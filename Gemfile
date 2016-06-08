@@ -2,7 +2,7 @@
 source 'https://ruby.taobao.org'
 
 gem 'mongoid', '~> 5.1.3'
-gem 'haml', '~> 4.0.7'
+gem 'haml-rails'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
