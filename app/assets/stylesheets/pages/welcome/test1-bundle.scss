@@ -1,0 +1,189 @@
+html {
+	font-family:"Microsoft YaHei";
+}
+body {
+	font-size: 62.5%;
+}
+body, p, img, div, ul, li, a, h3 {
+	margin:0;
+	padding:0;
+}
+
+.container{
+	position:relative;
+	width:100%;
+	max-width:640px;
+	margin:0 auto;
+	height:1180px;
+	background: #fedd02;
+}
+.header {
+	position:relative;
+	width:100%;
+	text-align:center;
+}
+.user {
+	position: absolute;
+	width:7.18%;
+	max-width:46px;
+	top:35%;
+	left:6.25%;
+}
+.cloud {
+	width:46.8%;
+	max-width:300px;
+}
+.center {
+	margin-top:-10%;
+	margin-left:-4.69%;
+	color:#333;
+	font-size:3em;
+}
+.tick {
+	position: absolute;
+	top:50%;
+	right:28.1%;
+	width:6.09%;
+	max-width:39px;
+}
+.search {
+	position: absolute;
+	width:6.09%;
+	max-width:39px;
+	top:35%;
+	right:6.25%;
+}
+.tag-choice {
+	width:100%;
+	overflow:hidden;
+	list-style:none;
+	margin-top:7%;
+
+	li {
+		float:left;
+		width:25%;
+		height:70px;
+		line-height: 70px;
+		font-size: 3em;
+		background:url("/assets/smallcloud.png") no-repeat;
+		text-align:center;
+		background-position:50%;
+		
+		a {
+			text-decoration: none;
+			color:#7d7d7d;
+		}
+	}
+}
+@mixin cloud {
+	width:16.4%;
+	max-width:105px;
+	
+	background:url("/assets/smallcloud.png") no-repeat;
+	background-size:100%;
+}
+.tag-caption {
+	width:100%;
+	height:7em;
+	line-height: 7em;
+	overflow:hidden;
+	margin-top:7%;
+	margin-bottom:3%;
+	text-align:center;
+	.new {
+		float:left;
+		@include cloud;
+		margin-right:10%;
+		margin-left:2%;
+	}
+	a {
+			text-decoration: none;
+			color:#7d7d7d;
+			font-size:3em;
+			&:hover {
+				color:#c20116;
+			}
+
+		}
+		
+}
+.notice {
+		@include cloud;
+		float:left;
+		margin-right:10%;
+}
+.course {
+		@include cloud;
+		float:left;
+
+}
+.book {
+		@include cloud;
+		float:right;
+		margin-right:2%;
+}
+
+@mixin bigbox {
+	width:95.4%;
+	margin:1% auto;
+	border-radius:10px;
+	background:#fff;
+} 
+.content {
+	position: relative;
+	@include bigbox;
+	overflow:hidden;
+	p {
+		font-size:2.6em;
+		color:#7d7d7d;
+	}
+}
+.visit {
+	float:left;
+	width:32.5%;
+	max-width:208px;
+	display:block;
+	padding:3% 3%;
+}
+.h3-caption {
+	padding:3% 3%;
+	font-size:3em;
+}
+.clip {
+	position: absolute;
+	bottom:5%;
+	right:5%;
+	width:20%;
+	background:#c20116;
+	border-radius:5px;
+	text-align:center;
+	p {
+		color:#fff;
+		font-size:3em;
+	}
+}
+
+
+
+@media screen and (max-width:640px) {
+	.container {
+		font-size: 100%;
+	}
+}
+@media screen and (max-width: 560px) {
+            .container {
+                font-size: 85%;
+            }
+        }
+
+@media screen and (max-width: 500px) {
+            .container {
+                font-size: 60%;
+            }
+        }
+@media screen and (max-width: 400px) {
+            .container {
+                font-size: 50%;
+            }
+        }
+
