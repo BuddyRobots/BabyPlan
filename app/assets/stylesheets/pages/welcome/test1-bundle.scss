@@ -10,7 +10,7 @@ body, p, img, div, ul, li, a, h3 {
 }
 
 .container{
-	position:relative;
+	// position:relative;
 	width:100%;
 	max-width:640px;
 	margin:0 auto;
@@ -152,14 +152,21 @@ body, p, img, div, ul, li, a, h3 {
 .clip {
 	position: absolute;
 	bottom:5%;
-	right:5%;
+	right:3%;
 	width:20%;
 	background:#c20116;
 	border-radius:5px;
 	text-align:center;
 	p {
 		color:#fff;
-		font-size:3em;
+		font-size:2.4em;
+		a {
+			text-decoration: none;
+			color:white;
+			&:hover {
+				color:orange;
+			}
+		}
 	}
 }
 
