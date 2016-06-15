@@ -10,24 +10,24 @@
     %p.center 海淀儿童中心
     %img.tick{:src => "/assets/tick.png"}
     %img.search{:src => "/assets/search.png"}
-  / %ul.tag-choice
-  /   %li.new 
-  /     %a{:href => "javascript:void(0)"} 最新
-  /   %li.notice 
-  /     %a{:href => "javascript:void(0)"} 公告
-  /   %li.course 
-  /     %a{:href => "javascript:void(0)"} 课程
-  /   %li.book 
-  /     %a{:href => "javascript:void(0)"} 绘本
-  .tag-caption
-    .new
+  %ul.tag-choice
+    %li.first
       %a{:href => "javascript:void(0)"} 最新
-    .notice 
+    %li.second 
       %a{:href => "javascript:void(0)"} 公告
-    .course 
+    %li.third
       %a{:href => "javascript:void(0)"} 课程
-    .book 
+    %li.last
       %a{:href => "javascript:void(0)"} 绘本
+  / .tag-caption
+  /   .new
+  /     %a{:href => "javascript:void(0)"} 最新
+  /   .notice 
+  /     %a{:href => "javascript:void(0)"} 公告
+  /   .course 
+  /     %a{:href => "javascript:void(0)"} 课程
+  /   .book 
+  /     %a{:href => "javascript:void(0)"} 绘本
   .content
     %img.visit{:src => "/assets/visit.png"}
     %h3.h3-caption 机器人教育激发学生学习

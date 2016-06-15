@@ -54,31 +54,40 @@ body, p, img, div, ul, li, a, h3 {
 	right:6.25%;
 }
 .tag-choice {
-	width:100%;
+	width:96%;
+	margin:7% auto;
 	overflow:hidden;
 	list-style:none;
-	margin-top:7%;
-
+	text-align:center;
+	height:7em;
+	line-height: 7em;
 	li {
 		float:left;
-		width:25%;
-		height:70px;
-		line-height: 70px;
+		width:17%;
+		max-width:105px;
 		font-size: 3em;
 		background:url("/assets/smallcloud.png") no-repeat;
-		text-align:center;
-		background-position:50%;
-		
 		a {
 			text-decoration: none;
 			color:#7d7d7d;
+			&:hover {
+				color:#c20116;
+			}
 		}
+	}
+	.second {
+		margin-left:11%;
+	}
+	.third {
+		margin-left:11%;
+	}
+	.last {
+		float:right;
 	}
 }
 @mixin cloud {
-	width:16.4%;
+	width:17%;
 	max-width:105px;
-	
 	background:url("/assets/smallcloud.png") no-repeat;
 	background-size:100%;
 }
