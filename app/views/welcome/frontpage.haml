@@ -1,0 +1,25 @@
+- content_for :app_head do
+  = javascript_include_tag "pages/welcome/frontpage-bundle"
+  = stylesheet_link_tag "pages/welcome/frontpage-bundle", :media => "all"
+
+
+  .container
+    %img.cloudblock{:src => "/assets/cloudblock.png"}
+    %img.frontcloud{:src => "/assets/frontcloud.png"}
+
+    .ad
+      %img.banner{:src => "/assets/banner.jpg"}
+      %img.user{:src => "/assets/user.png"}
+      %img.search{:src => "/assets/search.png"}
+    .tagchoice
+      %img.circle{:src => "/assets/circle.png"}
+      %a{:href => "javascript:void(0)"}
+        %img.notice{:src => "/assets/notice.png",:alt => "公告"}
+      %a{:href => "javascript:void(0)"}
+        %img.book{:src => "/assets/book.png",:alt => "绘本"}
+      %a{:href => "javascript:void(0)"}
+        %img.course{:src => "/assets/course.png",:alt => "课程"}
+    %img.footer{:src => "/assets/tree.png"}
+
+
+

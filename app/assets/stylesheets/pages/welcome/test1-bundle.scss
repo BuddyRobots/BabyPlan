@@ -14,8 +14,29 @@ body, p, img, div, ul, li, a, h3 {
 	width:100%;
 	max-width:640px;
 	margin:0 auto;
-	height:1180px;
-	background: #fedd02;
+	padding-bottom:3%;
+	/*斜条纹背景，如果反向则是-45度*/
+	// background: -webkit-gradient(
+	// linear, 
+	// left top, 
+	// right bottom, 
+	// from(#fedd02), color-stop(0.45, #fedd02), 
+	// color-stop(0.45, #fcc204), color-stop(0.5, #fcc204), 
+	// color-stop(0.5, #fedd02), color-stop(0.95, #fedd02), 
+	// color-stop(0.95, #fcc204), to(#fcc204));
+	// background: -moz-linear-gradient(
+	// -45deg, 
+	// #7aa00f 45%, 
+	// #67860e 45%, #67860e 50%, 
+	// #7aa00f 50%, #7aa00f 95%, 
+	// #67860e 95%, #67860e);
+	background: linear-gradient(
+    45deg, 
+    #fef29c 45%, 
+    #fcc204 45%, #fcc204 50%, 
+    #fef29c 50%, #fef29c 95%, 
+    #fcc204 95%, #fcc204);
+    background-size: 10px 10px;
 }
 .header {
 	position:relative;
@@ -64,9 +85,10 @@ body, p, img, div, ul, li, a, h3 {
 	li {
 		float:left;
 		width:17%;
-		max-width:105px;
-		font-size: 3em;
+		max-width:100px;
+		font-size: 2.6em;
 		background:url("/assets/smallcloud.png") no-repeat;
+		background-size:96%;
 		a {
 			text-decoration: none;
 			color:#7d7d7d;
@@ -89,7 +111,7 @@ body, p, img, div, ul, li, a, h3 {
 	width:17%;
 	max-width:105px;
 	background:url("/assets/smallcloud.png") no-repeat;
-	background-size:100%;
+	background-size:100% 7.1em;
 }
 .tag-caption {
 	width:100%;
@@ -133,8 +155,8 @@ body, p, img, div, ul, li, a, h3 {
 }
 
 @mixin bigbox {
-	width:95.4%;
-	margin:1% auto;
+	width:95.32%;
+	margin:5% auto;
 	border-radius:10px;
 	background:#fff;
 } 
@@ -178,6 +200,7 @@ body, p, img, div, ul, li, a, h3 {
 		}
 	}
 }
+
 
 
 
