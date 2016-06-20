@@ -1,0 +1,25 @@
+- content_for :app_head do
+  = javascript_include_tag "pages/welcome/CenterBook-bundle"
+  = stylesheet_link_tag "pages/welcome/CenterBook-bundle", :media => "all"
+
+
+  .container
+    .header
+      %img.crocodile{:src => "/assets/crocodile.png"}
+      %a{:href => "#"}
+        %img.back{:src => "/assets/back.png"}
+
+    .boxtitle
+      .bookcloud
+        %p 我想吃一个小孩
+      %a{:href => "#"}
+        %img.smallheart{:src => "/assets/smallheart.png"}
+      %a{:href => "#"}
+        %img.dialog{:src => "/assets/dialog.png"}
+
+
+    / .boxtitle
+    /   / %img.bookcloud{:src => "/assets/bookcloud.png"}
+    /   .bookcloud
+    /     %p 我想吃一个小孩
+

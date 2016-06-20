@@ -1,0 +1,51 @@
+- content_for :app_head do
+  = javascript_include_tag "pages/welcome/kidscenter-bundle"
+  = stylesheet_link_tag "pages/welcome/kidscenter-bundle", :media => "all"
+
+
+.container
+  .header
+    %a{:href => "#"}
+      %img.user{:src => "/assets/user.png"}
+    %img.cloud{:src => "/assets/cloud.png"} 
+    %p.center 海淀儿童中心
+    %img.tick{:src => "/assets/tick.png"}
+    %a{:href => "#"}
+      %img.search{:src => "/assets/search.png"}
+  %ul.tag-choice
+    %li.first
+      %a{:href => "javascript:void(0)"} 最新
+    %li.second 
+      %a{:href => "javascript:void(0)"} 公告
+    %li.third
+      %a{:href => "javascript:void(0)"} 课程
+    %li.last
+      %a{:href => "javascript:void(0)"} 绘本
+  / .tag-caption
+  /   .new
+  /     %a{:href => "javascript:void(0)"} 最新
+  /   .notice 
+  /     %a{:href => "javascript:void(0)"} 公告
+  /   .course 
+  /     %a{:href => "javascript:void(0)"} 课程
+  /   .book 
+  /     %a{:href => "javascript:void(0)"} 绘本
+  .content
+    %img.visit{:src => "/assets/visit.png"}
+    %h3.h3-caption 机器人教育激发学生学习
+    %p 机器人培训课程专业儿系统，初级班细化四阶，让孩子……
+    .clip
+      %p
+        %a{:href => "javascript:void(0)"} 详情
+  .content
+    %img.visit{:src => "/assets/visit.png"}
+    %h3.h3-caption 机器人教育激发学生学习
+    %p 机器人培训课程专业儿系统，初级班细化四阶，让孩子……
+    .clip
+      %p
+        %a{:href => "javascript:void(0)"} 详情
+
+
+
+
+ 

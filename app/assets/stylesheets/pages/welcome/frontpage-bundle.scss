@@ -24,8 +24,6 @@ body, p, img, div, ul, li, a, h3 {
 }
 
 .cloudblock {
-		position:absolute;
-		top:0;
 		width:100%;
 		max-width:640px;
 }
@@ -35,32 +33,45 @@ body, p, img, div, ul, li, a, h3 {
 		right:26.5%;
 		width:21%;
 		max-width:135px;
-	}
+}
+.user {
+	position: absolute;
+	width:7.18%;
+	max-width:46px;
+	top:1.5em;
+	left:2.3em;
+}
+.search {
+	position: absolute;
+	width:6.09%;
+	max-width:39px;
+	top:2.3em;
+	right:3em;
+}
 .ad {
 	position:relative;
-	width:94%;
-	margin:0 auto;
-	.banner {
+	width:100%;
+	padding-top:3%;
+	.slider {
+		position:relative;
 		width:100%;
-		max-width:600px;
+		max-width: 600px;
 		margin:0 auto;
-		padding-top:24.6875%;
+		ul li {
+			list-style: none;
+			a {
+				text-decoration: none;
+				color:white;
+			}
+		}
+		.banner {
+			width:100%;
+			max-width:600px;
+		}
 	}
-	.user {
-		position: absolute;
-		width:7.18%;
-		max-width:46px;
-		top:4%;
-		left:1.72%;
-	}
-	.search {
-		position: absolute;
-		width:6.09%;
-		max-width:39px;
-		top:5%;
-		right:1.72%;
-	}
+	
 }
+
 .tagchoice {
 	position:relative;
 	margin-top:3%;

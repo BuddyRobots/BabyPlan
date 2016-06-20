@@ -1,8 +1,12 @@
 Rails.application.routes.draw do
   get 'welcome/index'
   get 'welcome/test'
-  get 'welcome/test1'
+  get 'welcome/kidscenter'
   get 'welcome/frontpage'
+  get 'welcome/person'
+  get 'welcome/CenterBook'
+
+
 
 
 

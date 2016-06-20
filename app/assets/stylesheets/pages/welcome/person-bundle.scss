@@ -1,0 +1,146 @@
+html {
+	font-family:"Microsoft YaHei";
+}
+body {
+	font-size: 62.5%;
+}
+body, p, img, div, ul, li, a, h3 {
+	margin:0;
+	padding:0;
+}
+
+.container{
+	position:relative;
+	width:100%;
+	max-width:640px;
+	margin:0 auto;
+	padding-bottom:26em;
+	/*斜条纹背景，如果反向则是-45度*/
+	// background: -webkit-gradient(
+	// linear, 
+	// left top, 
+	// right bottom, 
+	// from(#fedd02), color-stop(0.45, #fedd02), 
+	// color-stop(0.45, #fcc204), color-stop(0.5, #fcc204), 
+	// color-stop(0.5, #fedd02), color-stop(0.95, #fedd02), 
+	// color-stop(0.95, #fcc204), to(#fcc204));
+	// background: -moz-linear-gradient(
+	// -45deg, 
+	// #7aa00f 45%, 
+	// #67860e 45%, #67860e 50%, 
+	// #7aa00f 50%, #7aa00f 95%, 
+	// #67860e 95%, #67860e);
+	background: linear-gradient(
+    45deg, 
+    #fef29c 45%, 
+    #fcc204 45%, #fcc204 50%, 
+    #fef29c 50%, #fef29c 95%, 
+    #fcc204 95%, #fcc204);
+    background-size: 10px 10px;
+}
+.headcloud {
+		width:100%;
+		max-width:640px;
+}
+.set {
+	position:absolute;
+	right:2em;
+	top:2.4em;
+	width:9.375%;
+	max-width:60px;
+}
+.mail {
+	position:absolute;
+	top:2.4em;
+	right:11.7em;
+	width:9.375%;
+	max-width:60px;
+}
+.back {
+	position:absolute;
+	top:2.4em;
+	width:9.375%;
+	max-width:60px;
+	left:4.6em;
+}
+.face {
+	position:relative;
+	overflow:hidden;
+	img {
+		display:block;
+		float:left;
+		margin-left:10.5em;
+		margin-right:2.2em;
+		width:28.4375%;
+		max-width:182px;
+	}
+	.username {
+		font-size:3.8em;
+		color:#3e3e3e;
+		padding-top:6%;
+		letter-spacing: 0.3em;
+	}
+}
+.collect {
+	position:relative;
+	width:100%;
+	.personcloud {
+		display:block;
+		width:84.06%;
+		max-width:538px;
+		margin:0 auto;
+	}
+	.heart {
+		position:absolute;
+		top:4.1em;
+		left:7.9em;
+		width:9.375%;
+		max-width:60px;
+	}
+	.content {
+		position:absolute;
+		top:1.32em;
+		left:4.6em;
+		font-size:3.6em;
+		color:#3e3e3e; 
+	}
+	a {
+		.rightarrow {
+			position:absolute;
+			width:9.375%;
+			max-width:60px;
+			top:3.3em;
+			right:7.5em;
+		}
+	}
+
+}
+
+.course,.book,.sign {
+	@extend .collect;
+}
+.c-box,.smile,.sign{
+	@extend .heart;
+}
+
+
+@media screen and (max-width:640px) {
+	.container {
+		font-size: 100%;
+	}
+}
+@media screen and (max-width: 560px) {
+    .container {
+        font-size: 85%;
+    }
+}
+@media screen and (max-width: 500px) {
+    .container {
+        font-size: 60%;
+    }
+}
+@media screen and (max-width: 400px) {
+    .container {
+        font-size: 50%;
+    }
+}

@@ -6,11 +6,23 @@
   .container
     %img.cloudblock{:src => "/assets/cloudblock.png"}
     %img.frontcloud{:src => "/assets/frontcloud.png"}
-
-    .ad
-      %img.banner{:src => "/assets/banner.jpg"}
+    %a{:href => "#"}
       %img.user{:src => "/assets/user.png"}
+    %a{:href => "#"}
       %img.search{:src => "/assets/search.png"}
+    .ad
+      .slider
+        %ul
+          %li
+            %a{:href => "javascript:void(0)",:alt => "广告图片"}
+              %img.banner{:src => "/assets/banner.jpg"}
+          %li
+            %a{:href => "javascript:void(0)",:alt => "广告图片"}
+              %img.banner{:src => "/assets/banner.jpg"}
+          %li
+            %a{:href => "javascript:void(0)",:alt => "广告图片"}
+              %img.banner{:src => "/assets/banner.jpg"}
+      
     .tagchoice
       %img.circle{:src => "/assets/circle.png"}
       %a{:href => "javascript:void(0)"}
@@ -20,6 +32,8 @@
       %a{:href => "javascript:void(0)"}
         %img.course{:src => "/assets/course.png",:alt => "课程"}
     %img.footer{:src => "/assets/tree.png"}
+
+%script $(".slider").yxMobileSlider({width:600,height:310,during:3000})
 
 
 
