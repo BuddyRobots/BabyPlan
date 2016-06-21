@@ -81,12 +81,14 @@ body, p, img, div, ul, li, a, h3 {
 		letter-spacing: 0.3em;
 	}
 }
+
+
 .collect {
 	position:relative;
 	width:100%;
 	.personcloud {
 		display:block;
-		width:84.06%;
+		width:84.0625%;
 		max-width:538px;
 		margin:0 auto;
 	}
@@ -113,15 +115,50 @@ body, p, img, div, ul, li, a, h3 {
 			right:7.5em;
 		}
 	}
-
 }
+
+
+// .collect {
+// 	position:relative;
+// 	width:100%;
+// 	background:url('/assets/personcloud.png') no-repeat;
+// 	background-size:84.5%;
+// 	background-position:center;
+// 	overflow:hidden;
+// 	margin-bottom:1em;
+// 	.heart {
+// 		float:left;
+// 		padding-top:4.1em;
+// 		padding-left:7.9em;
+// 		width:9.375%;
+// 		max-width:60px;
+// 	}
+// 	.content {
+// 		float:left;
+// 		line-height:3.88889em;
+// 		padding-left:0.5556em;
+// 		font-size:3.6em;
+// 		color:#3e3e3e; 
+// 	}
+// 	a {
+// 		.rightarrow {
+// 			float:right;
+// 			width:9.375%;
+// 			max-width:60px;
+// 			padding-top:3.3em;
+// 			padding-right:7.5em;
+// 		}
+// 	}
+// }
 
 .course,.book,.sign {
 	@extend .collect;
 }
-.c-box,.smile,.sign{
+.c-box,.smile,.pen {
 	@extend .heart;
 }
+
+
 
 
 @media screen and (max-width:640px) {
@@ -141,6 +178,6 @@ body, p, img, div, ul, li, a, h3 {
 }
 @media screen and (max-width: 400px) {
     .container {
-        font-size: 50%;
+        font-size: 55%;
     }
 }

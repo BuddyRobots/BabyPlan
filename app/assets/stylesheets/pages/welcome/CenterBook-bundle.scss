@@ -35,6 +35,7 @@ body, p, img, div, ul, li, a, h3 {
     #fef29c 50%, #fef29c 95%, 
     #fcc204 95%, #fcc204);
     background-size: 10px 10px;
+    padding-bottom:3em;
 }
 .header {
 	position:relative;
@@ -56,6 +57,8 @@ body, p, img, div, ul, li, a, h3 {
 	position:relative;
 	width:100%;
 	text-align:center;
+	padding-top:4em;
+	padding-bottom:2em;
 	.bookcloud {
 		background:url("/assets/bookcloud.png") no-repeat;
 		background-size:100%;
@@ -65,8 +68,6 @@ body, p, img, div, ul, li, a, h3 {
 		height:11.3em;
 		line-height:11.3em;
 		margin:0 auto;
-		padding-top:4em;
-		padding-bottom:2em;
 		p {
 			font-size: 3.6em;
 			color:#d70c18;
@@ -87,9 +88,116 @@ body, p, img, div, ul, li, a, h3 {
 	
 }
 
+.content {
+	width:95.3125%;
+	margin:0 auto;
+	background:white;
+	border-radius: 10px;
+	.fontconfig {
+		font-size: 2em;
+		color:#3e3e3e;
+		padding-left:0.75em;
+	}
+	.author {
+		@extend .fontconfig;
+		padding-top:1.25em;
+	}
+	.translater {
+		@extend .fontconfig;
+		padding-top:0.2em;
+	}
+	.figureauthor {
+		@extend .fontconfig;
+		padding-top:0.2em;
+	}
+	.profile {
+		font-size:2.8em;
+		color:#3e3e3e;
+		padding-top:1.14285em;
+		padding-left:0.53571em;
+		padding-bottom:0.71428em;
+		line-height:150%;
+	}
+}
 
+.recommend {
+	position:relative;
+	width:100%;
+	background:url("/assets/linecloud.png") no-repeat;
+	background-size:41.406%;
+	background-position:center;
+	margin-top:3em;
+	margin-bottom:1.5em;
+	text-align:center;
+	p {
+		line-height:3em;
+		font-size: 3.6em;
+		color:#3e3e3e;
+	}
+}
 
+.article {
+	width:95.3125%;
+	margin:0 auto;
+	background:white;
+	border-radius: 10px;
+	p {
+		font-size: 2.8em;
+		color:#3e3e3e;
+		text-indent:2em;
+		line-height:1.5em;
+		padding:0.53571em 1.14285em;
+	}
+}
 
+.address {
+	@extend .recommend;
+	margin-top:4em;
+	margin-bottom:3.7em;
+}
+.anotherbook {
+	position:relative;
+	width:95.3125%;
+	margin:0 auto;
+	background:white;
+	border-radius: 10px;
+	margin-bottom:2em;
+	.center {
+		font-size: 3.2em;
+		padding-left:0.46875em;
+		padding-top:0.625em;
+		padding-bottom:0.3em;
+		color:#3e3e3e;
+	}
+	.num {
+		font-size: 2.4em;
+		padding-left:0.625em;
+		color:#3e3e3e;
+		padding-bottom:0.625em;
+	}
+	.place {
+		@extend .num;
+	}
+}
+
+.description {
+	position:absolute;
+	width:25.573%;
+	max-width:156px;
+	top:3em;
+	right:1.5em;
+	background:#d70c18;
+	border-radius:10px;
+	text-align:center;
+	a {
+		text-decoration: none;
+	}
+	p {
+		font-size: 2.4em;
+		color:white;
+		padding:5% 0;
+	}
+}
 
 
 
