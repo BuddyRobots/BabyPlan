@@ -1,0 +1,132 @@
+html {
+	font-family:"Microsoft YaHei";
+}
+body {
+	font-size: 62.5%;
+}
+body, p, img, div, ul, li, a, h3 {
+	margin:0;
+	padding:0;
+}
+
+.container {
+	position:relative;
+	width:100%;
+	max-width:640px;
+	margin:0 auto;
+	padding-bottom:10em;
+	background: linear-gradient(
+    45deg, 
+    #fef29c 45%, 
+    #fcc204 45%, #fcc204 50%, 
+    #fef29c 50%, #fef29c 95%, 
+    #fcc204 95%, #fcc204);
+    background-size: 10px 10px;
+}
+.circlelogo {
+	width:38.75%;
+	max-width:248px;
+	display:block;
+	margin:0 auto;
+	padding:9em 0;
+}
+.input-box {
+	width:77.1875%;
+	margin-left:9em;
+	padding:2.5em 0;
+	overflow:hidden;
+	.account {
+		font-size:3em;
+		color:#3e3e3e;
+		.input-name {
+			font-size: 1em;
+			width:60%;
+			max-width:300px;
+			border:0;
+			background:none;
+			outline:none;
+		}
+		.identifycode {
+			font-size:0.8em;
+			border:1px solid #bfbfc0;
+			a {
+				text-decoration: none;
+				color:#3e3e3e;
+				&:hover {
+					color:red;
+				}
+			}
+		}
+	}
+	.underline {
+		color:#bfbfc0;
+	}
+	.forgetpass {
+		font-size:1.8em;
+		float:right;
+		padding-top:2%;
+		a {
+			text-decoration: none;
+			color:#3e3e3e;
+			&:hover {
+				color:red;
+				text-decoration: underline;
+			}
+		}
+	}
+}
+.register {
+	width:62.96875%;
+	margin:0 auto;
+	border:1px solid #bfbfc0;
+	font-size:3.6em;
+	color:#3e3e3e;
+	padding:4% 0;
+	margin-top:1em;
+	text-align:center;
+	&:hover {
+		color:red;
+	}
+}
+.clickdown {
+	text-decoration: none;
+}
+.registaccount {
+	font-size:3em;
+	color:#3e3e3e;
+	padding-top:3em;
+	text-align:center;
+	a {
+		text-decoration: none;
+		color:#3e3e3e;
+		&:hover {
+			color:red;
+			text-decoration: underline;
+		}
+	}
+}
+
+
+
+
+@media screen and (max-width:640px) {
+	.container {
+		font-size: 100%;
+	}
+}
+@media screen and (max-width: 560px) {
+    .container {
+        font-size: 85%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .container {
+        font-size: 60%;
+    }
+}
+@media screen and (max-width: 400px) {
+    .container {
+        font-size: 50%;
+    }
+}

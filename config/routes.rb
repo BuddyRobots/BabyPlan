@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   get 'welcome/frontpage'
   get 'welcome/person'
   get 'welcome/CenterBook'
+  get 'welcome/register'
+  get 'welcome/signup'
+  get 'welcome/centernotice'
 
 
 

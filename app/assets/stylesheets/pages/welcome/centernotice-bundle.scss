@@ -1,0 +1,63 @@
+html {
+	font-family:"Microsoft YaHei";
+}
+body {
+	font-size: 62.5%;
+}
+body, p, img, div, ul, li, a, h3 {
+	margin:0;
+	padding:0;
+}
+
+.container {
+	position:relative;
+	width:100%;
+	max-width:640px;
+	margin:0 auto;
+	background: linear-gradient(
+    45deg, 
+    #fef29c 45%, 
+    #fcc204 45%, #fcc204 50%, 
+    #fef29c 50%, #fef29c 95%, 
+    #fcc204 95%, #fcc204);
+    background-size: 10px 10px;
+}
+.haidian {
+	width:100%;
+	max-width:640px;
+}
+.searchcircle {
+	position:absolute;
+	width:9.375%;
+	max-width:60px;
+	top:3em;
+	right:1.5em;
+}
+
+
+
+
+
+
+
+@media screen and (max-width:640px) {
+	.container {
+		font-size: 100%;
+	}
+}
+@media screen and (max-width: 560px) {
+    .container {
+        font-size: 85%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .container {
+        font-size: 60%;
+    }
+}
+@media screen and (max-width: 400px) {
+    .container {
+        font-size: 50%;
+    }
+}

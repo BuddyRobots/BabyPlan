@@ -10,18 +10,39 @@
       %img.user{:src => "/assets/user.png"}
     %a{:href => "#"}
       %img.search{:src => "/assets/search.png"}
-    .ad
-      .slider
+    
+    .img_gallery
+      .point
+        %a{:href => "#"} 1
+        %a{:href => "#"} 2
+        %a{:href => "#"} 3
+      .main_img
         %ul
           %li
-            %a{:href => "javascript:void(0)",:alt => "广告图片"}
-              %img.banner{:src => "/assets/banner.jpg"}
+            %a{:href => "#"}
+              %span.img_1
           %li
-            %a{:href => "javascript:void(0)",:alt => "广告图片"}
-              %img.banner{:src => "/assets/banner.jpg"}
+            %a{:href => "#"}
+              %span.img_2
           %li
-            %a{:href => "javascript:void(0)",:alt => "广告图片"}
-              %img.banner{:src => "/assets/banner.jpg"}
+            %a{:href => "#"}
+              %span.img_3
+        %a#btn_prev{:href => "#"}
+        %a#btn_next{:href => "#"}
+
+
+    / .ad
+    /   .slider
+    /     %ul
+    /       %li
+    /         %a{:href => "javascript:void(0)",:alt => "广告图片"}
+    /           %img.banner{:src => "/assets/banner.jpg"}
+    /       %li
+    /         %a{:href => "javascript:void(0)",:alt => "广告图片"}
+    /           %img.banner{:src => "/assets/banner.jpg"}
+    /       %li
+    /         %a{:href => "javascript:void(0)",:alt => "广告图片"}
+    /           %img.banner{:src => "/assets/banner.jpg"}
       
     .tagchoice
       %img.circle{:src => "/assets/circle.png"}

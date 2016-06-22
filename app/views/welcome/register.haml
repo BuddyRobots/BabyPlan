@@ -1,0 +1,37 @@
+- content_for :app_head do
+  = javascript_include_tag "pages/welcome/register-bundle"
+  = stylesheet_link_tag "pages/welcome/register-bundle", :media => "all"
+
+
+.container
+  %img.circlelogo{:src => "/assets/register/circlelogo.png"}
+  .input-box
+    %form.account 
+      账号:
+      %input.input-name{:type => "text"}
+    %hr.under-line
+  .input-box
+    %form.account 
+      密码:
+      %input.input-name{:type => "text"}
+    %hr.under-line
+  .input-box
+    %form.account 
+      昵称:
+      %input.input-name{:type => "text"}
+    %hr.under-line
+  .input-box
+    %form.account 
+      手机号:
+      %input.input-name{:type => "text"}
+      %span.identifycode
+        %a{:href => "#"} 验证码
+    %hr.under-line
+  .input-box
+    %form.account 
+      验证码:
+      %input.input-name{:type => "text"}
+    %hr.under-line
+  %a.clickdown{:href => "#"} 
+    %p.register 注册
+   
