@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   get 'welcome/register'
   get 'welcome/signup'
   get 'welcome/centernotice'
+  get 'welcome/haidianbook'
+  get 'welcome/fengtaicenter'
 
 
 

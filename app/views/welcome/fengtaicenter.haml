@@ -1,0 +1,31 @@
+- content_for :app_head do
+  = javascript_include_tag "pages/welcome/fengtaicenter-bundle"
+  = stylesheet_link_tag "pages/welcome/fengtaicenter-bundle", :media => "all"
+
+
+
+.container
+  .header
+    %a{:href => "#"}
+      %img.uparrow{:src => "/assets/fengtaicenter/shanghong02.png"}
+    %input.input-box
+      %a{:href => "#"}
+        %img.search{:src => "/assets/fengtaicenter/search.png"}
+  .area
+    %dl
+      %dt.short 离我最近
+      %dd
+        %a{:href => "#"} 范围搜索:
+      %dd
+        %a{:href => "#"} 丰台区
+      %dd
+        %a{:href => "#"} 海淀区
+      %dd
+        %a{:href => "#"} 朝阳区
+  .details
+    %img.visit{:src => "/assets/fengtaicenter/fengtaicenter.jpg"}
+    %h3 丰台儿童中心 
+    %p.article 简介：这是一本极为有趣的图画书，以日记书写的方式…
+    %p.detail-flip
+      %a{:href => "#"} 中心首页
+ 

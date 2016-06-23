@@ -4,7 +4,7 @@ html {
 body {
 	font-size: 62.5%;
 }
-body, p, img, div, ul, li, a, h3 {
+body, p, img, div, dl, dt, dd, a, h3, span {
 	margin:0;
 	padding:0;
 }
@@ -23,57 +23,74 @@ body, p, img, div, ul, li, a, h3 {
     #fcc204 95%, #fcc204);
     background-size: 10px 10px;
 }
-.haidian {
+.header {
+	position:relative;
 	width:100%;
-	max-width:640px;
+	overflow:hidden;
 }
-.searchcircle {
-	position:absolute;
+.uparrow {
+	float:left;
 	width:9.375%;
 	max-width:60px;
-	top:3em;
-	right:1.5em;
+	margin-top:2.5em;
+	margin-left:1.5em;
 }
-.back {
+.input-box {
+	float:right;
+	margin-top:1.1em;
+	margin-right:3.06667em;
+	font-size:3em;
+	border-radius:5px;
+	width:64.0625%;
+	max-width:410px;
+	height:45px;
+	border:0;
+	outline:none;
+}
+.search {
 	position:absolute;
-	width:9.375%;
-	max-width:60px;
-	top:3em;
-	left:1.5em;
+	right:10.4em;
+	top:3.3em;
+	width:7.656%;
+	max-width:49px;
 }
+
+.area {
+	width:100%;
+	margin:3em 0;
+	border-top:1px solid #e6e6fa; 
+	border-bottom:1px solid #e6e6fa; 
+	background:white;
+	dl {
+		font-size: 2.8em;
+		padding-left:0.71428em;
+		dt, dd {
+			display:inline-block;
+			padding:0.42em 0;
+
+			a {
+				color:#7d7d7d;
+				text-decoration: none;
+				padding:0 0.435em;
+				border-right:1px solid #e6e6fa;
+				&:hover {
+					text-decoration: underline;
+					color:#d70c18;
+				}
+			}
+		}
+	}
+}
+.short {
+	color:#333;
+}
+
 .box-radius {
 	width:95.3125%;
 	max-width:610px;
 	margin:0 auto;
 	background:white;
 	border-radius:10px;
-}
-.description {
-	@extend .box-radius;
-	margin-top:5em;
-	margin-bottom:4.5em;
-	p {
-		font-size: 2.8em;
-		color:#3e3e3e;
-		padding:1.4285em 1.0714em;
-		text-indent: 2em;
-	}
-}
-.noticecaption {
-	width:68.4375%;
-	max-width:438px;
-	margin:0 auto;
-	background:url("/assets/centernotice/bookcloud.png") no-repeat;
-	background-size:100%;
-	background-position:center;
-	height:11.3em;
-	line-height: 11.3em;
-	margin-bottom:3.5em;
-	p {
-		font-size:3.6em;
-		color:#3e3e3e;
-		text-align:center;
-	}
 }
 .details {
 	@extend .box-radius;
@@ -101,7 +118,7 @@ body, p, img, div, ul, li, a, h3 {
 		margin-right:1.6em;
 		margin-bottom:1.5em;
 		background:#d70c18;
-		padding:0 4.8em;
+		padding:0 2em;
 		border-radius:5px;
 		height:4.8em;
 		line-height:4.8em;
@@ -115,7 +132,6 @@ body, p, img, div, ul, li, a, h3 {
 		}
 	}
 }
-
 
 
 
