@@ -26,38 +26,38 @@ body, p, img, div, dl, dt, dd, a, h3, span {
 .header {
 	position:relative;
 	width:100%;
-	overflow:hidden;
+	padding:5.77em 0;
 }
 .uparrow {
-	float:left;
+	position:absolute;
 	width:9.375%;
 	max-width:60px;
-	margin-top:2.5em;
-	margin-left:1.5em;
+	top:2.5em;
+	left:1.5em;
 }
 .input-box {
-	float:right;
-	margin-top:1.1em;
-	margin-right:3.06667em;
-	font-size:3em;
+	position:absolute;
+	top:1.27em;
+	right:3.54em;
+	padding:0.39em 0;
+	font-size:2.6em;
 	border-radius:5px;
 	width:64.0625%;
 	max-width:410px;
-	height:45px;
 	border:0;
 	outline:none;
 }
 .search {
 	position:absolute;
 	right:10.4em;
-	top:3.3em;
-	width:7.656%;
+	top:3.2em;
+	width:7.65625%;
 	max-width:49px;
 }
 
 .area {
 	width:100%;
-	margin:3em 0;
+	margin-bottom:3em;
 	border-top:1px solid #e6e6fa; 
 	border-bottom:1px solid #e6e6fa; 
 	background:white;
@@ -71,7 +71,7 @@ body, p, img, div, dl, dt, dd, a, h3, span {
 			a {
 				color:#7d7d7d;
 				text-decoration: none;
-				padding:0 0.435em;
+				padding:0 0.4em;
 				border-right:1px solid #e6e6fa;
 				&:hover {
 					text-decoration: underline;
@@ -93,30 +93,39 @@ body, p, img, div, dl, dt, dd, a, h3, span {
 	border-radius:10px;
 }
 .details {
+	position:relative;
 	@extend .box-radius;
 	overflow:hidden;
-	margin-bottom:2.5em;
+	margin-bottom:2.6em;
+	padding-bottom:1em;
 	.visit {
 		width:31.1475%;
 		max-width:190px;
 		float:left;
 		display:block;
-		margin:2em 1.5em;
+		margin:2.4em 3.6em 1.2em 2.7em;
 	}
-	h3 {
-		font-size:2.8em;
-		color:#3e3e3e;
-		padding-top:0.71428em;
-	}
-	.article {
-		font-size:2.6em;
-		color:#3e3e3e;
-		padding-top:0.65384em;
+	.article-box{
+		float:left;
+		width:56%;
+		h3 {
+			font-size:2.8em;
+			color:#3e3e3e;
+			padding-top:0.535em;
+		}
+		.article {
+			font-size:2.4em;
+			color:#7a7a7a;
+			line-height: 1.693em;
+			padding-top:0.67em;
+			padding-bottom:0.54em;
+			text-indent: 2em;
+		}
 	}
 	.detail-flip {
 		float:right;
-		margin-right:1.6em;
-		margin-bottom:1.5em;
+		margin-right:2.5em;
+		margin-bottom:2em;
 		background:#d70c18;
 		padding:0 2em;
 		border-radius:5px;
@@ -133,7 +142,27 @@ body, p, img, div, dl, dt, dd, a, h3, span {
 	}
 }
 
-
+.address {
+	// position:absolute;
+	// left:2.2em;
+	// top:17.6em;
+	float:left;
+	margin-left:2.2em;
+	.address-icon {
+		width:12%;
+		max-width:30px;
+		margin-right:0.6em;
+	}
+	.place {
+		font-size: 2em;
+		color:#b4b4b4;
+		vertical-align: top;
+	}
+	p {
+		font-size: 2em;
+		color:#b4b4b4;
+	}
+}
 
 
 @media screen and (max-width:640px) {
@@ -153,6 +182,11 @@ body, p, img, div, dl, dt, dd, a, h3, span {
     }
 }
 @media screen and (max-width: 400px) {
+    .container {
+        font-size: 56%;
+    }
+}
+@media screen and (max-width: 320px) {
     .container {
         font-size: 50%;
     }

@@ -1,0 +1,151 @@
+html {
+	font-family:"Microsoft YaHei";
+}
+body {
+	font-size: 62.5%;
+}
+body, p, img, div, ul, li, a, h3 {
+	margin:0;
+	padding:0;
+}
+
+.container {
+	position:relative;
+	width:100%;
+	max-width:640px;
+	margin:0 auto;
+	padding-bottom:2%;
+	background: linear-gradient(
+    45deg, 
+    #fef29c 45%, 
+    #fcc204 45%, #fcc204 50%, 
+    #fef29c 50%, #fef29c 95%, 
+    #fcc204 95%, #fcc204);
+    background-size: 10px 10px;
+}
+.haidian {
+	width:100%;
+	max-width:640px;
+}
+.searchcircle {
+	position:absolute;
+	width:9.375%;
+	max-width:60px;
+	top:3em;
+	right:1.5em;
+}
+.back {
+	position:absolute;
+	width:9.375%;
+	max-width:60px;
+	top:3em;
+	left:1.5em;
+}
+.box-radius {
+	width:95.3125%;
+	max-width:610px;
+	margin:0 auto;
+	background:white;
+	border-radius:10px;
+}
+.description {
+	@extend .box-radius;
+	margin-top:2.5em;
+	margin-bottom:3em;
+	p {
+		font-size: 2.4em;
+		color:#3e3e3e;
+		line-height: 1.5em;
+		padding:1.25em 0.625em;
+		text-indent: 2em;
+	}
+}
+.coursecaption {
+	width:40.5%;
+	max-width:259px;
+	margin:0 auto;
+	background:url("/assets/centercourse/yun02.png") no-repeat;
+	background-size:100%;
+	background-position:center;
+	height:10.7em;
+	line-height: 10.7em;
+	margin-bottom:2em;
+	p {
+		font-size:3em;
+		color:#3e3e3e;
+		text-align:center;
+	}
+}
+.class-name {
+	background:url("/assets/centercourse/ty.png") no-repeat;
+	background-size:87.96875%;
+	background-position:center;
+	padding-left:5.25em;
+	font-size:2.8em;
+	color:white;
+	height:2.04em;
+	line-height:2.04em;
+}
+.details {
+	@extend .box-radius;
+	overflow:hidden;
+	margin-top:3em;
+	margin-bottom:2.5em;
+	.content {
+		margin-left:2.3em;
+		margin-top:2em;
+		h3 {
+			font-size:3.8em;
+			color:#3e3e3e;
+		}
+		.article {
+			font-size:2.4em;
+			color:#666;
+			padding-top:0.34em;
+		}
+		.detail-flip {
+			float:right;
+			margin-right:1.6em;
+			margin-bottom:1.5em;
+			background:#d70c18;
+			padding:0 4.8em;
+			border-radius:5px;
+			height:4.8em;
+			line-height:4.8em;
+			a {
+				font-size:2.8em;
+				color:#fff;
+				text-decoration: none;
+				&:hover {
+					color:orange;
+				}
+			}
+		}
+	}
+}
+
+
+
+
+
+@media screen and (max-width:640px) {
+	.container {
+		font-size: 100%;
+	}
+}
+@media screen and (max-width: 560px) {
+    .container {
+        font-size: 85%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .container {
+        font-size: 65%;
+    }
+}
+@media screen and (max-width: 400px) {
+    .container {
+        font-size: 55%;
+    }
+}
