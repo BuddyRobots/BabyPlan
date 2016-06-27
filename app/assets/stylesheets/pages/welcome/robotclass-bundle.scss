@@ -4,7 +4,7 @@ html {
 body {
 	font-size: 62.5%;
 }
-body, p, img, div, ul, li, a, h3 {
+body, p, img, div, ul, li, a, h3, span {
 	margin:0;
 	padding:0;
 }
@@ -35,7 +35,7 @@ body, p, img, div, ul, li, a, h3 {
     #fef29c 50%, #fef29c 95%, 
     #fcc204 95%, #fcc204);
     background-size: 10px 10px;
-    padding-bottom:3em;
+    // padding-bottom:3em;
 }
 .header {
 	position:relative;
@@ -102,30 +102,11 @@ body, p, img, div, ul, li, a, h3 {
 	margin:0 auto;
 	background:white;
 	border-radius: 10px;
-	.fontconfig {
-		font-size: 2em;
+	.introduce {
+		font-size:2.4em;
 		color:#3e3e3e;
-		padding-left:0.75em;
-	}
-	.author {
-		@extend .fontconfig;
-		padding-top:1.25em;
-	}
-	.translater {
-		@extend .fontconfig;
-		padding-top:0.2em;
-	}
-	.figureauthor {
-		@extend .fontconfig;
-		padding-top:0.2em;
-	}
-	.profile {
-		font-size:2.8em;
-		color:#3e3e3e;
-		padding-top:1.14285em;
-		padding-left:0.53571em;
-		padding-bottom:0.71428em;
-		line-height:150%;
+		line-height: 150%;
+		padding:3.28% 2.46%;
 	}
 }
 
@@ -146,17 +127,7 @@ body, p, img, div, ul, li, a, h3 {
 }
 
 .article {
-	width:95.3125%;
-	margin:0 auto;
-	background:white;
-	border-radius: 10px;
-	p {
-		font-size: 2.8em;
-		color:#3e3e3e;
-		text-indent:2em;
-		line-height:1.5em;
-		padding:0.71428em 0.53571em;
-	}
+	@extend .content;
 }
 
 .address {
@@ -172,42 +143,76 @@ body, p, img, div, ul, li, a, h3 {
 	border-radius: 10px;
 	margin-bottom:2em;
 	.center {
-		font-size: 3.2em;
-		padding-left:0.46875em;
-		padding-top:0.625em;
-		padding-bottom:0.3em;
+		font-size: 3em;
+		padding-left:0.5em;
+		padding-top:0.67em;
 		color:#3e3e3e;
+		.left-distance {
+			font-size: 0.8em;
+			color:#3e3e3e;
+			padding-left:0.833em;
+		}
 	}
-	.num {
+	.time {
 		font-size: 2.4em;
-		padding-left:0.625em;
 		color:#3e3e3e;
-		padding-bottom:0.625em;
+		padding:0.3em 0.625em;
+		line-height:150%;
+		.price {
+			font-size: 1em;
+			color:#d70c19;
+			padding:0 0.625em;
+			padding-bottom:0.3em;
+		}
 	}
-	.place {
-		@extend .num;
-	}
+	
 }
 
 .description {
 	position:absolute;
-	width:25.573%;
+	width:28%;
 	max-width:156px;
-	top:3em;
+	top:7.5em;
 	right:1.5em;
 	background:#d70c18;
 	border-radius:5px;
 	text-align:center;
 	a {
 		text-decoration: none;
+		&:hover {
+			color:orange;
+		}
 	}
 	p {
 		font-size: 2.4em;
 		color:white;
-		padding:5% 0;
+		padding:5.45% 0;
+		text-shadow: 1px 1px 1px black;
 	}
 }
+.anotherbook-bottom {
+	@extend .anotherbook;
+	margin-bottom:0;
+}
+.earphone {
+	position:fixed;
+	width:14.0625%;
+	max-width:90px;
+	bottom:40em;
+	right:3.5em;
+}
 
+.footer {
+	width:100%;
+	text-align:center;
+	background:#fe0100;
+	p {
+		font-size: 3.6em;
+		color:white;
+		padding:5.45% 0;
+		text-shadow: 1px 1px 1px black;
+	}
+}
 
 
 @media screen and (max-width:640px) {
@@ -223,11 +228,21 @@ body, p, img, div, ul, li, a, h3 {
 
 @media screen and (max-width: 500px) {
     .container {
-        font-size: 70%;
+        font-size: 67%;
+    }
+}
+@media screen and (max-width: 420px) {
+    .container {
+        font-size: 63%;
     }
 }
 @media screen and (max-width: 400px) {
     .container {
-        font-size: 60%;
+        font-size: 56%;
+    }
+}
+@media screen and (max-width: 320px) {
+    .container {
+        font-size: 50%;
     }
 }

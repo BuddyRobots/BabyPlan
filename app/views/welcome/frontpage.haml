@@ -16,17 +16,23 @@
         %a{:href => "#"} 1
         %a{:href => "#"} 2
         %a{:href => "#"} 3
+        / %a{:href => "#"} 4
+        / %a{:href => "#"} 5
       .main_img
         %ul
           %li
             %a{:href => "#"}
-              %span.img_1
+              %img.img_1{:src => "/assets/banner.jpg"}
           %li
             %a{:href => "#"}
-              %span.img_2
+              %img.img_2{:src => "/assets/banner.jpg"}
           %li
             %a{:href => "#"}
-              %span.img_3
+              %img.img_3{:src => "/assets/banner.jpg"}
+          / %li
+          /   %img.img_4{:src => "/assets/banner.jpg"}
+          / %li
+          /   %img.img_5{:src => "/assets/banner.jpg"}
         %a#btn_prev{:href => "#"}
         %a#btn_next{:href => "#"}
 
@@ -55,7 +61,6 @@
     %img.footer{:src => "/assets/tree.png"}
 
 
-%script $(".slider").yxMobileSlider({width:600,height:310,during:3000})
 
 
 
