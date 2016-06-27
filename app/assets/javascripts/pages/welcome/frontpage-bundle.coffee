@@ -1,3 +1,6 @@
+#= require jquery.event.drag
+#= require jquery.touchSlider
+
 (($) ->
 
   $.fn.yxMobileSlider = (settings) ->
