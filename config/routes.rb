@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get 'welcome/fengtaicenter'
   get 'welcome/centercourse'
   get 'welcome/robotclass'
+  get 'welcome/evaluate'
 
 
 

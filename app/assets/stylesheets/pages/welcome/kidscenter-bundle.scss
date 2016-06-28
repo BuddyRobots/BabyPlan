@@ -171,9 +171,10 @@ body, p, img, div, ul, li, a, h3 {
 	@include bigbox;
 	overflow:hidden;
 	margin-bottom:2.5em;
-	p {
+	.message {
 		font-size:2.4em;
 		color:#7d7d7d;
+		line-height:150%;
 	}
 }
 .visit {
@@ -183,13 +184,22 @@ body, p, img, div, ul, li, a, h3 {
 	display:block;
 	padding:3% 3%;
 }
-.h3-caption {
-	padding:3.28% 3% 2% 3%;
+.icon {
+	float:left;
+	width:6.557%;
+	max-width:40px;
+	display:block;
+	padding-top:1.65%;
+	padding-right:1.65%;
+}
+.caption {
+	padding:3.28% 0 1% 0;
 	font-size:2.8em;
+	color:#7d7d7d;
 }
 .clip {
 	position: absolute;
-	bottom:1.5em;
+	bottom:8.71%;
 	right:3%;
 	width:20%;
 	background:#d70c18;

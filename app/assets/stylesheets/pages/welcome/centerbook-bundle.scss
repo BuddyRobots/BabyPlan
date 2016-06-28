@@ -78,14 +78,20 @@ body, p, img, div, ul, li, a, h3 {
 		width:7.5%;
 		max-width:48px;
 		top:0.1em;
-		right:14.4em;
+		right:12.4em;
 	}
 	.dialog {
 		@extend .smallheart;
 		top:0.6em;
 		right:6.6em;
 	}
-	
+	.num {
+		position:absolute;
+		font-size: 1.8em;
+		color:#666;
+		right:1.28em;
+		top:1em;
+	}
 }
 
 .content {
@@ -93,29 +99,19 @@ body, p, img, div, ul, li, a, h3 {
 	margin:0 auto;
 	background:white;
 	border-radius: 10px;
-	.fontconfig {
+	.author {
 		font-size: 2em;
 		color:#3e3e3e;
-		padding-left:0.75em;
-	}
-	.author {
-		@extend .fontconfig;
-		padding-top:1.25em;
-	}
-	.translater {
-		@extend .fontconfig;
-		padding-top:0.2em;
-	}
-	.figureauthor {
-		@extend .fontconfig;
-		padding-top:0.2em;
+		padding-left:2.46%;
+		padding-top:4.1%;
+		line-height: 150%;
 	}
 	.profile {
 		font-size:2.8em;
 		color:#3e3e3e;
-		padding-top:1.14285em;
-		padding-left:0.53571em;
-		padding-bottom:0.71428em;
+		padding-top:3%;
+		padding-left:2.46%;
+		padding-bottom:3.28%;
 		line-height:150%;
 	}
 }
@@ -152,8 +148,6 @@ body, p, img, div, ul, li, a, h3 {
 
 .address {
 	@extend .recommend;
-	margin-top:6.25%;
-	margin-bottom:5.783%;
 }
 .anotherbook {
 	position:relative;
@@ -217,8 +211,23 @@ body, p, img, div, ul, li, a, h3 {
         font-size: 70%;
     }
 }
+@media screen and (max-width: 450px) {
+    .container {
+        font-size: 67%;
+    }
+}
 @media screen and (max-width: 400px) {
     .container {
         font-size: 60%;
+    }
+}
+@media screen and (max-width: 360px) {
+    .container {
+        font-size: 55%;
+    }
+}
+@media screen and (max-width: 320px) {
+    .container {
+        font-size: 52%;
     }
 }

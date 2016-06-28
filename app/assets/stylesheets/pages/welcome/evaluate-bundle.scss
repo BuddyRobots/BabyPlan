@@ -1,0 +1,108 @@
+html {
+	font-family:"Microsoft YaHei";
+}
+body {
+	font-size: 62.5%;
+}
+body, p, img, div, ul, li, a, h3 {
+	margin:0;
+	padding:0;
+}
+
+.container{
+	width:100%;
+	max-width:640px;
+	margin:0 auto;
+	background: linear-gradient(
+    45deg, 
+    #fef29c 45%, 
+    #fcc204 45%, #fcc204 50%, 
+    #fef29c 50%, #fef29c 95%, 
+    #fcc204 95%, #fcc204);
+    background-size: 10px 10px;
+    padding-bottom:3em;
+}
+.header {
+	position:relative;
+	width:100%;
+	text-align:center;
+}
+.caption {
+	font-size:4.2em;
+	color:#3e3e3e;
+	padding:5% 0;
+}
+.back {
+	position:absolute;
+	top:2.8em;
+	left:1.8em;
+	width:9.375%;
+	max-width: 60px;
+}
+article {
+	width:90.9375%;
+	max-width:582px;
+	margin:0 auto;
+	margin-top:2.345%;
+	.headfigure {
+		width:18.213%;
+		max-width: 106px;
+		float:left;
+		margin-right:3.45%;
+	}
+	.username {
+		font-size: 2.8em;
+		color:#3e3e3e;
+		margin-bottom:1%;
+		padding-top:2%;
+	}	
+	.message {
+		width:72.85%;
+		max-width:424px;
+		background:white;
+		border-radius: 5px;
+		font-size: 2.6em;
+		color:#3e3e3e;
+		margin-left:21.65%;
+		padding:2.06% 3.61%;
+		line-height:135%;
+		word-break: break-all;
+	}
+	.num {
+		font-size: 2.2em;
+		color:#999;
+		margin-left:21.65%;
+		padding:2% 0;
+	}
+}
+hr {
+	border:1px solid #eee;
+}
+
+
+
+@media screen and (max-width: 500px) {
+    .container {
+        font-size: 70%;
+    }
+}
+@media screen and (max-width: 450px) {
+    .container {
+        font-size: 67%;
+    }
+}
+@media screen and (max-width: 400px) {
+    .container {
+        font-size: 60%;
+    }
+}
+@media screen and (max-width: 360px) {
+    .container {
+        font-size: 55%;
+    }
+}
+@media screen and (max-width: 320px) {
+    .container {
+        font-size: 52%;
+    }
+}

@@ -4,7 +4,7 @@ html {
 body {
 	font-size: 62.5%;
 }
-body, p, img, div, ul, li, a, h3, span {
+body, p, img, div, ul, li, a, h3, span, form, hr, input {
 	margin:0;
 	padding:0;
 }
@@ -32,13 +32,15 @@ body, p, img, div, ul, li, a, h3, span {
 }
 .input-box {
 	width:77.1875%;
-	margin-left:9em;
-	padding-bottom:4em;
+	padding-left:14.07%;
+	padding-bottom:5%;
 	.account {
 		font-size:3em;
 		color:#3e3e3e;
 		.input-name {
-			font-size: 1em;
+			display:inline-block;
+			margin-bottom:2.03%;
+			font-size: 0.8em;
 			width:60%;
 			max-width:300px;
 			border:0;
@@ -46,6 +48,8 @@ body, p, img, div, ul, li, a, h3, span {
 			outline:none;
 		}
 		.identifycode {
+			display:inline-block;
+			margin-bottom:2.45%;
 			font-size:0.8em;
 			border:1px solid #bfbfc0;
 			a {
