@@ -46,8 +46,8 @@ body, p, img, div, ul, li, a, h3 {
 	}
 	.back {
 		position:absolute;
-		top:2.8em;
-		left:1.8em;
+		top:6.35%;
+		left:2.82%;
 		width:9.375%;
 		max-width: 60px;
 	}
@@ -65,8 +65,7 @@ body, p, img, div, ul, li, a, h3 {
 		background-position:center;
 		width:69.4375%;
 		max-width:438px;
-		height:11.3em;
-		line-height:11.3em;
+		padding:5.4% 0;
 		margin:0 auto;
 		p {
 			font-size: 3.6em;
@@ -77,20 +76,20 @@ body, p, img, div, ul, li, a, h3 {
 		position:absolute;
 		width:7.5%;
 		max-width:48px;
-		top:0.1em;
-		right:12.4em;
+		top:0.6%;
+		right:22%;
 	}
 	.dialog {
 		@extend .smallheart;
-		top:0.6em;
-		right:6.6em;
+		top:3.41%;
+		right:10.32%;
 	}
 	.num {
 		position:absolute;
 		font-size: 1.8em;
 		color:#666;
-		right:1.28em;
-		top:1em;
+		right:3.6%;
+		top:10.23%;
 	}
 }
 

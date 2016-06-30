@@ -55,7 +55,7 @@ body, p, img, div, ul, li, a, h3 {
 	p {
 		font-size: 2.8em;
 		color:#3e3e3e;
-		padding:1.4285em 1.0714em;
+		padding:6.6% 4.925%;
 		text-indent: 2em;
 	}
 }
@@ -66,8 +66,7 @@ body, p, img, div, ul, li, a, h3 {
 	background:url("/assets/centernotice/bookcloud.png") no-repeat;
 	background-size:100%;
 	background-position:center;
-	height:11.3em;
-	line-height: 11.3em;
+	padding:5.4% 0; 
 	margin-bottom:5.47%;
 	p {
 		font-size:3.6em;
@@ -78,33 +77,34 @@ body, p, img, div, ul, li, a, h3 {
 .details {
 	@extend .box-radius;
 	overflow:hidden;
-	margin-bottom:2.5em;
+	margin-bottom:3.13%;
 	.visit {
 		width:31.1475%;
 		max-width:190px;
 		float:left;
 		display:block;
-		margin:2em 1.5em;
+		padding:3.28% 2.46%;
 	}
-	h3 {
+	.caption {
 		font-size:2.8em;
 		color:#3e3e3e;
 		padding-top:3.28%;
 	}
 	.article {
-		font-size:2.6em;
-		color:#3e3e3e;
+		font-size:2.4em;
+		color:#666;
 		padding-top:1.313%;
 	}
 	.detail-flip {
 		float:right;
+		width:25.2459%;
+		max-width:154px;
+		text-align:center;
 		margin-right:2.63%;
 		margin-bottom:2.46%;
 		background:#d70c18;
-		padding:0 4.8em;
+		padding:0.95% 0;
 		border-radius:5px;
-		height:4.8em;
-		line-height:4.8em;
 		a {
 			font-size:2.8em;
 			color:#fff;

@@ -1,0 +1,21 @@
+- content_for :app_head do
+  = javascript_include_tag "pages/welcome/robotcourse-bundle"
+  = stylesheet_link_tag "pages/welcome/robotcourse-bundle", :media => "all"
+
+
+
+.container
+  .header
+    %img.cloudblock{:src => "/assets/robotcourse/cloudblock.png"}
+    %a{:href => "#"}
+      %img.back{:src => "/assets/robotcourse/back.png"}
+  %img.char{:src => "/assets/robotcourse/char.png"}
+  .course
+    %a{:href => "#"}
+      %p 机器人初级课程
+  .course
+    %a{:href => "#"}
+      %p 机器人中级课程
+  .course
+    %a{:href => "#"}
+      %p 机器人高级课程
