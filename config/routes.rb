@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get 'welcome/usercenter'
   get 'welcome/centerbook'
   get 'welcome/register'
-  get 'welcome/signup'
+  get 'welcome/signin'
   get 'welcome/centernotice'
   get 'welcome/haidianbook'
   get 'welcome/fengtaicenter'

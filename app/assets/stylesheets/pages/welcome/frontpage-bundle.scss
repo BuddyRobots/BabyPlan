@@ -8,6 +8,12 @@ body, p, img, div, ul, li, a, h3 {
 	margin:0;
 	padding:0;
 }
+a{
+	border:none;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	-webkit-tap-highlight-color:transparent;
+	outline:none；
+}
 
 .container {
 	position:relative;
@@ -38,15 +44,15 @@ body, p, img, div, ul, li, a, h3 {
 	position: absolute;
 	width:7.18%;
 	max-width:46px;
-	top:1.5em;
-	left:2.3em;
+	top:1.29%;
+	left:3.6%;
 }
 .search {
 	position: absolute;
 	width:6.09%;
 	max-width:39px;
-	top:2.3em;
-	right:3em;
+	top:1.29%;
+	right:4.7%;
 }
 
 

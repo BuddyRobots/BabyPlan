@@ -8,6 +8,12 @@ body, p, img, div, ul, li, a, h3 {
 	margin:0;
 	padding:0;
 }
+a{
+	border:none;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	-webkit-tap-highlight-color:transparent;
+	outline:none；
+}
 
 .container{
 	width:100%;
@@ -35,7 +41,7 @@ body, p, img, div, ul, li, a, h3 {
     #fef29c 50%, #fef29c 95%, 
     #fcc204 95%, #fcc204);
     background-size: 10px 10px;
-    padding-bottom:3em;
+    padding-bottom:5%;
 }
 
 .header {
@@ -67,16 +73,14 @@ body, p, img, div, ul, li, a, h3 {
 	background:#d70c18;
 	border-radius:10px;
 	text-align:center;
+	padding:4.56% 0;
 	a {
 		text-decoration: none;
+		font-size:3.6em;
+		color:#fff;
 		&:hover {
 			color:orange;
 		}
-	}
-	p {
-		font-size:3.6em;
-		color:#fff;
-		padding:6.25% 0;
 	}
 }
 
