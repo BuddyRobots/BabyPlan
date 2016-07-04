@@ -1,0 +1,129 @@
+html {
+	font-family:"Microsoft YaHei";
+}
+body {
+	font-size: 62.5%;
+}
+body, p, img, div, ul, li, a, h2, span, input {
+	margin:0;
+	padding:0;
+}
+a{
+	border:none;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	-webkit-tap-highlight-color:transparent;
+	outline:none；
+}
+
+.container {
+	position:relative;
+	width:100%;
+	max-width:640px;
+	margin:0 auto;
+	padding-bottom:2%;
+	// background:white;
+}
+.header {
+	position:relative;
+	width:100%;
+	.caption {
+		font-size:4.2em;
+		color:#3e3e3e;
+		margin-left:4.38%;
+		margin-top:6.25%;
+		text-align:center;
+	}
+	.date {
+		font-size: 2.2em;
+		color:#666;
+		margin:6.25% 0 5.47% 4.38%;
+	}
+	.haidian {
+		margin-left:5.47%;
+		color:#d70c19;
+	}
+}
+.notice-1 {
+	width:91.5625%;
+	max-width:586px;
+	display:block;
+	margin:0 auto;
+}
+.active {
+	position:relative;
+	overflow:hidden;
+	.logo {
+		width:8.75%;
+		max-width:56px;
+		display:block;
+		margin-left:4.38%;
+		margin-top:4.69%;
+		float:left;
+	}
+	.activecaption {
+		font-size: 3em;
+		color:	#3e3e3e;
+		float:left;
+		margin-top:5.8%;
+		margin-left:2.35%;
+	}
+}
+.content {
+	font-size:2.6em;
+	color:#3e3e3e;
+	line-height:150%;
+	padding:2% 4.7%;
+	text-indent:2em;
+	margin-bottom:3%;
+}
+.airplan {
+	width:91.5625%;
+	max-width:586px;
+	display:block;
+	margin:0 auto;
+}
+.show{
+	@extend .airplan;
+	margin-bottom:3%;
+}
+.anothernotice {
+	font-size:2.8em;
+	color:#d70c19;
+	text-align:center;
+}
+.back {
+	position:fixed;
+	left:3.45%;
+	top:4%;
+}
+@media screen and (max-width:640px) {
+	.container {
+		font-size: 100%;
+	}
+}
+@media screen and (max-width: 560px) {
+    .container {
+        font-size: 85%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .container {
+        font-size: 75%;
+    }
+}
+@media screen and (max-width: 450px) {
+    .container {
+        font-size: 65%;
+    }
+}
+@media screen and (max-width: 400px) {
+    .container {
+        font-size: 55%;
+    }
+}
+@media screen and (max-width: 320px) {
+    .container {
+        font-size: 50%;
+    }
+}

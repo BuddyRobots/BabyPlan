@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get 'welcome/evaluate'
   get 'welcome/robotcourse'
   get 'welcome/haidiancenter'
+  get 'welcome/noticedescription'
 
 
 
