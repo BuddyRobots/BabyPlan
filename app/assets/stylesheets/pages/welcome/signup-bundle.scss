@@ -4,7 +4,7 @@ html {
 body {
 	font-size: 62.5%;
 }
-body, p, img, div, ul, li, a, h3, span {
+body, p, img, div, ul, li, a, h3, span, form, hr, input {
 	margin:0;
 	padding:0;
 }
@@ -32,14 +32,16 @@ body, p, img, div, ul, li, a, h3, span {
 }
 .input-box {
 	width:77.1875%;
-	margin-left:9em;
-	padding:2.5em 0;
+	padding-left:14.07%;
+	padding-bottom:5%;
 	overflow:hidden;
 	.account {
 		font-size:3em;
 		color:#3e3e3e;
 		.input-name {
-			font-size: 1em;
+			display:inline-block;
+			margin-bottom:2.03%;
+			font-size: 0.8em;
 			width:60%;
 			max-width:300px;
 			border:0;
@@ -82,7 +84,7 @@ body, p, img, div, ul, li, a, h3, span {
 	font-size:3.6em;
 	color:#3e3e3e;
 	padding:4% 0;
-	margin-top:1em;
+	margin-top:2%;
 	text-align:center;
 	&:hover {
 		color:red;
@@ -94,7 +96,7 @@ body, p, img, div, ul, li, a, h3, span {
 .registaccount {
 	font-size:3em;
 	color:#3e3e3e;
-	padding-top:3em;
+	padding-top:6%;
 	text-align:center;
 	a {
 		text-decoration: none;

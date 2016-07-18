@@ -3,15 +3,21 @@ Rails.application.routes.draw do
   get 'welcome/test'
   get 'welcome/kidscenter'
   get 'welcome/frontpage'
-  get 'welcome/person'
+  get 'welcome/usercenter'
   get 'welcome/centerbook'
   get 'welcome/register'
-  get 'welcome/signup'
+  get 'welcome/signin'
   get 'welcome/centernotice'
   get 'welcome/haidianbook'
   get 'welcome/fengtaicenter'
   get 'welcome/centercourse'
   get 'welcome/robotclass'
+  get 'welcome/evaluate'
+  get 'welcome/robotcourse'
+  get 'welcome/haidiancenter'
+  get 'welcome/noticedescription'
+  get 'welcome/mybook'
+
 
 
 

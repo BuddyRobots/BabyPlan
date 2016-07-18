@@ -4,9 +4,15 @@ html {
 body {
 	font-size: 62.5%;
 }
-body, p, img, div, ul, li, a, h3, span {
+body, p, img, div, ul, li, a, h3, span, form, hr, input {
 	margin:0;
 	padding:0;
+}
+a{
+	border:none;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	-webkit-tap-highlight-color:transparent;
+	outline:none；
 }
 
 .container {
@@ -28,17 +34,19 @@ body, p, img, div, ul, li, a, h3, span {
 	max-width:248px;
 	display:block;
 	margin:0 auto;
-	padding:9em 0;
+	padding:14.07% 0;
 }
 .input-box {
 	width:77.1875%;
-	margin-left:9em;
-	padding-bottom:4em;
+	padding-left:14.07%;
+	padding-bottom:5%;
 	.account {
 		font-size:3em;
 		color:#3e3e3e;
 		.input-name {
-			font-size: 1em;
+			display:inline-block;
+			margin-bottom:2.03%;
+			font-size: 0.8em;
 			width:60%;
 			max-width:300px;
 			border:0;
@@ -46,6 +54,8 @@ body, p, img, div, ul, li, a, h3, span {
 			outline:none;
 		}
 		.identifycode {
+			display:inline-block;
+			margin-bottom:2.45%;
 			font-size:0.8em;
 			border:1px solid #bfbfc0;
 			a {
@@ -66,18 +76,17 @@ body, p, img, div, ul, li, a, h3, span {
 	width:62.96875%;
 	margin:0 auto;
 	border:1px solid #bfbfc0;
-	font-size:3.6em;
-	color:#3e3e3e;
 	padding:5.7% 0;
 	text-align:center;
-	&:hover {
-		color:red;
+	a {
+		font-size:3.6em;
+		color:#3e3e3e;
+		text-decoration: none;
+		&:hover {
+			color:red;
+		}
 	}
 }
-.clickdown {
-	text-decoration: none;
-}
-
 
 
 

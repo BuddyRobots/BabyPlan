@@ -50,13 +50,13 @@ body, p, img, div, ul, li, a, h3 {
 }
 .description {
 	@extend .box-radius;
-	margin-top:2.5em;
-	margin-bottom:3em;
+	margin-top:3.91%;
+	margin-bottom:4.7%;
 	p {
 		font-size: 2.4em;
 		color:#3e3e3e;
 		line-height: 1.5em;
-		padding:1.25em 0.625em;
+		padding:4.92% 2.46%;
 		text-indent: 2em;
 	}
 }
@@ -67,13 +67,12 @@ body, p, img, div, ul, li, a, h3 {
 	background:url("/assets/centercourse/yun02.png") no-repeat;
 	background-size:100%;
 	background-position:center;
-	height:10.7em;
-	line-height: 10.7em;
-	margin-bottom:2em;
+	margin-bottom:3.13%;
+	text-align:center;
 	p {
 		font-size:3em;
+		line-height: 3.6em;
 		color:#3e3e3e;
-		text-align:center;
 	}
 }
 .class-name {
@@ -83,18 +82,18 @@ body, p, img, div, ul, li, a, h3 {
 	padding-left:5.25em;
 	font-size:2.8em;
 	color:white;
-	height:2.04em;
-	line-height:2.04em;
+	padding-top:1.6%;
+	padding-bottom:1.6%;
 }
 .details {
 	@extend .box-radius;
 	overflow:hidden;
-	margin-top:3em;
-	margin-bottom:2.5em;
+	margin-top:4.7%;
+	margin-bottom:3.13%;
 	.content {
-		margin-left:2.3em;
-		margin-top:2em;
-		h3 {
+		margin-left:3.78%;
+		margin-top:3.28%;
+		.caption {
 			font-size:3.8em;
 			color:#3e3e3e;
 		}
@@ -106,12 +105,10 @@ body, p, img, div, ul, li, a, h3 {
 		.detail-flip {
 			float:right;
 			margin-right:1.6em;
-			margin-bottom:1.5em;
+			margin-bottom:2.56%;
 			background:#d70c18;
-			padding:0 4.8em;
+			padding:1% 4.8em;
 			border-radius:5px;
-			height:4.8em;
-			line-height:4.8em;
 			a {
 				font-size:2.8em;
 				color:#fff;
@@ -141,11 +138,16 @@ body, p, img, div, ul, li, a, h3 {
 
 @media screen and (max-width: 500px) {
     .container {
-        font-size: 65%;
+        font-size: 75%;
+    }
+}
+@media screen and (max-width: 450px) {
+    .container {
+        font-size: 70%;
     }
 }
 @media screen and (max-width: 400px) {
     .container {
-        font-size: 55%;
+        font-size: 60%;
     }
 }

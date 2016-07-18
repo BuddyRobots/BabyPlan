@@ -8,7 +8,12 @@ body, p, img, div, ul, li, a, h3 {
 	margin:0;
 	padding:0;
 }
-
+a{
+	border:none;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	-webkit-tap-highlight-color:transparent;
+	outline:none；
+}
 .container{
 	width:100%;
 	max-width:640px;
@@ -35,7 +40,7 @@ body, p, img, div, ul, li, a, h3 {
     #fef29c 50%, #fef29c 95%, 
     #fcc204 95%, #fcc204);
     background-size: 10px 10px;
-    padding-bottom:3em;
+    padding-bottom:5%;
 }
 .header {
 	position:relative;
@@ -46,8 +51,8 @@ body, p, img, div, ul, li, a, h3 {
 	}
 	.back {
 		position:absolute;
-		top:2.8em;
-		left:1.8em;
+		top:6.35%;
+		left:2.82%;
 		width:9.375%;
 		max-width: 60px;
 	}
@@ -57,16 +62,15 @@ body, p, img, div, ul, li, a, h3 {
 	position:relative;
 	width:100%;
 	text-align:center;
-	padding-top:4em;
-	padding-bottom:2em;
+	padding-top:6.25%;
+	padding-bottom:3.13%;
 	.bookcloud {
 		background:url("/assets/bookcloud.png") no-repeat;
 		background-size:100%;
 		background-position:center;
 		width:69.4375%;
 		max-width:438px;
-		height:11.3em;
-		line-height:11.3em;
+		padding:5.4% 0;
 		margin:0 auto;
 		p {
 			font-size: 3.6em;
@@ -77,15 +81,21 @@ body, p, img, div, ul, li, a, h3 {
 		position:absolute;
 		width:7.5%;
 		max-width:48px;
-		top:0.1em;
-		right:14.4em;
+		top:0.6%;
+		right:22%;
 	}
 	.dialog {
 		@extend .smallheart;
-		top:0.6em;
-		right:6.6em;
+		top:3.41%;
+		right:10.32%;
 	}
-	
+	.num {
+		position:absolute;
+		font-size: 1.8em;
+		color:#666;
+		right:3.6%;
+		top:10.23%;
+	}
 }
 
 .content {
@@ -93,29 +103,19 @@ body, p, img, div, ul, li, a, h3 {
 	margin:0 auto;
 	background:white;
 	border-radius: 10px;
-	.fontconfig {
+	.author {
 		font-size: 2em;
 		color:#3e3e3e;
-		padding-left:0.75em;
-	}
-	.author {
-		@extend .fontconfig;
-		padding-top:1.25em;
-	}
-	.translater {
-		@extend .fontconfig;
-		padding-top:0.2em;
-	}
-	.figureauthor {
-		@extend .fontconfig;
-		padding-top:0.2em;
+		padding-left:2.46%;
+		padding-top:4.1%;
+		line-height: 150%;
 	}
 	.profile {
 		font-size:2.8em;
 		color:#3e3e3e;
-		padding-top:1.14285em;
-		padding-left:0.53571em;
-		padding-bottom:0.71428em;
+		padding-top:3%;
+		padding-left:2.46%;
+		padding-bottom:3.28%;
 		line-height:150%;
 	}
 }
@@ -126,8 +126,8 @@ body, p, img, div, ul, li, a, h3 {
 	background:url("/assets/linecloud.png") no-repeat;
 	background-size:41.406%;
 	background-position:center;
-	margin-top:3em;
-	margin-bottom:1.5em;
+	margin-top:4.69%;
+	margin-bottom:2.35%;
 	text-align:center;
 	p {
 		line-height:3em;
@@ -145,15 +145,13 @@ body, p, img, div, ul, li, a, h3 {
 		font-size: 2.8em;
 		color:#3e3e3e;
 		text-indent:2em;
-		line-height:1.5em;
-		padding:0.71428em 0.53571em;
+		line-height:150%;
+		padding:3.28% 2.46%;
 	}
 }
 
 .address {
 	@extend .recommend;
-	margin-top:4em;
-	margin-bottom:3.7em;
 }
 .anotherbook {
 	position:relative;
@@ -161,22 +159,19 @@ body, p, img, div, ul, li, a, h3 {
 	margin:0 auto;
 	background:white;
 	border-radius: 10px;
-	margin-bottom:2em;
+	margin-bottom:3.125%;
 	.center {
 		font-size: 3.2em;
-		padding-left:0.46875em;
-		padding-top:0.625em;
-		padding-bottom:0.3em;
+		padding-left:2.46%;
+		padding-top:3.28%;
+		padding-bottom:1%;
 		color:#3e3e3e;
 	}
 	.num {
 		font-size: 2.4em;
-		padding-left:0.625em;
+		padding-left:2.46%;
 		color:#3e3e3e;
-		padding-bottom:0.625em;
-	}
-	.place {
-		@extend .num;
+		padding-bottom:2.46%;
 	}
 }
 
@@ -184,18 +179,20 @@ body, p, img, div, ul, li, a, h3 {
 	position:absolute;
 	width:25.573%;
 	max-width:156px;
-	top:3em;
-	right:1.5em;
+	top:15.3%;
+	right:2.46%;
 	background:#d70c18;
 	border-radius:5px;
 	text-align:center;
+	padding-top:1.9%;
+	padding-bottom:1.3%;
 	a {
 		text-decoration: none;
-	}
-	p {
 		font-size: 2.4em;
 		color:white;
-		padding:5% 0;
+		&:hover {
+			color:orange;
+		}
 	}
 }
 
@@ -214,11 +211,26 @@ body, p, img, div, ul, li, a, h3 {
 
 @media screen and (max-width: 500px) {
     .container {
-        font-size: 60%;
+        font-size: 70%;
+    }
+}
+@media screen and (max-width: 450px) {
+    .container {
+        font-size: 67%;
     }
 }
 @media screen and (max-width: 400px) {
     .container {
-        font-size: 50%;
+        font-size: 60%;
+    }
+}
+@media screen and (max-width: 360px) {
+    .container {
+        font-size: 55%;
+    }
+}
+@media screen and (max-width: 320px) {
+    .container {
+        font-size: 52%;
     }
 }
