@@ -3,6 +3,7 @@ source 'https://ruby.taobao.org'
 
 gem 'mongoid', '~> 5.1.3'
 gem 'haml-rails'
+gem 'ezcrypto'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
