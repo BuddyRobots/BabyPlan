@@ -23,6 +23,7 @@ class User
   has_many :book_borrows, class_name: "BookBorrow", inverse_of: :client
   has_many :feedbacks
   has_many :favorites
+
   # relationships specific for staff
   belongs_to :staff_center
   has_many :announcements
@@ -32,14 +33,23 @@ class User
   scope :staff, ->{ where(user_type: STAFF) }
   scope :admin, ->{ where(user_type: ADMIN) }
 
-  def self.create_client(mobile, password)
-    # 1. create the user in the database, with password encrypted
+  def self.create_client(mobile)
+    # 1. check whether user exists?
+    u = User.where(mobile: mobile).first
+    if u.present?
+      return -1
+    else
+      u = User.create(user_type: CLIENT, mobile: mobile)
+    end
 
-    # 2. generate a verify code for the new client user
+    # 2. generate random code and save
+    code = "111111"
+    u.update_attribute(:mobile_verify_code, code)
 
-    # 3. send sms
-
-    # 4. return the new user instance
+    # 3. send message
+    
+    # 4. return user id
+    u.id.to_s
   end
 
   def self.create_staff(email, password)
