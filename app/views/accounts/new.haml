@@ -1,6 +1,6 @@
 - content_for :app_head do
-  = javascript_include_tag "pages/welcome/register-bundle"
-  = stylesheet_link_tag "pages/welcome/register-bundle", :media => "all"
+  = javascript_include_tag "pages/accounts/new-bundle"
+  = stylesheet_link_tag "pages/accounts/new-bundle", :media => "all"
 
 
 .container
@@ -9,12 +9,12 @@
   .input-box
     %form.account 
       账号:
-      %input.input-name{:type => "text"}
+      %input.input-field#name{:type => "text"}
     %hr.under-line
   .input-box
     %form.account 
       密码:
-      %input.input-name{:type => "password"}
+      %input.input-field#password{:type => "password"}
     %hr.under-line
   / .input-box
   /   %form.account 
@@ -24,14 +24,14 @@
   .input-box
     %form.account 
       手机号:
-      %input.input-name{:type => "number"}
+      %input.input-field#mobile{:type => "number"}
       %span.identifycode
-        %a{:href => "#"} 验证码
+        %a#send-code{:href => "#"} 验证码
     %hr.under-line
   .input-box
     %form.account 
       验证码:
-      %input.input-name{:type => "text"}
+      %input.input-field#code{:type => "text"}
     %hr.under-line
   .register
     %a{:href => "#"} 注册

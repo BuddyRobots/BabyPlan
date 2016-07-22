@@ -1,0 +1,113 @@
+html {
+	font-family:"Microsoft YaHei";
+}
+body {
+	font-size: 62.5%;
+}
+body, p, img, div, ul, li, a, h3, span, form, hr, input {
+	margin:0;
+	padding:0;
+}
+a{
+	border:none;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	-webkit-tap-highlight-color:transparent;
+	outline:none；
+}
+
+.container {
+	position:relative;
+	width:100%;
+	max-width:640px;
+	margin:0 auto;
+	padding-bottom:10em;
+	background: linear-gradient(
+    45deg, 
+    #fef29c 45%, 
+    #fcc204 45%, #fcc204 50%, 
+    #fef29c 50%, #fef29c 95%, 
+    #fcc204 95%, #fcc204);
+    background-size: 10px 10px;
+}
+.circlelogo {
+	width:38.75%;
+	max-width:248px;
+	display:block;
+	margin:0 auto;
+	padding:14.07% 0;
+}
+.input-box {
+	width:77.1875%;
+	padding-left:14.07%;
+	padding-bottom:5%;
+	.account {
+		font-size:3em;
+		color:#3e3e3e;
+		.input-field {
+			display:inline-block;
+			margin-bottom:2.03%;
+			font-size: 0.8em;
+			width:60%;
+			max-width:300px;
+			border:0;
+			background:none;
+			outline:none;
+		}
+		.identifycode {
+			display:inline-block;
+			margin-bottom:2.45%;
+			font-size:0.8em;
+			border:1px solid #bfbfc0;
+			a {
+				text-decoration: none;
+				color:#3e3e3e;
+				&:hover {
+					color:red;
+				}
+			}
+		}
+	}
+	.underline {
+		color:#bfbfc0;
+	}
+}
+
+.register {
+	width:62.96875%;
+	margin:0 auto;
+	border:1px solid #bfbfc0;
+	padding:5.7% 0;
+	text-align:center;
+	a {
+		font-size:3.6em;
+		color:#3e3e3e;
+		text-decoration: none;
+		&:hover {
+			color:red;
+		}
+	}
+}
+
+
+
+@media screen and (max-width:640px) {
+	.container {
+		font-size: 100%;
+	}
+}
+@media screen and (max-width: 560px) {
+    .container {
+        font-size: 85%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .container {
+        font-size: 60%;
+    }
+}
+@media screen and (max-width: 400px) {
+    .container {
+        font-size: 50%;
+    }
+}
