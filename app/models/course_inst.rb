@@ -12,4 +12,9 @@ class CourseInst
   belongs_to :course
   belongs_to :center
 
+  #relationships specific for course_participate
+  has_many :course_participates
+
+  has_many :feedbacks
+
 end

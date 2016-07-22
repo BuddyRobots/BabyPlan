@@ -8,6 +8,6 @@ class CourseParticipate
   field :paid, type: Boolean
 
   belongs_to :course_inst
-  belongs_to :client, class_name: "User", inverse_of: :course_participate
+  belongs_to :client, class_name: "User", inverse_of: :course_participates
 
 end
