@@ -1,4 +1,7 @@
 class StaffLog
+	include Mongoid::Document
+	include Mongoid::Timestamps
+	
 	field :operation_type, type: Integer
 
 	belongs_to :staff, class_name:"User", inverse_of: :staff_log

@@ -1,4 +1,7 @@
 class Favorite
+	include Mongoid::Document
+	include Mongoid::Timestamps
+	
 	field :favorite_type, type: Integer
 
 	belongs_to :user

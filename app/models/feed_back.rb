@@ -1,4 +1,7 @@
 class FeedBack
+	include Mongoid::Document
+	include Mongoid::Timestamps
+	
 	field :feedback_type, type: Integer
 	field :score, type: Integer
 	field :text, type: String
