@@ -15,3 +15,4 @@
 #= require turbolinks
 #= require utility/ajax
 #= require utility/console
+#= require utility/regex
