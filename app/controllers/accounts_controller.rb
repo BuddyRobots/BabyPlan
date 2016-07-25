@@ -7,10 +7,28 @@ class AccountsController < ApplicationController
     uid = User.create_client(params[:mobile])
 
     if uid == -1
-      render json: { success: false }
+      render json: { condition: false }
     else
-      render json: { success: true, user_id: uid }
+      render json: { condition: true, user_id: uid }
     end
+
+  end
+
+  def activate
+    Rails.logger.info params[:id]
+    us1 = User.where(id: params[:id]).first
+    us1.active(params[:name], params[:password],params[:code])
+
+    if us1==-2
+      render json: {request: false}
+    else
+      render json: {request: true, user_id: us1}
+    end
+
+  end
+
+  def new
   end
 
 end
+

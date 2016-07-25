@@ -33,6 +33,7 @@ class User
   scope :staff, ->{ where(user_type: STAFF) }
   scope :admin, ->{ where(user_type: ADMIN) }
 
+
   def self.create_client(mobile)
     # 1. check whether user exists?
     u = User.where(mobile: mobile).first
@@ -52,17 +53,14 @@ class User
     u.id.to_s
   end
 
-  def self.create_active
+  def active(name,password,code)
     u1=User.where(id: id).first
-    if u1.present?
-      if u1.mobile_verified_code == code
-        u1.update_attribute(:name, name)
-      else
-        u1.id.to_s
-      end
+    if u1.mobile_verify_code == code
+      u1.update_attributes(:name => name,:password => password,:mobile_verify_code => code)
     else
-      return 1
+      return -2
     end
+    u1.id.to_s
   end
 
   def self.create_staff(email, password)
