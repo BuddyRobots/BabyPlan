@@ -17,17 +17,18 @@ class AccountsController < ApplicationController
   def activate
     Rails.logger.info params[:id]
     us1 = User.where(id: params[:id]).first
-    us1.active(params[:name], params[:password],params[:code])
+    ret = us1.active(params[:name], params[:password], params[:code])
 
-    if us1==-2
+    if ret == -2
       render json: {request: false}
     else
-      render json: {request: true, user_id: us1}
+      render json: {request: true, user_id: us1.id.to_s}
     end
 
   end
 
   def new
+  
   end
 
 end

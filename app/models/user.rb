@@ -54,13 +54,11 @@ class User
   end
 
   def active(name,password,code)
-    u1=User.where(id: id).first
-    if u1.mobile_verify_code == code
-      u1.update_attributes(:name => name,:password => password,:mobile_verify_code => code)
+    if self.mobile_verify_code == code
+      self.update_attributes(name: name, password: password, mobile_verified: true)
     else
       return -2
     end
-    u1.id.to_s
   end
 
   def self.create_staff(email, password)
