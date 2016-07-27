@@ -17,6 +17,10 @@ Rails.application.routes.draw do
   get 'welcome/haidiancenter'
   get 'welcome/noticedescription'
   get 'welcome/mybook'
+  get 'welcome/mycourse'
+  get 'welcome/searchresult'
+
+
 
   resources :accounts do
     member do

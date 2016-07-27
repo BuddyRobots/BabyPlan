@@ -1,0 +1,33 @@
+- content_for :app_head do
+  = javascript_include_tag "pages/welcome/mycourse-bundle"
+  = stylesheet_link_tag "pages/welcome/mycourse-bundle", :media => "all"
+
+
+
+.container
+  .header
+    .cloud
+      %p 我的课程
+    %a{:href => "#"}
+      %img.back{:src => "/assets/mycourse/back.png"}
+  .details
+    %img.visit{:src => "/assets/mycourse/write.jpg"}
+    %p.caption 
+      机器人之动力机械
+    %p.article 教学内容：机器人设计及搭建+图形化编程+科学素养…
+    .detail-flip
+      %a{:href => "#"} 未付款
+  .details
+    %img.visit{:src => "/assets/mycourse/write.jpg"}
+    %p.caption 
+      机器人之动力机械
+    %p.article 教学内容：机器人设计及搭建+图形化编程+科学素养…
+    .detail-flip
+      %a{:href => "#"} 已付款
+  .details
+    %img.visit{:src => "/assets/mycourse/write.jpg"}
+    %p.caption 
+      机器人之动力机械
+    %p.article 教学内容：机器人设计及搭建+图形化编程+科学素养…
+    .detail-flip.end
+      %a{:href => "#"} 已结束

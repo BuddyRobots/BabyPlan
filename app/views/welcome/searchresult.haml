@@ -1,0 +1,59 @@
+- content_for :app_head do
+  = javascript_include_tag "pages/welcome/searchresult-bundle"
+  = stylesheet_link_tag "pages/welcome/searchresult-bundle", :media => "all"
+
+
+.container
+  .header
+    %a{:href => "#"}
+      %img.back{:src => "/assets/searchresult/back.png"}
+    %img.cloud{:src => "/assets/searchresult/cloud.png"} 
+    %p.center 所有儿童中心
+    %img.tick{:src => "/assets/searchresult/tick.png"}
+    %a{:href => "#"}
+      %img.search{:src => "/assets/searchresult/search.png"}
+  .resultBox
+    %p.result
+      搜索结果:
+      %span
+      机器人
+  .content
+    %img.visit{:src => "/assets/searchresult/diary.png"}
+    %img.icon{:src => "/assets/searchresult/hui.png"}
+    %p.caption 蚯蚓的日记
+    %p.message 简介:这是一本极为有趣的图画书，以日记书写的方式……
+    .clip
+      %a{:href => "javascript:void(0)"} 绘本详情
+  .content
+    %img.visit{:src => "/assets/searchresult/visit.png"}
+    %img.icon{:src => "/assets/searchresult/gao.png"}
+    %p.caption 机器人教育激发学生
+    %p.message 机器人培训课程专业而系统，初级班细化四阶，让孩子……
+    .clip
+      %a{:href => "javascript:void(0)"} 详情
+  .content
+    %img.visit{:src => "/assets/searchresult/write.jpg"}
+    %img.icon{:src => "/assets/searchresult/ke.png"}
+    %p.caption 机器人之动力机械
+    %p.message 教学内容:机器人设计及搭建+图形化编程+科学素养……
+    .clip
+      %a{:href => "javascript:void(0)"} 详情
+  .content
+    %img.visit{:src => "/assets/searchresult/write.jpg"}
+    %img.icon{:src => "/assets/searchresult/ke.png"}
+    %p.caption 机器人之动力机械
+    %p.message 教学内容:机器人设计及搭建+图形化编程+科学素养……
+    .clip
+      %a{:href => "javascript:void(0)"} 详情
+  .content
+    %img.visit{:src => "/assets/searchresult/write.jpg"}
+    %img.icon{:src => "/assets/searchresult/ke.png"}
+    %p.caption 机器人之动力机械
+    %p.message 教学内容:机器人设计及搭建+图形化编程+科学素养……
+    .clip
+      %a{:href => "javascript:void(0)"} 详情
+
+
+
+
+ 
