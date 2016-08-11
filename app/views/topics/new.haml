@@ -1,0 +1,39 @@
+- content_for :app_head do
+  = javascript_include_tag "pages/topics/new-bundle"
+  = stylesheet_link_tag "pages/topics/new-bundle", :media => "all"
+
+
+
+%p  这是一个测试
+%table
+  %tr
+    %td title
+    %td description
+
+  %tr
+    %td 好
+    %td 是好的方面
+    %td 
+      %a{:href => "#"} show
+    %td 
+      %a{:href => "#"} edit
+    %td 
+      %a{:href => "#"} destroy
+  %tr
+    %td 中
+    %td 是居中的方面
+    %td 
+      %a{:href => "#"} show
+    %td 
+      %a{:href => "#"} edit
+    %td 
+      %a{:href => "#"} destroy
+  %tr
+    %td 坏
+    %td 是差的方面
+    %td 
+      %a{:href => "#"} show
+    %td 
+      %a{:href => "#"} edit
+    %td 
+      %a{:href => "#"} destroy

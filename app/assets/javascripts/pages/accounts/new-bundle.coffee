@@ -1,4 +1,11 @@
-$ ->
+#= require wangEditor.min
+
+
+$(document).ready ->
+
+
+
+
 
   uid = ""
 
@@ -40,4 +47,23 @@ $ ->
         else
           alert("验证码输入错误")
       )
+
+
+
+  editor = new wangEditor("area1")
+  # editor.config.uploadImgUrl = '/assets'
+  editor.create()
+  $("#btn1").click ->
+    html = editor.$txt.html()
+    console.log html
+    $.postJSON(
+      '/accounts',
+      {
+        html: html
+      },
+      (data) ->
+        console.log data
+      )
+
+
 
