@@ -25,7 +25,7 @@ Rails.application.routes.draw do
 
 
   namespace :staff do
-    resources :registrations do
+    resources :sessions do
     end
   end
 
