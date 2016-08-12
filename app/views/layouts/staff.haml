@@ -3,6 +3,30 @@
   = javascript_include_tag "layouts/staff-layout"
   = yield :head
 
+  .container
+    .header
+      %a{:href => "#"}
+        %img.logo{:src => "/assets/managecenter/logo.png"}
+      %p.leftword 社区儿童管理中心
+      %p.rightword 您好欢迎访问社区儿童管理中心！
+      .sign-up
+        %a{:href => "#"} 注册
+      .sign-in
+        %a{:href => "#signinModal", "data-toggle" => "modal"} 登陆
+    .main
+      .sidebar
+        %ul
+          %li 
+            %a{:href => "#"} 儿童管理
+          %li 
+            %a{:href => "#"} 课程管理
+          %li 
+            %a{:href => "#"} 绘本管理
+          %li 
+            %a{:href => "#"} 公告信息管理
+          %li 
+            %a{:href => "#"} 统计信息查询
+
 = yield
 
 = render :template => 'layouts/application'

@@ -1,0 +1,135 @@
+
+.modal-body, .input, label {
+	margin: 0;
+	padding: 0;
+}
+
+// layout variable content
+.content {
+	position:absolute;
+	right: 0;
+	left: 160px;
+	bottom: 0;
+	top: 60px;
+	background:#f7fcff;
+	text-align: center;
+	box-shadow: -1px -1px 6px #9c9c9c inset;
+	.caption {
+		font-size: 2.4em;
+		color: #323232;
+		padding: 60px 0;
+	}
+}
+
+
+// signin  page 
+#signinModal {
+	position:absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -203px;
+	margin-top: -174px;
+	width: 406px;
+	height: 348px;
+	border-radius: 6px;
+}
+.modal-backdrop {
+	background-color: #999;
+}
+.close {
+	position: absolute;
+	right: -14px;
+	top: -14px;
+	opacity: 0.8;
+}
+
+
+
+.logo-box {
+	text-align:center;
+	padding: 30px 0 6px 0;
+}
+.signin-logo {
+	width: 64.285%;
+	max-width: 36px;
+}
+.kids-center {
+	font-size: 1.8em;
+	color: #323232;
+	margin-left: 10px;
+	vertical-align: middle;
+}
+.error-notice {
+	width:240px;
+	margin: 0 auto;
+	font-size: 1.2em;
+	color: #db1e2c;
+	margin-bottom: 4px;
+	visibility: hidden;
+}
+.account-box {
+	width: 240px;
+	margin: 0 auto;
+	font-size: 1.6em;
+	color: #323232;
+	margin-bottom: 40px;
+	.input-box {
+		width: 190px;
+		height: 36px;
+		border-radius: 6px;
+		border: 1px solid #c8c8c8;
+		margin-left: 9px;
+	}
+	.email-notice {
+		font-size: 0.75em;
+		color: #969696;
+		padding: 16px 0;
+	}
+	.signin {
+		width: 240px;
+		height: 40px;
+		border-radius: 6px;
+		background: #c8c8c8;
+		margin-top: 20px;
+		text-align: center;
+		line-height: 40px;
+		a {
+			font-size: 1em;
+			color: white;
+			text-decoration: none;
+		}
+	}
+	.checkbox {
+		width:240px;
+		margin-top: 15px;
+	}
+	label {
+		position: relative;
+	}
+	.square-box {
+		display: inline-block;
+		width: 16px;
+		height: 16px;
+		border-radius: 2px;
+		border: 1px solid #c8c8c8;
+		background: #f2f2f2;
+		vertical-align: middle;
+	}
+	.auto-signin {
+		display: inline-block;
+		font-size: 12px;
+		margin-left: 5px;
+		padding-top: 2px;
+	}
+	.forget-password {
+		position: absolute;
+		right: 20px;
+		font-size: 12px;
+		color: #227dda;
+		text-decoration: none;
+		padding-top: 2px;
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+}

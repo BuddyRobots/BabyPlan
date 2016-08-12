@@ -1,3 +1,57 @@
 - content_for :head do
   = javascript_include_tag "pages/staff/index-bundle"
   = stylesheet_link_tag "pages/staff/index-bundle", :media => "all"
+
+.content
+  %p.caption 欢迎登陆社区儿童管理中心
+  %img.master{:src => "/assets/managecenter/master.png"}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#signinModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  
+  %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", :src => "/assets/managecenter/close.png"}
+  
+  .modal-body
+    .logo-box
+      %img.signin-logo{:src => "/assets/managecenter/logo.png"}
+        %span.kids-center 社区儿童管理中心
+    %p.error-notice 您填写的账号或密码不正确，请再次尝试
+    .account-box
+      账&nbsp号
+      %input.input-box#name
+      %p.email-notice 请填写完整的账号或管理员账号
+      密&nbsp码
+      %input.input-box#password
+      %p.signin
+        %a{:href => "#"} 登陆
+      .checkbox
+        %label
+          %input.square-box{:type => "checkbox"}
+          %span.auto-signin 
+            5天内自动登陆
+          %a.forget-password{:href => "#"} 忘记密码？
