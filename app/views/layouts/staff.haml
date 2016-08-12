@@ -1,0 +1,7 @@
+- content_for :app_head do
+  = stylesheet_link_tag "layouts/staff-layout", :media => "all"
+  = javascript_include_tag "layouts/staff-layout"
+
+= yield
+
+= render :template => 'layouts/application'
