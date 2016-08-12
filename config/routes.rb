@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   get 'welcome/editdemo'
 
   get 'welcome/managecenter'
+  
 
 
 
@@ -40,6 +41,7 @@ Rails.application.routes.draw do
     end
   end
 
+  
 
 
   

@@ -2,12 +2,30 @@
   = javascript_include_tag "pages/welcome/managecenter-bundle"
   = stylesheet_link_tag "pages/welcome/managecenter-bundle", :media => "all"
 
+.container
+  .header
+    %a{:href => "#"}
+      %img.logo{:src => "/assets/managecenter/logo.png"}
+    %p.leftword 社区儿童管理中心
+    %p.rightword 您好欢迎访问社区儿童管理中心！
+    .sign-up
+      %a{:href => "#"} 注册
+    .sign-in
+      %a{:href => "#"} 登陆
 
-.header
-  %img.logo{:src => "/assets/managecenter/logo.png"}
-  %p.leftword 社区儿童管理中心
-  %p.rightword 您好欢迎访问社区儿童管理中心
-  .sign-in
-    %a{:href => "#"} 登陆
-  .sign-up
-    %a{:href => "#"} 注册
+  .main
+    .sidebar
+      %ul
+        %li 
+          %a{:href => "#"} 儿童管理
+        %li 
+          %a{:href => "#"} 课程管理
+        %li 
+          %a{:href => "#"} 绘本管理
+        %li 
+          %a{:href => "#"} 公告信息管理
+        %li 
+          %a{:href => "#"} 统计信息查询
+    .content
+      %p.caption 欢迎登陆社区儿童管理中心
+      %img.master{:src => "/assets/managecenter/master.png"}
