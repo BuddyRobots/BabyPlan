@@ -2,6 +2,7 @@
 .modal-body, .input, label {
 	margin: 0;
 	padding: 0;
+	max-height: 600px;
 }
 
 // layout variable content
@@ -42,14 +43,11 @@
 	top: -14px;
 	opacity: 0.8;
 }
-
-
-
 .logo-box {
 	text-align:center;
 	padding: 30px 0 6px 0;
 }
-.signin-logo {
+.sign-logo {
 	width: 64.285%;
 	max-width: 36px;
 }
@@ -86,6 +84,7 @@
 		padding: 16px 0;
 	}
 	.signin {
+		display: block;
 		width: 240px;
 		height: 40px;
 		border-radius: 6px;
@@ -93,10 +92,11 @@
 		margin-top: 20px;
 		text-align: center;
 		line-height: 40px;
-		a {
-			font-size: 1em;
-			color: white;
-			text-decoration: none;
+		font-size: 1em;
+		color: white;
+		text-decoration: none;
+		&:hover {
+			background: #ffa265;
 		}
 	}
 	.checkbox {
@@ -133,3 +133,91 @@
 		}
 	}
 }
+
+//signupModal
+#signupModal {
+	position:absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -203px;
+	margin-top: -280px;
+	width: 406px;
+	height: 560px;
+	border-radius: 6px;
+}
+.signup-logo-box {
+	padding: 30px 0;
+	text-align: center;
+}
+.textbox {
+	padding-bottom: 20px;
+	.textarea {
+		width: 120px;
+		float: left;
+		text-align: right;
+		font-size:1.6em;
+		color:#323232;
+		padding-top: 9px;
+	}
+	.input-box {
+		width: 190px;
+		height: 36px;
+		border-radius: 6px;
+		border: 1px solid #c8c8c8;
+		margin-left: 10px;
+	}
+	#signup-mobilecode {
+		width: 100px;
+		height: 36px;
+		border-radius: 6px;
+		border: 1px solid #c8c8c8;
+		margin-left: 10px;
+	}
+	#mobilecode {
+		width: 76px;
+		height: 36px;
+		border-radius: 6px;
+		background: #fee4d2;
+		margin-left: 10px;
+		font-size: 1.2em;
+		text-align: center;
+	}
+}
+.signup {
+	display: block;
+	margin: 0 auto;
+	width: 240px;
+	height: 40px;
+	border-radius: 6px;
+	background: #c8c8c8;
+	margin-top: 10px;
+	margin-bottom: 30px;
+	text-align: center;
+	line-height: 40px;
+	font-size: 1.6em;
+	color: white;
+	text-decoration: none;
+	&:hover {
+		background: #ffa265;
+		text-decoration: none;
+		color: white;
+	}
+}
+.footbox {
+	width: 100%;
+	height: 48px;
+	display: block;
+	background: #5698dc;
+	text-align: center;
+	line-height: 48px;
+	font-size: 1.6em;
+	color: white;
+	text-decoration: none;
+	&:hover {
+		text-decoration: none;
+		color: white;
+	}
+}
+
+
+
