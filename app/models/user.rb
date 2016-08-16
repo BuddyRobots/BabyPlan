@@ -17,6 +17,7 @@ class User
   field :mobile_verified, type: Boolean, default: false
   field :mobile_verify_code, type: String
   field :password_verify_code, type: String
+  field :auth_key
 
   # relationships specific for clients
   belongs_to :client_center
@@ -52,6 +53,26 @@ class User
     
     # 4. return user id
     { uid: u.id.to_s }
+  end
+
+  def self.find_by_auth_key(auth_key)
+    info = Encryption.decrypt_auth_key(auth_key)
+    user_id = info.split(',')[0]
+    User.where(id: user_id).first
+  end
+
+  def self.signin(mobile, password)
+    user = User.where(mobile: mobile).first
+    return ErrCode::USER_NOT_EXIST if user.nil?
+    return ErrCode::USER_NOT_VERIFIED if user.mobile_verified == false
+    return ErrCode::WRONG_PASSWORD if Encryption.encrypt_password(password) != user.password
+    return { auth_key: user.generate_auth_key }
+    
+  end
+
+  def generate_auth_key
+    info = "#{self.id.to_s},#{Time.now.to_i}"
+    Encryption.encrypt_auth_key(info)
   end
 
   def verify_staff(name, center, password, verify_code)

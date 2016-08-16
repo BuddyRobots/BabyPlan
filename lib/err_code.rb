@@ -6,6 +6,7 @@ module ErrCode
   USER_EXIST = -3
   WRONG_VERIFY_CODE = -4
   USER_NOT_VERIFIED = -5
+  REQUIRE_SIGNIN = -6
 
   def self.ret_false(code)
     msg = self.message(code)

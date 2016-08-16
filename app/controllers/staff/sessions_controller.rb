@@ -1,4 +1,5 @@
 class Staff::SessionsController < Staff::ApplicationController
+  before_filter :require_sign_in, only: []
 
   # show the index page
   def index
@@ -6,6 +7,8 @@ class Staff::SessionsController < Staff::ApplicationController
 
   # signin
   def create
+    retval = User.signin(params[:mobile], params[:password])
+    render json: retval_wrapper(retval)
   end
 
   # verify code
