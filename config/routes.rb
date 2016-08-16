@@ -36,6 +36,9 @@ Rails.application.routes.draw do
         post :forget_password
       end
     end
+
+    resources :clients do
+    end
   end
 
 
