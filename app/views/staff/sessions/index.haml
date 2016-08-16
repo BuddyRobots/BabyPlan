@@ -63,19 +63,22 @@
     .textbox
       %label.textarea 姓&nbsp名
       %input.input-box#signup-name
-    .textbox
-      %label.textarea 社区地址
+    .textbox#kids-center
+      %label.textarea 儿童中心
       %input.input-box#signup-address
-    .textbox
+    %p#mobile-notice adaff
+    .textbox#mobile
       %label.textarea 手机号
-      %input.input-box#signup-mobile{"type" => "number"}
+      %input.input-box#signup-mobile
+    %p#verify-code-notice dddf
     .textbox
       %label.textarea 验证码
       %input.input-box#signup-mobilecode
       %a.input-box#mobilecode{:href => "#"} 获取验证码
-    .textbox
+    .textbox#password
       %label.textarea 密&nbsp码
       %input.input-box#signup-password{"type" => "password"}
+    %p#password-notice adfag
     .textbox
       %label.textarea 确认密码
       %input.input-box#signup-confirm-password{"type" => "password"}
@@ -95,7 +98,7 @@
         %span.kids-center 社区儿童管理中心 
     .forgetbox
       %label.textarea 手机号
-      %input.forget-box#forget-mobile{"type" => "number"}
+      %input.forget-box#forget-mobile
     .forgetbox
       %label.textarea 验证码
       %input.forget-box#forget-mobilecode

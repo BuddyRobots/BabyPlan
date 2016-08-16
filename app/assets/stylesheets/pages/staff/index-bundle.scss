@@ -41,8 +41,11 @@
 	position: absolute;
 	right: -14px;
 	top: -14px;
-	opacity: 0.8;
+	opacity: 0.7;
 	z-index: 10;
+}
+.close:hover {
+	opacity: 1;
 }
 .logo-box {
 	text-align:center;
@@ -187,10 +190,7 @@
 		text-align: center;
 		text-decoration: none;
 	}
-	#signup-mobile {
-		margin-bottom: 0;
-		padding: 0;
-	}
+
 	#signup-password {
 		margin-bottom: 0;
 		padding: 0;
@@ -199,6 +199,15 @@
 		margin-bottom: 0;
 		padding: 0;
 	}
+}
+#kids-center, #mobile, #password {
+	padding: 0;
+}
+#mobile-notice, #verify-code-notice, #password-notice {
+	font-size: 1.2em;
+	color: #d70c19;
+	margin-left: 130px;
+	visibility: hidden;
 }
 .signup {
 	display: block;
@@ -297,10 +306,6 @@
 		color: #323232;
 		text-align: center;
 		text-decoration: none;
-	}
-	#forget-mobile {
-		margin-bottom: 0;
-		padding: 0;
 	}
 	#forget-password {
 		margin-bottom: 0;
