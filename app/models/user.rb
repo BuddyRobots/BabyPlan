@@ -34,13 +34,13 @@ class User
   scope :admin, ->{ where(user_type: ADMIN) }
 
 
-  def self.create_client(mobile)
+  def self.create_user(user_type, mobile)
     # 1. check whether user exists?
     u = User.where(mobile: mobile).first
     if u.present?
-      return -1
+      return ErrCode::USER_EXIST
     else
-      u = User.create(user_type: CLIENT, mobile: mobile)
+      u = User.create(user_type: user_type, mobile: mobile)
     end
 
     # 2. generate random code and save
@@ -50,7 +50,14 @@ class User
     # 3. send message
     
     # 4. return user id
-    u.id.to_s
+    { uid: u.id.to_s }
+  end
+
+  def verify_staff(name, center, password, verify_code)
+    if mobile_verify_code != verify_code
+      return ErrCode::WRONG_VERIFY_CODE
+    end
+    self.update_attributes(name: name, mobile_verified: true, center: center, password: Encryption.encrypt_password(password))
   end
 
   def active(name,password,code)
@@ -59,16 +66,6 @@ class User
     else
       return -2
     end
-  end
-
-  def self.create_staff(email, password)
-    # 1. create the user in the database, with password encrypted
-
-    # 2. generate a verify code for the new staff user
-
-    # 3. send email
-
-    # 4. return the new user instance
   end
 
 end
