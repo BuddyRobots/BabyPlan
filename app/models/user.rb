@@ -16,6 +16,7 @@ class User
   field :email_verify_code, type: String
   field :mobile_verified, type: Boolean, default: false
   field :mobile_verify_code, type: String
+  field :password_verify_code, type: String
 
   # relationships specific for clients
   belongs_to :client_center
@@ -60,12 +61,29 @@ class User
     self.update_attributes(name: name, mobile_verified: true, center: center, password: Encryption.encrypt_password(password))
   end
 
-  def active(name,password,code)
-    if self.mobile_verify_code == code
-      self.update_attributes(name: name, password: password, mobile_verified: true)
-    else
-      return -2
+  def forget_password
+    if u.mobile_verified == false
+      return ErrCode::USER_NOT_VERIFIED
     end
+
+    # generate random code and save
+    code = "111111"
+    u.update_attribute(:password_verify_code, code)
+
+    # todo: send message
+
+    { uid: self.id.to_s }
+  end
+
+  def reset_password(password, verify_code)
+    if self.mobile_verified == false
+      return ErrCode::USER_NOT_VERIFIED
+    end
+
+    if self.password_verify_code != verify_code
+      return ErrCode::WRONG_VERIFY_CODE
+    end
+    self.update_attributes(password: Encryption.encrypt_password(password), password_verify_code: "111111")
   end
 
 end

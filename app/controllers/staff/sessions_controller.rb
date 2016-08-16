@@ -21,4 +21,15 @@ class Staff::SessionsController < Staff::ApplicationController
     render json: retval_wrapper(retval)
   end
 
+  def forget_password
+    user = User.where(mobile: params[:mobile]).first
+    retval = user.nil? ? ErrCode::USER_NOT_EXIST : user.forget_password
+    render json: retval_wrapper(retval)
+  end
+
+  def reset_password
+    user = User.where(id: params[:id]).first
+    retval = user.nil? ? ErrCode::USER_NOT_EXIST : user.reset_password(params[:password], params[:code])
+    render json: retval_wrapper(retval)
+  end
 end

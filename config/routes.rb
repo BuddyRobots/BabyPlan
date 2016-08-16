@@ -29,9 +29,11 @@ Rails.application.routes.draw do
     resources :sessions do
       member do
         post :verify
+        post :reset_password
       end
       collection do
         post :signup
+        post :forget_password
       end
     end
   end
