@@ -5,6 +5,6 @@ class ApplicationController < ActionController::Base
 
   def retval_wrapper(value)
   	retval = ErrCode.ret_false(value)
-  	retval.nil? { success: true }.merge(value || {}) : retval
+  	retval.nil? ? { success: true }.merge(value || {}) : retval
   end
 end

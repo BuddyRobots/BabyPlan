@@ -1,5 +1,5 @@
 
 $ ->
   $(".forget-password").click ->
-    $("#signinModal").hide()
+    $("#signinModal").modal('hide')
 
