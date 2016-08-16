@@ -39,9 +39,9 @@ class User
   def self.create_user(user_type, mobile)
     # 1. check whether user exists?
     u = User.where(mobile: mobile).first
-    if u.present?
+    if u.present? && u.mobile_verified
       return ErrCode::USER_EXIST
-    else
+    elsif u.blank?
       u = User.create(user_type: user_type, mobile: mobile)
     end
 
@@ -66,8 +66,6 @@ class User
     return ErrCode::USER_NOT_EXIST if user.nil?
     return ErrCode::USER_NOT_VERIFIED if user.mobile_verified == false
     return ErrCode::WRONG_PASSWORD if Encryption.encrypt_password(password) != user.password
-    return { auth_key: user.generate_auth_key }
-    
   end
 
   def generate_auth_key
