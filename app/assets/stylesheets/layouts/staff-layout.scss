@@ -60,11 +60,9 @@ body, p, img, div, ul, li, a, h3 {
 		top:15px;
 		border-radius:2px;
 		line-height:30px;
-		a {
-			font-size:1.4em;
-			color:white;
-			text-decoration: none;
-		}
+		font-size:1.4em;
+		color:white;
+		text-decoration: none;
 		&:hover {
 			background:#28d883;
 		}
@@ -102,6 +100,9 @@ body, p, img, div, ul, li, a, h3 {
 	bottom: 0;
 	background: #227dda;
 	text-align: center;
+	ul {
+		list-style: none;
+	}
 	li {
 		background: url('/assets/managecenter/linear.png') no-repeat bottom;
 		padding: 15px 0;

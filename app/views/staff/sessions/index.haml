@@ -44,14 +44,14 @@
       %input.input-box#name
       %p.email-notice 请填写完整的账号或管理员账号
       密&nbsp码
-      %input.input-box#password
+      %input.input-box#password{"type" => "password"}
       %a.signin{:href => "#"} 登&nbsp陆
       .checkbox
         %label
           %input.square-box{:type => "checkbox"}
           %span.auto-signin 
             5天内自动登陆
-          %a.forget-password{:href => "#"} 忘记密码？
+          %a.forget-password{"data-toggle" => "modal", "data-target" => "#forgetModal"} 忘记密码？
 
 / signup
 #signupModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
@@ -68,19 +68,42 @@
       %input.input-box#signup-address
     .textbox
       %label.textarea 手机号
-      %input.input-box#signup-mobile
+      %input.input-box#signup-mobile{"type" => "number"}
     .textbox
       %label.textarea 验证码
       %input.input-box#signup-mobilecode
-      %input.input-box#mobilecode{:href => "#", "value" => "获取验证码"}
+      %a.input-box#mobilecode{:href => "#"} 获取验证码
     .textbox
       %label.textarea 密&nbsp码
-      %input.input-box#signup-password
+      %input.input-box#signup-password{"type" => "password"}
     .textbox
       %label.textarea 确认密码
-      %input.input-box#signup-confirm-password
+      %input.input-box#signup-confirm-password{"type" => "password"}
     %a.signup{:href => "#"} 注&nbsp册
     %a.footbox{:href => "#"}
       已有账号马上登陆
       %span.right-arrow
         %img{:src => "/assets/managecenter/arrowright.png"}
+
+
+/ forget-passwordModal
+#forgetModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", :src => "/assets/managecenter/close.png"}
+  .modal-body
+    .signup-logo-box
+      %img.sign-logo{:src => "/assets/managecenter/logo.png"}
+        %span.kids-center 社区儿童管理中心 
+    .forgetbox
+      %label.textarea 手机号
+      %input.forget-box#forget-mobile{"type" => "number"}
+    .forgetbox
+      %label.textarea 验证码
+      %input.forget-box#forget-mobilecode
+      %a.input-box#mobilecode{:href => "#"} 获取验证码
+    .forgetbox
+      %label.textarea 新密码
+      %input.forget-box#forget-password{"type" => "password"}
+    .forgetbox
+      %label.textarea 确认密码
+      %input.forget-box#forget-confirm-password{"type" => "password"}
+    %a.forget{:href => "#"} 确&nbsp认

@@ -42,6 +42,7 @@
 	right: -14px;
 	top: -14px;
 	opacity: 0.8;
+	z-index: 10;
 }
 .logo-box {
 	text-align:center;
@@ -174,13 +175,29 @@
 		margin-left: 10px;
 	}
 	#mobilecode {
+		display: inline-block;
 		width: 76px;
-		height: 36px;
+		height: 34px;
+		line-height: 34px;
 		border-radius: 6px;
 		background: #fee4d2;
 		margin-left: 10px;
 		font-size: 1.2em;
+		color: #323232;
 		text-align: center;
+		text-decoration: none;
+	}
+	#signup-mobile {
+		margin-bottom: 0;
+		padding: 0;
+	}
+	#signup-password {
+		margin-bottom: 0;
+		padding: 0;
+	}
+	#signup-confirm-password {
+		margin-bottom: 0;
+		padding: 0;
 	}
 }
 .signup {
@@ -197,11 +214,18 @@
 	font-size: 1.6em;
 	color: white;
 	text-decoration: none;
-	&:hover {
-		background: #ffa265;
-		text-decoration: none;
-		color: white;
-	}
+}
+.signup:link {
+	text-decoration: none;
+}
+.signup:visited {
+	color: white;
+	text-decoration: none;
+}
+.signup:hover {
+	background: #ffa265;
+	text-decoration: none;
+	color: white;
 }
 .footbox {
 	width: 100%;
@@ -213,11 +237,104 @@
 	font-size: 1.6em;
 	color: white;
 	text-decoration: none;
-	&:hover {
-		text-decoration: none;
-		color: white;
-	}
+}
+.footbox:link {
+	text-decoration: none;
+}
+.footbox:visited {
+	color: white;
+	text-decoration: none;
+}
+.footbox:hover {
+	text-decoration: none;
+	color: white;
 }
 
-
-
+//forget-passwordModal
+#forgetModal {
+	position:absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -203px;
+	margin-top: -200px;
+	width: 406px;
+	height: 400px;
+	border-radius: 6px;
+}
+.forgetbox {
+	padding-bottom: 20px;
+	.textarea {
+		width: 120px;
+		float: left;
+		text-align: right;
+		font-size:1.6em;
+		color:#323232;
+		padding-top: 9px;
+	}
+	.forget-box {
+		width: 190px;
+		height: 36px;
+		border-radius: 6px;
+		border: 1px solid #c8c8c8;
+		margin-left: 10px;
+	}
+	#forget-mobilecode {
+		width: 100px;
+		height: 36px;
+		border-radius: 6px;
+		border: 1px solid #c8c8c8;
+		margin-left: 10px;
+	}
+	#mobilecode {
+		display: inline-block;
+		width: 76px;
+		height: 34px;
+		line-height: 34px;
+		border-radius: 6px;
+		background: #fee4d2;
+		margin-left: 10px;
+		font-size: 1.2em;
+		color: #323232;
+		text-align: center;
+		text-decoration: none;
+	}
+	#forget-mobile {
+		margin-bottom: 0;
+		padding: 0;
+	}
+	#forget-password {
+		margin-bottom: 0;
+		padding: 0;
+	}
+	#forget-confirm-password {
+		margin-bottom: 0;
+		padding: 0;
+	}
+}
+.forget {
+	display: block;
+	margin: 0 auto;
+	width: 240px;
+	height: 40px;
+	border-radius: 6px;
+	background: #c8c8c8;
+	margin-top: 10px;
+	margin-bottom: 30px;
+	text-align: center;
+	line-height: 40px;
+	font-size: 1.6em;
+	color: white;
+	text-decoration: none;
+}
+.forget:link {
+	text-decoration: none;
+}
+.forget:visited {
+	color: white;
+	text-decoration: none;
+}
+.forget:hover {
+	background: #ffa265;
+	text-decoration: none;
+	color: white;
+}
