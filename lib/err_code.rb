@@ -5,6 +5,8 @@ module ErrCode
   WRONG_PASSWORD = -2
   USER_EXIST = -3
   WRONG_VERIFY_CODE = -4
+  USER_NOT_VERIFIED = -5
+  REQUIRE_SIGNIN = -6
 
   def self.ret_false(code)
     msg = self.message(code)
@@ -29,6 +31,8 @@ module ErrCode
       "token错误"
     when EXPIRED
       "token过期"
+    when USER_NOT_VERIFIED
+      "手机号未验证"
     when REQUIRE_SIGNIN
       "未登录"
     else
