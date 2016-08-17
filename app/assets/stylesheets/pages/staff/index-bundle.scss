@@ -99,9 +99,9 @@
 		font-size: 1em;
 		color: white;
 		text-decoration: none;
-		&:hover {
-			background: #ffa265;
-		}
+		// &:hover {
+		// 	background: #ffa265;
+		// }
 	}
 	.checkbox {
 		width:240px;
@@ -137,6 +137,11 @@
 		}
 	}
 }
+#name, #password {
+	padding: 0;
+	margin-bottom: 0;
+}
+
 
 //signupModal
 #signupModal {
@@ -210,8 +215,10 @@
 		padding: 0;
 	}
 }
-#kids-center, #mobile, #password {
+#kids-center, #mobile, #password, #signup-name, #signup-address, #signup-mobile,
+#signup-mobilecode {
 	padding: 0;
+	margin-bottom: 0;
 }
 #mobile-notice, #verify-code-notice, #password-notice {
 	font-size: 1.2em;
@@ -349,7 +356,11 @@
 	text-decoration: none;
 }
 .forget:hover {
-	background: #ffa265;
+	// background: #ffa265;
 	text-decoration: none;
 	color: white;
 }
+#forget-mobile, #forget-mobilecode {
+	padding: 0;
+	margin-bottom: 0;
+} 
