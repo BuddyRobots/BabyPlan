@@ -176,9 +176,6 @@
 	.clicked-box {
 		border: 1px solid #d70c19;
 	}
-	.clicked-pass {
-		border: 1px solid #1dbb6f;
-	}
 	#signup-mobilecode {
 		width: 100px;
 		height: 36px;
@@ -228,7 +225,6 @@
 	width: 240px;
 	height: 40px;
 	border-radius: 6px;
-	background: #c8c8c8;
 	margin-top: 10px;
 	margin-bottom: 30px;
 	text-align: center;
@@ -244,10 +240,11 @@
 	color: white;
 	text-decoration: none;
 }
-#signup:hover {
+.button-disabled {
+	background: #c8c8c8;
+}
+.button-enabled {
 	background: #ffa265;
-	text-decoration: none;
-	color: white;
 }
 #footbox {
 	width: 100%;
