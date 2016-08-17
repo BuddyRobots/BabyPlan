@@ -66,15 +66,15 @@
     .textbox#kids-center
       %label.textarea 儿童中心
       %input.input-box#signup-address
-    %p#mobile-notice adaff
+    %p#mobile-notice 请核对手机号
     .textbox#mobile
       %label.textarea 手机号
       %input.input-box#signup-mobile
-    %p#verify-code-notice dddf
+    %p#verify-code-notice 验证码错误
     .textbox
       %label.textarea 验证码
       %input.input-box#signup-mobilecode
-      %a.input-box#mobilecode{:href => "#"} 获取验证码
+      %button.input-box#mobilecode{:href => "#"} 获取验证码
     .textbox#password
       %label.textarea 密&nbsp码
       %input.input-box#signup-password{"type" => "password"}
@@ -82,8 +82,8 @@
     .textbox
       %label.textarea 确认密码
       %input.input-box#signup-confirm-password{"type" => "password"}
-    %a.signup{:href => "#"} 注&nbsp册
-    %a.footbox{:href => "#"}
+    %a#signup{:href => "#"} 注&nbsp册
+    %a#footbox{:href => "#"}
       已有账号马上登陆
       %span.right-arrow
         %img{:src => "/assets/managecenter/arrowright.png"}
@@ -102,7 +102,7 @@
     .forgetbox
       %label.textarea 验证码
       %input.forget-box#forget-mobilecode
-      %a.input-box#mobilecode{:href => "#"} 获取验证码
+      %button.forget-box#mobilecode{:href => "#"} 获取验证码
     .forgetbox
       %label.textarea 新密码
       %input.forget-box#forget-password{"type" => "password"}

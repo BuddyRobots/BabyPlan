@@ -21,6 +21,7 @@ class Staff::SessionsController < Staff::ApplicationController
   # create new staff user, params include mobile, return verify code
   def signup
     retval = User.create_user(User::CLIENT, params[:mobile])
+    # retval = ErrCode::USER_EXIST
     render json: retval_wrapper(retval)
   end
 
