@@ -22,7 +22,7 @@
 	}
 }
 
-
+	
 // signin  page 
 #signinModal {
 	position:absolute;
@@ -82,6 +82,12 @@
 		border: 1px solid #c8c8c8;
 		margin-left: 9px;
 	}
+	.unclicked-box {
+		border: 1px solid #c8c8c8;
+	}
+	.clicked-box {
+		border: 1px solid #d70c19;
+	}
 	.email-notice {
 		font-size: 0.75em;
 		color: #969696;
@@ -92,7 +98,7 @@
 		width: 240px;
 		height: 40px;
 		border-radius: 6px;
-		background: #c8c8c8;
+		// background: #c8c8c8;
 		margin-top: 20px;
 		text-align: center;
 		line-height: 40px;
@@ -175,18 +181,19 @@
 		margin-left: 10px;
 		border: 1px solid #c8c8c8;
 	}
-	.unclicked-box {
-		border: 1px solid #c8c8c8;
-	}
-	.clicked-box {
-		border: 1px solid #d70c19;
-	}
+	
 	#signup-mobilecode {
 		width: 100px;
 		height: 36px;
 		border-radius: 6px;
 		border: 1px solid #c8c8c8;
 		margin-left: 10px;
+	}
+	.unclicked-box {
+		border: 1px solid #c8c8c8;
+	}
+	.clicked-box {
+		border: 1px solid #d70c19;
 	}
 	.clicked {
 		background: #d4d4d4;
@@ -282,9 +289,9 @@
 	left: 50%;
 	top: 50%;
 	margin-left: -203px;
-	margin-top: -200px;
+	margin-top: -224px;
 	width: 406px;
-	height: 400px;
+	height: 448px;
 	border-radius: 6px;
 }
 .forgetbox {
@@ -311,18 +318,29 @@
 		border: 1px solid #c8c8c8;
 		margin-left: 10px;
 	}
-	#mobilecode {
+	#mobile-code {
 		width: 76px;
 		height: 36px;
 		line-height: 36px;
 		padding: 0;
 		border-radius: 6px;
-		background: #fee4d2;
 		margin-left: 10px;
 		font-size: 1.2em;
 		color: #323232;
 		text-align: center;
 		text-decoration: none;
+	}
+	.unclicked-box {
+		border: 1px solid #c8c8c8;
+	}
+	.clicked-box {
+		border: 1px solid #d70c19;
+	}
+	.clicked {
+		background: #d4d4d4;
+	}
+	.unclicked {
+		background: #fee4d2;
 	}
 	#forget-password {
 		margin-bottom: 0;
@@ -333,13 +351,24 @@
 		padding: 0;
 	}
 }
-.forget {
+#forget-mobile-notice, #forget-verify-code-notice, #forget-password-notice {
+	font-size: 1.2em;
+	color: #d70c19;
+	margin-left: 130px;
+	visibility: hidden;
+}
+#mobile-error {
+	padding-bottom: 10px;
+}
+#mobilecode-error, #password-error {
+	padding-bottom: 0;
+}
+#forget {
 	display: block;
 	margin: 0 auto;
 	width: 240px;
 	height: 40px;
 	border-radius: 6px;
-	background: #c8c8c8;
 	margin-top: 10px;
 	margin-bottom: 30px;
 	text-align: center;

@@ -81,13 +81,13 @@ class User
   end
 
   def forget_password
-    if u.mobile_verified == false
+    if self.mobile_verified == false
       return ErrCode::USER_NOT_VERIFIED
     end
 
     # generate random code and save
     code = "111111"
-    u.update_attribute(:password_verify_code, code)
+    self.update_attribute(:password_verify_code, code)
 
     # todo: send message
 
