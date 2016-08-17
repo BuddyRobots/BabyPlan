@@ -11,8 +11,12 @@
 # about supported directives.
 #
 #= require jquery
+#= require jquery-ui
 #= require jquery_ujs
 #= require turbolinks
 #= require utility/ajax
 #= require utility/console
 #= require utility/regex
+#= require handlebars.runtime
+#= require ui/widgets/notification
+#= require extensions/page_notification

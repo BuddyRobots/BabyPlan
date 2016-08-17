@@ -1,0 +1,15 @@
+$msg_background: #F9EDBE;
+$msg_border: #F0C36D;
+
+.notification {
+  visibility: hidden;
+  padding: 3px;
+  z-index: 10000;
+  font-weight: bold;
+  position: fixed;
+  display: inline;
+  left: 50%;
+  top: 0px;
+  background-color: $msg_background;
+  border: 2px solid $msg_border;
+}

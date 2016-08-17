@@ -98,6 +98,7 @@ $ ->
   # register
   $("#signup").click ->
     if uid == ""
+      # $.page_notification("欢迎！", 3000)
       return
     if $(this).hasClass("button-enabled") == false
       return
