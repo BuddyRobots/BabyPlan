@@ -41,7 +41,7 @@
     %p.error-notice 您填写的账号或密码不正确，请再次尝试
     .account-box
       账&nbsp号
-      %input.input-box#name
+      %input.input-box#name{:type => "text"}
       %p.email-notice 请填写完整的账号或管理员账号
       密&nbsp码
       %input.input-box#password{"type" => "password"}
@@ -62,26 +62,26 @@
         %span.kids-center 社区儿童管理中心     
     .textbox
       %label.textarea 姓&nbsp名
-      %input.input-box#signup-name
+      %input.input-box.unclicked-box#signup-name{:type => "text"}
     .textbox#kids-center
       %label.textarea 儿童中心
-      %input.input-box#signup-address
+      %input.input-box.unclicked-box#signup-address{:type => "text"}
     %p#mobile-notice 请核对手机号
     .textbox#mobile
       %label.textarea 手机号
-      %input.input-box#signup-mobile
+      %input.input-box.unclicked-box#signup-mobile{:type => "text"}
     %p#verify-code-notice 验证码错误
     .textbox
       %label.textarea 验证码
-      %input.input-box#signup-mobilecode
-      %button.input-box#mobilecode{:href => "#"} 获取验证码
+      %input.input-box.unclicked-box#signup-mobilecode{:type => "text"}
+      %button.input-box.unclicked#mobilecode{:href => "#"} 获取验证码
     .textbox#password
       %label.textarea 密&nbsp码
-      %input.input-box#signup-password{"type" => "password"}
-    %p#password-notice adfag
+      %input.input-box.unclicked-box#signup-password{"type" => "password"}
+    %p#password-notice 两次密码输入不一致
     .textbox
       %label.textarea 确认密码
-      %input.input-box#signup-confirm-password{"type" => "password"}
+      %input.input-box.unclicked-box#signup-confirm-password{"type" => "password"}
     %a#signup{:href => "#"} 注&nbsp册
     %a#footbox{:href => "#"}
       已有账号马上登陆
@@ -98,10 +98,10 @@
         %span.kids-center 社区儿童管理中心 
     .forgetbox
       %label.textarea 手机号
-      %input.forget-box#forget-mobile
+      %input.forget-box#forget-mobile{:type => "text"}
     .forgetbox
       %label.textarea 验证码
-      %input.forget-box#forget-mobilecode
+      %input.forget-box#forget-mobilecode{:type => "text"}
       %button.forget-box#mobilecode{:href => "#"} 获取验证码
     .forgetbox
       %label.textarea 新密码

@@ -167,8 +167,17 @@
 		width: 190px;
 		height: 36px;
 		border-radius: 6px;
-		border: 1px solid #c8c8c8;
 		margin-left: 10px;
+		border: 1px solid #c8c8c8;
+	}
+	.unclicked-box {
+		border: 1px solid #c8c8c8;
+	}
+	.clicked-box {
+		border: 1px solid #d70c19;
+	}
+	.clicked-pass {
+		border: 1px solid #1dbb6f;
 	}
 	#signup-mobilecode {
 		width: 100px;
@@ -177,13 +186,18 @@
 		border: 1px solid #c8c8c8;
 		margin-left: 10px;
 	}
+	.clicked {
+		background: #d4d4d4;
+	}
+	.unclicked {
+		background: #fee4d2;
+	}
 	#mobilecode {
 		width: 76px;
 		height: 36px;
 		line-height: 36px;
 		padding: 0;
 		border-radius: 6px;
-		background: #fee4d2;
 		margin-left: 10px;
 		font-size: 1.2em;
 		color: #323232;
