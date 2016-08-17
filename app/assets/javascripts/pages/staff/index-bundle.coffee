@@ -9,13 +9,17 @@ $ ->
   # verifycode
   wait = 60
   time = (o) ->
+    console.log o
     if wait == 0
+      $(o).attr("disabled", false)
       o.removeAttribute 'disabled'
-      o.value = '获取验证码'
+      $(o).text('获取验证码')
       wait = 60
     else
-      o.setAttribute 'disabled', true
-      o.value = '重新发送(' + wait + ')'
+      # o.setAttribute 'disabled', true
+      $(o).attr("disabled", true)
+      $(o).text('重发(' + wait + ')')
+      # $(o).addClass()
       o.style.background = "#d4d4d4"
       wait--
       setTimeout (->
