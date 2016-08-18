@@ -8,6 +8,9 @@ class ApplicationController < ActionController::Base
 
   def retval_wrapper(value)
     retval = ErrCode.ret_false(value)
+    if value.class == Hash && value[:auth_key].present?
+      refresh_session(value[:auth_key])
+    end
     retval.nil? ? { success: true }.merge(value || {}) : retval
   end
 

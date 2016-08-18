@@ -7,6 +7,7 @@ module ErrCode
   WRONG_VERIFY_CODE = -4
   USER_NOT_VERIFIED = -5
   REQUIRE_SIGNIN = -6
+  NO_CENTER = -7
 
   def self.ret_false(code)
     msg = self.message(code)
@@ -29,6 +30,8 @@ module ErrCode
       "手机号未验证"
     when REQUIRE_SIGNIN
       "未登录"
+    when NO_CENTER
+      "未分配儿童中心"
     else
       nil
     end

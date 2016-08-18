@@ -7,7 +7,7 @@ class Staff::SessionsController < Staff::ApplicationController
 
   # signin
   def create
-    retval = User.signin(params[:mobile], params[:password])
+    retval = User.signin_staff(params[:mobile], params[:password])
     render json: retval_wrapper(retval)
   end
 
@@ -20,8 +20,7 @@ class Staff::SessionsController < Staff::ApplicationController
 
   # create new staff user, params include mobile, return verify code
   def signup
-    retval = User.create_user(User::CLIENT, params[:mobile])
-    # retval = ErrCode::USER_EXIST
+    retval = User.create_user(User::STAFF, params[:mobile])
     render json: retval_wrapper(retval)
   end
 
@@ -33,7 +32,7 @@ class Staff::SessionsController < Staff::ApplicationController
 
   def reset_password
     user = User.where(id: params[:id]).first
-    retval = user.nil? ? ErrCode::USER_NOT_EXIST : user.reset_password(params[:password], params[:code])
+    retval = user.nil? ? ErrCode::USER_NOT_EXIST : user.reset_password(params[:password], params[:verify_code])
     render json: retval_wrapper(retval)
   end
 end

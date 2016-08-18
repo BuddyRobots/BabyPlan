@@ -17,7 +17,8 @@ class User
   field :mobile_verified, type: Boolean, default: false
   field :mobile_verify_code, type: String
   field :password_verify_code, type: String
-  field :auth_key
+  field :auth_key, type: String
+  field :center, type: String
 
   # relationships specific for clients
   belongs_to :client_center
@@ -61,11 +62,13 @@ class User
     User.where(id: user_id).first
   end
 
-  def self.signin(mobile, password)
-    user = User.where(mobile: mobile).first
+  def self.signin_staff(mobile, password)
+    user = User.staff.where(mobile: mobile).first
     return ErrCode::USER_NOT_EXIST if user.nil?
     return ErrCode::USER_NOT_VERIFIED if user.mobile_verified == false
     return ErrCode::WRONG_PASSWORD if Encryption.encrypt_password(password) != user.password
+    return ErrCode::NO_CENTER if user.staff_center.blank?
+    return { auth_key: user.generate_auth_key }
   end
 
   def generate_auth_key
@@ -78,6 +81,7 @@ class User
       return ErrCode::WRONG_VERIFY_CODE
     end
     self.update_attributes(name: name, mobile_verified: true, center: center, password: Encryption.encrypt_password(password))
+    nil
   end
 
   def forget_password
@@ -102,7 +106,8 @@ class User
     if self.password_verify_code != verify_code
       return ErrCode::WRONG_VERIFY_CODE
     end
-    self.update_attributes(password: Encryption.encrypt_password(password), password_verify_code: "111111")
+    self.update_attributes(password: Encryption.encrypt_password(password))
+    nil
   end
 
 end
