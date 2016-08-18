@@ -104,7 +104,6 @@ $ ->
     check_signup_input()
   $("#signup-mobilecode").keyup ->
     check_signup_input()
-    $("#verify-code-notice").css("visibility","hidden")
   $("#signup-password").keyup ->
     toggle_password_tip(false)
     check_signup_input()
@@ -140,9 +139,9 @@ $ ->
       },
       (data) ->
         if data.success
-          $.page_notification("注册完成，请通知管理员分配儿童中心", 3000)
+          $.page_notification("注册完成，请通知管理员分配儿童中心",3000)
         else
-          $("#verify-code-notice").text("验证码错误").css("visibility","visible")
+          $("#verify-code-notice").text("WRONG_VERIFY_CODE").css("visibility","visible")
       )
   $("#signup-signin").click ->
     $("#signinModal").modal('show')
@@ -203,7 +202,6 @@ $ ->
     check_forget_signup_input()
   $("#forget-mobilecode").keyup ->
     check_forget_signup_input()
-    $("#forget-verify-code-notice").css("visibility","hidden")
   $("#forget-password").keyup ->
     toggle_forget_password_tip(false)
     check_forget_signup_input()
@@ -233,12 +231,8 @@ $ ->
         verify_code: verify_code
       },
       (data) ->
-        if data.success
-          $("#forgetModal").modal('hide')
-          $("#signinModal").modal('show')
-          $.page_notification("密码已重置，请登录", 3000)
-        else
-          $("#forget-verify-code-notice").text("验证码错误").css("visibility","visible")
+        if !data.success
+          $("#forget-verify-code-notice").text("WRONG_VERIFY_CODE").css("visibility","visible")
       )
   $("#forget-register").click ->
     $("#forgetModal").modal('hide')
