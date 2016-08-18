@@ -64,7 +64,7 @@ $ ->
           console.log uid
         #需要修改
         else
-          $("#mobile-notice").text("USER_EXIST").css("visibility","visible")     
+          $("#mobile-notice").text("该手机号已注册，请直接登陆").css("visibility","visible")     
           console.log $("#mobile-notice").text()
     )
     if timer != null
@@ -138,10 +138,14 @@ $ ->
         verify_code: verify_code
       },
       (data) ->
-        if !data.success
+        if data.success
+          $.page_notification("注册完成，请通知管理员分配儿童中心",3000)
+        else
           $("#verify-code-notice").text("WRONG_VERIFY_CODE").css("visibility","visible")
       )
-
+  $("#signup-signin").click ->
+    $("#signinModal").modal('show')
+    $("#signupModal").modal('hide')
 
 
   # forgetpassword user mobile verify
@@ -165,7 +169,7 @@ $ ->
           $("#forget-mobile-notice").css("visibility","hidden")
           uid = data.uid
         else
-          $("#forget-mobile-notice").text("该手机号已注册").css("visibility","visible")     
+          $("#forget-mobile-notice").text("该手机号未注册").css("visibility","visible")     
       )
     if timer != null
       clearTimeout(timer)
@@ -230,6 +234,9 @@ $ ->
         if !data.success
           $("#forget-verify-code-notice").text("WRONG_VERIFY_CODE").css("visibility","visible")
       )
+  $("#forget-register").click ->
+    $("#forgetModal").modal('hide')
+    $("#signupModal").modal('show')
 
 
   toggle_signin_password_tip = (wrong) ->

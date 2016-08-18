@@ -260,7 +260,7 @@
 .button-enabled {
 	background: #ffa265;
 }
-#footbox {
+.footbox {
 	width: 100%;
 	height: 48px;
 	display: block;
@@ -271,14 +271,14 @@
 	color: white;
 	text-decoration: none;
 }
-#footbox:link {
+.footbox:link {
 	text-decoration: none;
 }
-#footbox:visited {
+.footbox:visited {
 	color: white;
 	text-decoration: none;
 }
-#footbox:hover {
+.footbox:hover {
 	text-decoration: none;
 	color: white;
 }

@@ -83,7 +83,7 @@
       %label.textarea 确认密码
       %input.input-box.unclicked-box#signup-confirm-password{"type" => "password"}
     %a#signup.button-disabled{:href => "javascript:void(0);"} 注&nbsp册
-    %a#footbox{:href => "javascript:void(0);"}
+    %a.footbox#signup-signin{:href => "javascript:void(0);"}
       已有账号马上登陆
       %span.right-arrow
         %img{:src => "/assets/managecenter/arrowright.png"}
@@ -113,8 +113,8 @@
       %label.textarea 确认密码
       %input.forget-box.unclicked-box#forget-confirm-password{"type" => "password"}
     %a#forget.button-disabled{:href => "javascript:void(0);"} 确&nbsp认
-    %a#footbox{:href => "javascript:void(0);"}
-      该手机号已注册
+    %a.footbox#forget-register{:href => "javascript:void(0);"}
+      前往注册
       %span.right-arrow
         %img{:src => "/assets/managecenter/arrowright.png"}
 
