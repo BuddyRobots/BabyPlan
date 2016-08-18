@@ -293,6 +293,7 @@ $ ->
         if data.success
           $(".error-notice").css("visibility","hidden")
         else
+          
           $(".error-notice").css("visibility","visible")
       )
 

@@ -85,6 +85,57 @@ body, p, img, div, ul, li, a, h3 {
 
 }
 
+.kids-manage {
+	float: right;
+	list-style: none;
+	.manage {
+		float: left;
+		height: 50px;
+		margin-top: 5px;
+		line-height: 50px;
+		padding: 0 30px;
+		border-left: 1px solid #c8c8c8;
+	}
+	#manage-photo {
+		background: url('/assets/managecenter/photocircle.png') no-repeat;
+		background-size: 34px;
+		background-position: 15px 9px;
+		padding: 0 0 0 15px;
+	}
+	.turnoff-icon, .about {
+		width: 100%;
+		max-width: 24px;
+	}
+	.dropdown-toggle {
+		font-size: 16px;
+		color: #323232;
+	}
+	.btn {
+		display: block;
+		background: white;
+		border: 0;
+	}
+	.caret {
+		margin-left: 10px;
+	}
+}
+.dropdown-menu {
+	li {
+		a{
+			text-align: left;
+			padding-left: 10px;
+			font-size: 16px;
+			color: #323232;
+			&:hover {
+				background: #e6e6e6;
+				color: #323232;
+			}
+		}
+		
+	}
+}
+
+
 .main {
 	position: absolute;
 	width: 100%;
