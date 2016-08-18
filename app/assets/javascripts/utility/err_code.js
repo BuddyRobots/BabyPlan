@@ -1,0 +1,2 @@
+USER_EXIST = -1
+USER_NOT_EXIST = -2

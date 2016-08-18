@@ -17,6 +17,8 @@
 #= require utility/ajax
 #= require utility/console
 #= require utility/regex
+#= require utility/err_code
 #= require handlebars.runtime
 #= require ui/widgets/notification
 #= require extensions/page_notification
+
