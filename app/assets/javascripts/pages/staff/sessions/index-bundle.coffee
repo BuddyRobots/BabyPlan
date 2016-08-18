@@ -123,7 +123,7 @@ $ ->
     password = $("#signup-password").val()
     verify_code = $("#mobilecode").val()
     password_verify_code = $("#signup-confirm-password").val()
-    
+
     if password != password_verify_code
       toggle_password_tip(true)
       return

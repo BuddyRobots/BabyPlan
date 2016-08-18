@@ -7,6 +7,9 @@ class User
   STAFF = 2
   ADMIN = 4
 
+  BOY = 1
+  GIRL = 2
+
   field :email, type: String
   field :mobile, type: String
   field :password, type: String
@@ -18,7 +21,15 @@ class User
   field :mobile_verify_code, type: String
   field :password_verify_code, type: String
   field :auth_key, type: String
+
+  # for staff
   field :center, type: String
+
+  # for client
+  field :gender, type: Integer
+  field :birthday, type: Date
+  field :parent, type: String
+  field :address, type: String
 
   # relationships specific for clients
   belongs_to :client_center
@@ -110,4 +121,22 @@ class User
     nil
   end
 
+  def is_staff
+    return self.user_type == User::STAFF
+  end
+
+  def is_admin
+    return self.user_type == User::ADMIN
+  end
+
+  def client_info
+    {
+      name: self.name,
+      gender: self.gender,
+      age: self.birthday.nil? ? self.birthday.year - Date.today.year : nil,
+      parent: self.parent,
+      mobile: self.mobile,
+      address: self.address
+    }
+  end
 end

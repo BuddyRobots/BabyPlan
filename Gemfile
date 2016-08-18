@@ -5,6 +5,7 @@ gem 'mongoid', '~> 5.1.3'
 gem 'haml-rails'
 gem 'ezcrypto'
 gem 'handlebars_assets'
+gem 'kaminari'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
