@@ -11,3 +11,6 @@
 /log/*
 !/log/.keep
 /tmp
+
+/config/mongoid.yml
+/.byebug_history

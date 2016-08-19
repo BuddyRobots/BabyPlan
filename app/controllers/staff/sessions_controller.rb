@@ -8,6 +8,14 @@ class Staff::SessionsController < Staff::ApplicationController
   # signin
   def create
     retval = User.signin_staff(params[:mobile], params[:password])
+    if retval.class == Hash && retval[:auth_key].present?
+      cookies[:auth_key] = {
+        :value => retval[:auth_key],
+        :expires => 24.months.from_now,
+        :domain => :all
+      }
+    end
+    byebug
     render json: retval_wrapper(retval)
   end
 
