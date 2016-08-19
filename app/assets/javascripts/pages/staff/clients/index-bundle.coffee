@@ -1,4 +1,12 @@
 $ ->
+  # calender set
+  $( "#datepicker" ).datepicker({
+        changeMonth: true,
+        changeYear: true
+      });
+  $( "#datepicker" ).datepicker( $.datepicker.regional[ "zh-TW" ] );
+  $( "#datepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+   
 
   uid = ""
   timer = null
@@ -56,7 +64,7 @@ $ ->
       return
     $("#kid-mobile").removeClass("clicked-box")
     $.postJSON(
-      '/staff/sessions/signup',
+      '/staff/clients',
       {
         mobile: mobile
       },
@@ -68,7 +76,7 @@ $ ->
           console.log uid
         #需要修改
         else
-          $("#mobile-notice").text("该手机号已添加").css("visibility","visible")     
+          $("#mobile-notice").text("帐号已存在").css("visibility","visible")     
           console.log $("#mobile-notice").text()
     )
     if timer != null
@@ -81,9 +89,7 @@ $ ->
         $("#kid-address").val().trim() == "" ||
         $("#kid-mobile").val().trim() == "" ||
         $("#kid-mobilecode").val().trim() == "" ||
-        $("#kid-birthday").val().trim() == "" ||
         $("#kid-parent").val().trim() == "" ||
-        $("#kid-sex").val().trim() == "" ||
         uid == ""
       $("#kid-add").addClass("button-disabled")
       $("#kid-add").removeClass("button-enabled")
@@ -100,11 +106,7 @@ $ ->
   $("#kid-mobilecode").keyup ->
     check_add_input()
     $("#verify-code-notice").css("visibility","hidden")
-  $("#kid-birthday").keyup ->
-    check_add_input()
   $("#kid-parent").keyup ->
-    check_add_input()
-  $("#kid-sex").keyup ->
     check_add_input()
 
   $("#kid-add").click ->
@@ -113,18 +115,15 @@ $ ->
       return
     if $(this).hasClass("button-enabled") == false
       return
-    name = $("#signup-name").val()
-    center = $("#signup-address").val()
-    password = $("#signup-password").val()
-    verify_code = $("#signup-mobilecode").val()
-    password_verify_code = $("#signup-confirm-password").val()
-    
-    if password != password_verify_code
-      toggle_password_tip(true)
-      return
+    name = $("#kid-name").val()
+    gender = $("#kid-gender").val()
+    birthday = $("datepicker").val()
+    address = $("#kid-address").val()
+    parent = $("#kid-parent").val()
+    verify_code = $("#kid-mobilecode").val()
     
     $.postJSON(
-      '/staff/sessions/' + uid + '/verify',
+      '/staff/clients/' + uid + '/verify',
       {
         name: name
         center: center
@@ -132,8 +131,9 @@ $ ->
         verify_code: verify_code
       },
       (data) ->
-        if data.success
-          $.page_notification("注册完成，请通知管理员分配儿童中心",3000)
-        else
-          $("#verify-code-notice").text("验证码错误").css("visibility","visible")
+        if !data.success
+          if data.code = USER_NOT_EXIST
+            $("#mobile-notice").text("帐号不存在").css("visibility","visible")
+          if data.code = WRONG_VERIFY_CODE
+            $("#verify-code-notice").text("验证码错误").css("visibility","visible")
       )

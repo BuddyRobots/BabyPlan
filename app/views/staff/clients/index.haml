@@ -10,11 +10,11 @@
     .manage-box
       .user-search-box
         .search-box
-          %input.input-box{:placeholder => "输入姓名"}
+          %input.search-input-box{:placeholder => "输入姓名"}
         .search-icon
           %a{:href => "javascript:void(0);"}
             %img.search{:src => "/assets/managecenter/search.png"}
-      .btn{:type => "button", :href => "#kidsaddModal", "data-toggle" => "modal"} 
+      .btn.kidadd-btn{:type => "button", :href => "#kidsaddModal", "data-toggle" => "modal"} 
         %img.add-edit{:src => "/assets/managecenter/ticker.png"}
         添加儿童
 
@@ -73,10 +73,12 @@
       %input.input-box.unclicked-box#kid-name{:type => "text"}
     .textbox
       %label.textarea 性&nbsp别
-      %input.input-box.unclicked-box#kid-sex{:type => "text"}
+      %select.input-box.unclicked-box#kid-gender
+        %option 男
+        %option 女
     .textbox
       %label.textarea 出生日期
-      %input.input-box.unclicked-box#kid-birthday{:type => "text"}
+      %input.input-box.unclicked-box#datepicker{:type => "text"}     
     .textbox
       %label.textarea 家长姓名
       %input.input-box.unclicked-box#kid-parent{:type => "text"}

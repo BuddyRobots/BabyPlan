@@ -1,3 +1,5 @@
+@import "jquery-ui";
+
 .modal-body, .input, label {
 	margin: 0;
 	padding: 0;
@@ -37,7 +39,7 @@
 .search-box {
 	float: left;
 }
-.input-box {
+.search-input-box {
 	width: 163px;
 	height:34px;
 	border: 0;
@@ -55,7 +57,7 @@
 	max-width: 22px;
 	margin: 6px 6px;
 }
-.btn {
+.kidadd-btn {
 	float: right;
 	margin: 11px 20px 0 0;
 	width: 100px;
@@ -66,7 +68,7 @@
 	background: #f7873d;
 	border-radius: 6px;
 }
-.btn:hover {
+.kidadd-btn:hover {
 	background: #f7873d;
 	color: white;
 }
@@ -166,7 +168,9 @@
 		margin-left: 10px;
 		border: 1px solid #c8c8c8;
 	}
-	
+	#locale {
+		display: none;
+	}
 	#kid-mobilecode {
 		width: 100px;
 		height: 36px;
@@ -207,7 +211,7 @@
 		padding: 0;
 	}
 }
-#kid-mobile, #kid-name, #kid-sex, #kid-birthday, #kid-address, #kid-mobile,
+#kid-mobile, #kid-name, #kid-gender, #datepicker, #kid-address, #kid-mobile,
 #kid-parent, #kid-address, #kid-mobilecode, #homeaddress, #mobile {
 	padding: 0;
 	margin-bottom: 0;
