@@ -9,12 +9,117 @@
 	background:#f7fcff;
 	box-shadow: -1px -1px 6px #9c9c9c inset;
 }
+
 .content-box {
-	padding: 20px 20px auto 20px;
+	position: relative;
+	margin: 20px 20px auto 20px;
 	box-shadow: 0 -1px 6px #9c9c9c inset;
-	background: white;
+	background: white;  
 }
 .manage-box {
 	height: 58px;
-	box-shadow: -1px -1px 6px #9c9c9c inset;
+	border-bottom: 1px solid #c8c8c8;
+}
+.user-search-box {
+	position: absolute;
+	width: 198px;
+	height: 34px;
+	left:20px;
+	top: 11px;
+	border: 1px solid #c8c8c8;
+	border-top-left-radius: 6px;
+	border-bottom-left-radius: 6px;
+}
+.search-box {
+	float: left;
+}
+.input-box {
+	width: 163px;
+	height:34px;
+	border: 0;
+	border-top-left-radius: 6px;
+	border-bottom-left-radius: 6px;
+}
+.search-icon {
+	float: left;
+	width:34px;
+	height:34px;
+	border-left: 1px solid #c8c8c8;
+}
+.search {
+	width: 100%;
+	max-width: 22px;
+	margin: 6px 6px;
+}
+.btn {
+	float: right;
+	margin: 11px 20px 0 0;
+	width: 100px;
+	height: 34px;
+	padding: 0;
+	line-height: 34px;
+	color: white;
+	background: #f7873d;
+	border-radius: 6px;
+}
+.btn:hover {
+	background: #f7873d;
+	color: white;
+}
+
+.table-box {
+	position: relative;
+	padding: 0;
+	margin: 20px 20px auto 20px;
+}
+.user-table {
+	border-radius: 6px;
+	border: 1px solid #c8c8c8;
+	font-size: 14px;
+	color: #323232;
+	margin-bottom: 0;
+	th {
+		text-align: center;
+		height: 40px;
+	}
+	td {
+		font-size: 12px;
+		color: #505050;
+		height:45px;
+		text-align: center;
+	}
+}
+.foot-message {
+	overflow: hidden;
+}
+.change-page {
+	float: left;
+	margin-left: 15px;
+	margin-top: 10px;
+	ul {
+		list-style: none;
+
+	}
+	li {
+		float: left;
+		border: 1px solid #c8c8c8;
+		background: #f4f4f4;
+	}
+	a {
+		display: block;
+		width: 16px;
+		height: 16px;
+		text-align: center;
+	}
+	#num {
+		width: 16px;
+		height: 16px;
+		font-size: 12px;
+		border: 1px solid #227dda;
+		text-align: center;
+	}
+	.arrow {
+		display: block;
+		padding: 3.5px 5.5px;
+	}
 }

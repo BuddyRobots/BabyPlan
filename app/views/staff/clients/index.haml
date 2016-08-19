@@ -4,5 +4,52 @@
 
 
 .content
+  /clients-index
+
   .content-box
+    .manage-box
+      .user-search-box
+        .search-box
+          %input.input-box{:placeholder => "输入姓名"}
+        .search-icon
+          %a{:href => "javascript:void(0);"}
+            %img.search{:src => "/assets/managecenter/search.png"}
+      .btn{:type => "button"} 
+        %img.add-edit{:src => "/assets/managecenter/ticker.png"}
+        添加儿童
+
+    .table-box
+      %table.table.table-bordered.user-table
+        %caption
+        %thead
+          %tr
+            %th 姓名
+            %th 年龄
+            %th 性别
+            %th 家长
+            %th 手机号
+            %th 家庭住址
+            %th 操作
+        %tbody
+          %tr
+            %td 李星
+            %td 6岁
+            %td 男
+            %td 李远征
+            %td 13126833829
+            %td 朝阳区新街口外大街27号院
+            %td
+              %a{:href => "javascript:void(0);"} 详情
+
+    .foot-message
+      %p 共6页每页显示10条信息
+      .change-page.clearfix
+        %ul
+          %li
+            %a#left-arrow{:href => "javascript:void(0);"}
+              %img.arrow{:src => "/assets/managecenter/left.png"} 
+          %li#num 1
+          %li
+            %a#right-arrow{:href => "javascript:void(0);"}
+              %img.arrow{:src => "/assets/managecenter/right.png"} 
 
