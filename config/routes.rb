@@ -39,6 +39,9 @@ Rails.application.routes.draw do
     end
 
     resources :clients do
+      member do
+        post :verify
+      end
     end
   end
 
