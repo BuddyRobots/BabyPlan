@@ -16,7 +16,7 @@
             %img.manager{:src => "/assets/managecenter/headphoto.png"}
             .btn-group
               %a.btn.dropdown-toggle{"data-toggle" => "dropdown", :href => "javascript:void(0);"}
-                管理员
+                = @current_user.name
                 %span.caret
               %ul.dropdown-menu
                 %li 

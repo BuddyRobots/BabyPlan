@@ -15,7 +15,6 @@ class Staff::SessionsController < Staff::ApplicationController
         :domain => :all
       }
     end
-    byebug
     render json: retval_wrapper(retval)
   end
 
