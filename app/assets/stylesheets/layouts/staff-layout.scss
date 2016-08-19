@@ -156,11 +156,12 @@ body, p, img, div, ul, li, a, h3 {
 	}
 	li {
 		background: url('/assets/managecenter/linear.png') no-repeat bottom;
-		padding: 15px 0;
 		a {
+			display: block;
 			font-size: 1.6em;
 			color: #fff;
 			text-decoration: none;
+			padding: 15px 0;
 		}
 	}
 }

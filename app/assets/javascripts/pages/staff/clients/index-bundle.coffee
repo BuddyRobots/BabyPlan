@@ -41,15 +41,7 @@ $ ->
     return
 
 
-  # $("#input-search").keydown (event) ->
-  #    code = event.which
-  #    if code == 13
-       # search()  按下事件
   
-
-  perss = ->
-    window.location.href = "/staff/clients"
-
 
 
 
@@ -109,6 +101,17 @@ $ ->
   $("#kid-parent").keyup ->
     check_add_input()
 
+
+  # $("#kid-add").keydown (event) ->
+  #   code = event.which
+  #   if code == 13
+  #     press()
+  
+  # perss = ->
+  #   location.href = "/staff/clients"
+
+
+# add button press
   $("#kid-add").click ->
     if uid == ""
       # $.page_notification("欢迎！", 3000)
@@ -126,8 +129,10 @@ $ ->
       '/staff/clients/' + uid + '/verify',
       {
         name: name
-        center: center
-        password: password
+        gender: gender
+        birthday: birthday
+        address: address
+        parent: parent
         verify_code: verify_code
       },
       (data) ->

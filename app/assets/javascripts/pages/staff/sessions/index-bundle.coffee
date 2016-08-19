@@ -271,6 +271,16 @@ $ ->
     toggle_signin_password_tip(false)
     check_signin_input()
 
+  # enter press event test
+  # $(document).keydown (event) ->
+  #   code = event.which
+  #   if code == '13'
+  #     alert "hello"
+  #     # press()
+  # perss = ->
+  #   location.href = "http://baidu.com"
+
+# sign in button
   $(".signin").click ->
     if $(this).hasClass("button-enabled") == false
       return
