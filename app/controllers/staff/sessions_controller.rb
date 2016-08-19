@@ -43,4 +43,9 @@ class Staff::SessionsController < Staff::ApplicationController
     retval = user.nil? ? ErrCode::USER_NOT_EXIST : user.reset_password(params[:password], params[:verify_code])
     render json: retval_wrapper(retval)
   end
+
+  def signout
+    cookies.delete(:auth_key, :domain => :all)
+    redirect_to staff_sessions_path
+  end
 end
