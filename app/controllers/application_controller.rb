@@ -12,6 +12,7 @@ class ApplicationController < ActionController::Base
   end
 
   def init
+    @code = params[:code]
     refresh_session(params[:auth_key] || cookies[:auth_key])
   end
 

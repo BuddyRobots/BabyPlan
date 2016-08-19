@@ -2,6 +2,8 @@
   = stylesheet_link_tag "layouts/staff-layout", :media => "all"
   = javascript_include_tag "layouts/staff-layout"
   = yield :head
+  :javascript
+    window.code = "#{@code}"
 
   .container
     .header
@@ -40,7 +42,7 @@
       .sidebar
         %ul
           %li 
-            %a{:href => "#"} 儿童管理
+            %a{:href => "/staff/clients"} 儿童管理
           %li 
             %a{:href => "#"} 课程管理
           %li 
