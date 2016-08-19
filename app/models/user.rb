@@ -39,7 +39,7 @@ class User
   has_many :favorites
 
   # relationships specific for staff
-  belongs_to :staff_center
+  belongs_to :staff_center, class_name: "Center", inverse_of: :staffs
   has_many :announcements
   has_many :staff_logs
 
@@ -68,9 +68,7 @@ class User
   end
 
   def self.find_by_auth_key(auth_key)
-    info = Encryption.decrypt_auth_key(auth_key)
-    user_id = info.split(',')[0]
-    User.where(id: user_id).first
+    User.where(auth_key: auth_key).first
   end
 
   def self.signin_staff(mobile, password)
@@ -79,7 +77,9 @@ class User
     return ErrCode::USER_NOT_VERIFIED if user.mobile_verified == false
     return ErrCode::WRONG_PASSWORD if Encryption.encrypt_password(password) != user.password
     return ErrCode::NO_CENTER if user.staff_center.blank?
-    return { auth_key: user.generate_auth_key }
+    auth_key = user.generate_auth_key
+    user.update_attribute(:auth_key, auth_key)
+    return { auth_key: auth_key }
   end
 
   def generate_auth_key
