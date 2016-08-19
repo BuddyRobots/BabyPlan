@@ -91,13 +91,19 @@
 }
 
 .select-page {
-	margin-top: 10px;
-	margin-bottom: 15px;
-	text-align: right;
+	position: relative;
+	padding-bottom: 1px;
+	// text-align: right;
 	.page-detail {
+		position: absolute;
+		top: 4px;
+		right: 210px;
 		font-size: 12px;
 		color: #969696;
 		margin-right: 15px;
+	}
+	.pagination {
+		margin: 15px 20px;
 	}
 }
 
