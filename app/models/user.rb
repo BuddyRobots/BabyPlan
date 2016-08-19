@@ -39,7 +39,7 @@ class User
   has_many :favorites
 
   # relationships specific for staff
-  belongs_to :staff_center
+  belongs_to :staff_center, class_name: "Center", inverse_of: :staffs
   has_many :announcements
   has_many :staff_logs
 

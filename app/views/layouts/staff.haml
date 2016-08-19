@@ -10,27 +10,29 @@
       %p.leftword 社区儿童管理中心
 
       /登录注册页面的layout
-      / %p.rightword 您好欢迎访问社区儿童管理中心！
-      / %a.sign-up{:href => "#signupModal", "data-toggle" => "modal"} 注册
-      / %a.sign-in{:href => "#signinModal", "data-toggle" => "modal"} 登陆
-      %ul.kids-manage
-        %li.manage#manage-photo
-          %img.manager{:src => "/assets/managecenter/headphoto.png"}
-          .btn-group
-            %a.btn.dropdown-toggle{"data-toggle" => "dropdown", :href => "javascript:void(0);"}
-              管理员
-              %span.caret
-            %ul.dropdown-menu
-              %li 
-                %a{:href => "javascript:void(0);"} 相关信息
-              %li 
-                %a{:href => "javascript:void(0);"} 修改密码
-        %li.manage
-          %a{:href => "javascript:void(0);"}
-            %img.about-icon{:src => "/assets/managecenter/about.png"}
-        %li.manage
-          %a{:href => "javascript:void(0);"}
-            %img.turnoff-icon{:src => "/assets/managecenter/turnoff.png"}
+      - if @current_user.present? && ( @current_user.is_staff || @current_user.is_admin )
+        %ul.kids-manage
+          %li.manage#manage-photo
+            %img.manager{:src => "/assets/managecenter/headphoto.png"}
+            .btn-group
+              %a.btn.dropdown-toggle{"data-toggle" => "dropdown", :href => "javascript:void(0);"}
+                管理员
+                %span.caret
+              %ul.dropdown-menu
+                %li 
+                  %a{:href => "javascript:void(0);"} 相关信息
+                %li 
+                  %a{:href => "javascript:void(0);"} 修改密码
+          %li.manage
+            %a{:href => "javascript:void(0);"}
+              %img.about-icon{:src => "/assets/managecenter/about.png"}
+          %li.manage
+            %a{:href => "javascript:void(0);"}
+              %img.turnoff-icon{:src => "/assets/managecenter/turnoff.png"}
+      - else
+        %p.rightword 您好欢迎访问社区儿童管理中心！
+        %a.sign-up{:href => "#signupModal", "data-toggle" => "modal"} 注册
+        %a.sign-in{:href => "#signinModal", "data-toggle" => "modal"} 登陆
         
       
       
