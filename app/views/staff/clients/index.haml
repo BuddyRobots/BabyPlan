@@ -14,7 +14,7 @@
         .search-icon
           %a{:href => "javascript:void(0);"}
             %img.search{:src => "/assets/managecenter/search.png"}
-      .btn{:type => "button"} 
+      .btn{:type => "button", :href => "#kidsaddModal", "data-toggle" => "modal"} 
         %img.add-edit{:src => "/assets/managecenter/ticker.png"}
         添加儿童
 
@@ -41,15 +41,47 @@
             %td
               %a{:href => "javascript:void(0);"} 详情
 
-    .foot-message
-      %p 共6页每页显示10条信息
-      .change-page.clearfix
+    .select-page
+      %p.page-detail 共6页每页显示10条信息
+      .pagination.pagination-small.pagination-right
         %ul
           %li
-            %a#left-arrow{:href => "javascript:void(0);"}
-              %img.arrow{:src => "/assets/managecenter/left.png"} 
-          %li#num 1
+            %a{:href => "javascript:void(0);"} «
           %li
-            %a#right-arrow{:href => "javascript:void(0);"}
-              %img.arrow{:src => "/assets/managecenter/right.png"} 
+            %a{:href => "javascript:void(0);"} 1
+          %li
+            %a{:href => "javascript:void(0);"} 2
+          %li
+            %a{:href => "javascript:void(0);"} 3
+          %li
+            %a{:href => "javascript:void(0);"} 4
+          %li
+            %a{:href => "javascript:void(0);"} 5
+          %li
+            %a{:href => "javascript:void(0);"} »
+
+
+
+
+#kidsaddModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
+  .modalheader
+    %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", :src => "/assets/managecenter/close.png"}
+    %h3
+
+
+
+
+
+
+    / .foot-message
+    /   %p 共6页每页显示10条信息
+    /   .change-page.clearfix
+    /     %ul
+    /       %li
+    /         %a#left-arrow{:href => "javascript:void(0);"}
+    /           %img.arrow{:src => "/assets/managecenter/left.png"} 
+    /       %li#num 1
+    /       %li
+    /         %a#right-arrow{:href => "javascript:void(0);"}
+    /           %img.arrow{:src => "/assets/managecenter/right.png"} 
 
