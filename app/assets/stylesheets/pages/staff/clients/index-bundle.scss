@@ -1,4 +1,8 @@
-
+.modal-body, .input, label {
+	margin: 0;
+	padding: 0;
+	max-height: 600px;
+}
 
 .content {
 	position:absolute;
@@ -81,11 +85,13 @@
 	th {
 		text-align: center;
 		height: 40px;
+		line-height: 40px;
 	}
 	td {
 		font-size: 12px;
 		color: #505050;
 		height:45px;
+		line-height: 45px;
 		text-align: center;
 	}
 }
@@ -93,11 +99,12 @@
 .select-page {
 	position: relative;
 	padding-bottom: 1px;
-	// text-align: right;
+	text-align: right;
 	.page-detail {
 		position: absolute;
 		top: 4px;
 		right: 210px;
+		
 		font-size: 12px;
 		color: #969696;
 		margin-right: 15px;
@@ -107,38 +114,137 @@
 	}
 }
 
-//self write style
-// .foot-message {
-// 	overflow: hidden;
-// }
-// .change-page {
-// 	float: left;
-// 	margin-left: 15px;
-// 	margin-top: 10px;
-// 	ul {
-// 		list-style: none;
 
-// 	}
-// 	li {
-// 		float: left;
-// 		border: 1px solid #c8c8c8;
-// 		background: #f4f4f4;
-// 	}
-// 	a {
-// 		display: block;
-// 		width: 16px;
-// 		height: 16px;
-// 		text-align: center;
-// 	}
-// 	#num {
-// 		width: 16px;
-// 		height: 16px;
-// 		font-size: 12px;
-// 		border: 1px solid #227dda;
-// 		text-align: center;
-// 	}
-// 	.arrow {
-// 		display: block;
-// 		padding: 3.5px 5.5px;
-// 	}
-// }
+
+#kidsaddModal {
+	position:absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -203px;
+	margin-top: -275px;
+	width: 406px;
+	height: 550px;
+	border-radius: 6px;
+}
+.modal-backdrop {
+	background-color: #999;
+}
+.close {
+	position: absolute;
+	right: -14px;
+	top: -14px;
+	opacity: 0.7;
+	z-index: 10;
+}
+.close:hover {
+	opacity: 1;
+}
+.modalheader {
+	height: 48px;
+	line-height: 48px;
+	box-shadow: 0 -1px 6px #9c9c9c; 
+}
+.caption {
+	font-size: 1.6em;
+	color: #323232;
+	margin-left: 20px;
+}
+.textbox {
+	padding-bottom: 20px;
+	.textarea {
+		width: 120px;
+		float: left;
+		text-align: right;
+		font-size:1.6em;
+		color:#323232;
+		padding-top: 9px;
+	}
+	.input-box {
+		width: 190px;
+		height: 36px;
+		border-radius: 6px;
+		margin-left: 10px;
+		border: 1px solid #c8c8c8;
+	}
+	
+	#kid-mobilecode {
+		width: 100px;
+		height: 36px;
+		border-radius: 6px;
+		border: 1px solid #c8c8c8;
+		margin-left: 10px;
+	}
+	.unclicked-box {
+		border: 1px solid #c8c8c8;
+	}
+	.clicked-box {
+		border: 1px solid #d70c19;
+	}
+	.clicked {
+		background: #d4d4d4;
+	}
+	.unclicked {
+		background: #fee4d2;
+	}
+	#mobilecode {
+		width: 76px;
+		height: 36px;
+		line-height: 36px;
+		padding: 0;
+		border-radius: 6px;
+		margin-left: 10px;
+		font-size: 1.2em;
+		color: #323232;
+		text-align: center;
+		text-decoration: none;
+	}
+	#kid-password {
+		margin-bottom: 0;
+		padding: 0;
+	}
+	#kid-confirm-password {
+		margin-bottom: 0;
+		padding: 0;
+	}
+}
+#kid-mobile, #kid-name, #kid-sex, #kid-birthday, #kid-address, #kid-mobile,
+#kid-parent, #kid-address, #kid-mobilecode, #homeaddress, #mobile {
+	padding: 0;
+	margin-bottom: 0;
+}
+#kid-name-box {
+	margin-top: 30px;
+}
+#mobile-notice, #verify-code-notice, #password-notice {
+	font-size: 1.2em;
+	color: #d70c19;
+	margin-left: 130px;
+	visibility: hidden;
+}
+#kid-add {
+	display: block;
+	margin: 0 auto;
+	width: 240px;
+	height: 40px;
+	border-radius: 6px;
+	margin-top: 10px;
+	margin-bottom: 30px;
+	text-align: center;
+	line-height: 40px;
+	font-size: 1.6em;
+	color: white;
+	text-decoration: none;
+}
+#kid-add:link {
+	text-decoration: none;
+}
+#kid-add:visited {
+	color: white;
+	text-decoration: none;
+}
+.button-disabled {
+	background: #c8c8c8;
+}
+.button-enabled {
+	background: #ffa265;
+}

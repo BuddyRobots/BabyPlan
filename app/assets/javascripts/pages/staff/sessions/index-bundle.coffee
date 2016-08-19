@@ -292,6 +292,7 @@ $ ->
       (data) ->
         if data.success
           $(".error-notice").css("visibility","hidden")
+          location.href = "/staff/clients"
         else
           
           $(".error-notice").css("visibility","visible")

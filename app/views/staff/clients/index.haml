@@ -23,27 +23,27 @@
         %caption
         %thead
           %tr
-            %th 姓名
-            %th 年龄
-            %th 性别
-            %th 家长
+            %th 姓&nbsp名
+            %th 年&nbsp龄
+            %th 性&nbsp别
+            %th 家&nbsp长
             %th 手机号
             %th 家庭住址
-            %th 操作
+            %th 操&nbsp作
         %tbody
           %tr
-            %td 李星
-            %td 6岁
+            %td 李&nbsp星
+            %td 6&nbsp岁
             %td 男
             %td 李远征
             %td 13126833829
             %td 朝阳区新街口外大街27号院
             %td
-              %a{:href => "javascript:void(0);"} 详情
+              %a{:href => "javascript:void(0);"} 详&nbsp情
 
     .select-page
       %p.page-detail 共6页每页显示10条信息
-      .pagination.pagination-small.pagination-right
+      .pagination.pagination-small
         %ul
           %li
             %a{:href => "javascript:void(0);"} «
@@ -66,7 +66,34 @@
 #kidsaddModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
   .modalheader
     %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", :src => "/assets/managecenter/close.png"}
-    %h3
+    %p.caption 添加儿童
+  .modal-body
+    .textbox#kid-name-box
+      %label.textarea 姓&nbsp名
+      %input.input-box.unclicked-box#kid-name{:type => "text"}
+    .textbox
+      %label.textarea 性&nbsp别
+      %input.input-box.unclicked-box#kid-sex{:type => "text"}
+    .textbox
+      %label.textarea 出生日期
+      %input.input-box.unclicked-box#kid-birthday{:type => "text"}
+    .textbox
+      %label.textarea 家长姓名
+      %input.input-box.unclicked-box#kid-parent{:type => "text"}
+    .textbox#homeaddress
+      %label.textarea 家庭地址
+      %input.input-box.unclicked-box#kid-address{:type => "text"}
+    %p#mobile-notice 请核对手机号
+    .textbox#mobile
+      %label.textarea 手机号
+      %input.input-box.unclicked-box#kid-mobile{:type => "text"}
+    %p#verify-code-notice 验证码输入错误
+    .textbox
+      %label.textarea 验证码
+      %input.input-box.unclicked-box#kid-mobilecode{:type => "text"}
+      %button.input-box.unclicked#mobilecode{:href => "javascript:void(0);"} 获取验证码
+    %a#kid-add.button-disabled{:href => "javascript:void(0);"} 添&nbsp加
+    
 
 
 
