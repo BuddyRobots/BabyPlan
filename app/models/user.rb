@@ -26,10 +26,11 @@ class User
   field :center, type: String
 
   # for client
-  field :gender, type: Integer
+  field :gender, type: Integer  # 0 for male, 1 for female
   field :birthday, type: Date
   field :parent, type: String
   field :address, type: String
+  field :created_by_staff, type: Boolean, default: false
 
   # relationships specific for clients
   belongs_to :client_center
@@ -48,13 +49,17 @@ class User
   scope :admin, ->{ where(user_type: ADMIN) }
 
 
-  def self.create_user(user_type, mobile)
+  def self.create_user(user_type, mobile, created_by_staff = false)
     # 1. check whether user exists?
     u = User.where(mobile: mobile).first
     if u.present? && u.mobile_verified
       return ErrCode::USER_EXIST
     elsif u.blank?
       u = User.create(user_type: user_type, mobile: mobile)
+    end
+
+    if user_type == CLIENT
+      u.update_attribute(:created_by_staff, created_by_staff)
     end
 
     # 2. generate random code and save
@@ -92,6 +97,16 @@ class User
       return ErrCode::WRONG_VERIFY_CODE
     end
     self.update_attributes(name: name, mobile_verified: true, center: center, password: Encryption.encrypt_password(password))
+    nil
+  end
+
+  def verify_client(name, gender, birthday, parent, address, verify_code)
+    if mobile_verify_code != verify_code
+      return ErrCode::WRONG_VERIFY_CODE
+    end
+    ary = birthday.split('.').map { |e| e.to_i }
+    self.update_attributes(name: name, mobile_verified: true, gender: gender.to_i, birthday: Date.new(ary[0], ary[1], ary[2]), parent: parent, address: address)
+    # todo: send password message
     nil
   end
 
