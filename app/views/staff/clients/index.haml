@@ -11,15 +11,13 @@
     .manage-box
       .user-search-box
         .search-box
-          %input.search-input-box{:placeholder => "输入姓名"}
+          %input.search-input-box{:placeholder => "输入姓名", value: @keyword }
         .search-icon
           %a{:href => "javascript:void(0);"}
             %img.search{:src => "/assets/managecenter/search.png"}
       .btn.kidadd-btn{:type => "button", :href => "#kidsaddModal", "data-toggle" => "modal"} 
         %img.add-edit{:src => "/assets/managecenter/ticker.png"}
         添加儿童
-
-    = @users["current_page"]
 
     .table-box
       %table.table.table-bordered.user-table
@@ -34,35 +32,28 @@
             %th 家庭住址
             %th 操&nbsp作
         %tbody
-          - @users["data"].each do |u|
+          - @users[:data].each do |u|
             %tr
               %td= u[:name]
-              %td 6&nbsp岁
-              %td 男
-              %td 李远征
-              %td 13126833829
-              %td 朝阳区新街口外大街27号院
+              %td= u[:age].to_s + " 岁"
+              %td= u[:gender] == 0 ? "男" : "女"
+              %td= u[:parent]
+              %td= u[:mobile]
+              %td= u[:address]
               %td
-                %a{:href => "javascript:void(0);"} 详&nbsp情
+                = link_to "详情", "/staff/clients/#{u[:id]}"
 
     .select-page
       %p.page-detail 共6页每页显示10条信息
       .pagination.pagination-small
         %ul
           %li
-            %a{:href => "javascript:void(0);"} «
+            %a{:href => "/staff/clients?keyword=#{@keyword}&page=#{@users[:previous_page]}"} «
+          - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
+            %li
+              %a{:href => "/staff/clients?keyword=#{@keyword}&page=#{page}"}= page
           %li
-            %a{:href => "javascript:void(0);"} 1
-          %li
-            %a{:href => "javascript:void(0);"} 2
-          %li
-            %a{:href => "javascript:void(0);"} 3
-          %li
-            %a{:href => "javascript:void(0);"} 4
-          %li
-            %a{:href => "javascript:void(0);"} 5
-          %li
-            %a{:href => "javascript:void(0);"} »
+            %a{:href => "/staff/clients?keyword=#{@keyword}&page=#{@users[:next_page]}"} »
 
 
 
