@@ -144,8 +144,8 @@ $ ->
         else
           $("#verify-code-notice").text("验证码错误").css("visibility","visible")
       )
+  
 
-    
   $("#signup-signin").click ->
     $("#signinModal").modal('show')
     $("#signupModal").modal('hide')
@@ -214,7 +214,7 @@ $ ->
     check_forget_signup_input()
 
   # reset password
-  forget ->
+  forget = ->
     if uid == ""
       # $.page_notification("欢迎！", 3000)
       return
