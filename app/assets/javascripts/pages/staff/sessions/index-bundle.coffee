@@ -114,11 +114,11 @@ $ ->
 
 
   # register
-  $("#signup").click ->
+  signup = ->
     if uid == ""
       # $.page_notification("欢迎！", 3000)
       return
-    if $(this).hasClass("button-enabled") == false
+    if $("#signup").hasClass("button-enabled") == false
       return
     name = $("#signup-name").val()
     center = $("#signup-address").val()
@@ -141,10 +141,16 @@ $ ->
       (data) ->
         if data.success
           $.page_notification("注册完成，请通知管理员分配儿童中心", 3000)
+          location.href = "/staff"
         else
           $("#verify-code-notice").text("验证码错误").css("visibility","visible")
       )
-  
+  $("#signup").click ->
+    signup()
+  $("#signup-confirm-password").keydown (event) ->
+    code = event.which
+    if code == 13
+      signup()
 
   $("#signup-signin").click ->
     $("#signinModal").modal('show')
