@@ -112,11 +112,11 @@ $ ->
 
 
 # add button press
-  $("#kid-add").click ->
+  kidAdd = ->
     if uid == ""
       # $.page_notification("欢迎！", 3000)
       return
-    if $(this).hasClass("button-enabled") == false
+    if $("#kid-add").hasClass("button-enabled") == false
       return
     name = $("#kid-name").val()
     gender = $("#kid-gender").val()
@@ -141,4 +141,14 @@ $ ->
             $("#mobile-notice").text("验证码错误").css("visibility","visible")
           if data.code == WRONG_VERIFY_CODE
             $("#verify-code-notice").text("验证码错误").css("visibility","visible")
+        else
+          $("#kidsaddModal").modal('hide')
+          location.href = "/staff/clients"
       )
+  $("#kid-add").click ->
+    kidAdd()
+
+  $("#kid-mobilecode").keydown(event) ->
+    code = event.which
+    if code == 13
+      kidAdd()

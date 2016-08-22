@@ -141,7 +141,8 @@ $ ->
       (data) ->
         if data.success
           $.page_notification("注册完成，请通知管理员分配儿童中心", 3000)
-          location.href = "/staff"
+          $("#signupModal").modal('hide')
+          $("#signinModal").modal('show')
         else
           $("#verify-code-notice").text("验证码错误").css("visibility","visible")
       )
