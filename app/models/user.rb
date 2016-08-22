@@ -146,9 +146,10 @@ class User
 
   def client_info
     {
+      id: self.id.to_s,
       name: self.name,
       gender: self.gender,
-      age: self.birthday.nil? ? self.birthday.year - Date.today.year : nil,
+      age: self.birthday.present? ? Date.today.year - self.birthday.year : nil,
       parent: self.parent,
       mobile: self.mobile,
       address: self.address
