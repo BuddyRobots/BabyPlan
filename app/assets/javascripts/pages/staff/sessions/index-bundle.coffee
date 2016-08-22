@@ -271,8 +271,8 @@ $ ->
     toggle_signin_password_tip(false)
     check_signin_input()
 
-
-  $(".signin").keydown (event) ->
+# enter click
+  $("#password").keydown (event) ->
     code = event.which
     if code == 13
       signin()
@@ -280,7 +280,7 @@ $ ->
 
 # sign in button
   signin = ->
-    if $(this).hasClass("button-enabled") == false
+    if $(".signin").hasClass("button-enabled") == false
       return
     mobile = $("#mobile").val()
     password = $("#password").val()

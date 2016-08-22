@@ -5,9 +5,12 @@ class Staff::ClientsController < Staff::ApplicationController
     @keyword = params[:keyword]
     users = User.client.where(name: /@keyword/)
     @users = auto_paginate(users)
-    @users["data"].map do |e|
+    @users["data"].map! do |e|
       e.client_info
     end
+    logger.info "AAAAAAAAAAAA"
+    logger.info @users.inspect
+    logger.info "AAAAAAAAAAAA"
   end
 
   # create a new user
