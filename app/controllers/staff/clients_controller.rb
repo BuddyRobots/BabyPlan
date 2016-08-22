@@ -3,9 +3,9 @@ class Staff::ClientsController < Staff::ApplicationController
   # show the index page
   def index
     @keyword = params[:keyword]
-    users = User.client.where(name: /@keyword/)
+    users = @keyword.present? ? User.client.where(name: /@keyword/) : User.client.all
     @users = auto_paginate(users)
-    @users["data"].map! do |e|
+    @users["data"] = @users["data"].map do |e|
       e.client_info
     end
     logger.info "AAAAAAAAAAAA"

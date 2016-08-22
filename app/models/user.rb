@@ -104,7 +104,7 @@ class User
     if mobile_verify_code != verify_code
       return ErrCode::WRONG_VERIFY_CODE
     end
-    ary = birthday.split('.').map { |e| e.to_i }
+    ary = birthday.split('-').map { |e| e.to_i }
     self.update_attributes(name: name, mobile_verified: true, gender: gender.to_i, birthday: Date.new(ary[0], ary[1], ary[2]), parent: parent, address: address)
     # todo: send password message
     nil

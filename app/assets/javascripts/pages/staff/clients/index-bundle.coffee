@@ -137,8 +137,8 @@ $ ->
       },
       (data) ->
         if !data.success
-          if data.code = USER_NOT_EXIST
-            $("#mobile-notice").text("帐号不存在").css("visibility","visible")
-          if data.code = WRONG_VERIFY_CODE
+          if data.code == USER_NOT_EXIST
+            $("#mobile-notice").text("验证码错误").css("visibility","visible")
+          if data.code == WRONG_VERIFY_CODE
             $("#verify-code-notice").text("验证码错误").css("visibility","visible")
       )
