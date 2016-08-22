@@ -20,6 +20,7 @@ $ ->
     $("#mobile-code").removeClass("clicked")
     $("#mobile-code").attr("disabled", false)
 
+    $("input").val("")
   
   # verifycode 60 sec reverse 
   time = (o) ->
@@ -62,14 +63,15 @@ $ ->
           $("#mobile-notice").css("visibility","hidden")
           uid = data.uid
           console.log uid
+          if timer != null
+            clearTimeout(timer)
+          time("#mobilecode")
         #需要修改
         else
           $("#mobile-notice").text("该手机号已注册，请直接登陆").css("visibility","visible")     
           console.log $("#mobile-notice").text()
     )
-    if timer != null
-      clearTimeout(timer)
-    time this
+    
 
   check_signup_input = ->
     console.log "check_signup_input pressed"
@@ -102,6 +104,7 @@ $ ->
     check_signup_input()
   $("#signup-mobile").keyup ->
     check_signup_input()
+    $("#mobile-notice").css("visibility","hidden")
   $("#signup-mobilecode").keyup ->
     check_signup_input()
     $("#verify-code-notice").css("visibility","hidden")
@@ -178,12 +181,13 @@ $ ->
         if data.success
           $("#forget-mobile-notice").css("visibility","hidden")
           uid = data.uid
+          if timer != null
+            clearTimeout(timer)
+          time("#mobile-code")
         else
           $("#forget-mobile-notice").text("该手机号未注册").css("visibility","visible")     
       )
-    if timer != null
-      clearTimeout(timer)
-    time this
+   
 
   toggle_forget_password_tip = (wrong) ->
     if (wrong)
@@ -210,6 +214,7 @@ $ ->
 
   $("#forget-mobile").keyup ->
     check_forget_signup_input()
+    $("#forget-mobile-notice").css("visibility","hidden")
   $("#forget-mobilecode").keyup ->
     check_forget_signup_input()
     $("#forget-verify-code-notice").css("visibility","hidden")

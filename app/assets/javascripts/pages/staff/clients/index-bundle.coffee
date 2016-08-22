@@ -66,14 +66,27 @@ $ ->
           $("#mobile-notice").css("visibility","hidden")
           uid = data.uid
           console.log uid
+          if timer != null
+            clearTimeout(timer)
+          time("#mobilecode")
         #需要修改
         else
-          $("#mobile-notice").text("帐号已存在").css("visibility","visible")     
+          $("#mobile-notice").text("帐号已存在").css("visibility","visible") 
           console.log $("#mobile-notice").text()
     )
-    if timer != null
-      clearTimeout(timer)
-    time this
+    
+    
+
+  # toggle_signin_password_tip = (wrong) ->
+  #   if (wrong)
+  #     $("#kid-mobile").addClass("clicked-box")
+  #     $("#kid-mobilecode").addClass("clicked-box")
+  #     $(".error-notice").css("visibility","visible")
+  #   else
+  #     $("#kid-mobile").removeClass("clicked-box")
+  #     $("#kid-mobilecode").removeClass("clicked-box")
+  #     $(".error-notice").css("visibility","hidden")
+
 
   check_add_input = ->
     console.log "check_add_input pressed"
@@ -95,20 +108,13 @@ $ ->
     check_add_input()
   $("#kid-mobile").keyup ->
     check_add_input()
+    $("#mobile-notice").css("visibility","hidden")
   $("#kid-mobilecode").keyup ->
     check_add_input()
     $("#verify-code-notice").css("visibility","hidden")
   $("#kid-parent").keyup ->
     check_add_input()
 
-
-  # $("#kid-add").keydown (event) ->
-  #   code = event.which
-  #   if code == 13
-  #     press()
-  
-  # perss = ->
-  #   location.href = "/staff/clients"
 
 
 # add button press
@@ -148,7 +154,7 @@ $ ->
   $("#kid-add").click ->
     kidAdd()
 
-  $("#kid-mobilecode").keydown(event) ->
+  $("#kid-mobilecode").keydown (event) ->
     code = event.which
     if code == 13
       kidAdd()

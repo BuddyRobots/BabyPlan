@@ -25,6 +25,7 @@
 .manage-box {
 	height: 58px;
 	border-bottom: 1px solid #c8c8c8;
+	overflow: hidden;
 }
 .user-search-box {
 	position: absolute;
@@ -103,18 +104,20 @@
 .select-page {
 	position: relative;
 	padding-bottom: 1px;
-	text-align: right;
+	overflow: hidden;
+	padding: 15px 0;
 	.page-detail {
-		position: absolute;
-		top: 4px;
-		right: 210px;
-		
+		width:60%;
+		float: left;
 		font-size: 12px;
 		color: #969696;
 		margin-right: 15px;
+		line-height: 26px;
+		text-align: right;
 	}
 	.pagination {
-		margin: 15px 20px;
+		float: right;
+		margin: 0 20px;
 	}
 }
 
