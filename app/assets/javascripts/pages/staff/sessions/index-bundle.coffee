@@ -144,6 +144,8 @@ $ ->
         else
           $("#verify-code-notice").text("验证码错误").css("visibility","visible")
       )
+
+    
   $("#signup-signin").click ->
     $("#signinModal").modal('show')
     $("#signupModal").modal('hide')
@@ -212,11 +214,11 @@ $ ->
     check_forget_signup_input()
 
   # reset password
-  $("#forget").click ->
+  forget ->
     if uid == ""
       # $.page_notification("欢迎！", 3000)
       return
-    if $(this).hasClass("button-enabled") == false
+    if $("#forget").hasClass("button-enabled") == false
       return
     password = $("#forget-password").val()
     verify_code = $("#forget-mobilecode").val()
@@ -240,6 +242,14 @@ $ ->
         else
           $("#forget-verify-code-notice").text("验证码错误").css("visibility","visible")
       )
+  $("#forget").click ->
+    forget()
+  $("#forget-confirm-password").keydown (event) ->
+    code = event.which
+    if code == 13
+      forget()
+
+
   $("#forget-register").click ->
     $("#forgetModal").modal('hide')
     $("#signupModal").modal('show')

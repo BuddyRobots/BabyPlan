@@ -120,7 +120,7 @@ $ ->
       return
     name = $("#kid-name").val()
     gender = $("#kid-gender").val()
-    birthday = $("datepicker").val()
+    birthday = $("#datepicker").val()
     address = $("#kid-address").val()
     parent = $("#kid-parent").val()
     verify_code = $("#kid-mobilecode").val()
