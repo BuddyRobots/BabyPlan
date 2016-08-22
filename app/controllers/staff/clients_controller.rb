@@ -2,7 +2,8 @@ class Staff::ClientsController < Staff::ApplicationController
 
   # show the index page
   def index
-    users = User.client.where(name: /#{params[:keyword]}/)
+    @keyword = params[:keyword]
+    users = User.client.where(name: /@keyword/)
     @users = auto_paginate(users)
     @users["data"].map do |e|
       e.client_info
