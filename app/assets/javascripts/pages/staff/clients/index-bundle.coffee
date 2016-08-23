@@ -7,7 +7,6 @@ $ ->
   $( "#datepicker" ).datepicker( $.datepicker.regional[ "zh-TW" ] );
   $( "#datepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
    
-
   uid = ""
   timer = null
   wait = 60
@@ -18,7 +17,6 @@ $ ->
     $("#mobile-code").addClass("unclicked")
     $("#mobile-code").removeClass("clicked")
     $("#mobile-code").attr("disabled", false)
-
 
   time = (o) ->
     console.log wait
@@ -39,11 +37,6 @@ $ ->
         return
       ), 1000
     return
-
-
-  
-
-
 
   # mobile verify code
   $("#mobilecode").click ->
@@ -75,8 +68,6 @@ $ ->
           console.log $("#mobile-notice").text()
     )
     
-    
-
   # toggle_signin_password_tip = (wrong) ->
   #   if (wrong)
   #     $("#kid-mobile").addClass("clicked-box")
@@ -114,7 +105,6 @@ $ ->
     $("#verify-code-notice").css("visibility","hidden")
   $("#kid-parent").keyup ->
     check_add_input()
-
 
 
 # add button press
@@ -158,3 +148,18 @@ $ ->
     code = event.which
     if code == 13
       kidAdd()
+
+
+  search = ->
+    value = $(".search-input-box").val()
+
+    location.href = "/staff/clients?keyword=" + value + "&page=1"
+
+
+  $(".search-icon").click ->
+    search()
+
+  $(".search-input-box").keydown (event) ->
+    code = event.which
+    if code == 13
+      search()

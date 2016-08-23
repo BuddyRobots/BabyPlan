@@ -11,16 +11,18 @@
     .manage-box
       .user-search-box
         .search-box
-          %input.search-input-box{:placeholder => "输入姓名", value: @keyword }
+          %input.search-input-box{:placeholder => "输入姓名", :type => "text", value: @keyword }
         .search-icon
           %a{:href => "javascript:void(0);"}
             %img.search{:src => "/assets/managecenter/search.png"}
       .btn.kidadd-btn{:type => "button", :href => "#kidsaddModal", "data-toggle" => "modal"} 
-        %img.add-edit{:src => "/assets/managecenter/ticker.png"}
+        %img.add-edit{:src => "/assets/managecenter/add.png"}
         添加儿童
-
+    
     - if @users[:data].length == 0
-
+      .undiscover
+        %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
+        %span.message 抱歉！暂无查找信息
     - else
       .table-box
         %table.table.table-bordered.user-table
@@ -46,20 +48,18 @@
                 %td
                   = link_to "详情", "/staff/clients/#{u[:id]}"
 
-      .select-page
-        %p.page-detail 
-          共6页每页显示10条信息
-          %span
-            .pagination.pagination-small
-              %ul
+      .select-page 
+        %span.totalitems= "共#{@users[:total_page]}页,总计#{@users[:total_number]}条"
+        %span.choice-page
+          .pagination.pagination-small
+            %ul
+              %li
+                %a{:href => "/staff/clients?keyword=#{@keyword}&page=#{@users[:previous_page]}"} «
+              - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
                 %li
-                  %a{:href => "/staff/clients?keyword=#{@keyword}&page=#{@users[:previous_page]}"} «
-                - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
-                  %li
-                    %a{:href => "/staff/clients?keyword=#{@keyword}&page=#{page}"}= page
-                %li
-                  %a{:href => "/staff/clients?keyword=#{@keyword}&page=#{@users[:next_page]}"} »
-
+                  %a{:href => "/staff/clients?keyword=#{@keyword}&page=#{page}"}= page
+              %li
+                %a{:href => "/staff/clients?keyword=#{@keyword}&page=#{@users[:next_page]}"} »
 
 
 
@@ -98,19 +98,4 @@
     
 
 
-
-
-
-
-    / .foot-message
-    /   %p 共6页每页显示10条信息
-    /   .change-page.clearfix
-    /     %ul
-    /       %li
-    /         %a#left-arrow{:href => "javascript:void(0);"}
-    /           %img.arrow{:src => "/assets/managecenter/left.png"} 
-    /       %li#num 1
-    /       %li
-    /         %a#right-arrow{:href => "javascript:void(0);"}
-    /           %img.arrow{:src => "/assets/managecenter/right.png"} 
 

@@ -64,7 +64,7 @@
 	width: 100px;
 	height: 34px;
 	padding: 0;
-	line-height: 34px;
+	line-height: 32px;
 	color: white;
 	background: #f7873d;
 	border-radius: 6px;
@@ -73,7 +73,9 @@
 	background: #f7873d;
 	color: white;
 }
-
+.add-edit {
+	vertical-align: middle;
+}
 .table-box {
 	position: relative;
 	padding: 0;
@@ -100,27 +102,39 @@
 		padding: 0;
 	}
 }
-
+.undiscover {
+	text-align: center;
+	padding: 30px;
+}
+.undiscover-icon {
+	display: inline-block;
+	width: 100%;
+	max-width: 39px;
+}
+.message {
+	font-size: 16px;
+	color: #969696;
+	margin-left: 20px;
+}
 .select-page {
-	position: relative;
-	padding-bottom: 1px;
-	overflow: hidden;
-	padding: 15px 0;
-	.page-detail {
-		width:60%;
-		float: left;
-		font-size: 12px;
-		color: #969696;
-		margin-right: 15px;
-		line-height: 26px;
-		text-align: right;
-	}
-	.pagination {
-		float: right;
-		margin: 0 20px;
-	}
+	text-align: right;
+	margin: 15px 20px;
+	padding-bottom: 10px;
+}
+.totalitems {
+	font-size: 12px;
+	color: #969696;
+	vertical-align: bottom;
+	height: 33px;
+	line-height: 33px;
 }
 
+.pagination {
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+	margin-left: 15px;
+}
 
 
 #kidsaddModal {
