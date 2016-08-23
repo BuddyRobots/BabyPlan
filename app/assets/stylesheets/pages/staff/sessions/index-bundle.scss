@@ -69,19 +69,23 @@
 	margin-bottom: 4px;
 	visibility: hidden;
 }
-.account-box {
-	width: 240px;
-	margin: 0 auto;
-	font-size: 1.6em;
-	color: #323232;
-	margin-bottom: 40px;
+.signin-textbox {
+	.textarea {
+		width: 120px;
+		float: left;
+		text-align: right;
+		font-size:1.6em;
+		color:#323232;
+		padding-top: 9px;
+	}
 	.input-box {
 		width: 190px;
 		height: 36px;
 		border-radius: 6px;
+		margin-left: 10px;
 		border: 1px solid #c8c8c8;
-		margin-left: 9px;
 	}
+	
 	.unclicked-box {
 		border: 1px solid #c8c8c8;
 	}
@@ -93,26 +97,11 @@
 		color: #969696;
 		padding: 16px 0;
 	}
-	.signin {
-		display: block;
-		width: 240px;
-		height: 40px;
-		border-radius: 6px;
-		// background: #c8c8c8;
-		margin-top: 20px;
-		text-align: center;
-		line-height: 40px;
-		font-size: 1em;
-		color: white;
-		text-decoration: none;
-		// &:hover {
-		// 	background: #ffa265;
-		// }
-	}
-	.checkbox {
-		width:240px;
-		margin-top: 15px;
-	}
+}
+
+.checkbox {
+	width:240px;
+	padding-left: 103px; 
 	label {
 		position: relative;
 	}
@@ -133,7 +122,7 @@
 	}
 	.forget-password {
 		position: absolute;
-		right: 20px;
+		right: 18px;
 		font-size: 12px;
 		color: #227dda;
 		text-decoration: none;
@@ -143,6 +132,41 @@
 		}
 	}
 }
+
+.email-notice {
+	font-size: 12px;
+	color: #969696;
+	text-align: center;
+	padding: 16px 0 16px 20px;
+}
+.signin{
+	display: block;
+	margin: 0 auto;
+	width: 240px;
+	height: 40px;
+	border-radius: 6px;
+	margin-top: 20px;
+	margin-bottom: 15px;
+	text-align: center;
+	line-height: 40px;
+	font-size: 1.6em;
+	color: white;
+	text-decoration: none;
+}
+.signin:link {
+	text-decoration: none;
+}
+.signin:visited {
+	color: white;
+	text-decoration: none;
+}
+.signin:hover {
+	text-decoration: none;
+	color: white;
+}
+
+
+
 #name, #password {
 	padding: 0;
 	margin-bottom: 0;

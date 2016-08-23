@@ -10,11 +10,9 @@
   .content-box
     .manage-box
       .user-search-box
-        .search-box
-          %input.search-input-box{:placeholder => "输入姓名", value: @keyword }
-        .search-icon
-          %a{:href => "javascript:void(0);"}
-            %img.search{:src => "/assets/managecenter/search.png"}
+        .input-append
+          %input#appendedInputButton.span2{:type => "text", :placeholder => "输入姓名"}
+          %button.btn#search-btn{:type => "button"}
       .btn.kidadd-btn{:type => "button", :href => "#kidsaddModal", "data-toggle" => "modal"} 
         %img.add-edit{:src => "/assets/managecenter/add.png"}
         添加儿童

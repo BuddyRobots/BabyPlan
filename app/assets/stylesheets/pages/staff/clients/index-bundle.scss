@@ -1,6 +1,6 @@
 @import "jquery-ui";
 
-.modal-body, .input, label {
+.modal-body, input, label {
 	margin: 0;
 	padding: 0;
 	max-height: 600px;
@@ -29,38 +29,30 @@
 }
 .user-search-box {
 	position: absolute;
-	width: 198px;
+	width: 200px;
 	height: 34px;
 	left:20px;
-	top: 11px;
+	top: 11.5px;
+	border-top-left-radius: 6px;
+	border-bottom-left-radius: 6px;
+}
+#appendedInputButton {
+	padding: 0;
+	width: 162px;
+	height: 34px;
+}
+#search-btn {
+	width: 36px;
+	height: 36px;
 	border: 1px solid #c8c8c8;
-	border-top-left-radius: 6px;
-	border-bottom-left-radius: 6px;
+	background: url("/assets/managecenter/search.png") no-repeat;
+	background-size: 22px;
+	background-position: 6px 6px;
 }
-.search-box {
-	float: left;
-}
-.search-input-box {
-	width: 163px;
-	height:34px;
-	border: 0;
-	border-top-left-radius: 6px;
-	border-bottom-left-radius: 6px;
-}
-.search-icon {
-	float: left;
-	width:34px;
-	height:34px;
-	border-left: 1px solid #c8c8c8;
-}
-.search {
-	width: 100%;
-	max-width: 22px;
-	margin: 6px 6px;
-}
+
 .kidadd-btn {
 	float: right;
-	margin: 11px 20px 0 0;
+	margin: 11.5px 20px 0 0;
 	width: 100px;
 	height: 34px;
 	padding: 0;
@@ -118,15 +110,15 @@
 }
 .select-page {
 	text-align: right;
-	margin: 15px 20px;
+	margin: 10px 20px;
 	padding-bottom: 10px;
 }
 .totalitems {
 	font-size: 12px;
 	color: #969696;
 	vertical-align: bottom;
-	height: 33px;
-	line-height: 33px;
+	height: 36px;
+	line-height: 36px;
 }
 
 .pagination {

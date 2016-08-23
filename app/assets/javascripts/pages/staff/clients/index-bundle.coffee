@@ -149,17 +149,15 @@ $ ->
     if code == 13
       kidAdd()
 
-
+# search-btn press
   search = ->
-    value = $(".search-input-box").val()
-
+    value = $("#appendedInputButton").val()
     location.href = "/staff/clients?keyword=" + value + "&page=1"
 
-
-  $(".search-icon").click ->
+  $("#search-btn").click ->
     search()
 
-  $(".search-input-box").keydown (event) ->
+  $("#appendedInputButton").keydown (event) ->
     code = event.which
     if code == 13
       search()

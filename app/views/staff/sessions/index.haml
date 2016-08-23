@@ -16,19 +16,19 @@
       %img.sign-logo{:src => "/assets/managecenter/logo.png"}
         %span.kids-center 社区儿童管理中心
     %p.error-notice 您填写的账号或密码不正确，请再次尝试
-    .account-box
-      账&nbsp号
+    .signin-textbox
+      %label.textarea 账&nbsp号
       %input.input-box.unclicked-box#mobile{:type => "text"}
-      %p.email-notice 请填写完整的账号或管理员账号
-      密&nbsp码
+    %p.email-notice 请填写完整的账号或管理员账号
+    .signin-textbox
+      %label.textarea 密&nbsp码
       %input.input-box.unclicked-box#password{"type" => "password"}
-      %a.signin.button-disabled{:href => "javascript:void(0);"} 登&nbsp录
-      .checkbox
-        %label
-          %input.square-box{:type => "checkbox"}
-          %span.auto-signin 
-            5天内自动登陆
-          %a.forget-password{"data-toggle" => "modal", "data-target" => "#forgetModal"} 忘记密码？
+    %a.signin.button-disabled{:href => "javascript:void(0);"} 登&nbsp录
+    .checkbox
+      %label
+        %input.square-box{:type => "checkbox"}
+        %span.auto-signin 5天内自动登陆
+        %a.forget-password{"data-toggle" => "modal", "data-target" => "#forgetModal"} 忘记密码？
 
 / signup
 #signupModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
