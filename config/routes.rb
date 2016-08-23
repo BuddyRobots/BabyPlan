@@ -38,6 +38,9 @@ Rails.application.routes.draw do
       end
     end
 
+    resources :books do
+    end
+
     resources :clients do
       member do
         post :verify
