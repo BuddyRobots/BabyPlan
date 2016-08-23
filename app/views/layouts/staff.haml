@@ -5,6 +5,7 @@
   :javascript
     window.code = "#{@code}"
 
+- content_for :app_content do
   .container
     .header
       %a{:href => "#"}
@@ -52,6 +53,6 @@
           %li 
             %a{:href => "#"} 统计信息查询
 
-= yield
+    = yield
 
 = render :template => 'layouts/application'
