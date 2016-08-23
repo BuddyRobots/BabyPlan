@@ -5,53 +5,53 @@
   :javascript
     window.code = "#{@code}"
 
-  .container
-    .header
-      %a{:href => "#"}
-        %img.logo{:src => "/assets/managecenter/logo.png"}
-      %p.leftword 社区儿童管理中心
+.container
+  .header
+    %a{:href => "#"}
+      %img.logo{:src => "/assets/managecenter/logo.png"}
+    %p.leftword 社区儿童管理中心
 
-      /登录注册页面的layout
-      - if @current_user.present? && ( @current_user.is_staff || @current_user.is_admin )
-        %ul.kids-manage
-          %li.manage#manage-photo
-            %img.manager{:src => "/assets/managecenter/headphoto.png"}
-            .btn-group
-              %a.btn.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-                = @current_user.name
-                %span.caret
-              %ul.dropdown-menu
-                %li 
-                  %a{:href => "javascript:void(0);"} 相关信息
-                %li 
-                  %a{:href => "javascript:void(0);"} 修改密码
-          %li.manage
-            %a{:href => "javascript:void(0);"}
-              %img.about-icon{:src => "/assets/managecenter/about.png"}
-          %li.manage
-            %a{:href => signout_staff_sessions_path}
-              %img.turnoff-icon{:src => "/assets/managecenter/turnoff.png"}
-      - else
-        %p.rightword 您好欢迎访问社区儿童管理中心！
-        %a.sign-up{:href => "#signupModal", "data-toggle" => "modal"} 注册
-        %a.sign-in{:href => "#signinModal", "data-toggle" => "modal"} 登陆
-        
+    /登录注册页面的layout
+    - if @current_user.present? && ( @current_user.is_staff || @current_user.is_admin )
+      %ul.kids-manage
+        %li.manage#manage-photo
+          %img.manager{:src => "/assets/managecenter/headphoto.png"}
+          .btn-group
+            %a.btn.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+              = @current_user.name
+              %span.caret
+            %ul.dropdown-menu
+              %li 
+                %a{:href => "javascript:void(0);"} 相关信息
+              %li 
+                %a{:href => "javascript:void(0);"} 修改密码
+        %li.manage
+          %a{:href => "javascript:void(0);"}
+            %img.about-icon{:src => "/assets/managecenter/about.png"}
+        %li.manage
+          %a{:href => signout_staff_sessions_path}
+            %img.turnoff-icon{:src => "/assets/managecenter/turnoff.png"}
+    - else
+      %p.rightword 您好欢迎访问社区儿童管理中心！
+      %a.sign-up{:href => "#signupModal", "data-toggle" => "modal"} 注册
+      %a.sign-in{:href => "#signinModal", "data-toggle" => "modal"} 登陆
       
-      
-    .main
-      .sidebar
-        %ul
-          %li 
-            %a{:href => "/staff/clients"} 儿童管理
-          %li 
-            %a{:href => "#"} 课程管理
-          %li 
-            %a{:href => "#"} 绘本管理
-          %li 
-            %a{:href => "#"} 公告信息管理
-          %li 
-            %a{:href => "#"} 统计信息查询
+    
+    
+  .main
+    .sidebar
+      %ul
+        %li 
+          %a{:href => "/staff/clients"} 儿童管理
+        %li 
+          %a{:href => "#"} 课程管理
+        %li 
+          %a{:href => "#"} 绘本管理
+        %li 
+          %a{:href => "#"} 公告信息管理
+        %li 
+          %a{:href => "#"} 统计信息查询
 
-= yield
+  = yield
 
 = render :template => 'layouts/application'
