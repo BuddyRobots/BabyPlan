@@ -102,6 +102,12 @@
 			text-decoration: underline;
 		}
 	}
+	.clicked {
+		background: #fdd3b9;
+	}
+	.new-add {
+		background: #eaeaea;
+	}
 }
 .undiscover {
 	text-align: center;
@@ -120,7 +126,7 @@
 .select-page {
 	text-align: right;
 	margin: 10px 20px 0 0;
-	// padding-bottom: 5px;
+	padding-bottom: 5px;
 }
 .totalitems {
 	font-size: 12px;
@@ -137,16 +143,16 @@
 	margin-left: 15px;
 }
 .user-review-box {
-	margin: 5px 20px auto 20px;
+	margin: 0 20px auto 20px;
 	border-radius: 6px;
 	border: 1px solid #c8c8c8;
-	padding-bottom: 5px;
+}
+.user-checkbox {
+	margin-bottom: 5px;
 }
 .user-review {
-	// display: inline-block;
 	font-size: 16px;
 	color: #323232;
-	// padding-top: 5px;
 	margin: 0 20px;
 	vertical-align: bottom;
 }
@@ -162,4 +168,108 @@
 }
 .inline {
 	line-height: 22px;
+}
+
+.book-description {
+	position: relative;
+	border-top: 1px solid #c8c8c8;
+}
+.book-img {
+	display: block;
+	float: left;
+	margin: 0 10px;
+	width: 60px;
+	height: 60px;
+}
+.user-item {
+	margin: 18px 0;
+	p {
+		padding: 1.2px;
+	}
+}
+
+.user-name {
+	font-size: 16px;
+	color: #646464;
+	margin-top: -3px;
+}
+.date {
+	font-size: 12px;
+	color: #969696;
+}
+.user-review-content {
+	font-size: 14px;
+	color: #787878;
+}
+#open-btn {
+	position: absolute;
+	width: 100px;
+	height: 36px;
+	top: 32px;
+	right: 20px;
+	color: white;
+	border-radius: 6px;
+	background: #f7873d;
+	border: 0;
+}
+
+
+
+// shelve modal
+
+#shelveModal {
+	position:absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -150px;
+	margin-top: -100px;
+	width: 300px;
+	height: 200px;
+	border-radius: 10px;
+}
+.modal-backdrop {
+	background-color: #999;
+}
+.close {
+	position: absolute;
+	right: -14px;
+	top: -14px;
+	opacity: 0.7;
+	z-index: 10;
+}
+.close:hover {
+	opacity: 1;
+}
+.modalheader {
+	height: 164px;
+	line-height: 164px;
+	// box-shadow: 0 -1px 6px #9c9c9c; 
+}
+.caption {
+	font-size: 18px;
+	color: #323232;
+	text-align: center;
+}
+
+.footbox {
+	width: 100%;
+	height: 36px;
+	display: block;
+	background: #227dda;
+	text-align: center;
+	line-height: 36px;
+	font-size: 14px;
+	color: white;
+	text-decoration: none;
+}
+.footbox:link {
+	text-decoration: none;
+}
+.footbox:visited {
+	color: white;
+	text-decoration: none;
+}
+.footbox:hover {
+	text-decoration: none;
+	color: white;
 }

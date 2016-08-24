@@ -1,0 +1,43 @@
+- content_for :head do
+  = javascript_include_tag "pages/staff/books/new-bundle"
+  = stylesheet_link_tag "pages/staff/books/new-bundle", :media => "all"
+  :javascript
+    window.keyword = "#{@keyword}"
+
+.content
+  /books-new
+  .content-box
+    .manage-box.clearfix
+      %p.book-add 添加绘本
+      .btn.end-btn{:type => "button", :href => "#kidsaddModal", "data-toggle" => "modal"} 
+        %img.end{:src => "/assets/managecenter/ticker.png"}
+        完成
+
+    .book-detail
+      %form.form-inline
+        %label.input-name 绘本名称
+        %input#input-area{:type => "text"}
+        %label.checkbox
+          %input.checkbox-content{:type => "checkbox"} 开课
+
+      .controls.controls-row
+        %label.input-caption 类型
+        %input#input-area{:type => "text"}
+        %label.input-caption 作者
+        %input#input-area{:type => "text"}
+        %label.input-caption 译者
+        %input#input-area{:type => "text"}
+        %label.input-caption 插画作者
+        %input#input-area{:type => "text"}
+        %label.input-caption 数量
+        %input#input-area{:type => "text"}
+        %label.input-caption 书号
+        %input#input-area{:type => "text"}
+
+      .book-introduce.clearfix
+        %span.introduce 书籍介绍
+        %span.wangedit-area
+          #edit-area
+
+      
+
