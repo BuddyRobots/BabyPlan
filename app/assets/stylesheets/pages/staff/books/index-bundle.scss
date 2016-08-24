@@ -69,7 +69,7 @@
 	vertical-align: middle;
 }
 .table-box {
-	position: relative;
+	// position: relative;
 	padding: 0;
 	margin: 20px 20px auto 20px;
 }
@@ -92,6 +92,15 @@
 		line-height: 45px;
 		text-align: center;
 		padding: 0;
+		.unshelve {
+			color: #969696;
+		}
+		.shelve {
+			color: #f7873d;
+		}
+		a {
+			text-decoration: underline;
+		}
 	}
 }
 .undiscover {
@@ -127,21 +136,30 @@
 	padding: 0;
 	margin-left: 15px;
 }
+.user-review-box {
+	margin: 5px 20px auto 20px;
+	border-radius: 6px;
+	border: 1px solid #c8c8c8;
+	padding-bottom: 5px;
+}
 .user-review {
 	// display: inline-block;
 	font-size: 16px;
 	color: #323232;
 	// padding-top: 5px;
+	margin: 0 20px;
 	vertical-align: bottom;
 }
 .inline{
-	font-size: 16px;
+	font-size: 12px;
 	color: #323232;
+	margin-right: 5px;
 }
 #inlineCheckbox1, #inlineCheckbox2 {
 	width: 16px;
 	height: 16px;
+	margin-right: 5px;
 }
 .inline {
-	line-height: 23px;
+	line-height: 22px;
 }

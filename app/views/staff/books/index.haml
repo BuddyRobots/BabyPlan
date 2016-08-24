@@ -33,7 +33,7 @@
             %th 封&nbsp底
             %th 作&nbsp者
             %th 书&nbsp号
-            %th 操&nbsp作
+            %th{:colspan => "2"} 操&nbsp作
         %tbody
           / - @users[:data].each do |u|
           %tr
@@ -47,6 +47,8 @@
             %td 2-1
             %td
               %a{:href => "javascript:void(0);"} 详情
+            %td
+              %a.unshelve{:href => "javascript:void(0);"} 下架
 
     .select-page 
       %span.totalitems= "共6页,总计30条"
