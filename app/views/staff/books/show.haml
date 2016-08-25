@@ -18,25 +18,31 @@
 
     .book-detail
       %form.form-inline
-        %label.input-name 绘本名称
-        %input.input-area#book-name{:type => "text"}
-        %label.checkbox
-          %input.checkbox-content{:type => "checkbox"} 开课
+        %label.input-caption 绘本名称:
+        %span.unedit-box#name-span 张三
+        %input.input-area#name-input{:type => "text"}
+        %label.shelve 上架
 
       .controls.controls-row
-        %label.input-caption 类型
-        %input.input-area#book-type{:type => "text"}
-        %label.input-caption 数量
-        %input.input-area#book-num{:type => "text"}
-        %label.input-caption#book-number 书号
-        %input.input-area#book-serial{:type => "text"}
+        %label.input-caption 类型:
+        %span.unedit-box#type-span 张三
+        %input.input-area#type-input{:type => "text"}
+        %label.input-caption 数量:
+        %span.unedit-box#num-span 张三
+        %input.input-area#num-input{:type => "text"}
+        %label.input-caption#book-number 书号:
+        %span.unedit-box#serial-span 张三
+        %input.input-area#serial-input{:type => "text"}
       .controls.controls-row
-        %label.input-caption 作者
-        %input.input-area#author{:type => "text"}
-        %label.input-caption 译者
-        %input.input-area#translator{:type => "text"}
-        %label.input-caption 插画作者
-        %input.input-area#picture-author{:type => "text"}
+        %label.input-caption 作者:
+        %span.unedit-box#author-span 张三
+        %input.input-area#author-input{:type => "text"}
+        %label.input-caption 译者:
+        %span.unedit-box#translator-span 张三
+        %input.input-area#translator-input{:type => "text"}
+        %label.input-caption#picture-label 插画作者:
+        %span.unedit-box#picture-span 张三
+        %input.input-area#picture-input{:type => "text"}
        
       .book-introduce.clearfix
         %span.introduce 书籍介绍

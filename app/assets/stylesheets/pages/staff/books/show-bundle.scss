@@ -69,52 +69,61 @@
 	border: 1px solid #c8c8c8;
 }
 .shelve {
-	margin-left: 20px;
 	color: #0fc077;
+	vertical-align: middle;
 }
 .form-inline {
 	margin: 20px 0;
 }
-.input-name {
+.input-caption {
 	display: inline-block;
-	margin-right: 5px;
 	vertical-align: middle;
 	font-size: 16px;
 	color: #323232;
-	padding-top: 3px;
-	margin-left: 16px;
+	margin-right: 10px;
+	margin-left: 20px
 }
-.input-caption {
-	@extend .input-name;
+#picture-label {
+	@extend .input-caption;
 	margin-left: 10px;
 }
 #book-number {
 	margin-left: 42px
 }
-.input-area {
+.unedit-box {
 	display: inline-block;
+	vertical-align: middle;
+	font-size: 14px;
+	color: #323232;
+	height: 30px;
+	line-height: 30px;
+	margin: 0 20px 0 0;
+	display: none;
+}
+.input-area {
 	width: 238px;
 	height: 30px;
 	padding: 0;
-	margin: 0 !important;
-}
-.checkbox {
-	margin-left: 15px;
+	margin: 0 20px 0 0 !important;
+	// display: none !important;
 }
 .controls-row {
-	margin: 0 0 20px 37px;
+	margin: 0 0 20px 31.5px;
 }
 .introduce {
 	display: inline-block;
 	vertical-align: top;
 	font-size: 16px;
 	color: #323232;
-	margin: 17px 5px 15px 16px;
+	margin:0 14px 0 20px;
 }
 .wangedit-area {
 	display: inline-block;
-	width: 90.5%;
+	width: 85%;
 	font-size: 14px;
+}
+#edit-area {
+	height: 150px;
 }
 .book-introduce {
 	margin-bottom: 20px;

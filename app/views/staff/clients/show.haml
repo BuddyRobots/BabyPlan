@@ -17,16 +17,28 @@
 
     .kids-details
       .controls.controls-row
-        %label.input-caption.edit#name 姓名:
-        %input.input-area{:type => "text"}
-        %label.input-caption#age 年龄:
-        %input.input-area{:type => "text"}
-        %label.input-caption#gender 性别:
-        %input.input-area{:type => "text"}
+        %label.input-caption.edit 姓名:
+        %span.unedit-box#name-span 张三
+        %input.input-area#name-input{:type => "text"}
+        %label.input-caption 年龄:
+        %span.unedit-box#age-span 张三
+        %input.input-area#age-input{:type => "text"}
+        %label.input-caption 性别:
+        %span.unedit-box#gender-span 张三
+        %input.input-area#gender-input{:type => "text"}
         %label.input-caption 联系方式:
-        %input.input-area#phone{:type => "text"}
+        %span.unedit-box#phone-span 张三
+        %input.input-area#phone-input{:type => "text"}
       .controls.controls-row
         %label.input-caption 家长:
-        %input.input-area#parent{:type => "text"}
+        %span.unedit-box#parent-span 张三
+        %input.input-area#parent-input{:type => "text"}
         %label.input-caption 地址:
-        %input.input-area#address{:type => "text"}
+        %span.unedit-box#address-span 张三
+        %input.input-area#address-input{:type => "text"}
+
+    .course-book
+      %span.course 课程
+      %span.book 绘本
+      %span.QR-code
+        .btn.QRcode-btn{:type => "button"} 生成签到二维码

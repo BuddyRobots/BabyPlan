@@ -60,21 +60,55 @@
 	margin: 20px 0 20px 20px;
 }
 .input-area {
-	display: inline-block;
 	width: 118px;
 	height: 30px;
 	padding: 0;
-	margin: 0 70px 0 0!important;
-	visibility: hidden;
+	margin: 0 70px 0 0 !important;
+	// display: none !important;
 }
-.edit {
-	
+.unedit-box {
+	display: inline-block;
+	vertical-align: middle;
+	font-size: 14px;
+	color: #323232;
+	width: 132px;
+	height: 30px;
+	line-height: 30px;
+	margin: 0 70px 0 0;
+	display: none;
+}
+#address-span {
+	@extend .unedit-box;
+	width: 252px;
+}
+#address-input {
+	@extend .input-area;
+	width: 238px;
 }
 .input-caption {
 	display: inline-block;
-	margin-right: 10px;
 	vertical-align: middle;
 	font-size: 16px;
 	color: #323232;
-	padding-top: 3px;
+	margin-right: 10px;
+}
+
+.course {
+	display: inline-block;
+	width: 100px;
+	height: 34px;
+	border-top-left-radius: 6px;
+	border-top-right-radius: 6px;
+	border: 1px solid #c8c8c8;
+	border-bottom: 0;
+	font-size: 16px;
+	color: #323232;
+	text-align: center;
+	line-height: 34px;
+	margin: 20px 0 0 20px;
+}
+.book {
+	@extend .course;
+	background: #c8c8c8;
+	margin: 20px 0 0 0;
 }
