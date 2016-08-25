@@ -6,6 +6,7 @@ gem 'haml-rails'
 gem 'ezcrypto'
 gem 'handlebars_assets'
 gem 'kaminari'
+gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
