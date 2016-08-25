@@ -48,6 +48,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :materials do
+  end
 
   resources :accounts do
     member do

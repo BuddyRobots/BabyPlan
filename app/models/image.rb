@@ -1,8 +1,7 @@
+# encoding: utf-8
 class Image
 
-  include Mongoid::Document
-  include Mongoid::Timestamps
-
-  field :path, type: String
+  extend CarrierWave::Mount
+  mount_uploader :image, ImageUploader
 
 end
