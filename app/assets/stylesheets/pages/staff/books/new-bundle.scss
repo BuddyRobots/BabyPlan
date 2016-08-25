@@ -2,12 +2,11 @@
 @import "jquery-ui";
 
 
-.modal-body, input, label {
+.modal-body, label {
 	margin: 0;
 	padding: 0;
 	max-height: 600px;
 }
-
 .content {
 	position:absolute;
 	right: 0;
@@ -86,7 +85,7 @@
 	width: 238px;
 	height: 30px;
 	padding: 0;
-	margin: 0;
+	margin: 0 !important;
 }
 .checkbox {
 	margin-left: 15px;
@@ -104,6 +103,7 @@
 .wangedit-area {
 	display: inline-block;
 	width: 90.5%;
+	font-size: 14px;
 }
 
 .book-introduce {

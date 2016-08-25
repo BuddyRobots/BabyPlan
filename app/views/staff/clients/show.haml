@@ -1,0 +1,32 @@
+- content_for :head do
+  = javascript_include_tag "pages/staff/clients/show-bundle"
+  = stylesheet_link_tag "pages/staff/clients/show-bundle", :media => "all"
+  :javascript
+    window.keyword = "#{@keyword}"
+
+
+
+.content
+  /clients-show
+  .content-box
+    .manage-box.clearfix
+      %p.kids-message 儿童信息
+      .btn.edit-btn{:type => "button"} 
+        %img.edit{:src => "/assets/managecenter/edit.png"}
+        编辑
+
+    .kids-details
+      .controls.controls-row
+        %label.input-caption.edit#name 姓名:
+        %input.input-area{:type => "text"}
+        %label.input-caption#age 年龄:
+        %input.input-area{:type => "text"}
+        %label.input-caption#gender 性别:
+        %input.input-area{:type => "text"}
+        %label.input-caption 联系方式:
+        %input.input-area#phone{:type => "text"}
+      .controls.controls-row
+        %label.input-caption 家长:
+        %input.input-area#parent{:type => "text"}
+        %label.input-caption 地址:
+        %input.input-area#address{:type => "text"}

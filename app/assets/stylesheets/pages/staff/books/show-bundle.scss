@@ -91,12 +91,12 @@
 #book-number {
 	margin-left: 42px
 }
-#input-area {
+.input-area {
 	display: inline-block;
 	width: 238px;
 	height: 30px;
 	padding: 0;
-	margin: 0;
+	margin: 0 !important;
 }
 .checkbox {
 	margin-left: 15px;
@@ -114,6 +114,7 @@
 .wangedit-area {
 	display: inline-block;
 	width: 90.5%;
+	font-size: 14px;
 }
 .book-introduce {
 	margin-bottom: 20px;

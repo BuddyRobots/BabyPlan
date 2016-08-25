@@ -19,24 +19,24 @@
     .book-detail
       %form.form-inline
         %label.input-name 绘本名称
-        %input#input-area{:type => "text"}
-        %label.shelve 上架
-         
+        %input.input-area#book-name{:type => "text"}
+        %label.checkbox
+          %input.checkbox-content{:type => "checkbox"} 开课
 
       .controls.controls-row
         %label.input-caption 类型
-        %input#input-area{:type => "text"}
+        %input.input-area#book-type{:type => "text"}
         %label.input-caption 数量
-        %input#input-area{:type => "text"}
+        %input.input-area#book-num{:type => "text"}
         %label.input-caption#book-number 书号
-        %input#input-area{:type => "text"}
+        %input.input-area#book-serial{:type => "text"}
       .controls.controls-row
         %label.input-caption 作者
-        %input#input-area{:type => "text"}
+        %input.input-area#author{:type => "text"}
         %label.input-caption 译者
-        %input#input-area{:type => "text"}
+        %input.input-area#translator{:type => "text"}
         %label.input-caption 插画作者
-        %input#input-area{:type => "text"}
+        %input.input-area#picture-author{:type => "text"}
        
       .book-introduce.clearfix
         %span.introduce 书籍介绍
