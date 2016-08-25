@@ -78,9 +78,12 @@
 	@extend .input-name;
 	margin-left: 10px;
 }
-#input-area {
+#book-number {
+	margin-left: 42px
+}
+.input-area {
 	display: inline-block;
-	width: 118px;
+	width: 238px;
 	height: 30px;
 	padding: 0;
 	margin: 0;
@@ -89,22 +92,20 @@
 	margin-left: 15px;
 }
 .controls-row {
-	margin: 0 0 0 37px;
+	margin: 0 0 20px 37px;
 }
 .introduce {
 	display: inline-block;
 	vertical-align: top;
 	font-size: 16px;
 	color: #323232;
-	margin: 17px 5px 15px 16px;
+	margin: 0 5px 15px 16px;
 }
 .wangedit-area {
 	display: inline-block;
 	width: 90.5%;
 }
-.wangEditor-container {
-	margin-top: 20px;
-}
+
 .book-introduce {
 	margin-bottom: 20px;
 }

@@ -1,0 +1,161 @@
+@import "wangEditor";
+@import "jquery-ui";
+
+
+.modal-body, input, label {
+	margin: 0;
+	padding: 0;
+	max-height: 600px;
+}
+
+.content {
+	position:absolute;
+	right: 0;
+	left: 160px;
+	bottom: 0;
+	top: 60px;
+	background:#f7fcff;
+	box-shadow: -1px -1px 6px #9c9c9c inset;
+}
+
+.content-box {
+	position: relative;
+	margin: 20px 20px auto 20px;
+	box-shadow: 0 -1px 6px #9c9c9c inset;
+	background: white;  
+	padding-bottom: 20px;
+}
+.manage-box {
+	height: 58px;
+	border-bottom: 1px solid #c8c8c8;
+	overflow: hidden;
+}
+.book-add {
+	float: left;
+	font-size: 16px;
+	color: #323232;
+	line-height: 59px;
+	margin-left: 20px;
+}
+.edit-btn {
+	float: right;
+	margin: 11.5px 20px 0 0;
+	width: 100px;
+	height: 34px;
+	padding: 0;
+	line-height: 32px;
+	color: white;
+	background: #f7873d;
+	border-radius: 6px;
+}
+.edit-btn:hover {
+	background: #f7873d;
+	color: white;
+}
+.unshelve-btn {
+	@extend .edit-btn;
+}
+.unshelve-btn:hover {
+	background: #f7873d;
+	color: white;
+}
+.book-edit {
+	vertical-align: middle;
+}
+
+.book-detail {
+	margin: 20px 20px auto 20px;
+	border-radius: 6px;
+	border: 1px solid #c8c8c8;
+}
+.shelve {
+	margin-left: 20px;
+	color: #0fc077;
+}
+.form-inline {
+	margin: 20px 0;
+}
+.input-name {
+	display: inline-block;
+	margin-right: 5px;
+	vertical-align: middle;
+	font-size: 16px;
+	color: #323232;
+	padding-top: 3px;
+	margin-left: 16px;
+}
+.input-caption {
+	@extend .input-name;
+	margin-left: 10px;
+}
+#book-number {
+	margin-left: 42px
+}
+#input-area {
+	display: inline-block;
+	width: 238px;
+	height: 30px;
+	padding: 0;
+	margin: 0;
+}
+.checkbox {
+	margin-left: 15px;
+}
+.controls-row {
+	margin: 0 0 20px 37px;
+}
+.introduce {
+	display: inline-block;
+	vertical-align: top;
+	font-size: 16px;
+	color: #323232;
+	margin: 17px 5px 15px 16px;
+}
+.wangedit-area {
+	display: inline-block;
+	width: 90.5%;
+}
+.book-introduce {
+	margin-bottom: 20px;
+}
+
+.message {
+	display: inline-block;
+	width: 100px;
+	height: 34px;
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+	border: 1px solid #c8c8c8;
+	border-bottom: 0;
+	font-size: 16px;
+	color: #323232;
+	text-align: center;
+	line-height: 34px;
+	margin: 20px 20px 0 20px;
+}
+.shelve-number {
+	color: #d70c19;
+	font-size: 14px;
+}
+.QRcode-btn {
+	@extend .edit-btn;
+	padding: 0 10px;
+	margin: 10px 20px 0 0;
+}
+.bookuse-message {
+	margin: 0 20px;
+	border: 1px solid #c8c8c8;
+	border-bottom-left-radius: 6px;
+	border-bottom-right-radius: 6px;
+	border-top: 0;
+}
+.table {
+	margin: 0;
+	border: 0;
+	font-size: 14px;
+	color: #323232;
+	td {
+		text-align: center;
+	}
+}
+

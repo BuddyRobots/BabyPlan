@@ -46,7 +46,7 @@
             %td 丽丽
             %td 2-1
             %td
-              %a{:href => "javascript:void(0);"} 详情
+              %a.details{:href => "javascript:void(0);"} 详情
             %td
               %a.unshelve{:href => "javascript:void(0);"} 下架
           %tr.clicked
@@ -59,7 +59,7 @@
             %td 丽丽
             %td 2-1
             %td
-              %a{:href => "javascript:void(0);"} 详情
+              %a.details{:href => "javascript:void(0);"} 详情
             %td
               %a.unshelve{:href => "javascript:void(0);"} 下架
           %tr.new-add
@@ -72,7 +72,7 @@
             %td 丽丽
             %td 2-1
             %td
-              %a{:href => "javascript:void(0);"} 详情
+              %a.details{:href => "javascript:void(0);"} 详情
             %td
               %a.shelve{:href => "#shelveModal", "data-toggle" => "modal"} 上架
             
@@ -103,14 +103,14 @@
           %p.user-name 大鱼海棠
           %p.date 2017-6-23 13:20
           %p.user-review-content 这本书看了感觉很好，儿童容易理解。
-          %button.btn#open-btn{:type => "button"} 默认按钮
+          %button.btn#open-btn{:type => "button"} 公开
       .book-description
         .user-item.clearfix
           %img.book-img{:src => "/assets/managecenter/user-img.png"}
           %p.user-name 大鱼海棠
           %p.date 2017-6-23 13:20
           %p.user-review-content 这本书看了感觉很好，儿童容易理解。
-          %button.btn#open-btn{:type => "button"} 默认按钮
+          %button.btn#open-btn{:type => "button"} 公开
 
     .select-page 
       %span.totalitems= "共6页,总计12条"
