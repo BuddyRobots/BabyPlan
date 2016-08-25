@@ -11,3 +11,9 @@ $ ->
     item
   )
   editor.create()
+
+
+  $(".end-btn").click ->
+
+    
+    location.href = "/staff/books"
