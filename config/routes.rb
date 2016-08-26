@@ -46,6 +46,9 @@ Rails.application.routes.draw do
         post :verify
       end
     end
+
+    resources :announcements do
+    end
   end
 
   resources :materials do
