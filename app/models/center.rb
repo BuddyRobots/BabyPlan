@@ -9,7 +9,7 @@ class Center
   field :desc, type: String
 
   has_many :course_insts
-  has_many :book_stocks
+  has_many :books
   has_many :announcements
   has_many :staffs, class_name: "User", inverse_of: :staff_center
 

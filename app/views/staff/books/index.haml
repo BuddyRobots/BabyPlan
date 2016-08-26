@@ -15,115 +15,87 @@
         %img.book-edit{:src => "/assets/managecenter/add.png"}
         添加绘本
 
-    / - if @users[:data].length == 0
-    /   .undiscover
-    /     %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
-    /     %span.message 抱歉！暂无查找信息
-    / - else
-    .table-box
-      %table.table.table-bordered.user-table
-        %caption
-        %thead
-          %tr
-            %th 绘本名称
-            %th 书籍介绍
-            %th 类&nbsp型
-            %th 在&nbsp架
-            %th 封&nbsp面
-            %th 封&nbsp底
-            %th 作&nbsp者
-            %th 书&nbsp号
-            %th{:colspan => "2"} 操&nbsp作
-        %tbody
-          / - @users[:data].each do |u|
-          %tr
-            %td 社会科学
-            %td 科技与社会的结合
-            %td 读本
-            %td 
-            %td 
-            %td 
-            %td 丽丽
-            %td 2-1
-            %td
-              %a.details{:href => "javascript:void(0);"} 详情
-            %td
-              %a.unshelve{:href => "javascript:void(0);"} 下架
-          %tr.clicked
-            %td 社会科学
-            %td 科技与社会的结合
-            %td 读本
-            %td 
-            %td 
-            %td 
-            %td 丽丽
-            %td 2-1
-            %td
-              %a.details{:href => "javascript:void(0);"} 详情
-            %td
-              %a.unshelve{:href => "javascript:void(0);"} 下架
-          %tr.new-add
-            %td 社会科学
-            %td 科技与社会的结合
-            %td 读本
-            %td 
-            %td 
-            %td 
-            %td 丽丽
-            %td 2-1
-            %td
-              %a.details{:href => "javascript:void(0);"} 详情
-            %td
-              %a.shelve{:href => "#shelveModal", "data-toggle" => "modal"} 上架
-            
+    - if @books[:data].length == 0
+      .undiscover
+        %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
+        %span.message 抱歉！暂无查找信息
+    - else
+      .table-box
+        %table.table.table-bordered.user-table
+          %caption
+          %thead
+            %tr
+              %th 绘本名称
+              %th 类&nbsp型
+              %th 数&nbsp量
+              %th 当前借出
+              %th 作&nbsp者
+              %th 书&nbsp号
+              %th{:colspan => "2"} 操&nbsp作
+          %tbody
+            - @books[:data].each do |b|
+              %tr{class: "#{ b[:available] ? "available" : "unavailable" }"}
+                %td= b[:name]
+                %td= b[:type]
+                %td= b[:stock].to_s + "本"
+                %td
+                %td= b[:author]
+                %td= b[:isbn]
+                %td
+                  %a.details{:href => "/staff/books/#{b[:id]}"} 详情
+                %td
+                  - if b[:available]
+                    %a{:href => "javascript:void(0);"} 下架
+                  - else
+                    %a{:href => "javascript:void(0);"} 上架
 
-    .select-page 
-      %span.totalitems= "共6页,总计30条"
-      %span.choice-page
-        .pagination.pagination-small
-          %ul
-            %li
-              %a{:href => "javascript:void(0);"} «
-            / - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
-            %li
-              %a{:href => "javascript:void(0);"} 1
-            %li
-              %a{:href => "javascript:void(0);"} »
+      .select-page 
+        %span.totalitems= "共6页,总计30条"
+        %span.choice-page
+          .pagination.pagination-small
+            %ul
+              %li
+                %a{:href => "javascript:void(0);"} «
+              / - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
+              %li
+                %a{:href => "javascript:void(0);"} 1
+              %li
+                %a{:href => "javascript:void(0);"} »
 
-    .user-review-box
-      .user-checkbox
-        %span.user-review 用户评价
-        %label.checkbox.inline
-          %input#inlineCheckbox1{:type => "checkbox", :value => "option1"} 未公开
-        %label.checkbox.inline
-          %input#inlineCheckbox2{:type => "checkbox", :value => "option2"} 已公开
-      .book-description
-        .user-item.clearfix
-          %img.book-img{:src => "/assets/managecenter/user-img.png"}
-          %p.user-name 大鱼海棠
-          %p.date 2017-6-23 13:20
-          %p.user-review-content 这本书看了感觉很好，儿童容易理解。
-          %button.btn#open-btn{:type => "button"} 公开
-      .book-description
-        .user-item.clearfix
-          %img.book-img{:src => "/assets/managecenter/user-img.png"}
-          %p.user-name 大鱼海棠
-          %p.date 2017-6-23 13:20
-          %p.user-review-content 这本书看了感觉很好，儿童容易理解。
-          %button.btn#open-btn{:type => "button"} 公开
+      .user-review-box
+        .user-checkbox
+          %span.user-review 用户评价
+          %label.checkbox.inline
+            %input#inlineCheckbox1{:type => "checkbox", :value => "option1"} 未公开
+          %label.checkbox.inline
+            %input#inlineCheckbox2{:type => "checkbox", :value => "option2"} 已公开
+        .book-description
+          .user-item.clearfix
+            %img.book-img{:src => "/assets/managecenter/user-img.png"}
+            %p.user-name 大鱼海棠
+            %p.date 2017-6-23 13:20
+            %p.user-review-content 这本书看了感觉很好，儿童容易理解。
+            %button.btn#open-btn{:type => "button"} 公开
+        .book-description
+          .user-item.clearfix
+            %img.book-img{:src => "/assets/managecenter/user-img.png"}
+            %p.user-name 大鱼海棠
+            %p.date 2017-6-23 13:20
+            %p.user-review-content 这本书看了感觉很好，儿童容易理解。
+            %button.btn#open-btn{:type => "button"} 公开
 
-    .select-page 
-      %span.totalitems= "共6页,总计12条"
-      %span.choice-page
-        .pagination.pagination-small
-          %ul
-            %li
-              %a{:href => "javascript:void(0);"} «
-            / - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
-            %li
-              %a{:href => "javascript:void(0);"} 1
-            %li
-              %a{:href => "javascript:void(0);"} »
+      .select-page 
+        %span.totalitems= "共6页,总计12条"
+        %span.choice-page
+          .pagination.pagination-small
+            %ul
+              %li
+                %a{:href => "javascript:void(0);"} «
+              / - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
+              %li
+                %a{:href => "javascript:void(0);"} 1
+              %li
+                %a{:href => "javascript:void(0);"} »
 
 
 
