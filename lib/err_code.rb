@@ -8,6 +8,7 @@ module ErrCode
   USER_NOT_VERIFIED = -5
   REQUIRE_SIGNIN = -6
   NO_CENTER = -7
+  BOOK_EXIST = -8
 
   def self.ret_false(code)
     msg = self.message(code)
@@ -32,6 +33,8 @@ module ErrCode
       "未登录"
     when NO_CENTER
       "未分配儿童中心"
+    when BOOK_EXIST
+      "已存在相同书号的图书"
     else
       nil
     end
