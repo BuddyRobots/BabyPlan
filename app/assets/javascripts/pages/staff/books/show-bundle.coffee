@@ -25,3 +25,13 @@ $ ->
   editor.config.hideLinkImg = true
 
   editor.create()
+
+
+
+# edit-btn press
+  $(".edit-btn").click ->
+    $(".unedit-box").toggle()
+    $(".shelve").toggle()
+    $(".edit-box").toggle()
+    $(".introduce-details").toggle()
+    $(".wangedit-area").toggle()

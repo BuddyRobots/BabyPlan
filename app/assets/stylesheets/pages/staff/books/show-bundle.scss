@@ -73,7 +73,8 @@
 	border: 1px solid #c8c8c8;
 }
 #name-span {
-	width: 120px;
+	width: auto;
+	margin-right: 15px;
 }
 .shelve {
 	color: #0fc077;
@@ -106,15 +107,17 @@
 	height: 30px;
 	line-height: 30px;
 	margin: 0 20px 0 0;
-	// display: none;
+}
+.edit-box {
+	display: none;
 }
 .input-area {
 	width: 238px;
 	height: 30px;
 	padding: 0;
 	margin: 0 20px 0 0 !important;
-	display: none !important;
 }
+
 .controls-row {
 	margin: 0 0 20px 31.5px;
 }
@@ -143,8 +146,6 @@
 	display: inline-block;
 	width: 86%;
 	text-indent: 28px;
-	// display: none;
-
 }
 .message {
 	display: inline-block;
