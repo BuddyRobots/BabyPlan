@@ -8,7 +8,7 @@
 	max-height: 600px;
 }
 
-.content {
+.content-area {
 	position:absolute;
 	right: 0;
 	left: 160px;
@@ -63,6 +63,10 @@
 	vertical-align: middle;
 }
 
+.manage-content {
+	overflow: auto;
+	max-height: 600px;    //需要修改高度
+}
 .book-detail {
 	margin: 20px 20px auto 20px;
 	border-radius: 6px;
@@ -119,11 +123,11 @@
 }
 .wangedit-area {
 	display: inline-block;
-	width: 85%;
+	width: 86%;
 	font-size: 14px;
 }
 #edit-area {
-	height: 150px;
+	height: 250px;
 }
 .book-introduce {
 	margin-bottom: 20px;
