@@ -72,6 +72,9 @@
 	border-radius: 6px;
 	border: 1px solid #c8c8c8;
 }
+#name-span {
+	width: 120px;
+}
 .shelve {
 	color: #0fc077;
 	vertical-align: middle;
@@ -87,7 +90,7 @@
 	margin-right: 10px;
 	margin-left: 20px
 }
-#picture-label {
+#illustrator-label {
 	@extend .input-caption;
 	margin-left: 10px;
 }
@@ -99,17 +102,18 @@
 	vertical-align: middle;
 	font-size: 14px;
 	color: #323232;
+	width: 252px;
 	height: 30px;
 	line-height: 30px;
 	margin: 0 20px 0 0;
-	display: none;
+	// display: none;
 }
 .input-area {
 	width: 238px;
 	height: 30px;
 	padding: 0;
 	margin: 0 20px 0 0 !important;
-	// display: none !important;
+	display: none !important;
 }
 .controls-row {
 	margin: 0 0 20px 31.5px;
@@ -119,12 +123,13 @@
 	vertical-align: top;
 	font-size: 16px;
 	color: #323232;
-	margin:0 14px 0 20px;
+	margin:0 11px 0 19px;
 }
 .wangedit-area {
 	display: inline-block;
 	width: 86%;
 	font-size: 14px;
+	display: none;
 }
 #edit-area {
 	height: 250px;
@@ -132,7 +137,15 @@
 .book-introduce {
 	margin-bottom: 20px;
 }
+.introduce-details {
+	font-size: 14px;
+	color: #323232;
+	display: inline-block;
+	width: 86%;
+	text-indent: 28px;
+	// display: none;
 
+}
 .message {
 	display: inline-block;
 	width: 100px;

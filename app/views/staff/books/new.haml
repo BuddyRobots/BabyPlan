@@ -4,7 +4,7 @@
   :javascript
     window.keyword = "#{@keyword}"
 
-.content
+.content-area
   /books-new
   .content-box
     .manage-box.clearfix
@@ -13,26 +13,27 @@
         %img.end{:src => "/assets/managecenter/ticker.png"}
         完成
 
+    .manage-content
     .book-detail
       %form.form-inline
-        %label.input-name 绘本名称
+        %label.input-name 绘本名称:
         %input.input-area#book-name{:type => "text"}
         %label.checkbox
           %input.checkbox-content#available{:type => "checkbox"} 立即上架
 
       .controls.controls-row
-        %label.input-caption 类型
+        %label.input-caption 类型:
         %input.input-area#book-type{:type => "text"}
-        %label.input-caption 数量
+        %label.input-caption 数量:
         %input.input-area#book-stock{:type => "text"}
-        %label.input-caption#book-number 书号
+        %label.input-caption#book-number 书号:
         %input.input-area#book-isbn{:type => "text"}
       .controls.controls-row
-        %label.input-caption 作者
+        %label.input-caption 作者:
         %input.input-area#book-author{:type => "text"}
-        %label.input-caption 译者
+        %label.input-caption 译者:
         %input.input-area#book-translator{:type => "text"}
-        %label.input-caption 插画作者
+        %label.input-caption 插画作者:
         %input.input-area#book-illustrator{:type => "text"}
        
       .book-introduce

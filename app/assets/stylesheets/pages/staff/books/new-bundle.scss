@@ -7,7 +7,7 @@
 	padding: 0;
 	max-height: 600px;
 }
-.content {
+.content-area {
 	position:absolute;
 	right: 0;
 	left: 160px;
@@ -105,7 +105,9 @@
 	width: 90.5%;
 	font-size: 14px;
 }
-
+#edit-area {
+	height: 250px;
+}
 .book-introduce {
 	margin-bottom: 20px;
 }

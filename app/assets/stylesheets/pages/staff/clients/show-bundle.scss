@@ -1,7 +1,10 @@
 @import "jquery-ui";
 
-
-.modal-body, input, label {
+input, label, span {
+	margin: 0;
+	padding: 0;
+}
+.modal-body {
 	margin: 0;
 	padding: 0;
 	max-height: 600px;
