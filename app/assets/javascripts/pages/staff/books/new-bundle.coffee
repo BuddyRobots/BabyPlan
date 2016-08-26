@@ -23,6 +23,36 @@ $ ->
 
 
   $(".end-btn").click ->
-
-    
-    location.href = "/staff/books"
+    name = $("#book-name").val().trim()
+    stock = $("#book-stock").val().trim()
+    isbn = $("#book-isbn").val().trim()
+    author = $("#book-author").val().trim()
+    translator = $("#book-translator").val().trim()
+    illustrator = $("#book-illustrator").val().trim()
+    available = $("#available").is(":checked")
+    desc = editor.$txt.html()
+    if name == "" || stock == "" || isbn == ""
+      $.page_notification("请补全信息")
+      return
+    $.postJSON(
+      '/staff/books',
+      {
+        book: {
+          name: name
+          stock: stock
+          isbn: isbn
+          author: author
+          translator: translator
+          illustrator: illustrator
+          desc: desc
+          available: available
+        }
+      },
+      (data) ->
+        console.log data
+        if data.success
+          location.href = "/staff/books/" + data.book_id
+        else
+          if data.code == BOOOK_EXIST
+            $.page_notification("该书号图书已经存在")
+      )

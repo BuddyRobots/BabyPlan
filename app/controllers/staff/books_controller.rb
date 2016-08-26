@@ -1,6 +1,12 @@
 class Staff::BooksController < Staff::ApplicationController
 
   def index
+    @keyword = params[:keyword]
+    books = @keyword.present? ? current_user.staff_center.books.where(name: /#{@keyword}/) : current_user.staff_center.books.all
+    @books = auto_paginate(books)
+    @books[:data] = @books[:data].map do |e|
+      e.book_info
+    end
   end
 
   def create
