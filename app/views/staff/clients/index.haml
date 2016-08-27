@@ -11,7 +11,7 @@
     .manage-box
       .user-search-box
         .input-append
-          %input#appendedInputButton.span2{:type => "text", :placeholder => "输入姓名"}
+          %input#appendedInputButton.span2{:type => "text", :placeholder => "输入姓名", :value => "#{@keyword}"}
           %button.btn#search-btn{:type => "button"}
       .btn.kidadd-btn{:type => "button", :href => "#kidsaddModal", "data-toggle" => "modal"} 
         %img.add-edit{:src => "/assets/managecenter/add.png"}

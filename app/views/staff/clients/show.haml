@@ -11,6 +11,9 @@
   .content-box
     .manage-box.clearfix
       %p.kids-message 儿童信息
+      .btn.finish-btn{:type => "button"} 
+        %img.ticker{:src => "/assets/managecenter/ticker.png"}
+        完成
       .btn.edit-btn{:type => "button"} 
         %img.edit{:src => "/assets/managecenter/edit.png"}
         编辑
@@ -19,26 +22,51 @@
       .controls.controls-row
         %label.input-caption.edit 姓名:
         %span.unedit-box#name-span 张三
-        %input.input-area#name-input{:type => "text"}
+        %span.edit-box
+          %input.input-area#name-input{:type => "text"}
         %label.input-caption 年龄:
         %span.unedit-box#age-span 张三
-        %input.input-area#age-input{:type => "text"}
+        %span.edit-box
+          %input.input-area#age-input{:type => "text"}
         %label.input-caption 性别:
         %span.unedit-box#gender-span 张三
-        %input.input-area#gender-input{:type => "text"}
+        %span.edit-box
+          %input.input-area#gender-input{:type => "text"}
         %label.input-caption 联系方式:
         %span.unedit-box#phone-span 张三
-        %input.input-area#phone-input{:type => "text"}
+        %span.edit-box
+          %input.input-area#phone-input{:type => "text"}
       .controls.controls-row
         %label.input-caption 家长:
         %span.unedit-box#parent-span 张三
-        %input.input-area#parent-input{:type => "text"}
+        %span.edit-box
+          %input.input-area#parent-input{:type => "text"}
         %label.input-caption 地址:
         %span.unedit-box#address-span 张三
-        %input.input-area#address-input{:type => "text"}
+        %span.edit-box
+          %input.input-area#address-input{:type => "text"}
 
     .course-book
-      %span.course 课程
+      %span.course 课程 
       %span.book 绘本
-      %span.QR-code
-        .btn.QRcode-btn{:type => "button"} 生成签到二维码
+      %span.class-status
+        %label.checkbox.inline
+          %input#inlineCheckbox1{:type => "checkbox", :value => "option1"} 未上课
+        %label.checkbox.inline
+          %input#inlineCheckbox2{:type => "checkbox", "background" => "#0fc077"} 已上课
+        %label.checkbox.inline
+          %input#inlineCheckbox3{:type => "checkbox", :value => "option3"} 缺课
+
+    .course-message
+      %span.span-attr.course-name 课程
+      %span.span-input#course-name
+        %a{:href => "javascript:void(0);"} 社会科学
+      %span.span-attr.course-time 上课时间
+      %span.span-input#course-time 2016-07-23--2016-08-23
+      %span.span-attr.course-teacher 主讲人
+      %span.span-input#coure-teacher 王健林
+      %span.span-attr.course-address 地址
+      %span.span-input#courese-address 呼伦贝尔大草原18号蒙古包
+       
+        
+

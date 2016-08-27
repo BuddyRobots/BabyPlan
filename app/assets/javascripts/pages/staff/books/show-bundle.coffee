@@ -28,10 +28,16 @@ $ ->
 
 
 
-# edit-btn press
+# edit-btn pressdown
   $(".edit-btn").click ->
     $(".unedit-box").toggle()
     $(".shelve").toggle()
     $(".edit-box").toggle()
     $(".introduce-details").toggle()
     $(".wangedit-area").toggle()
+    $(".finish-btn").toggle()
+    $(".edit-btn").toggle()
+
+# finish-btn pressdown
+  $(".finish-btn").click ->
+    location.href = "/staff/books/show"

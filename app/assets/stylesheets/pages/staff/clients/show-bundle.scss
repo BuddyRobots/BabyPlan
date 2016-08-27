@@ -54,6 +54,10 @@ input, label, span {
 	background: #f7873d;
 	color: white;
 }
+.finish-btn {
+	@extend .edit-btn;
+	display: none;
+}
 .kids-details {
 	margin: 20px 20px auto 20px;
 	border-radius: 6px;
@@ -67,7 +71,6 @@ input, label, span {
 	height: 30px;
 	padding: 0;
 	margin: 0 70px 0 0 !important;
-	// display: none !important;
 }
 .unedit-box {
 	display: inline-block;
@@ -78,6 +81,8 @@ input, label, span {
 	height: 30px;
 	line-height: 30px;
 	margin: 0 70px 0 0;
+}
+.edit-box {
 	display: none;
 }
 #address-span {
@@ -95,7 +100,10 @@ input, label, span {
 	color: #323232;
 	margin-right: 10px;
 }
-
+.course-book {
+	margin: 20px 20px auto 20px;
+	font-size: 0;    //消除inline-block之间的间距
+}
 .course {
 	display: inline-block;
 	width: 100px;
@@ -108,10 +116,18 @@ input, label, span {
 	color: #323232;
 	text-align: center;
 	line-height: 34px;
-	margin: 20px 0 0 20px;
 }
 .book {
 	@extend .course;
 	background: #c8c8c8;
-	margin: 20px 0 0 0;
+}
+.class-status {
+	float: right;
+	display: inline-block;
+	line-height: 35px;
+	vertical-align: top;
+}
+.course-message {
+	margin: 0 20px auto 20px;
+	border: 1px solid #c8c8c8;
 }

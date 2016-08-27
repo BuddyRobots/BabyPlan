@@ -9,7 +9,7 @@
     .manage-box
       .user-search-box
         .input-append
-          %input#appendedInputButton.span2{:type => "text", :placeholder => "输入绘本名称"}
+          %input#appendedInputButton.span2{:type => "text", :placeholder => "输入绘本名称", :value => "#{@keyword}"}
           %button.btn#search-btn{:type => "button"}
       .btn.bookadd-btn{:type => "button", :href => "#kidsaddModal", "data-toggle" => "modal"} 
         %img.book-edit{:src => "/assets/managecenter/add.png"}

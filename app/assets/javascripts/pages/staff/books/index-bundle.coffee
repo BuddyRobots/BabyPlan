@@ -2,7 +2,7 @@
 
 $ ->
 	# $("#signup-signin").click ->
-	# location.href = "/staff/books/+修改"
+	# location.href = "/staff/books/" + data.book_id
 
 
   $(".bookadd-btn").click ->
