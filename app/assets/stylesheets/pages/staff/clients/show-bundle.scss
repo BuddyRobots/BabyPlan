@@ -130,4 +130,52 @@ input, label, span {
 .course-message {
 	margin: 0 20px auto 20px;
 	border: 1px solid #c8c8c8;
+	padding-top: 18px;
+	.span-attr {
+		font-size: 16px;
+		color: #323232;
+	}
+	.span-input {
+		font-size: 14px;
+		color: #787878;
+	}
+}
+.span-right {
+	float: right;
+	margin-right: 20px;
+}
+#coure-status {
+	color: #d70c19;
+}
+.item {
+	padding-top: 13px;
+	font-size: 16px;
+	color: #323232;
+	padding-bottom: 15px;
+	border-bottom: 1px solid #c8c8c8;
+	.item-status {
+		margin-left: 20px;
+	}
+	.square {
+		display: inline-block;
+		width: 18px;
+		height: 18px;
+		background: #cfcfcf;
+		border-radius: 2px;
+		margin-right: 5px;
+		vertical-align: top;
+	}
+}
+.comments {
+	padding: 18px 20px;
+	font-size: 16px;
+	color: #323232;
+	img {
+		vertical-align: top;
+	}
+	.comments-content {
+		margin-left: 50px;
+		margin-top: 13px;
+		line-height: 25px;
+	}
 }
