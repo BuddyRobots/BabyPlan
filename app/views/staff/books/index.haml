@@ -34,7 +34,7 @@
               %th{:colspan => "2"} 操&nbsp作
           %tbody
             - @books[:data].each do |b|
-              %tr{class: "#{ b[:available] ? "available" : "unavailable" }"}
+              %tr{class: "#{ b[:available] ? "available" : "unavailable" }", "data-id" => b[:id]}
                 %td= b[:name]
                 %td= b[:type]
                 %td= b[:stock].to_s + "本"
@@ -45,9 +45,9 @@
                   %a.details{:href => "/staff/books/#{b[:id]}"} 详情
                 %td
                   - if b[:available]
-                    %a{:href => "javascript:void(0);"} 下架
+                    %a#set-available.available{:href => "javascript:void(0);"} 下架
                   - else
-                    %a{:href => "javascript:void(0);"} 上架
+                    %a#set-available.unavailable{:href => "javascript:void(0);"} 上架
 
       .select-page 
         %span.totalitems= "共#{@books[:total_page]}页,总计#{@books[:total_number]}条"

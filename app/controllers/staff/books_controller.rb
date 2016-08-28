@@ -15,8 +15,26 @@ class Staff::BooksController < Staff::ApplicationController
   end
 
   def show
+    @book = current_user.staff_center.books.where(id: params[:id]).first
+    if @book.nil?
+      redirect_to action: :index and return
+    end
+  end
+
+  def update
+    @book = current_user.staff_center.books.where(id: params[:id]).first
+    retval = ErrCode::BOOK_NOT_EXIST if @book.nil?
+    @book.update_info(params[:book])
+    render json: retval_wrapper(retval)
   end
 
   def new
+  end
+
+  def set_available
+    @book = current_user.staff_center.books.where(id: params[:id]).first
+    retval = ErrCode::BOOK_NOT_EXIST if @book.blank?
+    retval = @book.set_available(params[:available])
+    render json: retval_wrapper(retval)
   end
 end

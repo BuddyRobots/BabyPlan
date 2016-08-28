@@ -29,6 +29,7 @@ class Book
     end
     book = staff.staff_center.books.create(
       name: book_info[:name],
+      type: book_info[:type],
       isbn: book_info[:isbn],
       author: book_info[:author],
       translator: book_info[:translator],
@@ -52,5 +53,25 @@ class Book
       stock: self.stock,
       available: self.available
     }
+  end
+
+  def update_info(book_info)
+    self.update_attributes(
+      {
+        name: book_info["name"],
+        type: book_info["type"],
+        stock: book_info["stock"],
+        isbn: book_info["isbn"],
+        author: book_info["author"],
+        translator: book_info["translator"],
+        illustrator: book_info["illustrator"]
+      }
+    )
+    nil
+  end
+
+  def set_available(available)
+    self.update_attribute(:available, available == true)
+    nil
   end
 end

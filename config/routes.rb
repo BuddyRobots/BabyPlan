@@ -39,6 +39,9 @@ Rails.application.routes.draw do
     end
 
     resources :books do
+      member do
+        post :set_available
+      end
     end
 
     resources :clients do

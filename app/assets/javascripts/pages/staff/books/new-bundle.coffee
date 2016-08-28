@@ -27,6 +27,7 @@ $ ->
 
   $(".end-btn").click ->
     name = $("#book-name").val().trim()
+    type = $("#book-type").val().trim()
     stock = $("#book-stock").val().trim()
     isbn = $("#book-isbn").val().trim()
     author = $("#book-author").val().trim()
@@ -42,6 +43,7 @@ $ ->
       {
         book: {
           name: name
+          type: type
           stock: stock
           isbn: isbn
           author: author
