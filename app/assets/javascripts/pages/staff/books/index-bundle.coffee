@@ -8,9 +8,6 @@ $ ->
   $(".bookadd-btn").click ->
     location.href = "/staff/books/new"
 
-  $(".details").click ->
-  	location.href = "/staff/books/show"
-
 # search-btn press
   search = ->
     value = $("#appendedInputButton").val()
@@ -23,3 +20,33 @@ $ ->
     code = event.which
     if code == 13
       search()
+
+  $("#set-available").click ->
+    current_state = "unavalable"
+    if $(this).hasClass("available")
+      current_state = "available"
+    bid = $(this).closest("tr").attr("data-id")
+    link = $(this)
+    console.log bid
+    $.postJSON(
+      '/staff/books/' + bid + '/set_available',
+      {
+        available: current_state == "unavailable"
+      },
+      (data) ->
+        if data.success
+          $.page_notification("操作完成")
+          if current_state == "available"
+            link.removeClass("available")
+            link.addClass("unavailable")
+            link.text("上架")
+            link.closest("tr").removeClass("available")
+            link.closest("tr").addClass("unavailable")
+          else
+            link.addClass("available")
+            link.removeClass("unavailable")
+            link.text("下架")
+            link.closest("tr").addClass("available")
+            link.closest("tr").removeClass("unavailable")
+      )
+

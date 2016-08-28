@@ -56,10 +56,10 @@
 	@extend .edit-btn;
 	display: none;
 }
-.unshelve-btn {
+#unshelve-btn {
 	@extend .edit-btn;
 }
-.unshelve-btn:hover {
+#unshelve-btn:hover {
 	background: #f7873d;
 	color: white;
 }

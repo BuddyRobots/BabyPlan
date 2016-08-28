@@ -9,6 +9,7 @@ module ErrCode
   REQUIRE_SIGNIN = -6
   NO_CENTER = -7
   BOOK_EXIST = -8
+  BOOK_NOT_EXIST = -9
 
   def self.ret_false(code)
     msg = self.message(code)
@@ -35,6 +36,8 @@ module ErrCode
       "未分配儿童中心"
     when BOOK_EXIST
       "已存在相同书号的图书"
+    when BOOK_NOT_EXIST
+      "图书不存在"
     else
       nil
     end
