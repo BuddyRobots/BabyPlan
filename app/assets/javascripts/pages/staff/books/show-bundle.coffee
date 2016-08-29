@@ -26,8 +26,6 @@ $ ->
 
   editor.create()
 
-
-
   # edit-btn pressdown
   $(".edit-btn").click ->
     $(".unedit-box").toggle()
@@ -47,7 +45,9 @@ $ ->
     $("#translator-input").val($("#translator-span").text())
     $("#illustrator-input").val($("#illustrator-span").text())
 
-    editor.$txt.html(window.desc)
+    desc = $("#editor-content").html()
+    console.log desc
+    editor.$txt.html(desc)
 
   # finish-btn pressdown
   $(".finish-btn").click ->
@@ -95,7 +95,7 @@ $ ->
           $("#translator-span").text(translator)
           $("#illustrator-span").text(illustrator)
 
-          window.desc = desc
+          $("#editor-content").html(desc)
           window.stock = stock
           $(".introduce-details").text("")
           $(".introduce-details").append(desc)
