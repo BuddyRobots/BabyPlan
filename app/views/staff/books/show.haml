@@ -3,7 +3,6 @@
   = stylesheet_link_tag "pages/staff/books/show-bundle", :media => "all"
   :javascript
     window.bid = "#{@book.id.to_s}"
-    window.desc = "#{@book.desc}"
     window.stock = "#{@book.stock}"
 
 .content-area
@@ -88,9 +87,5 @@
               %td borrow-time
               %td restore-time
           
-         
-
-
-
-      
-
+#editor-content.hide
+  = @book.desc.html_safe
