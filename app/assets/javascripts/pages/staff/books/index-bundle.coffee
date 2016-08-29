@@ -21,19 +21,20 @@ $ ->
     if code == 13
       search()
 
-  $("#set-available").click ->
-    current_state = "unavalable"
+  $(".set-available").click ->
+    current_state = "unavailable"
     if $(this).hasClass("available")
       current_state = "available"
     bid = $(this).closest("tr").attr("data-id")
     link = $(this)
-    console.log bid
+    console.log current_state
     $.postJSON(
       '/staff/books/' + bid + '/set_available',
       {
         available: current_state == "unavailable"
       },
       (data) ->
+        console.log data
         if data.success
           $.page_notification("操作完成")
           if current_state == "available"
@@ -49,4 +50,9 @@ $ ->
             link.closest("tr").addClass("available")
             link.closest("tr").removeClass("unavailable")
       )
+    return false
+
+  $(".book-record").click ->
+    $(".book-record").removeClass("clicked")
+    $(this).addClass("clicked")
 
