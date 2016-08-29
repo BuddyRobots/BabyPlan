@@ -3,14 +3,7 @@
 $ ->
 
   editor = new wangEditor('edit-area')
-  # editor.config.menus = $.map(wangEditor.config.menus, (item, key) ->
-  #   if item == 'insertcode'
-  #     return null
-  #   if item == 'fullscreen'
-  #     return null    
-  #   item
-  # )
-  
+
   editor.config.menus = [
         'head',
         'img'
@@ -48,6 +41,11 @@ $ ->
     desc = $("#editor-content").html()
     console.log desc
     editor.$txt.html(desc)
+    
+# 我的方法
+    # desc = $(".introduce-details").html()
+    # console.log desc
+    # editor.$txt.html(desc)
 
   # finish-btn pressdown
   $(".finish-btn").click ->
@@ -96,6 +94,11 @@ $ ->
           $("#illustrator-span").text(illustrator)
 
           $("#editor-content").html(desc)
+
+          # 我的方法
+          # $(".introduce-details").html(desc)
+
+
           window.stock = stock
           $(".introduce-details").text("")
           $(".introduce-details").append(desc)
@@ -130,6 +133,12 @@ $ ->
             btn.find("img").attr("src", "/assets/managecenter/unshelve.png")
             $("#available-status").text("在架上")
       )
+
+  $("#back-img").click ->
+    $("#uploadBackModal").modal("show")
+
+  $("#cover-img").click ->
+    $("#uploadCoverModal").modal("show")
 
   $("#upload-cover").click ->
     $("#uploadCoverModal").modal("show")

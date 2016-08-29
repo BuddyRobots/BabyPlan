@@ -1,4 +1,4 @@
-
+#= require wangEditor.min
 
 $ ->
 	# $("#signup-signin").click ->
