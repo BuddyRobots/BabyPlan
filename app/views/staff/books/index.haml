@@ -45,9 +45,9 @@
                   %a.details{:href => "/staff/books/#{b[:id]}"} 详情
                 %td
                   - if b[:available]
-                    %a.set-available.available{:href => "javascript:void(0);"} 下架
+                    %a.set-available.link-available{:href => "javascript:void(0);"} 下架
                   - else
-                    %a.set-available.unavailable{:href => "javascript:void(0);"} 上架
+                    %a.set-available.link-unavailable{:href => "javascript:void(0);"} 上架
 
       .select-page 
         %span.totalitems= "共#{@books[:total_page]}页,总计#{@books[:total_number]}条"

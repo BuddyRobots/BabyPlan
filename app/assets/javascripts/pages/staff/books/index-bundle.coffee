@@ -23,7 +23,7 @@ $ ->
 
   $(".set-available").click ->
     current_state = "unavailable"
-    if $(this).hasClass("available")
+    if $(this).hasClass("link-available")
       current_state = "available"
     bid = $(this).closest("tr").attr("data-id")
     link = $(this)
@@ -38,14 +38,14 @@ $ ->
         if data.success
           $.page_notification("操作完成")
           if current_state == "available"
-            link.removeClass("available")
-            link.addClass("unavailable")
+            link.removeClass("link-available")
+            link.addClass("link-unavailable")
             link.text("上架")
             link.closest("tr").removeClass("available")
             link.closest("tr").addClass("unavailable")
           else
-            link.addClass("available")
-            link.removeClass("unavailable")
+            link.addClass("link-available")
+            link.removeClass("link-unavailable")
             link.text("下架")
             link.closest("tr").addClass("available")
             link.closest("tr").removeClass("unavailable")
