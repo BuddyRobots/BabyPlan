@@ -3,10 +3,6 @@
 
 $(document).ready ->
 
-
-
-
-
   uid = ""
 
   $("#send-code").click ->

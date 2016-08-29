@@ -130,3 +130,23 @@ $ ->
             btn.find("img").attr("src", "/assets/managecenter/unshelve.png")
             $("#available-status").text("在架上")
       )
+
+  $("#upload-cover").click ->
+    $("#uploadCoverModal").modal("show")
+
+  coverIntervalFunc = ->
+    $('#cover-name').html $('#cover_file').val();
+
+  $("#browser-cover-click").click ->
+    $("#cover_file").click()
+    setInterval(coverIntervalFunc, 1)
+
+  $("#upload-back").click ->
+    $("#uploadBackModal").modal("show")
+
+  backIntervalFunc = ->
+    $('#back-name').html $('#back_file').val();
+
+  $("#browser-back-click").click ->
+    $("#back_file").click()
+    setInterval(backIntervalFunc, 1)

@@ -37,4 +37,34 @@ class Staff::BooksController < Staff::ApplicationController
     retval = @book.set_available(params[:available])
     render json: retval_wrapper(retval)
   end
+
+  def update_cover
+    @book = current_user.staff_center.books.where(id: params[:id]).first
+    if @book.blank?
+      redirect_to action: :index and return
+    end
+    cover = Cover.new
+    cover.cover = params[:cover_file]
+    cover.store_cover!
+    filepath = cover.cover.file.file
+    m = Material.create(path: "/uploads/covers/" + filepath.split('/')[-1])
+    @book.cover = m
+    @book.save
+    redirect_to action: :show, id: @book.id.to_s and return
+  end
+
+  def update_back
+    @book = current_user.staff_center.books.where(id: params[:id]).first
+    if @book.blank?
+      redirect_to action: :index and return
+    end
+    back = Back.new
+    back.back = params[:back_file]
+    back.store_back!
+    filepath = back.back.file.file
+    m = Material.create(path: "/uploads/backs/" + filepath.split('/')[-1])
+    @book.back = m
+    @book.save
+    redirect_to action: :show, id: @book.id.to_s and return
+  end
 end

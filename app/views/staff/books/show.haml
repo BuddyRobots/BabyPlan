@@ -86,6 +86,51 @@
               %td name
               %td borrow-time
               %td restore-time
-          
+    .manage-image
+      %a#upload-cover{href: "javascript:void(0);"} 上传封面
+      - if @book.cover.present?
+        = image_tag(@book.cover.path)
+      %a#upload-back{href: "javascript:void(0);"} 上传封底
+      - if @book.back.present?
+        = image_tag(@book.back.path)
+
 #editor-content.hide
   = @book.desc.html_safe
+
+#uploadCoverModal.modal.fade
+  .modal-dialog
+    .modal-content
+      = form_tag(update_cover_staff_book_path(@book), method: "post", multipart: true) do
+        .modal-header
+          %button.close{type: "button", "data-dismiss" => "modal", "aria-hidden" => "true"} &times;
+          %h3 上传封面
+        .modal-body
+          .form-group.hide
+            = text_field_tag :book_id, @book.id.to_s
+          .form-group
+            = file_field_tag "cover_file", { class: "hide", accept: ".jpg,.png" }
+            %a#browser-cover-click{href: "javascript:void(0);"} 选择
+            %p#cover-name
+        .modal-footer
+          = submit_tag "上传", :class => 'btn-primary btn'
+          %a.btn.btn-default{href: "#", data: {dismiss: "modal"}, "aria-hidden" => "true"} 取消
+
+
+
+#uploadBackModal.modal.fade
+  .modal-dialog
+    .modal-content
+      = form_tag(update_back_staff_book_path(@book), method: "post", multipart: true) do
+        .modal-header
+          %button.close{type: "button", "data-dismiss" => "modal", "aria-hidden" => "true"} &times;
+          %h3 上传封底
+        .modal-body
+          .form-group.hide
+            = text_field_tag :book_id, @book.id.to_s
+          .form-group
+            = file_field_tag "back_file", { class: "hide", accept: ".jpg,.png" }
+            %a#browser-back-click{href: "javascript:void(0);"} 选择
+            %p#back-name
+        .modal-footer
+          = submit_tag "上传", :class => 'btn-primary btn'
+          %a.btn.btn-default{href: "#", data: {dismiss: "modal"}, "aria-hidden" => "true"} 取消

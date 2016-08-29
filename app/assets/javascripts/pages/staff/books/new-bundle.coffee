@@ -35,7 +35,7 @@ $ ->
     illustrator = $("#book-illustrator").val().trim()
     available = $("#available").is(":checked")
     desc = editor.$txt.html()
-    if name == "" || stock == "" || isbn == ""
+    if name == "" || stock == "" || isbn == "" || desc == ""
       $.page_notification("请补全信息")
       return
     $.postJSON(
