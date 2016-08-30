@@ -1,0 +1,32 @@
+- content_for :head do
+  = javascript_include_tag "pages/staff/announcements/new-bundle"
+  = stylesheet_link_tag "pages/staff/announcements/new-bundle", :media => "all"
+
+
+
+.content-area
+  /announcements-new
+  .content-box
+    .btn.end-btn{:type => "button", :href => "#add-announcementModal", "data-toggle" => "modal"} 
+      %img.end-img{:src => "/assets/managecenter/ticker.png"}
+      完成
+    / .btn.declare-btn{:type => "button"} 
+    /   %img.declare{:src => "/assets/managecenter/shelve.png"}
+    /   公布
+    .tabbable
+      %ul.nav.nav-tabs
+        %li.active
+          %a{"data-toggle" => "tab", :href => "#tab1"} 本区公告
+
+    .edit-area
+      .caption-div
+        %form.form-inline
+          %input#input-caption{:placeholder => "请输入标题", :type => "text"}
+          %label.checkbox
+            %input{:type => "checkbox"}
+            公布
+
+      .wangedit-area
+        #edit-box
+      
+      

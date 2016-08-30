@@ -1,0 +1,85 @@
+@import "wangEditor";
+@import "jquery-ui";
+
+.content-area {
+	position:absolute;
+	right: 0;
+	left: 160px;
+	bottom: 0;
+	top: 60px;
+	background:#f7fcff;
+	box-shadow: -1px -1px 6px #9c9c9c inset;
+}
+.content-box {
+	position: relative;
+	margin: 20px 20px auto 20px;
+	box-shadow: 0 -1px 6px #9c9c9c inset;
+	background: white; 
+	padding: 20px 0;
+}
+.btn {
+	margin: 0;
+	padding: 0;
+}
+.end-btn {
+	float: right;
+	margin: -9px 20px 0 0;
+	width: 100px;
+	height: 34px;
+	line-height: 32px;
+	color: white;
+	background: #f7873d;
+	border-radius: 6px;
+}
+.end-btn:hover {
+	background: #f7873d;
+	color: white;
+}
+.declare-btn {
+	@extend .end-btn;
+}
+.end-img {
+	vertical-align: middle;
+}
+.tabbable {
+	margin: 0 20px auto 20px;
+}
+.nav-tabs {
+	margin-bottom: 0;
+	li {
+		font-size: 16px;
+		color: #323232;
+	}
+}
+.edit-area {
+	margin: 0 20px;
+	border: 1px solid #c8c8c8;
+	border-top: 0;
+	padding: 20px 0;
+}
+#input-caption {
+	width: 640px;
+	height: 62px;
+	padding: 0;
+	border-radius: 4px;
+	font-size: 24px;
+}
+.caption-div {
+	width: 65%;
+	margin: 0 auto;
+	vertical-align: baseline;
+}
+.checkbox {
+	font-size: 14px;
+	color: #323232;
+	margin-left: 15px;
+}
+.wangedit-area {
+	margin: 0 60px;
+	font-size: 14px;
+	color: #323232;
+}
+#edit-box {
+	height: 350px;
+	margin-bottom: 20px;
+}
