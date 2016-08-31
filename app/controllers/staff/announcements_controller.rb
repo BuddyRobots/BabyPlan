@@ -6,6 +6,8 @@ class Staff::AnnouncementsController < Staff::ApplicationController
     @local_eles = auto_paginate(local_eles)
     global_eles = @keyword.present? ? Announcement.where(center: nil).where(title: /#{@keyword}/) : Announcement.where(center: nil)
     @global_eles = auto_paginate(global_eles)
+
+    @profile = params[:profile]
   end
 
   def create
@@ -14,7 +16,7 @@ class Staff::AnnouncementsController < Staff::ApplicationController
   end
 
   def show
-    @announcement = current_user.staff_center.announcements.where(id: params[:id]).first
+    @announcement = Announcement.where(id: params[:id]).first
     if @announcement.nil?
       redirect_to action: :index and return
     end
