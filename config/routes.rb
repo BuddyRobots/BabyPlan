@@ -24,6 +24,8 @@ Rails.application.routes.draw do
   get 'welcome/managecenter'
   
 
+  namespace :admin do
+  end
 
   namespace :staff do
     resources :sessions do
