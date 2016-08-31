@@ -12,7 +12,7 @@
     .header
       %a{:href => "#"}
         %img.logo{:src => "/assets/managecenter/logo.png"}
-      %p.leftword 北京市社区儿童中心
+      %p.leftword 管理员后台系统
 
 
       /登录注册页面的layout
@@ -36,8 +36,8 @@
             %a{:href => signout_admin_sessions_path}
               %img.turnoff-icon{:src => "/assets/managecenter/turnoff.png"}
       - else
-        %p.rightword 您好欢迎访问社区儿童中心管理系统！
-        %a.sign-in{:href => "#signinModal", "data-toggle" => "modal"} 登陆
+        %p.rightword 您好欢迎访问管理员后台系统！
+        %a.sign-in{:href => "#signinModal", "data-toggle" => "modal"} 登录
         
       
     
@@ -45,15 +45,15 @@
       .sidebar
         %ul
           %li
-            %a{:href => "/admin/centers"} 儿童中心管理
+            %a{:href => "/admin/centers"} 工作人员管理
           %li 
-            %a{:href => "/admin/staffs"} 工作人员管理
+            %a{:href => "/admin/staffs"} 课程管理
           %li 
-            %a{:href => "/admin/courses"} 课程管理
+            %a{:href => "/admin/courses"} 绘本管理
           %li 
-            %a{:href => "/admin/books"} 绘本管理
+            %a{:href => "/admin/books"} 公告信息管理
           %li 
-            %a{:href => "/admin/announcements"} 公告信息管理
+            %a{:href => "/admin/announcements"} 儿童中心管理
 
 
     = yield
