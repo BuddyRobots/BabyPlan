@@ -2,6 +2,10 @@ class Staff::AnnouncementsController < Staff::ApplicationController
 
   def index
     @keyword = params[:keyword]
+    local_eles = @keyword.present? ? current_user.staff_center.announcements.where(title: /#{@keyword}/) : current_user.staff_center.announcements.all
+    @local_eles = auto_paginate(local_eles)
+    global_eles = @keyword.present? ? Announcement.where(center: nil).where(title: /#{@keyword}/) : Announcement.where(center: nil)
+    @global_eles = auto_paginate(global_eles)
   end
 
   def create
