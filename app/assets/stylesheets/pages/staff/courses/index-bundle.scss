@@ -1,0 +1,276 @@
+@import "jquery-ui";
+
+.modal-body, input, label {
+	margin: 0;
+	padding: 0;
+	max-height: 600px;
+}
+
+.content {
+	position:absolute;
+	right: 0;
+	left: 160px;
+	bottom: 0;
+	top: 60px;
+	background:#f7fcff;
+	box-shadow: -1px -1px 6px #9c9c9c inset;
+}
+
+.content-box {
+	position: relative;
+	margin: 20px 20px auto 20px;
+	box-shadow: 0 -1px 6px #9c9c9c inset;
+	background: white;  
+}
+.manage-box {
+	height: 58px;
+	border-bottom: 1px solid #c8c8c8;
+	overflow: hidden;
+}
+.user-search-box {
+	position: absolute;
+	width: 200px;
+	height: 34px;
+	left:20px;
+	top: 11.5px;
+	border-top-left-radius: 6px;
+	border-bottom-left-radius: 6px;
+}
+#appendedInputButton {
+	padding: 0;
+	width: 162px;
+	height: 34px;
+}
+#search-btn {
+	width: 36px;
+	height: 36px;
+	border: 1px solid #c8c8c8;
+	background: url("/assets/managecenter/search.png") no-repeat;
+	background-size: 22px;
+	background-position: 6px 6px;
+}
+
+.bookadd-btn {
+	float: right;
+	margin: 11.5px 20px 0 0;
+	width: 100px;
+	height: 34px;
+	padding: 0;
+	line-height: 32px;
+	color: white;
+	background: #f7873d;
+	border-radius: 6px;
+}
+.bookadd-btn:hover {
+	background: #f7873d;
+	color: white;
+}
+.book-edit {
+	vertical-align: middle;
+}
+.table-box {
+	// position: relative;
+	padding: 0;
+	margin: 20px 20px auto 20px;
+}
+.user-table {
+	border-radius: 6px;
+	border: 1px solid #c8c8c8;
+	font-size: 14px;
+	color: #323232;
+	margin-bottom: 0;
+	th {
+		text-align: center;
+		height: 40px;
+		line-height: 40px;
+		padding: 0;
+	}
+	td {
+		font-size: 12px;
+		color: #505050;
+		height:45px;
+		line-height: 45px;
+		text-align: center;
+		padding: 0;
+		.unshelve {
+			color: #969696;
+		}
+		.shelve {
+			color: #f7873d;
+		}
+		a {
+			
+			text-decoration: underline;
+		}
+	}
+	.unavailable {
+		background: #eaeaea;
+	}
+	.clicked {
+		background: #fdd3b9;
+	}
+}
+.undiscover {
+	text-align: center;
+	padding: 30px;
+}
+.undiscover-icon {
+	display: inline-block;
+	width: 100%;
+	max-width: 39px;
+}
+.message {
+	font-size: 16px;
+	color: #969696;
+	margin-left: 20px;
+}
+.select-page {
+	text-align: right;
+	margin: 10px 20px 0 0;
+	padding-bottom: 5px;
+}
+.totalitems {
+	font-size: 12px;
+	color: #969696;
+	vertical-align: bottom;
+	height: 36px;
+	line-height: 36px;
+}
+
+.pagination {
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+	margin-left: 15px;
+}
+.user-review-box {
+	margin: 0 20px auto 20px;
+	border-radius: 6px;
+	border: 1px solid #c8c8c8;
+}
+.user-checkbox {
+	margin-bottom: 5px;
+}
+.user-review {
+	font-size: 16px;
+	color: #323232;
+	margin: 0 20px;
+	vertical-align: bottom;
+}
+.inline{
+	font-size: 12px;
+	color: #323232;
+	margin-right: 5px;
+}
+#inlineCheckbox1, #inlineCheckbox2 {
+	width: 16px;
+	height: 16px;
+	margin-right: 5px;
+}
+.inline {
+	line-height: 22px;
+}
+
+.book-description {
+	position: relative;
+	border-top: 1px solid #c8c8c8;
+}
+.book-img {
+	display: block;
+	float: left;
+	margin: 0 10px;
+	width: 60px;
+	height: 60px;
+}
+.user-item {
+	margin: 18px 0;
+	p {
+		padding: 1.2px;
+	}
+}
+
+.user-name {
+	font-size: 16px;
+	color: #646464;
+	margin-top: -3px;
+}
+.date {
+	font-size: 12px;
+	color: #969696;
+}
+.user-review-content {
+	font-size: 14px;
+	color: #787878;
+}
+#open-btn {
+	position: absolute;
+	width: 100px;
+	height: 36px;
+	top: 32px;
+	right: 20px;
+	color: white;
+	border-radius: 6px;
+	background: #f7873d;
+	border: 0;
+}
+
+
+
+// shelve modal
+
+#shelveModal {
+	position:absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -150px;
+	margin-top: -100px;
+	width: 300px;
+	height: 200px;
+	border-radius: 10px;
+}
+.modal-backdrop {
+	background-color: #999;
+}
+.close {
+	position: absolute;
+	right: -14px;
+	top: -14px;
+	opacity: 0.7;
+	z-index: 10;
+}
+.close:hover {
+	opacity: 1;
+}
+.modalheader {
+	height: 164px;
+	line-height: 164px;
+	// box-shadow: 0 -1px 6px #9c9c9c; 
+}
+.caption {
+	font-size: 18px;
+	color: #323232;
+	text-align: center;
+}
+
+.footbox {
+	width: 100%;
+	height: 36px;
+	display: block;
+	background: #227dda;
+	text-align: center;
+	line-height: 36px;
+	font-size: 14px;
+	color: white;
+	text-decoration: none;
+}
+.footbox:link {
+	text-decoration: none;
+}
+.footbox:visited {
+	color: white;
+	text-decoration: none;
+}
+.footbox:hover {
+	text-decoration: none;
+	color: white;
+}

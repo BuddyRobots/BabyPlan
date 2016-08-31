@@ -18,11 +18,38 @@ ul, li {
 	margin: 20px 20px auto 20px;
 	box-shadow: 0 -1px 6px #9c9c9c inset;
 	background: white; 
-	padding-top: 20px;
+}
+.manage-box {
+	height: 58px;
+	border-bottom: 1px solid #c8c8c8;
+	overflow: hidden;
+	margin-bottom: 15px;
+}
+.user-search-box {
+	position: absolute;
+	width: 200px;
+	height: 34px;
+	left:20px;
+	top: 11.5px;
+	border-top-left-radius: 6px;
+	border-bottom-left-radius: 6px;
+}
+#appendedInputButton {
+	padding: 0;
+	width: 162px;
+	height: 34px;
+}
+#search-btn {
+	width: 36px;
+	height: 36px;
+	border: 1px solid #c8c8c8;
+	background: url("/assets/managecenter/search.png") no-repeat;
+	background-size: 22px;
+	background-position: 6px 6px;
 }
 .add-btn {
 	float: right;
-	margin: -9px 20px 0 0;
+	margin: 11.5px 20px 0 0;
 	padding: 0 10px;
 	height: 34px;
 	line-height: 32px;
@@ -37,6 +64,20 @@ ul, li {
 .add-img {
 	vertical-align: middle;
 }
+.undiscover {
+	text-align: center;
+	padding: 30px;
+}
+.undiscover-icon {
+	display: inline-block;
+	width: 100%;
+	max-width: 39px;
+}
+.message {
+	font-size: 16px;
+	color: #969696;
+	margin-left: 20px;
+}
 .tabbable {
 	margin: 0 20px auto 20px;
 }
@@ -47,9 +88,12 @@ ul, li {
 		color: #323232;
 	}
 }
+.tab-content {
+	padding-bottom: 15px;
+}
 .tab-pane {
-	overflow: scroll;
-	max-height: 655px;
+	overflow: auto;
+	max-height: 600px;
 }
 .introduce {
 	border: 1px solid #c8c8c8;
