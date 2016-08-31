@@ -2,3 +2,32 @@
   = javascript_include_tag "pages/admin/staffs/show-bundle"
   = stylesheet_link_tag "pages/admin/staffs/show-bundle", :media => "all"
 
+.content-area
+  /staffs-show
+  .content-box
+    .manage-box.clearfix
+      %p.staffs-name 
+        王健林
+        %span 账号锁定中，暂时无法使用
+      .btn.unlock-btn{:type => "button"}  解锁
+    .manage-content
+      %p.gender 性别：男
+      %p.mobile 联系方式： 13126833286
+      %span 调整岗位:
+      %select
+        %option 富仁名苑儿童中心
+        %option 朝阳儿童中心
+        %option 海淀儿童中心
+        %option 丰台儿童中心
+        %option 昌平儿童中心
+      / %form.form-horizontal
+      /   .control-group
+      /     %label.control-label{:for => "inputEmail"} 调整岗位:
+      /     .controls
+      /       %select
+      /         %option 富仁名苑儿童中心
+      /         %option 朝阳儿童中心
+      /         %option 海淀儿童中心
+      /         %option 丰台儿童中心
+      /         %option 昌平儿童中心
+      /  

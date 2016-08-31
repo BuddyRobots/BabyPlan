@@ -14,7 +14,7 @@
           %input#appendedInputButton.span2{:type => "text", :placeholder => "输入姓名", :value => "#{@keyword}"}
           %button.btn#search-btn{:type => "button"}
     .manage-content
-      - if @users[:data].length == 0
+      - if @staffs[:data].length == 0
         .undiscover
           %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
           %span.message 抱歉！暂无查找信息
@@ -27,64 +27,28 @@
                 %th 工作人员
                 %th 儿童中心
                 %th 联系电话
-                %th 操作
-                %th 状态
+                %th 操&nbsp作
+                %th 状&nbsp态
             %tbody
-              - @users[:data].each do |u|
+              - @staffs[:data].each do |u|
                 %tr
                   %td= u[:name]
-                  %td= u[:age].to_s + " 岁"
-                  %td= u[:gender] == 0 ? "男" : "女"
-                  %td= u[:parent]
+                  %td= u[:center]
                   %td= u[:mobile]
-                  %td= u[:address]
                   %td
-                    = link_to "详情", "/staff/clients/#{u[:id]}"
+                    = link_to "详情", "/admin/staffs/#{u[:id]}"
+                  %td= u[:status]
 
         .select-page 
-          %span.totalitems= "共#{@users[:total_page]}页,总计#{@users[:total_number]}条"
+          %span.totalitems= "共#{@staffs[:total_page]}页,总计#{@staffs[:total_number]}条"
           %span.choice-page
             .pagination.pagination-small
               %ul
                 %li
-                  %a{:href => "/staff/clients?keyword=#{@keyword}&page=#{@users[:previous_page]}"} «
-                - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
+                  %a{:href => "/admin/staffs?keyword=#{@keyword}&page=#{@staffs[:previous_page]}"} «
+                - ( (@staffs[:previous_page] > 2 ? @staffs[:previous_page] - 2 : 1) .. (@staffs[:next_page] < @staffs[:total_page] - 2 ? @staffs[:next_page] + 2 : @staffs[:total_page]) ).to_a.each do |page|
                   %li
-                    %a{:href => "/staff/clients?keyword=#{@keyword}&page=#{page}"}= page
+                    %a{:href => "/admin/staffs?keyword=#{@keyword}&page=#{page}"}= page
                 %li
-                  %a{:href => "/staff/clients?keyword=#{@keyword}&page=#{@users[:next_page]}"} »
+                  %a{:href => "/admin/staffs?keyword=#{@keyword}&page=#{@staffs[:next_page]}"} »
 
-
-
-#kidsaddModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
-  .modalheader
-    %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", :src => "/assets/managecenter/close.png"}
-    %p.caption 添加儿童
-  .modal-body
-    .textbox#kid-name-box
-      %label.textarea 姓&nbsp名
-      %input.input-box.unclicked-box#kid-name{:type => "text"}
-    .textbox
-      %label.textarea 性&nbsp别
-      %select.input-box.unclicked-box#kid-gender
-        %option 男
-        %option 女
-    .textbox
-      %label.textarea 出生日期
-      %input.input-box.unclicked-box#datepicker{:type => "text"}     
-    .textbox
-      %label.textarea 家长姓名
-      %input.input-box.unclicked-box#kid-parent{:type => "text"}
-    .textbox#homeaddress
-      %label.textarea 家庭地址
-      %input.input-box.unclicked-box#kid-address{:type => "text"}
-    %p#mobile-notice 请核对手机号
-    .textbox#mobile
-      %label.textarea 手机号
-      %input.input-box.unclicked-box#kid-mobile{:type => "text"}
-    %p#verify-code-notice 验证码输入错误
-    .textbox
-      %label.textarea 验证码
-      %input.input-box.unclicked-box#kid-mobilecode{:type => "text"}
-      %button.input-box.unclicked#mobilecode{:href => "javascript:void(0);"} 获取验证码
-    %a#kid-add.button-disabled{:href => "javascript:void(0);"} 添&nbsp加

@@ -1,0 +1,80 @@
+@import "jquery-ui";
+
+input, label, span {
+	margin: 0;
+	padding: 0;
+}
+
+.content-area {
+	position:absolute;
+	right: 0;
+	left: 160px;
+	bottom: 0;
+	top: 60px;
+	background:#f7fcff;
+	box-shadow: -1px -1px 6px #9c9c9c inset;
+	padding: 20px;
+}
+
+.content-box {
+	position: relative;
+	box-shadow: 0 -1px 6px #9c9c9c inset;
+	background: white;  
+	height: 100%;
+}
+.manage-box {
+	height: 58px;
+	border-bottom: 1px solid #c8c8c8;
+	overflow: hidden;
+}
+.manage-content {
+	overflow: auto;
+	position: absolute;
+	top: 60px;
+	left: 0px;
+	bottom: 0px;
+	right: 0px;
+	padding-left: 20px;
+	padding-top: 20px;
+	font-size: 16px;
+	color: #969696;
+	p {
+		line-height: 30px;
+	}
+	span {
+		display: inline-block;
+		vertical-align: middle;
+	}
+	select {
+		margin: 0;
+		padding: 3px 6px 6px 6px;
+	}
+}
+.staffs-name {
+	float: left;
+	font-size: 16px;
+	color: #323232;
+	line-height: 59px;
+	margin-left: 20px;
+	span {
+		display: inline-block;
+		font-size: 12px;
+		color: red;
+		margin-left: 5px;
+	}
+}
+.unlock-btn {
+	float: right;
+	margin: 11.5px 20px 0 0;
+	width: 100px;
+	height: 34px;
+	padding: 0;
+	line-height: 32px;
+	color: white;
+	background: #f7873d;
+	border-radius: 6px;
+}
+.unlock-btn:hover {
+	background: #f7873d;
+	color: white;
+}

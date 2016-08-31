@@ -178,11 +178,16 @@ class User
   end
 
   def staff_info
+    status_hash = {
+      NEW: "新创建",
+      LOCKED: "锁定中",
+      NORMAL: "正常"
+    }
     {
       id: self.id.to_s,
       name: self.name,
-      center: self.staff_center.name,
-      status: self.status
+      center: self.staff_center.try(:name),
+      status: status_hash[self.status]
     }
   end
 end
