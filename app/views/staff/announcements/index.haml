@@ -74,6 +74,18 @@
           %a.desc-click{:href => "javascript:void(0);"} 
             详情
             %img.desc-img{:src => "/assets/managecenter/double-right.png"}
+          .select-page 
+            %span.totalitems= "共6页,总计12条"
+            %span.choice-page
+              .pagination.pagination-small
+                %ul
+                  %li
+                    %a{:href => "javascript:void(0);"} «
+                  / - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
+                  %li
+                    %a{:href => "javascript:void(0);"} 1
+                  %li
+                    %a{:href => "javascript:void(0);"} »
         #tab2.tab-pane
           .undiscover
             %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
