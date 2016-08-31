@@ -193,6 +193,13 @@
 	font-size: 16px;
 	color: #646464;
 	margin-top: -3px;
+	span {
+		display: inline-block;
+		margin-right: 15px;
+	}
+	img {
+		vertical-align: top;
+	}
 }
 .date {
 	font-size: 12px;

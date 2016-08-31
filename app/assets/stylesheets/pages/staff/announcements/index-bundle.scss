@@ -30,7 +30,7 @@ ul, li {
 	height: 58px;
 	border-bottom: 1px solid #c8c8c8;
 	overflow: hidden;
-	margin-bottom: 15px;
+	// margin-bottom: 15px;
 }
 .user-search-box {
 	position: absolute;
@@ -86,10 +86,12 @@ ul, li {
 	margin-left: 20px;
 }
 .tabbable {
-	margin: 0 20px 20px 20px;
-	height: 100%;
+	position: relative;
+	padding: 20px;
 	overflow: auto;
+	height: 600px;
 }
+	
 .nav-tabs {
 	margin-bottom: 0;
 	li {
@@ -98,8 +100,7 @@ ul, li {
 	}
 }
 .tab-pane {
-	overflow: auto;
-	// max-height: 600px;
+
 }
 .introduce {
 	border: 1px solid #c8c8c8;
@@ -178,7 +179,7 @@ ul, li {
 
 .select-page {
 	text-align: right;
-	margin: 10px 20px 7px 0;
+	margin: 10px 0 7px 0;
 }
 .totalitems {
 	font-size: 12px;
