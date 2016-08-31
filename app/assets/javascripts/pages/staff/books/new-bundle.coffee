@@ -52,7 +52,7 @@ $ ->
         if data.success
           location.href = "/staff/books/" + data.book_id
         else
-          if data.code == BOOOK_EXIST
+          if data.code == BOOK_EXIST
             $.page_notification("该书号图书已经存在")
       )
 

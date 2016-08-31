@@ -1,7 +1,8 @@
 - content_for :head do
   = javascript_include_tag "pages/staff/announcements/show-bundle"
   = stylesheet_link_tag "pages/staff/announcements/show-bundle", :media => "all"
-
+  :javascript
+    window.aid = "#{@announcement.id.to_s}"
 
 
 .content-area
@@ -10,9 +11,14 @@
     .btn.edit-btn{:type => "button"} 
       %img.edit-img{:src => "/assets/managecenter/edit.png"}
       编辑
-    .btn.unshelve-btn{:type => "button"} 
-      %img.unshelve{:src => "/assets/managecenter/unshelve.png"}
-      下架
+    - if @announcement.is_published
+      .btn#unshelve-btn.published{:type => "button"} 
+        %img.unshelve{:src => "/assets/managecenter/unshelve.png"}
+        %span 隐藏
+    - else
+      .btn#unshelve-btn.unpublished{:type => "button"} 
+        %img.unshelve{:src => "/assets/managecenter/shelve.png"}
+        %span 公布
 
     / 点击edit-btn后动作
     .btn.end-btn{:type => "button"} 
@@ -24,19 +30,20 @@
     .tabbable
       %ul.nav.nav-tabs
         %li.active
-          %a{"data-toggle" => "tab", :href => "#tab1"} 本区公告
+          %a{"data-toggle" => "tab", :href => "#tab1"}= @announcement.center.present? ? "本区公告" : "全局公告"
 
     .display-box
       .display-area
         %p.caption-header
-          %span.show-caption 中国少年科学院优秀青少年赴美国航天营
-          %a.declared{:href => "javascript:void(0);"} 公布
+          %span.show-caption= @announcement.title
+          %a#publish-status{class: @announcement.is_published ? "declared" : "undeclared", :href => "javascript:void(0);"}= @announcement.is_published ? "已公布" : "未公布"
         .display-content
-          %img.display-img{:src => "/assets/noticedescription/notice002.jpg"}
-          %p.desc 为更好地贯彻落实李克强总理在2014年7月2日主持召开国务院常务会议时提出的“要合理安排学校寒、暑假等假期，组织好夏令营、冬令营、研学旅行”的讲话精神，促进我国优秀青少年和国际青少年的交流，激发广大青少年探索科学奥秘的兴趣，中国少年科学院、中国青少年发展服务中心决定，于2016年暑期继续赴美国举办航天主题交流活动为更好地贯彻落实李克强总理在2014年7月2日主持召开国务院常务会议时提出的“要合理安排学校寒、暑假等假期，组织好夏令营、冬令营、研学旅行”的讲话精神，促进我国优秀青少年和国际青少年的交流，激发广大青少年探索科学奥秘的兴趣，中国少年科学院、中国青少年发展服务中心决定，于2016年暑期继续赴美国举办航天主题交流活动
+          = @announcement.content.html_safe
+          / %img.display-img{:src => "/assets/noticedescription/notice002.jpg"}
+          / %p.desc 为更好地贯彻落实李克强总理在2014年7月2日主持召开国务院常务会议时提出的“要合理安排学校寒、暑假等假期，组织好夏令营、冬令营、研学旅行”的讲话精神，促进我国优秀青少年和国际青少年的交流，激发广大青少年探索科学奥秘的兴趣，中国少年科学院、中国青少年发展服务中心决定，于2016年暑期继续赴美国举办航天主题交流活动为更好地贯彻落实李克强总理在2014年7月2日主持召开国务院常务会议时提出的“要合理安排学校寒、暑假等假期，组织好夏令营、冬令营、研学旅行”的讲话精神，促进我国优秀青少年和国际青少年的交流，激发广大青少年探索科学奥秘的兴趣，中国少年科学院、中国青少年发展服务中心决定，于2016年暑期继续赴美国举办航天主题交流活动
 
-          %img.display-img{:src => "/assets/noticedescription/notice002.jpg"}
-          %p.desc 为更好地贯彻落实李克强总理在2014年7月2日主持召开国务院常务会议时提出的“要合理安排学校寒、暑假等假期，组织好夏令营、冬令营、研学旅行”的讲话精神，促进我国优秀青少年和国际青少年的交流，激发广大青少年探索科学奥秘的兴趣，中国少年科学院、中国青少年发展服务中心决定，于2016年暑期继续赴美国举办航天主题交流活动为更好地贯彻落实李克强总理在2014年7月2日主持召开国务院常务会议时提出的“要合理安排学校寒、暑假等假期，组织好夏令营、冬令营、研学旅行”的讲话精神，促进我国优秀青少年和国际青少年的交流，激发广大青少年探索科学奥秘的兴趣，中国少年科学院、中国青少年发展服务中心决定，于2016年暑期继续赴美国举办航天主题交流活动
+          / %img.display-img{:src => "/assets/noticedescription/notice002.jpg"}
+          / %p.desc 为更好地贯彻落实李克强总理在2014年7月2日主持召开国务院常务会议时提出的“要合理安排学校寒、暑假等假期，组织好夏令营、冬令营、研学旅行”的讲话精神，促进我国优秀青少年和国际青少年的交流，激发广大青少年探索科学奥秘的兴趣，中国少年科学院、中国青少年发展服务中心决定，于2016年暑期继续赴美国举办航天主题交流活动为更好地贯彻落实李克强总理在2014年7月2日主持召开国务院常务会议时提出的“要合理安排学校寒、暑假等假期，组织好夏令营、冬令营、研学旅行”的讲话精神，促进我国优秀青少年和国际青少年的交流，激发广大青少年探索科学奥秘的兴趣，中国少年科学院、中国青少年发展服务中心决定，于2016年暑期继续赴美国举办航天主题交流活动
 
     / 点击edit-btn后display-box隐藏，edit-area显示
     .edit-area

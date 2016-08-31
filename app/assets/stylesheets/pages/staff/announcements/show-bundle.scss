@@ -34,7 +34,7 @@
 	background: #f7873d;
 	color: white;
 }
-.unshelve-btn, .end-btn, .declare-btn {
+#unshelve-btn, .end-btn, .declare-btn {
 	@extend .edit-btn;
 }
 .end-btn, .declare-btn {
