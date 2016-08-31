@@ -1,0 +1,6 @@
+- content_for :head do
+  = javascript_include_tag "pages/admin/staffs/index-bundle"
+  = stylesheet_link_tag "pages/admin/staffs/index-bundle", :media => "all"
+  :javascript
+    window.keyword = "#{@keyword}"
+

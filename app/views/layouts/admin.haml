@@ -1,0 +1,60 @@
+- content_for :app_head do
+  = stylesheet_link_tag "layouts/admin-layout", :media => "all"
+  = javascript_include_tag "layouts/admin-layout"
+  = yield :head
+  :javascript
+    window.code = "#{@code}"
+
+
+
+- content_for :app_content do
+  .container
+    .header
+      %a{:href => "#"}
+        %img.logo{:src => "/assets/managecenter/logo.png"}
+      %p.leftword 北京市社区儿童中心
+
+
+      /登录注册页面的layout
+      - if @current_user.present? && ( @current_user.is_staff || @current_user.is_admin )
+        %ul.kids-manage
+          %li.manage#manage-photo
+            %img.manager{:src => "/assets/managecenter/headphoto.png"}
+            .btn-group
+              %a.btn.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+                = @current_user.name
+                %span.caret
+              %ul.dropdown-menu
+                %li 
+                  %a{:href => "javascript:void(0);"} 相关信息
+                %li 
+                  %a{:href => "javascript:void(0);"} 修改密码
+          %li.manage
+            %a{:href => "javascript:void(0);"}
+              %img.about-icon{:src => "/assets/managecenter/about.png"}
+          %li.manage
+            %a{:href => signout_admin_sessions_path}
+              %img.turnoff-icon{:src => "/assets/managecenter/turnoff.png"}
+      - else
+        %p.rightword 您好欢迎访问社区儿童中心管理系统！
+        %a.sign-in{:href => "#signinModal", "data-toggle" => "modal"} 登陆
+        
+      
+    
+    .main
+      .sidebar
+        %ul
+          %li
+            %a{:href => "/admin/centers"} 儿童中心管理
+          %li 
+            %a{:href => "/admin/staffs"} 工作人员管理
+          %li 
+            %a{:href => "/admin/courses"} 课程管理
+          %li 
+            %a{:href => "/admin/books"} 绘本管理
+          %li 
+            %a{:href => "/admin/announcements"} 公告信息管理
+
+
+    = yield
+= render :template => 'layouts/application'
