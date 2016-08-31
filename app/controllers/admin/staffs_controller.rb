@@ -1,7 +1,9 @@
 class Admin::StaffsController < Admin::ApplicationController
 
-  # show the index page
   def index
+  end
+
+  def show
   end
 
 end

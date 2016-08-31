@@ -32,6 +32,14 @@ Rails.application.routes.draw do
     end
     resources :staffs do
     end
+    resources :announcements do
+    end
+    resources :centers do
+    end
+    resources :courses do
+    end
+    resources :books do
+    end
   end
 
   namespace :staff do
