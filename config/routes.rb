@@ -25,6 +25,13 @@ Rails.application.routes.draw do
   
 
   namespace :admin do
+    resources :sessions do
+      collection do
+        get :signout
+      end
+    end
+    resources :staffs do
+    end
   end
 
   namespace :staff do
