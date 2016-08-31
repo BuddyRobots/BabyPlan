@@ -13,20 +13,21 @@
     / .btn.declare-btn{:type => "button"} 
     /   %img.declare{:src => "/assets/managecenter/shelve.png"}
     /   公布
-    .tabbable
-      %ul.nav.nav-tabs
-        %li.active
-          %a{"data-toggle" => "tab", :href => "#tab1"} 本区公告
+    .manage-content
+      .tabbable
+        %ul.nav.nav-tabs
+          %li.active
+            %a{"data-toggle" => "tab", :href => "#tab1"} 本区公告
 
-    .edit-area
-      .caption-div
-        %form.form-inline
-          %input#input-caption{:placeholder => "请输入标题", :type => "text"}
-          %label.checkbox
-            %input#publish-cb{:type => "checkbox"}
-            公布
+      .edit-area
+        .caption-div
+          %form.form-inline
+            %input#input-caption{:placeholder => "请输入标题", :type => "text"}
+            %label.checkbox
+              %input#publish-cb{:type => "checkbox"}
+              公布
 
-      .wangedit-area
-        #edit-box
+        .wangedit-area
+          #edit-box
       
       

@@ -6,7 +6,7 @@
 	max-height: 600px;
 }
 
-.content {
+.content-area {
 	position:absolute;
 	right: 0;
 	left: 160px;
@@ -14,18 +14,26 @@
 	top: 60px;
 	background:#f7fcff;
 	box-shadow: -1px -1px 6px #9c9c9c inset;
+	padding: 20px;
 }
-
 .content-box {
 	position: relative;
-	margin: 20px 20px auto 20px;
 	box-shadow: 0 -1px 6px #9c9c9c inset;
 	background: white;  
+	height: 100%;
 }
 .manage-box {
 	height: 58px;
 	border-bottom: 1px solid #c8c8c8;
 	overflow: hidden;
+}
+.manage-content {
+	overflow: auto;
+	position: absolute;
+	top: 60px;
+	left: 0px;
+	bottom: 0px;
+	right: 0px;
 }
 .user-search-box {
 	position: absolute;

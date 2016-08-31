@@ -4,7 +4,7 @@
   :javascript
     window.keyword = "#{@keyword}"
 
-.content
+.content-area
   /clients-index
 
   .content-box
@@ -16,48 +16,48 @@
       .btn.kidadd-btn{:type => "button", :href => "#kidsaddModal", "data-toggle" => "modal"} 
         %img.add-edit{:src => "/assets/managecenter/add.png"}
         添加儿童
-    
-    - if @users[:data].length == 0
-      .undiscover
-        %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
-        %span.message 抱歉！暂无查找信息
-    - else
-      .table-box
-        %table.table.table-bordered.user-table
-          %caption
-          %thead
-            %tr
-              %th 姓&nbsp名
-              %th 年&nbsp龄
-              %th 性&nbsp别
-              %th 家&nbsp长
-              %th 手机号
-              %th 家庭住址
-              %th 操&nbsp作
-          %tbody
-            - @users[:data].each do |u|
+    .manage-content
+      - if @users[:data].length == 0
+        .undiscover
+          %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
+          %span.message 抱歉！暂无查找信息
+      - else
+        .table-box
+          %table.table.table-bordered.user-table
+            %caption
+            %thead
               %tr
-                %td= u[:name]
-                %td= u[:age].to_s + " 岁"
-                %td= u[:gender] == 0 ? "男" : "女"
-                %td= u[:parent]
-                %td= u[:mobile]
-                %td= u[:address]
-                %td
-                  = link_to "详情", "/staff/clients/#{u[:id]}"
+                %th 姓&nbsp名
+                %th 年&nbsp龄
+                %th 性&nbsp别
+                %th 家&nbsp长
+                %th 手机号
+                %th 家庭住址
+                %th 操&nbsp作
+            %tbody
+              - @users[:data].each do |u|
+                %tr
+                  %td= u[:name]
+                  %td= u[:age].to_s + " 岁"
+                  %td= u[:gender] == 0 ? "男" : "女"
+                  %td= u[:parent]
+                  %td= u[:mobile]
+                  %td= u[:address]
+                  %td
+                    = link_to "详情", "/staff/clients/#{u[:id]}"
 
-      .select-page 
-        %span.totalitems= "共#{@users[:total_page]}页,总计#{@users[:total_number]}条"
-        %span.choice-page
-          .pagination.pagination-small
-            %ul
-              %li
-                %a{:href => "/staff/clients?keyword=#{@keyword}&page=#{@users[:previous_page]}"} «
-              - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
+        .select-page 
+          %span.totalitems= "共#{@users[:total_page]}页,总计#{@users[:total_number]}条"
+          %span.choice-page
+            .pagination.pagination-small
+              %ul
                 %li
-                  %a{:href => "/staff/clients?keyword=#{@keyword}&page=#{page}"}= page
-              %li
-                %a{:href => "/staff/clients?keyword=#{@keyword}&page=#{@users[:next_page]}"} »
+                  %a{:href => "/staff/clients?keyword=#{@keyword}&page=#{@users[:previous_page]}"} «
+                - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
+                  %li
+                    %a{:href => "/staff/clients?keyword=#{@keyword}&page=#{page}"}= page
+                %li
+                  %a{:href => "/staff/clients?keyword=#{@keyword}&page=#{@users[:next_page]}"} »
 
 
 

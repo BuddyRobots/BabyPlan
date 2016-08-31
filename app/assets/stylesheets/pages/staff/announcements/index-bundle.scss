@@ -4,7 +4,7 @@ ul, li {
 	padding: 0;
 	margin: 0;
 }
-.content {
+.content-area {
 	position:absolute;
 	right: 0;
 	left: 160px;
@@ -15,22 +15,23 @@ ul, li {
 	padding: 20px;
 }
 .content-box {
-	// position: absolute;
-	// bottom: 0;
-	// right: 0;
-	// top: 0;
-	// left: 0;
-	// margin: 20px;
-	height: 100%;
+	position: relative;
 	box-shadow: 0 -1px 6px #9c9c9c inset;
-	background: white; 
+	background: white;  
+	height: 100%;
 }
 .manage-box {
-	position: relative;
 	height: 58px;
 	border-bottom: 1px solid #c8c8c8;
 	overflow: hidden;
-	// margin-bottom: 15px;
+}
+.manage-content {
+	overflow: auto;
+	position: absolute;
+	top: 60px;
+	left: 0px;
+	bottom: 0px;
+	right: 0px;
 }
 .user-search-box {
 	position: absolute;
