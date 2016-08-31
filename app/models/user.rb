@@ -23,7 +23,11 @@ class User
   field :auth_key, type: String
 
   # for staff
+  NEW = 1
+  NORMAL = 2
+  LOCKED = 4
   field :center, type: String
+  field :status, type: Integer
 
   # for client
   field :gender, type: Integer  # 0 for male, 1 for female
@@ -77,7 +81,7 @@ class User
   end
 
   def self.signin_staff(mobile, password)
-    user = User.staff.where(mobile: mobile).first
+    user = User.staff.where(mobile: mobile).first || User.admin.where(mobile: mobile).first
     return ErrCode::USER_NOT_EXIST if user.nil?
     return ErrCode::USER_NOT_VERIFIED if user.mobile_verified == false
     return ErrCode::WRONG_PASSWORD if Encryption.encrypt_password(password) != user.password
@@ -103,11 +107,17 @@ class User
     Encryption.encrypt_auth_key(info)
   end
 
-  def verify_staff(name, center, password, verify_code)
+  def verify_staff(name, center_name, password, verify_code)
     if mobile_verify_code != verify_code
       return ErrCode::WRONG_VERIFY_CODE
     end
-    self.update_attributes(name: name, mobile_verified: true, center: center, password: Encryption.encrypt_password(password))
+    center = Center.where(name: center_name).first
+    if center.nil?
+      return ErrCode::CENTER_NOT_EXIST
+    end
+    self.update_attributes(name: name, mobile_verified: true, status: NEW, password: Encryption.encrypt_password(password))
+    self.staff_center = center
+    self.save
     nil
   end
 
@@ -164,6 +174,15 @@ class User
       parent: self.parent,
       mobile: self.mobile,
       address: self.address
+    }
+  end
+
+  def staff_info
+    {
+      id: self.id.to_s,
+      name: self.name,
+      center: self.staff_center.name,
+      status: self.status
     }
   end
 end
