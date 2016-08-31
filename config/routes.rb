@@ -22,7 +22,9 @@ Rails.application.routes.draw do
   get 'welcome/editdemo'
 
   get 'welcome/managecenter'
-  
+
+  resources :centers do
+  end
 
   namespace :admin do
     resources :sessions do

@@ -1,5 +1,11 @@
 
 $ ->
+
+  $("#signup-address").autocomplete(
+    source: "/centers"
+    appendTo: "#signupModal"
+  )
+
   # forgotpassword
   $(".forget-password").click ->
     $("#signinModal").modal('hide')
@@ -147,7 +153,10 @@ $ ->
           $("#signupModal").modal('hide')
           $("#signinModal").modal('show')
         else
-          $("#verify-code-notice").text("验证码错误").css("visibility","visible")
+          if data.code == WRONG_VERIFY_CODE
+            $("#verify-code-notice").text("验证码错误").css("visibility","visible")
+          if data.code == CENTER_NOT_EXIST
+            $.page_notification("儿童中心不存在")
       )
   $("#signup").click ->
     signup()
