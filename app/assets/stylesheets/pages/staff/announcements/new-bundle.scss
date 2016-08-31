@@ -9,23 +9,28 @@
 	top: 60px;
 	background:#f7fcff;
 	box-shadow: -1px -1px 6px #9c9c9c inset;
+	padding: 20px;
 }
 .content-box {
 	position: relative;
-	margin: 20px 20px auto 20px;
 	box-shadow: 0 -1px 6px #9c9c9c inset;
-	background: white; 
-	padding: 20px 0;
+	background: white;  
+	height: 100%;
+	overflow: auto;
 }
-.btn {
-	margin: 0;
-	padding: 0;
+.manage-content {
+	position: absolute;
+	top: 20px;
+	left: 0px;
+	bottom: 0px;
+	right: 0px;
 }
 .end-btn {
 	float: right;
-	margin: -9px 20px 0 0;
+	margin: 11px 20px 0 0;
 	width: 100px;
 	height: 34px;
+	padding: 0;
 	line-height: 32px;
 	color: white;
 	background: #f7873d;

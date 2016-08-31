@@ -5,7 +5,7 @@
     window.keyword = "#{@keyword}"
 
 
-.content
+.content-area
   /courses-index
   .content-box
     .manage-box
@@ -22,111 +22,124 @@
     /     %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
     /     %span.message 抱歉！暂无查找信息
     / - else
-    .table-box
-      %table.table.table-bordered.user-table
-        %caption
-        %thead
-          %tr
-            %th 课&nbsp程
-            %th 简&nbsp介
-            %th 开课时间
-            %th 主讲人
-            %th 地&nbsp址
-            %th 费&nbsp用
-            %th 注意事项
-            %th 图&nbsp片
-            %th{:colspan => "2"} 操&nbsp作
-        %tbody
-          %tr
-            %td 社会科学
-            %td 社会与科技的结合
-            %td 2016-8-30 9:00
-            %td 王健林
-            %td 夫人名苑活动室
-            %td 700\节
-            %td 不能迟到，带上书
-            %td 
-            %td 
-              %a.details{:href => "javascript:void(0);"} 详情
-            %td
-              %a.set-available.link-available{:href => "javascript:void(0);"} 下架
-    .select-page 
-      %span.totalitems= "共6页,总计12条"
-      %span.choice-page
-        .pagination.pagination-small
-          %ul
-            %li
-              %a{:href => "javascript:void(0);"} «
-            / - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
-            %li
-              %a{:href => "javascript:void(0);"} 1
-            %li
-              %a{:href => "javascript:void(0);"} »
+    .manage-content
+      .table-box
+        %table.table.table-bordered.user-table
+          %caption
+          %thead
+            %tr
+              %th 课&nbsp程
+              %th 简&nbsp介
+              %th 开课时间
+              %th 主讲人
+              %th 地&nbsp址
+              %th 费&nbsp用
+              %th 注意事项
+              %th 图&nbsp片
+              %th{:colspan => "2"} 操&nbsp作
+          %tbody
+            %tr
+              %td 社会科学
+              %td 社会与科技的结合
+              %td 2016-8-30 9:00
+              %td 王健林
+              %td 夫人名苑活动室
+              %td 700\节
+              %td 不能迟到，带上书
+              %td 
+              %td 
+                %a.details{:href => "javascript:void(0);"} 详情
+              %td
+                %a.set-available.link-available{:href => "javascript:void(0);"} 下架
+      .select-page 
+        %span.totalitems= "共6页,总计12条"
+        %span.choice-page
+          .pagination.pagination-small
+            %ul
+              %li
+                %a{:href => "javascript:void(0);"} «
+              / - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
+              %li
+                %a{:href => "javascript:void(0);"} 1
+              %li
+                %a{:href => "javascript:void(0);"} »
 
-          / %tbody
-          /   - @courses[:data].each do |b|
-          /     %tr{class: "book-record #{ b[:available] ? "available" : "unavailable" }", "data-id" => b[:id]}
-          /       %td= b[:name]
-          /       %td= b[:type]
-          /       %td= b[:stock].to_s + "本"
-          /       %td
-          /       %td= b[:author]
-          /       %td= b[:isbn]
-          /       %td
-          /         %a.details{:href => "/staff/courses/#{b[:id]}"} 详情
-          /       %td
-          /         - if b[:available]
-          /           %a.set-available.link-available{:href => "javascript:void(0);"} 下架
-          /         - else
-          /           %a.set-available.link-unavailable{:href => "javascript:void(0);"} 上架
+            / %tbody
+            /   - @courses[:data].each do |b|
+            /     %tr{class: "book-record #{ b[:available] ? "available" : "unavailable" }", "data-id" => b[:id]}
+            /       %td= b[:name]
+            /       %td= b[:type]
+            /       %td= b[:stock].to_s + "本"
+            /       %td
+            /       %td= b[:author]
+            /       %td= b[:isbn]
+            /       %td
+            /         %a.details{:href => "/staff/courses/#{b[:id]}"} 详情
+            /       %td
+            /         - if b[:available]
+            /           %a.set-available.link-available{:href => "javascript:void(0);"} 下架
+            /         - else
+            /           %a.set-available.link-unavailable{:href => "javascript:void(0);"} 上架
 
-      / .select-page 
-      /   %span.totalitems= "共#{@courses[:total_page]}页,总计#{@courses[:total_number]}条"
-      /   %span.choice-page
-      /     .pagination.pagination-small
-      /       %ul
-      /         %li
-      /           %a{:href => "/staff/courses?keyword=#{@keyword}&page=#{@courses[:previous_page]}"} «
-      /         - ( (@courses[:previous_page] > 2 ? @courses[:previous_page] - 2 : 1) .. (@courses[:next_page] < @courses[:total_page] - 2 ? @courses[:next_page] + 2 : @courses[:total_page]) ).to_a.each do |page|
-      /           %li
-      /             %a{:href => "/staff/courses?keyword=#{@keyword}&page=#{page}"}= page
-      /         %li
-      /           %a{:href => "/staff/courses?keyword=#{@keyword}&page=#{@courses[:next_page]}"} »
+        / .select-page 
+        /   %span.totalitems= "共#{@courses[:total_page]}页,总计#{@courses[:total_number]}条"
+        /   %span.choice-page
+        /     .pagination.pagination-small
+        /       %ul
+        /         %li
+        /           %a{:href => "/staff/courses?keyword=#{@keyword}&page=#{@courses[:previous_page]}"} «
+        /         - ( (@courses[:previous_page] > 2 ? @courses[:previous_page] - 2 : 1) .. (@courses[:next_page] < @courses[:total_page] - 2 ? @courses[:next_page] + 2 : @courses[:total_page]) ).to_a.each do |page|
+        /           %li
+        /             %a{:href => "/staff/courses?keyword=#{@keyword}&page=#{page}"}= page
+        /         %li
+        /           %a{:href => "/staff/courses?keyword=#{@keyword}&page=#{@courses[:next_page]}"} »
 
-    .user-review-box
-      .user-checkbox
-        %span.user-review 用户评价
-        %label.checkbox.inline
-          %input#inlineCheckbox1{:type => "checkbox", :value => "option1"} 未公开
-        %label.checkbox.inline
-          %input#inlineCheckbox2{:type => "checkbox", :value => "option2"} 已公开
-      .book-description
-        .user-item.clearfix
-          %img.book-img{:src => "/assets/managecenter/user-img.png"}
-          %p.user-name 大鱼海棠
-          %p.date 2017-6-23 13:20
-          %p.user-review-content 这本书看了感觉很好，儿童容易理解。
-          %button.btn#open-btn{:type => "button"} 公开
-      .book-description
-        .user-item.clearfix
-          %img.book-img{:src => "/assets/managecenter/user-img.png"}
-          %p.user-name 大鱼海棠
-          %p.date 2017-6-23 13:20
-          %p.user-review-content 这本书看了感觉很好，儿童容易理解。
-          %button.btn#open-btn{:type => "button"} 公开
+      .user-review-box
+        .user-checkbox
+          %span.user-review 用户评价
+          %label.checkbox.inline
+            %input#inlineCheckbox1{:type => "checkbox", :value => "option1"} 未公开
+          %label.checkbox.inline
+            %input#inlineCheckbox2{:type => "checkbox", :value => "option2"} 已公开
+        .book-description
+          .user-item.clearfix
+            %img.book-img{:src => "/assets/managecenter/user-img.png"}
+            %p.user-name
+              %span 大鱼海棠
+              %img.star-img{:src => "/assets/managecenter/star.png"}
+              %img.star-img{:src => "/assets/managecenter/star.png"}
+              %img.star-img{:src => "/assets/managecenter/star.png"}
+              %img.star-img{:src => "/assets/managecenter/star.png"}
+              %img.star-img{:src => "/assets/managecenter/star.png"}
+            %p.date 2017-6-23 13:20
+            %p.user-review-content 这本书看了感觉很好，儿童容易理解。
+            %button.btn#open-btn{:type => "button"} 公开
+        .book-description
+          .user-item.clearfix
+            %img.book-img{:src => "/assets/managecenter/user-img.png"}
+            %p.user-name
+              %span 大鱼海棠
+              %img.star-img{:src => "/assets/managecenter/star.png"}
+              %img.star-img{:src => "/assets/managecenter/star.png"}
+              %img.star-img{:src => "/assets/managecenter/star.png"}
+              %img.star-img{:src => "/assets/managecenter/star.png"}
+              %img.star-img{:src => "/assets/managecenter/star.png"}
+            %p.date 2017-6-23 13:20
+            %p.user-review-content 这本书看了感觉很好，儿童容易理解。
+            %button.btn#open-btn{:type => "button"} 公开
 
-    .select-page 
-      %span.totalitems= "共6页,总计12条"
-      %span.choice-page
-        .pagination.pagination-small
-          %ul
-            %li
-              %a{:href => "javascript:void(0);"} «
-            / - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
-            %li
-              %a{:href => "javascript:void(0);"} 1
-            %li
-              %a{:href => "javascript:void(0);"} »
+      .select-page 
+        %span.totalitems= "共6页,总计12条"
+        %span.choice-page
+          .pagination.pagination-small
+            %ul
+              %li
+                %a{:href => "javascript:void(0);"} «
+              / - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
+              %li
+                %a{:href => "javascript:void(0);"} 1
+              %li
+                %a{:href => "javascript:void(0);"} »
 
 
 
