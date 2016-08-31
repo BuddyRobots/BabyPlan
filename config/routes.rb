@@ -56,6 +56,9 @@ Rails.application.routes.draw do
     end
 
     resources :announcements do
+      member do
+        post :set_publish
+      end
     end
   end
 
