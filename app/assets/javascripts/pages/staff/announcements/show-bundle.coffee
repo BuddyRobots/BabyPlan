@@ -17,22 +17,6 @@ $ ->
 
   editor.create()
 
-  $(".unpublish").click ->
-    $.postJSON(
-      '/staff/announcements' + window.aid + "/set_publish",
-      {
-        is_published: false
-      },
-      (data) ->
-        console.log data
-        if data.success
-          $(".unshelve-btn").removeClass("unpublish").addClass("publish")
-        else
-          if data.code == ANNOUNCEMENT_NOT_EXIST
-            $.page_notification("公告不存在")
-      )
-
-
   $("#unshelve-btn").click ->
     current_state = "unpublished"
     if $(this).hasClass("published")
@@ -61,22 +45,44 @@ $ ->
             $("#publish-status").text("已公布").addClass("declared").removeClass("undeclared")
       )
 
-# edit-btn press-down
+  # edit-btn press-down
   $(".edit-btn").click ->
     $(".edit-btn").toggle()
-    $(".unshelve-btn").toggle()
     $(".end-btn").toggle()
-    $(".declare-btn").toggle()
     $(".display-box").toggle()
     $(".edit-area").toggle()
+
+    $("#unshelve-btn").attr("disabled", true)
     
-    $("#input-caption").val($(".caption").text())
+    $("#input-caption").val($("#show-caption").text())
     $("#edit-box").html($(".display-content").html())
 
-# end-btn press-down   未完成
   $(".end-btn").click ->
-    location.href = "/staff/announcements/show"
-    $(".unshelve-btn").toggle()
-    $(".declare-btn").toggle()
 
+    title = $("#input-caption").val()
+    content = editor.$txt.html()
 
+    $.putJSON(
+      '/staff/announcements/' + window.aid,
+      {
+        announcement: {
+          title: title
+          content: content
+        }
+      },
+      (data) ->
+        console.log data
+        if data.success
+          $(".edit-btn").toggle()
+          $(".end-btn").toggle()
+          $(".display-box").toggle()
+          $(".edit-area").toggle()
+
+          $("#unshelve-btn").attr("disabled", false)
+
+          $("#show-caption").text($("#input-caption").val())
+          console.log content
+          $(".display-content").html(content)
+        else
+          $.page_notification "服务器出错，请稍后重试"
+    )

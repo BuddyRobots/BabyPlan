@@ -1,6 +1,7 @@
 class Staff::AnnouncementsController < Staff::ApplicationController
 
   def index
+    @keyword = params[:keyword]
   end
 
   def create
@@ -26,5 +27,14 @@ class Staff::AnnouncementsController < Staff::ApplicationController
   end
 
   def new
+  end
+
+  def update
+    @announcement = current_user.staff_center.announcements.where(id: params[:id]).first
+    if @announcement.nil?
+      render json: retval_wrapper(ErrCode::ANNOUNCEMENT_NOT_EXIST) and return
+    end
+    retval = @announcement.update_announcement(params[:announcement])
+    render json: retval_wrapper(retval) and return
   end
 end

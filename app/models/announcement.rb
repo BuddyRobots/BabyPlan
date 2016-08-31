@@ -27,4 +27,16 @@ class Announcement
 
     { announcement_id: announcement.id.to_s }
   end
+
+  def update_announcement(announcement_info)
+    html = Nokogiri::HTML(announcement_info[:content])
+    info = {
+      title: announcement_info[:title],
+      content: announcement_info[:content],
+      plain_text: html.text,
+      image_path: html.css("img").blank? ? "" : html.css("img")[0].attr("src")
+    }
+    self.update_attributes(info)
+    nil
+  end
 end
