@@ -38,6 +38,9 @@ Rails.application.routes.draw do
       end
     end
 
+    resources :courses do
+    end
+
     resources :books do
       member do
         post :set_available

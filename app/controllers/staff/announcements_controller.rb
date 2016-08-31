@@ -4,6 +4,7 @@ class Staff::AnnouncementsController < Staff::ApplicationController
   end
 
   def create
+  	
   end
 
   def show
