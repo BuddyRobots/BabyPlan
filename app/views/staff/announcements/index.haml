@@ -3,10 +3,9 @@
   = stylesheet_link_tag "pages/staff/announcements/index-bundle", :media => "all"
   :javascript
     window.keyword = "#{@keyword}"
-
+    window.profile = "#{@profile}"
 
 .content
-  /announcements-index
   .content-box
     .manage-box
       .user-search-box
@@ -26,70 +25,64 @@
 
       .tab-content
         #tab1.tab-pane.active
-          .introduce
-            %img.visit{:src => "/assets/visit.png"}
-            %p.caption-header
-              %span.caption 中国少年科学院优秀青少年赴美国航天营
-              %span#time-flag 2016-8-23 15:33
-              %a.undeclared{:href => "javascript:void(0);"} 未公布
-            .desc
-              %p 为更好地贯彻落实李克强总理在2014年7月2日主持召开国务院常务会议时提出的“要合理安排学校寒、暑假等假期，组织好夏令营、冬令营、研学旅行”的讲话精神，促进我国优秀青少年和国际青少年的交流，激发广大青少年探索科学奥秘的兴趣，中国少年科学院、中国青少年发展服务中心决定，于2016年暑期继续赴美国举办航天主题交流活动
-              %p 为更好地贯彻落实李克强总理在2014年7月2日主持召开国务院常务会议时提出的“要合理安排学校寒、暑假等假期，组织好夏令营、冬令营、研学旅行”的讲话精神。为更好地贯彻落实李克强总理在2014年7月2日主持召开国务院常务会议时提出的“要合理安排学校寒、暑假等假期，组织好夏令营、冬令营、研学旅行”的讲话精神，促进我国优秀青少年和国际青少年的交流，激发广大青少年探索科学奥秘的兴趣，中国少年科学院、中国青少年发展服务中心决定，于2016年暑期继续赴美国举办航天主题交流活动为更好地贯彻落实李克强总理在2014年7月2日主持召开国务院常务会议时提出的“要合理安排学校寒、暑假等假期，组织好夏令营、冬令营、研学旅行”的讲话精神，促进我国优秀青少年和国际青少年的交流，激发广大青少年探索科学奥秘的兴趣，中国少年科学院、中国青少年发展服务中心决定，于2016年暑期继续赴美国举办航天主题交流活动
-          %a.desc-click{:href => "javascript:void(0);"} 
-            详情
-            %img.desc-img{:src => "/assets/managecenter/double-right.png"}
-          .introduce
-            %img.visit{:src => "/assets/visit.png"}
-            %p.caption-header
-              %span.caption 中国少年科学院优秀青少年赴美国航天营
-              %span#time-flag 2016-8-23 15:33
-              %a.declared{:href => "javascript:void(0);"} 公布
-            .desc
-              %p 为更好地贯彻落实李克强总理在2014年7月2日主持召开国务院常务会议时提出的“要合理安排学校寒、暑假等假期，组织好夏令营、冬令营、研学旅行”的讲话精神，促进我国优秀青少年和国际青少年的交流，激发广大青少年探索科学奥秘的兴趣，中国少年科学院、中国青少年发展服务中心决定，于2016年暑期继续赴美国举办航天主题交流活动
-              %p 为更好地贯彻落实李克强总理在2014年7月2日主持召开国务院常务会议时提出的“要合理安排学校寒、暑假等假期，组织好夏令营、冬令营、研学旅行”的讲话精神。
-          %a.desc-click{:href => "javascript:void(0);"} 
-            详情
-            %img.desc-img{:src => "/assets/managecenter/double-right.png"}
-          .introduce
-            %img.visit{:src => "/assets/visit.png"}
-            %p.caption-header
-              %span.caption 中国少年科学院优秀青少年赴美国航天营
-              %span#time-flag 2016-8-23 15:33
-              %a.declared{:href => "javascript:void(0);"} 公布
-            .desc
-              %p 为更好地贯彻落实李克强总理在2014年7月2日主持召开国务院常务会议时提出的“要合理安排学校寒、暑假等假期，组织好夏令营、冬令营、研学旅行”的讲话精神，促进我国优秀青少年和国际青少年的交流，激发广大青少年探索科学奥秘的兴趣，中国少年科学院、中国青少年发展服务中心决定，于2016年暑期继续赴美国举办航天主题交流活动
-              %p 为更好地贯彻落实李克强总理在2014年7月2日主持召开国务院常务会议时提出的“要合理安排学校寒、暑假等假期，组织好夏令营、冬令营、研学旅行”的讲话精神。
-          %a.desc-click{:href => "javascript:void(0);"} 
-            详情
-            %img.desc-img{:src => "/assets/managecenter/double-right.png"}
-          .introduce
-            %img.visit{:src => "/assets/visit.png"}
-            %p.caption-header
-              %span.caption 中国少年科学院优秀青少年赴美国航天营
-              %span#time-flag 2016-8-23 15:33
-              %a.declared{:href => "javascript:void(0);"} 公布
-            .desc
-              %p 为更好地贯彻落实李克强总理在2014年7月2日主持召开国务院常务会议时提出的“要合理安排学校寒、暑假等假期，组织好夏令营、冬令营、研学旅行”的讲话精神，促进我国优秀青少年和国际青少年的交流，激发广大青少年探索科学奥秘的兴趣，中国少年科学院、中国青少年发展服务中心决定，于2016年暑期继续赴美国举办航天主题交流活动
-              %p 为更好地贯彻落实李克强总理在2014年7月2日主持召开国务院常务会议时提出的“要合理安排学校寒、暑假等假期，组织好夏令营、冬令营、研学旅行”的讲话精神。
-          %a.desc-click{:href => "javascript:void(0);"} 
-            详情
-            %img.desc-img{:src => "/assets/managecenter/double-right.png"}
-          .select-page 
-            %span.totalitems= "共6页,总计12条"
-            %span.choice-page
-              .pagination.pagination-small
-                %ul
-                  %li
-                    %a{:href => "javascript:void(0);"} «
-                  / - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
-                  %li
-                    %a{:href => "javascript:void(0);"} 1
-                  %li
-                    %a{:href => "javascript:void(0);"} »
+          - if @global_eles[:data].length == 0
+            .undiscover
+              %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
+              %span.message 抱歉！暂无查找信息
+          - else
+            - @global_eles[:data].each do |e|
+              .introduce
+                %img.visit{:src => e.image_path, width: "190", height: "129"}
+                %p.caption-header
+                  %span.caption= e.title
+                  %span#time-flag= e.created_at.strftime("%Y-%m-%d %H-%M")
+                  %a.undeclared{:href => "javascript:void(0);"} 未公布
+                .desc
+                  = e.plain_text
+              %a.desc-click{:href => "/staff/announcements/" + e.id.to_s} 
+                详情
+                %img.desc-img{:src => "/assets/managecenter/double-right.png"}
+            .select-page 
+              %span.totalitems= "共#{@global_eles[:total_page]}页,总计#{@global_eles[:total_number]}条"
+              %span.choice-page
+                .pagination.pagination-small
+                  %ul
+                    %li
+                      %a{:href => "/staff/announcements?profile=global&keyword=#{@keyword}&page=#{@global_eles[:previous_page]}"} «
+                    - ( (@global_eles[:previous_page] > 2 ? @global_eles[:previous_page] - 2 : 1) .. (@global_eles[:next_page] < @global_eles[:total_page] - 2 ? @global_eles[:next_page] + 2 : @global_eles[:total_page]) ).to_a.each do |page|
+                      %li
+                        %a{:href => "/staff/announcements?profile=global&keyword=#{@keyword}&page=#{page}"}= page
+                    %li
+                      %a{:href => "/staff/announcements?profile=global&keyword=#{@keyword}&page=#{@global_eles[:next_page]}"} »
         #tab2.tab-pane
-          .undiscover
-            %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
-            %span.message 抱歉！暂无查找信息
-
+          - if @local_eles[:data].length == 0
+            .undiscover
+              %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
+              %span.message 抱歉！暂无查找信息
+          - else
+            - @local_eles[:data].each do |e|
+              .introduce
+                %img.visit{:src => e.image_path, width: "190", height: "129"}
+                %p.caption-header
+                  %span.caption= e.title
+                  %span#time-flag= e.created_at.strftime("%Y-%m-%d %H-%M")
+                  %a.undeclared{:href => "javascript:void(0);"} 未公布
+                .desc
+                  = e.plain_text
+              %a.desc-click{:href => "/staff/announcements/" + e.id.to_s} 
+                详情
+                %img.desc-img{:src => "/assets/managecenter/double-right.png"}
+            .select-page 
+              %span.totalitems= "共#{@local_eles[:total_page]}页,总计#{@local_eles[:total_number]}条"
+              %span.choice-page
+                .pagination.pagination-small
+                  %ul
+                    %li
+                      %a{:href => "/staff/announcements?profile=local&keyword=#{@keyword}&page=#{@local_eles[:previous_page]}"} «
+                    - ( (@local_eles[:previous_page] > 2 ? @local_eles[:previous_page] - 2 : 1) .. (@local_eles[:next_page] < @local_eles[:total_page] - 2 ? @local_eles[:next_page] + 2 : @local_eles[:total_page]) ).to_a.each do |page|
+                      %li
+                        %a{:href => "/staff/announcements?profile=global&keyword=#{@keyword}&page=#{page}"}= page
+                    %li
+                      %a{:href => "/staff/announcements?profile=global&keyword=#{@keyword}&page=#{@local_eles[:next_page]}"} »
 
       
