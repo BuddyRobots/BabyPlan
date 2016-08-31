@@ -8,12 +8,13 @@
 .content-area
   /announcements-show
   .content-box
-    .btn.end-btn{:type => "button"} 
-      %img.end-img{:src => "/assets/managecenter/ticker.png"}
-      完成
-    .btn.edit-btn{:type => "button"} 
-      %img.edit-img{:src => "/assets/managecenter/edit.png"}
-      编辑
+    - if @announcement.center.present?
+      .btn.end-btn{:type => "button"} 
+        %img.end-img{:src => "/assets/managecenter/ticker.png"}
+        完成
+      .btn.edit-btn{:type => "button"} 
+        %img.edit-img{:src => "/assets/managecenter/edit.png"}
+        编辑
     - if @announcement.is_published
       .btn#unshelve-btn.published{:type => "button"} 
         %img.unshelve{:src => "/assets/managecenter/unshelve.png"}
