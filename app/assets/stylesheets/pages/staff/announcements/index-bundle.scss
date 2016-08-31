@@ -12,17 +12,21 @@ ul, li {
 	top: 60px;
 	background:#f7fcff;
 	box-shadow: -1px -1px 6px #9c9c9c inset;
-	padding: 20px 20px;
+	padding: 20px;
 }
 .content-box {
-	// position: relative;
-	// margin: 20px 20px auto 20px;
-	position: absolute;
-	margin-right: 20px;
+	// position: absolute;
+	// bottom: 0;
+	// right: 0;
+	// top: 0;
+	// left: 0;
+	// margin: 20px;
+	height: 100%;
 	box-shadow: 0 -1px 6px #9c9c9c inset;
 	background: white; 
 }
 .manage-box {
+	position: relative;
 	height: 58px;
 	border-bottom: 1px solid #c8c8c8;
 	overflow: hidden;
@@ -82,7 +86,9 @@ ul, li {
 	margin-left: 20px;
 }
 .tabbable {
-	margin: 0 20px auto 20px;
+	margin: 0 20px 20px 20px;
+	height: 100%;
+	overflow: auto;
 }
 .nav-tabs {
 	margin-bottom: 0;
@@ -93,7 +99,7 @@ ul, li {
 }
 .tab-pane {
 	overflow: auto;
-	max-height: 600px;
+	// max-height: 600px;
 }
 .introduce {
 	border: 1px solid #c8c8c8;
