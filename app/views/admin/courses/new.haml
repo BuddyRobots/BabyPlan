@@ -1,4 +1,30 @@
 - content_for :head do
   = javascript_include_tag "pages/admin/courses/new-bundle"
   = stylesheet_link_tag "pages/admin/courses/new-bundle", :media => "all"
+  :javascript
+    window.keyword = "#{@keyword}"
+
+.content-area
+  /courses-new
+  .content-box
+    .manage-box.clearfix
+      %p.book-add 添加课程
+
+    .manage-content
+      %form.form-inline
+        %label.input-name 课程名称:
+        %input.input-area#book-name{:type => "text"}
+        %label.checkbox
+          %input.checkbox-content#available{:type => "checkbox"} 上架
+
+      .controls.controls-row
+        %label.input-caption 主讲人:
+        %input.input-area#book-type{:type => "text"}
+        %label.input-caption 费用:
+        %input.input-area#book-stock{:type => "text"}
+       
+      .book-introduce
+        %span.introduce 书籍介绍:
+        %span.wangedit-area
+          #edit-area
 

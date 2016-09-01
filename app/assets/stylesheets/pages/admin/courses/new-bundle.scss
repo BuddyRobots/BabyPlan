@@ -1,0 +1,115 @@
+@import "wangEditor";
+@import "jquery-ui";
+
+
+.modal-body, label {
+	margin: 0;
+	padding: 0;
+	max-height: 600px;
+}
+.content-area {
+	position:absolute;
+	right: 0;
+	left: 160px;
+	bottom: 0;
+	top: 60px;
+	background:#f7fcff;
+	box-shadow: -1px -1px 6px #9c9c9c inset;
+	padding: 20px;
+}
+
+.content-box {
+	position: relative;
+	box-shadow: 0 -1px 6px #9c9c9c inset;
+	background: white;  
+	height: 100%;
+}
+.manage-box {
+	height: 58px;
+	border-bottom: 1px solid #c8c8c8;
+	overflow: hidden;
+}
+.manage-content {
+	overflow: auto;
+	position: absolute;
+	top: 60px;
+	left: 0px;
+	bottom: 0px;
+	right: 0px;
+}
+.book-add {
+	float: left;
+	font-size: 16px;
+	color: #323232;
+	line-height: 59px;
+	margin-left: 20px;
+}
+.end-btn {
+	float: right;
+	margin: 11.5px 20px 0 0;
+	width: 100px;
+	height: 34px;
+	padding: 0;
+	line-height: 32px;
+	color: white;
+	background: #f7873d;
+	border-radius: 6px;
+}
+.end-btn:hover {
+	background: #f7873d;
+	color: white;
+}
+.book-edit {
+	vertical-align: middle;
+}
+
+.form-inline {
+	margin: 20px 0;
+}
+.input-name {
+	display: inline-block;
+	margin-right: 5px;
+	vertical-align: middle;
+	font-size: 16px;
+	color: #323232;
+	padding-top: 3px;
+	margin-left: 16px;
+}
+.input-caption {
+	@extend .input-name;
+	margin-left: 10px;
+}
+#book-number {
+	margin-left: 42px
+}
+.input-area {
+	display: inline-block;
+	width: 238px;
+	height: 30px;
+	padding: 0;
+	margin: 0 !important;
+}
+.checkbox {
+	margin-left: 15px;
+}
+.controls-row {
+	margin: 0 0 20px 21px;
+}
+.introduce {
+	display: inline-block;
+	vertical-align: top;
+	font-size: 16px;
+	color: #323232;
+	margin: 0 5px 15px 16px;
+}
+.wangedit-area {
+	display: inline-block;
+	width: 90%;
+	font-size: 14px;
+}
+#edit-area {
+	height: 250px;
+}
+.book-introduce {
+	margin-bottom: 20px;
+}

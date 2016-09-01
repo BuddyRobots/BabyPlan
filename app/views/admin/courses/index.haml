@@ -4,3 +4,58 @@
   :javascript
     window.keyword = "#{@keyword}"
 
+
+.content-area
+  /courses-index
+  .content-box
+    .manage-box
+      .user-search-box
+        .input-append
+          %input#appendedInputButton.span2{:type => "text", :placeholder => "输入课程名称", :value => "#{@keyword}"}
+          %button.btn#search-btn{:type => "button"}
+      .btn.bookadd-btn{:type => "button", :href => "#kidsaddModal", "data-toggle" => "modal"} 
+        %img.book-edit{:src => "/assets/managecenter/add.png"}
+        添加课程
+    
+    / .manage-content
+    /   - if @courses[:data].length == 0
+    /     .undiscover
+    /       %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
+    /       %span.message 抱歉！暂无查找信息
+    /   - else
+    /     .table-box
+    /       %table.table.table-bordered.user-table
+    /         %caption
+    /         %thead
+    /           %tr
+    /             %th 课&nbsp程
+    /             %th 简&nbsp介
+    /             %th 主讲人
+    /             %th 费&nbsp用
+    /             %th 图&nbsp片
+    /             %th{:colspan => "2"} 操&nbsp作
+    /         %tbody
+    /           - @courses[:data].each do |c|
+    /             %tr{class: "book-record #{ c[:available] ? "available" : "unavailable" }", "data-id" => c[:id]}
+    /               %td= c[:name]
+    /               %td= c[:desc]
+    /               %td= c[:speaker]
+    /               %td= c[:charge]
+    /               %td= c[:img]
+    /               %td
+    /                 - if c[:available]
+    /                   %a.set-available.link-available{:href => "javascript:void(0);"} 详情
+    /                 - else
+    /                   %a.set-available.link-unavailable{:href => "javascript:void(0);"} 下架
+
+    /     .select-page 
+    /       %span.totalitems= "共#{@courses[:total_page]}页,总计#{@courses[:total_number]}条"
+    /       %span.choice-page
+    /         .pagination.pagination-small
+    /           %ul
+    /             %li
+    /               %a{:href => "/staff/courses?keyword=#{@keyword}&page=#{@courses[:previous_page]}"} «
+    /             - ( (@courses[:previous_page] > 2 ? @courses[:previous_page] - 2 : 1) .. (@courses[:next_page] < @courses[:total_page] - 2 ? @courses[:next_page] + 2 : @courses[:total_page]) ).to_a.each do |page|
+    /               %li
+    /                 %a{:href => "/staff/courses?keyword=#{@keyword}&page=#{page}"}= page
+    /             %li
