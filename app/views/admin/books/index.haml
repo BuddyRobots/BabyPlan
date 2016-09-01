@@ -5,56 +5,53 @@
     window.keyword = "#{@keyword}"
 
 .content-area
-  /books-index
-
   .content-box
     .manage-box
-      %form.form-inline
-        .input-append.user-search-box
-          %input#appendedInputButton.span2{:type => "text", :placeholder => "输入绘本名称", :value => "#{@keyword}"}
-          %button.btn#search-btn{:type => "button"}
-        %label.checkbox
-          %input{:type => "checkbox"} 合并书籍管理
-            
-    / .manage-content
-    /   - if @books[:data].length == 0
-    /     .undiscover
-    /       %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
-    /       %span.message 抱歉！暂无查找信息
-    /   - else
-    /     .table-box
-    /       %table.table.table-bordered.user-table
-    /         %caption
-    /         %thead
-    /           %tr
-    /             %th 绘本名称
-    /             %th 儿童中心
-    /             %th 类&nbsp型
-    /             %th 数&nbsp量
-    /             %th 作&nbsp者
-    /             %th ISBN编码
-    /             %th 操&nbsp作
-    /         %tbody
-    /           - @books[:data].each do |u|
-    /             %tr
-    /               %td= u[:name]
-    /               %td= u[:center]
-    /               %td= u[:type]
-    /               %td= u[:stock]
-    /               %td= u[:author]
-    /               %td= u[:isbn]
-    /               %td
-    /                 = link_to "详情", "/admin/books/#{u[:id]}"
+      .input-append.user-search-box
+        %input#appendedInputButton.span2{:type => "text", :placeholder => "输入绘本名称", :value => "#{@keyword}"}
+        %button.btn#search-btn{:type => "button"}
+      / %label.checkbox
+      /  %input{:type => "checkbox"} 合并书籍管理
 
-    /     .select-page 
-    /       %span.totalitems= "共#{@books[:total_page]}页,总计#{@books[:total_number]}条"
-    /       %span.choice-page
-    /         .pagination.pagination-small
-    /           %ul
-    /             %li
-    /               %a{:href => "/admin/books?keyword=#{@keyword}&page=#{@books[:previous_page]}"} «
-    /             - ( (@books[:previous_page] > 2 ? @books[:previous_page] - 2 : 1) .. (@books[:next_page] < @books[:total_page] - 2 ? @books[:next_page] + 2 : @books[:total_page]) ).to_a.each do |page|
-    /               %li
-    /                 %a{:href => "/admin/books?keyword=#{@keyword}&page=#{page}"}= page
-    /             %li
-    /               %a{:href => "/admin/books?keyword=#{@keyword}&page=#{@books[:next_page]}"} »
+    .manage-content
+      - if @books[:data].length == 0
+        .undiscover
+          %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
+          %span.message 抱歉！暂无查找信息
+      - else
+        .table-box
+          %table.table.table-bordered.user-table
+            %caption
+            %thead
+              %tr
+                %th 绘本名称
+                %th 儿童中心
+                %th 类&nbsp型
+                %th 数&nbsp量
+                %th 作&nbsp者
+                %th ISBN编码
+                %th 操&nbsp作
+            %tbody
+              - @books[:data].each do |e|
+                %tr
+                  %td= e[:name]
+                  %td= e[:center]
+                  %td= e[:type]
+                  %td= e[:stock]
+                  %td= e[:author]
+                  %td= e[:isbn]
+                  %td
+                    = link_to "详情", "/admin/books/#{e[:id]}"
+
+        .select-page 
+          %span.totalitems= "共#{@books[:total_page]}页,总计#{@books[:total_number]}条"
+          %span.choice-page
+            .pagination.pagination-small
+              %ul
+                %li
+                  %a{:href => "/admin/books?keyword=#{@keyword}&page=#{@books[:previous_page]}"} «
+                - ( (@books[:previous_page] > 2 ? @books[:previous_page] - 2 : 1) .. (@books[:next_page] < @books[:total_page] - 2 ? @books[:next_page] + 2 : @books[:total_page]) ).to_a.each do |page|
+                  %li
+                    %a{:href => "/admin/books?keyword=#{@keyword}&page=#{page}"}= page
+                %li
+                  %a{:href => "/admin/books?keyword=#{@keyword}&page=#{@books[:next_page]}"} »
