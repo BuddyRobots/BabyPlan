@@ -33,6 +33,10 @@ Rails.application.routes.draw do
       end
     end
     resources :staffs do
+      member do
+        put :change_center
+        put :change_status
+      end
     end
     resources :announcements do
     end

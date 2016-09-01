@@ -56,14 +56,15 @@ input, label, span {
 	color: #323232;
 	line-height: 59px;
 	margin-left: 20px;
-	span {
-		display: inline-block;
-		font-size: 12px;
-		color: red;
-		margin-left: 5px;
-	}
 }
-.unlock-btn {
+.staff-status {
+	line-height: 59px;
+	display: inline-block;
+	font-size: 12px;
+	color: red;
+	margin-left: 5px;
+}
+.status-btn {
 	float: right;
 	margin: 11.5px 20px 0 0;
 	width: 100px;
@@ -74,7 +75,7 @@ input, label, span {
 	background: #f7873d;
 	border-radius: 6px;
 }
-.unlock-btn:hover {
+.status-btn:hover {
 	background: #f7873d;
 	color: white;
 }

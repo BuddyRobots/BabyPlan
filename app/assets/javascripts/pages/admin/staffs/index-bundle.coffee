@@ -1,6 +1,5 @@
 
 $ ->
-# search-btn press
   search = ->
     value = $("#appendedInputButton").val()
     location.href = "/admin/staffs?keyword=" + value + "&page=1"

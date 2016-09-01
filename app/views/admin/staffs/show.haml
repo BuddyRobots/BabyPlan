@@ -1,33 +1,24 @@
 - content_for :head do
   = javascript_include_tag "pages/admin/staffs/show-bundle"
   = stylesheet_link_tag "pages/admin/staffs/show-bundle", :media => "all"
+  :javascript
+    window.sid = "#{@staff.id.to_s}"
 
 .content-area
-  /staffs-show
   .content-box
     .manage-box.clearfix
-      %p.staffs-name 
-        王健林
-        %span 账号锁定中，暂时无法使用
-      .btn.unlock-btn{:type => "button"}  解锁
+      %p.staffs-name= @staff.name
+      - if @staff.status == User::NEW
+        %span.staff-status.new-staff 新账号，等待开通
+        .btn.status-btn.open-btn{:type => "button"} 开通
+      - elsif @staff.status == User::LOCKED
+        %span.staff-status.locked-staff 账号锁定中，暂时无法使用
+        .btn.status-btn.unlock-btn{:type => "button"} 解锁
+      - else
+        %span.staff-status.normal-staff
+        .btn.status-btn.lock-btn{:type => "button"} 锁定
     .manage-content
-      %p.gender 性别：男
-      %p.mobile 联系方式： 13126833286
+      / %p.gender 性别：男
+      %p.mobile= "联系方式： #{@staff.mobile}"
       %span 调整岗位:
-      %select
-        %option 富仁名苑儿童中心
-        %option 朝阳儿童中心
-        %option 海淀儿童中心
-        %option 丰台儿童中心
-        %option 昌平儿童中心
-      / %form.form-horizontal
-      /   .control-group
-      /     %label.control-label{:for => "inputEmail"} 调整岗位:
-      /     .controls
-      /       %select
-      /         %option 富仁名苑儿童中心
-      /         %option 朝阳儿童中心
-      /         %option 海淀儿童中心
-      /         %option 丰台儿童中心
-      /         %option 昌平儿童中心
-      /  
+      = select_tag "center_id", options_for_select(Center.centers_for_select, @staff.staff_center.id.to_s)
