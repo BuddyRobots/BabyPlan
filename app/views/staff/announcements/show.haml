@@ -25,10 +25,9 @@
         %span 公布
 
     .manage-content
-      .tabbable
-        %ul.nav.nav-tabs
-          %li.active
-            %a{"data-toggle" => "tab", :href => "#tab1"}= @announcement.center.present? ? "本区公告" : "全局公告"
+      %ul.nav.nav-tabs
+        %li.active
+          %a{"data-toggle" => "tab", :href => "#tab1"}= @announcement.center.present? ? "本区公告" : "全局公告"
 
       .display-box
         .display-area

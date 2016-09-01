@@ -1,22 +1,20 @@
 #= require wangEditor.min
 
 $ ->
+  # wangEditor
   editor = new wangEditor('edit-box')
-  
   editor.config.menus = [
         'head',
         'img'
      ]
   editor.config.uploadImgUrl = '/materials'
-
   editor.config.uploadHeaders = {
     'Accept' : 'HTML'
   }
-
   editor.config.hideLinkImg = true
-
   editor.create()
 
+  # unshelve-btn press-down
   $("#unshelve-btn").click ->
     current_state = "unpublished"
     if $(this).hasClass("published")
