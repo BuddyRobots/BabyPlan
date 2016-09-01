@@ -1,6 +1,7 @@
 #= require wangEditor.min
 
 $ ->
+  # wangEditor
   editor = new wangEditor('edit-box')
   
   editor.config.menus = [
@@ -8,15 +9,13 @@ $ ->
         'img'
      ]
   editor.config.uploadImgUrl = '/materials'
-
   editor.config.uploadHeaders = {
     'Accept' : 'HTML'
   }
-
   editor.config.hideLinkImg = true
-
   editor.create()
 
+# end-btn press-down
   $(".end-btn").click ->
     title = $("#input-caption").val().trim()
     console.log title
@@ -31,6 +30,7 @@ $ ->
           {
             title: title
             content: content
+            content: content
             is_published: is_published
           }
       },
@@ -40,4 +40,4 @@ $ ->
           window.location.href = "/staff/announcements/" + data.announcement_id
         else
           $.page_notification "服务器出错，请稍后重试"
-    )
+      )
