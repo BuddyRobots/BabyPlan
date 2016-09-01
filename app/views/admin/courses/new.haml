@@ -9,6 +9,9 @@
   .content-box
     .manage-box.clearfix
       %p.book-add 添加课程
+      .btn.end-btn{:type => "button", :href => "#kidsaddModal", "data-toggle" => "modal"} 
+        %img.end{:src => "/assets/managecenter/ticker.png"}
+        完成
 
     .manage-content
       %form.form-inline
@@ -24,7 +27,7 @@
         %input.input-area#book-stock{:type => "text"}
        
       .book-introduce
-        %span.introduce 书籍介绍:
+        %span.introduce 课程介绍:
         %span.wangedit-area
           #edit-area
 
