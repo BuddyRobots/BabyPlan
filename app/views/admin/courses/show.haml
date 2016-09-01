@@ -2,3 +2,86 @@
   = javascript_include_tag "pages/admin/courses/show-bundle"
   = stylesheet_link_tag "pages/admin/courses/show-bundle", :media => "all"
 
+
+.content-area
+  .content-box
+    .manage-content
+      .tabbable
+        %ul.nav.nav-tabs
+          %li.active
+            %a{"data-toggle" => "tab", :href => "#tab1"} 开课区域
+          %li
+            %a{"data-toggle" => "tab", :href => "#tab2"} 课程信息
+
+        .tab-content
+          #tab1.tab-pane.active
+            .manage-box.clearfix
+              .user-checkbox
+                %span.user-review 课程名称：
+                %span.class-name 生活素质课
+                %label.checkbox.inline
+                  %input#inlineCheckbox1{:type => "checkbox", :value => "option1"} 已开课
+                %label.checkbox.inline
+                  %input#inlineCheckbox2{:type => "checkbox", :value => "option2"} 未开课
+                %label.checkbox.inline
+                  %input#inlineCheckbox2{:type => "checkbox", :value => "option2"} 已结课
+              .btn.edit-btn{:type => "button"} 
+                %img.edit{:src => "/assets/managecenter/edit.png"}
+                编辑
+              .btn.finish-btn{:type => "button"} 
+                %img.ticker{:src => "/assets/managecenter/ticker.png"}
+                完成
+            .table-box
+              %table.table.table-bordered.user-table
+                %caption
+                %thead
+                  %tr
+                    %th 儿童中心
+                    %th 上课地址
+                    %th 主讲人
+                    %th 报名人数
+                    %th 费&nbsp用
+                    %th 上课时间
+                %tbody
+                  %tr
+                    %td 富仁名苑儿童中心
+                    %td 北京市朝阳区富仁名苑27号楼2单元活动室
+                    %td 大山
+                    %td 50人
+                    %td 700元\节
+                    %td 2016-8-25--2016-9-25
+            / 分页
+            / .select-page 
+            /   %span.totalitems= "共#{@local_eles[:total_page]}页,总计#{@local_eles[:total_number]}条"
+            /   %span.choice-page
+            /     .pagination.pagination-small
+            /       %ul
+            /         %li
+            /           %a{:href => "/staff/announcements?profile=local&keyword=#{@keyword}&page=#{@local_eles[:previous_page]}"} «
+            /         - ( (@local_eles[:previous_page] > 2 ? @local_eles[:previous_page] - 2 : 1) .. (@local_eles[:next_page] < @local_eles[:total_page] - 2 ? @local_eles[:next_page] + 2 : @local_eles[:total_page]) ).to_a.each do |page|
+            /           %li
+            /             %a{:href => "/staff/announcements?profile=local&keyword=#{@keyword}&page=#{page}"}= page
+            /         %li
+            /           %a{:href => "/staff/announcements?profile=local&keyword=#{@keyword}&page=#{@local_eles[:next_page]}"} »
+
+            %p.class-calender 课程日历
+            .calender-box
+
+          #tab2.tab-pane
+            .desc-items
+              %span.course-name 课程名称:
+              %span.input-course 社会科学
+              %span.shelve 上架
+            .desc-items
+              %span.course-name 主讲人:
+              %span.input-course 尼古拉斯.赵四
+              %span.course-name 费用:
+              %span.input-course 700元\节
+      
+             
+            .book-introduce
+              %span.introduce 课程介绍:
+              %span.wangedit-area
+                #edit-area
+
+

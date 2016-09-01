@@ -1,0 +1,186 @@
+@import "wangEditor";
+@import "jquery-ui";
+
+ul, li {
+	padding: 0;
+	margin: 0;
+}
+.content-area {
+	position:absolute;
+	right: 0;
+	left: 160px;
+	bottom: 0;
+	top: 60px;
+	background:#f7fcff;
+	box-shadow: -1px -1px 6px #9c9c9c inset;
+	padding: 20px;
+}
+.content-box {
+	position: relative;
+	box-shadow: 0 -1px 6px #9c9c9c inset;
+	background: white;  
+	height: 100%;
+}
+.manage-content {
+	overflow: auto;
+	position: absolute;
+	top: 20px;
+	left: 0px;
+	bottom: 0px;
+	right: 0px;
+}
+
+.manage-box {
+	height: 58px;
+}
+.user-checkbox {
+	float: left;
+	padding-top: 11.5px;
+}
+.user-review {
+	font-size: 16px;
+	color: #323232;
+	margin-left: 20px;
+	vertical-align: bottom;
+}
+.class-name {
+	font-size: 16px;
+	color: #323232;
+	vertical-align: bottom;
+	display: inline-block;
+	margin-right: 10px;
+}
+.inline{
+	font-size: 14px;
+	color: #323232;
+	margin-right: 5px;
+	line-height: 22px;
+	padding-top:2px;
+}
+#inlineCheckbox1, #inlineCheckbox2 {
+	width: 16px;
+	height: 16px;
+	margin-right: 5px;
+}
+.edit-btn {
+	float: right;
+	margin: 11px 20px 0 0;
+	width: 100px;
+	height: 34px;
+	padding: 0;
+	line-height: 32px;
+	color: white;
+	background: #f7873d;
+	border-radius: 6px;
+}
+.edit-btn:hover {
+	background: #f7873d;
+	color: white;
+}
+.finish-btn {
+	@extend .edit-btn;
+}
+
+.tabbable {
+	padding: 0 20px 20px 20px;
+}	
+.nav-tabs {
+	margin-bottom: 0;
+	border: 0;
+	li {
+		font-size: 16px;
+		color: #323232;
+	}
+}
+.tab-pane {
+	border: 1px solid #ddd;
+}
+.table-box {
+	padding: 0;
+	margin: 0 20px;
+}
+.user-table {
+	border-radius: 6px;
+	border: 1px solid #c8c8c8;
+	font-size: 14px;
+	color: #323232;
+	margin-bottom: 0;
+	th {
+		text-align: center;
+		height: 40px;
+		line-height: 40px;
+		padding: 0;
+	}
+	td {
+		font-size: 12px;
+		color: #505050;
+		height:45px;
+		line-height: 45px;
+		text-align: center;
+		padding: 0;
+		.unshelve {
+			color: #969696;
+		}
+		.shelve {
+			color: #f7873d;
+		}
+		a {
+			
+			text-decoration: underline;
+		}
+	}
+	.unavailable {
+		background: #eaeaea;
+	}
+	.clicked {
+		background: #fdd3b9;
+	}
+}
+.class-calender {
+	margin: 10px 20px;
+	font-size: 16px;
+	color: #323232;
+}
+.calender-box {
+	border: 1px solid #c8c8c8;
+	margin: 0 20px 20px 20px;
+	border-radius: 6px;
+	height: 100px;
+}
+
+.desc-items {
+	margin: 15px 16px;
+}
+.course-name {
+	font-size: 16px;
+	color: #323232;
+}
+.input-course {
+	font-size: 14px;
+	color: #323232;
+	display: inline-block;
+	margin-left: 5px;
+	margin-right: 20px;
+}
+.shelve {
+	@extend .input-course;
+	color: #0fc077;
+}
+.book-introduce {
+	margin-bottom: 20px;
+	.introduce {
+		display: inline-block;
+		vertical-align: top;
+		font-size: 16px;
+		color: #323232;
+		margin: 0 5px 15px 16px;
+	}
+	.wangedit-area {
+		display: inline-block;
+		width: 90%;
+		font-size: 14px;
+	}
+	#edit-area {
+		height: 250px;
+	}
+}
