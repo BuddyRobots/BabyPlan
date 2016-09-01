@@ -45,6 +45,7 @@ class Book
     {
       id: self.id.to_s,
       name: self.name,
+      center: self.center.name,
       author: self.author,
       translator: self.translator,
       illustrator: self.illustrator,
