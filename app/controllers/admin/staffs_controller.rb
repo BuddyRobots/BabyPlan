@@ -11,6 +11,23 @@ class Admin::StaffsController < Admin::ApplicationController
   end
 
   def show
+    @staff = User.staff.where(id: params[:id]).first
   end
 
+  def change_center
+    @staff = User.staff.where(id: params[:id]).first
+    @center = Center.where(id: params[:center_id]).first
+    @staff.staff_center = @center
+    @staff.save
+    render json: retval_wrapper(nil) and return
+  end
+
+  def change_status
+    @staff = User.staff.where(id: params[:id]).first
+    @staff.status = User::LOCKED if params[:admin_action] == "lock"
+    @staff.status = User::NORMAL if params[:admin_action] == "open"
+    @staff.status = User::NORMAL if params[:admin_action] == "unlock"
+    @staff.save
+    render json: retval_wrapper(nil) and return
+  end
 end

@@ -13,4 +13,12 @@ class Center
   has_many :announcements
   has_many :staffs, class_name: "User", inverse_of: :staff_center
 
+
+  def self.centers_for_select
+    hash = { }
+    Center.all.each do |c|
+      hash[c.name] = c.id.to_s
+    end
+    hash 
+  end
 end
