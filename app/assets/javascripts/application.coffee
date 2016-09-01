@@ -14,7 +14,6 @@
 #= require jquery-ui
 #= require datepicker-zh-TW
 #= require jquery_ujs
-#= require turbolinks
 #= require utility/ajax
 #= require utility/console
 #= require utility/regex
