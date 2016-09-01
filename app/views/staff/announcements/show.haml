@@ -4,9 +4,7 @@
   :javascript
     window.aid = "#{@announcement.id.to_s}"
 
-
 .content-area
-  /announcements-show
   .content-box
     - if @announcement.center.present?
       .btn.end-btn{:type => "button"} 
