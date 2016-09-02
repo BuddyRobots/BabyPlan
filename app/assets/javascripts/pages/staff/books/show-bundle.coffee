@@ -10,13 +10,10 @@ $ ->
      ]
 
   editor.config.uploadImgUrl = '/materials'
-
   editor.config.uploadHeaders = {
     'Accept' : 'HTML'
   }
-
   editor.config.hideLinkImg = true
-
   editor.create()
 
   # edit-btn pressdown
@@ -30,6 +27,7 @@ $ ->
     $(".edit-btn").toggle()
 
     $("#unshelve-btn").attr("disabled", true)
+    $("#QRcode-btn").attr("disabled", true)
     $("#name-input").val($("#name-span").text())
     $("#type-input").val($("#type-span").text())
     $("#stock-input").val(window.stock)
@@ -84,7 +82,7 @@ $ ->
           $(".edit-btn").toggle() 
 
           $("#unshelve-btn").attr("disabled", false)
-
+          $("#QRcode-btn").attr("disabled", false)
           $("#name-span").text(name)
           $("#type-span").text(type)
           $("#stock-span").text(stock + "本")
@@ -133,7 +131,23 @@ $ ->
             btn.find("img").attr("src", "/assets/managecenter/unshelve.png")
             $("#available-status").text("在架上")
       )
+# button hide
+  $("#book-message").click ->
+    $(".edit-btn").show()
+    $("#unshelve-btn").show()
+    $("#QRcode-btn").show()
 
+  $("#user-review").click ->
+    $(".edit-btn").hide()
+    $("#unshelve-btn").hide()
+    $("#QRcode-btn").hide()
+
+  $("#borrow-message").click ->
+    $(".edit-btn").hide()
+    $("#unshelve-btn").hide()
+    $("#QRcode-btn").hide()
+
+# img upload
   $("#back-img").click ->
     $("#uploadBackModal").modal("show")
 
@@ -159,3 +173,4 @@ $ ->
   $("#browser-back-click").click ->
     $("#back_file").click()
     setInterval(backIntervalFunc, 1)
+

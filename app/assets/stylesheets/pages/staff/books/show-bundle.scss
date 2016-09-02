@@ -25,30 +25,19 @@
 	background: white;  
 	height: 100%;
 }
-.manage-box {
-	height: 58px;
-	border-bottom: 1px solid #c8c8c8;
-	overflow: hidden;
-}
-
 .manage-content {
 	overflow: auto;
 	position: absolute;
-	top: 60px;
+	top: 20px;
 	left: 0px;
 	bottom: 0px;
 	right: 0px;
 }
-.book-add {
-	float: left;
-	font-size: 16px;
-	color: #323232;
-	line-height: 59px;
-	margin-left: 20px;
-}
 .edit-btn {
-	float: right;
-	margin: 11.5px 20px 0 0;
+	position: absolute;
+	top: 11px;
+	right: 20px;
+	z-index: 10;
 	width: 100px;
 	height: 34px;
 	padding: 0;
@@ -65,20 +54,36 @@
 	@extend .edit-btn;
 	display: none;
 }
+#QRcode-btn {
+	@extend .edit-btn;
+	right: 260px;
+}
 #unshelve-btn {
 	@extend .edit-btn;
+	right: 140px;
 }
 #unshelve-btn:hover {
 	background: #f7873d;
 	color: white;
 }
+.tabbable {
+	margin: 0 20px auto 20px;
+}
+.nav-tabs {
+	margin-bottom: 0;
+	border-bottom: 0;
+	li {
+		font-size: 16px;
+		color: #323232;
+	}
+}
 .book-edit {
 	vertical-align: middle;
 }
 .book-detail {
-	margin: 20px 20px auto 20px;
-	border-radius: 6px;
-	border: 1px solid #c8c8c8;
+	border: 1px solid #ddd;
+	border-bottom-left-radius: 6px;
+	border-bottom-right-radius: 6px;
 }
 #name-span {
 	width: auto;
@@ -174,11 +179,6 @@
 	color: #d70c19;
 	font-size: 14px;
 }
-.QRcode-btn {
-	@extend .edit-btn;
-	padding: 0 10px;
-	margin: 10px 20px 0 0;
-}
 .bookuse-message {
 	margin: 0 20px;
 	border: 1px solid #c8c8c8;
@@ -197,8 +197,8 @@
 }
 
 .cover-back {
-	margin: 20px 20px auto 20px;
 	border-radius: 6px;
+	margin-top: 20px;
 	border: 1px solid #c8c8c8;
 	padding: 15px 20px;
 	font-size: 16px;
@@ -298,4 +298,133 @@
 }
 .cover-caption, .back-caption, #cover-name, #back-name {
 	margin-left: 15px;
+}
+
+
+// user review
+.select-page {
+	text-align: right;
+	margin: 10px 0 0 0;
+	padding-bottom: 5px;
+}
+.totalitems {
+	font-size: 12px;
+	color: #969696;
+	vertical-align: bottom;
+	height: 36px;
+	line-height: 36px;
+}
+
+.pagination {
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+	margin-left: 15px;
+}
+.user-review-box {
+	border-radius: 6px;
+	border: 1px solid #c8c8c8;
+}
+.user-checkbox {
+	margin-bottom: 5px;
+	margin-left: 20px;
+}
+.user-review {
+	font-size: 16px;
+	color: #323232;
+	margin: 0 20px;
+	vertical-align: bottom;
+}
+.inline{
+	font-size: 12px;
+	color: #323232;
+	margin-right: 5px;
+	line-height: 22px;
+}
+#inlineCheckbox1, #inlineCheckbox2 {
+	width: 16px;
+	height: 16px;
+	margin-right: 5px;
+}
+.book-description {
+	position: relative;
+	border-top: 1px solid #c8c8c8;
+}
+.book-img {
+	display: block;
+	float: left;
+	margin: 0 10px;
+	width: 60px;
+	height: 60px;
+}
+.user-item {
+	margin: 18px 0;
+	p {
+		padding: 1.2px;
+	}
+}
+
+.user-name {
+	font-size: 16px;
+	color: #646464;
+	margin-top: -3px;
+}
+.date {
+	font-size: 12px;
+	color: #969696;
+}
+.user-review-content {
+	font-size: 14px;
+	color: #787878;
+}
+#open-btn {
+	position: absolute;
+	width: 100px;
+	height: 36px;
+	top: 32px;
+	right: 20px;
+	color: white;
+	border-radius: 6px;
+	background: #f7873d;
+	border: 0;
+}
+.table-box {
+	padding: 0;
+}
+.user-table {
+	border-radius: 6px;
+	border: 1px solid #c8c8c8;
+	font-size: 14px;
+	color: #323232;
+	margin-bottom: 0;
+	th {
+		text-align: center;
+		height: 40px;
+		line-height: 40px;
+		padding: 0;
+	}
+	td {
+		font-size: 12px;
+		color: #505050;
+		height:45px;
+		line-height: 45px;
+		text-align: center;
+		padding: 0;
+		.unshelve {
+			color: #969696;
+		}
+		.shelve {
+			color: #f7873d;
+		}
+		a {
+			
+			text-decoration: underline;
+		}
+	}
+	.unavailable {
+		background: #eaeaea;
+	}
+	.clicked {
+		background: #fdd3b9;
+	}
 }

@@ -78,7 +78,6 @@
 	vertical-align: middle;
 }
 .table-box {
-	// position: relative;
 	padding: 0;
 	margin: 20px 20px auto 20px;
 }
@@ -152,75 +151,6 @@
 	padding: 0;
 	margin-left: 15px;
 }
-.user-review-box {
-	margin: 0 20px auto 20px;
-	border-radius: 6px;
-	border: 1px solid #c8c8c8;
-}
-.user-checkbox {
-	margin-bottom: 5px;
-}
-.user-review {
-	font-size: 16px;
-	color: #323232;
-	margin: 0 20px;
-	vertical-align: bottom;
-}
-.inline{
-	font-size: 12px;
-	color: #323232;
-	margin-right: 5px;
-	line-height: 22px;
-}
-#inlineCheckbox1, #inlineCheckbox2 {
-	width: 16px;
-	height: 16px;
-	margin-right: 5px;
-}
-.book-description {
-	position: relative;
-	border-top: 1px solid #c8c8c8;
-}
-.book-img {
-	display: block;
-	float: left;
-	margin: 0 10px;
-	width: 60px;
-	height: 60px;
-}
-.user-item {
-	margin: 18px 0;
-	p {
-		padding: 1.2px;
-	}
-}
-
-.user-name {
-	font-size: 16px;
-	color: #646464;
-	margin-top: -3px;
-}
-.date {
-	font-size: 12px;
-	color: #969696;
-}
-.user-review-content {
-	font-size: 14px;
-	color: #787878;
-}
-#open-btn {
-	position: absolute;
-	width: 100px;
-	height: 36px;
-	top: 32px;
-	right: 20px;
-	color: white;
-	border-radius: 6px;
-	background: #f7873d;
-	border: 0;
-}
-
-
 
 // shelve modal
 
