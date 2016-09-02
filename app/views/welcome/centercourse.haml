@@ -2,33 +2,33 @@
   = javascript_include_tag "pages/welcome/centercourse-bundle"
   = stylesheet_link_tag "pages/welcome/centercourse-bundle", :media => "all"
 
-
-.container
-  %img.haidian{:src => "/assets/centercourse/zhongxintu.png"}
-  %a{:href => "#"}
-    %img.searchcircle{:src => "/assets/centercourse/searchcircle.png"}
-  %a{:href => "#"}
-    %img.back{:src => "/assets/centercourse/back.png"}
-  .description
-    %p 海淀儿童中心位于海淀区创业路13号成立于2016年。创课程的设计完全基于官方制定的课程体系，借助于独特的学习理念、教学指导、小组作业、安全环保的学具、趣味性的比赛方式，使孩子们发挥出天生的创意力和想象力，培养团队精神、解决问题能力、应变能力、表达能力、社交能力等，帮助他们从容应对21世纪所带来的新挑战。
-  .coursecaption
-    %p 中心课程
-  %p.class-name 常规班
-  .details
-    .content
-      %p.caption 机器人教育激发学生学习兴…
-      %p.article 机器人培训课程专业而系统，初级班细化四阶，让孩子…
-      %p.detail-flip
-        %a{:href => "#"} 详情
-  .details
-    .content
-      %p.caption 机器人教育激发学生学习兴…
-      %p.article 机器人培训课程专业而系统，初级班细化四阶，让孩子…
-      %p.detail-flip
-        %a{:href => "#"} 详情
-  .details
-    .content
-      %p.caption 机器人教育激发学生学习兴…
-      %p.article 机器人培训课程专业而系统，初级班细化四阶，让孩子…
-      %p.detail-flip
-        %a{:href => "#"} 详情
+- content_for :app_content do
+  .container
+    %img.haidian{:src => "/assets/centercourse/zhongxintu.png"}
+    %a{:href => "#"}
+      %img.searchcircle{:src => "/assets/centercourse/searchcircle.png"}
+    %a{:href => "#"}
+      %img.back{:src => "/assets/centercourse/back.png"}
+    .description
+      %p 海淀儿童中心位于海淀区创业路13号成立于2016年。创课程的设计完全基于官方制定的课程体系，借助于独特的学习理念、教学指导、小组作业、安全环保的学具、趣味性的比赛方式，使孩子们发挥出天生的创意力和想象力，培养团队精神、解决问题能力、应变能力、表达能力、社交能力等，帮助他们从容应对21世纪所带来的新挑战。
+    .coursecaption
+      %p 中心课程
+    %p.class-name 常规班
+    .details
+      .content
+        %p.caption 机器人教育激发学生学习兴…
+        %p.article 机器人培训课程专业而系统，初级班细化四阶，让孩子…
+        %p.detail-flip
+          %a{:href => "#"} 详情
+    .details
+      .content
+        %p.caption 机器人教育激发学生学习兴…
+        %p.article 机器人培训课程专业而系统，初级班细化四阶，让孩子…
+        %p.detail-flip
+          %a{:href => "#"} 详情
+    .details
+      .content
+        %p.caption 机器人教育激发学生学习兴…
+        %p.article 机器人培训课程专业而系统，初级班细化四阶，让孩子…
+        %p.detail-flip
+          %a{:href => "#"} 详情

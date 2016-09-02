@@ -156,7 +156,7 @@ $ ->
           if data.code == WRONG_VERIFY_CODE
             $("#verify-code-notice").text("验证码错误").css("visibility","visible")
           if data.code == CENTER_NOT_EXIST
-            $.page_notification("儿童中心不存在")
+            $.page_notification("儿童中心不存在",3000)
       )
   $("#signup").click ->
     signup()
@@ -333,7 +333,8 @@ $ ->
           $(".error-notice").css("visibility","hidden")
           location.href = "/staff/clients"
         else
-          
+          if data.code == NO_CENTER 
+            $.page_notification("请通知管理员分配儿童中心", 3000)
           $(".error-notice").css("visibility","visible")
       )
 

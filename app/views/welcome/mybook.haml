@@ -2,43 +2,43 @@
   = javascript_include_tag "pages/welcome/mybook-bundle"
   = stylesheet_link_tag "pages/welcome/mybook-bundle", :media => "all"
 
-
-.container
-  .header
-    .cloud
-      %p 我的绘本
-    %a{:href => "#"}
-      %img.back{:src => "/assets/mybook/back.png"}
-  
-  .details
-    %img.visit{:src => "/assets/mybook/diary.png"}
-    %p.caption 
-      蚯蚓的日记 
-      %span 8月14日借阅
-    %p.article 简介：这是一本极为有趣的图画书，以日记书写的方式…
-    .detail-flip
-      %a{:href => "#"} 绘本详情
-  .details
-    %img.visit{:src => "/assets/mybook/book.jpg"}
-    %p.caption 
-      蚯蚓的日记 
-      %span 8月2日借阅
-    %p.article 简介：全套20册小学英文全套绘本各种可爱的小故事。
-    .detail-flip
-      %a{:href => "#"} 绘本详情
-  .details
-    %img.visit{:src => "/assets/mybook/newhome.png"}
-    %p.caption 
-      蚯蚓的日记 
-      %span 7月15日借阅
-    %p.article 简介：小袋袋的伙伴们是不是有一个比他更棒的家？小…
-    .detail-flip
-      %a{:href => "#"} 绘本详情
-  .details
-    %img.visit{:src => "/assets/mybook/friends.jpg"}
-    %p.caption 
-      蚯蚓的日记 
-      %span 已还
-    %p.article 简介：小熊想和好朋友一起玩耍，可是他太胆小了。
-    .detail-flip
-      %a{:href => "#"} 绘本详情
+- content_for :app_content do
+  .container
+    .header
+      .cloud
+        %p 我的绘本
+      %a{:href => "#"}
+        %img.back{:src => "/assets/mybook/back.png"}
+    
+    .details
+      %img.visit{:src => "/assets/mybook/diary.png"}
+      %p.caption 
+        蚯蚓的日记 
+        %span 8月14日借阅
+      %p.article 简介：这是一本极为有趣的图画书，以日记书写的方式…
+      .detail-flip
+        %a{:href => "#"} 绘本详情
+    .details
+      %img.visit{:src => "/assets/mybook/book.jpg"}
+      %p.caption 
+        蚯蚓的日记 
+        %span 8月2日借阅
+      %p.article 简介：全套20册小学英文全套绘本各种可爱的小故事。
+      .detail-flip
+        %a{:href => "#"} 绘本详情
+    .details
+      %img.visit{:src => "/assets/mybook/newhome.png"}
+      %p.caption 
+        蚯蚓的日记 
+        %span 7月15日借阅
+      %p.article 简介：小袋袋的伙伴们是不是有一个比他更棒的家？小…
+      .detail-flip
+        %a{:href => "#"} 绘本详情
+    .details
+      %img.visit{:src => "/assets/mybook/friends.jpg"}
+      %p.caption 
+        蚯蚓的日记 
+        %span 已还
+      %p.article 简介：小熊想和好朋友一起玩耍，可是他太胆小了。
+      .detail-flip
+        %a{:href => "#"} 绘本详情

@@ -20,6 +20,8 @@ Rails.application.routes.draw do
   get 'welcome/mycourse'
   get 'welcome/searchresult'
   get 'welcome/editdemo'
+  get 'welcome/searchlink'
+
 
   get 'welcome/managecenter'
 
