@@ -21,7 +21,11 @@ $ ->
     console.log title
     if title == ""
       $.page_notification "请输入标题"
+      return
     content = editor.$txt.html()
+    if content == ""
+      $.page_notification "请输入公告内容"
+      return
     is_published = $("#publish-cb").is(":checked")
     $.postJSON(
       '/staff/announcements',
@@ -29,7 +33,6 @@ $ ->
         announcement: 
           {
             title: title
-            content: content
             content: content
             is_published: is_published
           }

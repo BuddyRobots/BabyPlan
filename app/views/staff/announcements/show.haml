@@ -13,14 +13,14 @@
       .btn.edit-btn{:type => "button"} 
         %img.edit-img{:src => "/assets/managecenter/edit.png"}
         编辑
-    - if @announcement.is_published
-      .btn#unshelve-btn.published{:type => "button"} 
-        %img.unshelve{:src => "/assets/managecenter/unshelve.png"}
-        %span 隐藏
-    - else
-      .btn#unshelve-btn.unpublished{:type => "button"} 
-        %img.unshelve{:src => "/assets/managecenter/shelve.png"}
-        %span 公布
+      - if @announcement.is_published
+        .btn#unshelve-btn.published{:type => "button"} 
+          %img.unshelve{:src => "/assets/managecenter/unshelve.png"}
+          %span 隐藏
+      - else
+        .btn#unshelve-btn.unpublished{:type => "button"} 
+          %img.unshelve{:src => "/assets/managecenter/shelve.png"}
+          %span 公布
 
     .manage-content
       %ul.nav.nav-tabs
