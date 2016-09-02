@@ -8,6 +8,7 @@ class CourseInst
   field :address, type: String
   field :capacity, type: Integer
   field :price, type: Integer
+  field :speaker, type: String
 
   belongs_to :course
   belongs_to :center

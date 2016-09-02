@@ -8,7 +8,7 @@
   /courses-new
   .content-box
     .manage-box.clearfix
-      %p.book-add 添加课程
+      %p.course-add 添加课程
       .btn.end-btn{:type => "button", :href => "#kidsaddModal", "data-toggle" => "modal"} 
         %img.end{:src => "/assets/managecenter/ticker.png"}
         完成
@@ -16,17 +16,19 @@
     .manage-content
       %form.form-inline
         %label.input-name 课程名称:
-        %input.input-area#book-name{:type => "text"}
-        %label.checkbox
-          %input.checkbox-content#available{:type => "checkbox"} 上架
+        %input.input-area#course-name{:type => "text"}
+        %label.checkbox#available
+          %input.checkbox-content{:type => "checkbox"} 上架
 
       .controls.controls-row
         %label.input-caption 主讲人:
-        %input.input-area#book-type{:type => "text"}
+        %input.input-area#course-speaker{:type => "text"}
         %label.input-caption 费用:
-        %input.input-area#book-stock{:type => "text"}
+        %input.input-area#course-price{:type => "text"}
+        %label.input-caption 课时:
+        %input.input-area#course-length{:type => "text"}
        
-      .book-introduce
+      .course-introduce
         %span.introduce 课程介绍:
         %span.wangedit-area
           #edit-area

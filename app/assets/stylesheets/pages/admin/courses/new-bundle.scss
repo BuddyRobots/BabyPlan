@@ -37,7 +37,7 @@
 	bottom: 0px;
 	right: 0px;
 }
-.book-add {
+.course-add {
 	float: left;
 	font-size: 16px;
 	color: #323232;
@@ -59,7 +59,7 @@
 	background: #f7873d;
 	color: white;
 }
-.book-edit {
+.course-edit {
 	vertical-align: middle;
 }
 
@@ -79,7 +79,7 @@
 	@extend .input-name;
 	margin-left: 10px;
 }
-#book-number {
+#course-number {
 	margin-left: 42px
 }
 .input-area {
@@ -110,6 +110,6 @@
 #edit-area {
 	height: 250px;
 }
-.book-introduce {
+.course-introduce {
 	margin-bottom: 20px;
 }
