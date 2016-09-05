@@ -1,0 +1,194 @@
+@import "jquery-ui";
+
+ul, li {
+	padding: 0;
+	margin: 0;
+}
+.content-area {
+	position:absolute;
+	right: 0;
+	left: 160px;
+	bottom: 0;
+	top: 60px;
+	background:#f7fcff;
+	box-shadow: -1px -1px 6px #9c9c9c inset;
+	padding: 20px;
+}
+.content-box {
+	position: relative;
+	box-shadow: 0 -1px 6px #9c9c9c inset;
+	background: white;  
+	height: 100%;
+}
+.manage-box {
+	height: 58px;
+	border-bottom: 1px solid #c8c8c8;
+	overflow: hidden;
+}
+.manage-content {
+	overflow: auto;
+	position: absolute;
+	top: 60px;
+	left: 0px;
+	bottom: 0px;
+	right: 0px;
+}
+.user-search-box {
+	position: absolute;
+	width: 200px;
+	height: 34px;
+	left:20px;
+	top: 11.5px;
+	border-top-left-radius: 6px;
+	border-bottom-left-radius: 6px;
+}
+#appendedInputButton {
+	padding: 0;
+	width: 162px;
+	height: 34px;
+}
+#search-btn {
+	width: 36px;
+	height: 36px;
+	border: 1px solid #c8c8c8;
+	background: url("/assets/managecenter/search.png") no-repeat;
+	background-size: 22px;
+	background-position: 6px 6px;
+}
+.add-btn {
+	float: right;
+	margin: 11.5px 20px 0 0;
+	padding: 0 10px;
+	height: 34px;
+	line-height: 32px;
+	color: white;
+	background: #f7873d;
+	border-radius: 6px;
+}
+.add-btn:hover {
+	background: #f7873d;
+	color: white;
+}
+.add-img {
+	vertical-align: middle;
+}
+.undiscover {
+	text-align: center;
+	padding: 30px;
+}
+.undiscover-icon {
+	display: inline-block;
+	width: 100%;
+	max-width: 39px;
+}
+.message {
+	font-size: 16px;
+	color: #969696;
+	margin-left: 20px;
+}
+.tabbable {
+	padding: 20px;
+}
+	
+.nav-tabs {
+	margin-bottom: 0;
+	li {
+		font-size: 16px;
+		color: #323232;
+	}
+}
+.introduce {
+	border: 1px solid #c8c8c8;
+	border-top: 0;
+	padding: 20px;
+}
+.caption-header {
+	margin-bottom: 10px;
+}
+.caption {
+	font-size: 24px;
+	color: #323232;
+}
+#time-flag, .kids-center {
+	font-size: 14px;
+	color: #969696;
+	margin-left: 10px;
+}
+.undeclared {
+	float: right;
+	font-size: 14px;
+	color: #969696;
+}
+.undeclared:link {
+	text-decoration: none;
+	color: #969696;
+}
+.undeclared:hover {
+	text-decoration: none;
+	color: #969696;
+}
+.declared {
+	float: right;
+	font-size: 14px;
+	color: #0fc077;
+}
+.declared:link {
+	text-decoration: none;
+	color: #0fc077;
+}
+.declared:hover {
+	text-decoration: none;
+	color: #0fc077;
+}
+.desc {
+	font-size: 12px;
+	color: #3e3e3e;
+	text-indent: 24px;
+	height: 100px;
+	overflow: hidden;
+}
+.visit {
+	float: left;
+	margin-right: 20px;
+	width: 190px;
+	height: 129px;
+}
+
+.desc-click {
+	font-size: 14px;
+	color: #227dda;
+	vertical-align: middle;
+	float: right;
+	margin: -20px 21px 0 0;
+}
+.desc-click:link {
+	text-decoration: none;
+	color: #227dda;
+}
+.desc-click:hover {
+	text-decoration: none;
+	color: #227dda;
+}
+.desc-img {
+	display: inline-block;
+	margin-top: -2px;
+}
+
+.select-page {
+	text-align: right;
+	margin: 10px 0 7px 0;
+}
+.totalitems {
+	font-size: 12px;
+	color: #969696;
+	vertical-align: bottom;
+	height: 36px;
+	line-height: 36px;
+}
+
+.pagination {
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+	margin-left: 15px;
+}

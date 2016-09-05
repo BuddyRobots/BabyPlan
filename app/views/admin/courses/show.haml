@@ -9,12 +9,34 @@
       .tabbable
         %ul.nav.nav-tabs
           %li.active
-            %a{"data-toggle" => "tab", :href => "#tab1"} 开课区域
+            %a{"data-toggle" => "tab", :href => "#tab1"} 课程信息
           %li
-            %a{"data-toggle" => "tab", :href => "#tab2"} 课程信息
+            %a{"data-toggle" => "tab", :href => "#tab2"} 开课区域
 
         .tab-content
           #tab1.tab-pane.active
+            .desc-items
+              %span.course-name 课程名称:
+              %span.input-course 社会科学
+              %span.shelve 上架
+            .btn.edit-btn{:type => "button"} 
+              %img.edit{:src => "/assets/managecenter/edit.png"}
+              编辑
+            .btn.finish-btn{:type => "button"} 
+              %img.ticker{:src => "/assets/managecenter/ticker.png"}
+              完成
+            .desc-items
+              %span.course-name 主讲人:
+              %span.input-course 尼古拉斯.赵四
+              %span.course-name 费用:
+              %span.input-course 700元\节
+          
+             
+            .book-introduce
+              %span.introduce 课程介绍:
+              %span.wangedit-area
+                #edit-area
+          #tab2.tab-pane
             .manage-box.clearfix
               .user-checkbox
                 %span.user-review 课程名称：
@@ -25,12 +47,7 @@
                   %input#inlineCheckbox2{:type => "checkbox", :value => "option2"} 未开课
                 %label.checkbox.inline
                   %input#inlineCheckbox2{:type => "checkbox", :value => "option2"} 已结课
-              .btn.edit-btn{:type => "button"} 
-                %img.edit{:src => "/assets/managecenter/edit.png"}
-                编辑
-              .btn.finish-btn{:type => "button"} 
-                %img.ticker{:src => "/assets/managecenter/ticker.png"}
-                完成
+              
             .table-box
               %table.table.table-bordered.user-table
                 %caption
@@ -67,21 +84,6 @@
             %p.class-calender 课程日历
             .calender-box
 
-          #tab2.tab-pane
-            .desc-items
-              %span.course-name 课程名称:
-              %span.input-course 社会科学
-              %span.shelve 上架
-            .desc-items
-              %span.course-name 主讲人:
-              %span.input-course 尼古拉斯.赵四
-              %span.course-name 费用:
-              %span.input-course 700元\节
-      
-             
-            .book-introduce
-              %span.introduce 课程介绍:
-              %span.wangedit-area
-                #edit-area
+         
 
 
