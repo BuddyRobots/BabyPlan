@@ -1,4 +1,4 @@
 
 $ ->
-	$(".bookadd-btn").click ->
+  $(".add-btn").click ->
     location.href = "/admin/courses/new"

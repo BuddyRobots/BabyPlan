@@ -12,8 +12,8 @@
         .input-append
           %input#appendedInputButton.span2{:type => "text", :placeholder => "输入课程名称", :value => "#{@keyword}"}
           %button.btn#search-btn{:type => "button"}
-      .btn.bookadd-btn{:type => "button", :href => "#kidsaddModal", "data-toggle" => "modal"} 
-        %img.book-edit{:src => "/assets/managecenter/add.png"}
+      .btn.add-btn{:type => "button", :href => "#kidsaddModal", "data-toggle" => "modal"} 
+        %img.course-edit{:src => "/assets/managecenter/add.png"}
         添加课程
     
     .manage-content
@@ -38,10 +38,12 @@
                   %td= c[:speaker]
                   %td= c[:price]
                   %td
+                    %a.details{:href => "/admin/courses/#{c[:id]}"} 详情
+                  %td
                     - if c[:available]
-                      %a.set-available.link-available{:href => "javascript:void(0);"} 详情
+                      %a.set-available.link-available{:href => "javascript:void(0);"} 下架
                     - else
-                      %a.set-available.link-unavailable{:href => "javascript:void(0);"} 下架
+                      %a.set-available.link-unavailable{:href => "javascript:void(0);"} 上架
 
         .select-page 
           %span.totalitems= "共#{@courses[:total_page]}页,总计#{@courses[:total_number]}条"
