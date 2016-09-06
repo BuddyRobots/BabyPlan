@@ -17,11 +17,11 @@
         添加儿童中心
     
     .manage-content
-      / - if @courses[:data].length == 0
-      /   .undiscover
-      /     %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
-      /     %span.message 抱歉！暂无查找信息
-      / - else
+      - if @centers[:data].length == 0
+        .undiscover
+          %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
+          %span.message 抱歉！暂无查找信息
+      - else
       .table-box
         %table.table.table-bordered.user-table
           %caption
@@ -34,39 +34,28 @@
               %th 开设课程
               %th{:colspan => "2"} 操&nbsp作
           %tbody
-            / - @courses[:data].each do |c|
-            /   %tr{class: "#{ c[:available] ? "available" : "unavailable" }", "data-id" => c[:id]}
-            /     %td= c[:name]
-            /     %td= c[:speaker]
-            /     %td= c[:price]
-            /     %td
-            /       %a.details{:href => "/admin/courses/#{c[:id]}"} 详情
-            /     %td
-            /       - if c[:available]
-            /         %a.set-available.link-available{:href => "javascript:void(0);"} 下架
-            /       - else
-            /         %a.set-available.link-unavailable{:href => "javascript:void(0);"} 上架
-            %tr
-              %td 朝阳儿童中心
-              %td 富仁名苑26号楼101
-              %td 5人
-              %td 300种
-              %td 10
-              %td 
-                %a.access{:href => "javascript:void(0);"} 进入
-              %td
-                %a.description{:href => "javascript:void(0);"} 详情
+            - @centers[:data].each do |c|
+              %tr{"data-id" => c[:id]}
+                %td= c[:name]
+                %td= c[:address]
+                %td= c[:staffs_desc]
+                %td= c[:books_desc]
+                %td= c[:courses_desc]
+                %td 
+                  %a.access{:href => "javascript:void(0);"} 进入
+                %td
+                  %a.description{:href => "javascript:void(0);"} 详情
 
-        / .select-page 
-        /   %span.totalitems= "共#{@courses[:total_page]}页,总计#{@courses[:total_number]}条"
-        /   %span.choice-page
-        /     .pagination.pagination-small
-        /       %ul
-        /         %li
-        /           %a{:href => "/staff/courses?keyword=#{@keyword}&page=#{@courses[:previous_page]}"} «
-        /         - ( (@courses[:previous_page] > 2 ? @courses[:previous_page] - 2 : 1) .. (@courses[:next_page] < @courses[:total_page] - 2 ? @courses[:next_page] + 2 : @courses[:total_page]) ).to_a.each do |page|
-        /           %li
-        /             %a{:href => "/staff/courses?keyword=#{@keyword}&page=#{page}"}= page
-        /         %li
-        /           %a{:href => "/staff/courses?keyword=#{@keyword}&page=#{@courses[:next_page]}"} »
+        .select-page 
+          %span.totalitems= "共#{@centers[:total_page]}页,总计#{@centers[:total_number]}条"
+          %span.choice-page
+            .pagination.pagination-small
+              %ul
+                %li
+                  %a{:href => "/admin/centers?keyword=#{@keyword}&page=#{@centers[:previous_page]}"} «
+                - ( (@centers[:previous_page] > 2 ? @centers[:previous_page] - 2 : 1) .. (@centers[:next_page] < @centers[:total_page] - 2 ? @centers[:next_page] + 2 : @centers[:total_page]) ).to_a.each do |page|
+                  %li
+                    %a{:href => "/admin/centers?keyword=#{@keyword}&page=#{page}"}= page
+                %li
+                  %a{:href => "/admin/centers?keyword=#{@keyword}&page=#{@centers[:next_page]}"} »
 
