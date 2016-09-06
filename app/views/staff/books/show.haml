@@ -13,7 +13,7 @@
     .btn.edit-btn{:type => "button"} 
       %img.edit{:src => "/assets/managecenter/edit.png"}
       编辑
-    .btn#QRcode-btn{:type => "button"} 生成二维码
+    / .btn#QRcode-btn{:type => "button"} 生成二维码
     - if @book.available == true
       .btn#unshelve-btn.available{:type => "button"} 
         %img.end{:src => "/assets/managecenter/unshelve.png"}

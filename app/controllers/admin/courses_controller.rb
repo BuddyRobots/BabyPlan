@@ -18,6 +18,7 @@ class Admin::CoursesController < Admin::ApplicationController
   end
 
   def show
+    @course = Course.where(id: params[:id]).first
   end
 
   def set_available
