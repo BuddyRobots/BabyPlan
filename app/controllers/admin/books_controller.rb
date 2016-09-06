@@ -10,6 +10,9 @@ class Admin::BooksController < Admin::ApplicationController
   end
 
   def show
+    @book = Book.where(id: params[:id]).first
+    similar_books = Book.where(isbn: @book.isbn).where(:center_id.ne => @book.center_id)
+    @similar_books = auto_paginate(similar_books)
   end
 
 end
