@@ -30,4 +30,8 @@ $ ->
     $("#classspeaker-input").val($("#classspeaker-span").text())
     $("#charge-input").val($("#charge-span").text())
 
+    $("#edit-area").html($(".introduce-details").html())
+
+    $(".introduce-details").toggle()
+    $(".wangedit-area").toggle()
  
