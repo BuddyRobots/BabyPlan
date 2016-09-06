@@ -1,17 +1,26 @@
 - content_for :head do
   = javascript_include_tag "pages/admin/courses/show-bundle"
   = stylesheet_link_tag "pages/admin/courses/show-bundle", :media => "all"
+  :javascript
+    window.cid = "#{@course.id.to_s}"
 
 
 .content-area
-  
   .manage-content
-    .btn.edit-btn{:type => "button"} 
-      %img.edit{:src => "/assets/managecenter/edit.png"}
-      编辑
     .btn.finish-btn{:type => "button"} 
       %img.ticker{:src => "/assets/managecenter/ticker.png"}
       完成
+    .btn.edit-btn{:type => "button"} 
+      %img.edit{:src => "/assets/managecenter/edit.png"}
+      编辑
+    - if @course.available == true
+      .btn#unshelve-btn.available{:type => "button"} 
+        %img.end{:src => "/assets/managecenter/unshelve.png"}
+        %span 下架
+    - else
+      .btn#unshelve-btn.unavailable{:type => "button"} 
+        %img.end{:src => "/assets/managecenter/shelve.png"}
+        %span 上架
     .tabbable
       %ul.nav.nav-tabs
         %li.active
@@ -38,10 +47,11 @@
             %span.edit-box
               %input.input-area#charge-input{:type => "text"}
         
-           
-          .book-introduce
+          .course-introduce
             %span.introduce 课程介绍:
-            %span.wangedit-area
+            %div.introduce-details
+              = @course.desc.html_safe
+            .wangedit-area
               #edit-area
         #tab2.tab-pane
           .manage-box.clearfix

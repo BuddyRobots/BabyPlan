@@ -78,7 +78,15 @@ ul, li {
 }
 .finish-btn {
 	@extend .edit-btn;
+	display: none;
+}
+#unshelve-btn {
+	@extend .edit-btn;
 	right: 140px;
+}
+#unshelve-btn:hover {
+	background: #f7873d;
+	color: white;
 }
 
 .tabbable {
@@ -193,8 +201,15 @@ ul, li {
 	margin-right: 20px;
 	vertical-align: middle;
 }
-.book-introduce {
+.course-introduce {
 	margin-bottom: 20px;
+	.introduce-details {
+		font-size: 14px;
+		color: #323232;
+		display: inline-block;
+		width: 86%;
+		text-indent: 28px;
+	}
 	.introduce {
 		display: inline-block;
 		vertical-align: top;
@@ -203,9 +218,10 @@ ul, li {
 		margin: 0 10px 15px 16px;
 	}
 	.wangedit-area {
-		display: inline-block;
+		// display: inline-block;
 		width: 89.5%;
 		font-size: 14px;
+		display: none;
 	}
 	#edit-area {
 		height: 250px;
