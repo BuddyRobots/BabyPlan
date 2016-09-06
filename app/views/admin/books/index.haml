@@ -10,8 +10,6 @@
       .input-append.user-search-box
         %input#appendedInputButton.span2{:type => "text", :placeholder => "输入绘本名称", :value => "#{@keyword}"}
         %button.btn#search-btn{:type => "button"}
-      / %label.checkbox
-      /  %input{:type => "checkbox"} 合并书籍管理
 
     .manage-content
       - if @books[:data].length == 0

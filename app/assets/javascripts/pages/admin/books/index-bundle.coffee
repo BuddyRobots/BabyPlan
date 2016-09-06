@@ -1,7 +1,7 @@
 $ ->
   search = ->
     value = $("#appendedInputButton").val()
-    window.location.href = "/admin/books?keyword=" + value
+    window.location.href = "/admin/books?keyword=" + value + "&page=1"
 
   $("#search-btn").click ->
     search()

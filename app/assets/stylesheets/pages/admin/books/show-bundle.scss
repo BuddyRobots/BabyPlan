@@ -1,0 +1,321 @@
+@import "wangEditor";
+@import "jquery-ui";
+
+
+.modal-body, input, label {
+	margin: 0;
+	padding: 0;
+	max-height: 600px;
+}
+
+.content-area {
+	position:absolute;
+	right: 0;
+	left: 160px;
+	bottom: 0;
+	top: 60px;
+	background:#f7fcff;
+	box-shadow: -1px -1px 6px #9c9c9c inset;
+	padding: 20px;
+}
+
+.manage-content {
+	overflow: auto;
+	position: absolute;
+	top: 20px;
+	left: 0px;
+	bottom: 0px;
+	right: 0px;
+	box-shadow: 0 -1px 6px #9c9c9c inset;
+	background: white;  
+	margin: 0 20px 20px 20px;
+}
+.tabbable {
+	margin: 20px 20px auto 20px;
+}
+.nav-tabs {
+	margin-bottom: 0;
+	border-bottom: 0;
+	li {
+		font-size: 16px;
+		color: #323232;
+	}
+}
+.book-edit {
+	vertical-align: middle;
+}
+.book-detail {
+	border: 1px solid #c8c8c8;
+	border-bottom-left-radius: 6px;
+	border-bottom-right-radius: 6px;
+}
+#name-span {
+	margin-right: 8px;
+}
+.shelve {
+	color: #0fc077;
+	vertical-align: middle;
+}
+.form-inline {
+	margin: 20px 0;
+}
+.input-caption {
+	display: inline-block;
+	vertical-align: middle;
+	font-size: 16px;
+	color: #323232;
+	margin-right: 10px;
+	margin-left: 20px
+}
+#center-address {
+	@extend .input-caption;
+	margin-left: 0;
+}
+#address-span {
+	margin-right: 55px;
+}
+#illustrator-label {
+	@extend .input-caption;
+	margin-left: 10px;
+}
+#book-number {
+	margin-left: 42px
+}
+.unedit-box {
+	display: inline-block;
+	vertical-align: middle;
+	font-size: 14px;
+	color: #323232;
+	width: 252px;
+	height: 30px;
+	line-height: 30px;
+	margin: 0 20px 0 0;
+}
+.edit-box {
+	display: none;
+}
+.input-area {
+	width: 238px;
+	height: 30px;
+	padding: 0;
+	margin: 0 20px 0 0 !important;
+}
+
+.controls-row {
+	margin: 0 0 20px 31.5px;
+}
+.introduce {
+	display: inline-block;
+	vertical-align: top;
+	float: left;
+	font-size: 16px;
+	color: #323232;
+	margin:0 13px 0 19px;
+}
+.wangedit-area {
+	float: left;
+	width: 86%;
+	font-size: 14px;
+	display: none;
+}
+#edit-area {
+	height: 250px;
+}
+.cover-img, .back-img {
+	display: inline-block;
+	width: 100px;
+	height: 120px;
+}
+.book-introduce {
+	margin-bottom: 20px;
+}
+.introduce-details {
+	font-size: 14px;
+	color: #323232;
+	display: inline-block;
+	width: 86%;
+	text-indent: 28px;
+}
+.message {
+	display: inline-block;
+	width: 100px;
+	height: 34px;
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+	border: 1px solid #c8c8c8;
+	border-bottom: 0;
+	font-size: 16px;
+	color: #323232;
+	text-align: center;
+	line-height: 34px;
+	margin: 20px 20px 0 20px;
+}
+.shelve-number {
+	color: #d70c19;
+	font-size: 14px;
+}
+.bookuse-message {
+	margin: 0 20px;
+	border: 1px solid #c8c8c8;
+	border-bottom-left-radius: 6px;
+	border-bottom-right-radius: 6px;
+	border-top: 0;
+}
+.table {
+	margin: 0;
+	border: 0;
+	font-size: 14px;
+	color: #323232;
+	td {
+		text-align: center;
+	}
+}
+
+.cover-back {
+	border-radius: 6px;
+	margin-top: 20px;
+	border: 1px solid #c8c8c8;
+	padding: 15px 20px;
+	font-size: 16px;
+	color: #323232;
+}
+.cover {
+	vertical-align: top;
+	margin-right: 5px;
+}
+.back {
+	@extend .cover;
+	margin-left: 20px;
+}
+
+
+// user review
+.select-page {
+	text-align: right;
+	margin: 10px 0 0 0;
+	padding-bottom: 5px;
+}
+.totalitems {
+	font-size: 12px;
+	color: #969696;
+	vertical-align: bottom;
+	height: 36px;
+	line-height: 36px;
+}
+
+.pagination {
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+	margin-left: 15px;
+}
+.user-review-box {
+	border-radius: 6px;
+	border: 1px solid #c8c8c8;
+}
+.user-checkbox {
+	margin-bottom: 5px;
+	margin-left: 20px;
+}
+.user-review {
+	font-size: 16px;
+	color: #323232;
+	margin: 0 20px;
+	vertical-align: bottom;
+}
+.inline{
+	font-size: 12px;
+	color: #323232;
+	margin-right: 5px;
+	line-height: 22px;
+}
+#inlineCheckbox1, #inlineCheckbox2 {
+	width: 16px;
+	height: 16px;
+	margin-right: 5px;
+}
+.book-description {
+	position: relative;
+	border-top: 1px solid #c8c8c8;
+}
+.book-img {
+	display: block;
+	float: left;
+	margin: 0 10px;
+	width: 60px;
+	height: 60px;
+}
+.user-item {
+	margin: 18px 0;
+	p {
+		padding: 1.2px;
+	}
+}
+
+.user-name {
+	font-size: 16px;
+	color: #646464;
+	margin-top: -3px;
+}
+.date {
+	font-size: 12px;
+	color: #969696;
+}
+.user-review-content {
+	font-size: 14px;
+	color: #787878;
+}
+.review-status {
+	position: absolute;
+	top: 39px;
+	right: 20px;
+	color: white;
+	font-size: 14px;
+	color: #323232;
+}
+#unopen {
+	color: #0fc077;
+}
+#open {
+	color: #f7873d;
+}
+.table-box {
+	padding: 0;
+}
+.user-table {
+	border-radius: 6px;
+	border: 1px solid #c8c8c8;
+	font-size: 14px;
+	color: #323232;
+	margin-bottom: 0;
+	th {
+		text-align: center;
+		height: 40px;
+		line-height: 40px;
+		padding: 0;
+	}
+	td {
+		font-size: 12px;
+		color: #505050;
+		height:45px;
+		line-height: 45px;
+		text-align: center;
+		padding: 0;
+		.unshelve {
+			color: #969696;
+		}
+		.shelve {
+			color: #f7873d;
+		}
+		a {
+			
+			text-decoration: underline;
+		}
+	}
+	.unavailable {
+		background: #eaeaea;
+	}
+	.clicked {
+		background: #fdd3b9;
+	}
+}

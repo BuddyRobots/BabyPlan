@@ -26,9 +26,11 @@
 	right: 0px;
 }
 .edit-btn {
+	position: absolute;
+	top: 11px;
+	right: 20px;
+	z-index: 10;
 	padding: 0;
-	float: right;
-	margin: 11px 20px 0 0;
 	width: 100px;
 	height: 34px;
 	line-height: 32px;
@@ -40,10 +42,12 @@
 	background: #f7873d;
 	color: white;
 }
-#unshelve-btn, .end-btn, .declare-btn {
+#unshelve-btn {
 	@extend .edit-btn;
+	right: 140px;
 }
-.end-btn, .declare-btn {
+.end-btn {
+	@extend .edit-btn;
 	display: none;
 }
 .edit-img {

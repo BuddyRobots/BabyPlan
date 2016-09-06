@@ -2,3 +2,53 @@
   = javascript_include_tag "pages/admin/announcements/show-bundle"
   = stylesheet_link_tag "pages/admin/announcements/show-bundle", :media => "all"
 
+.content-area
+  .content-box
+    - if @announcement.center.present?
+      .btn.end-btn{:type => "button"} 
+        %img.end-img{:src => "/assets/managecenter/ticker.png"}
+        完成
+      .btn.edit-btn{:type => "button"} 
+        %img.edit-img{:src => "/assets/managecenter/edit.png"}
+        编辑
+      - if @announcement.is_published
+        .btn#unshelve-btn.published{:type => "button"} 
+          %img.unshelve{:src => "/assets/managecenter/unshelve.png"}
+          %span 隐藏
+      - else
+        .btn#unshelve-btn.unpublished{:type => "button"} 
+          %img.unshelve{:src => "/assets/managecenter/shelve.png"}
+          %span 公布
+
+    .manage-content
+      %ul.nav.nav-tabs
+        %li.active
+          %a{"data-toggle" => "tab", :href => "#tab1"}= @announcement.center.present? ? "本区公告" : "全局公告"
+
+      .display-box
+        .display-area
+          %p.caption-header
+            %span#show-caption= @announcement.title
+            %a#publish-status{class: @announcement.is_published ? "declared" : "undeclared", :href => "javascript:void(0);"}= @announcement.is_published ? "已公布" : "未公布"
+          .display-content
+            = @announcement.content.html_safe
+
+      / 点击edit-btn后display-box隐藏，edit-area显示
+      .edit-area
+        .caption-div
+          %form.form-inline
+            %input#input-caption{:placeholder => "请输入标题", :type => "text"}
+
+        .wangedit-area
+          #edit-box
+            %p 请输入内容...
+
+
+#declareModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
+  .modalheader
+    %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", :src => "/assets/managecenter/close.png"}
+  .modal-body
+    %p 是否确认发布本条消息
+  .modal-footer
+    %a.btn.yes{:href => "javascript:void(0);"} 是
+    %a.btn.btn-primary.no{:href => "javascript:void(0);"} 否
