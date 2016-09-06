@@ -51,7 +51,7 @@
             %span.edit-box
               %input.input-area#charge-input{:type => "text"}
         
-          .course-introduce
+          .course-introduce.clearfix
             %span.introduce 课程介绍:
             %div.introduce-details
               = @course.desc.to_s.html_safe

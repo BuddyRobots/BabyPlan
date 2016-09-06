@@ -212,13 +212,14 @@ ul, li {
 	}
 	.introduce {
 		display: inline-block;
+		float: left;
 		vertical-align: top;
 		font-size: 16px;
 		color: #323232;
 		margin: 0 10px 15px 16px;
 	}
 	.wangedit-area {
-		// display: inline-block;
+		float: left;
 		width: 89.5%;
 		font-size: 14px;
 		display: none;
