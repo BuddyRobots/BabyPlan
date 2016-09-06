@@ -40,6 +40,10 @@ class Course
       price: self.price,
       available: self.available
     }
+  end
 
+  def set_available(available)
+    self.update_attribute(:available, available == true)
+    nil
   end
 end

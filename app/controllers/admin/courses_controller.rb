@@ -20,4 +20,11 @@ class Admin::CoursesController < Admin::ApplicationController
   def show
   end
 
+  def set_available
+    @course = Course.where(id: params[:id]).first
+    retval = ErrCode::COURSE_NOT_EXIST if @course.blank?
+    retval = @course.set_available(params[:available])
+    render json: retval_wrapper(retval)
+  end
+
 end
