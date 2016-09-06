@@ -2,6 +2,7 @@
 
 $ ->
 
+# wangEditor
   editor = new wangEditor('edit-area')
 
   editor.config.menus = [

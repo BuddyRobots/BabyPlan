@@ -15,12 +15,6 @@ ul, li {
 	box-shadow: -1px -1px 6px #9c9c9c inset;
 	padding: 20px;
 }
-.content-box {
-	position: relative;
-	box-shadow: 0 -1px 6px #9c9c9c inset;
-	background: white;  
-	height: 100%;
-}
 .manage-content {
 	overflow: auto;
 	position: absolute;
@@ -28,6 +22,9 @@ ul, li {
 	left: 0px;
 	bottom: 0px;
 	right: 0px;
+	box-shadow: 0 -1px 6px #9c9c9c inset;
+	background: white;  
+	margin: 0 20px 20px 20px;
 }
 
 .manage-box {
@@ -63,8 +60,10 @@ ul, li {
 	margin-right: 5px;
 }
 .edit-btn {
-	float: right;
-	margin: -25px 20px 0 0;
+	position: absolute;
+	top: 11px;
+	right: 20px;
+	z-index: 10;
 	width: 100px;
 	height: 34px;
 	padding: 0;
@@ -79,11 +78,13 @@ ul, li {
 }
 .finish-btn {
 	@extend .edit-btn;
+	right: 140px;
 }
 
 .tabbable {
-	padding: 0 20px 20px 20px;
+	padding: 20px;
 }	
+
 .nav-tabs {
 	margin-bottom: 0;
 	border: 0;
@@ -94,6 +95,10 @@ ul, li {
 }
 .tab-pane {
 	border: 1px solid #ddd;
+	border-radius: 6px;
+}
+#tab1 {
+	border-radius: 0 6px 6px 6px;
 }
 .table-box {
 	padding: 0;
@@ -151,20 +156,42 @@ ul, li {
 .desc-items {
 	margin: 15px 16px;
 }
-.course-name {
-	font-size: 16px;
-	color: #323232;
-}
-.input-course {
+.unedit-box {
+	display: inline-block;
+	vertical-align: middle;
 	font-size: 14px;
 	color: #323232;
+	width: 252px;
+	height: 30px;
+	line-height: 30px;
+	margin: 0 20px 0 0;
+}
+.edit-box {
+	display: none;
+}
+.input-area {
+	width: 238px;
+	height: 30px;
+	padding: 0;
+	margin: 0 20px 0 0 !important;
+}
+.course-name {
+	display: inline-block;
+	vertical-align: middle;
+	font-size: 16px;
+	color: #323232;
+	margin-right: 10px;
+}
+#speaker {
+	margin-left: 16px;
+}
+.shelve {
+	font-size: 14px;
+	color: #0fc077;
 	display: inline-block;
 	margin-left: 5px;
 	margin-right: 20px;
-}
-.shelve {
-	@extend .input-course;
-	color: #0fc077;
+	vertical-align: middle;
 }
 .book-introduce {
 	margin-bottom: 20px;
@@ -173,11 +200,11 @@ ul, li {
 		vertical-align: top;
 		font-size: 16px;
 		color: #323232;
-		margin: 0 5px 15px 16px;
+		margin: 0 10px 15px 16px;
 	}
 	.wangedit-area {
 		display: inline-block;
-		width: 90%;
+		width: 89.5%;
 		font-size: 14px;
 	}
 	#edit-area {

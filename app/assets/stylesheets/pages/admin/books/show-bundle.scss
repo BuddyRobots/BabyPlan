@@ -45,7 +45,7 @@
 	vertical-align: middle;
 }
 .book-detail {
-	border: 1px solid #c8c8c8;
+	border: 1px solid #ddd;
 	border-bottom-left-radius: 6px;
 	border-bottom-right-radius: 6px;
 }
@@ -142,7 +142,7 @@
 	height: 34px;
 	border-top-left-radius: 4px;
 	border-top-right-radius: 4px;
-	border: 1px solid #c8c8c8;
+	border: 1px solid #ddd;
 	border-bottom: 0;
 	font-size: 16px;
 	color: #323232;
@@ -156,7 +156,7 @@
 }
 .bookuse-message {
 	margin: 0 20px;
-	border: 1px solid #c8c8c8;
+	border: 1px solid #ddd;
 	border-bottom-left-radius: 6px;
 	border-bottom-right-radius: 6px;
 	border-top: 0;
@@ -174,7 +174,7 @@
 .cover-back {
 	border-radius: 6px;
 	margin-top: 20px;
-	border: 1px solid #c8c8c8;
+	border: 1px solid #ddd;
 	padding: 15px 20px;
 	font-size: 16px;
 	color: #323232;
@@ -188,6 +188,23 @@
 	margin-left: 20px;
 }
 
+// undiscover message
+.undiscover {
+	text-align: center;
+	padding: 30px;
+	border: 1px solid #ddd;
+	border-radius: 6px;
+}
+.undiscover-icon {
+	display: inline-block;
+	width: 100%;
+	max-width: 39px;
+}
+.undiscover-message {
+	font-size: 16px;
+	color: #969696;
+	margin-left: 20px;
+}
 
 // user review
 .select-page {
@@ -211,7 +228,7 @@
 }
 .user-review-box {
 	border-radius: 6px;
-	border: 1px solid #c8c8c8;
+	border: 1px solid #ddd;
 }
 .user-checkbox {
 	margin-bottom: 5px;
@@ -236,7 +253,7 @@
 }
 .book-description {
 	position: relative;
-	border-top: 1px solid #c8c8c8;
+	border-top: 1px solid #ddd;
 }
 .book-img {
 	display: block;
@@ -284,7 +301,7 @@
 }
 .user-table {
 	border-radius: 6px;
-	border: 1px solid #c8c8c8;
+	border: 1px solid #ddd;
 	font-size: 14px;
 	color: #323232;
 	margin-bottom: 0;
