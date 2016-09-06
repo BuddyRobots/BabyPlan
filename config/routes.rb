@@ -41,6 +41,9 @@ Rails.application.routes.draw do
       end
     end
     resources :announcements do
+      member do
+        post :set_publish
+      end
     end
     resources :centers do
     end

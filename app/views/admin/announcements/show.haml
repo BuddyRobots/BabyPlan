@@ -1,10 +1,12 @@
 - content_for :head do
   = javascript_include_tag "pages/admin/announcements/show-bundle"
   = stylesheet_link_tag "pages/admin/announcements/show-bundle", :media => "all"
+  :javascript
+    window.aid = "#{@announcement.id.to_s}"
 
 .content-area
   .content-box
-    - if @announcement.center.present?
+    - if @announcement.center.nil?
       .btn.end-btn{:type => "button"} 
         %img.end-img{:src => "/assets/managecenter/ticker.png"}
         完成

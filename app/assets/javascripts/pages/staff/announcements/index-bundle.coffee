@@ -1,5 +1,3 @@
-
-
 $ ->
   if window.profile == "local"
     $('.nav-tabs a[href="#tab2"]').tab('show')
