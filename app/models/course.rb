@@ -42,6 +42,18 @@ class Course
     }
   end
 
+  def update_info(course_info)
+    self.update_attributes(
+      {
+        name: course_info["name"],
+        price: course_info["price"],
+        desc: course_info["desc"],
+        speaker: course_info["speaker"]
+      }
+    )
+    nil
+  end
+
   def set_available(available)
     self.update_attribute(:available, available == true)
     nil

@@ -3,6 +3,7 @@
   = stylesheet_link_tag "pages/admin/courses/show-bundle", :media => "all"
   :javascript
     window.cid = "#{@course.id.to_s}"
+    window.price = "#{@course.price}"
 
 
 .content-area
@@ -32,25 +33,28 @@
         #tab1.tab-pane.active
           .desc-items
             %span.course-name 课程名称:
-            %span.unedit-box#classname-span 社会科学
+            %span.unedit-box#classname-span= @course.name
             %span.edit-box
               %input.input-area#classname-input{:type => "text"}
-            %span.shelve 上架
+            - if @course.available
+              %span.shelve 在架上
+            - else
+              %span.shelve 未上架
           
           .desc-items
             %span.course-name#speaker 主讲人:
-            %span.unedit-box#classspeaker-span 尼古拉斯.赵四
+            %span.unedit-box#classspeaker-span= @course.speaker
             %span.edit-box
               %input.input-area#classspeaker-input{:type => "text"}
             %span.course-name 费用:
-            %span.unedit-box#charge-span 700元\节
+            %span.unedit-box#charge-span= @course.price.to_s + "元"
             %span.edit-box
               %input.input-area#charge-input{:type => "text"}
         
           .course-introduce.clearfix
             %span.introduce 课程介绍:
             %div.introduce-details
-              = @course.desc.html_safe
+              = @course.desc.to_s.html_safe
             .wangedit-area
               #edit-area
         #tab2.tab-pane
