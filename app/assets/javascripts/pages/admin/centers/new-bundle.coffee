@@ -15,12 +15,8 @@ $ ->
   editor.create()
 
   marker = null
-  window.data = null
   map = null
   geocoder = null
-  window.p1 = null
-  window.p2 = null
-  window.p = null
   # 自定义Marker图标样式
   size = new qq.maps.Size(30, 30)
   origin = new qq.maps.Point(0, 0)
@@ -31,6 +27,9 @@ $ ->
     origin,
     anchor
     )
+
+  window.lat = null
+  window.lng = null
 
   init = ->
     center = new qq.maps.LatLng(39.87601941962116, 116.43310546875)
@@ -45,14 +44,10 @@ $ ->
       map,
       'click',
       (d) ->
-        console.log d
-        window.data = d
-        console.log window.data.latLng.lat
-        console.log window.data.latLng.lng
+        window.lat = d.latLng.lat
+        window.lng = d.latLng.lng
        
-        p1 = window.data.latLng.lat
-        p2 = window.data.latLng.lng
-        p = new qq.maps.LatLng(p1, p2)
+        p = new qq.maps.LatLng(window.lat, window.lng)
 
         if marker != null
           marker.setVisible(false)
@@ -70,7 +65,7 @@ $ ->
   init()
 
   codeAddress = ->
-    address = document.getElementById('address').value
+    address = document.getElementById('center-address').value
     #对指定地址进行解析
     geocoder.getLocation(address)
     #设置服务请求成功的回调函数
@@ -78,6 +73,8 @@ $ ->
       map.setCenter(result.detail.location)
       if marker != null
         marker.setVisible(false)
+      window.lat = result.detail.location.lat
+      window.lng = result.detail.location.lng
       marker = new qq.maps.Marker(
         map: map
         position: result.detail.location)
@@ -86,6 +83,34 @@ $ ->
     geocoder.setError ->
       alert '出错了，请输入正确的地址！！！'
 
-  $("#auto-jump-position").click ->
+  $("#auto-locate").click ->
     codeAddress()
     
+  $(".end-btn").click ->
+    name = $("#center-name").val()
+    address = $("#center-address").val()
+    desc = editor.$txt.html()
+    available = $("#available").is(":checked")
+    if name == "" || address == "" || desc == ""
+      $.page_notification("请补全信息")
+      return
+    if window.lat == null
+      $.page_notification("请在地图上确定具体位置")
+      return
+    $.postJSON(
+      '/admin/centers',
+      {
+        center: {
+          name: name
+          address: address
+          desc: desc
+          available: available
+          lat: window.lat
+          lng: window.lng
+        }
+      },
+      (data) ->
+        console.log data
+        if data.success
+          location.href = "/admin/centers/" + data.center_id
+      )

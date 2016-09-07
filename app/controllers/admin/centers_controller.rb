@@ -9,6 +9,11 @@ class Admin::CentersController < Admin::ApplicationController
     end
   end
 
+  def create
+    retval = Center.create_center(params[:center])
+    render json: retval_wrapper(retval)
+  end
+
   def new
   end
 

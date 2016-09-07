@@ -21,12 +21,12 @@
           %input.checkbox-content{:type => "checkbox"} 开放
 
       %label.input-name 详细地址:
-      %input.input-area#address{:type => "text"}
+      %input.input-area#center-address{:type => "text"}
       .map-position
         %span.map-address 地图位置:
         %span.notice 
           请在地图上点击定位或
-          %a#auto-jump-position{:href => "javascript:void(0);"} 自动定位
+        %a#auto-locate{:href => "javascript:void(0);"} 自动定位
         #map-container
       
       .center-introduce.clearfix

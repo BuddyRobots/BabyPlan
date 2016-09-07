@@ -82,7 +82,7 @@
 .checkbox {
 	margin-left: 15px;
 }
-#address {
+#center-address {
 	@extend .input-area;
 	width: 500px;
 }
@@ -97,6 +97,9 @@
 		margin-left: 5px;
 		font-size: 14px;
 		color: #323232;
+	}
+	#auto-locate {
+		font-size: 14px;
 	}
 }
 .introduce {
