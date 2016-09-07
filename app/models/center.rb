@@ -36,7 +36,7 @@ class Center
   def books_desc
     total_stock = 0
     self.books.each { |e| total_stock = total_stock + e.stock }
-    self.books.length.to_s + "类/" + total_stock.to_s + "本"
+    self.books.length.to_s + "种/" + total_stock.to_s + "本"
   end
 
   def courses_desc
