@@ -5,7 +5,8 @@ class Center
 
   field :name, type: String
   field :address, type: String
-  field :location, type: String
+  field :lat, type: String
+  field :lng, type: String
   field :desc, type: String
   field :available, type: Boolean
 
@@ -14,6 +15,17 @@ class Center
   has_many :announcements
   has_many :staffs, class_name: "User", inverse_of: :staff_center
 
+  def self.create_center(center_info)
+    center = Center.create(
+      name: center_info[:name],
+      address: center_info[:address],
+      desc: center_info[:desc],
+      available: center_info[:price],
+      lat: center_info[:lat],
+      lng: center_info[:lng]
+    )
+    { center_id: center.id.to_s }
+  end
 
   def self.centers_for_select
     hash = { }

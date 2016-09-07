@@ -15,10 +15,9 @@ $ ->
   editor.create()
 
   marker = null
-  window.data = null
-  window.p1 = null
-  window.p2 = null
-  window.p = null
+
+  window.lat = null
+  window.lng = null
 
   init = ->
     map = new qq.maps.Map(document.getElementById("map-container"))
@@ -27,14 +26,10 @@ $ ->
       map,
       'click',
       (d) ->
-        console.log d
-        window.data = d
-        console.log window.data.latLng.lat
-        console.log window.data.latLng.lng
+        window.lat = d.latLng.lat
+        window.lng = d.latLng.lng
        
-        p1 = window.data.latLng.lat
-        p2 = window.data.latLng.lng
-        p = new qq.maps.LatLng(p1, p2)
+        p = new qq.maps.LatLng(window.lat, window.lng)
 
         if marker != null
           marker.setVisible(false)
@@ -59,3 +54,32 @@ $ ->
       )
 
   init()
+
+  $(".end-btn").click ->
+    name = $("#center-name").val()
+    address = $("#center-address").val()
+    desc = editor.$txt.html()
+    available = $("#available").is(":checked")
+    if name == "" || address == "" || desc == ""
+      $.page_notification("请补全信息")
+      return
+    if window.lat == null
+      $.page_notification("请在地图上确定具体位置")
+      return
+    $.postJSON(
+      '/admin/centers',
+      {
+        center: {
+          name: name
+          address: address
+          desc: desc
+          available: available
+          lat: window.lat
+          lng: window.lng
+        }
+      },
+      (data) ->
+        console.log data
+        if data.success
+          location.href = "/admin/centers/" + data.center_id
+      )
