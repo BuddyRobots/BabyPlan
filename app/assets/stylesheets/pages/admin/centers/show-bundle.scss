@@ -1,0 +1,265 @@
+@import "wangEditor";
+@import "jquery-ui";
+
+
+.modal-body, input, label {
+	margin: 0;
+	padding: 0;
+	max-height: 600px;
+}
+
+.content-area {
+	position:absolute;
+	right: 0;
+	left: 160px;
+	bottom: 0;
+	top: 60px;
+	background:#f7fcff;
+	box-shadow: -1px -1px 6px #9c9c9c inset;
+	padding: 20px;
+}
+
+.manage-content {
+	overflow: auto;
+	position: absolute;
+	top: 20px;
+	left: 0px;
+	bottom: 0px;
+	right: 0px;
+	box-shadow: 0 -1px 6px #9c9c9c inset;
+	background: white;  
+	margin: 0 20px 20px 20px;
+}
+.edit-btn {
+	position: absolute;
+	top: 11px;
+	right: 20px;
+	z-index: 10;
+	width: 100px;
+	height: 34px;
+	padding: 0;
+	line-height: 32px;
+	color: white;
+	background: #f7873d;
+	border-radius: 6px;
+}
+.edit-btn:hover {
+	background: #f7873d;
+	color: white;
+}
+.finish-btn {
+	@extend .edit-btn;
+	display: none;
+}
+#unshelve-btn {
+	@extend .edit-btn;
+	right: 140px;
+}
+#unshelve-btn:hover {
+	background: #f7873d;
+	color: white;
+}
+.tabbable {
+	margin: 20px 20px auto 20px;
+}
+.nav-tabs {
+	margin-bottom: 0;
+	border-bottom: 0;
+	li {
+		font-size: 16px;
+		color: #323232;
+	}
+}
+.book-edit {
+	vertical-align: middle;
+}
+.center-detail {
+	border: 1px solid #ddd;
+	border-radius: 0 6px 6px 6px;
+}
+#name-span {
+	width: auto;
+	margin-right: 15px;
+}
+.shelve {
+	color: #0fc077;
+	vertical-align: middle;
+}
+.form-inline {
+	margin: 20px 0;
+}
+.input-caption {
+	display: inline-block;
+	vertical-align: middle;
+	font-size: 16px;
+	color: #323232;
+	margin-right: 10px;
+	margin-left: 20px
+}
+.unedit-box {
+	display: inline-block;
+	vertical-align: middle;
+	font-size: 14px;
+	color: #323232;
+	width: 252px;
+	height: 30px;
+	line-height: 30px;
+	margin: 0 20px 0 0;
+}
+.edit-box {
+	display: none;
+}
+#center-address {
+	width: 400px;
+}
+.input-area {
+	width: 238px;
+	height: 30px;
+	padding: 0;
+	margin: 0 20px 0 0 !important;
+}
+.shelve {
+    color: #0fc077;
+    vertical-align: middle;
+}
+.map-position {
+	margin: 20px 20px 15px 20px;
+	.map-address {
+		font-size: 16px;
+		color: #323232;
+		vertical-align: top;
+		margin-right: 10px;
+	}
+	.notice {
+		display: inline-block;
+		font-size: 14px;
+		color: #323232;
+	}
+	#auto-locate {
+		font-size: 14px;
+	}
+}
+#map-container {
+	display: inline-block;
+	width: 90%;
+	height: 300px;
+	border: 1px solid #ddd;
+}
+.map-notice {
+	display: none;
+	margin-bottom: 5px;
+}
+
+.center-introduce {
+	padding-top: 5px;
+	margin-bottom: 20px;
+}
+.introduce {
+	float: left;
+	display: inline-block;
+	vertical-align: top;
+	font-size: 16px;
+	color: #323232;
+	margin: 0 10px 15px 20px;
+}
+.wangedit-area {
+	float: left;
+	width: 87%;
+	font-size: 14px;
+	display: none;
+}
+#edit-area {
+	height: 250px;
+}
+.introduce-details {
+	font-size: 14px;
+	color: #323232;
+	display: inline-block;
+	width: 87%;
+	text-indent: 28px;
+}
+ 
+
+.message {
+	display: inline-block;
+	width: 100px;
+	height: 34px;
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+	border: 1px solid #ddd;
+	border-bottom: 0;
+	font-size: 16px;
+	color: #323232;
+	text-align: center;
+	line-height: 34px;
+	margin: 20px 20px 0 20px;
+}
+
+// undiscover message
+.undiscover {
+	text-align: center;
+	padding: 30px;
+	border: 1px solid #ddd;
+	border-radius: 6px;
+}
+.undiscover-icon {
+	display: inline-block;
+	width: 100%;
+	max-width: 39px;
+}
+.undiscover-message {
+	font-size: 16px;
+	color: #969696;
+	margin-left: 20px;
+}
+
+// user review
+.select-page {
+	text-align: right;
+	margin: 10px 0 0 0;
+	padding-bottom: 5px;
+}
+.totalitems {
+	font-size: 12px;
+	color: #969696;
+	vertical-align: bottom;
+	height: 36px;
+	line-height: 36px;
+}
+
+.pagination {
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+	margin-left: 15px;
+}
+.table-box {
+	padding: 0;
+}
+.user-table {
+	border-radius: 6px;
+	border: 1px solid #ddd;
+	font-size: 14px;
+	color: #323232;
+	margin-bottom: 0;
+	th {
+		text-align: center;
+		height: 40px;
+		line-height: 40px;
+		padding: 0;
+	}
+	td {
+		font-size: 12px;
+		color: #505050;
+		height:45px;
+		line-height: 45px;
+		text-align: center;
+		padding: 0;
+	}
+	.unavailable {
+		background: #eaeaea;
+	}
+	.clicked {
+		background: #fdd3b9;
+	}
+}

@@ -1,4 +1,140 @@
 - content_for :head do
+  = javascript_include_tag "http://map.qq.com/api/js?v=2.exp"
   = javascript_include_tag "pages/admin/centers/show-bundle"
   = stylesheet_link_tag "pages/admin/centers/show-bundle", :media => "all"
 
+.content-area
+  .manage-content
+    .btn.finish-btn{:type => "button"} 
+      %img.ticker{:src => "/assets/managecenter/ticker.png"}
+      完成
+    .btn.edit-btn{:type => "button"} 
+      %img.edit{:src => "/assets/managecenter/edit.png"}
+      编辑
+    .btn#unshelve-btn.available{:type => "button"} 
+      %img.end{:src => "/assets/managecenter/unshelve.png"}
+      %span 关闭
+    / - if @book.available == true
+    /   .btn#unshelve-btn.available{:type => "button"} 
+    /     %img.end{:src => "/assets/managecenter/unshelve.png"}
+    /     %span 关闭
+    / - else
+    /   .btn#unshelve-btn.unavailable{:type => "button"} 
+    /     %img.end{:src => "/assets/managecenter/shelve.png"}
+    /     %span 开放
+    .tabbable
+      %ul.nav.nav-tabs
+        %li.active
+          %a#center-message{"data-toggle" => "tab", :href => "#tab1"} 基本信息
+        %li
+          %a#center-class{"data-toggle" => "tab", :href => "#tab2"} 开设课程
+        %li
+          %a#center-book{"data-toggle" => "tab", :href => "#tab3"} 绘本
+
+      .tab-content
+        #tab1.tab-pane.active
+          .center-detail
+            %form.form-inline
+              %label.input-caption 中心名称:
+              %span.unedit-box#name-span 朝阳区儿童中心
+              %span.edit-box
+                %input.input-area#name-input{:type => "text"}
+              %label#available-status.shelve 开放
+              / - if @book.available == true
+              /   %label#available-status.shelve 开放
+              / - else
+              /   %label#available-status.shelve 关闭
+            %form.form-inline
+              %label.input-caption 详细地址:
+              %span.unedit-box#address-span 富仁名苑26号楼101
+              %span.edit-box
+                %input.input-area#center-address{:type => "text"}
+            .map-position
+              %span.map-address 地图位置:
+              .map-notice
+                %span.notice 
+                  请在地图上点击定位或
+                %a#auto-locate{:href => "javascript:void(0);"} 自动定位
+              #map-container
+            
+            .center-introduce.clearfix
+              %span.introduce 中心介绍:
+              .introduce-details 朝阳区儿童中心位于安立路富仁名苑26号楼101
+              %span.wangedit-area
+                #edit-area
+
+        #tab2.tab-pane
+          .undiscover
+            %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
+            %span.undiscover-message 抱歉！暂无查找信息
+          .table-box
+            %table.table.table-bordered.user-table
+              %caption
+              %thead
+                %tr
+                  %th 课程名称
+                  %th 主讲人
+                  %th 上课地址
+                  %th 上课时间
+                  %th 报名人数
+                  %th 费&nbsp用
+              %tbody
+                / - @books[:data].each do |b|
+                /   %tr{class: "book-record #{ b[:available] ? "available" : "unavailable" }", "data-id" => b[:id]}
+                %tr
+                  %td 儿童编程
+                  %td 王思聪
+                  %td 富仁名苑26号楼101
+                  %td 2016-8-23
+                  %td 100人
+                  %td 500\节
+          .select-page 
+            %span.totalitems= "共6页,总计12条"
+            %span.choice-page
+              .pagination.pagination-small
+                %ul
+                  %li
+                    %a{:href => "javascript:void(0);"} «
+                  / - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
+                  %li
+                    %a{:href => "javascript:void(0);"} 1
+                  %li
+                    %a{:href => "javascript:void(0);"} »
+
+        #tab3.tab-pane
+          .undiscover
+            %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
+            %span.undiscover-message 抱歉！暂无查找信息
+          .table-box
+            %table.table.table-bordered.user-table
+              %caption
+              %thead
+                %tr
+                  %th 绘本名称
+                  %th 类&nbsp型
+                  %th 数&nbsp量
+                  %th 作&nbsp者
+                  %th ISBN号
+
+              %tbody
+                / - @books[:data].each do |b|
+                /   %tr{class: "book-record #{ b[:available] ? "available" : "unavailable" }", "data-id" => b[:id]}
+                %tr
+                  %td 鳄鱼历险记
+                  %td 儿童科幻
+                  %td 30本
+                  %td 卡萨.布兰卡
+                  %td 9527
+
+          .select-page 
+            %span.totalitems= "共6页,总计12条"
+            %span.choice-page
+              .pagination.pagination-small
+                %ul
+                  %li
+                    %a{:href => "javascript:void(0);"} «
+                  / - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
+                  %li
+                    %a{:href => "javascript:void(0);"} 1
+                  %li
+                    %a{:href => "javascript:void(0);"} »
