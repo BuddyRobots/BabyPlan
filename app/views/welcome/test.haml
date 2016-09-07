@@ -1,26 +1,8 @@
 
 - content_for :app_head do
+  = javascript_include_tag "http://map.qq.com/api/js?v=2.exp"
   = javascript_include_tag "pages/welcome/test-bundle"
   = stylesheet_link_tag "pages/welcome/test-bundle", :media => "all"
 
-
-.wrap 
-  .header
-    %img.header-left{:src => "/assets/logo.png"}
-    %p.header-right 2016.03
-  .content
-    %img.ad-banner{:src => "/assets/banner.png"}
-    .content-right
-      %hr
-      %h2.about about
-      %h2.about technology
-      %p.c-top about technology about technology about technology
-      %p.c-middle 700
-      %p.c-bottom 3.2
-      %p.text1 css
-      %p.text2 csscsscsscsscsscss
-
-
-
-
-  
+- content_for :app_content do
+  #container

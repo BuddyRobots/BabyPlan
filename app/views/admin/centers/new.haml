@@ -1,4 +1,35 @@
 - content_for :head do
+  = javascript_include_tag "http://map.qq.com/api/js?v=2.exp"
   = javascript_include_tag "pages/admin/centers/new-bundle"
   = stylesheet_link_tag "pages/admin/centers/new-bundle", :media => "all"
 
+
+.content-area
+  /centers-new
+  .content-box
+    .manage-box.clearfix
+      %p.center-add 添加儿童中心
+      .btn.end-btn{:type => "button"}
+        %img.end{:src => "/assets/managecenter/ticker.png"}
+        完成
+
+    .manage-content
+      %form.form-inline
+        %label.input-name 中心名称:
+        %input.input-area#center-name{:type => "text"}
+        %label.checkbox#available
+          %input.checkbox-content{:type => "checkbox"} 开放
+
+      %label.input-name 详细地址:
+      %input.input-area#address{:type => "text"}
+      .map-position
+        %span.map-address 地图位置:
+        %span.notice 
+          请在地图上点击定位或
+          %a{:href => "javascript:void(0);"} 自动定位
+        #map-container
+      
+      .center-introduce.clearfix
+        %span.introduce 中心介绍:
+        .wangedit-area
+          #edit-area

@@ -1,4 +1,8 @@
 $ ->
+
+  $(".add-btn").click ->
+    location.href = "/admin/centers/new"
+
   search = ->
     value = $("#appendedInputButton").val()
     window.location.href = "/admin/centers?keyword=" + value + "&page=1"
