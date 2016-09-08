@@ -4,6 +4,7 @@
 #= require wangEditor.min
 
 $ ->
+  is_edit = false
 
 # wangEditor
   editor = new wangEditor('edit-area')
@@ -24,7 +25,11 @@ $ ->
     $(".btn").hide()
 
   $("#course-message").click ->
-    $(".btn").show()
+    if is_edit
+      $(".finish-btn").show()
+    else
+      $(".edit-btn").show()
+    $("#unshelve-btn").show()
 
   # unshelve-btn press-down
   $("#unshelve-btn").click ->
@@ -70,8 +75,12 @@ $ ->
 
     $(".edit-btn").toggle()
     $(".finish-btn").toggle()
+
+    is_edit = true
  
   $(".finish-btn").click ->
+
+    is_edit = false
 
     name = $("#classname-input").val()
     speaker = $("#classspeaker-input").val()
