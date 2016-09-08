@@ -1,4 +1,5 @@
 @import "wangEditor";
+@import "fullcalendar.min";
 @import "jquery-ui";
 
 ul, li {
@@ -149,16 +150,16 @@ ul, li {
 		background: #fdd3b9;
 	}
 }
-.class-calender {
+.class-calendar {
 	margin: 10px 20px;
 	font-size: 16px;
 	color: #323232;
 }
-.calender-box {
+#calendar {
 	border: 1px solid #c8c8c8;
 	margin: 0 20px 20px 20px;
-	border-radius: 6px;
-	height: 100px;
+	// border-radius: 6px;
+	height: auto;
 }
 
 .desc-items {
