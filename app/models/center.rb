@@ -66,4 +66,22 @@ class Center
       available: self.available
     }
   end
+
+  def set_available(available)
+    self.update_attribute(:available, available == true)
+    nil
+  end
+
+  def update_info(center_info)
+    self.update_attributes(
+      {
+        name: center_info["name"],
+        address: center_info["address"],
+        desc: center_info["desc"],
+        lat: center_info["lat"],
+        lng: center_info["lng"]
+      }
+    )
+    nil
+  end
 end

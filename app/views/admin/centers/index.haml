@@ -44,7 +44,7 @@
                 %td 
                   %a.access{:href => "javascript:void(0);"} 进入
                 %td
-                  %a.description{:href => "javascript:void(0);"} 详情
+                  %a.description{:href => "/admin/centers/#{c[:id]}"} 详情
 
         .select-page 
           %span.totalitems= "共#{@centers[:total_page]}页,总计#{@centers[:total_number]}条"

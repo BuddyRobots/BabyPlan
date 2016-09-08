@@ -2,6 +2,10 @@
   = javascript_include_tag "http://map.qq.com/api/js?v=2.exp"
   = javascript_include_tag "pages/admin/centers/show-bundle"
   = stylesheet_link_tag "pages/admin/centers/show-bundle", :media => "all"
+  :javascript
+    window.cid = "#{@center.id.to_s}"
+    window.lat = "#{@center.lat.to_s}"
+    window.lng = "#{@center.lng.to_s}"
 
 .content-area
   .manage-content
@@ -11,17 +15,15 @@
     .btn.edit-btn{:type => "button"} 
       %img.edit{:src => "/assets/managecenter/edit.png"}
       编辑
-    .btn#unshelve-btn.available{:type => "button"} 
-      %img.end{:src => "/assets/managecenter/unshelve.png"}
-      %span 关闭
-    / - if @book.available == true
-    /   .btn#unshelve-btn.available{:type => "button"} 
-    /     %img.end{:src => "/assets/managecenter/unshelve.png"}
-    /     %span 关闭
-    / - else
-    /   .btn#unshelve-btn.unavailable{:type => "button"} 
-    /     %img.end{:src => "/assets/managecenter/shelve.png"}
-    /     %span 开放
+    - if @center.available == true
+      .btn#unshelve-btn.available{:type => "button"} 
+        %img.end{:src => "/assets/managecenter/unshelve.png"}
+        %span 关闭
+    - else
+      .btn#unshelve-btn.unavailable{:type => "button"} 
+        %img.end{:src => "/assets/managecenter/shelve.png"}
+        %span 开放
+
     .tabbable
       %ul.nav.nav-tabs
         %li.active
@@ -36,17 +38,16 @@
           .center-detail
             %form.form-inline
               %label.input-caption 中心名称:
-              %span.unedit-box#name-span 朝阳区儿童中心
+              %span.unedit-box#name-span= @center.name
               %span.edit-box
                 %input.input-area#name-input{:type => "text"}
-              %label#available-status.shelve 开放
-              / - if @book.available == true
-              /   %label#available-status.shelve 开放
-              / - else
-              /   %label#available-status.shelve 关闭
+              - if @center.available == true
+                %label#available-status.shelve 开放中
+              - else
+                %label#available-status.shelve 关闭中
             %form.form-inline
               %label.input-caption 详细地址:
-              %span.unedit-box#address-span 富仁名苑26号楼101
+              %span.unedit-box#address-span= @center.address
               %span.edit-box
                 %input.input-area#center-address{:type => "text"}
             .map-position
@@ -59,7 +60,8 @@
             
             .center-introduce.clearfix
               %span.introduce 中心介绍:
-              .introduce-details 朝阳区儿童中心位于安立路富仁名苑26号楼101
+              .introduce-details
+                = @center.desc.to_s.html_safe
               %span.wangedit-area
                 #edit-area
 
