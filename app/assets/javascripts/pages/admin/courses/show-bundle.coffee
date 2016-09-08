@@ -110,7 +110,6 @@ $ ->
     )
 
   # fullcalendar
-
   $('#course-area').on 'shown.bs.tab', (e) ->
     initialLocaleCode = "zh-cn"
     $("#calendar").fullCalendar({
@@ -127,6 +126,8 @@ $ ->
       fixedWeekCount: false
       nowIndicator: true
       height: 500
+      dayClick: (date) ->
+        alert(date)
       events: [
         {
           title: 'All Day Event'
@@ -183,6 +184,5 @@ $ ->
           start: '2016-09-28'
           color: "red"
         }
-
       ]
     })

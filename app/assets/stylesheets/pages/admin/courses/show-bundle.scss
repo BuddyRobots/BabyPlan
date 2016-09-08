@@ -158,10 +158,12 @@ ul, li {
 #calendar {
 	border: 1px solid #c8c8c8;
 	margin: 0 20px 20px 20px;
-	// border-radius: 6px;
-	// height: auto;
+	border-radius: 4px;
+	font-size: 14px;
 }
-
+h2 {
+	font-size: 14px;
+}
 .desc-items {
 	margin: 15px 16px;
 }
