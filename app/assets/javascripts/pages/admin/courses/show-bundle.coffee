@@ -22,7 +22,9 @@ $ ->
   editor.create()
 
   $("#course-area").click ->
-    $(".btn").hide()
+    $(".finish-btn").hide()
+    $(".edit-btn").hide()
+    $("#unshelve-btn").hide()
 
   $("#course-message").click ->
     if is_edit
