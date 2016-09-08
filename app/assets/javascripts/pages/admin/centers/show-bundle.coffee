@@ -2,6 +2,8 @@
 
 $ ->
 
+  is_edit = false
+
   editor = new wangEditor('edit-area')
   editor.config.menus = [
         'head',
@@ -28,8 +30,8 @@ $ ->
     anchor
     )
 
-  window.lat = null
-  window.lng = null
+  # window.lat = null
+  # window.lng = null
 
   init = ->
     center = new qq.maps.LatLng(39.87601941962116, 116.43310546875)
@@ -40,7 +42,24 @@ $ ->
 
     geocoder = new qq.maps.Geocoder()
 
-    qq.maps.event.addListener(
+    if window.lat != null
+      p = new qq.maps.LatLng(window.lat, window.lng)
+      marker = new qq.maps.Marker({
+        # 设置Marker的位置坐标
+        position: p,
+        map: map
+        })
+     
+      marker.setIcon(icon)
+      marker.setTitle("test")
+      marker.setVisible(true)
+
+  init()
+
+  listener = null
+
+  enable_set_marker = ->
+    listener = qq.maps.event.addListener(
       map,
       'click',
       (d) ->
@@ -62,7 +81,8 @@ $ ->
         marker.setTitle("test")
       )
 
-  init()
+  disable_set_marker = ->
+    qq.maps.event.removeListener(listener)
 
   codeAddress = ->
     address = document.getElementById('center-address').value
@@ -89,19 +109,24 @@ $ ->
 
 
   $("#center-message").click ->
-    $(".edit-btn").show()
+    # $(".edit-btn").show()
+    if is_edit == true
+      $(".finish-btn").show()
+    else
+      $(".edit-btn").show()
     $("#unshelve-btn").show()
 
   $("#center-class").click ->
     $(".edit-btn").hide()
+    $(".finish-btn").hide()
     $("#unshelve-btn").hide()
 
   $("#center-book").click ->
     $(".edit-btn").hide()
+    $(".finish-btn").hide()
     $("#unshelve-btn").hide()
 
 
-# edit-btn  未完成
   $(".edit-btn").click ->
     $(".unedit-box").toggle()
     $(".shelve").toggle()
@@ -113,5 +138,79 @@ $ ->
 
     $("#name-input").val($("#name-span").text())
     $("#center-address").val($("#address-span").text())
+    $("#edit-area").html($(".introduce-details").html())
+
+    $(".edit-btn").toggle()
+    $(".finish-btn").toggle()
+
+    enable_set_marker()
+    is_edit = true
+
+  $(".finish-btn").click ->
+    is_edit = false
+    name = $("#name-input").val()
+    address = $("#center-address").val()
+    desc = editor.$txt.html()
+
+    $.putJSON(
+      '/admin/centers/' + window.cid,
+      {
+        center: {
+          name: name
+          address: address
+          desc: desc
+          lat: window.lat
+          lng: window.lng
+        }
+      },
+      (data) ->
+        console.log data
+        if data.success
+          $(".edit-btn").toggle()
+          $(".finish-btn").toggle()
+          $(".introduce-details").toggle()
+          $(".wangedit-area").toggle()
+          $(".unedit-box").show()
+          $(".edit-box").hide()
+
+          $(".map-notice").css("display", "none")
+          $("#map-container").css("margin-left", "0px")
+
+          $("#unshelve-btn").attr("disabled", false)
+
+          $("#name-span").text(name)
+          $("#address-span").text(address)
+          $(".introduce-details").html(desc)
+          disable_set_marker()
+        else
+          $.page_notification "服务器出错，请稍后重试"
+    )
 
 
+  $("#unshelve-btn").click ->
+    current_state = "unavailable"
+    if $(this).hasClass("available")
+      current_state = "available"
+    btn = $(this)
+    $.postJSON(
+      '/admin/centers/' + window.cid + '/set_available',
+      {
+        available: current_state == "unavailable"
+      },
+      (data) ->
+        if data.success
+          $.page_notification("操作完成")
+          console.log btn.find("img").attr("src")
+          if current_state == "available"
+            btn.removeClass("available")
+            btn.addClass("unavailable")
+            btn.find("span").text("开放")
+            btn.find("img").attr("src", "/assets/managecenter/shelve.png")
+            $(".shelve").text("关闭中")
+          else
+            btn.addClass("available")
+            btn.removeClass("unavailable")
+            btn.find("span").text("关闭")
+            btn.find("img").attr("src", "/assets/managecenter/unshelve.png")
+            $(".shelve").text("开放中")
+      )

@@ -12,7 +12,7 @@ module ErrCode
   BOOK_NOT_EXIST = -9
   ANNOUNCEMENT_NOT_EXIST = -10
   CENTER_NOT_EXIST = -11
-  COURSE_NOT_EXIST = -11
+  COURSE_NOT_EXIST = -12
 
   def self.ret_false(code)
     msg = self.message(code)

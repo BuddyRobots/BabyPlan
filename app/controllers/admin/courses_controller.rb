@@ -30,8 +30,8 @@ class Admin::CoursesController < Admin::ApplicationController
 
   def update
     @course = Course.where(id: params[:id]).first
-    retval = ErrCode::COURSE_NOT_EXIST if @course.nil?
-    @course.update_info(params[:course])
+    render json: retval_wrapper(ErrCode::COURSE_NOT_EXIST) and return if @course.nil?
+    retval = @course.update_info(params[:course])
     render json: retval_wrapper(retval)
   end
 end
