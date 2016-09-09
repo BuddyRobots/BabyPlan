@@ -162,6 +162,9 @@ body, p, img, div, ul, li, a, h3, table, tr, th, td {
 			color: #fff;
 			text-decoration: none;
 			padding: 15px 0;
+			&:active {
+				border-right: 5px solid #fff;
+			}
 		}
 	}
 }

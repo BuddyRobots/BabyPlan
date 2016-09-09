@@ -36,6 +36,10 @@
             %span.unedit-box#classname-span= @course.name
             %span.edit-box
               %input.input-area#classname-input{:type => "text"}
+            %span.course-name 课程编号:
+            / %span.unedit-box#code-span= @course.code            去掉注释就可以应用
+            %span.edit-box
+              %input.input-area#code-input{:type => "text"}
             - if @course.available
               %span.shelve 在架上
             - else
