@@ -28,6 +28,9 @@ Rails.application.routes.draw do
   resources :centers do
   end
 
+  resources :courses do
+  end
+
   namespace :admin do
     resources :sessions do
       collection do

@@ -21,3 +21,9 @@ $ ->
 
   $(".details").click ->
     location.href = "/staff/courses/show"
+
+
+  $("#coursename").autocomplete(
+    source: "/centers"
+    appendTo: "#course-addModal"
+  )

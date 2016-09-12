@@ -3,6 +3,7 @@ class Course
   include Mongoid::Document
   include Mongoid::Timestamps
 
+  field :code, type: String, default: ""
   field :name, type: String
   field :length, type: Integer
   field :address, type: String
