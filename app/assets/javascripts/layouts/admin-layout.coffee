@@ -1,4 +1,4 @@
-#= require bootstrap.min
+
 
 $ ->
   if window.code == REQUIRE_SIGNIN
