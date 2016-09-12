@@ -13,6 +13,8 @@ module ErrCode
   ANNOUNCEMENT_NOT_EXIST = -10
   CENTER_NOT_EXIST = -11
   COURSE_NOT_EXIST = -12
+  COURSE_INST_EXIST = -13
+  COURSE_INST_NOT_EXIST = -14
 
   def self.ret_false(code)
     msg = self.message(code)

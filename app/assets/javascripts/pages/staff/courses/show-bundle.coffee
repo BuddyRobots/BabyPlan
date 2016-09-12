@@ -3,6 +3,9 @@
 #= require locale-all
 
 $ ->
+
+  is_edit = false
+
   initialLocaleCode = "zh-cn"
   $("#calendar").fullCalendar({
     header:
@@ -77,15 +80,42 @@ $ ->
     ]
   })
 
+  $("#unshelve-btn").click ->
+    current_state = "unavailable"
+    if $(this).hasClass("available")
+      current_state = "available"
+    btn = $(this)
+    $.postJSON(
+      '/staff/courses/' + window.cid + '/set_available',
+      {
+        available: current_state == "unavailable"
+      },
+      (data) ->
+        if data.success
+          $.page_notification("操作完成")
+          console.log btn.find("img").attr("src")
+          if current_state == "available"
+            btn.removeClass("available")
+            btn.addClass("unavailable")
+            btn.find("span").text("上架")
+            btn.find("img").attr("src", "/assets/managecenter/shelve.png")
+            $(".shelve").text("已下架")
+          else
+            btn.addClass("available")
+            btn.removeClass("unavailable")
+            btn.find("span").text("下架")
+            btn.find("img").attr("src", "/assets/managecenter/unshelve.png")
+            $(".shelve").text("在架上")
+      )
+
   $(".edit-btn").click ->
+    $("#unshelve-btn").attr("disabled", true)
     $(".unedit-box").toggle()
     $(".edit-box").toggle()
-    $(".shelve").hide()
-    $("#name-input").val($("#name-span").text())
     $("#course-num").val($("#num-span").text())
-    $("#course-capacity").val($("#capacity-span").text())
-    $("#course-charge").val($("#charge-span").text())
-    $("#course-times").val($("#times-span").text())
+    $("#course-capacity").val(window.capacity)
+    $("#course-charge").val(window.price)
+    $("#course-times").val(window.length)
     $("#course-date").val($("#date-span").text())
     $("#course-speaker").val($("#speaker-span").text())
     $("#course-address").val($("#address-span").text())
@@ -94,3 +124,71 @@ $ ->
     $("#calendar").css("margin-top","15px")
     $("#calendar").css("margin-left","79px")
 
+    $(".edit-btn").toggle()
+    $(".finish-btn").toggle()
+    is_edit = true
+
+  $(".finish-btn").click ->
+    is_edit = false
+
+    code = $("#course-num").val()
+    capacity = $("#course-capacity").val()
+    price = $("#course-charge").val()
+    length = $("#course-times").val()
+    date = $("#course-date").val()
+    speaker = $("#course-speaker").val()
+    address = $("#course-address").val()
+
+    $.putJSON(
+      '/staff/courses/' + window.cid,
+      {
+        course_inst: {
+          code: code
+          capacity: capacity
+          price: price
+          length: length
+          date: date
+          speaker: speaker
+          address: address
+        }
+      },
+      (data) ->
+        console.log data
+        if data.success
+          $(".edit-btn").toggle()
+          $(".finish-btn").toggle()
+          $(".unedit-box").show()
+          $(".edit-box").hide()
+
+          $("#unshelve-btn").attr("disabled", false)
+
+          $("#num-span").text(code)
+          $("#capacity-span").text(capacity + "人")
+          $("#charge-span").text(price + "元")
+          $("#times-span").text(length + "次")
+          window.capacity = capacity
+          window.price = price
+          window.length = length
+          $("#date-span").text(date)
+          $("#speaker-span").text(speaker)
+          $("#address-span").text(address)
+        else
+          $.page_notification "服务器出错，请稍后重试"
+    )
+
+  $("#user-review").click ->
+    $(".finish-btn").hide()
+    $(".edit-btn").hide()
+    $("#unshelve-btn").hide()
+
+  $("#register-message").click ->
+    $(".finish-btn").hide()
+    $(".edit-btn").hide()
+    $("#unshelve-btn").hide()
+
+  $("#course-message").click ->
+    if is_edit
+      $(".finish-btn").show()
+    else
+      $(".edit-btn").show()
+    $("#unshelve-btn").show()

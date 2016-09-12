@@ -11,7 +11,7 @@ class Staff::BooksController < Staff::ApplicationController
 
   def create
     retval = Book.create_book(current_user, params[:book])
-    render json: retval_wrapper(retval)
+    render json: retval_wrapper(retval) and return
   end
 
   def show
