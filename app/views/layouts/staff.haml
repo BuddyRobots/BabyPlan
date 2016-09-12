@@ -14,7 +14,6 @@
         %img.logo{:src => "/assets/managecenter/logo.png"}
       %p.leftword= @center_name
 
-
       /登录注册页面的layout
       - if @current_user.present? && ( @current_user.is_staff || @current_user.is_admin )
         %ul.kids-manage
@@ -40,8 +39,6 @@
         %button.sign-up{"data-target" => "#signupModal", "data-toggle" => "modal", :type => "button"} 注册
         %button.sign-in{"data-target" => "#signinModal", "data-toggle" => "modal", :type => "button"} 登陆
         
-      
-    
     .main
       .sidebar
         %ul
@@ -55,7 +52,6 @@
             %a{:href => "/staff/announcements"} 公告信息管理
           %li 
             %a{:href => "#"} 统计信息查询
-
 
     = yield
 = render :template => 'layouts/application'
