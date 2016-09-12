@@ -49,8 +49,9 @@ class User
   has_many :staff_logs
 
   scope :client, ->{ where(user_type: CLIENT) }
-  scope :staff, ->{ where(user_type: STAFF) }
+  scope :staff, ->{ any_of({user_type: ADMIN}, {user_type: ADMIN}) }
   scope :admin, ->{ where(user_type: ADMIN) }
+
 
 
   def self.create_user(user_type, mobile, created_by_staff = false)
