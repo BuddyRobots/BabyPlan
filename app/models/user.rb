@@ -49,7 +49,7 @@ class User
   has_many :staff_logs
 
   scope :client, ->{ where(user_type: CLIENT) }
-  scope :staff, ->{ any_of({user_type: ADMIN}, {user_type: ADMIN}) }
+  scope :staff, ->{ any_of({user_type: STAFF}, {user_type: ADMIN}) }
   scope :admin, ->{ where(user_type: ADMIN) }
 
 
