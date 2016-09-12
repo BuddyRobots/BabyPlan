@@ -6,6 +6,7 @@
     window.capacity = "#{@course_inst.capacity}"
     window.price = "#{@course_inst.price}"
     window.length = "#{@course_inst.length}"
+    window.date_in_calendar = "#{@course_inst.date_in_calendar_str}"
 
 .content-area
   .manage-content
@@ -88,8 +89,7 @@
                     %input.form-control#end-time{:type => "text", placeholder: "请选择下课时间"}
                     %button.btn.btn-success#add-event{type: "button"} 添加
                   #rm-event-wrapper.form-inline
-                    %select.form-control
-                    %button.btn.btn-danger#add-event{type: "button"} 删除
+                    %span 单击日历中的事件进行删除
                 #calendar
       
         #tab2.tab-pane
@@ -172,3 +172,8 @@
                     %a{:href => "javascript:void(0);"} 1
                   %li
                     %a{:href => "javascript:void(0);"} »
+
+#dialog-confirm{:title => "警告"}
+  %p
+    %span.ui-icon.ui-icon-alert{:style => "float:left; margin:12px 12px 20px 0;"}>
+    确定删除？

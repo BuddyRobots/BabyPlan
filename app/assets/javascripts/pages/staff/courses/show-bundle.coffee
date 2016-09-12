@@ -4,8 +4,14 @@
 
 $ ->
 
+  guid = ->
+    s4 = ->
+      Math.floor((1 + Math.random()) * 0x10000).toString(16).substring 1
+    s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4()
+
   $("#calendar-operation-wrapper").hide()
   is_edit = false
+
 
   initialLocaleCode = "zh-cn"
   $("#calendar").fullCalendar({
@@ -80,9 +86,44 @@ $ ->
     #   }
     # ]
     eventClick: (calEvent, jsEvent, view) ->
-      alert 'Event: ' + calEvent.id
-      return
+      if is_edit == false
+        return
+      $("#calendar").fullCalendar('removeEvents', calEvent.id)
+      # $('#dialog-confirm').dialog
+      #   resizable: false
+      #   height: 'auto'
+      #   width: 400
+      #   modal: true
+      #   buttons:
+      #     '确定': ->
+      #       $(this).dialog 'close'
+      #       $("#calendar").fullCalendar('removeEvents', calEvent.id)
+      #       return
+      #     "取消": ->
+      #       $(this).dialog 'close'
+      #       return
+      # return
   })
+
+
+  parse_calendar_events = ->
+    event_str_ary = window.date_in_calendar.split(';')
+    $.each(
+      event_str_ary,
+      (index, event_str) ->
+        start_str = event_str.split(',')[0]
+        end_str = event_str.split(',')[1]
+        e = {
+          id: guid()
+          title: ""
+          allDay: false
+          start: start_str
+          end: end_str
+        }
+        $("#calendar").fullCalendar('renderEvent', e, true)
+    )
+
+  parse_calendar_events()
 
   $("#unshelve-btn").click ->
     current_state = "unavailable"
@@ -141,6 +182,15 @@ $ ->
     speaker = $("#course-speaker").val()
     address = $("#course-address").val()
 
+    fc_events = $('#calendar').fullCalendar('clientEvents')
+    date_in_calendar = []
+
+    $.each(
+      fc_events,
+      (index, fc_event) ->
+        date_in_calendar.push(fc_event.start._i + "," + fc_event.end._i)
+    )
+
     $.putJSON(
       '/staff/courses/' + window.cid,
       {
@@ -152,6 +202,7 @@ $ ->
           date: date
           speaker: speaker
           address: address
+          date_in_calendar: date_in_calendar
         }
       },
       (data) ->
@@ -218,13 +269,13 @@ $ ->
   })
 
   $("#add-event").click ->
+    if is_edit == false
+      return
     date = $("#datepicker").val()
     start_time = $("#start-time").val()
     end_time = $("#end-time").val()
-    console.log date
-    console.log start_time
-    console.log end_time
     e = {
+      id: guid()
       title: ""
       allDay: false
       start: date + "T" + start_time

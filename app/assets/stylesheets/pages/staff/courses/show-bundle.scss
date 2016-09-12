@@ -147,8 +147,13 @@ input, label {
 	width: 85%;
 }
 
-#add-event-wrapper, #rm-event-wrapper {
+#add-event-wrapper {
 	padding-left: 10px;
+}
+
+#rm-event-wrapper {
+	padding-left: 10px;
+	color: red;
 }
 
 #calendar {

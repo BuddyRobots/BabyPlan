@@ -12,6 +12,7 @@ class CourseInst
   field :price, type: Integer
   field :speaker, type: String
   field :date, type: String
+  field :date_in_calendar, type: Array, default: [ ]
 
   belongs_to :course
   belongs_to :center
@@ -66,7 +67,8 @@ class CourseInst
         length: course_inst_info["length"],
         date: course_inst_info["date"],
         speaker: course_inst_info["speaker"],
-        address: course_inst_info["address"]
+        address: course_inst_info["address"],
+        date_in_calendar: course_inst_info["date_in_calendar"]
       }
     )
     nil
@@ -75,5 +77,9 @@ class CourseInst
   def set_available(available)
     self.update_attribute(:available, available == true)
     nil
+  end
+
+  def date_in_calendar_str
+    self.date_in_calendar.join(';')
   end
 end
