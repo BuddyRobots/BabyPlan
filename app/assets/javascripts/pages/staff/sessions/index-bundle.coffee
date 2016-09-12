@@ -78,6 +78,7 @@ $ ->
           $("#mobile-notice").text("该手机号已注册，请直接登陆").css("visibility","visible")     
           console.log $("#mobile-notice").text()
     )
+    return false
     
 
   check_signup_input = ->
@@ -159,6 +160,7 @@ $ ->
           if data.code == CENTER_NOT_EXIST
             $.page_notification("儿童中心不存在",3000)
       )
+    
   $("#signup").click ->
     signup()
     return false
@@ -181,7 +183,7 @@ $ ->
     if mobile_retval == false
       $("#forget-mobile-notice").css("visibility","visible")
       $("#forget-mobile").addClass("clicked-box")
-      return
+      return false
     $("#forget-mobile").removeClass("clicked-box")
     $.postJSON(
       '/staff/sessions/forget_password',
@@ -199,6 +201,7 @@ $ ->
         else
           $("#forget-mobile-notice").text("该手机号未注册").css("visibility","visible")     
       )
+    return false
    
 
   toggle_forget_password_tip = (wrong) ->
