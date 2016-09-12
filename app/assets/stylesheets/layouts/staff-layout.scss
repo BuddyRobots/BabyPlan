@@ -5,7 +5,6 @@ html {
 	height: 100%;
 }
 body {
-	font-size: 62.5%;
 	height: 100%;
 }
 body, p, img, div, ul, li, a, h3, table, tr, th, td {
@@ -44,7 +43,7 @@ body, p, img, div, ul, li, a, h3, table, tr, th, td {
 	}
 	.leftword {
 		position:absolute;
-		font-size:1.8em;
+		font-size:18px;
 		color:#323232;
 		top:20px;
 		left:66px;
@@ -53,13 +52,14 @@ body, p, img, div, ul, li, a, h3, table, tr, th, td {
 		position:absolute;
 		width:60px;
 		height:30px;
+		border: 0;
 		text-align:center;
 		background:#1dbb6f;
 		right:20px;
 		top:15px;
 		border-radius:2px;
 		line-height:30px;
-		font-size:1.4em;
+		font-size: 14px;
 		color:white;
 		text-decoration: none;
 		&:hover {
@@ -75,11 +75,11 @@ body, p, img, div, ul, li, a, h3, table, tr, th, td {
 		}
 	}
 	.rightword {
-		position:absolute;
-		font-size:1.4em;
-		color:#969696;
-		right:180px;
-		top:20px;
+		position: absolute;
+		font-size: 14px;
+		color: #969696;
+		right: 180px;
+		top: 20px;
 	}
 
 }
@@ -157,7 +157,7 @@ body, p, img, div, ul, li, a, h3, table, tr, th, td {
 		background: url('/assets/managecenter/linear.png') no-repeat bottom;
 		a {
 			display: block;
-			font-size: 1.6em;
+			font-size: 16px;
 			color: #fff;
 			text-decoration: none;
 			padding: 15px 0;

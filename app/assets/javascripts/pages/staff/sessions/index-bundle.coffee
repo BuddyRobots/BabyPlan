@@ -27,6 +27,7 @@ $ ->
     $("#mobile-code").attr("disabled", false)
 
     $("input").val("")
+    $(".notice").css("visibility", "hidden")
   
   # verifycode 60 sec reverse 
   time = (o) ->
@@ -56,7 +57,7 @@ $ ->
     if mobile_retval == false
       $("#mobile-notice").css("visibility","visible")
       $("#signup-mobile").addClass("clicked-box")
-      return
+      return false
     $("#signup-mobile").removeClass("clicked-box")
     $.postJSON(
       '/staff/sessions/signup',
@@ -160,6 +161,8 @@ $ ->
       )
   $("#signup").click ->
     signup()
+    return false
+
   $("#signup-confirm-password").keydown (event) ->
     code = event.which
     if code == 13
@@ -265,6 +268,8 @@ $ ->
       )
   $("#forget").click ->
     forget()
+    return false
+
   $("#forget-confirm-password").keydown (event) ->
     code = event.which
     if code == 13
@@ -340,6 +345,7 @@ $ ->
 
   $(".signin").click ->
     signin()
+    return false
 
 
 
