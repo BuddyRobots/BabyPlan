@@ -120,9 +120,7 @@ $ ->
     $("#course-speaker").val($("#speaker-span").text())
     $("#course-address").val($("#address-span").text())
 
-    $(".notice").show()
-    $("#calendar").css("margin-top","15px")
-    $("#calendar").css("margin-left","79px")
+    $(".calendar-operation-wrapper").show()
 
     $(".edit-btn").toggle()
     $(".finish-btn").toggle()
@@ -161,6 +159,7 @@ $ ->
           $(".edit-box").hide()
 
           $("#unshelve-btn").attr("disabled", false)
+          $(".calendar-operation-wrapper").hide()
 
           $("#num-span").text(code)
           $("#capacity-span").text(capacity + "人")
