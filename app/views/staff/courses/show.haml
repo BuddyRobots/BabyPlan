@@ -75,10 +75,22 @@
               %span.unedit-box#address-span= @course_inst.address
               %span.edit-box
                 %input.input-area#course-address{:type => "text"}
-            / .calendar-desc.clearfix
             .controls.controls-row.clearfix
-              %label.class-calendar 课程日历:
-              #calendar
+              %label.input-caption.class-calendar 课程日历:
+              #calendar-wrapper
+                #calendar-operation-wrapper
+                  #add-event-wrapper.form-inline
+                    %span 日期
+                    %input.form-control#datepicker{:type => "text", placeholder: "请选择上课日期"}
+                    %span ，从
+                    %input.form-control#start-time{:type => "text", placeholder: "请选择上课时间"}
+                    %span 到
+                    %input.form-control#end-time{:type => "text", placeholder: "请选择下课时间"}
+                    %button.btn.btn-success#add-event{type: "button"} 添加
+                  #rm-event-wrapper.form-inline
+                    %select.form-control
+                    %button.btn.btn-danger#add-event{type: "button"} 删除
+                #calendar
       
         #tab2.tab-pane
           .undiscover

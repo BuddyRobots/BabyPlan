@@ -4,6 +4,7 @@
 
 $ ->
 
+  $("#calendar-operation-wrapper").hide()
   is_edit = false
 
   initialLocaleCode = "zh-cn"
@@ -21,63 +22,66 @@ $ ->
     fixedWeekCount: false
     nowIndicator: true
     height: 500
-    events: [
-      {
-        title: 'All Day Event'
-        start: '2016-09-01'
-      }
-      {
-        title: 'Long Event'
-        start: '2016-09-07'
-        end: '2016-09-10'
-      }
-      {
-        id: 999
-        title: 'Repeating Event'
-        start: '2016-09-09T16:00:00'
-      }
-      {
-        id: 999
-        title: 'Repeating Event'
-        start: '2016-09-16T16:00:00'
-      }
-      {
-        title: 'Conference'
-        start: '2016-09-11'
-        end: '2016-09-13'
-      }
-      {
-        title: 'Meeting'
-        start: '2016-09-12T10:30:00'
-        end: '2016-09-12T12:30:00'
-      }
-      {
-        title: 'Lunch'
-        start: '2016-09-12T12:00:00'
-      }
-      {
-        title: 'Meeting'
-        start: '2016-09-12T14:30:00'
-      }
-      {
-        title: 'Happy Hour'
-        start: '2016-09-12T17:30:00'
-      }
-      {
-        title: 'Dinner'
-        start: '2016-09-12T20:00:00'
-      }
-      {
-        title: 'Birthday Party'
-        start: '2016-09-13T07:00:00'
-      }
-      {
-        title: 'Click for Google'
-        url: 'http://google.com/'
-        start: '2016-09-28'
-        color: "red"
-      }
-    ]
+    # events: [
+    #   {
+    #     title: 'All Day Event'
+    #     start: '2016-09-01'
+    #   }
+    #   {
+    #     title: 'Long Event'
+    #     start: '2016-09-07'
+    #     end: '2016-09-10'
+    #   }
+    #   {
+    #     id: 999
+    #     title: 'Repeating Event'
+    #     start: '2016-09-09T16:00:00'
+    #   }
+    #   {
+    #     id: 999
+    #     title: 'Repeating Event'
+    #     start: '2016-09-16T16:00:00'
+    #   }
+    #   {
+    #     title: 'Conference'
+    #     start: '2016-09-11'
+    #     end: '2016-09-13'
+    #   }
+    #   {
+    #     title: 'Meeting'
+    #     start: '2016-09-12T10:30:00'
+    #     end: '2016-09-12T12:30:00'
+    #   }
+    #   {
+    #     title: 'Lunch'
+    #     start: '2016-09-12T12:00:00'
+    #   }
+    #   {
+    #     title: 'Meeting'
+    #     start: '2016-09-12T14:30:00'
+    #   }
+    #   {
+    #     title: 'Happy Hour'
+    #     start: '2016-09-12T17:30:00'
+    #   }
+    #   {
+    #     title: 'Dinner'
+    #     start: '2016-09-12T20:00:00'
+    #   }
+    #   {
+    #     title: 'Birthday Party'
+    #     start: '2016-09-13T07:00:00'
+    #   }
+    #   {
+    #     title: 'Click for Google'
+    #     url: 'http://google.com/'
+    #     start: '2016-09-28'
+    #     color: "red"
+    #   }
+    # ]
+    eventClick: (calEvent, jsEvent, view) ->
+      alert 'Event: ' + calEvent.id
+      return
   })
 
   $("#unshelve-btn").click ->
@@ -120,7 +124,7 @@ $ ->
     $("#course-speaker").val($("#speaker-span").text())
     $("#course-address").val($("#address-span").text())
 
-    $(".calendar-operation-wrapper").show()
+    $("#calendar-operation-wrapper").show()
 
     $(".edit-btn").toggle()
     $(".finish-btn").toggle()
@@ -159,7 +163,7 @@ $ ->
           $(".edit-box").hide()
 
           $("#unshelve-btn").attr("disabled", false)
-          $(".calendar-operation-wrapper").hide()
+          $("#calendar-operation-wrapper").hide()
 
           $("#num-span").text(code)
           $("#capacity-span").text(capacity + "人")
@@ -191,3 +195,39 @@ $ ->
     else
       $(".edit-btn").show()
     $("#unshelve-btn").show()
+
+  # calender set
+  $( "#datepicker" ).datepicker({
+        changeMonth: true,
+        changeYear: true
+      });
+  $( "#datepicker" ).datepicker( $.datepicker.regional[ "zh-TW" ] )
+  $( "#datepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd" )
+
+  $('#start-time').timepicker({
+    'minTime': '7:00am'
+    'maxTime': '9:00pm'
+    'showDuration': false
+    'timeFormat': 'H:i:s'
+  })
+  $('#end-time').timepicker({
+    'minTime': '7:00am'
+    'maxTime': '9:00pm'
+    'showDuration': false
+    'timeFormat': 'H:i:s'
+  })
+
+  $("#add-event").click ->
+    date = $("#datepicker").val()
+    start_time = $("#start-time").val()
+    end_time = $("#end-time").val()
+    console.log date
+    console.log start_time
+    console.log end_time
+    e = {
+      title: ""
+      allDay: false
+      start: date + "T" + start_time
+      end: date + "T" + end_time
+    }
+    $("#calendar").fullCalendar('renderEvent', e, true)

@@ -40,7 +40,7 @@ class User
   belongs_to :client_center
   has_many :course_participates, class_name: "CourseParticipate", inverse_of: :client
   has_many :book_borrows, class_name: "BookBorrow", inverse_of: :client
-  has_many :feed_backs
+  has_many :feedbacks
   has_many :favorites
 
   # relationships specific for staff

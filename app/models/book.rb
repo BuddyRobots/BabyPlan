@@ -19,7 +19,7 @@ class Book
   has_one :back, class_name: "Material", inverse_of: :back_book
 
   belongs_to :center
-  has_many :feed_backs
+  has_many :feedbacks
   has_many :favorites
 
   def self.create_book(staff, book_info)

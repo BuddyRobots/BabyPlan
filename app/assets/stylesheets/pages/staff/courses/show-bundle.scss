@@ -93,7 +93,6 @@ input, label {
 }
 .course-num {
 	display: inline-block;
-	padding-top: 3px;
 	vertical-align: middle;
 }
 #course-num {
@@ -124,6 +123,13 @@ input, label {
 	height: 30px;
 	line-height: 30px;
 }
+.course-num {
+	vertical-align: middle;
+	font-size: 14px;
+	color: #323232;
+	height: 30px;
+	line-height: 30px;
+}
 .edit-box {
 	display: none;
 }
@@ -131,24 +137,22 @@ input, label {
 	width: 381px;
 }
 
-.calendar-desc {
-	font-size: 16px;
-	color: #323232;
-	margin: 15px 20px;
-}
+
 .class-calendar {
 	float: left;
 }
-.notice {
-	font-size: 14px;
-	color: #323232;
-	margin-left: 10px;
-	display: none;
-}
-#calendar {
+
+#calendar-wrapper {
 	float: left;
-	border: 1px solid #c8c8c8;
 	width: 85%;
+}
+
+#add-event-wrapper, #rm-event-wrapper {
+	padding-left: 10px;
+}
+
+#calendar {
+	border: 1px solid #c8c8c8;
 	margin-left: 10px;
 	border-radius: 4px;
 	font-size: 14px;

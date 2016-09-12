@@ -13,6 +13,7 @@
 #= require jquery
 #= require jquery-ui
 #= require datepicker-zh-TW
+#= require jquery.timepicker
 #= require jquery_ujs
 #= require bootstrap-sprockets
 #= require utility/ajax
