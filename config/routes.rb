@@ -76,6 +76,9 @@ Rails.application.routes.draw do
     end
 
     resources :courses do
+      collection do
+        get :get_id_by_name
+      end
     end
 
     resources :books do

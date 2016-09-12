@@ -14,7 +14,12 @@ $ ->
       search()
 
   $(".confirm").click ->
-    location.href = "/staff/courses/new"
+    course_name = $("#coursename").val()
+    $.getJSON "/staff/courses/get_id_by_name?course_name=" + course_name, (data) ->
+      if data.success
+        location.href = "/staff/courses/new?course_id=" + data.id
+      else
+        $.page_notification "课程不存在"
 
   $(".cancel").click ->
     $("#course-addModal").modal("hide")
@@ -24,6 +29,6 @@ $ ->
 
 
   $("#coursename").autocomplete(
-    source: "/centers"
+    source: "/courses"
     appendTo: "#course-addModal"
   )

@@ -28,6 +28,7 @@
             %thead
               %tr
                 %th 课&nbsp程
+                %th 编&nbsp号
                 %th 主讲人
                 %th 费&nbsp用
                 %th{:colspan => "2"} 操&nbsp作
@@ -35,6 +36,7 @@
               - @courses[:data].each do |c|
                 %tr{class: "#{ c[:available] ? "available" : "unavailable" }", "data-id" => c[:id]}
                   %td= c[:name]
+                  %td= c[:code]
                   %td= c[:speaker]
                   %td= c[:price]
                   %td

@@ -7,6 +7,7 @@ gem 'ezcrypto'
 gem 'handlebars_assets'
 gem 'kaminari'
 gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
+gem 'bootstrap-sass'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

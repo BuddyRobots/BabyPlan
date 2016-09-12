@@ -6,5 +6,4 @@ class CoursesController < ApplicationController
     course_name_code = courses.map { |e| "(#{e.code}) " + e.name }
     render json: course_name_code and return
   end
-
 end

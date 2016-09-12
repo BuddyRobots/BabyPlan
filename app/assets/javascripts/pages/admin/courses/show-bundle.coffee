@@ -68,6 +68,7 @@ $ ->
     $(".edit-box").show()
     $("#code-input").val($("#code-span").text())
     $("#classname-input").val($("#classname-span").text())
+    $("#code-input").val($("#course-span").text())
     $("#classspeaker-input").val($("#classspeaker-span").text())
     $("#charge-input").val(window.price)
 

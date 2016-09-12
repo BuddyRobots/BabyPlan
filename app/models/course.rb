@@ -28,6 +28,7 @@ class Course
       desc: course_info[:desc],
       price: course_info[:price],
       speaker: course_info[:speaker],
+      code: course_info[:code],
       available: course_info[:available]
     )
     { course_id: course.id.to_s }
@@ -37,6 +38,7 @@ class Course
     {
       id: self.id.to_s,
       name: self.name,
+      code: self.code,
       speaker: self.speaker,
       price: self.price,
       available: self.available
@@ -49,6 +51,7 @@ class Course
         name: course_info["name"],
         price: course_info["price"],
         desc: course_info["desc"],
+        code: course_info["code"],
         speaker: course_info["speaker"]
       }
     )
