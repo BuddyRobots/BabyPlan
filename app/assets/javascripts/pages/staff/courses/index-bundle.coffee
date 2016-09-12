@@ -13,7 +13,7 @@ $ ->
     if code == 13
       search()
 
-  $(".confirm").click ->
+  $("#confirm-btn").click ->
     course_name = $("#coursename").val()
     $.getJSON "/staff/courses/get_id_by_name?course_name=" + course_name, (data) ->
       if data.success

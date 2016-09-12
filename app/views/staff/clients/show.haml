@@ -28,28 +28,28 @@
         #tab1.tab-pane.active
           .controls.controls-row
             %label.input-caption.edit 姓名:
-            %span.unedit-box#name-span 张三
+            %span.unedit-box#name-span= @user.name
             %span.edit-box
               %input.input-area#name-input{:type => "text"}
             %label.input-caption 年龄:
-            %span.unedit-box#age-span 张三
+            %span.unedit-box#age-span= (Time.now.year - @user.birthday.year).to_s + "岁"
             %span.edit-box
               %input.input-area#age-input{:type => "text"}
             %label.input-caption 性别:
-            %span.unedit-box#gender-span 张三
+            %span.unedit-box#gender-span= @user.gender == 0 ? "男" : "女"
             %span.edit-box
               %input.input-area#gender-input{:type => "text"}
             %label.input-caption 联系方式:
-            %span.unedit-box#phone-span 张三
+            %span.unedit-box#phone-span= @user.mobile
             %span.edit-box
               %input.input-area#phone-input{:type => "text"}
           .controls.controls-row
             %label.input-caption 家长:
-            %span.unedit-box#parent-span 张三
+            %span.unedit-box#parent-span= @user.parent
             %span.edit-box
               %input.input-area#parent-input{:type => "text"}
             %label.input-caption 地址:
-            %span.unedit-box#address-span 张三
+            %span.unedit-box#address-span= @user.address
             %span.edit-box
               %input.input-area#address-input{:type => "text"}
 

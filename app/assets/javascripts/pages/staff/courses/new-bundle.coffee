@@ -76,3 +76,41 @@ $ ->
       }
     ]
   })
+
+  $(".end-btn").click ->
+    course_id = window.cid
+    available = $("#available").is(":checked")
+    code = $("#course-code").val()
+    capacity = $("#course-capacity").val()
+    price = $("#course-price").val()
+    length = $("#course-length").val()
+    date = $("#course-date").val()
+    speaker = $("#course-speaker").val()
+    address = $("#course-address").val()
+
+    if code == "" || capacity == "" || price == "" || length == "" || date == "" || speaker == "" || address == ""
+      $.page_notification("请将信息补充完整")
+      return
+
+    $.postJSON(
+      '/staff/courses/',
+      course: {
+        course_id: course_id
+        available: available
+        code: code
+        capacity: capacity
+        price: price
+        length: length
+        date: date
+        speaker: speaker
+        address: address
+      },
+      (data) ->
+        if data.success
+          location.href = "/staff/courses/" + data.course_inst_id
+        else
+          if data.code == COURSE_INST_EXIST
+            $.page_notification("课程编号已存在")
+          else
+            $.page_notification("服务器出错")
+      )

@@ -79,6 +79,9 @@ Rails.application.routes.draw do
       collection do
         get :get_id_by_name
       end
+      member do
+        post :set_available
+      end
     end
 
     resources :books do

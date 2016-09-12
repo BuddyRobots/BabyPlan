@@ -1,6 +1,17 @@
 class Staff::CoursesController < Staff::ApplicationController
 
   def index
+    @keyword = params[:keyword]
+    course_insts = @keyword.present? ? current_user.staff_center.course_insts.where(name: /#{@keyword}/) : current_user.staff_center.course_insts.all
+    @course_insts = auto_paginate(course_insts)
+    @course_insts[:data] = @course_insts[:data].map do |e|
+      e.course_inst_info
+    end
+  end
+
+  def create
+    retval = CourseInst.create_course_inst(current_user, params[:course])
+    render json: retval_wrapper(retval) and return
   end
 
   def new
@@ -8,6 +19,14 @@ class Staff::CoursesController < Staff::ApplicationController
   end
 
   def show
+    @course_inst = CourseInst.where(id: params[:id]).first
+  end
+
+  def update
+    @course_inst = CourseInst.where(id: params[:id]).first
+    render json: retval_wrapper(ErrCode::COURSE_INST_NOT_EXIST) and return if @course_inst.nil?
+    retval = @course_inst.update_info(params[:course_inst])
+    render json: retval_wrapper(retval)
   end
 
   def get_id_by_name
@@ -24,5 +43,12 @@ class Staff::CoursesController < Staff::ApplicationController
     else
       render json: retval_wrapper(ErrCode::COURSE_NOT_EXIST) and return
     end
+  end
+
+  def set_available
+    @course_inst = CourseInst.where(id: params[:id]).first
+    retval = ErrCode::COURSE_INST_NOT_EXIST if @course.blank?
+    retval = @course_inst.set_available(params[:available])
+    render json: retval_wrapper(retval)
   end
 end
