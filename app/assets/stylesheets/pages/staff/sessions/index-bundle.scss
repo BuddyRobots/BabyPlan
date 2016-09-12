@@ -222,95 +222,36 @@
 		left: 50%;
 		top: 50%;
 		margin-left: -203px;
-		margin-top: -224px;
+		margin-top: -209px;
 		width: 406px;
-		height: 456px;
+		height: 418px;
 		border-radius: 6px;
 	}
 	
 }
-.forgetbox {
-	padding-bottom: 20px;
-	.textarea {
-		width: 120px;
-		float: left;
-		text-align: right;
-		font-size:16px;
-		color:#323232;
-		padding-top: 9px;
-	}
-	.forget-box {
-		width: 190px;
-		height: 36px;
-		border-radius: 6px;
-		border: 1px solid #c8c8c8;
-		margin-left: 10px;
-	}
-	#forget-mobilecode {
-		width: 100px;
-		height: 36px;
-		border-radius: 6px;
-		border: 1px solid #c8c8c8;
-		margin-left: 10px;
-	}
-	#mobile-code {
-		width: 76px;
-		height: 36px;
-		line-height: 36px;
-		padding: 0;
-		border-radius: 6px;
-		margin-left: 10px;
-		font-size: 12px;
-		color: #323232;
-		text-align: center;
-		text-decoration: none;
-	}
-	.unclicked-box {
-		border: 1px solid #c8c8c8;
-	}
-	.clicked-box {
-		border: 1px solid #d70c19;
-	}
-	.clicked {
-		background: #d4d4d4;
-	}
-	.unclicked {
-		background: #fee4d2;
-	}
-	#forget-password {
-		margin-bottom: 0;
-		padding: 0;
-	}
-	#forget-confirm-password {
-		margin-bottom: 0;
-		padding: 0;
-	}
+.forget-password-box {
+	width: 78%;
+	margin: 0  auto;
+}
+#notice-box {
+	margin-bottom: 0;
 }
 #forget-mobile-notice, #forget-verify-code-notice, #forget-password-notice {
 	font-size: 12px;
+	height: 20px;
+	line-height: 20px;
 	color: #d70c19;
-	margin-left: 130px;
+	margin-left: 85px;
 	visibility: hidden;
 }
-#mobile-error {
-	padding-bottom: 10px;
+#mobile-code {
+	@extend #mobilecode;
 }
-#mobilecode-error, #password-error {
-	padding-bottom: 0;
+.forget-button {
+	text-align: center;
 }
 #forget {
-	display: block;
-	margin: 0 auto;
-	width: 240px;
-	height: 40px;
-	border-radius: 6px;
-	margin-top: 10px;
-	margin-bottom: 30px;
-	text-align: center;
-	line-height: 40px;
-	font-size: 16px;
-	color: white;
-	text-decoration: none;
+	@extend #signup;
 }
 .forget:link {
 	text-decoration: none;
@@ -320,13 +261,8 @@
 	text-decoration: none;
 }
 .forget:hover {
-	// background: #ffa265;
 	text-decoration: none;
 	color: white;
-}
-#forget-mobile, #forget-mobilecode {
-	padding: 0;
-	margin-bottom: 0;
 } 
 
 
