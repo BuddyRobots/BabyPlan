@@ -9,89 +9,95 @@
   %img.master{:src => "/assets/managecenter/master.png"}
 
 / signin
-#signinModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
-  %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", :src => "/assets/managecenter/close.png"} 
-  .modal-body
-    .logo-box
-      %img.sign-logo{:src => "/assets/managecenter/logo.png"}
-        %span.kids-center 社区儿童管理中心
-    %p.error-notice 您填写的账号或密码不正确，请再次尝试
-    .signin-textbox
-      %label.textarea 账&nbsp号
-      %input.input-box.unclicked-box#mobile{:type => "text"}
-    %p.email-notice 请填写完整的账号或管理员账号
-    .signin-textbox
-      %label.textarea 密&nbsp码
-      %input.input-box.unclicked-box#password{"type" => "password"}
-    %a.signin.button-disabled{:href => "javascript:void(0);"} 登&nbsp录
-    .checkbox
-      %label
-        %input.square-box{:type => "checkbox"}
-        %span.auto-signin 5天内自动登陆
-        %a.forget-password{"data-toggle" => "modal", "data-target" => "#forgetModal"} 忘记密码？
+#signinModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
+  .modal-dialog
+    .modal-content
+      %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", :src => "/assets/managecenter/close.png"} 
+      .modal-body
+        .logo-box
+          %img.sign-logo{:src => "/assets/managecenter/logo.png"}
+            %span.kids-center 社区儿童管理中心
+        %p.error-notice 您填写的账号或密码不正确，请再次尝试
+        .signin-textbox
+          %label.textarea 账&nbsp号
+          %input.input-box.unclicked-box#mobile{:type => "text"}
+        %p.email-notice 请填写完整的账号或管理员账号
+        .signin-textbox
+          %label.textarea 密&nbsp码
+          %input.input-box.unclicked-box#password{"type" => "password"}
+        %a.signin.button-disabled{:href => "javascript:void(0);"} 登&nbsp录
+        .checkbox
+          %label
+            %input.square-box{:type => "checkbox"}
+            %span.auto-signin 5天内自动登陆
+            %a.forget-password{"data-toggle" => "modal", "data-target" => "#forgetModal"} 忘记密码？
 
 / signup
-#signupModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
-  %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", :src => "/assets/managecenter/close.png"}
-  .modal-body
-    .signup-logo-box
-      %img.sign-logo{:src => "/assets/managecenter/logo.png"}
-        %span.kids-center 社区儿童管理中心     
-    .textbox
-      %label.textarea 姓&nbsp名
-      %input.input-box.unclicked-box#signup-name{:type => "text"}
-    .textbox#kids-center
-      %label.textarea 儿童中心
-      %input.input-box.unclicked-box#signup-address{:type => "text"}
-    %p#mobile-notice 请核对手机号
-    .textbox#mobile
-      %label.textarea 手机号
-      %input.input-box.unclicked-box#signup-mobile{:type => "text"}
-    %p#verify-code-notice 验证码错误
-    .textbox
-      %label.textarea 验证码
-      %input.input-box.unclicked-box#signup-mobilecode{:type => "text"}
-      %button.input-box.unclicked#mobilecode{:href => "javascript:void(0);"} 获取验证码
-    .textbox#password
-      %label.textarea 密&nbsp码
-      %input.input-box.unclicked-box#signup-password{"type" => "password"}
-    %p#password-notice 两次密码输入不一致
-    .textbox
-      %label.textarea 确认密码
-      %input.input-box.unclicked-box#signup-confirm-password{"type" => "password"}
-    %a#signup.button-disabled{:href => "javascript:void(0);"} 注&nbsp册
-    %a.footbox#signup-signin{:href => "javascript:void(0);"}
-      已有账号马上登陆
-      %span.right-arrow
-        %img{:src => "/assets/managecenter/arrowright.png"}
+#signupModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", :src => "/assets/managecenter/close.png"}
+      .modal-body
+        .signup-logo-box
+          %img.sign-logo{:src => "/assets/managecenter/logo.png"}
+            %span.kids-center 社区儿童管理中心     
+        .textbox
+          %label.textarea 姓&nbsp名
+          %input.input-box.unclicked-box#signup-name{:type => "text"}
+        .textbox#kids-center
+          %label.textarea 儿童中心
+          %input.input-box.unclicked-box#signup-address{:type => "text"}
+        %p#mobile-notice 请核对手机号
+        .textbox#mobile
+          %label.textarea 手机号
+          %input.input-box.unclicked-box#signup-mobile{:type => "text"}
+        %p#verify-code-notice 验证码错误
+        .textbox
+          %label.textarea 验证码
+          %input.input-box.unclicked-box#signup-mobilecode{:type => "text"}
+          %button.input-box.unclicked#mobilecode{:href => "javascript:void(0);"} 获取验证码
+        .textbox#password
+          %label.textarea 密&nbsp码
+          %input.input-box.unclicked-box#signup-password{"type" => "password"}
+        %p#password-notice 两次密码输入不一致
+        .textbox
+          %label.textarea 确认密码
+          %input.input-box.unclicked-box#signup-confirm-password{"type" => "password"}
+        %a#signup.button-disabled{:href => "javascript:void(0);"} 注&nbsp册
+        %a.footbox#signup-signin{:href => "javascript:void(0);"}
+          已有账号马上登陆
+          %span.right-arrow
+            %img{:src => "/assets/managecenter/arrowright.png"}
 
 
 / forget-passwordModal
-#forgetModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
-  %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", :src => "/assets/managecenter/close.png"}
-  .modal-body
-    .signup-logo-box#mobile-error
-      %img.sign-logo{:src => "/assets/managecenter/logo.png"}
-        %span.kids-center 社区儿童管理中心 
-    %p#forget-mobile-notice 请核对手机号
-    .forgetbox#mobilecode-error
-      %label.textarea 手机号
-      %input.forget-box.unclicked-box#forget-mobile{:type => "text"}
-    %p#forget-verify-code-notice 验证码错误
-    .forgetbox
-      %label.textarea 验证码
-      %input.forget-box.unclicked-box#forget-mobilecode{:type => "text"}
-      %button.forget-box.unclicked#mobile-code{:href => "javascript:void(0);"} 获取验证码
-    .forgetbox#password-error
-      %label.textarea 新密码
-      %input.forget-box.unclicked-box#forget-password{"type" => "password"}
-    %p#forget-password-notice 两次密码输入不一致
-    .forgetbox
-      %label.textarea 确认密码
-      %input.forget-box.unclicked-box#forget-confirm-password{"type" => "password"}
-    %a#forget.button-disabled{:href => "javascript:void(0);"} 重置密码
-    %a.footbox#forget-register{:href => "javascript:void(0);"}
-      前往注册
-      %span.right-arrow
-        %img{:src => "/assets/managecenter/arrowright.png"}
+#forgetModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", :src => "/assets/managecenter/close.png"}
+      .modal-body
+        .signup-logo-box#mobile-error
+          %img.sign-logo{:src => "/assets/managecenter/logo.png"}
+            %span.kids-center 社区儿童管理中心 
+        %p#forget-mobile-notice 请核对手机号
+        .forgetbox#mobilecode-error
+          %label.textarea 手机号
+          %input.forget-box.unclicked-box#forget-mobile{:type => "text"}
+        %p#forget-verify-code-notice 验证码错误
+        .forgetbox
+          %label.textarea 验证码
+          %input.forget-box.unclicked-box#forget-mobilecode{:type => "text"}
+          %button.forget-box.unclicked#mobile-code{:href => "javascript:void(0);"} 获取验证码
+        .forgetbox#password-error
+          %label.textarea 新密码
+          %input.forget-box.unclicked-box#forget-password{"type" => "password"}
+        %p#forget-password-notice 两次密码输入不一致
+        .forgetbox
+          %label.textarea 确认密码
+          %input.forget-box.unclicked-box#forget-confirm-password{"type" => "password"}
+        %a#forget.button-disabled{:href => "javascript:void(0);"} 重置密码
+        %a.footbox#forget-register{:href => "javascript:void(0);"}
+          前往注册
+          %span.right-arrow
+            %img{:src => "/assets/managecenter/arrowright.png"}
 

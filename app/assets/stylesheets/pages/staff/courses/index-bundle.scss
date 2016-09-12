@@ -154,14 +154,17 @@
 
 // course-addModal
 #course-addModal {
-	position:absolute;
-	left: 50%;
-	top: 50%;
-	margin-left: -151px;
-	margin-top: -101px;
-	width: 300px;
-	height: 200px;
-	border-radius: 6px;
+	.modal-dialog {
+		position:absolute;
+		left: 50%;
+		top: 50%;
+		margin-left: -151px;
+		margin-top: -101px;
+		width: 300px;
+		height: 200px;
+		border-radius: 6px;
+	}
+	
 }
 .modal-backdrop {
 	background-color: #999;

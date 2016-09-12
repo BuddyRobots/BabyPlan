@@ -37,8 +37,8 @@
               %img.turnoff-icon{:src => "/assets/managecenter/turnoff.png"}
       - else
         %p.rightword 您好欢迎访问社区儿童管理中心！
-        %a.sign-up{:href => "#signupModal", "data-toggle" => "modal"} 注册
-        %a.sign-in{:href => "#signinModal", "data-toggle" => "modal"} 登陆
+        %button.sign-up{"data-target" => "#signupModal", "data-toggle" => "modal", :type => "button"} 注册
+        %button.sign-in{"data-target" => "#signinModal", "data-toggle" => "modal", :type => "button"} 登陆
         
       
     

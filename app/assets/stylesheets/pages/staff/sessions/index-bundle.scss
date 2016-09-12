@@ -25,14 +25,17 @@
 	
 // signin  page 
 #signinModal {
-	position:absolute;
-	left: 50%;
-	top: 50%;
-	margin-left: -203px;
-	margin-top: -174px;
-	width: 406px;
-	height: 348px;
-	border-radius: 6px;
+	.modal-dialog {
+		position:absolute;
+		left: 50%;
+		top: 50%;
+		margin-left: -203px;
+		margin-top: -174px;
+		width: 406px;
+		height: 348px;
+		border-radius: 6px;
+	}
+	
 }
 .modal-backdrop {
 	background-color: #999;
@@ -175,14 +178,16 @@
 
 //signupModal
 #signupModal {
-	position:absolute;
-	left: 50%;
-	top: 50%;
-	margin-left: -203px;
-	margin-top: -280px;
-	width: 406px;
-	height: 572px;
-	border-radius: 6px;
+	.modal-dialog{
+		position:absolute;
+		left: 50%;
+		top: 50%;
+		margin-left: -203px;
+		margin-top: -280px;
+		width: 406px;
+		height: 572px;
+		border-radius: 6px;
+	}
 }
 .signup-logo-box {
 	padding: 30px 0;
@@ -309,14 +314,17 @@
 
 //forget-passwordModal
 #forgetModal {
-	position:absolute;
-	left: 50%;
-	top: 50%;
-	margin-left: -203px;
-	margin-top: -224px;
-	width: 406px;
-	height: 456px;
-	border-radius: 6px;
+	.modal-dialog {
+		position:absolute;
+		left: 50%;
+		top: 50%;
+		margin-left: -203px;
+		margin-top: -224px;
+		width: 406px;
+		height: 456px;
+		border-radius: 6px;
+	}
+	
 }
 .forgetbox {
 	padding-bottom: 20px;

@@ -13,7 +13,7 @@
         .input-append
           %input#appendedInputButton.span2{:type => "text", :placeholder => "输入课程名称", :value => "#{@keyword}"}
           %button.btn#search-btn{:type => "button"}
-      .btn.bookadd-btn{:type => "button", :href => "#course-addModal", "data-toggle" => "modal"} 
+      .btn.bookadd-btn{:type => "button", "data-target" => "#course-addModal", "data-toggle" => "modal"} 
         %img.book-edit{:src => "/assets/managecenter/add.png"}
         添加课程
 
@@ -95,19 +95,21 @@
         /           %a{:href => "/staff/courses?keyword=#{@keyword}&page=#{@courses[:next_page]}"} »
 
 
-#course-addModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
-  .modalheader
-    %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", :src => "/assets/managecenter/close.png"}
-  .modal-body
-    .form-group
-      %label{:for => "coursename"} 添加课程
-      %input.form-control#coursename{:placeholder => "请输入名称或编号并从列表中选择"}
-  .modal-footer
-    %a.btn.confirm{:href => "javascript:void(0);"} 确定
-    %a.btn.btn-primary.cancel{:href => "javascript:void(0);"} 取消
+#course-addModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modalheader
+        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", :src => "/assets/managecenter/close.png"}
+      .modal-body
+        .form-group
+          %label{:for => "coursename"} 添加课程
+          %input.form-control#coursename{:placeholder => "请输入名称或编号并从列表中选择"}
+      .modal-footer
+        %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} 确定
+        %button.btn.btn-primary{:type => "button"} 取消
 
 
-#shelveModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
+#shelveModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
   .modalheader
     %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", :src => "/assets/managecenter/close.png"}
     %p.caption 请填写完整信息后再选择上架
