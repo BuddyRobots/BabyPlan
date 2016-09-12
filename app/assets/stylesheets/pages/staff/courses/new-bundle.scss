@@ -105,22 +105,30 @@
 .controls-row {
 	margin-bottom: 15px;
 }
-.calendar-desc {
-	font-size: 16px;
-	color: #323232;
-	margin: 15px 20px;
+
+.class-calendar {
+	float: left;
 }
-.notice {
-	font-size: 14px;
-	color: #323232;
+
+#calendar-wrapper {
+	float: left;
+	width: 85%;
 }
+
+#add-event-wrapper {
+	padding-left: 10px;
+}
+
+#rm-event-wrapper {
+	padding-left: 10px;
+	color: red;
+}
+
 #calendar {
 	border: 1px solid #c8c8c8;
-	width: 84%;
-	margin: 0 auto;
+	margin-left: 10px;
 	border-radius: 4px;
 	font-size: 14px;
-	margin-bottom: 20px;
 }
 h2 {
 	font-size: 14px;
