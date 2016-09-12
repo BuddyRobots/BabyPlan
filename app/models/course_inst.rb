@@ -39,7 +39,8 @@ class CourseInst
       capacity: course_inst_info[:capacity],
       price: course_inst_info[:price],
       date: course_inst_info[:date],
-      speaker: course_inst_info[:speaker]
+      speaker: course_inst_info[:speaker],
+      date_in_calendar: course_inst_info[:date_in_calendar]
     })
     course_inst.center = staff.staff_center
     course_inst.save
