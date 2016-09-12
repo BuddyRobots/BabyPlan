@@ -66,6 +66,7 @@ $ ->
     $("#unshelve-btn").attr("disabled", true)
     $(".unedit-box").hide()
     $(".edit-box").show()
+    $("#code-input").val($("#code-span").text())
     $("#classname-input").val($("#classname-span").text())
     $("#classspeaker-input").val($("#classspeaker-span").text())
     $("#charge-input").val(window.price)
@@ -87,6 +88,7 @@ $ ->
     name = $("#classname-input").val()
     speaker = $("#classspeaker-input").val()
     price = $("#charge-input").val()
+    code = $("#code-input").val()
     desc = editor.$txt.html()
 
     $.putJSON(
@@ -96,6 +98,7 @@ $ ->
           name: name
           speaker: speaker
           price: price
+          code: code
           desc: desc
         }
       },
@@ -113,6 +116,7 @@ $ ->
 
           $("#classname-span").text(name)
           $("#classspeaker-span").text(speaker)
+          $("#code-span").text(code)
           $("#charge-span").text(price + "元")
           window.price = price
           $(".introduce-details").html(desc)

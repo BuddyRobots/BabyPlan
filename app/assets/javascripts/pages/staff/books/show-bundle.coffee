@@ -2,6 +2,8 @@
 
 $ ->
 
+  is_edit = false
+
 # wangEditor
   editor = new wangEditor('edit-area')
 
@@ -26,6 +28,7 @@ $ ->
     $(".wangedit-area").toggle()
     $(".finish-btn").toggle()
     $(".edit-btn").toggle()
+    is_edit = true
 
     $("#unshelve-btn").attr("disabled", true)
     $("#QRcode-btn").attr("disabled", true)
@@ -40,11 +43,29 @@ $ ->
     desc = $("#editor-content").html()
     console.log desc
     editor.$txt.html(desc)
-    
-# 我的方法
-    # desc = $(".introduce-details").html()
-    # console.log desc
-    # editor.$txt.html(desc)
+
+    # 我的方法
+    #   desc = $(".introduce-details").html()
+    #   console.log desc
+    #   editor.$txt.html(desc)
+
+# button hide
+  $("#book-message").click ->
+    if is_edit
+      $(".finish-btn").show()
+    else
+      $(".edit-btn").show()
+    $("#unshelve-btn").show()
+
+  $("#user-review").click ->
+    $(".edit-btn").hide()
+    $("#unshelve-btn").hide()
+    $(".finish-btn").hide()
+
+  $("#borrow-message").click ->
+    $(".edit-btn").hide()
+    $("#unshelve-btn").hide()
+    $(".finish-btn").hide()  
 
   # finish-btn pressdown
   $(".finish-btn").click ->
@@ -132,21 +153,6 @@ $ ->
             btn.find("img").attr("src", "/assets/managecenter/unshelve.png")
             $("#available-status").text("在架上")
       )
-# button hide
-  $("#book-message").click ->
-    $(".edit-btn").show()
-    $("#unshelve-btn").show()
-    $("#QRcode-btn").show()
-
-  $("#user-review").click ->
-    $(".edit-btn").hide()
-    $("#unshelve-btn").hide()
-    $("#QRcode-btn").hide()
-
-  $("#borrow-message").click ->
-    $(".edit-btn").hide()
-    $("#unshelve-btn").hide()
-    $("#QRcode-btn").hide()
 
 # img upload
   $("#back-img").click ->

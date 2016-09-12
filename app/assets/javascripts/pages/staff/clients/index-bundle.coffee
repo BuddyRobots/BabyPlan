@@ -134,9 +134,9 @@ $ ->
       (data) ->
         if !data.success
           if data.code == USER_NOT_EXIST
-            $("#mobile-notice").text("验证码错误").css("visibility","visible")
+            $("#mobile-notice").text("账号不存在").css("visibility", "visible")
           if data.code == WRONG_VERIFY_CODE
-            $("#verify-code-notice").text("验证码错误").css("visibility","visible")
+            $("#verify-code-notice").text("验证码错误").css("visibility", "visible")
         else
           $("#kidsaddModal").modal('hide')
           location.href = "/staff/clients"
