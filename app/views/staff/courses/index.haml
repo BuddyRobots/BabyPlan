@@ -10,9 +10,10 @@
   .content-box
     .manage-box
       .user-search-box
-        .input-append
-          %input#appendedInputButton.span2{:type => "text", :placeholder => "输入课程名称", :value => "#{@keyword}"}
-          %button.btn#search-btn{:type => "button"}
+        .input-group
+          %input.form-control#search-input{:type => "text", :placeholder => "输入课程名称", :value => "#{@keyword}"}
+          %span.input-group-btn
+            %button.btn.btn-default#search-btn{:type => "button"}
       .btn.bookadd-btn{:type => "button", "data-target" => "#course-addModal", "data-toggle" => "modal"} 
         %img.book-edit{:src => "/assets/managecenter/add.png"}
         添加课程
@@ -24,7 +25,7 @@
     - else
       .manage-content
         .table-box
-          %table.table.table-bordered.user-table
+          %table.table.table-bordered#user-table
             %caption
             %thead
               %tr
@@ -47,19 +48,17 @@
                   %td
                     %a.set-available.link-available{:href => "javascript:void(0);"} 下架
 
-
         .select-page 
           %span.totalitems= "共#{@course_insts[:total_page]}页,总计#{@course_insts[:total_number]}条"
           %span.choice-page
-            .pagination.pagination-small
-              %ul
+            %ul.pagination.pagination-sm
+              %li
+                %a{:href => "/staff/courses?keyword=#{@keyword}&page=#{@course_insts[:previous_page]}"} «
+              - ( (@course_insts[:previous_page] > 2 ? @course_insts[:previous_page] - 2 : 1) .. (@course_insts[:next_page] < @course_insts[:total_page] - 2 ? @course_insts[:next_page] + 2 : @course_insts[:total_page]) ).to_a.each do |page|
                 %li
-                  %a{:href => "/staff/courses?keyword=#{@keyword}&page=#{@course_insts[:previous_page]}"} «
-                - ( (@course_insts[:previous_page] > 2 ? @course_insts[:previous_page] - 2 : 1) .. (@course_insts[:next_page] < @course_insts[:total_page] - 2 ? @course_insts[:next_page] + 2 : @course_insts[:total_page]) ).to_a.each do |page|
-                  %li
-                    %a{:href => "/staff/courses?keyword=#{@keyword}&page=#{page}"}= page
-                %li
-                  %a{:href => "/staff/courses?keyword=#{@keyword}&page=#{@course_insts[:next_page]}"} »
+                  %a{:href => "/staff/courses?keyword=#{@keyword}&page=#{page}"}= page
+              %li
+                %a{:href => "/staff/courses?keyword=#{@keyword}&page=#{@course_insts[:next_page]}"} »
 
 
 #course-addModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
@@ -69,7 +68,7 @@
         %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", :src => "/assets/managecenter/close.png"}
       .modal-body
         .form-group
-          %label{:for => "coursename"} 添加课程
+          %label.course-caption{:for => "coursename"} 添加课程
           %input.form-control#coursename{:placeholder => "请输入名称或编号并从列表中选择"}
       .modal-footer
         %button.btn.btn-default#confirm-btn{"data-dismiss" => "modal", :type => "button"} 确定

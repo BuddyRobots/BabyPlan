@@ -17,6 +17,8 @@ $ ->
     $("#mobile-code").addClass("unclicked")
     $("#mobile-code").removeClass("clicked")
     $("#mobile-code").attr("disabled", false)
+    $("input").val("")
+    $(".notice").css("visibility", "hidden")
 
   time = (o) ->
     console.log wait
@@ -46,7 +48,7 @@ $ ->
     if mobile_retval == false
       $("#mobile-notice").css("visibility","visible")
       $("#kid-mobile").addClass("clicked-box")
-      return
+      return false
     $("#kid-mobile").removeClass("clicked-box")
     $.postJSON(
       '/staff/clients',
@@ -67,6 +69,7 @@ $ ->
           $("#mobile-notice").text("帐号已存在").css("visibility","visible") 
           console.log $("#mobile-notice").text()
     )
+    return false
     
   # toggle_signin_password_tip = (wrong) ->
   #   if (wrong)
@@ -143,6 +146,7 @@ $ ->
       )
   $("#kid-add").click ->
     kidAdd()
+    return false
 
   $("#kid-mobilecode").keydown (event) ->
     code = event.which
@@ -151,13 +155,13 @@ $ ->
 
 # search-btn press
   search = ->
-    value = $("#appendedInputButton").val()
+    value = $("#search-input").val()
     location.href = "/staff/clients?keyword=" + value + "&page=1"
 
   $("#search-btn").click ->
     search()
 
-  $("#appendedInputButton").keydown (event) ->
+  $("#search-input").keydown (event) ->
     code = event.which
     if code == 13
       search()

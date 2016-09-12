@@ -51,8 +51,8 @@
 	height: 34px;
 }
 #search-btn {
-	width: 36px;
-	height: 36px;
+	width: 34px;
+	height: 34px;
 	border: 1px solid #c8c8c8;
 	background: url("/assets/managecenter/search.png") no-repeat;
 	background-size: 22px;
@@ -82,7 +82,7 @@
 	padding: 0;
 	margin: 20px 20px auto 20px;
 }
-.user-table {
+#user-table {
 	border-radius: 6px;
 	border: 1px solid #c8c8c8;
 	font-size: 14px;
@@ -139,14 +139,16 @@
 
 
 #kidsaddModal {
-	position:absolute;
-	left: 50%;
-	top: 50%;
-	margin-left: -203px;
-	margin-top: -275px;
-	width: 406px;
-	height: 550px;
-	border-radius: 6px;
+	.modal-dialog {
+		position:absolute;
+		left: 50%;
+		top: 50%;
+		margin-left: -203px;
+		margin-top: -275px;
+		width: 406px;
+		height: 550px;
+		border-radius: 6px;	
+	}
 }
 .modal-backdrop {
 	background-color: #999;
@@ -167,104 +169,62 @@
 	box-shadow: 0 -1px 6px #9c9c9c; 
 }
 .caption {
-	font-size: 1.6em;
+	font-size: 16px;
 	color: #323232;
 	margin-left: 20px;
 }
-.textbox {
-	padding-bottom: 20px;
-	.textarea {
-		width: 120px;
-		float: left;
-		text-align: right;
-		font-size:1.6em;
-		color:#323232;
-		padding-top: 9px;
-	}
-	.input-box {
-		width: 190px;
-		height: 36px;
-		border-radius: 6px;
-		margin-left: 10px;
-		border: 1px solid #c8c8c8;
-	}
-	#locale {
-		display: none;
-	}
-	#kid-mobilecode {
-		width: 100px;
-		height: 36px;
-		border-radius: 6px;
-		border: 1px solid #c8c8c8;
-		margin-left: 10px;
-	}
-	.unclicked-box {
-		border: 1px solid #c8c8c8;
-	}
-	.clicked-box {
-		border: 1px solid #d70c19;
-	}
-	.clicked {
-		background: #d4d4d4;
-	}
-	.unclicked {
-		background: #fee4d2;
-	}
-	#mobilecode {
-		width: 76px;
-		height: 36px;
-		line-height: 36px;
-		padding: 0;
-		border-radius: 6px;
-		margin-left: 10px;
-		font-size: 1.2em;
-		color: #323232;
-		text-align: center;
-		text-decoration: none;
-	}
-	#kid-password {
-		margin-bottom: 0;
-		padding: 0;
-	}
-	#kid-confirm-password {
-		margin-bottom: 0;
-		padding: 0;
-	}
+.form-horizontal {
+	width: 78%;
+	margin: 0 auto;
+	padding-top: 20px;
 }
-#kid-mobile, #kid-name, #kid-gender, #datepicker, #kid-address, #kid-mobile,
-#kid-parent, #kid-address, #kid-mobilecode, #homeaddress, #mobile {
-	padding: 0;
+.form-group {
+	margin-bottom: 20px;
+}
+#home-address, #mobile-input {
 	margin-bottom: 0;
 }
-#kid-name-box {
-	margin-top: 30px;
-}
-#mobile-notice, #verify-code-notice, #password-notice {
-	font-size: 1.2em;
+.notice {
+	font-size: 12px;
 	color: #d70c19;
-	margin-left: 130px;
+	margin-left: 85px;
+	height: 20px;
+	line-height: 20px;
 	visibility: hidden;
 }
-#kid-add {
-	display: block;
-	margin: 0 auto;
-	width: 240px;
-	height: 40px;
+#mobilecode {
+	width: 85px;
+	height: 34px;
+	line-height: 34px;
+	border: 0;
 	border-radius: 6px;
-	margin-top: 10px;
-	margin-bottom: 30px;
+	font-size: 12px;
+	color: #323232;
+}
+.unclicked-box {
+	border: 1px solid #c8c8c8;
+}
+.clicked-box {
+	border: 1px solid #d70c19;
+}
+.clicked {
+	background: #d4d4d4;
+}
+.unclicked {
+	background: #fee4d2;
+}
+.add-button {
 	text-align: center;
+}
+#kid-add {
+	width: 80%;
+	height: 40px;
+	border: 0;
+	border-radius: 4px;
+	margin-bottom: 20px;
 	line-height: 40px;
-	font-size: 1.6em;
+	font-size: 16px;
 	color: white;
-	text-decoration: none;
-}
-#kid-add:link {
-	text-decoration: none;
-}
-#kid-add:visited {
-	color: white;
-	text-decoration: none;
 }
 .button-disabled {
 	background: #c8c8c8;
@@ -272,3 +232,101 @@
 .button-enabled {
 	background: #ffa265;
 }
+
+
+
+// .textbox {
+// 	padding-bottom: 20px;
+// 	.textarea {
+// 		width: 120px;
+// 		float: left;
+// 		text-align: right;
+// 		font-size:16px;
+// 		color:#323232;
+// 		padding-top: 9px;
+// 	}
+// 	.input-box {
+// 		width: 190px;
+// 		height: 36px;
+// 		border-radius: 6px;
+// 		margin-left: 10px;
+// 		border: 1px solid #c8c8c8;
+// 	}
+// 	#locale {
+// 		display: none;
+// 	}
+// 	#kid-mobilecode {
+// 		width: 100px;
+// 		height: 36px;
+// 		border-radius: 6px;
+// 		border: 1px solid #c8c8c8;
+// 		margin-left: 10px;
+// 	}
+// 	.unclicked-box {
+// 		border: 1px solid #c8c8c8;
+// 	}
+// 	.clicked-box {
+// 		border: 1px solid #d70c19;
+// 	}
+// 	.clicked {
+// 		background: #d4d4d4;
+// 	}
+// 	.unclicked {
+// 		background: #fee4d2;
+// 	}
+// 	#mobilecode {
+// 		width: 76px;
+// 		height: 36px;
+// 		line-height: 36px;
+// 		padding: 0;
+// 		border-radius: 6px;
+// 		margin-left: 10px;
+// 		font-size: 12px;
+// 		color: #323232;
+// 		text-align: center;
+// 		text-decoration: none;
+// 	}
+// 	#kid-password {
+// 		margin-bottom: 0;
+// 		padding: 0;
+// 	}
+// 	#kid-confirm-password {
+// 		margin-bottom: 0;
+// 		padding: 0;
+// 	}
+// }
+// #kid-mobile, #kid-name, #kid-gender, #datepicker, #kid-address, #kid-mobile,
+// #kid-parent, #kid-address, #kid-mobilecode, #homeaddress, #mobile {
+// 	padding: 0;
+// 	margin-bottom: 0;
+// }
+// #kid-name-box {
+// 	margin-top: 30px;
+// }
+// #mobile-notice, #verify-code-notice, #password-notice {
+// 	font-size: 12px;
+// 	color: #d70c19;
+// 	// margin-left: 130px;
+// 	// visibility: hidden;
+// }
+// #kid-add {
+// 	display: block;
+// 	margin: 0 auto;
+// 	width: 240px;
+// 	height: 40px;
+// 	border-radius: 6px;
+// 	margin-top: 10px;
+// 	margin-bottom: 30px;
+// 	text-align: center;
+// 	line-height: 40px;
+// 	font-size: 16px;
+// 	color: white;
+// 	text-decoration: none;
+// }
+// #kid-add:link {
+// 	text-decoration: none;
+// }
+// #kid-add:visited {
+// 	color: white;
+// 	text-decoration: none;
+// }

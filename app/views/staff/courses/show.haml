@@ -98,10 +98,14 @@
             %span.undiscover-message 抱歉！暂无查找信息
           .user-review-box
             .user-checkbox
-              %label.checkbox.inline
+              %label.checkbox-inline
                 %input#inlineCheckbox1{:type => "checkbox", :value => "option1"} 未公开
-              %label.checkbox.inline
+              %label.checkbox-inline
                 %input#inlineCheckbox2{:type => "checkbox", :value => "option2"} 已公开
+              / %label.checkbox.inline
+              /   %input#inlineCheckbox1{:type => "checkbox", :value => "option1"} 未公开
+              / %label.checkbox.inline
+              /   %input#inlineCheckbox2{:type => "checkbox", :value => "option2"} 已公开
             .book-description
               .user-item.clearfix
                 %img.book-img{:src => "/assets/managecenter/user-img.png"}
@@ -131,22 +135,21 @@
           .select-page 
             %span.totalitems= "共6页,总计12条"
             %span.choice-page
-              .pagination.pagination-small
-                %ul
-                  %li
-                    %a{:href => "javascript:void(0);"} «
-                  / - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
-                  %li
-                    %a{:href => "javascript:void(0);"} 1
-                  %li
-                    %a{:href => "javascript:void(0);"} »
-
+              %ul.pagination.pagination-sm
+                %li
+                  %a{:href => "javascript:void(0);"} «
+                / - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
+                %li
+                  %a{:href => "javascript:void(0);"} 1
+                %li
+                  %a{:href => "javascript:void(0);"} »
+          
         #tab3.tab-pane
           .undiscover
             %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
             %span.undiscover-message 抱歉！暂无查找信息
           .table-box
-            %table.table.table-bordered.user-table
+            %table.table.table-bordered#user-table
               %caption
               %thead
                 %tr
@@ -163,12 +166,12 @@
           .select-page 
             %span.totalitems= "共6页,总计12条"
             %span.choice-page
-              .pagination.pagination-small
-                %ul
-                  %li
-                    %a{:href => "javascript:void(0);"} «
-                  / - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
-                  %li
-                    %a{:href => "javascript:void(0);"} 1
-                  %li
-                    %a{:href => "javascript:void(0);"} »
+              %ul.pagination.pagination-sm
+                %li
+                  %a{:href => "javascript:void(0);"} «
+                / - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
+                %li
+                  %a{:href => "javascript:void(0);"} 1
+                %li
+                  %a{:href => "javascript:void(0);"} »
+        

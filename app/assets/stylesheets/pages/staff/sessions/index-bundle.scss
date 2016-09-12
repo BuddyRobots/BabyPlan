@@ -3,20 +3,32 @@
 	padding: 0;
 }
 // layout variable content
-.content {
+.content-area {
 	position:absolute;
 	right: 0;
 	left: 160px;
 	bottom: 0;
 	top: 60px;
 	background:#f7fcff;
-	text-align: center;
 	box-shadow: -1px -1px 6px #9c9c9c inset;
-	.caption {
-		font-size: 24px;
-		color: #323232;
-		padding: 60px 0;
-	}
+	padding: 20px;
+}
+.manage-content {
+	overflow: auto;
+	position: absolute;
+	top: 20px;
+	left: 0px;
+	bottom: 0px;
+	right: 0px;
+	box-shadow: 0 -1px 6px #9c9c9c inset;
+	background: white;  
+	margin: 0 20px 20px 20px;
+	text-align: center;
+}
+.caption {
+	font-size: 24px;
+	color: #323232;
+	padding: 60px 0;
 }
 .form-group {
 	margin-bottom: 20px;
@@ -178,13 +190,6 @@
 	line-height: 40px;
 	font-size: 16px;
 	color: white;
-}
-#signup:link {
-	text-decoration: none;
-}
-#signup:visited {
-	color: white;
-	text-decoration: none;
 }
 .button-disabled {
 	background: #c8c8c8;

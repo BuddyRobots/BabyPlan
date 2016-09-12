@@ -204,8 +204,8 @@ h2 {
 	border: 1px solid #ddd;
 }
 .user-checkbox {
-	margin-bottom: 5px;
-	margin-left: 20px;
+	margin: 5px 0;
+	margin-left: 10px;
 }
 .user-review {
 	font-size: 16px;
@@ -224,17 +224,6 @@ h2 {
 	img {
 		vertical-align: top;
 	}
-}
-.inline{
-	font-size: 12px;
-	color: #323232;
-	margin-right: 5px;
-	line-height: 22px;
-}
-#inlineCheckbox1, #inlineCheckbox2 {
-	width: 16px;
-	height: 16px;
-	margin-right: 5px;
 }
 .book-description {
 	position: relative;
@@ -286,7 +275,7 @@ h2 {
 .table-box {
 	padding: 0;
 }
-.user-table {
+#user-table {
 	border-radius: 6px;
 	border: 1px solid #ddd;
 	font-size: 14px;

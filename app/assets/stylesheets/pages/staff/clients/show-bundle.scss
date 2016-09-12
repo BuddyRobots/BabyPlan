@@ -1,6 +1,6 @@
 @import "jquery-ui";
 
-input, label, span, ul, li {
+span, ul, li, label {
 	margin: 0;
 	padding: 0;
 }
@@ -66,52 +66,36 @@ input, label, span, ul, li {
 	border: 1px solid #ddd;
 	border-radius: 0 6px 6px 6px;
 }
-.controls-row {
-	margin: 20px 0 20px 20px;
-}
-.input-area {
-	width: 118px;
-	height: 30px;
-	padding: 0;
-	margin: 0 70px 0 0 !important;
+.form-inline {
+	margin: 20px 20px;
 }
 .unedit-box {
 	display: inline-block;
-	vertical-align: middle;
 	font-size: 14px;
 	color: #323232;
-	width: 132px;
-	height: 30px;
-	line-height: 30px;
-	margin: 0 70px 0 0;
+	width: 200px;
 }
 .edit-box {
 	display: none;
+	margin-right: 50px;
 }
 #address-span {
 	@extend .unedit-box;
 	width: 350px;
 }
 #address-input {
-	@extend .input-area;
 	width: 384px;
 }
-.input-caption {
-	display: inline-block;
-	vertical-align: middle;
-	font-size: 16px;
-	color: #323232;
-	margin-right: 10px;
-}
+
 
 // tab2
 .course-details {
 	margin: 15px 0;
+	margin-left: 20px;
 }
 .class-status {
 	float: right;
 	display: inline-block;
-	line-height: 35px;
 	margin-right: 20px;
 }
 .span-attr {

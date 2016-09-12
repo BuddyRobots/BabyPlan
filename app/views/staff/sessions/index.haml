@@ -2,10 +2,11 @@
   = javascript_include_tag "pages/staff/sessions/index-bundle"
   = stylesheet_link_tag "pages/staff/sessions/index-bundle", :media => "all"
 
-.content
+.content-area
   / sessions-index
-  %p.caption 欢迎登陆社区儿童管理中心
-  %img.master{:src => "/assets/managecenter/master.png"}
+  .manage-content
+    %p.caption 欢迎登陆社区儿童管理中心
+    %img.master{:src => "/assets/managecenter/master.png"}
 
 / signin
 #signinModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 

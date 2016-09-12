@@ -26,32 +26,45 @@
 
       .tab-content
         #tab1.tab-pane.active
-          .controls.controls-row
-            %label.input-caption.edit 姓名:
-            %span.unedit-box#name-span= @user.name
+          %form.form-inline{:role => "form"}
+            .form-group
+              %label 姓名:
+              %span.unedit-box#name-span= @user.name
             %span.edit-box
-              %input.input-area#name-input{:type => "text"}
-            %label.input-caption 年龄:
-            %span.unedit-box#age-span= (Time.now.year - @user.birthday.year).to_s + "岁"
+              .form-group
+                %input.form-control#name-input{:type => "text"}
+            .form-group
+              %label 年龄:
+              %span.unedit-box#age-span= (Time.now.year - @user.birthday.year).to_s + "岁"
             %span.edit-box
-              %input.input-area#age-input{:type => "text"}
-            %label.input-caption 性别:
-            %span.unedit-box#gender-span= @user.gender == 0 ? "男" : "女"
+              .form-group
+                %input.form-control#age-input{:type => "text"}
+          %form.form-inline{:role => "form"}
+            .form-group
+              %label 性别:
+              %span.unedit-box#gender-span= @user.gender == 0 ? "男" : "女"
             %span.edit-box
-              %input.input-area#gender-input{:type => "text"}
-            %label.input-caption 联系方式:
-            %span.unedit-box#phone-span= @user.mobile
+              .form-group
+                %input.form-control#gender-input{:type => "text"}
+            .form-group
+              %label 家长:
+              %span.unedit-box#parent-span= @user.parent
             %span.edit-box
-              %input.input-area#phone-input{:type => "text"}
-          .controls.controls-row
-            %label.input-caption 家长:
-            %span.unedit-box#parent-span= @user.parent
+              .form-group
+                %input.form-control#parent-input{:type => "text"}
+          %form.form-inline{:role => "form"}
+            .form-group
+              %label 联系方式:
+              %span.unedit-box#phone-span= @user.mobile
             %span.edit-box
-              %input.input-area#parent-input{:type => "text"}
-            %label.input-caption 地址:
-            %span.unedit-box#address-span= @user.address
+              .form-group
+                %input.form-control#phone-input{:type => "text"}
+            .form-group
+              %label 地址:
+              %span.unedit-box#address-span= @user.address
             %span.edit-box
-              %input.input-area#address-input{:type => "text"}
+              .form-group
+                %input.form-control#address-input{:type => "text"}
 
         #tab2.tab-pane
           .review-box
@@ -80,11 +93,11 @@
               %span.square
               %span.square
               %span.class-status
-                %label.checkbox.inline
+                %label.checkbox-inline
                   %input#inlineCheckbox1{:type => "checkbox", :value => "option1"} 未上课
-                %label.checkbox.inline
-                  %input#inlineCheckbox2{:type => "checkbox", "background" => "#0fc077"} 已上课
-                %label.checkbox.inline
+                %label.checkbox-inline
+                  %input#inlineCheckbox2{:type => "checkbox", :value => "option2"} 已上课
+                %label.checkbox-inline
                   %input#inlineCheckbox3{:type => "checkbox", :value => "option3"} 缺课
             .comments
               %span 评论：
@@ -98,15 +111,14 @@
           .select-page 
             %span.totalitems= "共6页,总计12条"
             %span.choice-page
-              .pagination.pagination-small
-                %ul
-                  %li
-                    %a{:href => "javascript:void(0);"} «
-                  / - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
-                  %li
-                    %a{:href => "javascript:void(0);"} 1
-                  %li
-                    %a{:href => "javascript:void(0);"} »
+              %ul.pagination.pagination-sm
+                %li
+                  %a{:href => "javascript:void(0);"} «
+                / - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
+                %li
+                  %a{:href => "javascript:void(0);"} 1
+                %li
+                  %a{:href => "javascript:void(0);"} »
 
         #tab3.tab-pane
           .review-box
@@ -145,15 +157,14 @@
           .select-page 
             %span.totalitems= "共6页,总计12条"
             %span.choice-page
-              .pagination.pagination-small
-                %ul
-                  %li
-                    %a{:href => "javascript:void(0);"} «
-                  / - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
-                  %li
-                    %a{:href => "javascript:void(0);"} 1
-                  %li
-                    %a{:href => "javascript:void(0);"} »
+              %ul.pagination.pagination-sm
+                %li
+                  %a{:href => "javascript:void(0);"} «
+                / - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
+                %li
+                  %a{:href => "javascript:void(0);"} 1
+                %li
+                  %a{:href => "javascript:void(0);"} »
       
 
       
