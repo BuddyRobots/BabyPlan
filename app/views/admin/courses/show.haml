@@ -35,11 +35,11 @@
             %span.course-name 课程名称:
             %span.unedit-box#classname-span= @course.name
             %span.edit-box
-              %input.input-area#classname-input{:type => "text"}
+              %input.input-area.form-control#classname-input{:type => "text"}
             %span.course-name 课程编号:
             %span.unedit-box#code-span= @course.code
             %span.edit-box
-              %input.input-area#code-input{:type => "text"}
+              %input.input-area.form-control#code-input{:type => "text"}
             - if @course.available
               %span.shelve 在架上
             - else
@@ -49,11 +49,11 @@
             %span.course-name#speaker 主讲人:
             %span.unedit-box#classspeaker-span= @course.speaker
             %span.edit-box
-              %input.input-area#classspeaker-input{:type => "text"}
-            %span.course-name 费用:
+              %input.input-area.form-control#classspeaker-input{:type => "text"}
+            %span.course-name#charge 费用:
             %span.unedit-box#charge-span= @course.price.to_s + "元"
             %span.edit-box
-              %input.input-area#charge-input{:type => "text"}
+              %input.input-area.form-control#charge-input{:type => "text"}
         
           .course-introduce.clearfix
             %span.introduce 课程介绍:
@@ -62,19 +62,19 @@
             .wangedit-area
               #edit-area
         #tab2.tab-pane
-          .manage-box.clearfix
+          .course-box.clearfix
             .user-checkbox
-              %span.user-review 课程名称：
+              %span.user-review 课程名称:
               %span.class-name 生活素质课
-              %label.checkbox.inline
+              %label.checkbox-inline
                 %input#inlineCheckbox1{:type => "checkbox", :value => "option1"} 已开课
-              %label.checkbox.inline
+              %label.checkbox-inline
                 %input#inlineCheckbox2{:type => "checkbox", :value => "option2"} 未开课
-              %label.checkbox.inline
+              %label.checkbox-inline
                 %input#inlineCheckbox2{:type => "checkbox", :value => "option2"} 已结课
             
           .table-box
-            %table.table.table-bordered.user-table
+            %table.table.table-bordered#user-table
               / %caption
               %thead
                 %tr

@@ -27,7 +27,9 @@ $ ->
     $("#mobile-code").attr("disabled", false)
 
     $("input").val("")
+    $("input").removeClass("clicked-box")
     $(".notice").css("visibility", "hidden")
+    $("button").removeClass("button-enabled")
   
   # verifycode 60 sec reverse 
   time = (o) ->

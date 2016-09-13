@@ -7,9 +7,11 @@
 .content-area
   .content-box
     .manage-box
-      .input-append.user-search-box
-        %input#appendedInputButton.span2{:type => "text", :placeholder => "输入绘本名称", :value => "#{@keyword}"}
-        %button.btn#search-btn{:type => "button"}
+      .user-search-box
+        .input-group
+          %input.form-control#search-input{:type => "text", :placeholder => "输入绘本名称", :value => "#{@keyword}"}
+          %span.input-group-btn
+            %button.btn.btn-default#search-btn{:type => "button"}
 
     .manage-content
       - if @books[:data].length == 0
@@ -18,7 +20,7 @@
           %span.message 抱歉！暂无查找信息
       - else
         .table-box
-          %table.table.table-bordered.user-table
+          %table.table.table-bordered#user-table
             %caption
             %thead
               %tr
@@ -40,16 +42,14 @@
                   %td= e[:isbn]
                   %td
                     = link_to "详情", "/admin/books/#{e[:id]}"
-
         .select-page 
           %span.totalitems= "共#{@books[:total_page]}页,总计#{@books[:total_number]}条"
           %span.choice-page
-            .pagination.pagination-small
-              %ul
+            %ul.pagination.pagination-sm
+              %li
+                %a{:href => "/admin/books?keyword=#{@keyword}&page=#{@books[:previous_page]}"} «
+              - ( (@books[:previous_page] > 2 ? @books[:previous_page] - 2 : 1) .. (@books[:next_page] < @books[:total_page] - 2 ? @books[:next_page] + 2 : @books[:total_page]) ).to_a.each do |page|
                 %li
-                  %a{:href => "/admin/books?keyword=#{@keyword}&page=#{@books[:previous_page]}"} «
-                - ( (@books[:previous_page] > 2 ? @books[:previous_page] - 2 : 1) .. (@books[:next_page] < @books[:total_page] - 2 ? @books[:next_page] + 2 : @books[:total_page]) ).to_a.each do |page|
-                  %li
-                    %a{:href => "/admin/books?keyword=#{@keyword}&page=#{page}"}= page
-                %li
-                  %a{:href => "/admin/books?keyword=#{@keyword}&page=#{@books[:next_page]}"} »
+                  %a{:href => "/admin/books?keyword=#{@keyword}&page=#{page}"}= page
+              %li
+                %a{:href => "/admin/books?keyword=#{@keyword}&page=#{@books[:next_page]}"} »

@@ -344,8 +344,8 @@
 	border: 1px solid #ddd;
 }
 .user-checkbox {
-	margin-bottom: 5px;
-	margin-left: 20px;
+	margin: 5px 0;
+	margin-left: 10px;
 }
 .user-review {
 	font-size: 16px;
@@ -358,11 +358,6 @@
 	color: #323232;
 	margin-right: 5px;
 	line-height: 22px;
-}
-#inlineCheckbox1, #inlineCheckbox2 {
-	width: 16px;
-	height: 16px;
-	margin-right: 5px;
 }
 .book-description {
 	position: relative;

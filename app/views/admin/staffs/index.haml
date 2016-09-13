@@ -8,9 +8,10 @@
   .content-box
     .manage-box
       .user-search-box
-        .input-append
-          %input#appendedInputButton.span2{:type => "text", :placeholder => "输入姓名", :value => "#{@keyword}"}
-          %button.btn#search-btn{:type => "button"}
+        .input-group
+          %input.form-control#search-input{:type => "text", :placeholder => "输入姓名", :value => "#{@keyword}"}
+          %span.input-group-btn
+            %button.btn.btn-default#search-btn{:type => "button"}
     .manage-content
       - if @staffs[:data].length == 0
         .undiscover
@@ -18,7 +19,7 @@
           %span.message 抱歉！暂无查找信息
       - else
         .table-box
-          %table.table.table-bordered.user-table
+          %table.table.table-bordered#user-table
             %caption
             %thead
               %tr
@@ -36,17 +37,14 @@
                   %td
                     = link_to "详情", "/admin/staffs/#{u[:id]}"
                   %td= u[:status]
-
         .select-page 
           %span.totalitems= "共#{@staffs[:total_page]}页,总计#{@staffs[:total_number]}条"
           %span.choice-page
-            .pagination.pagination-small
-              %ul
+            %ul.pagination.pagination-sm
+              %li
+                %a{:href => "/admin/staffs?keyword=#{@keyword}&page=#{@staffs[:previous_page]}"} «
+              - ( (@staffs[:previous_page] > 2 ? @staffs[:previous_page] - 2 : 1) .. (@staffs[:next_page] < @staffs[:total_page] - 2 ? @staffs[:next_page] + 2 : @staffs[:total_page]) ).to_a.each do |page|
                 %li
-                  %a{:href => "/admin/staffs?keyword=#{@keyword}&page=#{@staffs[:previous_page]}"} «
-                - ( (@staffs[:previous_page] > 2 ? @staffs[:previous_page] - 2 : 1) .. (@staffs[:next_page] < @staffs[:total_page] - 2 ? @staffs[:next_page] + 2 : @staffs[:total_page]) ).to_a.each do |page|
-                  %li
-                    %a{:href => "/admin/staffs?keyword=#{@keyword}&page=#{page}"}= page
-                %li
-                  %a{:href => "/admin/staffs?keyword=#{@keyword}&page=#{@staffs[:next_page]}"} »
-
+                  %a{:href => "/admin/staffs?keyword=#{@keyword}&page=#{page}"}= page
+              %li
+                %a{:href => "/admin/staffs?keyword=#{@keyword}&page=#{@staffs[:next_page]}"} »

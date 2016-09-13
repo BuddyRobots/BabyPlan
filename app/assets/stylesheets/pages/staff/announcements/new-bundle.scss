@@ -27,7 +27,7 @@
 }
 .end-btn {
 	position: absolute;
-	top: 11px;
+	top: 15px;
 	right: 20px;
 	z-index: 10;
 	width: 100px;
@@ -77,17 +77,16 @@
 	margin: 0 auto;
 	vertical-align: baseline;
 }
-.checkbox {
+.checkbox-inline {
 	font-size: 14px;
 	color: #323232;
 	margin-left: 15px;
 }
 .wangedit-area {
-	margin: 0 60px;
+	margin: 20px 60px 0 60px;
 	font-size: 14px;
 	color: #323232;
 }
 #edit-box {
 	height: 350px;
-	margin-bottom: 20px;
 }

@@ -72,27 +72,25 @@
 	vertical-align: middle;
 	font-size: 16px;
 	color: #323232;
-	padding-top: 3px;
 	margin-left: 16px;
+	font-weight: normal;
 }
 .input-caption {
 	@extend .input-name;
 	margin-left: 10px;
 }
-#course-number {
+#charge {
 	margin-left: 42px
 }
-#course-code {
-	width: 205px;
+#course-code, #course-name {
+	width: 238px;
 }
 .input-area {
 	display: inline-block;
 	width: 238px;
 	height: 30px;
-	padding: 0;
-	margin: 0 !important;
 }
-.checkbox {
+.checkbox-inline {
 	margin-left: 15px;
 }
 .controls-row {

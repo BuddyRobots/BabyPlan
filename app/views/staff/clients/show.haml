@@ -28,39 +28,39 @@
         #tab1.tab-pane.active
           %form.form-inline{:role => "form"}
             .form-group
-              %label 姓名:
+              %label.caption 姓名:
               %span.unedit-box#name-span= @user.name
             %span.edit-box
               .form-group
                 %input.form-control#name-input{:type => "text"}
             .form-group
-              %label 年龄:
+              %label.caption 年龄:
               %span.unedit-box#age-span= (Time.now.year - @user.birthday.year).to_s + "岁"
             %span.edit-box
               .form-group
                 %input.form-control#age-input{:type => "text"}
           %form.form-inline{:role => "form"}
             .form-group
-              %label 性别:
+              %label.caption 性别:
               %span.unedit-box#gender-span= @user.gender == 0 ? "男" : "女"
             %span.edit-box
               .form-group
                 %input.form-control#gender-input{:type => "text"}
             .form-group
-              %label 家长:
+              %label.caption 家长:
               %span.unedit-box#parent-span= @user.parent
             %span.edit-box
               .form-group
                 %input.form-control#parent-input{:type => "text"}
           %form.form-inline{:role => "form"}
             .form-group
-              %label 联系方式:
+              %label.caption 联系方式:
               %span.unedit-box#phone-span= @user.mobile
             %span.edit-box
               .form-group
                 %input.form-control#phone-input{:type => "text"}
             .form-group
-              %label 地址:
+              %label.caption 地址:
               %span.unedit-box#address-span= @user.address
             %span.edit-box
               .form-group
@@ -94,7 +94,7 @@
               %span.square
               %span.class-status
                 %label.checkbox-inline
-                  %input#inlineCheckbox1{:type => "checkbox", :value => "option1"} 未上课
+                  %input{:type => "checkbox", :value => "option1"} 未上课
                 %label.checkbox-inline
                   %input#inlineCheckbox2{:type => "checkbox", :value => "option2"} 已上课
                 %label.checkbox-inline

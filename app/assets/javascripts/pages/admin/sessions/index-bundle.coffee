@@ -21,6 +21,10 @@ $ ->
     $("#mobile-code").attr("disabled", false)
 
     $("input").val("")
+    $("input").removeClass("clicked-box")
+    $(".notice").css("visibility", "hidden")
+    $("button").removeClass("button-enabled")
+
   
   # verifycode 60 sec reverse 
   time = (o) ->
@@ -50,7 +54,7 @@ $ ->
     if mobile_retval == false
       $("#mobile-notice").css("visibility","visible")
       $("#signup-mobile").addClass("clicked-box")
-      return
+      return false
     $("#signup-mobile").removeClass("clicked-box")
     $.postJSON(
       '/admin/sessions/signup',
@@ -71,6 +75,7 @@ $ ->
           $("#mobile-notice").text("该手机号已注册，请直接登录").css("visibility","visible")     
           console.log $("#mobile-notice").text()
     )
+    return false
     
 
   check_signup_input = ->
@@ -125,7 +130,7 @@ $ ->
     if mobile_retval == false
       $("#forget-mobile-notice").css("visibility","visible")
       $("#forget-mobile").addClass("clicked-box")
-      return
+      return false
     $("#forget-mobile").removeClass("clicked-box")
     $.postJSON(
       '/admin/sessions/forget_password',
@@ -143,6 +148,7 @@ $ ->
         else
           $("#forget-mobile-notice").text("该手机号未注册").css("visibility","visible")     
       )
+    return false
    
 
   toggle_forget_password_tip = (wrong) ->
@@ -212,6 +218,7 @@ $ ->
       )
   $("#forget").click ->
     forget()
+    return false
   $("#forget-confirm-password").keydown (event) ->
     code = event.which
     if code == 13
@@ -220,7 +227,7 @@ $ ->
 
   $("#forget-register").click ->
     $("#forgetModal").modal('hide')
-    $("#signupModal").modal('show')
+    $("#signinModal").modal('show')
 
 
   toggle_signin_password_tip = (wrong) ->
@@ -267,7 +274,7 @@ $ ->
     if mobile_retval == false
       $(".error-notice").css("visibility","visible")
       $("#mobile").addClass("clicked-box")
-      return
+      return false
     $("#mobile").removeClass("clicked-box")
     $.postJSON(
       '/admin/sessions',
@@ -286,6 +293,7 @@ $ ->
 
   $(".signin").click ->
     signin()
+    return false
 
 
 

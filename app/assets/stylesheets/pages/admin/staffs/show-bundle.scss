@@ -38,17 +38,32 @@ input, label, span {
 	padding-top: 20px;
 	font-size: 16px;
 	color: #969696;
-	p {
-		line-height: 30px;
-	}
 	span {
-		display: inline-block;
-		vertical-align: middle;
+		line-height: 30px;
+		font-size: 16px;
+		color: #323232;
+	}
+	.adjust {
+		font-size: 16px;
+		color: #323232;
+		font-weight: normal;
+		padding-left: 0;
+		padding-right: 0;
 	}
 	select {
 		margin: 0;
 		padding: 3px 6px 6px 6px;
 	}
+}
+.mobile {
+	display: inline-block;
+	margin-right: 10px;
+}
+.form-horizontal {
+	width: 40%;
+}
+.form-control {
+	width: 100%;
 }
 .staffs-name {
 	float: left;

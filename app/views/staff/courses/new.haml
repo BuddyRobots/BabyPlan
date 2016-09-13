@@ -17,8 +17,8 @@
       %form.form-inline
         %label.input-name 课程名称:
         %span.unedit-box#name-span= @course.name
-        %label.checkbox
-          %input.checkbox-content#available{:type => "checkbox"} 上架
+        %label.checkbox-inline
+          %input.checkbox-content#available{:type => "checkbox", :value => "option1"} 上架
 
       .controls.controls-row
         %label.input-caption 开课编号:

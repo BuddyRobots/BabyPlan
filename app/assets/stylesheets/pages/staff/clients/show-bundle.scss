@@ -69,6 +69,11 @@ span, ul, li, label {
 .form-inline {
 	margin: 20px 20px;
 }
+.caption {
+	font-weight: normal;
+	font-size: 16px;
+	color: #323232;
+}
 .unedit-box {
 	display: inline-block;
 	font-size: 14px;
@@ -97,14 +102,17 @@ span, ul, li, label {
 	float: right;
 	display: inline-block;
 	margin-right: 20px;
+	font-weight: normal;
 }
 .span-attr {
 	font-size: 16px;
 	color: #323232;
+	font-weight: normal;
 }
 .span-input {
 	font-size: 14px;
 	color: #787878;
+	margin-right: 20px;
 }
 .span-right {
 	float: right;

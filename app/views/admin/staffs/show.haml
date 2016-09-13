@@ -19,6 +19,12 @@
         .btn.status-btn.lock-btn{:type => "button"} 锁定
     .manage-content
       / %p.gender 性别：男
-      %p.mobile= "联系方式： #{@staff.mobile}"
-      %span 调整岗位:
-      = select_tag "center_id", options_for_select(Center.centers_for_select, @staff.staff_center.id.to_s)
+      %span.mobile 联系方式:
+      %span= "#{@staff.mobile}"
+      %form.form-horizontal{:role => "form"}
+        .form-group
+          %label.col-sm-2.control-label.adjust{:for => "inputEmail3"} 调整岗位:
+          .col-sm-10
+            = select_tag "center_id", options_for_select(Center.centers_for_select, @staff.staff_center.id.to_s), class: "form-control"
+            / %input#inputEmail3.form-control{:placeholder => "Email", :type => "email"}
+

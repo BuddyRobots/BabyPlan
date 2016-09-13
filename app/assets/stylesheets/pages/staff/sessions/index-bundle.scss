@@ -12,27 +12,15 @@
 	background:#f7fcff;
 	box-shadow: -1px -1px 6px #9c9c9c inset;
 	padding: 20px;
-}
-.manage-content {
-	overflow: auto;
-	position: absolute;
-	top: 20px;
-	left: 0px;
-	bottom: 0px;
-	right: 0px;
-	box-shadow: 0 -1px 6px #9c9c9c inset;
-	background: white;  
-	margin: 0 20px 20px 20px;
 	text-align: center;
+	overflow: auto;
 }
 .caption {
 	font-size: 24px;
 	color: #323232;
 	padding: 60px 0;
 }
-.form-group {
-	margin-bottom: 20px;
-}
+
 
 // signin  modal
 #signinModal {
@@ -47,6 +35,10 @@
 		border-radius: 6px;
 	}
 	
+}
+.form-group {
+	margin-bottom: 20px;
+	font-weight: normal;
 }
 .modal-backdrop {
 	background-color: #999;
@@ -107,17 +99,6 @@
 	margin-bottom: 10px;
 	border-radius: 4px;
 	font-size: 16px;
-	color: white;
-}
-.signin:link {
-	text-decoration: none;
-}
-.signin:visited {
-	color: white;
-	text-decoration: none;
-}
-.signin:hover {
-	text-decoration: none;
 	color: white;
 }
 #name {
@@ -258,17 +239,6 @@
 #forget {
 	@extend #signup;
 }
-.forget:link {
-	text-decoration: none;
-}
-.forget:visited {
-	color: white;
-	text-decoration: none;
-}
-.forget:hover {
-	text-decoration: none;
-	color: white;
-} 
 
 
 

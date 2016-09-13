@@ -28,8 +28,8 @@ ul, li {
 	margin: 0 20px 20px 20px;
 }
 
-.manage-box {
-	height: 58px;
+.course-box {
+	padding-bottom: 15px;
 }
 .user-checkbox {
 	float: left;
@@ -42,27 +42,14 @@ ul, li {
 	vertical-align: bottom;
 }
 .class-name {
-	font-size: 16px;
+	font-size: 14px;
 	color: #323232;
-	vertical-align: bottom;
 	display: inline-block;
 	margin-right: 10px;
 }
-.inline{
-	font-size: 14px;
-	color: #323232;
-	margin-right: 5px;
-	line-height: 22px;
-	padding-top:2px;
-}
-#inlineCheckbox1, #inlineCheckbox2 {
-	width: 16px;
-	height: 16px;
-	margin-right: 5px;
-}
 .edit-btn {
 	position: absolute;
-	top: 11px;
+	top: 15px;
 	right: 20px;
 	z-index: 10;
 	width: 100px;
@@ -113,7 +100,7 @@ ul, li {
 	padding: 0;
 	margin: 0 20px;
 }
-.user-table {
+#user-table {
 	border-radius: 6px;
 	border: 1px solid #c8c8c8;
 	font-size: 14px;
@@ -183,7 +170,8 @@ ul, li {
 	font-size: 14px;
 }
 h2 {
-	font-size: 14px;
+	font-size: 16px;
+	line-height: 30px
 }
 .desc-items {
 	margin: 15px 16px;
@@ -202,13 +190,13 @@ h2 {
 	display: none;
 }
 .input-area {
+	display: inline-block;
 	width: 238px;
 	height: 30px;
-	padding: 0;
-	margin: 0 20px 0 0 !important;
+	margin-right: 20px;
 }
-#code-input {
-	width: 206px;
+#charge {
+	margin-left: 32px;
 }
 .course-name {
 	display: inline-block;
