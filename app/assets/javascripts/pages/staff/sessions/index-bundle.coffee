@@ -75,7 +75,7 @@ $ ->
           time("#mobilecode")
         #需要修改
         else
-          $("#mobile-notice").text("该手机号已注册，请直接登陆").css("visibility","visible")     
+          $("#mobile-notice").text("该手机号已注册，请直接登录").css("visibility","visible")     
           console.log $("#mobile-notice").text()
     )
     return false

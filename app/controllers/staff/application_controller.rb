@@ -18,6 +18,7 @@ class Staff::ApplicationController < ApplicationController
   end
 
   def get_current_center
+    return if current_user.nil?
     if current_user.is_admin
       center_id = cookies[:center_id]
       @current_center = Center.where(id: center_id).first
