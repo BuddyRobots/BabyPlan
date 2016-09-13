@@ -2,7 +2,7 @@ class Staff::CoursesController < Staff::ApplicationController
 
   def index
     @keyword = params[:keyword]
-    course_insts = @keyword.present? ? current_user.staff_center.course_insts.where(name: /#{@keyword}/) : current_user.staff_center.course_insts.all
+    course_insts = @keyword.present? ? current_center.course_insts.where(name: /#{@keyword}/) : current_center.course_insts.all
     @course_insts = auto_paginate(course_insts)
     @course_insts[:data] = @course_insts[:data].map do |e|
       e.course_inst_info

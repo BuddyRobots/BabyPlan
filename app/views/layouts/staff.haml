@@ -12,7 +12,7 @@
     .header
       %a{:href => "#"}
         %img.logo{:src => "/assets/managecenter/logo.png"}
-      %p.leftword= @center_name
+      %p.leftword= @current_center.nil? ? "北京市社区儿童中心" : @current_center.name
 
       /登录注册页面的layout
       - if @current_user.present? && ( @current_user.is_staff || @current_user.is_admin )
@@ -35,9 +35,9 @@
             %a{:href => signout_staff_sessions_path}
               %img.turnoff-icon{:src => "/assets/managecenter/turnoff.png"}
       - else
-        %p.rightword 您好欢迎访问社区儿童管理中心！
+        %p.rightword 您好欢迎访问北京市社区儿童中心！
         %button.sign-up{"data-target" => "#signupModal", "data-toggle" => "modal", :type => "button"} 注册
-        %button.sign-in{"data-target" => "#signinModal", "data-toggle" => "modal", :type => "button"} 登陆
+        %button.sign-in{"data-target" => "#signinModal", "data-toggle" => "modal", :type => "button"} 登录
         
     .main
       .sidebar
@@ -50,8 +50,8 @@
             %a{:href => "/staff/books"} 绘本管理
           %li 
             %a{:href => "/staff/announcements"} 公告信息管理
-          %li 
-            %a{:href => "#"} 统计信息查询
+          / %li 
+          /   %a{:href => "#"} 统计信息查询
 
     = yield
 = render :template => 'layouts/application'

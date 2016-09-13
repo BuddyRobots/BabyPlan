@@ -51,8 +51,3 @@ $ ->
             link.closest("tr").removeClass("unavailable")
       )
     return false
-
-  $(".book-record").click ->
-    $(".book-record").removeClass("clicked")
-    $(this).addClass("clicked")
-
