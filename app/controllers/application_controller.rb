@@ -16,15 +16,6 @@ class ApplicationController < ActionController::Base
   def init
     @code = params[:code]
     refresh_session(params[:auth_key] || cookies[:auth_key])
-    get_center_name
-  end
-
-  def get_center_name
-    if current_user.present? && current_user.staff_center.present?
-      @center_name = current_user.staff_center.name
-    else
-      @center_name = nil
-    end
   end
 
   def refresh_session(auth_key)
