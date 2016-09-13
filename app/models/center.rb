@@ -20,7 +20,7 @@ class Center
       name: center_info[:name],
       address: center_info[:address],
       desc: center_info[:desc],
-      available: center_info[:price],
+      available: center_info[:available],
       lat: center_info[:lat],
       lng: center_info[:lng]
     )
