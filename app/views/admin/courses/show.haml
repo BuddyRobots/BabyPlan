@@ -4,6 +4,7 @@
   :javascript
     window.cid = "#{@course.id.to_s}"
     window.price = "#{@course.price}"
+    window.profile = "#{@profile}"
 
 
 .content-area
@@ -62,53 +63,54 @@
             .wangedit-area
               #edit-area
         #tab2.tab-pane
-          .course-box.clearfix
-            .user-checkbox
-              %span.user-review 课程名称:
-              %span.class-name 生活素质课
-              %label.checkbox-inline
-                %input#inlineCheckbox1{:type => "checkbox", :value => "option1"} 已开课
-              %label.checkbox-inline
-                %input#inlineCheckbox2{:type => "checkbox", :value => "option2"} 未开课
-              %label.checkbox-inline
-                %input#inlineCheckbox2{:type => "checkbox", :value => "option2"} 已结课
-            
-          .table-box
-            %table.table.table-bordered#user-table
-              / %caption
-              %thead
-                %tr
-                  %th 儿童中心
-                  %th 上课地址
-                  %th 主讲人
-                  %th 报名人数
-                  %th 费&nbsp用
-                  %th 上课时间
-              %tbody
-                %tr
-                  %td 富仁名苑儿童中心
-                  %td 北京市朝阳区富仁名苑27号楼2单元活动室
-                  %td 大山
-                  %td 50人
-                  %td 700元\节
-                  %td 2016-8-25--2016-9-25
-          / 分页
-          / .select-page 
-          /   %span.totalitems= "共#{@local_eles[:total_page]}页,总计#{@local_eles[:total_number]}条"
-          /   %span.choice-page
-          /     .pagination.pagination-small
-          /       %ul
-          /         %li
-          /           %a{:href => "/staff/announcements?profile=local&keyword=#{@keyword}&page=#{@local_eles[:previous_page]}"} «
-          /         - ( (@local_eles[:previous_page] > 2 ? @local_eles[:previous_page] - 2 : 1) .. (@local_eles[:next_page] < @local_eles[:total_page] - 2 ? @local_eles[:next_page] + 2 : @local_eles[:total_page]) ).to_a.each do |page|
-          /           %li
-          /             %a{:href => "/staff/announcements?profile=local&keyword=#{@keyword}&page=#{page}"}= page
-          /         %li
-          /           %a{:href => "/staff/announcements?profile=local&keyword=#{@keyword}&page=#{@local_eles[:next_page]}"} »
+          / .course-box.clearfix
+          /   .user-checkbox
+          /     %span.user-review 课程名称:
+          /     %span.class-name= @course.name
+          /     %label.checkbox-inline
+          /       %input#inlineCheckbox1{:type => "checkbox", :value => "option1"} 已开课
+          /     %label.checkbox-inline
+          /       %input#inlineCheckbox2{:type => "checkbox", :value => "option2"} 未开课
+          /     %label.checkbox-inline
+          /       %input#inlineCheckbox2{:type => "checkbox", :value => "option2"} 已结课
+          - if @course_insts[:data].length == 0
+            .undiscover
+              %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
+              %span.message 抱歉！暂无查找信息
+          - else
+            .table-box
+              %table.table.table-bordered#user-table
+                %thead
+                  %tr
+                    %th 儿童中心
+                    %th 上课地址
+                    %th 主讲人
+                    %th 课程容量
+                    %th 报名人数
+                    %th 费&nbsp用
+                    %th 上课时间
+                %tbody
+                  - @course_insts[:data].each do |ci|
+                    %tr.course-inst-tr{data: {id: ci.id.to_s}}
+                      %td= ci.center.name
+                      %td= ci.address
+                      %td= ci.speaker
+                      %td= ci.capacity.to_s + "人"
+                      %td= ci.course_participates.length.to_s + "人"
+                      %td= ci.price.to_s + "元"
+                      %td= ci.date
+            / 分页
+            .select-page 
+              %span.totalitems= "共#{@course_insts[:total_page]}页,总计#{@course_insts[:total_number]}条"
+              %span.choice-page
+                %ul.pagination.pagination-sm
+                  %li
+                    %a{:href => "/admin/courses/#{@course.id.to_s}?profile=area&page=#{@course_insts[:previous_page]}"} «
+                  - ( (@course_insts[:previous_page] > 2 ? @course_insts[:previous_page] - 2 : 1) .. (@course_insts[:next_page] < @course_insts[:total_page] - 2 ? @course_insts[:next_page] + 2 : @course_insts[:total_page]) ).to_a.each do |page|
+                    %li
+                      %a{:href => "/admin/courses/#{@course.id.to_s}?profile=area&page=#{page}"}= page
+                  %li
+                    %a{:href => "/admin/courses/#{@course.id.to_s}?profile=area&page=#{@course_insts[:next_page]}"} »
 
-          %p.class-calendar 课程日历
-          #calendar
-
-         
-
-
+            %p.class-calendar 点击表格中记录显示具体课程日历
+            #calendar

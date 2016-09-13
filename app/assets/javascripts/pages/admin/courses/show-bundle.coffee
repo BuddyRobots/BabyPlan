@@ -4,20 +4,15 @@
 #= require wangEditor.min
 
 $ ->
+
+
   is_edit = false
 
 # wangEditor
   editor = new wangEditor('edit-area')
-
-  editor.config.menus = [
-        'head',
-        'img'
-     ]
+  editor.config.menus = ['head', 'img']
   editor.config.uploadImgUrl = '/materials'
-
-  editor.config.uploadHeaders = {
-    'Accept' : 'HTML'
-  }
+  editor.config.uploadHeaders = {'Accept' : 'HTML'}
   editor.config.hideLinkImg = true
   editor.create()
 
@@ -137,68 +132,58 @@ $ ->
       buttonIcons: true
       weekNumbers: true
       navLinks: true
-      editable: true
       eventLimit: true
       fixedWeekCount: false
       nowIndicator: true
       height: 500
-      dayClick: (date) ->
-        alert(date)
-      events: [
-        {
-          title: 'All Day Event'
-          start: '2016-09-01'
-        }
-        {
-          title: 'Long Event'
-          start: '2016-09-07'
-          end: '2016-09-10'
-        }
-        {
-          id: 999
-          title: 'Repeating Event'
-          start: '2016-09-09T16:00:00'
-        }
-        {
-          id: 999
-          title: 'Repeating Event'
-          start: '2016-09-16T16:00:00'
-        }
-        {
-          title: 'Conference'
-          start: '2016-09-11'
-          end: '2016-09-13'
-        }
-        {
-          title: 'Meeting'
-          start: '2016-09-12T10:30:00'
-          end: '2016-09-12T12:30:00'
-        }
-        {
-          title: 'Lunch'
-          start: '2016-09-12T12:00:00'
-        }
-        {
-          title: 'Meeting'
-          start: '2016-09-12T14:30:00'
-        }
-        {
-          title: 'Happy Hour'
-          start: '2016-09-12T17:30:00'
-        }
-        {
-          title: 'Dinner'
-          start: '2016-09-12T20:00:00'
-        }
-        {
-          title: 'Birthday Party'
-          start: '2016-09-13T07:00:00'
-        }
-        {
-          title: 'Click for Google'
-          url: 'http://google.com/'
-          start: '2016-09-28'
-          color: "red"
-        }
-      ]
     })
+
+  if window.profile == "area"
+    $('.nav-tabs a[href="#tab2"]').tab('show')
+    $(".finish-btn").hide()
+    $(".edit-btn").hide()
+    $("#unshelve-btn").hide()
+
+  parse_calendar_events = ->
+    event_str_ary = window.date_in_calendar.split(';')
+    $.each(
+      event_str_ary,
+      (index, event_str) ->
+        start_str = event_str.split(',')[0]
+        end_str = event_str.split(',')[1]
+        e = {
+          id: guid()
+          title: ""
+          allDay: false
+          start: start_str
+          end: end_str
+        }
+        $("#calendar").fullCalendar('renderEvent', e, true)
+    )
+
+  $(".course-inst-tr").click ->
+    ci_id = $(this).attr("data-id")
+    tr = $(this)
+
+    $.getJSON "/admin/courses/" + ci_id + "/get_calendar", (data) ->
+      if data.success
+        $("#calendar").fullCalendar('removeEvents')
+        console.log data.calendar
+        $.each(
+          data.calendar,
+          (index, event_str) ->
+            start_str = event_str.split(',')[0]
+            end_str = event_str.split(',')[1]
+            e = {
+              title: ""
+              allDay: false
+              start: start_str
+              end: end_str
+            }
+            $("#calendar").fullCalendar('renderEvent', e, true)
+        )
+        $(".course-inst-tr").removeClass("clicked")
+        tr.addClass("clicked")
+      else
+        $.page_notification "课程不存在"
+

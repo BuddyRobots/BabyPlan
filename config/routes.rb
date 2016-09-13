@@ -57,6 +57,7 @@ Rails.application.routes.draw do
     resources :courses do
       member do
         post :set_available
+        get :get_calendar
       end
     end
     resources :books do
