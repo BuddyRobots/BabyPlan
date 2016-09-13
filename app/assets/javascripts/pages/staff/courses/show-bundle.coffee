@@ -23,7 +23,6 @@ $ ->
     buttonIcons: true
     weekNumbers: true
     navLinks: true
-    editable: true
     eventLimit: true
     fixedWeekCount: false
     nowIndicator: true

@@ -19,6 +19,9 @@ class Admin::CoursesController < Admin::ApplicationController
 
   def show
     @course = Course.where(id: params[:id]).first
+    course_insts = @course.course_insts
+    @course_insts = auto_paginate(course_insts)
+    @profile = params[:profile]
   end
 
   def set_available
@@ -33,5 +36,10 @@ class Admin::CoursesController < Admin::ApplicationController
     render json: retval_wrapper(ErrCode::COURSE_NOT_EXIST) and return if @course.nil?
     retval = @course.update_info(params[:course])
     render json: retval_wrapper(retval)
+  end
+
+  def get_calendar
+    course_inst = CourseInst.where(id: params[:id]).first
+    render json: retval_wrapper({ calendar: course_inst.date_in_calendar }) and return
   end
 end
