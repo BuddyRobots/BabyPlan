@@ -51,6 +51,7 @@ Rails.application.routes.draw do
     resources :centers do
       member do
         post :set_available
+        get :set_current
       end
     end
     resources :courses do

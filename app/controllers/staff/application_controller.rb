@@ -1,6 +1,8 @@
 class Staff::ApplicationController < ApplicationController
   layout 'layouts/staff'
-  before_filter :require_sign_in
+  before_filter :require_sign_in, :get_current_center
+
+  attr_reader :current_center
 
   def require_sign_in
     respond_to do |format|
@@ -12,6 +14,18 @@ class Staff::ApplicationController < ApplicationController
           render json: retval_wrapper(ErrCode::REQUIRE_SIGNIN) and return
         end
       end
+    end
+  end
+
+  def get_current_center
+    if current_user.is_admin
+      center_id = cookies[:center_id]
+      @current_center = Center.where(id: center_id).first
+      if @current_center.blank?
+        redirect_to admin_centers_path and return
+      end
+    else
+      @current_center = current_user.staff_center
     end
   end
 end

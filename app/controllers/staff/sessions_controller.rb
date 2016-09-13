@@ -44,7 +44,12 @@ class Staff::SessionsController < Staff::ApplicationController
   end
 
   def signout
-    cookies.delete(:auth_key, :domain => :all)
-    redirect_to staff_sessions_path
+    if current_user.is_admin
+      cookies.delete(:center_id, :domain => :all)
+      redirect_to admin_centers_path and return
+    else
+      cookies.delete(:auth_key, :domain => :all)
+      redirect_to staff_sessions_path
+    end
   end
 end

@@ -42,7 +42,7 @@
                 %td= c[:books_desc]
                 %td= c[:courses_desc]
                 %td 
-                  %a.access{:href => "javascript:void(0);"} 进入
+                  %a.access{:href => "/admin/centers/#{c[:id]}/set_current"} 进入
                 %td
                   %a.description{:href => "/admin/centers/#{c[:id]}"} 详情
 

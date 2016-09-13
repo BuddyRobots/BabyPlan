@@ -28,6 +28,20 @@ class Admin::CentersController < Admin::ApplicationController
     render json: retval_wrapper(retval)
   end
 
+  def set_current
+    @center = Center.where(id: params[:id]).first
+    if @center.present?
+      cookies[:center_id] = {
+        :value => @center.id.to_s,
+        :expires => 24.months.from_now,
+        :domain => :all
+      }
+      redirect_to staff_clients_path and return
+    else
+      redirect_to admin_centers_path and return
+    end
+  end
+
   def update
     @center = Center.where(id: params[:id]).first
     render json: retval_wrapper(ErrCode::CENTER_NOT_EXIST) and return if @center.nil?
