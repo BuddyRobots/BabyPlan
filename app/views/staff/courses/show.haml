@@ -49,33 +49,33 @@
               %span.course-num= @course_inst.course.code + "-"
               %span.unedit-box#num-span= @course_inst.inst_code
               %span.edit-box
-                %input.input-area#course-num{:type => "text"}
+                %input.input-area.form-control#course-num{:type => "text"}
               %label.input-caption 容量:
               %span.unedit-box#capacity-span= @course_inst.capacity.to_s + "人"
               %span.edit-box
-                %input.input-area#course-capacity{:type => "text"}
+                %input.input-area.form-control#course-capacity{:type => "text"}
               %label.input-caption 费用:
               %span.unedit-box#charge-span= @course_inst.price.to_s + "元"
               %span.edit-box
-                %input.input-area#course-charge{:type => "text"}
+                %input.input-area.form-control#course-charge{:type => "text"}
               %label.input-caption.course-times 课次:
               %span.unedit-box#times-span= @course_inst.length.to_s + "次"
               %span.edit-box
-                %input.input-area#course-times{:type => "text"}
+                %input.input-area.form-control#course-times{:type => "text"}
             .controls.controls-row
               %label.input-caption 上课时间:
               %span.unedit-box#date-span= @course_inst.date
               %span.edit-box
-                %input.input-area#course-date{:type => "text"}
+                %input.input-area.form-control#course-date{:type => "text"}
               %label.input-caption.course-speaker 主讲人:
               %span.unedit-box#speaker-span= @course_inst.speaker
               %span.edit-box
-                %input.input-area#course-speaker{:type => "text"}
+                %input.input-area.form-control#course-speaker{:type => "text"}
             .controls.controls-row
               %label.input-caption 上课地址:
               %span.unedit-box#address-span= @course_inst.address
               %span.edit-box
-                %input.input-area#course-address{:type => "text"}
+                %input.input-area.form-control#course-address{:type => "text"}
             .controls.controls-row.clearfix
               %label.input-caption.class-calendar 课程日历:
               #calendar-wrapper
