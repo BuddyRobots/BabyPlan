@@ -42,14 +42,14 @@
                 %td= c[:books_desc]
                 %td= c[:courses_desc]
                 %td 
+                  %a.access{:href => "/admin/centers/#{c[:id]}/set_current"} 进入
+                %td
+                  %a.description{:href => "/admin/centers/#{c[:id]}"} 详情
+                %td
                   - if c[:available] == true
                     %a.set-available.link-available{:href => "javascript:void(0);"} 关闭
                   - else
                     %a.set-available.link-unavailable{:href => "javascript:void(0);"} 打开
-                %td 
-                  %a.access{:href => "/admin/centers/#{c[:id]}/set_current"} 进入
-                %td
-                  %a.description{:href => "/admin/centers/#{c[:id]}"} 详情
 
         .select-page 
           %span.totalitems= "共#{@centers[:total_page]}页,总计#{@centers[:total_number]}条"
