@@ -38,7 +38,7 @@
               %label.input-caption 绘本名称:
               %span.unedit-box#name-span= @book.name
               %span.edit-box
-                %input.input-area#name-input{:type => "text"}
+                %input.input-area.form-control#name-input{:type => "text"}
               - if @book.available == true
                 %label#available-status.shelve 在架上
               - else
@@ -47,28 +47,28 @@
               %label.input-caption 类型:
               %span.unedit-box#type-span= @book.type
               %span.edit-box
-                %input.input-area#type-input{:type => "text"}
+                %input.input-area.form-control#type-input{:type => "text"}
               %label.input-caption 数量:
               %span.unedit-box#stock-span= @book.stock.to_s + "本"
               %span.edit-box
-                %input.input-area#stock-input{:type => "text"}
+                %input.input-area.form-control#stock-input{:type => "text"}
               %label.input-caption#book-number 书号:
               %span.unedit-box#isbn-span= @book.isbn
               %span.edit-box
-                %input.input-area#isbn-input{:type => "text"}
+                %input.input-area.form-control#isbn-input{:type => "text"}
             .controls.controls-row
               %label.input-caption 作者:
               %span.unedit-box#author-span= @book.author
               %span.edit-box
-                %input.input-area#author-input{:type => "text"}
+                %input.input-area.form-control#author-input{:type => "text"}
               %label.input-caption 译者:
               %span.unedit-box#translator-span= @book.translator
               %span.edit-box
-                %input.input-area#translator-input{:type => "text"}
+                %input.input-area.form-control#translator-input{:type => "text"}
               %label.input-caption#illustrator-label 插画作者:
               %span.unedit-box#illustrator-span= @book.illustrator
               %span.edit-box
-                %input.input-area#illustrator-input{:type => "text"}             
+                %input.input-area.form-control#illustrator-input{:type => "text"}             
             .book-introduce.clearfix
               %span.introduce 书籍介绍:
               %div.introduce-details
@@ -114,22 +114,21 @@
           .select-page 
             %span.totalitems= "共6页,总计12条"
             %span.choice-page
-              .pagination.pagination-small
-                %ul
-                  %li
-                    %a{:href => "javascript:void(0);"} «
-                  / - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
-                  %li
-                    %a{:href => "javascript:void(0);"} 1
-                  %li
-                    %a{:href => "javascript:void(0);"} »
+              %ul.pagination.pagination-sm
+                %li
+                  %a{:href => "javascript:void(0);"} «
+                / - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
+                %li
+                  %a{:href => "javascript:void(0);"} 1
+                %li
+                  %a{:href => "javascript:void(0);"} »
 
         #tab3.tab-pane
           .undiscover
             %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
             %span.undiscover-message 抱歉！暂无查找信息
           .table-box
-            %table.table.table-bordered.user-table
+            %table.table.table-bordered#user-table
               %caption
               %thead
                 %tr
@@ -146,56 +145,59 @@
           .select-page 
             %span.totalitems= "共6页,总计12条"
             %span.choice-page
-              .pagination.pagination-small
-                %ul
-                  %li
-                    %a{:href => "javascript:void(0);"} «
-                  / - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
-                  %li
-                    %a{:href => "javascript:void(0);"} 1
-                  %li
-                    %a{:href => "javascript:void(0);"} »
+              %ul.pagination.pagination-sm
+                %li
+                  %a{:href => "javascript:void(0);"} «
+                / - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
+                %li
+                  %a{:href => "javascript:void(0);"} 1
+                %li
+                  %a{:href => "javascript:void(0);"} »
      
 #editor-content.hide
   = @book.desc.html_safe
 
 
-#uploadCoverModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
-  = form_tag(update_cover_staff_book_path(@book), method: "post", multipart: true) do
-    .modal-header
-      %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", :src => "/assets/managecenter/close.png"}
-      %p.caption 上传封面
-    .modal-body
-      .form-group.hide
-        = text_field_tag :book_id, @book.id.to_s
-      .form-group
-        = file_field_tag "cover_file", { class: "hide", accept: ".jpg,.png" }
-        %span.cover-caption 上传封面图片
-        %a#browser-cover-click{href: "javascript:void(0);"} 
-          %img{:src => "/assets/managecenter/upload.png"} 
-        %span.notice 请选择10M内的.jpg或.png图片上传
-        %p#cover-name
-    .modal-footer
-      = submit_tag "上传", :class => 'btn-primary btn'
-      %a.btn.btn-default{href: "#", data: {dismiss: "modal"}, "aria-hidden" => "true"} 取消
+#uploadCoverModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
+  .modal-dialog
+    .modal-content
+      = form_tag(update_cover_staff_book_path(@book), method: "post", multipart: true) do
+        .modal-header
+          %h3.caption 上传封面
+          %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", :src => "/assets/managecenter/close.png"}
+        .modal-body
+          .form-group.hide
+            = text_field_tag :book_id, @book.id.to_s
+          .form-group
+            = file_field_tag "cover_file", { class: "hide", accept: ".jpg,.png" }
+            %span.cover-caption 上传封面图片
+            %a#browser-cover-click{href: "javascript:void(0);"} 
+              %img{:src => "/assets/managecenter/upload.png"} 
+            %span.notice 请选择10M内的.jpg或.png图片上传
+            %p#cover-name
+        .modal-footer
+          = submit_tag "上传", :class => 'btn-primary btn'
+          %a.btn.btn-default{href: "#", data: {dismiss: "modal"}, "aria-hidden" => "true"} 取消
 
 
-#uploadBackModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
-  = form_tag(update_back_staff_book_path(@book), method: "post", multipart: true) do
-    .modal-header
-      %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", :src => "/assets/managecenter/close.png"}
-      %p.caption 上传封底
-    .modal-body
-      .form-group.hide
-        = text_field_tag :book_id, @book.id.to_s
-      .form-group
-        = file_field_tag "back_file", { class: "hide", accept: ".jpg,.png" }
-        %span.back-caption 上传封底图片
-        %a#browser-back-click{href: "javascript:void(0);"} 
-          %img{:src => "/assets/managecenter/upload.png"} 
-        %span.notice 请选择10M内的.jpg或.png图片上传
-        %p#back-name
-    .modal-footer
-      = submit_tag "上传", :class => 'btn-primary btn'
-      %a.btn.btn-default{href: "#", data: {dismiss: "modal"}, "aria-hidden" => "true"} 取消
+#uploadBackModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
+  .modal-dialog
+    .modal-content
+      = form_tag(update_back_staff_book_path(@book), method: "post", multipart: true) do
+        .modal-header
+          %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", :src => "/assets/managecenter/close.png"}
+          %h3.caption 上传封底
+        .modal-body
+          .form-group.hide
+            = text_field_tag :book_id, @book.id.to_s
+          .form-group
+            = file_field_tag "back_file", { class: "hide", accept: ".jpg,.png" }
+            %span.back-caption 上传封底图片
+            %a#browser-back-click{href: "javascript:void(0);"} 
+              %img{:src => "/assets/managecenter/upload.png"} 
+            %span.notice 请选择10M内的.jpg或.png图片上传
+            %p#back-name
+        .modal-footer
+          = submit_tag "上传", :class => 'btn-primary btn'
+          %a.btn.btn-default{href: "#", data: {dismiss: "modal"}, "aria-hidden" => "true"} 取消
 

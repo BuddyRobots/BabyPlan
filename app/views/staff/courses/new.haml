@@ -23,21 +23,21 @@
       .controls.controls-row
         %label.input-caption 开课编号:
         %span.course-num= @course.code + "-"
-        %input.input-area#course-code{:type => "text"}
+        %input.input-area.form-control#course-code{:type => "text"}
         %label.input-caption 容量:
-        %input.input-area#course-capacity{:type => "text"}
+        %input.input-area.form-control#course-capacity{:type => "text"}
         %label.input-caption 费用:
-        %input.input-area#course-price{:type => "text", value: @course.price}
+        %input.input-area.form-control#course-price{:type => "text", value: @course.price}
         %label.input-caption.course-length 课次:
-        %input.input-area#course-length{:type => "text", value: @course.length}
+        %input.input-area.form-control#course-length{:type => "text", value: @course.length}
       .controls.controls-row
         %label.input-caption 上课时间:
-        %input.input-area#course-date{:type => "text"}
+        %input.input-area.form-control#course-date{:type => "text"}
         %label.input-caption.course-speaker 主讲人:
-        %input.input-area#course-speaker{:type => "text", value: @course.speaker}
+        %input.input-area.form-control#course-speaker{:type => "text", value: @course.speaker}
       .controls.controls-row
         %label.input-caption 上课地址:
-        %input.input-area#course-address{:type => "text"}
+        %input.input-area.form-control#course-address{:type => "text"}
       
       .controls.controls-row.clearfix
         %label.input-caption.class-calendar 课程日历:

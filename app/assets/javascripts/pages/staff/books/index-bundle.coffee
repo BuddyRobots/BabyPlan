@@ -10,13 +10,13 @@ $ ->
 
 # search-btn press
   search = ->
-    value = $("#appendedInputButton").val()
+    value = $("#search-input").val()
     location.href = "/staff/books?keyword=" + value + "&page=1"
 
   $("#search-btn").click ->
     search()
 
-  $("#appendedInputButton").keydown (event) ->
+  $("#search-input").keydown (event) ->
     code = event.which
     if code == 13
       search()

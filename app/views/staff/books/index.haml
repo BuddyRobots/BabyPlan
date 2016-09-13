@@ -8,10 +8,11 @@
   .content-box
     .manage-box
       .user-search-box
-        .input-append
-          %input#appendedInputButton.span2{:type => "text", :placeholder => "输入绘本名称", :value => "#{@keyword}"}
-          %button.btn#search-btn{:type => "button"}
-      .btn.bookadd-btn{:type => "button", :href => "#kidsaddModal", "data-toggle" => "modal"} 
+        .input-group
+          %input.form-control#search-input{:type => "text", :placeholder => "输入课程名称", :value => "#{@keyword}"}
+          %span.input-group-btn
+            %button.btn.btn-default#search-btn{:type => "button"}
+      .btn.bookadd-btn{:type => "button", "data-target" => "#kidsaddModal", "data-toggle" => "modal"} 
         %img.book-edit{:src => "/assets/managecenter/add.png"}
         添加绘本
     
@@ -22,7 +23,7 @@
           %span.message 抱歉！暂无查找信息
       - else
         .table-box
-          %table.table.table-bordered.user-table
+          %table.table.table-bordered#user-table
             %caption
             %thead
               %tr
@@ -49,32 +50,30 @@
                       %a.set-available.link-available{:href => "javascript:void(0);"} 下架
                     - else
                       %a.set-available.link-unavailable{:href => "javascript:void(0);"} 上架
-
         .select-page 
           %span.totalitems= "共#{@books[:total_page]}页,总计#{@books[:total_number]}条"
           %span.choice-page
-            .pagination.pagination-small
-              %ul
+            %ul.pagination.pagination-sm
+              %li
+                %a{:href => "/staff/books?keyword=#{@keyword}&page=#{@books[:previous_page]}"} «
+              - ( (@books[:previous_page] > 2 ? @books[:previous_page] - 2 : 1) .. (@books[:next_page] < @books[:total_page] - 2 ? @books[:next_page] + 2 : @books[:total_page]) ).to_a.each do |page|
                 %li
-                  %a{:href => "/staff/books?keyword=#{@keyword}&page=#{@books[:previous_page]}"} «
-                - ( (@books[:previous_page] > 2 ? @books[:previous_page] - 2 : 1) .. (@books[:next_page] < @books[:total_page] - 2 ? @books[:next_page] + 2 : @books[:total_page]) ).to_a.each do |page|
-                  %li
-                    %a{:href => "/staff/books?keyword=#{@keyword}&page=#{page}"}= page
-                %li
-                  %a{:href => "/staff/books?keyword=#{@keyword}&page=#{@books[:next_page]}"} »
+                  %a{:href => "/staff/books?keyword=#{@keyword}&page=#{page}"}= page
+              %li
+                %a{:href => "/staff/books?keyword=#{@keyword}&page=#{@books[:next_page]}"} »
+          
 
-        
-
-
-#shelveModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
-  .modalheader
-    %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", :src => "/assets/managecenter/close.png"}
-    %p.caption 请填写完整信息后再选择上架
-  .modal-body
-    %a.footbox#signup-signin{:href => "javascript:void(0);"}
-      点击前往补全信息
-      %span.right-arrow
-        %img{:src => "/assets/managecenter/right-arrow.png"}
+#shelveModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
+  .modal-dialog
+    .modal-content
+      .modalheader
+        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", :src => "/assets/managecenter/close.png"}
+        %p.caption 请填写完整信息后再选择上架
+      .modal-body
+        %a.footbox#signup-signin{:href => "javascript:void(0);"}
+          点击前往补全信息
+          %span.right-arrow
+            %img{:src => "/assets/managecenter/right-arrow.png"}
       
 
 

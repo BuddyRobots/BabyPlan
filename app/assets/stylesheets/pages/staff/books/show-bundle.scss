@@ -32,7 +32,7 @@
 }
 .edit-btn {
 	position: absolute;
-	top: 11px;
+	top: 15px;
 	right: 20px;
 	z-index: 10;
 	width: 100px;
@@ -98,7 +98,8 @@
 	font-size: 16px;
 	color: #323232;
 	margin-right: 10px;
-	margin-left: 20px
+	margin-left: 20px;
+	font-weight: normal;
 }
 #illustrator-label {
 	@extend .input-caption;
@@ -121,10 +122,9 @@
 	display: none;
 }
 .input-area {
+	display: inline-block;
 	width: 238px;
 	height: 30px;
-	padding: 0;
-	margin: 0 20px 0 0 !important;
 }
 
 .controls-row {
@@ -224,24 +224,28 @@
 }
 
 #uploadCoverModal {
-	position:absolute;
-	left: 50%;
-	top: 50%;
-	margin-left: -250px;
-	margin-top: -106px;
-	width: 500px;
-	height: 210px;
-	border-radius: 10px;
+	.modal-dialog {
+		position:absolute;
+		left: 50%;
+		top: 50%;
+		margin-left: -250px;
+		margin-top: -106px;
+		width: 500px;
+		height: 210px;
+		border-radius: 10px;
+	}
 }
 #uploadBackModal {
-	position:absolute;
-	left: 50%;
-	top: 50%;
-	margin-left: -250px;
-	margin-top: -106px;
-	width: 500px;
-	height: 210px;
-	border-radius: 10px;
+	.modal-dialog {
+		position:absolute;
+		left: 50%;
+		top: 50%;
+		margin-left: -250px;
+		margin-top: -106px;
+		width: 500px;
+		height: 210px;
+		border-radius: 10px;
+	}
 }
 .modal-backdrop {
 	background-color: #999;
@@ -249,7 +253,7 @@
 .close {
 	position: absolute;
 	right: -14px;
-	top: -14px;
+	top: -12px;
 	opacity: 0.7;
 	z-index: 10;
 }
@@ -282,6 +286,7 @@
 .form-group {
 	font-size: 14px;
 	color: #323232;
+	margin-bottom: 0;
 }
 .modal-footer {
 	background: white;
@@ -404,7 +409,7 @@
 .table-box {
 	padding: 0;
 }
-.user-table {
+#user-table {
 	border-radius: 6px;
 	border: 1px solid #ddd;
 	font-size: 14px;
