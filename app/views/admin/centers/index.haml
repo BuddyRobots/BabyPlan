@@ -9,9 +9,10 @@
   .content-box
     .manage-box
       .user-search-box
-        .input-append
-          %input#appendedInputButton.span2{:type => "text", :placeholder => "输入中心名称", :value => "#{@keyword}"}
-          %button.btn#search-btn{:type => "button"}
+        .input-group
+          %input.form-control#search-input{:type => "text", :placeholder => "输入中心名称", :value => "#{@keyword}"}
+          %span.input-group-btn
+            %button.btn.btn-default#search-btn{:type => "button"}
       .btn.add-btn{:type => "button"} 
         %img.course-edit{:src => "/assets/managecenter/add.png"}
         添加儿童中心
@@ -23,8 +24,7 @@
           %span.message 抱歉！暂无查找信息
       - else
       .table-box
-        %table.table.table-bordered.user-table
-          %caption
+        %table.table.table-bordered#user-table
           %thead
             %tr
               %th 中心名称
@@ -50,17 +50,15 @@
                     %a.set-available.link-available{:href => "javascript:void(0);"} 关闭
                   - else
                     %a.set-available.link-unavailable{:href => "javascript:void(0);"} 打开
-
         .select-page 
           %span.totalitems= "共#{@centers[:total_page]}页,总计#{@centers[:total_number]}条"
           %span.choice-page
-            .pagination.pagination-small
-              %ul
+            %ul.pagination.pagination-sm
+              %li
+                %a{:href => "/admin/centers?keyword=#{@keyword}&page=#{@centers[:previous_page]}"} «
+              - ( (@centers[:previous_page] > 2 ? @centers[:previous_page] - 2 : 1) .. (@centers[:next_page] < @centers[:total_page] - 2 ? @centers[:next_page] + 2 : @centers[:total_page]) ).to_a.each do |page|
                 %li
-                  %a{:href => "/admin/centers?keyword=#{@keyword}&page=#{@centers[:previous_page]}"} «
-                - ( (@centers[:previous_page] > 2 ? @centers[:previous_page] - 2 : 1) .. (@centers[:next_page] < @centers[:total_page] - 2 ? @centers[:next_page] + 2 : @centers[:total_page]) ).to_a.each do |page|
-                  %li
-                    %a{:href => "/admin/centers?keyword=#{@keyword}&page=#{page}"}= page
-                %li
-                  %a{:href => "/admin/centers?keyword=#{@keyword}&page=#{@centers[:next_page]}"} »
+                  %a{:href => "/admin/centers?keyword=#{@keyword}&page=#{page}"}= page
+              %li
+                %a{:href => "/admin/centers?keyword=#{@keyword}&page=#{@centers[:next_page]}"} »
 

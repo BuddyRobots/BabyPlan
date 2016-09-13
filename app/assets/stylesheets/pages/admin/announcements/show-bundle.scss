@@ -27,7 +27,7 @@
 }
 .edit-btn {
 	position: absolute;
-	top: 11px;
+	top: 15px;
 	right: 20px;
 	z-index: 10;
 	padding: 0;
@@ -63,10 +63,10 @@
 	}
 }
 .display-box {
-	border: 1px solid #c8c8c8;
+	border: 1px solid #ddd;
 	margin: 0 20px;
 	.display-area {
-		width: 640px;
+		width: 60%;
 		margin: 0 auto;
 	}
 }
@@ -80,6 +80,9 @@
 #show-caption {
 	font-size: 24px;
 	color: #323232;
+}
+#publish-status {
+	line-height: 35px;
 }
 #time-flag {
 	font-size: 14px;
@@ -116,36 +119,25 @@
 	display: block;
 	margin: 0 auto;
 }
-.desc {
-	padding: 15px;
-	margin: 10px 0;
-	border: 1px solid #c8c8c8;
-	border-radius: 6px;
-	text-indent: 32px;
-	font-size: 16px;
-	color: #3e3e3e;
-}
 .edit-area {
 	margin: 0 20px;
-	border: 1px solid #c8c8c8;
-	border-top: 0;
+	border: 1px solid #ddd;
 	padding: 20px 0;
 	display: none;
 }
 #input-caption {
-	width: 640px;
+	width: 60%;
 	height: 62px;
 	padding: 0;
 	border-radius: 4px;
 	font-size: 24px;
 	text-align: center;
 }
-.caption-div {
-	width: 642px;
-	margin: 0 auto;
+.form-inline {
+	text-align: center;
 }
 .wangedit-area {
-	margin: 0 60px;
+	margin: 20px 60px 0 60px;
 	font-size: 14px;
 	color: #323232;
 }

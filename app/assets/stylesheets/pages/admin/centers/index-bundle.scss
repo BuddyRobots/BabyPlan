@@ -51,8 +51,8 @@
 	height: 34px;
 }
 #search-btn {
-	width: 36px;
-	height: 36px;
+	width: 34px;
+	height: 34px;
 	border: 1px solid #c8c8c8;
 	background: url("/assets/managecenter/search.png") no-repeat;
 	background-size: 22px;
@@ -80,7 +80,7 @@
 	padding: 0;
 	margin: 20px 20px auto 20px;
 }
-.user-table {
+#user-table {
 	border-radius: 6px;
 	border: 1px solid #c8c8c8;
 	font-size: 14px;
@@ -133,8 +133,8 @@
 }
 .select-page {
 	text-align: right;
-	margin: 10px 20px 0 0;
 	padding-bottom: 5px;
+	margin-top: 10px;
 }
 .totalitems {
 	font-size: 12px;

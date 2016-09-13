@@ -66,7 +66,7 @@
 	color: #323232;
 	margin-right: 10px;
 	margin-left: 20px;
-	font-weight: 20px;
+	font-weight: normal;
 }
 #center-address {
 	@extend .input-caption;
@@ -241,16 +241,8 @@
 	margin: 0 20px;
 	vertical-align: bottom;
 }
-.inline{
-	font-size: 12px;
-	color: #323232;
-	margin-right: 5px;
-	line-height: 22px;
-}
-#inlineCheckbox1, #inlineCheckbox2 {
-	width: 16px;
-	height: 16px;
-	margin-right: 5px;
+.user-checkbox {
+	padding: 5px 0;
 }
 .book-description {
 	position: relative;
@@ -301,7 +293,7 @@
 .table-box {
 	padding: 0;
 }
-.user-table {
+#user-table1 {
 	border-radius: 6px;
 	border: 1px solid #ddd;
 	font-size: 14px;
@@ -337,4 +329,7 @@
 	.clicked {
 		background: #fdd3b9;
 	}
+}
+#user-table2 {
+	@extend #user-table1;
 }

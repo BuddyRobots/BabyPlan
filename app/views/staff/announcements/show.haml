@@ -31,7 +31,7 @@
         .display-area
           %p.caption-header
             %span#show-caption= @announcement.title
-            %a#publish-status{class: @announcement.is_published ? "declared" : "undeclared", :href => "javascript:void(0);"}= @announcement.is_published ? "已公布" : "未公布"
+            %span#publish-status{class: @announcement.is_published ? "declared" : "undeclared", :href => "javascript:void(0);"}= @announcement.is_published ? "已公布" : "未公布"
           .display-content
             = @announcement.content.html_safe
 
@@ -39,7 +39,7 @@
       .edit-area
         .caption-div
           %form.form-inline
-            %input#input-caption{:placeholder => "请输入标题", :type => "text"}
+            %input.form-control#input-caption{:placeholder => "请输入标题", :type => "text"}
 
         .wangedit-area
           #edit-box

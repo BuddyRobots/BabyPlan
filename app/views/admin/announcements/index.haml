@@ -9,9 +9,10 @@
   .content-box
     .manage-box
       .user-search-box
-        .input-append
-          %input#appendedInputButton.span2{:type => "text", :placeholder => "输入搜索关键字", :value => "#{@keyword}"}
-          %button.btn#search-btn{:type => "button"}
+        .input-group
+          %input.form-control#search-input{:type => "text", :placeholder => "输入搜索关键字", :value => "#{@keyword}"}
+          %span.input-group-btn
+            %button.btn.btn-default#search-btn{:type => "button"}
       .btn.add-btn{:type => "button", :href => "#add-announcementModal", "data-toggle" => "modal"} 
         %img.add-img{:src => "/assets/managecenter/add.png"}
         添加全局公告
@@ -45,15 +46,14 @@
               .select-page 
                 %span.totalitems= "共#{@global_eles[:total_page]}页,总计#{@global_eles[:total_number]}条"
                 %span.choice-page
-                  .pagination.pagination-small
-                    %ul
+                  %ul.pagination.pagination-sm
+                    %li
+                      %a{:href => "/admin/announcements?profile=global&keyword=#{@keyword}&page=#{@global_eles[:previous_page]}"} «
+                    - ( (@global_eles[:previous_page] > 2 ? @global_eles[:previous_page] - 2 : 1) .. (@global_eles[:next_page] < @global_eles[:total_page] - 2 ? @global_eles[:next_page] + 2 : @global_eles[:total_page]) ).to_a.each do |page|
                       %li
-                        %a{:href => "/admin/announcements?profile=global&keyword=#{@keyword}&page=#{@global_eles[:previous_page]}"} «
-                      - ( (@global_eles[:previous_page] > 2 ? @global_eles[:previous_page] - 2 : 1) .. (@global_eles[:next_page] < @global_eles[:total_page] - 2 ? @global_eles[:next_page] + 2 : @global_eles[:total_page]) ).to_a.each do |page|
-                        %li
-                          %a{:href => "/admin/announcements?profile=global&keyword=#{@keyword}&page=#{page}"}= page
-                      %li
-                        %a{:href => "/admin/announcements?profile=global&keyword=#{@keyword}&page=#{@global_eles[:next_page]}"} »
+                        %a{:href => "/admin/announcements?profile=global&keyword=#{@keyword}&page=#{page}"}= page
+                    %li
+                      %a{:href => "/admin/announcements?profile=global&keyword=#{@keyword}&page=#{@global_eles[:next_page]}"} »
           #tab2.tab-pane
             - if @local_eles[:data].length == 0
               .undiscover
@@ -76,12 +76,12 @@
               .select-page 
                 %span.totalitems= "共#{@local_eles[:total_page]}页,总计#{@local_eles[:total_number]}条"
                 %span.choice-page
-                  .pagination.pagination-small
-                    %ul
+                  %ul.pagination.pagination-sm
+                    %li
+                      %a{:href => "/admin/announcements?profile=local&keyword=#{@keyword}&page=#{@local_eles[:previous_page]}"} «
+                    - ( (@local_eles[:previous_page] > 2 ? @local_eles[:previous_page] - 2 : 1) .. (@local_eles[:next_page] < @local_eles[:total_page] - 2 ? @local_eles[:next_page] + 2 : @local_eles[:total_page]) ).to_a.each do |page|
                       %li
-                        %a{:href => "/admin/announcements?profile=local&keyword=#{@keyword}&page=#{@local_eles[:previous_page]}"} «
-                      - ( (@local_eles[:previous_page] > 2 ? @local_eles[:previous_page] - 2 : 1) .. (@local_eles[:next_page] < @local_eles[:total_page] - 2 ? @local_eles[:next_page] + 2 : @local_eles[:total_page]) ).to_a.each do |page|
-                        %li
-                          %a{:href => "/admin/announcements?profile=local&keyword=#{@keyword}&page=#{page}"}= page
-                      %li
-                        %a{:href => "/admin/announcements?profile=local&keyword=#{@keyword}&page=#{@local_eles[:next_page]}"} »
+                        %a{:href => "/admin/announcements?profile=local&keyword=#{@keyword}&page=#{page}"}= page
+                    %li
+                      %a{:href => "/admin/announcements?profile=local&keyword=#{@keyword}&page=#{@local_eles[:next_page]}"} »
+                   

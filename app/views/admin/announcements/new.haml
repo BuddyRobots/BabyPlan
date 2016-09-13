@@ -18,12 +18,10 @@
             %a{"data-toggle" => "tab", :href => "#tab1"} 全局公告
 
       .edit-area
-        .caption-div
-          %form.form-inline
-            %input#input-caption{:placeholder => "请输入标题", :type => "text"}
-            %label.checkbox
-              %input#publish-cb{:type => "checkbox"}
-              公布
+        %form.form-inline
+          %input.form-control#input-caption{:placeholder => "请输入标题", :type => "text"}
+          %label.checkbox-inline
+            %input#publish-cb{:type => "checkbox"} 公布
 
         .wangedit-area
           #edit-box

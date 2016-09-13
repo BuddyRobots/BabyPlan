@@ -32,7 +32,7 @@
 }
 .edit-btn {
 	position: absolute;
-	top: 11px;
+	top: 15px;
 	right: 20px;
 	z-index: 10;
 	width: 100px;
@@ -94,14 +94,15 @@
 	font-size: 16px;
 	color: #323232;
 	margin-right: 10px;
-	margin-left: 20px
+	margin-left: 20px;
+	font-weight: normal;
 }
 .unedit-box {
 	display: inline-block;
 	vertical-align: middle;
 	font-size: 14px;
 	color: #323232;
-	width: 252px;
+	width: 300px;
 	height: 30px;
 	line-height: 30px;
 	margin: 0 20px 0 0;
@@ -113,10 +114,9 @@
 	width: 400px;
 }
 .input-area {
+	display: inline-block;
 	width: 238px;
 	height: 30px;
-	padding: 0;
-	margin: 0 20px 0 0 !important;
 }
 .shelve {
     color: #0fc077;
@@ -236,7 +236,7 @@
 .table-box {
 	padding: 0;
 }
-.user-table {
+#user-table1 {
 	border-radius: 6px;
 	border: 1px solid #ddd;
 	font-size: 14px;
@@ -262,4 +262,7 @@
 	.clicked {
 		background: #fdd3b9;
 	}
+}
+#user-table2 {
+	@extend #user-table1;
 }

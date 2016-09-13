@@ -27,7 +27,7 @@
 }
 .end-btn {
 	position: absolute;
-	top: 11px;
+	top: 15px;
 	right: 20px;
 	z-index: 10;
 	width: 100px;
@@ -60,30 +60,28 @@
 }
 .edit-area {
 	margin: 0 20px;
-	border: 1px solid #c8c8c8;
+	border: 1px solid #ddd;
 	border-top: 0;
 	padding: 20px 0;
 }
+.form-inline {
+	text-align: center;
+}
 #input-caption {
-	width: 640px;
+	width: 60%;
 	height: 62px;
 	padding: 0;
 	border-radius: 4px;
 	font-size: 24px;
-	text-align: center;
-}
-.caption-div {
-	width: 65%;
-	margin: 0 auto;
-	vertical-align: baseline;
-}
-.checkbox {
-	font-size: 14px;
 	color: #323232;
+	text-align: center;
+	font-weight: normal;
+}
+.checkbox-inline {
 	margin-left: 15px;
 }
 .wangedit-area {
-	margin: 0 60px;
+	margin: 20px 60px 0 60px;
 	font-size: 14px;
 	color: #323232;
 }

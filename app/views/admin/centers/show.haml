@@ -40,7 +40,7 @@
               %label.input-caption 中心名称:
               %span.unedit-box#name-span= @center.name
               %span.edit-box
-                %input.input-area#name-input{:type => "text"}
+                %input.input-area.form-control#name-input{:type => "text"}
               - if @center.available == true
                 %label#available-status.shelve 开放中
               - else
@@ -49,7 +49,7 @@
               %label.input-caption 详细地址:
               %span.unedit-box#address-span= @center.address
               %span.edit-box
-                %input.input-area#center-address{:type => "text"}
+                %input.input-area.form-control#center-address{:type => "text"}
             .map-position
               %span.map-address 地图位置:
               .map-notice
@@ -70,7 +70,7 @@
             %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
             %span.undiscover-message 抱歉！暂无查找信息
           .table-box
-            %table.table.table-bordered.user-table
+            %table.table.table-bordered#user-table1
               %caption
               %thead
                 %tr
@@ -93,22 +93,21 @@
           .select-page 
             %span.totalitems= "共6页,总计12条"
             %span.choice-page
-              .pagination.pagination-small
-                %ul
-                  %li
-                    %a{:href => "javascript:void(0);"} «
-                  / - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
-                  %li
-                    %a{:href => "javascript:void(0);"} 1
-                  %li
-                    %a{:href => "javascript:void(0);"} »
+              %ul.pagination.pagination-sm
+                %li
+                  %a{:href => "javascript:void(0);"} «
+                / - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
+                %li
+                  %a{:href => "javascript:void(0);"} 1
+                %li
+                  %a{:href => "javascript:void(0);"} »
 
         #tab3.tab-pane
           .undiscover
             %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
             %span.undiscover-message 抱歉！暂无查找信息
           .table-box
-            %table.table.table-bordered.user-table
+            %table.table.table-bordered#user-table2
               %caption
               %thead
                 %tr
@@ -127,16 +126,14 @@
                   %td 30本
                   %td 卡萨.布兰卡
                   %td 9527
-
           .select-page 
             %span.totalitems= "共6页,总计12条"
             %span.choice-page
-              .pagination.pagination-small
-                %ul
-                  %li
-                    %a{:href => "javascript:void(0);"} «
-                  / - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
-                  %li
-                    %a{:href => "javascript:void(0);"} 1
-                  %li
-                    %a{:href => "javascript:void(0);"} »
+              %ul.pagination.pagination-sm
+                %li
+                  %a{:href => "javascript:void(0);"} «
+                / - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
+                %li
+                  %a{:href => "javascript:void(0);"} 1
+                %li
+                  %a{:href => "javascript:void(0);"} »

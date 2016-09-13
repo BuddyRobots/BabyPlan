@@ -16,12 +16,12 @@
     .manage-content
       %form.form-inline
         %label.input-name 中心名称:
-        %input.input-area#center-name{:type => "text"}
-        %label.checkbox#available
-          %input.checkbox-content{:type => "checkbox"} 开放
-
-      %label.input-name 详细地址:
-      %input.input-area#center-address{:type => "text"}
+        %input.input-area.form-control#center-name{:type => "text"}
+        %label.checkbox-inline#available
+          %input#inlineCheckbox1{:type => "checkbox"} 开放
+      %form.form-inline
+        %label.input-name 详细地址:
+        %input.input-area.form-control#center-address{:type => "text"}
       .map-position
         %span.map-address 地图位置:
         %span.notice 

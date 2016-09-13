@@ -75,13 +75,11 @@
               .select-page 
                 %span.totalitems= "共#{@local_eles[:total_page]}页,总计#{@local_eles[:total_number]}条"
                 %span.choice-page
-                  .pagination.pagination-small
-                    %ul
+                  %ul.pagination.pagination-sm
+                    %li
+                      %a{:href => "/staff/announcements?profile=local&keyword=#{@keyword}&page=#{@local_eles[:previous_page]}"} «
+                    - ( (@local_eles[:previous_page] > 2 ? @local_eles[:previous_page] - 2 : 1) .. (@local_eles[:next_page] < @local_eles[:total_page] - 2 ? @local_eles[:next_page] + 2 : @local_eles[:total_page]) ).to_a.each do |page|
                       %li
-                        %a{:href => "/staff/announcements?profile=local&keyword=#{@keyword}&page=#{@local_eles[:previous_page]}"} «
-                      - ( (@local_eles[:previous_page] > 2 ? @local_eles[:previous_page] - 2 : 1) .. (@local_eles[:next_page] < @local_eles[:total_page] - 2 ? @local_eles[:next_page] + 2 : @local_eles[:total_page]) ).to_a.each do |page|
-                        %li
-                          %a{:href => "/staff/announcements?profile=local&keyword=#{@keyword}&page=#{page}"}= page
-                      %li
-                        %a{:href => "/staff/announcements?profile=local&keyword=#{@keyword}&page=#{@local_eles[:next_page]}"} »
-
+                        %a{:href => "/staff/announcements?profile=local&keyword=#{@keyword}&page=#{page}"}= page
+                    %li
+                      %a{:href => "/staff/announcements?profile=local&keyword=#{@keyword}&page=#{@local_eles[:next_page]}"} »

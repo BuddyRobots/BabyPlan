@@ -69,22 +69,25 @@
 	vertical-align: middle;
 	font-size: 16px;
 	color: #323232;
-	padding-top: 3px;
 	margin-left: 20px;
+	font-weight: normal;
 }
 .input-area {
 	display: inline-block;
 	width: 238px;
 	height: 30px;
-	padding: 0;
-	margin: 0 !important;
 }
-.checkbox {
+#center-name {
+	display: inline-block;
+	width: 30%;
+	height: 30px;
+}
+.checkbox-inline {
 	margin-left: 15px;
 }
 #center-address {
 	@extend .input-area;
-	width: 500px;
+	width: 40%;
 }
 .map-position {
 	margin: 15px 20px;
@@ -112,7 +115,7 @@
 }
 #map-container {
 	width: 93%;
-	margin-left: 75px;
+	margin-left: 7%;
 	margin-top: 13px;
 	height: 300px;
 	border: 1px solid #ddd;

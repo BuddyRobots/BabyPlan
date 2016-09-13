@@ -60,26 +60,23 @@
 }
 .edit-area {
 	margin: 0 20px;
-	border: 1px solid #c8c8c8;
+	border: 1px solid #ddd;
 	border-top: 0;
 	padding: 20px 0;
 }
+.form-inline {
+	text-align: center;
+}
 #input-caption {
-	width: 640px;
+	width: 60%;
 	height: 62px;
 	padding: 0;
 	border-radius: 4px;
 	font-size: 24px;
 	text-align: center;
-}
-.caption-div {
-	width: 65%;
-	margin: 0 auto;
-	vertical-align: baseline;
+	font-weight: normal;
 }
 .checkbox-inline {
-	font-size: 14px;
-	color: #323232;
 	margin-left: 15px;
 }
 .wangedit-area {
