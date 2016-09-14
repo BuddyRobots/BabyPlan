@@ -1,5 +1,11 @@
 class Staff::CoursesController < Staff::ApplicationController
 
+  before_filter :set_active_tab
+
+  def set_active_tab
+    @active_tab = "course"
+  end
+
   def index
     @keyword = params[:keyword]
     course_insts = @keyword.present? ? current_center.course_insts.where(name: /#{@keyword}/) : current_center.course_insts.all

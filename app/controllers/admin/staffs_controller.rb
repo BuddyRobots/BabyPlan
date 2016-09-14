@@ -1,5 +1,11 @@
 class Admin::StaffsController < Admin::ApplicationController
 
+  before_filter :set_active_tab
+
+  def set_active_tab
+    @active_tab = "staff"
+  end
+
   def index
     @keyword = params[:keyword]
     staffs = @keyword.present? ? User.staff.where(name: /#{@keyword}/) : User.staff

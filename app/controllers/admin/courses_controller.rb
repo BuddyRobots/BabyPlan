@@ -1,5 +1,11 @@
 class Admin::CoursesController < Admin::ApplicationController
 
+  before_filter :set_active_tab
+
+  def set_active_tab
+    @active_tab = "course"
+  end
+
   def index
     @keyword = params[:keyword]
     courses = @keyword.present? ? Course.where(name: /#{@keyword}/) : Course.all
