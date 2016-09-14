@@ -1,5 +1,11 @@
 class Staff::AnnouncementsController < Staff::ApplicationController
 
+  before_filter :set_active_tab
+
+  def set_active_tab
+    @active_tab = "announcement"
+  end
+
   def index
     @keyword = params[:keyword]
     local_eles = @keyword.present? ? current_center.announcements.where(title: /#{@keyword}/) : current_center.announcements.all

@@ -1,5 +1,11 @@
 class Staff::ClientsController < Staff::ApplicationController
 
+  before_filter :set_active_tab
+
+  def set_active_tab
+    @active_tab = "client"
+  end
+
   # show the index page
   def index
     @keyword = params[:keyword]

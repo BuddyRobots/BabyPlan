@@ -1,5 +1,11 @@
 class Staff::BooksController < Staff::ApplicationController
 
+  before_filter :set_active_tab
+
+  def set_active_tab
+    @active_tab = "book"
+  end
+
   def index
     @keyword = params[:keyword]
     books = @keyword.present? ? current_center.books.where(name: /#{@keyword}/) : current_center.books.all

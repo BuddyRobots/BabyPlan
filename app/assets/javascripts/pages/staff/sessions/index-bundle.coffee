@@ -63,6 +63,9 @@ $ ->
       return false
     $("#signup-mobile").removeClass("clicked-box")
     captcha = $("#signup-captcha").val()
+    if captcha == ""
+      $("#figure-code-notice").text("请输入图形验证码").css("visibility", "visible") 
+      return false
     $.postJSON(
       '/staff/sessions/signup',
       {

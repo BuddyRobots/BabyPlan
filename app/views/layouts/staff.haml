@@ -42,13 +42,13 @@
     .main
       .sidebar
         %ul#nav-ul
-          %li.active
+          %li{class: @active_tab == "client" ? "active" : ""}
             %a{:href => "/staff/clients"} 儿童管理
-          %li 
+          %li{class: @active_tab == "course" ? "active" : ""}
             %a{:href => "/staff/courses"} 课程管理
-          %li 
+          %li{class: @active_tab == "book" ? "active" : ""}
             %a{:href => "/staff/books"} 绘本管理
-          %li 
+          %li{class: @active_tab == "announcement" ? "active" : ""}
             %a{:href => "/staff/announcements"} 公告信息管理
           / %li 
           /   %a{:href => "#"} 统计信息查询

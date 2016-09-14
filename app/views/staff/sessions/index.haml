@@ -65,7 +65,7 @@
             .form-group#captcha
               %label.col-sm-4.control-label{:for => "figure-code"} 图形验证码
               .col-sm-4
-                %input.unclicked-box.form-control#figure-code{:type => "text"}
+                %input.unclicked-box.form-control#signup-captcha{:type => "text"}
               .col-sm-4
                 %a.refresh-captcha{href: "javascript:void(0)"}
                   = rucaptcha_image_tag(alt: 'Captcha', width: "84px", height: "34px", class: "rucaptcha-image")
