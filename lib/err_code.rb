@@ -15,6 +15,7 @@ module ErrCode
   COURSE_NOT_EXIST = -12
   COURSE_INST_EXIST = -13
   COURSE_INST_NOT_EXIST = -14
+  WRONG_CAPTCHA = -15
 
   def self.ret_false(code)
     msg = self.message(code)
@@ -32,7 +33,7 @@ module ErrCode
     when USER_EXIST
       "帐号已存在"
     when WRONG_VERIFY_CODE
-      "验证码错误"
+      "手机验证码错误"
     when USER_NOT_VERIFIED
       "手机号未验证"
     when REQUIRE_SIGNIN
@@ -49,6 +50,8 @@ module ErrCode
       "儿童中心不存在"
     when COURSE_NOT_EXIST
       "课程不存在"
+    when WRONG_CAPTCHA
+      "图形验证码错误"
     else
       nil
     end

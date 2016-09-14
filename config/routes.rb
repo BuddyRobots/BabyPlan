@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+
+  mount RuCaptcha::Engine => "/rucaptcha"
+
   get 'welcome/index'
   get 'welcome/test'
   get 'welcome/kidscenter'

@@ -27,8 +27,11 @@ class Staff::SessionsController < Staff::ApplicationController
 
   # create new staff user, params include mobile, return verify code
   def signup
+    if params[:captcha] != session[:_rucaptcha]
+      render json: retval_wrapper(ErrCode::WRONG_CAPTCHA) and return
+    end
     retval = User.create_user(User::STAFF, params[:mobile])
-    render json: retval_wrapper(retval)
+    render json: retval_wrapper(retval) and return
   end
 
   def forget_password

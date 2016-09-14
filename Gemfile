@@ -8,6 +8,7 @@ gem 'handlebars_assets'
 gem 'kaminari'
 gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
 gem 'bootstrap-sass'
+gem 'rucaptcha'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

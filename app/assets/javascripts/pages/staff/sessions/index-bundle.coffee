@@ -1,6 +1,9 @@
 
 $ ->
 
+  $(".rucaptcha-image").click ->
+    $(this).attr('src', /rucaptcha/ + '?' + (new Date()).getTime())
+
   $("#signup-address").autocomplete(
     source: "/centers"
     appendTo: "#signupModal"
@@ -61,10 +64,12 @@ $ ->
       $("#signup-mobile").addClass("clicked-box")
       return false
     $("#signup-mobile").removeClass("clicked-box")
+    captcha = $("#signup-captcha").val()
     $.postJSON(
       '/staff/sessions/signup',
       {
         mobile: mobile
+        captcha: captcha
       },
       (data) ->
         console.log data
