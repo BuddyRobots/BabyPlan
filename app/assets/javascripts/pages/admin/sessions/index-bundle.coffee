@@ -1,6 +1,9 @@
 
 $ ->
   # forgotpassword
+  $(".rucaptcha-image").click ->
+    $(this).attr('src', /rucaptcha/ + '?' + (new Date()).getTime())
+
   $(".forget-password").click ->
     $("#signinModal").modal('hide')
 
@@ -56,10 +59,15 @@ $ ->
       $("#signup-mobile").addClass("clicked-box")
       return false
     $("#signup-mobile").removeClass("clicked-box")
+    captcha = $("#forget-captcha-input").val()
+    if captcha == ""
+      $("#forget-captcha-notice").text("请输入图形验证码").css("visibility", "visible") 
+      return false
     $.postJSON(
       '/admin/sessions/signup',
       {
         mobile: mobile
+        captcha: captcha
       },
       (data) ->
         console.log data
@@ -72,7 +80,10 @@ $ ->
           time("#mobilecode")
         #需要修改
         else
-          $("#mobile-notice").text("该手机号已注册，请直接登录").css("visibility","visible")     
+          if data.code == WRONG_CAPTCHA
+            $("#signup-captcha-notice").text("图形验证码错误").css("visibility", "visible") 
+          if data.code == USER_NOT_EXIST
+            $("#forget-mobile-notice").text("该手机号未注册").css("visibility","visible")
           console.log $("#mobile-notice").text()
     )
     return false
@@ -131,11 +142,16 @@ $ ->
       $("#forget-mobile-notice").css("visibility","visible")
       $("#forget-mobile").addClass("clicked-box")
       return false
+    captcha = $("#forget-captcha-input").val()
+    if captcha == ""
+      $("#forget-captcha-notice").text("请输入图形验证码").css("visibility", "visible") 
+      return false
     $("#forget-mobile").removeClass("clicked-box")
     $.postJSON(
       '/admin/sessions/forget_password',
       {
         mobile: mobile
+        captcha: captcha
       },
       (data) ->
         console.log data
@@ -146,7 +162,10 @@ $ ->
             clearTimeout(timer)
           time("#mobile-code")
         else
-          $("#forget-mobile-notice").text("该手机号未注册").css("visibility","visible")     
+          if data.code == WRONG_CAPTCHA
+            $("#signup-captcha-notice").text("图形验证码错误").css("visibility", "visible") 
+          if data.code == USER_NOT_EXIST
+            $("#forget-mobile-notice").text("该手机号未注册").css("visibility","visible")
       )
     return false
    
@@ -180,6 +199,9 @@ $ ->
   $("#forget-mobilecode").keyup ->
     check_forget_signup_input()
     $("#forget-verify-code-notice").css("visibility","hidden")
+  $("#forget-captcha-input").keyup ->
+    check_forget_signup_input()
+    $("#forget-captcha-notice").css("visibility","hidden")
   $("#forget-password").keyup ->
     toggle_forget_password_tip(false)
     check_forget_signup_input()
@@ -295,20 +317,3 @@ $ ->
     signin()
     return false
 
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
-  

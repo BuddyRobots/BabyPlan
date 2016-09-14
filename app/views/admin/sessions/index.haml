@@ -51,6 +51,14 @@
               %label.col-sm-3.control-label{:for => "forget-mobile"} 手机号
               .col-sm-9
                 %input.unclicked-box.form-control#forget-mobile{:type => "text"}
+            %p.notice#forget-captcha-notice 图形验证码错误
+            .form-group#forget-captcha
+              %label.col-sm-4.control-label{:for => "forget-captcha-input"} 图形验证码
+              .col-sm-4
+                %input.unclicked-box.form-control#forget-captcha-input{:type => "text"}
+              .col-sm-4
+                %a.refresh-captcha{href: "javascript:void(0)"}
+                  = rucaptcha_image_tag(alt: 'Captcha', width: "84px", height: "34px", class: "rucaptcha-image")
             %p.notice#forget-verify-code-notice 验证码错误
             .form-group
               %label.col-sm-3.control-label{:for => "signup-mobilecode"} 验证码

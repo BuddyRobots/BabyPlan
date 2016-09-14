@@ -143,7 +143,14 @@
 #notice-box {
 	margin-bottom: 0;
 }
-#forget-mobile-notice, #forget-verify-code-notice, #forget-password-notice {
+#signup-captcha, #forget-captcha {
+	margin-bottom: 0;
+}
+.refresh-captcha {
+	display: inline-block;
+	border: 1px solid #ddd;
+}
+#forget-mobile-notice, #forget-captcha-notice, #forget-verify-code-notice, #forget-password-notice {
 	font-size: 12px;
 	height: 20px;
 	line-height: 20px;
