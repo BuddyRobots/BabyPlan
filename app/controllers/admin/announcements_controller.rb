@@ -1,5 +1,11 @@
 class Admin::AnnouncementsController < Admin::ApplicationController
 
+  before_filter :set_active_tab
+
+  def set_active_tab
+    @active_tab = "announcement"
+  end
+
   def index
     @keyword = params[:keyword]
     local_eles = @keyword.present? ? Announcement.where(:center.ne => nil).where(title: /#{@keyword}/) : Announcement.where(:center.ne => nil)

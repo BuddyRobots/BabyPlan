@@ -1,5 +1,11 @@
 class Admin::CentersController < Admin::ApplicationController
 
+  before_filter :set_active_tab
+
+  def set_active_tab
+    @active_tab = "center"
+  end
+
   def index
     @keyword = params[:keyword]
     centers = @keyword.present? ? Center.where(name: /#{@keyword}/) : Center.all

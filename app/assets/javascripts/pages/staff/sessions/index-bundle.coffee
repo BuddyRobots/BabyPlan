@@ -64,7 +64,7 @@ $ ->
     $("#signup-mobile").removeClass("clicked-box")
     captcha = $("#signup-captcha").val()
     if captcha == ""
-      $("#figure-code-notice").text("请输入图形验证码").css("visibility", "visible") 
+      $("#signup-captcha-notice").text("请输入图形验证码").css("visibility", "visible") 
       return false
     $.postJSON(
       '/staff/sessions/signup',
@@ -83,7 +83,7 @@ $ ->
         #需要修改
         else
           if data.code == WRONG_CAPTCHA
-            $("#figure-code-notice").text("图形验证码错误").css("visibility", "visible") 
+            $("#signup-captcha-notice").text("图形验证码错误").css("visibility", "visible") 
           if data.code == USER_EXIST
             $("#mobile-notice").text("该手机号已注册，请直接登录").css("visibility","visible")    
     )
@@ -122,6 +122,9 @@ $ ->
   $("#signup-mobile").keyup ->
     check_signup_input()
     $("#mobile-notice").css("visibility","hidden")
+  $("#signup-captcha").keyup ->
+    check_signup_input()
+    $("#signup-captcha-notice").css("visibility", "hidden")
   $("#signup-mobilecode").keyup ->
     check_signup_input()
     $("#verify-code-notice").css("visibility","hidden")
