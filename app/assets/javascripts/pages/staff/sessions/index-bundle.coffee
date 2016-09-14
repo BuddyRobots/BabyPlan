@@ -36,7 +36,6 @@ $ ->
   
   # verifycode 60 sec reverse 
   time = (o) ->
-    console.log wait
     $(o).attr("disabled", true)
     $(o).addClass("clicked")
     $(o).removeClass("unclicked")
@@ -58,7 +57,6 @@ $ ->
   $("#mobilecode").click ->
     mobile = $("#signup-mobile").val()
     mobile_retval = $.regex.isMobile(mobile)
-    console.log mobile_retval
     if mobile_retval == false
       $("#mobile-notice").css("visibility","visible")
       $("#signup-mobile").addClass("clicked-box")
@@ -76,14 +74,12 @@ $ ->
         if data.success
           $("#mobile-notice").css("visibility","hidden")
           uid = data.uid
-          console.log uid
           if timer != null
             clearTimeout(timer)
           time("#mobilecode")
         #需要修改
         else
           $("#mobile-notice").text("该手机号已注册，请直接登录").css("visibility","visible")     
-          console.log $("#mobile-notice").text()
     )
     return false
     

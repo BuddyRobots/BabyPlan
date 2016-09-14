@@ -67,7 +67,7 @@
                 %input.unclicked-box.form-control#figure-code{:type => "text"}
               .col-sm-4
                 %a.refresh-captcha{href: "javascript:void(0)"}
-                  = rucaptcha_image_tag(alt: 'Captcha', width: "84px", height: "34px")
+                  = rucaptcha_image_tag(alt: 'Captcha', width: "84px", height: "34px", class: "rucaptcha-image")
             %p.notice#verify-code-notice 验证码错误
             .form-group
               %label.col-sm-4.control-label{:for => "signup-mobilecode"} 验证码
