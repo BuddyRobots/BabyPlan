@@ -35,6 +35,9 @@ class Staff::SessionsController < Staff::ApplicationController
   end
 
   def forget_password
+    if params[:captcha] != session[:_rucaptcha]
+      render json: retval_wrapper(ErrCode::WRONG_CAPTCHA) and return
+    end
     user = User.staff.where(mobile: params[:mobile]).first
     retval = user.nil? ? ErrCode::USER_NOT_EXIST : user.forget_password
     render json: retval_wrapper(retval)

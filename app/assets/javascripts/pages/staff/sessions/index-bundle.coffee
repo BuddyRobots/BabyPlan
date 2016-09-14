@@ -62,7 +62,7 @@ $ ->
       $("#signup-mobile").addClass("clicked-box")
       return false
     $("#signup-mobile").removeClass("clicked-box")
-    captcha = $("#signup-captcha").val()
+    captcha = $("#signup-captcha-input").val()
     if captcha == ""
       $("#signup-captcha-notice").text("请输入图形验证码").css("visibility", "visible") 
       return false
@@ -122,7 +122,7 @@ $ ->
   $("#signup-mobile").keyup ->
     check_signup_input()
     $("#mobile-notice").css("visibility","hidden")
-  $("#signup-captcha").keyup ->
+  $("#signup-captcha-input").keyup ->
     check_signup_input()
     $("#signup-captcha-notice").css("visibility", "hidden")
   $("#signup-mobilecode").keyup ->
@@ -198,11 +198,16 @@ $ ->
       $("#forget-mobile-notice").css("visibility","visible")
       $("#forget-mobile").addClass("clicked-box")
       return false
+    captcha = $("#forget-captcha-input").val()
+    if captcha == ""
+      $("#forget-captcha-notice").text("请输入图形验证码").css("visibility", "visible") 
+      return false
     $("#forget-mobile").removeClass("clicked-box")
     $.postJSON(
       '/staff/sessions/forget_password',
       {
         mobile: mobile
+        captcha: captcha
       },
       (data) ->
         console.log data
@@ -215,8 +220,10 @@ $ ->
         else
           if data.code == USER_NOT_VERIFIED
             $("#forget-mobile-notice").text("手机号未验证").css("visibility", "visible")
+          if data.code == WRONG_CAPTCHA
+            $("#forget-captcha-notice").text("图形验证码错误").css("visibility", "visible") 
           if data.code == USER_NOT_EXIST
-            $("#forget-mobile-notice").text("帐号不存在").css("visibility", "visible")
+            $("#forget-mobile-notice").text("该手机号未注册").css("visibility","visible") 
       )
     return false
    
@@ -250,6 +257,9 @@ $ ->
   $("#forget-mobilecode").keyup ->
     check_forget_signup_input()
     $("#forget-verify-code-notice").css("visibility","hidden")
+  $("#forget-captcha-input").keyup ->
+    check_forget_signup_input()
+    $("#forget-captcha-notice").css("visibility","hidden")
   $("#forget-password").keyup ->
     toggle_forget_password_tip(false)
     check_forget_signup_input()
