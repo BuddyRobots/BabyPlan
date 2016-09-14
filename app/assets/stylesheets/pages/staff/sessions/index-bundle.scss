@@ -113,9 +113,9 @@
 		left: 50%;
 		top: 50%;
 		margin-left: -203px;
-		margin-top: -264px;
+		margin-top: -291px;
 		width: 406px;
-		height: 528px;
+		height: 582px;
 		border-radius: 6px;
 	}
 }
@@ -132,9 +132,17 @@
 	height: 34px;
 	line-height: 34px;
 	border: 0;
-	border-radius: 6px;
+	border-radius: 4px;
 	font-size: 12px;
 	color: #323232;
+}
+#captcha {
+	margin-top: 20px;
+	margin-bottom: 0;
+}
+.refresh-captcha {
+	display: inline-block;
+	border: 1px solid #ddd;
 }
 .unclicked-box {
 	border: 1px solid #c8c8c8;

@@ -77,6 +77,23 @@ ul, li {
 	color: white;
 }
 
+// undiscover message
+.undiscover {
+	text-align: center;
+	padding: 30px;
+	border-radius: 6px;
+}
+.undiscover-icon {
+	display: inline-block;
+	width: 100%;
+	max-width: 39px;
+}
+.undiscover-message {
+	font-size: 16px;
+	color: #969696;
+	margin-left: 20px;
+}
+
 .tabbable {
 	padding: 20px;
 }	
@@ -98,7 +115,7 @@ ul, li {
 }
 .table-box {
 	padding: 0;
-	margin: 0 20px;
+	margin: 20px 20px 0 20px;
 }
 #user-table {
 	border-radius: 6px;
@@ -145,8 +162,7 @@ ul, li {
 // select-page
 .select-page {
 	text-align: right;
-	margin: 10px 0 0 0;
-	padding-bottom: 5px;
+	margin: 10px 20px 0 0;
 }
 .totalitems {
 	font-size: 12px;
@@ -163,7 +179,7 @@ ul, li {
 }
 
 .class-calendar {
-	margin: 10px 20px;
+	margin: 5px 20px;
 	font-size: 16px;
 	color: #323232;
 }
@@ -174,8 +190,8 @@ ul, li {
 	font-size: 14px;
 }
 h2 {
-	font-size: 16px;
-	line-height: 30px
+	font-size: 20px;
+	padding-top: 5px;
 }
 .desc-items {
 	margin: 15px 16px;
