@@ -161,7 +161,7 @@ $ ->
           time("#mobile-code")
         else
           if data.code == WRONG_CAPTCHA
-            $("#signup-captcha-notice").text("图形验证码错误").css("visibility", "visible") 
+            $("#forget-captcha-notice").text("图形验证码错误").css("visibility", "visible") 
           if data.code == USER_NOT_EXIST
             $("#forget-mobile-notice").text("该手机号未注册").css("visibility","visible")
       )
