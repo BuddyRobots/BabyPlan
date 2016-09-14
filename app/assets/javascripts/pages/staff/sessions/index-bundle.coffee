@@ -79,7 +79,10 @@ $ ->
           time("#mobilecode")
         #需要修改
         else
-          $("#mobile-notice").text("该手机号已注册，请直接登录").css("visibility","visible")     
+          if data.code == WRONG_CAPTCHA
+            $("#figure-code-notice").text("图形验证码错误").css("visibility", "visible") 
+          if data.code == USER_EXIST
+            $("#mobile-notice").text("该手机号已注册，请直接登录").css("visibility","visible")    
     )
     return false
     
