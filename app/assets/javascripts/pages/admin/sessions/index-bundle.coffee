@@ -131,8 +131,6 @@ $ ->
     toggle_password_tip(false)
     check_signup_input()
 
-
-
   # forgetpassword user mobile verify
   $("#mobile-code").click ->
     mobile = $("#forget-mobile").val()
