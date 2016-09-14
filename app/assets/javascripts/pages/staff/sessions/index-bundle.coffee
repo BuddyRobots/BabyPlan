@@ -218,6 +218,8 @@ $ ->
             clearTimeout(timer)
           time("#mobile-code")
         else
+          if data.code == USER_NOT_VERIFIED
+            $("#forget-mobile-notice").text("手机号未验证").css("visibility", "visible")
           if data.code == WRONG_CAPTCHA
             $("#forget-captcha-notice").text("图形验证码错误").css("visibility", "visible") 
           if data.code == USER_NOT_EXIST
@@ -292,7 +294,12 @@ $ ->
           $("#signinModal").modal('show')
           $.page_notification("密码已重置，请登录", 3000)
         else
-          $("#forget-verify-code-notice").text("验证码错误").css("visibility","visible")
+          if data.code == USER_NOT_VERIFIED
+            $("#forget-mobile-notice").text("手机号未验证").css("visibility", "visible")
+          if data.code == USER_NOT_EXIST
+            $("#forget-mobile-notice").text("帐号不存在").css("visibility", "visible")
+          if data.code == WRONG_VERIFY_CODE
+            $("#forget-verify-code-notice").text("手机验证码错误").css("visibility", "visible")
       )
   $("#forget").click ->
     forget()
