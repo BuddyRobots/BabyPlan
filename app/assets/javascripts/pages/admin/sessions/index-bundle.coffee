@@ -18,17 +18,16 @@ $ ->
     $("#mobilecode").removeClass("clicked")
     $("#mobilecode").attr("disabled", false)
 
-    $("#mobile-code").text("获取验证码")
-    $("#mobile-code").addClass("unclicked")
-    $("#mobile-code").removeClass("clicked")
-    $("#mobile-code").attr("disabled", false)
+    $("#forget-mobile-code").text("获取验证码")
+    $("#forget-mobile-code").addClass("unclicked")
+    $("#forget-mobile-code").removeClass("clicked")
+    $("#forget-mobile-code").attr("disabled", false)
 
     $("input").val("")
     $("input").removeClass("clicked-box")
     $(".notice").css("visibility", "hidden")
     $("button").removeClass("button-enabled")
 
-  
   # verifycode 60 sec reverse 
   time = (o) ->
     console.log wait
@@ -87,54 +86,9 @@ $ ->
           console.log $("#mobile-notice").text()
     )
     return false
-    
-
-  check_signup_input = ->
-    console.log "check_signup_input pressed"
-    if $("#signup-name").val().trim() == "" ||
-        $("#signup-address").val().trim() == "" ||
-        $("#signup-mobile").val().trim() == "" ||
-        $("#signup-mobilecode").val().trim() == "" ||
-        $("#signup-password").val().trim() == "" ||
-        $("#signup-confirm-password").val().trim() == "" ||
-        uid == ""
-      $("#signup").addClass("button-disabled")
-      $("#signup").removeClass("button-enabled")
-    else
-      $("#signup").removeClass("button-disabled")
-      $("#signup").addClass("button-enabled")
-
-  toggle_password_tip = (wrong) ->
-    if (wrong)
-      $("#signup-password").addClass("clicked-box")
-      $("#signup-confirm-password").addClass("clicked-box")
-      $("#password-notice").css("visibility","visible")
-    else
-      $("#signup-password").removeClass("clicked-box")
-      $("#signup-confirm-password").removeClass("clicked-box")
-      $("#password-notice").css("visibility","hidden")
-
-  $("#signup-name").keyup ->
-    check_signup_input()
-  $("#signup-address").keyup ->
-    check_signup_input()
-  $("#signup-mobile").keyup ->
-    check_signup_input()
-    $("#mobile-notice").css("visibility","hidden")
-  $("#signup-mobilecode").keyup ->
-    check_signup_input()
-    $("#verify-code-notice").css("visibility","hidden")
-  $("#signup-password").keyup ->
-    toggle_password_tip(false)
-    check_signup_input()
-  $("#signup-confirm-password").keyup ->
-    toggle_password_tip(false)
-    check_signup_input()
-
-
 
   # forgetpassword user mobile verify
-  $("#mobile-code").click ->
+  $("#forget-mobile-code").click ->
     mobile = $("#forget-mobile").val()
     mobile_retval = $.regex.isMobile(mobile)
     console.log mobile_retval
@@ -160,7 +114,7 @@ $ ->
           uid = data.uid
           if timer != null
             clearTimeout(timer)
-          time("#mobile-code")
+          time("#forget-mobile-code")
         else
           if data.code == WRONG_CAPTCHA
             $("#signup-captcha-notice").text("图形验证码错误").css("visibility", "visible") 
@@ -168,7 +122,6 @@ $ ->
             $("#forget-mobile-notice").text("该手机号未注册").css("visibility","visible")
       )
     return false
-   
 
   toggle_forget_password_tip = (wrong) ->
     if (wrong)
@@ -180,7 +133,7 @@ $ ->
       $("#forget-confirm-password").removeClass("clicked-box")
       $("#forget-password-notice").css("visibility","hidden")
 
-  check_forget_signup_input = ->
+  check_forget_input = ->
     console.log "check_signup_input pressed"
     if $("#forget-mobile").val().trim() == "" ||
         $("#forget-mobilecode").val().trim() == "" ||
@@ -194,20 +147,20 @@ $ ->
       $("#forget").addClass("button-enabled")
 
   $("#forget-mobile").keyup ->
-    check_forget_signup_input()
+    check_forget_input()
     $("#forget-mobile-notice").css("visibility","hidden")
   $("#forget-mobilecode").keyup ->
-    check_forget_signup_input()
+    check_forget_input()
     $("#forget-verify-code-notice").css("visibility","hidden")
   $("#forget-captcha-input").keyup ->
-    check_forget_signup_input()
+    check_forget_input()
     $("#forget-captcha-notice").css("visibility","hidden")
   $("#forget-password").keyup ->
     toggle_forget_password_tip(false)
-    check_forget_signup_input()
+    check_forget_input()
   $("#forget-confirm-password").keyup ->
     toggle_forget_password_tip(false)
-    check_forget_signup_input()
+    check_forget_input()
 
   # reset password
   forget = ->
@@ -274,6 +227,8 @@ $ ->
 
   $("#mobile").keyup ->
     check_signin_input()
+    $(".error-notice").css("visibility", "hidden")
+    $("input").removeClass("clicked-box")
   $("#password").keyup ->
     toggle_signin_password_tip(false)
     check_signin_input()
@@ -309,8 +264,8 @@ $ ->
           $(".error-notice").css("visibility","hidden")
           location.href = "/admin/staffs"
         else
-          
           $(".error-notice").css("visibility","visible")
+          $(".signin").addClass("button-disabled")
       )
 
   $(".signin").click ->
