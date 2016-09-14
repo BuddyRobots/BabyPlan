@@ -62,10 +62,10 @@
               .col-sm-8
                 %input.unclicked-box#signup-mobile.form-control{:type => "text"}
             %p.notice#signup-captcha-notice 图形验证码错误
-            .form-group#captcha
-              %label.col-sm-4.control-label{:for => "signup-captcha"} 图形验证码
+            .form-group#signup-captcha
+              %label.col-sm-4.control-label{:for => "signup-captcha-input"} 图形验证码
               .col-sm-4
-                %input.unclicked-box.form-control#signup-captcha{:type => "text"}
+                %input.unclicked-box.form-control#signup-captcha-input{:type => "text"}
               .col-sm-4
                 %a.refresh-captcha{href: "javascript:void(0)"}
                   = rucaptcha_image_tag(alt: 'Captcha', width: "84px", height: "34px", class: "rucaptcha-image")
@@ -108,6 +108,14 @@
               %label.col-sm-3.control-label{:for => "forget-mobile"} 手机号
               .col-sm-9
                 %input.unclicked-box#forget-mobile.form-control{:type => "text"}
+            %p.notice#forget-captcha-notice 图形验证码错误
+            .form-group#forget-captcha
+              %label.col-sm-4.control-label{:for => "forget-captcha-input"} 图形验证码
+              .col-sm-4
+                %input.unclicked-box.form-control#forget-captcha-input{:type => "text"}
+              .col-sm-4
+                %a.refresh-captcha{href: "javascript:void(0)"}
+                  = rucaptcha_image_tag(alt: 'Captcha', width: "84px", height: "34px", class: "rucaptcha-image")
             %p.notice#forget-verify-code-notice 验证码错误
             .form-group
               %label.col-sm-3.control-label{:for => "signup-mobilecode"} 验证码
