@@ -38,6 +38,10 @@ Rails.application.routes.draw do
     resources :sessions do
       collection do
         get :signout
+        post :forget_password
+      end
+      member do
+        post :reset_password
       end
     end
     resources :staffs do
