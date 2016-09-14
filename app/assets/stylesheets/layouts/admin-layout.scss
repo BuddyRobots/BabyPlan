@@ -164,8 +164,10 @@ body, p, img, div, ul, li, a, h3, table, tr, th, td {
 			padding: 15px 0;
 		}
 	}
+	.active {
+		border-right: 5px solid #fff;
+	}
 }
-
 
 
 
