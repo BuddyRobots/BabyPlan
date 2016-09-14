@@ -30,7 +30,6 @@ $ ->
 
   # verifycode 60 sec reverse 
   time = (o) ->
-    console.log wait
     $(o).attr("disabled", true)
     $(o).addClass("clicked")
     $(o).removeClass("unclicked")
@@ -52,7 +51,6 @@ $ ->
   $("#mobilecode").click ->
     mobile = $("#signup-mobile").val()
     mobile_retval = $.regex.isMobile(mobile)
-    console.log mobile_retval
     if mobile_retval == false
       $("#mobile-notice").css("visibility","visible")
       $("#signup-mobile").addClass("clicked-box")
@@ -69,11 +67,9 @@ $ ->
         captcha: captcha
       },
       (data) ->
-        console.log data
         if data.success
           $("#mobile-notice").css("visibility","hidden")
           uid = data.uid
-          console.log uid
           if timer != null
             clearTimeout(timer)
           time("#mobilecode")
@@ -83,7 +79,6 @@ $ ->
             $("#signup-captcha-notice").text("图形验证码错误").css("visibility", "visible") 
           if data.code == USER_NOT_EXIST
             $("#forget-mobile-notice").text("该手机号未注册").css("visibility","visible")
-          console.log $("#mobile-notice").text()
     )
     return false
 
@@ -91,7 +86,6 @@ $ ->
   $("#forget-mobile-code").click ->
     mobile = $("#forget-mobile").val()
     mobile_retval = $.regex.isMobile(mobile)
-    console.log mobile_retval
     if mobile_retval == false
       $("#forget-mobile-notice").css("visibility","visible")
       $("#forget-mobile").addClass("clicked-box")
@@ -108,7 +102,6 @@ $ ->
         captcha: captcha
       },
       (data) ->
-        console.log data
         if data.success
           $("#forget-mobile-notice").css("visibility","hidden")
           uid = data.uid
@@ -117,7 +110,7 @@ $ ->
           time("#forget-mobile-code")
         else
           if data.code == WRONG_CAPTCHA
-            $("#signup-captcha-notice").text("图形验证码错误").css("visibility", "visible") 
+            $("#forget-captcha-notice").text("图形验证码错误").css("visibility", "visible") 
           if data.code == USER_NOT_EXIST
             $("#forget-mobile-notice").text("该手机号未注册").css("visibility","visible")
       )
@@ -134,7 +127,6 @@ $ ->
       $("#forget-password-notice").css("visibility","hidden")
 
   check_forget_input = ->
-    console.log "check_signup_input pressed"
     if $("#forget-mobile").val().trim() == "" ||
         $("#forget-mobilecode").val().trim() == "" ||
         $("#forget-password").val().trim() == "" ||
@@ -216,7 +208,6 @@ $ ->
       $(".error-notice").css("visibility","hidden")
 
   check_signin_input = ->
-    console.log "check_signin_input pressed"
     if $("#mobile").val().trim() == "" ||
         $("#password").val().trim() == ""
       $(".signin").addClass("button-disabled")
@@ -247,7 +238,6 @@ $ ->
     mobile = $("#mobile").val()
     password = $("#password").val()
     mobile_retval = $.regex.isMobile(mobile)
-    console.log mobile_retval
     if mobile_retval == false
       $(".error-notice").css("visibility","visible")
       $("#mobile").addClass("clicked-box")
