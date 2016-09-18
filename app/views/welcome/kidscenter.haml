@@ -5,9 +5,10 @@
 - content_for :app_content do
   .container
     .header
+
       %a{:href => "#"}
         %img.user{:src => "/assets/kidscenter/user.png"}
-      %img.cloud{:src => "/assets/kidscenter/cloud.png"} 
+      / %img.cloud{:src => "/assets/kidscenter/cloud.png"} 
       %p.center 所有儿童中心
       %img.tick{:src => "/assets/kidscenter/tick.png"}
       %a{:href => "#"}
@@ -21,15 +22,6 @@
         %a{:href => "javascript:void(0)"} 课程
       %li.last
         %a{:href => "javascript:void(0)"} 绘本
-    / .tag-caption
-    /   .new
-    /     %a{:href => "javascript:void(0)"} 最新
-    /   .notice 
-    /     %a{:href => "javascript:void(0)"} 公告
-    /   .course 
-    /     %a{:href => "javascript:void(0)"} 课程
-    /   .book 
-    /     %a{:href => "javascript:void(0)"} 绘本
     .content
       %img.visit{:src => "/assets/kidscenter/diary.png"}
       %img.icon{:src => "/assets/kidscenter/hui.png"}
