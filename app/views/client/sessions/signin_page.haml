@@ -3,4 +3,19 @@
   = stylesheet_link_tag "pages/client/sessions/signin_page-bundle", :media => "all"
 
 - content_for :app_content do
-  %p Find me in client/sessions/signin_page.haml
+  .content-area
+    %a{:href => "#"}
+      %img.circlelogo{:src => "/assets/register/circlelogo.png"}
+    .input-box
+      %form.account 
+        账号:
+        %input.input-name{:type => "text"}
+    .input-box
+      %form.account 
+        密码:
+        %input.input-name{:type => "password"}
+      .forgetpass
+        %a{:href => "#"} 忘记密码
+    %a#signin{:href => "#"} 登录
+    %a#signup{:href => "/client/sessions/singup_page"} 注册
+      

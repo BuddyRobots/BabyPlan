@@ -1,9 +1,11 @@
 html {
 	font-size: 16px;
+	height: 100%;
 }
 body {
 	font-family:"Microsoft YaHei";
 	font-size: 62.5%;
+	height: 100%;
 }
 body, p, img, div, ul, li, a, h3, span, form, hr, input {
 	margin:0;
@@ -20,6 +22,7 @@ a{
 	position:relative;
 	width:100%;
 	max-width:640px;
+	height: 100%;
 	margin:0 auto;
 	padding-bottom:10em;
 	background: linear-gradient(
@@ -39,23 +42,26 @@ a{
 }
 .input-box {
 	width:77.1875%;
-	padding-left:14.07%;
+	margin: 0 auto;
 	padding-bottom:5%;
-	overflow:hidden;
 	.account {
 		font-size:3em;
 		color:#3e3e3e;
+		border-bottom: 1px solid #bfbfc0;
 		.input-name {
 			display:inline-block;
 			margin-bottom:2.03%;
-			font-size: 0.8em;
-			width:60%;
+			font-size: 1em;
+			margin-left: 2%;
+			width:50%;
 			max-width:300px;
 			border:0;
 			background:none;
 			outline:none;
 		}
 		.identifycode {
+			display:inline-block;
+			margin-bottom:2.45%;
 			font-size:0.8em;
 			border:1px solid #bfbfc0;
 			a {
@@ -67,53 +73,21 @@ a{
 			}
 		}
 	}
-	.underline {
-		color:#bfbfc0;
-	}
-	.forgetpass {
-		font-size:1.8em;
-		float:right;
-		padding-top:2%;
-		a {
-			text-decoration: none;
-			color:#3e3e3e;
-			&:hover {
-				color:red;
-				text-decoration: underline;
-			}
-		}
-	}
-}
-.register {
-	width:62.96875%;
-	margin:0 auto;
-	border:1px solid #bfbfc0;
-	padding:4% 0;
-	margin-top:2%;
-	text-align:center;
-	a {
-		font-size:3.6em;
-		color:#3e3e3e;
-		text-decoration: none;
-		&:hover {
-			color:red;
-		}
-	}
-}
-.registaccount {
-	padding-top:6%;
-	text-align:center;
-	a {
-		text-decoration: none;
-		font-size:3em;
-		color:#3e3e3e;
-		&:hover {
-			color:red;
-			text-decoration: underline;
-		}
-	}
 }
 
+#signup {
+	display: block;
+	width:62.96875%;
+	margin:0 auto;
+	margin-top:0.3%;
+	text-align:center;
+	font-size:3.6em;
+	color:#3e3e3e;
+	padding:1% 0;
+	text-decoration: none;
+	border-radius: 6px;
+	border:1px solid #bfbfc0;
+}
 
 
 

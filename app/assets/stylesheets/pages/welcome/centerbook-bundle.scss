@@ -1,9 +1,9 @@
 html {
-	font-family:"Microsoft YaHei";
-	// font-size: 62.5%;
+	font-size: 16px;
 }
 body {
-	// font-size: 62.5%;
+	font-family:"Microsoft YaHei";
+	font-size: 62.5%;
 }
 body, p, img, div, ul, li, a, h3 {
 	margin:0;
@@ -15,7 +15,7 @@ a{
 	-webkit-tap-highlight-color:transparent;
 	outline:none；
 }
-.container{
+.content-area {
 	width:100%;
 	max-width:640px;
 	margin:0 auto;
@@ -131,7 +131,7 @@ a{
 	margin-bottom:2.35%;
 	text-align:center;
 	p {
-		line-height:3em;
+		line-height:300%;
 		font-size: 3.6em;
 		color:#3e3e3e;
 	}
@@ -185,8 +185,8 @@ a{
 	background:#d70c18;
 	border-radius:5px;
 	text-align:center;
-	padding-top:1.9%;
-	padding-bottom:1.3%;
+	padding-top:2.1%;
+	padding-bottom:1.1%;
 	a {
 		text-decoration: none;
 		font-size: 2.4em;
@@ -200,38 +200,38 @@ a{
 
 
 @media screen and (max-width:640px) {
-	.container {
+	.content-area {
 		font-size: 100%;
 	}
 }
 @media screen and (max-width: 560px) {
-    .container {
+    .content-area {
         font-size: 85%;
     }
 }
 
 @media screen and (max-width: 500px) {
-    .container {
+    .content-area {
         font-size: 70%;
     }
 }
 @media screen and (max-width: 450px) {
-    .container {
+    .content-area {
         font-size: 67%;
     }
 }
 @media screen and (max-width: 400px) {
-    .container {
+    .content-area {
         font-size: 60%;
     }
 }
 @media screen and (max-width: 360px) {
-    .container {
+    .content-area {
         font-size: 55%;
     }
 }
 @media screen and (max-width: 320px) {
-    .container {
+    .content-area {
         font-size: 52%;
     }
 }

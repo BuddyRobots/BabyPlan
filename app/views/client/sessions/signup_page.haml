@@ -3,4 +3,26 @@
   = stylesheet_link_tag "pages/client/sessions/signup_page-bundle", :media => "all"
 
 - content_for :app_content do
-  %p Find me in client/sessions/signup_page.haml
+  .content-area
+    %a{:href => "#"}
+      %img.circlelogo{:src => "/assets/register/circlelogo.png"}
+    .input-box
+      %form.account 
+        账号:
+        %input.input-name{:type => "text"}
+    .input-box
+      %form.account 
+        密码:
+        %input.input-name{:type => "password"}
+    .input-box
+      %form.account 
+        手机号:
+        %input.input-name{:type => "number"}
+        %span.identifycode
+          %a{:href => "#"} 验证码
+    .input-box
+      %form.account 
+        验证码:
+        %input.input-name{:type => "text"}
+    %a#signup{:href => "#"} 注册
+      

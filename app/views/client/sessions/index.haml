@@ -3,4 +3,39 @@
   = stylesheet_link_tag "pages/client/sessions/index-bundle", :media => "all"
 
 - content_for :app_content do
-  %p Find me in client/sessions/index.haml
+  .content-area
+    %img.cloudblock{:src => "/assets/cloudblock.png"}
+    %img.frontcloud{:src => "/assets/frontcloud.png"}
+    %a#user{:href => "/client/sessions/signin_page"}
+      %img.user-img{:src => "/assets/user.png"}
+    %a#search{:href => "javascript:void(0);"}
+      %img.search-img{:src => "/assets/search.png"}
+    
+    .img_gallery
+      .point
+        %a{:href => "javascript:void(0);"} 1
+        %a{:href => "javascript:void(0);"} 2
+        %a{:href => "javascript:void(0);"} 3
+      .main_img
+        %ul
+          %li
+            %a{:href => "javascript:void(0);"}
+              %img.img_1{:src => "/assets/banner.jpg"}
+          %li
+            %a{:href => "javascript:void(0);"}
+              %img.img_2{:src => "/assets/banner.jpg"}
+          %li
+            %a{:href => "javascript:void(0);"}
+              %img.img_3{:src => "/assets/banner.jpg"}
+        %a#btn_prev{:href => "javascript:void(0);"}
+        %a#btn_next{:href => "javascript:void(0);"}
+      
+    .tagchoice
+      %img.circle{:src => "/assets/circle.png"}
+      %a{:href => "javascript:void(0)"}
+        %img.notice{:src => "/assets/notice.png",:alt => "公告"}
+      %a{:href => "javascript:void(0)"}
+        %img.book{:src => "/assets/book.png",:alt => "绘本"}
+      %a{:href => "javascript:void(0)"}
+        %img.course{:src => "/assets/course.png",:alt => "课程"}
+    %img.footer{:src => "/assets/tree.png"}

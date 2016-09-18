@@ -1,7 +1,8 @@
 html {
-	font-family:"Microsoft YaHei";
+	font-size: 16px;
 }
 body {
+	font-family:"Microsoft YaHei";
 	font-size: 62.5%;
 }
 body, p, img, div, ul, li, a, h3, span, form, hr, input {
@@ -15,7 +16,7 @@ a{
 	outline:none；
 }
 
-.container {
+.content-area {
 	position:relative;
 	width:100%;
 	max-width:640px;
@@ -47,7 +48,7 @@ a{
 			display:inline-block;
 			margin-bottom:2.03%;
 			font-size: 0.8em;
-			width:60%;
+			width:50%;
 			max-width:300px;
 			border:0;
 			background:none;
@@ -91,23 +92,23 @@ a{
 
 
 @media screen and (max-width:640px) {
-	.container {
+	.content-area {
 		font-size: 100%;
 	}
 }
 @media screen and (max-width: 560px) {
-    .container {
+    .content-area {
         font-size: 85%;
     }
 }
 
 @media screen and (max-width: 500px) {
-    .container {
+    .content-area {
         font-size: 60%;
     }
 }
 @media screen and (max-width: 400px) {
-    .container {
+    .content-area {
         font-size: 50%;
     }
 }

@@ -3,20 +3,20 @@
   = stylesheet_link_tag "pages/welcome/searchresult-bundle", :media => "all"
 
 - content_for :app_content do
-  .container
+  .content-area
     .header
       %a{:href => "#"}
         %img.back{:src => "/assets/searchresult/back.png"}
-      %img.cloud{:src => "/assets/searchresult/cloud.png"} 
       %p.center 所有儿童中心
       %img.tick{:src => "/assets/searchresult/tick.png"}
       %a{:href => "#"}
         %img.search{:src => "/assets/searchresult/search.png"}
-    .resultBox
-      %p.result
-        搜索结果:
-        %span
-        机器人
+    
+    %input.result-box{:placeholder => "机器人"}
+      / %p.result
+      /   搜索结果:
+      /   %span
+      /   机器人
     .content
       %img.visit{:src => "/assets/searchresult/diary.png"}
       %img.icon{:src => "/assets/searchresult/hui.png"}

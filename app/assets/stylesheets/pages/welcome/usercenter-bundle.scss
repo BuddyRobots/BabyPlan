@@ -1,7 +1,8 @@
 html {
-	font-family:"Microsoft YaHei";
+	font-size: 16px;
 }
 body {
+	font-family:"Microsoft YaHei";
 	font-size: 62.5%;
 }
 body, p, img, div, ul, li, a, h3 {
@@ -15,7 +16,7 @@ a{
 	outline:none；
 }
 
-.container{
+.content-area {
 	position:relative;
 	width:100%;
 	max-width:640px;
@@ -107,10 +108,10 @@ a{
 	}
 	.content {
 		position:absolute;
-		top:36.4%;
+		top:35%;
 		left:25.8%;
 		font-size:3.6em;
-		color:#3e3e3e; 
+		color:#3e3e3e;
 	}
 	a {
 		.rightarrow {
@@ -168,22 +169,22 @@ a{
 
 
 @media screen and (max-width:640px) {
-	.container {
+	.content-area {
 		font-size: 100%;
 	}
 }
 @media screen and (max-width: 560px) {
-    .container {
+    .content-area {
         font-size: 85%;
     }
 }
 @media screen and (max-width: 500px) {
-    .container {
+    .content-area {
         font-size: 60%;
     }
 }
 @media screen and (max-width: 400px) {
-    .container {
+    .content-area {
         font-size: 55%;
     }
 }

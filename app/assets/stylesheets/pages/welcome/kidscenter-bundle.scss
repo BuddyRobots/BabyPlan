@@ -1,8 +1,9 @@
 html {
-	font-family:"Microsoft YaHei";
+	font-size: 16px;
 }
 body {
-	font-size: 71.4285%;
+	font-family:"Microsoft YaHei";
+	font-size: 62.5%;
 }
 body, p, img, div, ul, li, a, h3 {
 	margin:0;
@@ -14,27 +15,11 @@ a{
 	-webkit-tap-highlight-color:transparent;
 	outline:none；
 }
-.container{
-	// position:relative;
+.content-area {
 	width:100%;
 	max-width:640px;
 	margin:0 auto;
 	padding-bottom:3%;
-	/*斜条纹背景，如果反向则是-45度*/
-	// background: -webkit-gradient(
-	// linear, 
-	// left top, 
-	// right bottom, 
-	// from(#fedd02), color-stop(0.45, #fedd02), 
-	// color-stop(0.45, #fcc204), color-stop(0.5, #fcc204), 
-	// color-stop(0.5, #fedd02), color-stop(0.95, #fedd02), 
-	// color-stop(0.95, #fcc204), to(#fcc204));
-	// background: -moz-linear-gradient(
-	// -45deg, 
-	// #7aa00f 45%, 
-	// #67860e 45%, #67860e 50%, 
-	// #7aa00f 50%, #7aa00f 95%, 
-	// #67860e 95%, #67860e);
 	background: linear-gradient(
     45deg, 
     #fef29c 45%, 
@@ -50,7 +35,7 @@ a{
 	background: url("/assets/kidscenter/cloud.png") no-repeat;
 	background-size: 46.875%;
 	background-position: center;
-	padding: 5% 0;
+	padding: 3.52% 0;
 }
 .user {
 	position: absolute;
@@ -65,7 +50,7 @@ a{
 }
 .tick {
 	position: absolute;
-	top:50%;
+	top:40%;
 	right:28.1%;
 	width:6.09%;
 	max-width:39px;
@@ -113,54 +98,6 @@ a{
 	}
 }
 
-// DIV写法样式
-@mixin cloud {
-	width:17.1%;
-	max-width:105px;
-	background:url("/assets/smallcloud.png") no-repeat;
-	background-size:100% 7.1em;
-}
-.tag-caption {
-	width:100%;
-	height:7em;
-	line-height: 7em;
-	overflow:hidden;
-	margin-top:7%;
-	margin-bottom:3%;
-	text-align:center;
-	.new {
-		float:left;
-		@include cloud;
-		margin-right:10%;
-		margin-left:2%;
-	}
-	a {
-			text-decoration: none;
-			color:#7d7d7d;
-			font-size:3em;
-			&:hover {
-				color:#c20116;
-			}
-
-		}		
-}
-.notice {
-		@include cloud;
-		float:left;
-		margin-right:10%;
-}
-.course {
-		@include cloud;
-		float:left;
-
-}
-.book {
-		@include cloud;
-		float:right;
-		margin-right:2%;
-}
-
-
 
 @mixin bigbox {
 	width:95.32%;
@@ -201,7 +138,7 @@ a{
 }
 .clip {
 	position: absolute;
-	bottom:8.71%;
+	bottom:5%;
 	right:3%;
 	width:20%;
 	background:#d70c18;
@@ -212,7 +149,7 @@ a{
 	a {
 		text-decoration: none;
 		color:white;
-		font-size:2.8em;
+		font-size:2.4em;
 		&:hover {
 			color:orange;
 		}
@@ -220,26 +157,24 @@ a{
 }
 
 
-
-
 @media screen and (max-width:640px) {
-	.container {
+	.content-area {
 		font-size: 100%;
 	}
 }
 @media screen and (max-width: 560px) {
-    .container {
+    .content-area {
         font-size: 85%;
     }
 }
 
 @media screen and (max-width: 500px) {
-    .container {
+    .content-area {
         font-size: 60%;
     }
 }
 @media screen and (max-width: 400px) {
-    .container {
+    .content-area {
         font-size: 50%;
     }
 }

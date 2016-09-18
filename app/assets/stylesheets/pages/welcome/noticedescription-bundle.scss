@@ -1,7 +1,8 @@
 html {
-	font-family:"Microsoft YaHei";
+	font-size: 16px;
 }
 body {
+	font-family:"Microsoft YaHei";
 	font-size: 62.5%;
 }
 body, p, img, div, ul, li, a, h2, span, input {
@@ -15,7 +16,7 @@ a{
 	outline:none；
 }
 
-.container {
+.content-area {
 	position:relative;
 	width:100%;
 	max-width:640px;
@@ -36,7 +37,7 @@ a{
 	.date {
 		font-size: 2.2em;
 		color:#666;
-		margin:6.25% 0 5.47% 4.38%;
+		margin:3.25% 0 3.25% 4.38%;
 	}
 	.haidian {
 		margin-left:5.47%;
@@ -102,33 +103,33 @@ a{
 
 
 @media screen and (max-width:640px) {
-	.container {
+	.content-area {
 		font-size: 100%;
 	}
 }
 @media screen and (max-width: 560px) {
-    .container {
+    .content-area {
         font-size: 85%;
     }
 }
 
 @media screen and (max-width: 500px) {
-    .container {
+    .content-area {
         font-size: 75%;
     }
 }
 @media screen and (max-width: 450px) {
-    .container {
+    .content-area {
         font-size: 65%;
     }
 }
 @media screen and (max-width: 400px) {
-    .container {
+    .content-area {
         font-size: 55%;
     }
 }
 @media screen and (max-width: 320px) {
-    .container {
+    .content-area {
         font-size: 50%;
     }
 }
