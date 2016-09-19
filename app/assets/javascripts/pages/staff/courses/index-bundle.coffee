@@ -21,7 +21,7 @@ $ ->
       else
         $.page_notification "课程不存在"
 
-  $(".cancel").click ->
+  $("#cancel").click ->
     $("#course-addModal").modal("hide")
 
   $(".details").click ->
