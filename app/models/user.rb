@@ -51,6 +51,7 @@ class User
   scope :client, ->{ where(user_type: CLIENT) }
   scope :staff, ->{ any_of({user_type: STAFF}, {user_type: ADMIN}) }
   scope :admin, ->{ where(user_type: ADMIN) }
+  scope :only_staff, ->{ where(user_type: STAFF) }
 
   def is_admin
     return self.user_type == ADMIN
