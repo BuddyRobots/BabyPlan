@@ -43,7 +43,9 @@ Rails.application.routes.draw do
         get :signup_page
       end
     end
-    resources :info do
+    resources :infos do
+    end
+    resources :centers do
     end
   end
 
