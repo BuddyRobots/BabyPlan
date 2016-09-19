@@ -100,7 +100,6 @@ class User
     return ErrCode::USER_NOT_EXIST if user.nil?
     return ErrCode::USER_NOT_VERIFIED if user.mobile_verified == false
     return ErrCode::WRONG_PASSWORD if Encryption.encrypt_password(password) != user.password
-    return ErrCode::NO_CENTER if user.staff_center.blank?
     auth_key = user.generate_auth_key
     user.update_attribute(:auth_key, auth_key)
     return { auth_key: auth_key }
