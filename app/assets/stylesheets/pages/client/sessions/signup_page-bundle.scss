@@ -41,7 +41,8 @@ a{
 	padding:14.07% 0;
 }
 .input-box {
-	width:77.1875%;
+	// width:77.1875%;
+	width: 70%;
 	margin: 0 auto;
 	padding-bottom:5%;
 	.account {
@@ -53,7 +54,7 @@ a{
 			margin-bottom:2.03%;
 			font-size: 1em;
 			margin-left: 2%;
-			width:50%;
+			width:47%;
 			max-width:300px;
 			border:0;
 			background:none;
@@ -61,23 +62,21 @@ a{
 		}
 		.identifycode {
 			display:inline-block;
-			margin-bottom:2.45%;
-			font-size:0.8em;
+			font-size:1em;
+			padding: 0 2%;
+			border-radius: 4px;
 			border:1px solid #bfbfc0;
-			a {
-				text-decoration: none;
-				color:#3e3e3e;
-				&:hover {
-					color:red;
-				}
-			}
+			text-decoration: none;
+			color:#3e3e3e;
+			float: right;
 		}
 	}
 }
 
 #signup {
 	display: block;
-	width:62.96875%;
+	width: 40%;
+	// width:62.96875%;
 	margin:0 auto;
 	margin-top:0.3%;
 	text-align:center;
