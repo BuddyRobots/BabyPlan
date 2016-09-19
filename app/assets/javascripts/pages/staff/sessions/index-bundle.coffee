@@ -163,7 +163,7 @@ $ ->
       },
       (data) ->
         if data.success
-          $.page_notification("注册完成，请通知管理员分配儿童中心", 3000)
+          $.page_notification("注册完成，请通知管理员开通账号", 3000)
           $("#signupModal").modal('hide')
           $("#signinModal").modal('show')
         else
@@ -374,7 +374,7 @@ $ ->
           location.href = "/staff/clients"
         else
           if data.code == NO_CENTER 
-            $.page_notification("请通知管理员分配儿童中心", 3000)
+            $.page_notification("请通知管理员开通账号", 3000)
           if data.code == USER_NOT_EXIST
             $(".error-notice").text("帐号不存在").css("visibility","visible")
           if data.code == USER_NOT_VERIFIED
