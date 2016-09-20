@@ -1,0 +1,21 @@
+- content_for :app_head do
+  = javascript_include_tag "pages/welcome/systemmessage-bundle"
+  = stylesheet_link_tag "pages/welcome/systemmessage-bundle", :media => "all"
+
+
+- content_for :app_content do
+  .content-area
+    .header
+      %img.cloudblock{:src => "/assets/robotcourse/cloudblock.png"}
+      %a{:href => "#"}
+        %img.back{:src => "/assets/robotcourse/back.png"}
+    .caption 系统消息
+    .notice
+      .notice-content 尊敬的客户,您好，欢迎您注册本公司的产品，如有任何疑问欢迎您致电本公司客服，电话：88888888.
+      .notice-time 2016年9月5日
+    .notice
+      .notice-content 尊敬的客户,您好，欢迎您注册本公司的产品，如有任何疑问欢迎您致电本公司客服，电话：88888888.
+      .notice-time 2016年9月5日
+    .notice
+      .notice-content 尊敬的客户,您好，欢迎您注册本公司的产品，如有任何疑问欢迎您致电本公司客服，电话：88888888.
+      .notice-time 2016年9月5日

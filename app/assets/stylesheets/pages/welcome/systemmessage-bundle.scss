@@ -1,0 +1,110 @@
+html {
+	font-size: 16px;
+}
+body {
+	font-family:"Microsoft YaHei";
+	font-size: 62.5%;
+}
+body, p, img, div, ul, li, a, h3 {
+	margin:0;
+	padding:0;
+}
+a{
+	border:none;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	-webkit-tap-highlight-color:transparent;
+	outline:none；
+}
+
+.content-area {
+	width:100%;
+	max-width:640px;
+	margin:0 auto;
+	background: linear-gradient(
+    45deg, 
+    #fef29c 45%, 
+    #fcc204 45%, #fcc204 50%, 
+    #fef29c 50%, #fef29c 95%, 
+    #fcc204 95%, #fcc204);
+    background-size: 10px 10px;
+}
+
+.header {
+	position:relative;
+	width:100%;
+	.cloudblock {
+		width:100%;
+		max-width:640px;
+	}
+	.back {
+		position:absolute;
+		top:20.3%;
+		left:7.5%;
+		width:9.375%;
+		max-width: 60px;
+	}
+}
+.caption {
+	font-size: 3.6em;
+	color: #3e3e3e;
+	text-align: center;
+	margin-bottom: 6.5%;
+}
+.notice {
+	width: 87.5%;
+	max-width: 560px;
+	margin: 0 auto;
+	background: #fff;
+	padding: 3% 3% 0 3%;
+	overflow: hidden;
+	margin-bottom: 4%;
+}
+.notice-content {
+	border-bottom: 1px dashed #7d7d7d;
+	padding-bottom: 3%;
+	font-size: 2.6em;
+	color: #7d7d7d;
+	text-indent: 2em;
+}
+.notice-time {
+	font-size: 2.2em;
+	color: #999;
+	padding: 2% 0;
+	float: right;
+}
+@media screen and (max-width:640px) {
+	.content-area {
+		font-size: 100%;
+	}
+}
+@media screen and (max-width: 560px) {
+    .content-area {
+        font-size: 85%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .content-area {
+        font-size: 70%;
+    }
+}
+@media screen and (max-width: 450px) {
+    .content-area {
+        font-size: 67%;
+    }
+}
+@media screen and (max-width: 400px) {
+    .content-area {
+        font-size: 60%;
+    }
+}
+@media screen and (max-width: 360px) {
+    .content-area {
+        font-size: 55%;
+    }
+}
+@media screen and (max-width: 320px) {
+    .content-area {
+        font-size: 52%;
+    }
+}
