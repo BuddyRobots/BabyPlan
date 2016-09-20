@@ -3,11 +3,11 @@
 $(document).ready (e) ->
   i
   # 设定每一行的宽度=屏幕宽度+按钮宽度
-  $('.line-scroll-wrapper').width $('.line-wrapper').width() + $('.line-btn-delete').width()
+  # $('.line-scroll-wrapper').width $('.line-wrapper').width() + $('.line-btn-delete').width()
   # 设定常规信息区域宽度=屏幕宽度
   $('.line-normal-wrapper').width $('.line-wrapper').width()
   # 设定文字部分宽度（为了实现文字过长时在末尾显示...）
-  $('.line-normal-msg').width $('.line-normal-wrapper').width() - 280
+  # $('.line-normal-msg').width $('.line-normal-wrapper').width() - 280
   # 获取所有行，对每一行设置监听
   lines = $('.line-normal-wrapper')
   len = lines.length
@@ -51,14 +51,15 @@ $(document).ready (e) ->
         lastLeftObj = null
         # 清空上一个左滑的对象
       diffX = e.changedTouches[0].pageX - lastXForMobile
-      if diffX < -150
-        $(pressedObj).animate { marginLeft: '-160px' }, 500
+      if diffX < -100
+        width = $(".line-btn-delete").width()
+        $(pressedObj).animate { marginLeft: '-' + width + 'px' }, 500
         # 左滑
         lastLeftObj and lastLeftObj != pressedObj and $(lastLeftObj).animate({ marginLeft: '0' }, 500)
         # 已经左滑状态的按钮右滑
         lastLeftObj = pressedObj
         # 记录上一个左滑的对象
-      else if diffX > 150
+      else if diffX > 100
         if pressedObj == lastLeftObj
           $(pressedObj).animate { marginLeft: '0' }, 500
           # 右滑
@@ -82,14 +83,14 @@ $(document).ready (e) ->
         lastLeftObj = null
         # 清空上一个左滑的对象
       diffX = e.clientX - lastX
-      if diffX < -150
-        $(pressedObj).animate { marginLeft: '-160px' }, 500
+      if diffX < -100
+        $(pressedObj).animate { marginLeft: '-120px' }, 500
         # 左滑
         lastLeftObj and lastLeftObj != pressedObj and $(lastLeftObj).animate({ marginLeft: '0' }, 500)
         # 已经左滑状态的按钮右滑
         lastLeftObj = pressedObj
         # 记录上一个左滑的对象
-      else if diffX > 150
+      else if diffX > 100
         if pressedObj == lastLeftObj
           $(pressedObj).animate { marginLeft: '0' }, 500
           # 右滑
