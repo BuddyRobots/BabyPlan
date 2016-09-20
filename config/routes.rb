@@ -25,6 +25,8 @@ Rails.application.routes.draw do
   get 'welcome/editdemo'
   get 'welcome/searchlink'
   get 'welcome/systemmessage'
+  get 'welcome/collect'
+
 
 
   get 'welcome/managecenter'
