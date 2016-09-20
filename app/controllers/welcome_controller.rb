@@ -4,4 +4,7 @@ class WelcomeController < ApplicationController
 
   def test
   end
+
+  def test_image_uploader
+  end
 end

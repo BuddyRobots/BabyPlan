@@ -1,0 +1,10 @@
+
+- content_for :app_head do
+  = javascript_include_tag "pages/welcome/test_image_uploader-bundle"
+  / = stylesheet_link_tag "pages/welcome/test_image_uploader-bundle", :media => "all"
+
+- content_for :app_content do
+  %p TEST IMAGE UPLOADER
+
+  %input{:accept => "image/*", :type => "file"}/
+  %img#output/
