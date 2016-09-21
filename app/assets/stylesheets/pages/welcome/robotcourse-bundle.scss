@@ -1,9 +1,11 @@
 html {
 	font-size: 16px;
+	height: 100%;
 }
 body {
 	font-family:"Microsoft YaHei";
 	font-size: 62.5%;
+	height: 100%;
 }
 body, p, img, div, ul, li, a, h3 {
 	margin:0;
@@ -20,21 +22,8 @@ a{
 	width:100%;
 	max-width:640px;
 	margin:0 auto;
-	/*斜条纹背景，如果反向则是-45度*/
-	// background: -webkit-gradient(
-	// linear, 
-	// left top, 
-	// right bottom, 
-	// from(#fedd02), color-stop(0.45, #fedd02), 
-	// color-stop(0.45, #fcc204), color-stop(0.5, #fcc204), 
-	// color-stop(0.5, #fedd02), color-stop(0.95, #fedd02), 
-	// color-stop(0.95, #fcc204), to(#fcc204));
-	// background: -moz-linear-gradient(
-	// -45deg, 
-	// #7aa00f 45%, 
-	// #67860e 45%, #67860e 50%, 
-	// #7aa00f 50%, #7aa00f 95%, 
-	// #67860e 95%, #67860e);
+	height: 100%;
+	overflow: auto;
 	background: linear-gradient(
     45deg, 
     #fef29c 45%, 
@@ -42,7 +31,7 @@ a{
     #fef29c 50%, #fef29c 95%, 
     #fcc204 95%, #fcc204);
     background-size: 10px 10px;
-    padding-bottom:5%;
+    padding-bottom: 2%;
 }
 
 .header {

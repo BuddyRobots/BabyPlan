@@ -10,15 +10,10 @@
       %form.account 
         账号:
         %input.input-name{:type => "text"}
-      %hr.under-line
     .input-box
       %form.account 
         密码:
         %input.input-name{:type => "password"}
-      %hr.under-line
-      .forgetpass
-        %a{:href => "#"} 忘记密码
-    .register
-      %a{:href => "#"} 登录
-    .registaccount
-      %a{:href => "#"} 注册账号
+      %a.forgetpass{:href => "javascript:void(0);"} 忘记密码
+    %a.signin.clicked{:href => "javascript:void(0);"} 登录
+    %a.signup{:href => "javascript:void(0);"} 注册

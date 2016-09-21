@@ -1,9 +1,11 @@
 html {
 	font-size: 16px;
+	height: 100%;
 }
 body {
 	font-family:"Microsoft YaHei";
 	font-size: 62.5%;
+	height: 100%;
 }
 body, p, img, div, ul, li, a, h3, hr {
 	margin:0;
@@ -19,6 +21,8 @@ a{
 .content-area{
 	width:100%;
 	max-width:640px;
+	height: 100%;
+	overflow: auto;
 	margin:0 auto;
 	background: linear-gradient(
     45deg, 
@@ -27,7 +31,7 @@ a{
     #fef29c 50%, #fef29c 95%, 
     #fcc204 95%, #fcc204);
     background-size: 10px 10px;
-    padding-bottom:5%;
+    padding-bottom:2%;
 }
 .header {
 	position:relative;
