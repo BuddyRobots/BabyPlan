@@ -28,7 +28,6 @@ a{
 	*zoom: 1;
 }
 
-
 .content-area {
 	position:relative;
 	width:100%;
@@ -70,9 +69,18 @@ a{
 	padding: 2%;
 	text-align: center;
 }
+.course {
+	width: 96%;
+	margin: 3.13% auto;
+	padding: 3.13% 0;
+	background: #fff;
+	border-radius: 6px;
+}
 .course-info {
-	width: 90.625%;
-	margin: 3% auto;
+	margin: 0 3.25%;
+	padding: 3.25% 0;
+	border-top: 2px dashed #fccc6a;
+	border-bottom: 2px dashed #fccc6a;
 	.caption {
 		font-size: 3.8em;
 		color: #d70c19;
