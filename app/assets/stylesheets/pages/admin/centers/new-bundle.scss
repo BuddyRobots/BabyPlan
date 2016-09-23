@@ -17,7 +17,16 @@
 	box-shadow: -1px -1px 6px #9c9c9c inset;
 	padding: 20px;
 }
-
+.clearfix:before, .clearfix:after {
+	content: " ";
+	display: table;
+}
+.clearfix:after {
+	clear: both;
+}
+.clearfix {
+	*zoom: 1;
+}
 .content-box {
 	position: relative;
 	box-shadow: 0 -1px 6px #9c9c9c inset;
@@ -38,12 +47,22 @@
 	bottom: 0px;
 	right: 0px;
 }
+#back {
+	float: left;
+}
 .center-add {
 	float: left;
 	font-size: 16px;
 	color: #323232;
-	line-height: 59px;
-	margin-left: 20px;
+	padding-left: 20px;
+	height: 52px;
+	line-height: 52px;
+	margin-top: 3px;
+	border-left: 1px solid #c8c8c8;
+}
+.open {
+	float: right;
+	margin: 20px 20px 0 0;
 }
 .end-btn {
 	float: right;
@@ -60,8 +79,12 @@
 	background: #f7873d;
 	color: white;
 }
-.form-inline {
-	margin: 20px 0;
+.input-left {
+	float: left;
+}
+.photo {
+	width: 117px;
+	margin: 19px 0 0 60px;
 }
 .input-name {
 	display: inline-block;
@@ -72,22 +95,13 @@
 	margin-left: 20px;
 	font-weight: normal;
 }
-.input-area {
-	display: inline-block;
-	width: 238px;
-	height: 30px;
-}
-#center-name {
-	display: inline-block;
-	width: 30%;
-	height: 30px;
-}
-.checkbox-inline {
-	margin-left: 15px;
-}
-#center-address {
-	@extend .input-area;
-	width: 40%;
+.form-inline {
+	margin: 20px 0;
+	width: 550px;
+	.form-control{
+		width: 440px;
+		height: 30px;
+	}
 }
 .map-position {
 	margin: 15px 20px;
@@ -114,20 +128,20 @@
 	margin: 0 5px 15px 20px;
 }
 #map-container {
-	width: 93%;
+	width: 720px;
 	margin-left: 7%;
 	margin-top: 13px;
-	height: 300px;
+	height: 240px;
 	border: 1px solid #ddd;
 }
 .wangedit-area {
 	float: left;
-	width: 90%;
+	width: 722px;
 	font-size: 14px;
-	margin-left: 3px;
+	margin-left: 4px;
 }
 #edit-area {
-	height: 250px;
+	height: 200px;
 }
 .center-introduce {
 	padding-top: 5px;

@@ -60,11 +60,15 @@
 	color: white;
 }
 .tabbable {
-	margin: 20px 20px auto 20px;
+	margin: 20px 20px 0 0;
+}
+.back {
+	position: absolute;
+	top: 19px;
 }
 .nav-tabs {
 	margin-bottom: 0;
-	border-bottom: 0;
+	padding-left: 55px;
 	li {
 		font-size: 16px;
 		color: #323232;
@@ -199,8 +203,6 @@
 .undiscover {
 	text-align: center;
 	padding: 30px;
-	border: 1px solid #ddd;
-	border-radius: 6px;
 }
 .undiscover-icon {
 	display: inline-block;
@@ -235,10 +237,9 @@
 }
 .table-box {
 	padding: 0;
+	margin-left: 20px;
 }
 #user-table1 {
-	border-radius: 6px;
-	border: 1px solid #ddd;
 	font-size: 14px;
 	color: #323232;
 	margin-bottom: 0;
