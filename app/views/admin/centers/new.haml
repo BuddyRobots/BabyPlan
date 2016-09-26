@@ -26,8 +26,8 @@
           %form.form-inline
             %label.input-name 详细地址:
             %input.input-area.form-control#center-address{:type => "text"}
-        %img.photo{:src => "/assets/web/photo.png"}
-          
+        %a#upload-photo{href: "javascript:void(0);"}
+          %img.photo{:src => "/assets/web/photo.png"}
 
       .map-position.clearfix
         %span.map-address 地图位置:
@@ -40,3 +40,24 @@
         %span.introduce 中心介绍:
         .wangedit-area
           #edit-area
+
+/ #uploadPhotoModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
+/   .modal-dialog
+/     .modal-content
+/       = form_tag(update_cover_staff_book_path(@book), method: "post", multipart: true) do
+/         .modal-header
+/           %h3.caption 上传图片
+/           %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", :src => "/assets/managecenter/close.png"}
+/         .modal-body
+/           .form-group.hide
+/             = text_field_tag :book_id, @book.id.to_s
+/           .form-group
+/             = file_field_tag "cover_file", { class: "hide", accept: ".jpg,.png" }
+/             %span.cover-caption 上传图片
+/             %a#browser-cover-click{href: "javascript:void(0);"} 
+/               %img{:src => "/assets/managecenter/upload.png"} 
+/             %span.notice 请选择10M内的.jpg或.png图片上传
+/             %p#cover-name
+/         .modal-footer
+/           = submit_tag "上传", :class => 'btn-primary btn'
+/           %a.btn.btn-default{href: "#", data: {dismiss: "modal"}, "aria-hidden" => "true"} 取消

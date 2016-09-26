@@ -37,12 +37,22 @@
 	bottom: 0px;
 	right: 0px;
 }
+#back {
+	float: left;
+}
 .book-add {
 	float: left;
 	font-size: 16px;
 	color: #323232;
-	line-height: 59px;
-	margin-left: 20px;
+	padding-left: 20px;
+	height: 52px;
+	line-height: 54px;
+	margin-top: 3px;
+	border-left: 1px solid #c8c8c8;
+}
+.open {
+	float: right;
+	margin: 20px 20px 0 0;
 }
 .end-btn {
 	float: right;
@@ -64,50 +74,141 @@
 }
 
 .form-inline {
-	margin: 20px 0;
+	margin: 20px 0 20px 51px;
 }
 .input-name {
 	display: inline-block;
-	margin-right: 5px;
 	vertical-align: middle;
 	font-size: 16px;
 	color: #323232;
-	margin-left: 16px;
 	font-weight: normal;
 }
 .input-caption {
 	@extend .input-name;
-	margin-left: 10px;
-}
-#book-number {
-	margin-left: 42px
 }
 .input-area {
 	display: inline-block;
 	width: 238px;
 	height: 30px;
+	margin: 0 20px 0 10px;
 }
-.checkbox-inline {
-	margin-left: 15px;
+#book-type {
+	width: 864px;
 }
 .controls-row {
-	margin: 0 0 20px 37px;
+	margin: 20px 0 20px 20px;
 }
 .introduce {
 	display: inline-block;
 	vertical-align: top;
 	font-size: 16px;
 	color: #323232;
-	margin: 0 5px 15px 16px;
+	margin: 0 10px 15px 20px;
 }
 .wangedit-area {
 	display: inline-block;
-	width: 90%;
-	font-size: 14px;
+	width: 73.5%;
+	font-size: 16px;
 }
 #edit-area {
-	height: 250px;
+	height: 200px;
 }
 .book-introduce {
 	margin-bottom: 20px;
+}
+.cover-back {
+	font-size: 16px;
+	margin-left: 50px;
+	span {
+		vertical-align: top;
+		margin-right: 10px;
+	}
+}
+
+#upload-cover {
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+	margin-right: 50px;
+}
+#upload-back {
+	@extend #upload-cover;
+}
+
+#uploadCoverModal {
+	.modal-dialog {
+		position:absolute;
+		left: 50%;
+		top: 50%;
+		margin-left: -250px;
+		margin-top: -106px;
+		width: 500px;
+		height: 210px;
+		border-radius: 10px;
+	}
+}
+#uploadBackModal {
+	.modal-dialog {
+		position:absolute;
+		left: 50%;
+		top: 50%;
+		margin-left: -250px;
+		margin-top: -106px;
+		width: 500px;
+		height: 210px;
+		border-radius: 10px;
+	}
+}
+.modal-backdrop {
+	background-color: #999;
+}
+.close {
+	position: absolute;
+	right: -14px;
+	top: -12px;
+	opacity: 0.7;
+	z-index: 10;
+}
+.close:hover {
+	opacity: 1;
+}
+.modal-header {
+	height: 50px;
+	line-height: 50px;
+	box-shadow: 0 -1px 6px #9c9c9c; 
+}
+.caption {
+	font-size: 18px;
+	color: #323232;
+}
+.modal-body {
+	box-shadow: 0 1px 6px #9c9c9c; 
+}
+#browser-cover-click {
+	font-size: 16px;
+	text-decoration: none;
+	height:60px;
+	line-height: 60px;
+	color: #323232;
+	vertical-align: middle;
+}
+#browser-back-click {
+	@extend #browser-cover-click;
+}
+.form-group {
+	font-size: 14px;
+	color: #323232;
+	margin-bottom: 0;
+}
+.modal-footer {
+	background: white;
+}
+#cover-img, #back-img {
+	width: 100px;
+	height: 100px;
+	margin-right: 50px;
+	cursor: pointer;
+}
+.cover-caption, .back-caption, #cover-name, #back-name {
+	margin-left: 15px;
 }

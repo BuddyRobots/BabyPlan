@@ -5,25 +5,49 @@
 .content-area
   /announcements-new
   .content-box
-    .btn.end-btn{:type => "button", :href => "#add-announcementModal", "data-toggle" => "modal"} 
-      %img.end-img{:src => "/assets/managecenter/ticker.png"}
-      完成
-    / .btn.declare-btn{:type => "button"} 
-    /   %img.declare{:src => "/assets/managecenter/shelve.png"}
-    /   公布
+    .manage-box.clearfix
+      %a#back{:href => "/staff/announcements"}
+        %img{:src => "/assets/web/back.png"}
+      %p.notice-add 添加本区公告
+      .btn.end-btn{:type => "button"}
+        %img.end{:src => "/assets/managecenter/ticker.png"}
+        完成
+      %label.checkbox-inline.open#available
+        %input#publish-cb{:type => "checkbox"} 暂不发布
     .manage-content
-      .tabbable
-        %ul.nav.nav-tabs
-          %li.active
-            %a{"data-toggle" => "tab", :href => "#tab1"} 本区公告
-
-      .edit-area
-        %form.form-inline
-          %input.form-control#input-caption{:placeholder => "请输入标题", :type => "text"}
-          %label.checkbox-inline
-            %input#publish-cb{:type => "checkbox"} 公布
-              
+      %form.form-inline
+        %label.input-name 公告标题:
+        %input.form-control#input-caption{:type => "text"}
+      .phont-inline
+        %span 封面配图:
+        %a#upload-photo{href: "javascript:void(0);"}
+          %img.photo{:src => "/assets/web/photo.png"}
+      .notice-introduce.clearfix
+        %span.introduce 公告正文:
         .wangedit-area
           #edit-box
+
+
+/ #uploadPhotoModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
+/   .modal-dialog
+/     .modal-content
+/       = form_tag(update_cover_staff_book_path(@book), method: "post", multipart: true) do
+/         .modal-header
+/           %h3.caption 上传图片
+/           %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", :src => "/assets/managecenter/close.png"}
+/         .modal-body
+/           .form-group.hide
+/             = text_field_tag :book_id, @book.id.to_s
+/           .form-group
+/             = file_field_tag "cover_file", { class: "hide", accept: ".jpg,.png" }
+/             %span.cover-caption 上传图片
+/             %a#browser-cover-click{href: "javascript:void(0);"} 
+/               %img{:src => "/assets/managecenter/upload.png"} 
+/             %span.notice 请选择10M内的.jpg或.png图片上传
+/             %p#cover-name
+/         .modal-footer
+/           = submit_tag "上传", :class => 'btn-primary btn'
+/           %a.btn.btn-default{href: "#", data: {dismiss: "modal"}, "aria-hidden" => "true"} 取消
+
       
       

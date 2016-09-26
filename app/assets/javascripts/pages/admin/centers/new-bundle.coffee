@@ -114,3 +114,16 @@ $ ->
         if data.success
           location.href = "/admin/centers/" + data.center_id
       )
+
+
+
+#img upload
+  $("#upload-photo").click ->
+    $("#uploadPhotoModal").modal("show")
+
+  coverIntervalFunc = ->
+    $('#cover-name').html $('#cover_file').val();
+
+  $("#browser-cover-click").click ->
+    $("#cover_file").click()
+    setInterval(coverIntervalFunc, 1)

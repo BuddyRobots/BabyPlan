@@ -95,19 +95,21 @@ ul, li {
 }
 
 .tabbable {
-	padding: 20px;
+	margin: 20px 20px 0 0;
 }	
-
+.back {
+	position: absolute;
+	top: 19px;
+}
 .nav-tabs {
 	margin-bottom: 0;
-	border: 0;
+	padding-left: 55px;
 	li {
 		font-size: 16px;
 		color: #323232;
 	}
 }
 .tab-pane {
-	border: 1px solid #ddd;
 	border-radius: 6px;
 }
 #tab1 {
@@ -194,7 +196,7 @@ h2 {
 	padding-top: 5px;
 }
 .desc-items {
-	margin: 15px 16px;
+	margin: 15px 20px;
 }
 .unedit-box {
 	display: inline-block;
@@ -215,17 +217,13 @@ h2 {
 	height: 30px;
 	margin-right: 20px;
 }
-#charge {
-	margin-left: 32px;
-}
 .course-name {
 	display: inline-block;
 	vertical-align: middle;
 	font-size: 16px;
 	color: #323232;
 	margin-right: 10px;
-}
-#speaker {
+}#nums {
 	margin-left: 16px;
 }
 .shelve {
@@ -255,11 +253,11 @@ h2 {
 	}
 	.wangedit-area {
 		float: left;
-		width: 89.5%;
+		width: 78%;
 		font-size: 14px;
 		display: none;
 	}
 	#edit-area {
-		height: 250px;
+		height: 200px;
 	}
 }

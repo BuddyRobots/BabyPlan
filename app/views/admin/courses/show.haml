@@ -24,6 +24,8 @@
         %img.end{:src => "/assets/managecenter/shelve.png"}
         %span 上架
     .tabbable
+      %a{:href => "/admin/courses"}
+        %img.back{:src => "/assets/web/tab-back.png"}
       %ul.nav.nav-tabs
         %li.active
           %a#course-message{"data-toggle" => "tab", :href => "#tab1"} 课程信息
@@ -37,25 +39,28 @@
             %span.unedit-box#classname-span= @course.name
             %span.edit-box
               %input.input-area.form-control#classname-input{:type => "text"}
-            %span.course-name 课程编号:
-            %span.unedit-box#code-span= @course.code
-            %span.edit-box
-              %input.input-area.form-control#code-input{:type => "text"}
-            - if @course.available
-              %span.shelve 在架上
-            - else
-              %span.shelve 未上架
-          
-          .desc-items
             %span.course-name#speaker 主讲人:
             %span.unedit-box#classspeaker-span= @course.speaker
             %span.edit-box
               %input.input-area.form-control#classspeaker-input{:type => "text"}
-            %span.course-name#charge 费用:
+            %span.course-name#nums 课次:
+            %span.unedit-box#nums-span
+            %span.edit-box
+              %input.input-area.form-control#nums-input{:type => "text"}
+          
+          .desc-items
+            %span.course-name 课程编号:
+            %span.unedit-box#code-span= @course.code
+            %span.edit-box
+              %input.input-area.form-control#code-input{:type => "text"}
+            %span.course-name#charge 市场价:
             %span.unedit-box#charge-span= @course.price.to_s + "元"
             %span.edit-box
               %input.input-area.form-control#charge-input{:type => "text"}
-        
+            %span.course-name#public-price 公益价:
+            %span.unedit-box#public-price-span
+            %span.edit-box
+              %input.input-area.form-control#public-price-input{:type => "text"}
           .course-introduce.clearfix
             %span.introduce 课程介绍:
             %div.introduce-details
