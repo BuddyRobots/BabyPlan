@@ -37,12 +37,22 @@
 	bottom: 0px;
 	right: 0px;
 }
+#back {
+	float: left;
+}
 .course-add {
 	float: left;
 	font-size: 16px;
 	color: #323232;
-	line-height: 59px;
-	margin-left: 20px;
+	padding-left: 20px;
+	height: 52px;
+	line-height: 54px;
+	margin-top: 3px;
+	border-left: 1px solid #c8c8c8;
+}
+.open {
+	float: right;
+	margin: 20px 20px 0 0;
 }
 .end-btn {
 	float: right;
@@ -72,44 +82,38 @@
 	vertical-align: middle;
 	font-size: 16px;
 	color: #323232;
-	margin-left: 16px;
+	margin-left: 20px;
 	font-weight: normal;
 }
 .input-caption {
 	@extend .input-name;
-	margin-left: 10px;
+	margin-left: 20px;
 }
-#charge {
-	margin-left: 42px
-}
-#course-code, #course-name {
-	width: 238px;
+#nums {
+	margin-left: 36px;
 }
 .input-area {
 	display: inline-block;
-	width: 238px;
 	height: 30px;
+	margin-right: 30px;
 }
 .checkbox-inline {
 	margin-left: 15px;
-}
-.controls-row {
-	margin: 0 0 20px 21px;
 }
 .introduce {
 	display: inline-block;
 	vertical-align: top;
 	font-size: 16px;
 	color: #323232;
-	margin: 0 5px 15px 16px;
+	margin: 0 5px 15px 20px;
 }
 .wangedit-area {
 	display: inline-block;
-	width: 90%;
+	width: 69.7%;
 	font-size: 14px;
 }
 #edit-area {
-	height: 250px;
+	height: 200px;
 }
 .course-introduce {
 	margin-bottom: 20px;

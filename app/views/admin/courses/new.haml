@@ -8,27 +8,31 @@
   /courses-new
   .content-box
     .manage-box.clearfix
+      %a#back{:href => "/admin/courses"}
+        %img{:src => "/assets/web/back.png"}
       %p.course-add 添加课程
       .btn.end-btn{:type => "button", :href => "#kidsaddModal", "data-toggle" => "modal"} 
         %img.end{:src => "/assets/managecenter/ticker.png"}
         完成
+      %label.checkbox-inline.open#available
+        %input#inlineCheckbox1{:type => "checkbox"} 暂不上架
 
     .manage-content
       %form.form-inline
         %label.input-name 课程名称:
         %input.input-area.form-control#course-name{:type => "text"}
-        %label.input-caption 课程编号:
-        %input.input-area.form-control#course-code{:type => "text"}
-        %label.checkbox-inline
-          %input#inlineCheckbox1{:type => "checkbox"} 上架
-
-      .controls.controls-row
         %label.input-caption 主讲人:
         %input.input-area.form-control#course-speaker{:type => "text"}
-        %label.input-caption#charge 费用:
-        %input.input-area.form-control#course-price{:type => "text"}
-        %label.input-caption 课时:
+        %label.input-caption#nums 课次:
         %input.input-area.form-control#course-length{:type => "text"}
+      %form.form-inline
+        %label.input-caption 课程编号:
+        %input.input-area.form-control#course-code{:type => "text"}
+        %label.input-caption 市场价:
+        %input.input-area.form-control#course-price{:type => "text"}
+        %label.input-caption#center-charge 公益价:
+        %input.input-area.form-control#public-price{:type => "text"}
+
        
       .course-introduce
         %span.introduce 课程介绍:

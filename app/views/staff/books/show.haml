@@ -13,16 +13,19 @@
     .btn.edit-btn{:type => "button"} 
       %img.edit{:src => "/assets/managecenter/edit.png"}
       编辑
-    / .btn#QRcode-btn{:type => "button"} 生成二维码
+    .btn#QRcode-btn{:type => "button"}
+      %img.QRcode{src: "/assets/web/qrcode.png"} 导出二维码
     - if @book.available == true
-      .btn#unshelve-btn.available{:type => "button"} 
+      .btn.unshelve-btn.available{:type => "button"} 
         %img.end{:src => "/assets/managecenter/unshelve.png"}
         %span 下架
     - else
-      .btn#unshelve-btn.unavailable{:type => "button"} 
+      .btn.unshelve-btn.unavailable{:type => "button"} 
         %img.end{:src => "/assets/managecenter/shelve.png"}
         %span 上架
     .tabbable
+      %a{:href => "/admin/books"}
+        %img.back{:src => "/assets/web/tab-back.png"}
       %ul.nav.nav-tabs
         %li.active
           %a#book-message{"data-toggle" => "tab", :href => "#tab1"} 绘本信息
@@ -33,60 +36,70 @@
 
       .tab-content
         #tab1.tab-pane.active
-          .book-detail
-            %form.form-inline
-              %label.input-caption 绘本名称:
-              %span.unedit-box#name-span= @book.name
-              %span.edit-box
-                %input.input-area.form-control#name-input{:type => "text"}
-              - if @book.available == true
-                %label#available-status.shelve 在架上
-              - else
-                %label#available-status.shelve 已下架
-            .controls.controls-row
-              %label.input-caption 类型:
-              %span.unedit-box#type-span= @book.type
-              %span.edit-box
-                %input.input-area.form-control#type-input{:type => "text"}
-              %label.input-caption 数量:
-              %span.unedit-box#stock-span= @book.stock.to_s + "本"
-              %span.edit-box
-                %input.input-area.form-control#stock-input{:type => "text"}
-              %label.input-caption#book-number 书号:
-              %span.unedit-box#isbn-span= @book.isbn
-              %span.edit-box
-                %input.input-area.form-control#isbn-input{:type => "text"}
-            .controls.controls-row
-              %label.input-caption 作者:
-              %span.unedit-box#author-span= @book.author
-              %span.edit-box
-                %input.input-area.form-control#author-input{:type => "text"}
-              %label.input-caption 译者:
-              %span.unedit-box#translator-span= @book.translator
-              %span.edit-box
-                %input.input-area.form-control#translator-input{:type => "text"}
-              %label.input-caption#illustrator-label 插画作者:
-              %span.unedit-box#illustrator-span= @book.illustrator
-              %span.edit-box
-                %input.input-area.form-control#illustrator-input{:type => "text"}             
-            .book-introduce.clearfix
-              %span.introduce 书籍介绍:
-              %div.introduce-details
-                = @book.desc.html_safe
-              %span.wangedit-area
-                #edit-area
+          .controls.controls-row
+            %label.input-caption 绘本名称:
+            %span.unedit-box#name-span= @book.name
+            %span.edit-box
+              %input.input-area.form-control#name-input{:type => "text"}
+            %label.input-caption#author 作者:
+            %span.unedit-box#author-span= @book.author
+            %span.edit-box
+              %input.input-area.form-control#author-input{:type => "text"}
+          .controls.controls-row
+            %label.input-caption#illustrator-label 插画作者:
+            %span.unedit-box#illustrator-span= @book.illustrator
+            %span.edit-box
+              %input.input-area.form-control#illustrator-input{:type => "text"} 
+            %label.input-caption#translator 译者:
+            %span.unedit-box#translator-span= @book.translator
+            %span.edit-box
+              %input.input-area.form-control#translator-input{:type => "text"}
+            %label.input-caption#book-number 书号:
+            %span.unedit-box#isbn-span= @book.isbn
+            %span.edit-box
+              %input.input-area.form-control#isbn-input{:type => "text"}
+          .controls.controls-row
+            %label.input-caption#mixage-label 最小适龄:
+            %span.unedit-box#mixage-span
+            %span.edit-box
+              %input.input-area.form-control#mixage-input{:type => "text"}      
+            %label.input-caption#mixage-label 最大适龄:
+            %span.unedit-box#maxage-span
+            %span.edit-box
+              %input.input-area.form-control#maxage-input{:type => "text"}  
+            %label.input-caption 数量:
+            %span.unedit-box#stock-span= @book.stock.to_s + "本"
+            %span.edit-box
+              %input.input-area.form-control#stock-input{:type => "text"}
+          %form.form-inline
+            %label.input-caption 类型:
+            %span.unedit-box#type-span= @book.type
+            %span.edit-box
+              %input.input-area.form-control#type-input{:type => "text"}
+                   
+          .book-introduce.clearfix
+            %span.introduce 书籍介绍:
+            %div.introduce-details
+              = @book.desc.html_safe
+            %span.wangedit-area
+              #edit-area
           .cover-back
-            %span.cover 封面:
-            - if @book.cover.present?
-              = image_tag(@book.cover.path, id: "cover-img")
-            - else
-              %a#upload-cover{href: "javascript:void(0);"} 请点击上传封面
-            %span.back 封底:
-            - if @book.back.present?
-              = image_tag(@book.back.path, id: "back-img")
-            - else
-              %a#upload-back{href: "javascript:void(0);"} 请点击上传封底
-
+            %span.book-cover 封面:
+            %a#upload-cover{href: "javascript:void(0);"}
+              %img.photo{src: "/assets/web/addcover.png"}
+            / - if @book.cover.present?
+            /   = image_tag(@book.cover.path, id: "cover-img")
+            / - else
+            /   %a#upload-cover{href: "javascript:void(0);"}
+            /     %img.photo{src: "/assets/web/addcover.png"}
+            %span.book-back 封底:
+            %a#upload-back{href: "javascript:void(0);"}
+              %img.photo{src: "/assets/web/coverempty.png"}
+            / - if @book.back.present?
+            /   = image_tag(@book.back.path, id: "back-img")
+            / - else
+            /   %a#upload-back{href: "javascript:void(0);"}
+            /     %img.photo{src: "/assets/web/coverempty.png"}
         #tab2.tab-pane
           .undiscover
             %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
@@ -129,7 +142,6 @@
             %span.undiscover-message 抱歉！暂无查找信息
           .table-box
             %table.table.table-bordered#user-table
-              %caption
               %thead
                 %tr
                   %th 借阅人

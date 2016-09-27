@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   get 'welcome/searchlink'
   get 'welcome/systemmessage'
   get 'welcome/collect'
+  get 'welcome/courseinfo'
 
 
 

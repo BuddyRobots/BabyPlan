@@ -1,9 +1,11 @@
 html {
 	font-size: 16px;
+	height: 100%;
 }
 body {
 	font-family:"Microsoft YaHei";
 	font-size: 62.5%;
+	height: 100%;
 }
 body, p, img, div, ul, li, a, h3, span, form, hr, input {
 	margin:0;
@@ -20,8 +22,9 @@ a{
 	position:relative;
 	width:100%;
 	max-width:640px;
+	height: 100%;
+	overflow: auto;
 	margin:0 auto;
-	padding-bottom:10em;
 	background: linear-gradient(
     45deg, 
     #fef29c 45%, 
@@ -38,15 +41,17 @@ a{
 	padding:14.07% 0;
 }
 .input-box {
-	width:77.1875%;
-	padding-left:14.07%;
-	padding-bottom:5%;
+	width:70%;
+	margin: 0 auto;
+	padding-top:5%;
+	border-bottom: 1px solid #bfbfc0;
 	.account {
 		font-size:3em;
 		color:#3e3e3e;
 		.input-name {
 			display:inline-block;
 			margin-bottom:2.03%;
+			margin-left: 2%;
 			font-size: 0.8em;
 			width:50%;
 			max-width:300px;
@@ -56,39 +61,33 @@ a{
 		}
 		.identifycode {
 			display:inline-block;
-			margin-bottom:2.45%;
-			font-size:0.8em;
+			float: right;
+			font-size:1em;
 			border:1px solid #bfbfc0;
-			a {
-				text-decoration: none;
-				color:#3e3e3e;
-				&:hover {
-					color:red;
-				}
-			}
+			text-decoration: none;
+			color:#3e3e3e;
+			padding: 0 2%;
+			border-radius: 4px;
 		}
 	}
-	.underline {
-		color:#bfbfc0;
-	}
 }
-
-.register {
-	width:62.96875%;
-	margin:0 auto;
+.signup {
+	display: block;
+	width: 40%;
+	margin: 0 auto;
+	margin-top: 10%;
 	border:1px solid #bfbfc0;
-	padding:5.7% 0;
-	text-align:center;
-	a {
-		font-size:3.6em;
-		color:#3e3e3e;
-		text-decoration: none;
-		&:hover {
-			color:red;
-		}
-	}
+	border-radius: 6px;
+	padding: 3% 0;
+	text-align: center;
+	font-size: 3.2em;
+	color: #3e3e3e;
+	text-decoration: none;
 }
-
+.signup:link, .signup:visited, .signup:hover, .signup:active {
+	text-decoration: none;
+	color: #3e3e3e;
+}
 
 
 @media screen and (max-width:640px) {

@@ -28,6 +28,7 @@ $ ->
     translator = $("#book-translator").val().trim()
     illustrator = $("#book-illustrator").val().trim()
     available = $("#available").is(":checked")
+    
     desc = editor.$txt.html()
     if name == "" || stock == "" || isbn == "" || desc == ""
       $.page_notification("请补全信息")
@@ -56,4 +57,23 @@ $ ->
             $.page_notification("该书号图书已经存在")
       )
 
+# img upload
+  $("#upload-cover").click ->
+    $("#uploadCoverModal").modal("show")
 
+  coverIntervalFunc = ->
+    $('#cover-name').html $('#cover_file').val();
+
+  $("#browser-cover-click").click ->
+    $("#cover_file").click()
+    setInterval(coverIntervalFunc, 1)
+
+  $("#upload-back").click ->
+    $("#uploadBackModal").modal("show")
+
+  backIntervalFunc = ->
+    $('#back-name').html $('#back_file').val();
+
+  $("#browser-back-click").click ->
+    $("#back_file").click()
+    setInterval(backIntervalFunc, 1)

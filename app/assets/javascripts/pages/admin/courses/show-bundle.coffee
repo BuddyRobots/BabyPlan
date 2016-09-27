@@ -65,6 +65,8 @@ $ ->
     $("#classname-input").val($("#classname-span").text())
     $("#code-input").val($("#course-span").text())
     $("#classspeaker-input").val($("#classspeaker-span").text())
+    $("#public-price-input").val($("#public-price-span").text())
+    $("#nums-input").val($("#nums-span").text())
     $("#charge-input").val(window.price)
 
     $("#edit-area").html($(".introduce-details").html())

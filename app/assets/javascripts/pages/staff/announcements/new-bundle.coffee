@@ -44,3 +44,14 @@ $ ->
         else
           $.page_notification "服务器出错，请稍后重试"
       )
+
+#img upload
+  $("#upload-photo").click ->
+    $("#uploadPhotoModal").modal("show")
+
+  coverIntervalFunc = ->
+    $('#cover-name').html $('#cover_file').val();
+
+  $("#browser-cover-click").click ->
+    $("#cover_file").click()
+    setInterval(coverIntervalFunc, 1)

@@ -26,11 +26,10 @@ input, label {
 	box-shadow: 0 -1px 6px #9c9c9c inset;
 	background: white;  
 	margin: 0 20px 20px 20px;
-	padding-bottom: 20px;
 }
 .edit-btn {
 	position: absolute;
-	top: 11px;
+	top: 15px;
 	right: 20px;
 	z-index: 10;
 	width: 100px;
@@ -42,38 +41,52 @@ input, label {
 	border-radius: 6px;
 }
 .edit-btn:hover {
-	background: #f7873d;
 	color: white;
 }
 .finish-btn {
 	@extend .edit-btn;
 	display: none;
 }
-#unshelve-btn {
+.unshelve-btn {
 	@extend .edit-btn;
 	right: 140px;
 }
-#unshelve-btn:hover {
-	background: #f7873d;
+.unshelve-btn:hover {
 	color: white;
 }
+.available {
+	background: #f7873d;
+}
+.unavailable {
+		background: #10c078;
+	}
 .tabbable {
-	margin: 20px 20px auto 20px;
+	margin: 20px 0 0 0;
+}
+.back {
+	position: absolute;
+	top: 19px;
 }
 .nav-tabs {
 	margin-bottom: 0;
-	border-bottom: 0;
+	padding-left: 55px;
 	li {
 		font-size: 16px;
 		color: #323232;
 	}
 }
-.book-detail {
-	border: 1px solid #ddd;
-	border-radius: 0 6px 6px 6px;
+.text-message {
+	width: 40%;
+	float: left;
 }
 .form-inline {
-	margin: 15px 0;
+	margin: 20px 0;
+}
+.photo {
+	width: 32.3%;
+	display: inline-block;
+	margin-left: 80px;
+	margin-top: 15px;
 }
 .input-caption {
 	display: inline-block;
@@ -88,26 +101,24 @@ input, label {
 	color: #0fc077;
 	vertical-align: middle;
 }
-#name-span {
-	width: auto;
-	margin-right: 15px;
-}
-.course-num {
-	display: inline-block;
-	vertical-align: middle;
+.kids-capacity {
+	margin-left: 36px;
 }
 #course-num {
-	width: 130px;
+	width: 75px;
+}
+#num-span {
+	width: auto;
 }
 #course-address, #course-date {
 	width: 350px;
 }
-.course-speaker {
-	margin-left: 69px;
+.course-times {
+	margin-left: 52px;
 }
 .input-area {
 	display: inline-block;
-	width: 165px;
+	width: 170px;
 	height: 30px;
 }
 .controls-row {
@@ -122,6 +133,9 @@ input, label {
 	height: 30px;
 	line-height: 30px;
 }
+.num-box {
+	@extend .unedit-box;
+}
 .course-num {
 	vertical-align: middle;
 	font-size: 14px;
@@ -133,7 +147,7 @@ input, label {
 	display: none;
 }
 #date-span, #address-span {
-	width: 381px;
+	width: 75%;
 }
 
 
@@ -143,7 +157,7 @@ input, label {
 
 #calendar-wrapper {
 	float: left;
-	width: 85%;
+	width: 75%;
 }
 
 #add-event-wrapper {
@@ -162,15 +176,14 @@ input, label {
 	font-size: 14px;
 }
 h2 {
-	font-size: 14px;
+	font-size: 20px;
+	padding-top: 3px;
 }
 
 // undiscover message
 .undiscover {
 	text-align: center;
 	padding: 30px;
-	border: 1px solid #ddd;
-	border-radius: 6px;
 }
 .undiscover-icon {
 	display: inline-block;
@@ -186,7 +199,7 @@ h2 {
 // select-page
 .select-page {
 	text-align: right;
-	margin: 10px 0 0 0;
+	margin: 10px 20px 0 0;
 	padding-bottom: 5px;
 }
 .totalitems {
@@ -206,6 +219,7 @@ h2 {
 .user-review-box {
 	border-radius: 6px;
 	border: 1px solid #ddd;
+	margin: 20px;
 }
 .user-checkbox {
 	margin: 5px 0;
@@ -278,6 +292,7 @@ h2 {
 //tab3
 .table-box {
 	padding: 0;
+	margin: 20px;
 }
 #user-table {
 	border-radius: 6px;
@@ -308,9 +323,6 @@ h2 {
 			
 			text-decoration: underline;
 		}
-	}
-	.unavailable {
-		background: #eaeaea;
 	}
 	.clicked {
 		background: #fdd3b9;

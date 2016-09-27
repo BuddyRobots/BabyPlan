@@ -44,7 +44,6 @@
 	border-radius: 6px;
 }
 .edit-btn:hover {
-	background: #f7873d;
 	color: white;
 }
 .finish-btn {
@@ -54,59 +53,59 @@
 #QRcode-btn {
 	@extend .edit-btn;
 	right: 260px;
+	width: 136px;
 }
-#unshelve-btn {
+.QRcode {
+	margin-right: 10px;
+	margin-top: -2px;
+}
+.unshelve-btn {
 	@extend .edit-btn;
 	right: 140px;
 }
-#unshelve-btn:hover {
-	background: #f7873d;
+.unshelve-btn:hover {
 	color: white;
 }
+.unavailable {
+	background: #10c078;
+}
+
+
 .tabbable {
-	margin: 20px 20px auto 20px;
+	margin: 20px 0 0 0;
+}
+.back {
+	position: absolute;
+	top: 19px;
 }
 .nav-tabs {
 	margin-bottom: 0;
-	border-bottom: 0;
+	padding-left: 55px;
 	li {
 		font-size: 16px;
 		color: #323232;
 	}
-}
-.book-edit {
-	vertical-align: middle;
-}
-.book-detail {
-	border: 1px solid #ddd;
-	border-radius: 0 6px 6px 6px;
-}
-#name-span {
-	width: auto;
-	margin-right: 15px;
 }
 .shelve {
 	color: #0fc077;
 	vertical-align: middle;
 }
 .form-inline {
-	margin: 20px 0;
+	margin: 20px 0 20px 51px;
+	#type-input {
+		width: 79.6%;
+	}
 }
 .input-caption {
 	display: inline-block;
 	vertical-align: middle;
 	font-size: 16px;
-	color: #323232;
+	color: #464646;
 	margin-right: 10px;
-	margin-left: 20px;
 	font-weight: normal;
 }
-#illustrator-label {
-	@extend .input-caption;
-	margin-left: 10px;
-}
-#book-number {
-	margin-left: 42px
+#author, #translator {
+	margin-left: 32px;
 }
 .unedit-box {
 	display: inline-block;
@@ -120,6 +119,7 @@
 }
 .edit-box {
 	display: none;
+	margin-right: 20px;
 }
 .input-area {
 	display: inline-block;
@@ -128,7 +128,7 @@
 }
 
 .controls-row {
-	margin: 0 0 20px 31.5px;
+	margin: 20px 0 20px 20px;
 }
 .introduce {
 	display: inline-block;
@@ -140,12 +140,12 @@
 }
 .wangedit-area {
 	float: left;
-	width: 86%;
-	font-size: 14px;
+	width: 76%;
+	font-size: 16px;
 	display: none;
 }
 #edit-area {
-	height: 250px;
+	height: 200px;
 }
 .book-introduce {
 	margin-bottom: 20px;
@@ -193,31 +193,23 @@
 }
 
 .cover-back {
-	border-radius: 6px;
+	margin-left: 51px;
 	margin-top: 20px;
-	border: 1px solid #ddd;
-	padding: 15px 20px;
 	font-size: 16px;
 	color: #323232;
 }
-.cover {
+.book-cover {
 	vertical-align: top;
-	margin-right: 5px;
+	margin-right: 10px;
 }
-.back {
-	@extend .cover;
+.book-back {
+	@extend .book-cover;
 }
 #upload-cover {
 	display: inline-block;
 	width: 100px;
-	height: 120px;
-	margin-right: 10px;
-	border: 1px solid #ddd;
-	border-radius: 4px;
-	background: #c8c8c8;
-	line-height: 122px;
-	text-decoration: none;
-	font-size: 14px;
+	height: 100px;
+	margin-right: 50px;
 }
 #upload-back {
 	@extend #upload-cover;
@@ -293,8 +285,8 @@
 }
 #cover-img, #back-img {
 	width: 100px;
-	height: 120px;
-	margin-right: 10px;
+	height: 100px;
+	margin-right: 50px;
 	cursor: pointer;
 }
 .cover-caption, .back-caption, #cover-name, #back-name {
@@ -305,8 +297,8 @@
 .undiscover {
 	text-align: center;
 	padding: 30px;
-	border: 1px solid #ddd;
-	border-radius: 6px;
+	// border: 1px solid #ddd;
+	// border-radius: 6px;
 }
 .undiscover-icon {
 	display: inline-block;
@@ -342,6 +334,7 @@
 .user-review-box {
 	border-radius: 6px;
 	border: 1px solid #ddd;
+	margin-left: 20px;
 }
 .user-checkbox {
 	margin: 5px 0;
@@ -403,6 +396,7 @@
 }
 .table-box {
 	padding: 0;
+	margin-left: 20px;
 }
 #user-table {
 	border-radius: 6px;
@@ -433,9 +427,6 @@
 			
 			text-decoration: underline;
 		}
-	}
-	.unavailable {
-		background: #eaeaea;
 	}
 	.clicked {
 		background: #fdd3b9;
