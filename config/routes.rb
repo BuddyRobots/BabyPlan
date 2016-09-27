@@ -74,6 +74,7 @@ Rails.application.routes.draw do
     resources :announcements do
       member do
         post :set_publish
+        post :upload_photo
       end
     end
     resources :centers do
@@ -132,6 +133,7 @@ Rails.application.routes.draw do
     resources :announcements do
       member do
         post :set_publish
+        post :upload_photo
       end
     end
   end

@@ -49,4 +49,19 @@ class Staff::AnnouncementsController < Staff::ApplicationController
     retval = @announcement.update_announcement(params[:announcement])
     render json: retval_wrapper(retval) and return
   end
+
+  def upload_photo
+    @announcement = Announcement.where(id: params[:id]).first
+    if @announcement.blank?
+      redirect_to action: :index and return
+    end
+    photo = Photo.new
+    photo.photo = params[:photo_file]
+    photo.store_photo!
+    filepath = photo.photo.file.file
+    m = Material.create(path: "/uploads/photos/" + filepath.split('/')[-1])
+    @announcement.photo = m
+    @announcement.save
+    redirect_to action: :show, id: @announcement.id.to_s and return
+  end
 end

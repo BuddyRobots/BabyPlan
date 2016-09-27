@@ -112,6 +112,7 @@ $ ->
       (data) ->
         console.log data
         if data.success != true
+          $.page_notification "服务器出错，请稍后重试"
           return
         # the information is updated successfully, next step is to upload the image
         src = $("#photo")[0].src
@@ -124,9 +125,7 @@ $ ->
 
       )
 
-
-
-#img upload
+#photo upload
   $("#upload-photo").click ->
     $("#photo_file").trigger("click")
 

@@ -65,7 +65,6 @@ class Admin::CentersController < Admin::ApplicationController
     photo.store_photo!
     filepath = photo.photo.file.file
     m = Material.create(path: "/uploads/photos/" + filepath.split('/')[-1])
-    byebug
     @center.photo = m
     @center.save
     redirect_to action: :show, id: @center.id.to_s and return

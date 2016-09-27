@@ -26,7 +26,7 @@
           %form.form-inline
             %label.input-name 详细地址:
             %input.input-area.form-control#center-address{:type => "text"}
-        = form_tag("/staff/books/1/update_back", method: "post", multipart: true, id: "upload-photo-form") do
+        = form_tag("/", method: "post", multipart: true, id: "upload-photo-form", class: "hide") do
           = file_field_tag "photo_file", { class: "hide", accept: ".jpg,.png" }
         %a#upload-photo{href: "javascript:void(0);"}
           %img#photo{:src => "/assets/web/photo.png"}

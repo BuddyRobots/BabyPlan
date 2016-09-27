@@ -39,19 +39,21 @@ $ ->
       },
       (data) ->
         console.log data
-        if data.success
+        if data.success != true
+          $.page_notification "服务器出错，请稍后重试"
+          return
+        src = $(".photo")[0].src
+        if src == "/assets/web/photo.png"
           window.location.href = "/staff/announcements/" + data.announcement_id
         else
-          $.page_notification "服务器出错，请稍后重试"
+          $("#upload-photo-form")[0].action = "/staff/announcements/" + data.announcement_id + "/upload_photo"
+          $("#upload-photo-form").submit()
       )
 
 #img upload
   $("#upload-photo").click ->
-    $("#uploadPhotoModal").modal("show")
+    $("#photo_file").trigger("click")
 
-  coverIntervalFunc = ->
-    $('#cover-name').html $('#cover_file').val();
-
-  $("#browser-cover-click").click ->
-    $("#cover_file").click()
-    setInterval(coverIntervalFunc, 1)
+  $("#photo_file").change (event) ->
+    photo = $(".photo")[0]
+    photo.src = URL.createObjectURL(event.target.files[0])

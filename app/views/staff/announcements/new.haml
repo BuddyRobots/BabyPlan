@@ -20,6 +20,8 @@
         %input.form-control#input-caption{:type => "text"}
       .phont-inline
         %span 封面配图:
+        = form_tag("/", method: "post", multipart: true, id: "upload-photo-form", class: "hide") do
+          = file_field_tag "photo_file", { class: "hide", accept: ".jpg,.png" }
         %a#upload-photo{href: "javascript:void(0);"}
           %img.photo{:src => "/assets/web/photo.png"}
       .notice-introduce.clearfix
