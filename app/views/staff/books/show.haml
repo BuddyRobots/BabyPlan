@@ -13,13 +13,14 @@
     .btn.edit-btn{:type => "button"} 
       %img.edit{:src => "/assets/managecenter/edit.png"}
       编辑
-    / .btn#QRcode-btn{:type => "button"} 生成二维码
+    .btn#QRcode-btn{:type => "button"}
+      %img.QRcode{src: "/assets/web/qrcode.png"} 导出二维码
     - if @book.available == true
-      .btn#unshelve-btn.available{:type => "button"} 
+      .btn.unshelve-btn.available{:type => "button"} 
         %img.end{:src => "/assets/managecenter/unshelve.png"}
         %span 下架
     - else
-      .btn#unshelve-btn.unavailable{:type => "button"} 
+      .btn.unshelve-btn.unavailable{:type => "button"} 
         %img.end{:src => "/assets/managecenter/shelve.png"}
         %span 上架
     .tabbable
@@ -40,23 +41,32 @@
             %span.unedit-box#name-span= @book.name
             %span.edit-box
               %input.input-area.form-control#name-input{:type => "text"}
-            %label.input-caption 作者:
+            %label.input-caption#author 作者:
             %span.unedit-box#author-span= @book.author
             %span.edit-box
               %input.input-area.form-control#author-input{:type => "text"}
-            %label.input-caption 译者:
+          .controls.controls-row
+            %label.input-caption#illustrator-label 插画作者:
+            %span.unedit-box#illustrator-span= @book.illustrator
+            %span.edit-box
+              %input.input-area.form-control#illustrator-input{:type => "text"} 
+            %label.input-caption#translator 译者:
             %span.unedit-box#translator-span= @book.translator
             %span.edit-box
               %input.input-area.form-control#translator-input{:type => "text"}
-          .controls.controls-row
-            %label.input-caption#illustrator-label 适合年龄:
-            %span.unedit-box#illustrator-span= @book.illustrator
-            %span.edit-box
-              %input.input-area.form-control#illustrator-input{:type => "text"}      
             %label.input-caption#book-number 书号:
             %span.unedit-box#isbn-span= @book.isbn
             %span.edit-box
               %input.input-area.form-control#isbn-input{:type => "text"}
+          .controls.controls-row
+            %label.input-caption#mixage-label 最小适龄:
+            %span.unedit-box#mixage-span
+            %span.edit-box
+              %input.input-area.form-control#mixage-input{:type => "text"}      
+            %label.input-caption#mixage-label 最大适龄:
+            %span.unedit-box#maxage-span
+            %span.edit-box
+              %input.input-area.form-control#maxage-input{:type => "text"}  
             %label.input-caption 数量:
             %span.unedit-box#stock-span= @book.stock.to_s + "本"
             %span.edit-box

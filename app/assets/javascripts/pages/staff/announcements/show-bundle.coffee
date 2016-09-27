@@ -15,7 +15,7 @@ $ ->
   editor.create()
 
   # unshelve-btn press-down
-  $("#unshelve-btn").click ->
+  $(".unshelve-btn").click ->
     current_state = "unpublished"
     if $(this).hasClass("published")
       current_state = "published"
@@ -34,13 +34,11 @@ $ ->
             btn.addClass("unpublished")
             btn.find("span").text("公布")
             btn.find("img").attr("src", "/assets/managecenter/shelve.png")
-            $("#publish-status").text("未公布").removeClass("declared").addClass("undeclared")
           else
             btn.addClass("published")
             btn.removeClass("unpublished")
             btn.find("span").text("隐藏")
             btn.find("img").attr("src", "/assets/managecenter/unshelve.png")
-            $("#publish-status").text("已公布").addClass("declared").removeClass("undeclared")
       )
 
   # edit-btn press-down
@@ -50,7 +48,7 @@ $ ->
     $(".display-box").toggle()
     $(".edit-area").toggle()
 
-    $("#unshelve-btn").attr("disabled", true)
+    $(".unshelve-btn").attr("disabled", true)
     
     $("#input-caption").val($("#show-caption").text())
     $("#edit-box").html($(".display-content").html())
@@ -76,7 +74,7 @@ $ ->
           $(".display-box").toggle()
           $(".edit-area").toggle()
 
-          $("#unshelve-btn").attr("disabled", false)
+          $(".unshelve-btn").attr("disabled", false)
 
           $("#show-caption").text($("#input-caption").val())
           console.log content

@@ -30,7 +30,7 @@ $ ->
     $(".edit-btn").toggle()
     is_edit = true
 
-    $("#unshelve-btn").attr("disabled", true)
+    $(".unshelve-btn").attr("disabled", true)
     $("#QRcode-btn").attr("disabled", true)
     $("#name-input").val($("#name-span").text())
     $("#type-input").val($("#type-span").text())
@@ -55,16 +55,16 @@ $ ->
       $(".finish-btn").show()
     else
       $(".edit-btn").show()
-    $("#unshelve-btn").show()
+    $(".unshelve-btn").show()
 
   $("#user-review").click ->
     $(".edit-btn").hide()
-    $("#unshelve-btn").hide()
+    $(".unshelve-btn").hide()
     $(".finish-btn").hide()
 
   $("#borrow-message").click ->
     $(".edit-btn").hide()
-    $("#unshelve-btn").hide()
+    $(".unshelve-btn").hide()
     $(".finish-btn").hide()  
 
   # finish-btn pressdown
@@ -103,7 +103,7 @@ $ ->
           $(".finish-btn").toggle()
           $(".edit-btn").toggle() 
 
-          $("#unshelve-btn").attr("disabled", false)
+          $(".unshelve-btn").attr("disabled", false)
           $("#QRcode-btn").attr("disabled", false)
           $("#name-span").text(name)
           $("#type-span").text(type)
@@ -126,7 +126,7 @@ $ ->
           $.page_notification("服务器出错")
       )
 
-  $("#unshelve-btn").click ->
+  $(".unshelve-btn").click ->
     current_state = "unavailable"
     if $(this).hasClass("available")
       current_state = "available"

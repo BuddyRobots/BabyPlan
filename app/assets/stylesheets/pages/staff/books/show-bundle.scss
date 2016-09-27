@@ -44,7 +44,6 @@
 	border-radius: 6px;
 }
 .edit-btn:hover {
-	background: #f7873d;
 	color: white;
 }
 .finish-btn {
@@ -54,22 +53,26 @@
 #QRcode-btn {
 	@extend .edit-btn;
 	right: 260px;
+	width: 136px;
 }
-#unshelve-btn {
+.QRcode {
+	margin-right: 10px;
+	margin-top: -2px;
+}
+.unshelve-btn {
 	@extend .edit-btn;
 	right: 140px;
 }
-#unshelve-btn:hover {
-	background: #f7873d;
+.unshelve-btn:hover {
 	color: white;
 }
 .unavailable {
-	background: #FFFFFF;
+	background: #10c078;
 }
 
 
 .tabbable {
-	margin: 20px 20px 0 0;
+	margin: 20px 0 0 0;
 }
 .back {
 	position: absolute;
@@ -90,16 +93,19 @@
 .form-inline {
 	margin: 20px 0 20px 51px;
 	#type-input {
-		width: 864px;
+		width: 79.6%;
 	}
 }
 .input-caption {
 	display: inline-block;
 	vertical-align: middle;
 	font-size: 16px;
-	color: #323232;
+	color: #464646;
 	margin-right: 10px;
 	font-weight: normal;
+}
+#author, #translator {
+	margin-left: 32px;
 }
 .unedit-box {
 	display: inline-block;
@@ -134,7 +140,7 @@
 }
 .wangedit-area {
 	float: left;
-	width: 75%;
+	width: 76%;
 	font-size: 16px;
 	display: none;
 }

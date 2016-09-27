@@ -26,8 +26,9 @@ $ ->
     isbn = $("#book-isbn").val().trim()
     author = $("#book-author").val().trim()
     translator = $("#book-translator").val().trim()
-    illustrator = $("#book-kids-age").val().trim()
+    illustrator = $("#book-illustrator").val().trim()
     available = $("#available").is(":checked")
+    
     desc = editor.$txt.html()
     if name == "" || stock == "" || isbn == "" || desc == ""
       $.page_notification("请补全信息")

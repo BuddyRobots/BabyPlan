@@ -8,7 +8,7 @@
   /books-new
   .content-box
     .manage-box.clearfix
-      %a#back{:href => "/admin/courses"}
+      %a#back{:href => "/staff/books"}
         %img{:src => "/assets/web/back.png"}
       %p.book-add 添加绘本
       .btn.end-btn{:type => "button", :href => "#kidsaddModal", "data-toggle" => "modal"} 
@@ -19,17 +19,22 @@
 
     .manage-content
       .controls.controls-row
-        %label.input-name 绘本名称:
+        %label.input-caption 绘本名称:
         %input.input-area.form-control#book-name{:type => "text"}
-        %label.input-caption 作者:
+        %label.input-caption#author 作者:
         %input.input-area.form-control#book-author{:type => "text"}
-        %label.input-caption 译者:
-        %input.input-area.form-control#book-translator{:type => "text"}
       .controls.controls-row
-        %label.input-caption 适合年龄:
-        %input.input-area.form-control#book-kids-age{:type => "text"}
+        %label.input-caption 插画作者:
+        %input.input-area.form-control#book-illustrator{:type => "text"}
+        %label.input-caption#translator 译者:
+        %input.input-area.form-control#book-translator{:type => "text"}
         %label.input-caption#book-number 书号:
         %input.input-area.form-control#book-isbn{:type => "text"}
+      .controls.controls-row
+        %label.input-caption 最小适龄:
+        %input.input-area.form-control#mix-age{:type => "text"}
+        %label.input-caption 最大适龄:
+        %input.input-area.form-control#max-age{:type => "text"}
         %label.input-caption 数量:
         %input.input-area.form-control#book-stock{:type => "text"}
       %form.form-inline

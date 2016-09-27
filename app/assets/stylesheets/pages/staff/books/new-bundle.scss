@@ -76,15 +76,15 @@
 .form-inline {
 	margin: 20px 0 20px 51px;
 }
-.input-name {
+.input-caption {
 	display: inline-block;
 	vertical-align: middle;
 	font-size: 16px;
 	color: #323232;
 	font-weight: normal;
 }
-.input-caption {
-	@extend .input-name;
+#author, #translator {
+	margin-left: 32px;
 }
 .input-area {
 	display: inline-block;
@@ -93,7 +93,7 @@
 	margin: 0 20px 0 10px;
 }
 #book-type {
-	width: 864px;
+	width: 79.6%;
 }
 .controls-row {
 	margin: 20px 0 20px 20px;
@@ -107,7 +107,7 @@
 }
 .wangedit-area {
 	display: inline-block;
-	width: 73.5%;
+	width: 76%;
 	font-size: 16px;
 }
 #edit-area {

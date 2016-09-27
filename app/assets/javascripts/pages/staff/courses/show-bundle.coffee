@@ -67,7 +67,7 @@ $ ->
 
   parse_calendar_events()
 
-  $("#unshelve-btn").click ->
+  $(".unshelve-btn").click ->
     current_state = "unavailable"
     if $(this).hasClass("available")
       current_state = "available"
@@ -96,7 +96,7 @@ $ ->
       )
 
   $(".edit-btn").click ->
-    $("#unshelve-btn").attr("disabled", true)
+    $(".unshelve-btn").attr("disabled", true)
     $(".unedit-box").toggle()
     $(".edit-box").toggle()
     $("#course-num").val($("#num-span").text())
@@ -107,6 +107,7 @@ $ ->
     $("#course-speaker").val($("#speaker-span").text())
     $("#course-address").val($("#address-span").text())
 
+    $("#course-num").css("width", $(".num-box").width() - $(".code-num").width()-4)
     $("#calendar-operation-wrapper").show()
 
     $(".edit-btn").toggle()
@@ -155,7 +156,7 @@ $ ->
           $(".unedit-box").show()
           $(".edit-box").hide()
 
-          $("#unshelve-btn").attr("disabled", false)
+          $(".unshelve-btn").attr("disabled", false)
           $("#calendar-operation-wrapper").hide()
 
           $("#num-span").text(code)
@@ -175,19 +176,19 @@ $ ->
   $("#user-review").click ->
     $(".finish-btn").hide()
     $(".edit-btn").hide()
-    $("#unshelve-btn").hide()
+    $(".unshelve-btn").hide()
 
   $("#register-message").click ->
     $(".finish-btn").hide()
     $(".edit-btn").hide()
-    $("#unshelve-btn").hide()
+    $(".unshelve-btn").hide()
 
   $("#course-message").click ->
     if is_edit
       $(".finish-btn").show()
     else
       $(".edit-btn").show()
-    $("#unshelve-btn").show()
+    $(".unshelve-btn").show()
 
   # calender set
   $( "#datepicker" ).datepicker({

@@ -6,32 +6,30 @@
 
 .content-area
   .content-box
-    - if @announcement.center.present?
-      .btn.end-btn{:type => "button"} 
-        %img.end-img{:src => "/assets/managecenter/ticker.png"}
-        完成
-      .btn.edit-btn{:type => "button"} 
-        %img.edit-img{:src => "/assets/managecenter/edit.png"}
-        编辑
-      - if @announcement.is_published
-        .btn#unshelve-btn.published{:type => "button"} 
-          %img.unshelve{:src => "/assets/managecenter/unshelve.png"}
-          %span 隐藏
-      - else
-        .btn#unshelve-btn.unpublished{:type => "button"} 
-          %img.unshelve{:src => "/assets/managecenter/shelve.png"}
-          %span 公布
+    .manage-box.clearfix
+      %a#back{:href => "/staff/announcements"}
+        %img{:src => "/assets/web/back.png"}
+      %p.local-notice 本区公告
+      - if @announcement.center.present?
+        .btn.end-btn{:type => "button"} 
+          %img.end-img{:src => "/assets/managecenter/ticker.png"}
+          完成
+        .btn.edit-btn{:type => "button"} 
+          %img.edit-img{:src => "/assets/managecenter/edit.png"}
+          编辑
+        - if @announcement.is_published
+          .btn.unshelve-btn.published{:type => "button"} 
+            %img.unshelve{:src => "/assets/managecenter/unshelve.png"}
+            %span 隐藏
+        - else
+          .btn.unshelve-btn.unpublished{:type => "button"} 
+            %img.unshelve{:src => "/assets/managecenter/shelve.png"}
+            %span 公布
 
     .manage-content
-      %ul.nav.nav-tabs
-        %li.active
-          %a{"data-toggle" => "tab", :href => "#tab1"}= @announcement.center.present? ? "本区公告" : "全局公告"
-
       .display-box
         .display-area
-          %p.caption-header
-            %span#show-caption= @announcement.title
-            %span#publish-status{class: @announcement.is_published ? "declared" : "undeclared", :href => "javascript:void(0);"}= @announcement.is_published ? "已公布" : "未公布"
+          %p.caption-header#show-caption= @announcement.title
           .display-content
             = @announcement.content.html_safe
 
