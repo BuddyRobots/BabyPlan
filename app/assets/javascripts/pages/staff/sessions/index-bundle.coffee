@@ -128,11 +128,15 @@ $ ->
   $("#signup-mobilecode").keyup ->
     check_signup_input()
     $("#verify-code-notice").css("visibility","hidden")
-  $("#signup-password").keyup ->
-    toggle_password_tip(false)
+  $("#signup-password").keyup (event) ->
+    code = event.which
+    if code != 13
+      toggle_password_tip(false)
     check_signup_input()
-  $("#signup-confirm-password").keyup ->
-    toggle_password_tip(false)
+  $("#signup-confirm-password").keyup (event) ->
+    code = event.which
+    if code != 13
+      toggle_password_tip(false)
     check_signup_input()
 
 
@@ -260,11 +264,15 @@ $ ->
   $("#forget-captcha-input").keyup ->
     check_forget_signup_input()
     $("#forget-captcha-notice").css("visibility","hidden")
-  $("#forget-password").keyup ->
-    toggle_forget_password_tip(false)
+  $("#forget-password").keyup (event) ->
+    code = event.which
+    if code != 13
+      toggle_forget_password_tip(false)
     check_forget_signup_input()
-  $("#forget-confirm-password").keyup ->
-    toggle_forget_password_tip(false)
+  $("#forget-confirm-password").keyup (event) ->
+    code = event.which
+    if code != 13
+      toggle_forget_password_tip(false)
     check_forget_signup_input()
 
   # reset password
@@ -338,8 +346,10 @@ $ ->
 
   $("#mobile").keyup ->
     check_signin_input()
-  $("#password").keyup ->
-    toggle_signin_password_tip(false)
+  $("#password").keyup (event) ->
+    code = event.which
+    if code != 13
+      toggle_signin_password_tip(false)
     check_signin_input()
 
 # enter click

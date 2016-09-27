@@ -54,4 +54,19 @@ class Admin::CentersController < Admin::ApplicationController
     retval = @center.update_info(params[:center])
     render json: retval_wrapper(retval)
   end
+
+  def upload_photo
+    @center = Center.where(id: params[:id]).first
+    if @center.blank?
+      redirect_to action: :index and return
+    end
+    photo = Photo.new
+    photo.photo = params[:photo_file]
+    photo.store_photo!
+    filepath = photo.photo.file.file
+    m = Material.create(path: "/uploads/photos/" + filepath.split('/')[-1])
+    @center.photo = m
+    @center.save
+    redirect_to action: :show, id: @center.id.to_s and return
+  end
 end

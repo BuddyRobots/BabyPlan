@@ -11,6 +11,7 @@ class Announcement
   belongs_to :center
   belongs_to :staff, class_name:"User", inverse_of: :announcement
 
+  has_one :photo, class_name: "Material", inverse_of: :announcement_photo
   has_many :favorites
   has_many :staff_logs
 

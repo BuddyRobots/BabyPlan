@@ -32,6 +32,8 @@ Rails.application.routes.draw do
 
   get 'welcome/managecenter'
 
+  get 'welcome/test_image_uploader'
+
   resources :centers do
   end
 
@@ -72,12 +74,14 @@ Rails.application.routes.draw do
     resources :announcements do
       member do
         post :set_publish
+        post :upload_photo
       end
     end
     resources :centers do
       member do
         post :set_available
         get :set_current
+        post :upload_photo
       end
     end
     resources :courses do
@@ -129,6 +133,7 @@ Rails.application.routes.draw do
     resources :announcements do
       member do
         post :set_publish
+        post :upload_photo
       end
     end
   end
