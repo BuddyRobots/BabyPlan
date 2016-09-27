@@ -220,8 +220,10 @@ $ ->
     check_signin_input()
     $(".error-notice").css("visibility", "hidden")
     $("input").removeClass("clicked-box")
-  $("#password").keyup ->
-    toggle_signin_password_tip(false)
+  $("#password").keyup (event) ->
+    code = event.which
+    if code != 13
+      toggle_signin_password_tip(false)
     check_signin_input()
 
 # enter click

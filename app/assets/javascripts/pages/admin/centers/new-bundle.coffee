@@ -111,19 +111,25 @@ $ ->
       },
       (data) ->
         console.log data
-        if data.success
+        if data.success != true
+          return
+        # the information is updated successfully, next step is to upload the image
+        src = $("#photo")[0].src
+        if src == "/assets/web/photo.png"
+          # the user does not upload photo, skip photo uploading step
           location.href = "/admin/centers/" + data.center_id
+        else
+          $("#upload-photo-form")[0].action = "/admin/centers/" + data.center_id + "/upload_photo"
+          $("#upload-photo-form").submit()
+
       )
 
 
 
 #img upload
   $("#upload-photo").click ->
-    $("#uploadPhotoModal").modal("show")
+    $("#photo_file").trigger("click")
 
-  coverIntervalFunc = ->
-    $('#cover-name').html $('#cover_file').val();
-
-  $("#browser-cover-click").click ->
-    $("#cover_file").click()
-    setInterval(coverIntervalFunc, 1)
+  $("#photo_file").change (event) ->
+    photo = $("#photo")[0]
+    photo.src = URL.createObjectURL(event.target.files[0])

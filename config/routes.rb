@@ -80,6 +80,7 @@ Rails.application.routes.draw do
       member do
         post :set_available
         get :set_current
+        post :upload_photo
       end
     end
     resources :courses do

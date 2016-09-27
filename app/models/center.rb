@@ -10,6 +10,7 @@ class Center
   field :desc, type: String
   field :available, type: Boolean
 
+  has_one :photo, class_name: "Material", inverse_of: :center_photo
   has_many :course_insts
   has_many :books
   has_many :announcements
