@@ -7,50 +7,63 @@
 .content-area
   /courses-new
   .content-box
-    .manage-box.clearfix
-      %p.course-set 开设课程
+    .manage-box
+      %a#back{:href => "/staff/courses"}
+        %img{:src => "/assets/web/back.png"}
+      %p.course-add 添加课程
       .btn.end-btn{:type => "button"} 
         %img.end{:src => "/assets/managecenter/ticker.png"}
         完成
+      %label.checkbox-inline.open#available
+        %input#inlineCheckbox1{:type => "checkbox"} 暂不上架
 
     .manage-content
-      %form.form-inline
-        %label.input-name 课程名称:
-        %span.unedit-box#name-span= @course.name
-        %label.checkbox-inline
-          %input.checkbox-content#available{:type => "checkbox", :value => "option1"} 上架
+      .top-box.clearfix
+        .text-message
+          %form.form-inline
+            %label.input-caption 课程名称:
+            %span.unedit-box#name-span= @course.name
+          %form.form-inline
+            %label.input-caption 上课时间:
+            %input.input-area.form-control#course-date{:type => "text"}
+          %form.form-inline
+            %label.input-caption 上课地址:
+            %input.input-area.form-control#course-address{:type => "text"}
+        .photo
+          %img{src: "/assets/photo.png"}
 
       .controls.controls-row
         %label.input-caption 开课编号:
-        %span.course-num= @course.code + "-"
-        %input.input-area.form-control#course-code{:type => "text"}
-        %label.input-caption 容量:
+        %span.num-box
+          %span.course-num= @course.code + "-"
+          %input.input-area.form-control#course-code{:type => "text"}
+        %label.input-caption 主讲人:
+        %input.input-area.form-control#course-speaker{:type => "text", value: @course.speaker}
+        %label.input-caption.kids-capacity 容量:
         %input.input-area.form-control#course-capacity{:type => "text"}
-        %label.input-caption 费用:
-        %input.input-area.form-control#course-price{:type => "text", value: @course.price}
+      .controls.controls-row
         %label.input-caption.course-length 课次:
         %input.input-area.form-control#course-length{:type => "text", value: @course.length}
-      .controls.controls-row
-        %label.input-caption 上课时间:
-        %input.input-area.form-control#course-date{:type => "text"}
-        %label.input-caption.course-speaker 主讲人:
-        %input.input-area.form-control#course-speaker{:type => "text", value: @course.speaker}
-      .controls.controls-row
-        %label.input-caption 上课地址:
-        %input.input-area.form-control#course-address{:type => "text"}
+        %label.input-caption 市场价:
+        %input.input-area.form-control#course-price{:type => "text", value: @course.price}
+        %label.input-caption 公益价:
+        %input.input-area.form-control#public-price{:type => "text"}
       
-      .controls.controls-row.clearfix
-        %label.input-caption.class-calendar 课程日历:
-        #calendar-wrapper
-          #calendar-operation-wrapper
-            #add-event-wrapper.form-inline
-              %span 日期
-              %input.form-control#datepicker{:type => "text", placeholder: "请选择上课日期"}
-              %span ，从
-              %input.form-control#start-time{:type => "text", placeholder: "请选择上课时间"}
-              %span 到
-              %input.form-control#end-time{:type => "text", placeholder: "请选择下课时间"}
-              %button.btn.btn-success#add-event{type: "button"} 添加
-            #rm-event-wrapper.form-inline
-              %span 单击日历中的事件进行删除
-          #calendar
+      .calendar-wrapper.clearfix
+        .calendar-operation-wrapper
+          %p.title 课程日历
+          %p.small-tips （单击日历中的时间进行删除）
+          %form.form-inline
+            %label.input-date 上课日期:
+            %input.input-area.form-control.datepicker{:type => "text"}
+          %form.form-inline
+            %label.input-date 开始时间:
+            %input.input-area.form-control.datepicker{:type => "text"}
+          %form.form-inline
+            %label.input-date 结束时间:
+            %input.input-area.form-control.datepicker{:type => "text"}
+          .btn.add-btn{:type => "button"} 添加单次
+          .repeat.clearfix
+            .btn.date-btn{:type => "button"} 次日重复
+            .btn.week-btn{:type => "button"} 每周重复
+        #calendar

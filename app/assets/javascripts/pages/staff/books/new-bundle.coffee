@@ -18,7 +18,6 @@ $ ->
 
   editor.create()
 
-
   $(".end-btn").click ->
     name = $("#book-name").val().trim()
     type = $("#book-type").val().trim()

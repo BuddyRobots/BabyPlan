@@ -1,7 +1,16 @@
 @import "fullcalendar.min";
 @import "jquery-ui";
 
-
+.clearfix:before, .clearfix:after {
+	content: " ";
+	display: table;
+}
+.clearfix:after {
+	clear: both;
+}
+.clearfix {
+	*zoom: 1;
+}
 .modal-body, label {
 	margin: 0;
 	padding: 0;
@@ -37,12 +46,22 @@
 	bottom: 0px;
 	right: 0px;
 }
-.course-set {
+#back {
+	float: left;
+}
+.course-add {
 	float: left;
 	font-size: 16px;
 	color: #323232;
-	line-height: 60px;
-	margin-left: 20px;
+	padding-left: 20px;
+	height: 52px;
+	line-height: 52px;
+	margin-top: 3px;
+	border-left: 1px solid #c8c8c8;
+}
+.open {
+	float: right;
+	margin: 20px 20px 0 0;
 }
 .end-btn {
 	float: right;
@@ -56,13 +75,19 @@
 	border-radius: 6px;
 }
 .end-btn:hover {
-	background: #f7873d;
 	color: white;
 }
-.form-inline {
-	margin: 15px 0;
+.top-box {
+	margin-top: 10px;
 }
-.input-name {
+.text-message {
+	width: 50%;
+	float: left;
+}
+.form-inline {
+	margin: 20px 0;
+}
+.input-caption {
 	display: inline-block;
 	margin-right: 5px;
 	font-size: 16px;
@@ -71,64 +96,99 @@
 	vertical-align: middle;
 	font-weight: normal;
 }
-#name-span {
-	font-size: 14px;
-	color: #323232;
-	vertical-align: middle;
-}
-.input-caption {
-	@extend .input-name;
-}
-.course-num {
-	display: inline-block;
-	padding-top: 3px;
-	vertical-align: middle;
-}
-#course-num {
-	width: 130px;
+.course-length {
+	margin-left: 52px;
 }
 #course-address, #course-date {
-	width: 350px;
+	width: 80%;
 }
-.course-speaker {
-	margin-left: 79px;
+.num-box {
+	@extend .input-area;
+}
+.photo {
+	width: 17.25%;
+	height: 138px;
+	display: inline-block;
+	margin-left: 80px;
+	margin-top: 5px;
+}
+.kids-capacity {
+	margin-left: 36px;
 }
 .input-area {
 	display: inline-block;
-	width: 180px;
+	width: 198px;
 	height: 30px;
 }
-.checkbox-inline {
-	margin-left: 15px;
-}
 .controls-row {
-	margin-bottom: 15px;
+	margin-bottom: 20px;
 }
 
-.class-calendar {
-	float: left;
-}
-
-#calendar-wrapper {
-	float: left;
-	width: 85%;
-}
-
-#add-event-wrapper {
-	padding-left: 10px;
-}
-
-#rm-event-wrapper {
-	padding-left: 10px;
-	color: red;
-}
-
-#calendar {
+.calendar-wrapper {
+	width: 72.7%;
+	margin-left: 20px;
+	margin-bottom: 20px;
 	border: 1px solid #c8c8c8;
-	margin-left: 10px;
-	border-radius: 4px;
+	border-radius: 6px;
+}
+.calendar-operation-wrapper {
+	width: 40%;
+	float: left;
+	text-align: center;
+}
+#calendar {
+	width: 59%;
+	float: right;
 	font-size: 14px;
+}
+.title {
+	font-size: 16px;
+	color: #323232;
+	text-align: center;
+	margin: 20px 0 10px 0;
+}
+.small-tips {
+	font-size: 16px;
+	color: #c8c8c8;
+	text-align: center;
+	margin-bottom: 20px;
+}
+.input-date {
+	display: inline-block;
+	margin-right: 5px;
+	font-size: 16px;
+	color: #323232;
+	vertical-align: middle;
+	font-weight: normal;
+}
+.add-btn {
+	width: 240px;
+	background: #10c078;
+	font-size: 16px;
+	color: white;
+}
+.add-btn:hover {
+	color: white;
+}
+.repeat {
+	width: 240px;
+	margin: 10px auto;
+}
+.date-btn {
+	float: left;
+	width: 110px;
+	background: #c8c8c8;
+	font-size: 16px;
+	color: white;
+}
+.date-btn:hover {
+	color: white;
+}
+.week-btn {
+	@extend .date-btn;
+	float: right;
 }
 h2 {
-	font-size: 14px;
+	font-size: 18px;
+	padding-top: 5px;
 }

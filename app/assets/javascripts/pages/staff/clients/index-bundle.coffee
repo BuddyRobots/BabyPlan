@@ -1,11 +1,12 @@
+
 $ ->
   # calender set
   $( "#datepicker" ).datepicker({
-        changeMonth: true,
-        changeYear: true
-      });
-  $( "#datepicker" ).datepicker( $.datepicker.regional[ "zh-TW" ] );
-  $( "#datepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+        # changeMonth: true,
+        # changeYear: true
+      })
+  $( "#datepicker" ).datepicker( $.datepicker.regional[ "zh-TW" ] )
+  $( "#datepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd" )
    
   uid = ""
   timer = null

@@ -1,4 +1,4 @@
-#= require moment.min
+# = require moment.min
 #= require fullcalendar.min
 #= require locale-all
 
@@ -22,10 +22,13 @@ $ ->
     eventLimit: true
     fixedWeekCount: false
     nowIndicator: true
-    height: 500
+    height: 355
+    # aspectRatio: 2
     eventClick: (calEvent, jsEvent, view) ->
       $("#calendar").fullCalendar('removeEvents', calEvent.id)
   })
+
+  $("#course-code").css("width", $(".num-box").width() - $(".course-num").width() - 4)
 
   $(".end-btn").click ->
     course_id = window.cid
@@ -77,12 +80,12 @@ $ ->
       )
 
 
-  $( "#datepicker" ).datepicker({
-        changeMonth: true,
-        changeYear: true
-      });
-  $( "#datepicker" ).datepicker( $.datepicker.regional[ "zh-TW" ] )
-  $( "#datepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd" )
+  $( ".datepicker" ).datepicker({
+        # changeMonth: true,
+        # changeYear: true
+      })
+  $( ".datepicker" ).datepicker( $.datepicker.regional[ "zh-TW" ] )
+  $( ".datepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd" )
 
   $('#start-time').timepicker({
     'minTime': '7:00am'
