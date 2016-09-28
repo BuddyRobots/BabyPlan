@@ -131,8 +131,9 @@ $ ->
     $(".unedit-box").toggle()
     $(".shelve").toggle()
     $(".edit-box").toggle()
+    $(".notice-box").toggle()
+    $("#upload-photo").toggle()
     $(".map-notice").css("display", "inline-block")
-    $("#map-container").css("margin-left", "77px")
     $(".introduce-details").toggle()
     $(".wangedit-area").toggle()
 
@@ -148,6 +149,8 @@ $ ->
 
   $(".finish-btn").click ->
     is_edit = false
+    $(".notice-box").toggle()
+    $("#upload-photo").toggle()
     name = $("#name-input").val()
     address = $("#center-address").val()
     desc = editor.$txt.html()
@@ -172,12 +175,7 @@ $ ->
           $(".wangedit-area").toggle()
           $(".unedit-box").show()
           $(".edit-box").hide()
-
-          $(".map-notice").css("display", "none")
-          $("#map-container").css("margin-left", "0px")
-
           $("#unshelve-btn").attr("disabled", false)
-
           $("#name-span").text(name)
           $("#address-span").text(address)
           $(".introduce-details").html(desc)
@@ -214,3 +212,11 @@ $ ->
             btn.find("img").attr("src", "/assets/managecenter/unshelve.png")
             $(".shelve").text("开放中")
       )
+
+#img upload
+  $("#upload-photo").click ->
+    $("#photo_file").trigger("click")
+
+  $("#photo_file").change (event) ->
+    photo = $(".edit-photo")[0]
+    photo.src = URL.createObjectURL(event.target.files[0])

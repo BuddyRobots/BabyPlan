@@ -7,6 +7,16 @@
 	padding: 0;
 	max-height: 600px;
 }
+.clearfix:before, .clearfix:after {
+	content: " ";
+	display: table;
+}
+.clearfix:after {
+	clear: both;
+}
+.clearfix {
+	*zoom: 1;
+}
 
 .content-area {
 	position:absolute;
@@ -81,9 +91,37 @@
 	border: 1px solid #ddd;
 	border-radius: 0 6px 6px 6px;
 }
+.input-left {
+	float: left;
+	width: 50%;
+}
+.photo {
+	position: relative;
+	float: left;
+	width: 11.3%;
+	max-width: 128px;
+	height: 88px;
+	margin: 15px 0 0 60px;
+}
+.unedit-photo {
+	width: auto;
+	max-width: 128px;
+	height: 88px;
+}
+#upload-photo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	display: none;
+}
 #name-span {
 	width: auto;
 	margin-right: 15px;
+}
+#name-input, #center-address {
+	width: 80%;
+	height: 30px;
 }
 .shelve {
 	color: #0fc077;
@@ -114,20 +152,13 @@
 .edit-box {
 	display: none;
 }
-#center-address {
-	width: 400px;
-}
-.input-area {
-	display: inline-block;
-	width: 238px;
-	height: 30px;
-}
+
 .shelve {
     color: #0fc077;
     vertical-align: middle;
 }
 .map-position {
-	margin: 20px 20px 15px 20px;
+	margin: 0 20px 20px 20px;
 	.map-address {
 		font-size: 16px;
 		color: #323232;
@@ -145,17 +176,19 @@
 }
 #map-container {
 	display: inline-block;
-	width: 90%;
+	width: 100%;
 	height: 300px;
 	border: 1px solid #ddd;
 }
 .map-notice {
-	display: none;
-	margin-bottom: 5px;
+	display: inline-block;
+	width: 65.5%;
 }
-
+.notice-box {
+	display: none;
+	margin-bottom: 10px;
+}
 .center-introduce {
-	padding-top: 5px;
 	margin-bottom: 20px;
 }
 .introduce {
@@ -164,11 +197,11 @@
 	vertical-align: top;
 	font-size: 16px;
 	color: #323232;
-	margin: 0 10px 15px 20px;
+	margin: 0 12px 15px 20px;
 }
 .wangedit-area {
 	float: left;
-	width: 87%;
+	width: 63.5%;
 	font-size: 14px;
 	display: none;
 }

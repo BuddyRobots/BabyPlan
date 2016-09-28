@@ -37,27 +37,30 @@
 
       .tab-content
         #tab1.tab-pane.active
-          %form.form-inline
-            %label.input-caption 中心名称:
-            %span.unedit-box#name-span= @center.name
-            %span.edit-box
-              %input.input-area.form-control#name-input{:type => "text"}
-            - if @center.available == true
-              %label#available-status.shelve 开放中
-            - else
-              %label#available-status.shelve 关闭中
-          %form.form-inline
-            %label.input-caption 详细地址:
-            %span.unedit-box#address-span= @center.address
-            %span.edit-box
-              %input.input-area.form-control#center-address{:type => "text"}
+          .input-box.clearfix
+            .input-left
+              %form.form-inline
+                %label.input-caption 中心名称:
+                %span.unedit-box#name-span= @center.name
+                %span.edit-box
+                  %input.input-area.form-control#name-input{:type => "text"}
+              %form.form-inline
+                %label.input-caption 详细地址:
+                %span.unedit-box#address-span= @center.address
+                %span.edit-box
+                  %input.input-area.form-control#center-address{:type => "text"}
+            .photo
+              %img.unedit-photo{:src => "/assets/visit.png"}
+              %a#upload-photo{href: "javascript:void(0);"}
+                %img.edit-photo{:src => "/assets/web/add-photo.png"}
           .map-position
             %span.map-address 地图位置:
             .map-notice
-              %span.notice 
-                请在地图上点击定位或
-              %a#auto-locate{:href => "javascript:void(0);"} 自动定位
-            #map-container
+              .notice-box
+                %span.notice 
+                  请在地图上点击定位或
+                %a#auto-locate{:href => "javascript:void(0);"} 自动定位
+              #map-container
           
           .center-introduce.clearfix
             %span.introduce 中心介绍:

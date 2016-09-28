@@ -53,13 +53,14 @@
                 %span.edit-box
                   %input.input-area.form-control#course-address{:type => "text"}
             .photo
-              %img{src: "/assets/visit.png"}
+              %img.unedit-photo{:src => "/assets/banner.png"}
+              %a#upload-photo{href: "javascript:void(0);"}
+                %img.edit-photo{:src => "/assets/web/photo.png"}
 
           .controls.controls-row
             %label.input-caption 开课编号:
             %span.num-box
-              %span.code-num yezlqm-
-              / %span.course-num= @course_inst.course.code + "-"
+              %span.course-num= @course_inst.course.code + "-" 
               %span.unedit-box#num-span= @course_inst.inst_code
               %span.edit-box
                 %input.input-area.form-control#course-num{:type => "text"}
@@ -84,21 +85,26 @@
             %span.unedit-box#public-span
             %span.edit-box
               %input.input-area.form-control#public-charge{:type => "text"}
-          .controls.controls-row.clearfix
-            %label.input-caption.class-calendar 课程日历:
-            #calendar-wrapper
-              #calendar-operation-wrapper
-                #add-event-wrapper.form-inline
-                  %span 日期
-                  %input.form-control#datepicker{:type => "text", placeholder: "请选择上课日期"}
-                  %span ，从
-                  %input.form-control#start-time{:type => "text", placeholder: "请选择上课时间"}
-                  %span 到
-                  %input.form-control#end-time{:type => "text", placeholder: "请选择下课时间"}
-                  %button.btn.btn-success#add-event{type: "button"} 添加
-                #rm-event-wrapper.form-inline
-                  %span 单击日历中的事件进行删除
-              #calendar
+          .calendar-wrapper.clearfix
+            %label.class-calendar 课程日历:
+            .show-calendar#calendar
+            .calendar-operation-wrapper
+              %p.title 课程日历
+              %p.small-tips （单击日历中的时间进行删除）
+              %form.form-inline
+                %label.input-date 上课日期:
+                %input.input-area.form-control#datepicker{:type => "text"}
+              %form.form-inline
+                %label.input-date 开始时间:
+                %input.input-area.form-control#start-time{:type => "text"}
+              %form.form-inline
+                %label.input-date 结束时间:
+                %input.input-area.form-control#end-time{:type => "text"}
+              .btn#add-event{:type => "button"} 添加单次
+              .repeat.clearfix
+                .btn.date-btn{:type => "button"} 次日重复
+                .btn.week-btn{:type => "button"} 每周重复
+
       
         #tab2.tab-pane
           .undiscover

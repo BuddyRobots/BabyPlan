@@ -75,6 +75,9 @@ input, label {
 		color: #323232;
 	}
 }
+.top-box {
+	margin-top: 10px;
+}
 .text-message {
 	width: 50%;
 	float: left;
@@ -83,18 +86,30 @@ input, label {
 	margin: 20px 0;
 }
 .photo {
+	position: relative;
 	width: 17.25%;
-	height: 138px;
 	display: inline-block;
-	margin-left: 25px;
-	margin-top: 15px;
+	margin-left: 7.5%;
+	margin-top: 0.5%;
+}
+.unedit-photo {
+	width: auto;
+	max-width: 200px;
+	height: 138px;
+}
+#upload-photo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	display: none;
 }
 .input-caption {
 	display: inline-block;
 	vertical-align: middle;
 	font-size: 16px;
 	color: #323232;
-	margin-right: 10px;
+	margin-right: 5px;
 	margin-left: 20px;
 	font-weight: normal;
 }
@@ -105,8 +120,8 @@ input, label {
 .kids-capacity {
 	margin-left: 36px;
 }
-#course-num {
-	width: 75px;
+.num-box {
+	@extend .input-area;
 }
 #num-span {
 	width: auto;
@@ -119,7 +134,7 @@ input, label {
 }
 .input-area {
 	display: inline-block;
-	width: 170px;
+	width: 17.2%;
 	height: 30px;
 }
 .controls-row {
@@ -130,7 +145,7 @@ input, label {
 	vertical-align: middle;
 	font-size: 14px;
 	color: #323232;
-	width: 170px;
+	width: 17.2%;
 	height: 30px;
 	line-height: 30px;
 }
@@ -154,31 +169,88 @@ input, label {
 
 .class-calendar {
 	float: left;
+	font-size: 16px;
+	color: #323232;
+	font-weight: normal;
 }
 
-#calendar-wrapper {
+.show-calendar {
 	float: left;
-	width: 75%;
-}
-
-#add-event-wrapper {
-	padding-left: 10px;
-}
-
-#rm-event-wrapper {
-	padding-left: 10px;
-	color: red;
-}
-
-#calendar {
+	width: 90.6%;
 	border: 1px solid #c8c8c8;
 	margin-left: 10px;
 	border-radius: 4px;
 	font-size: 14px;
 }
 h2 {
-	font-size: 20px;
-	padding-top: 3px;
+	font-size: 18px;
+	padding-top: 5px;
+}
+
+// edit-calendar
+.calendar-wrapper {
+	width: 72.7%;
+	margin: 20px 0 0 20px;
+	// border: 1px solid #c8c8c8;
+	border-radius: 6px;
+}
+.calendar-operation-wrapper {
+	width: 40%;
+	float: left;
+	text-align: center;
+	display: none;
+}
+.edit-calendar {
+	width: 59%;
+	float: right;
+	font-size: 14px;
+}
+.title {
+	font-size: 18px;
+	color: #323232;
+	text-align: center;
+	margin: 20px 0 10px 0;
+}
+.small-tips {
+	font-size: 16px;
+	color: #c8c8c8;
+	text-align: center;
+	margin-bottom: 20px;
+}
+.input-date {
+	display: inline-block;
+	margin-right: 5px;
+	font-size: 16px;
+	color: #323232;
+	vertical-align: middle;
+	font-weight: normal;
+}
+#add-event {
+	width: 240px;
+	background: #10c078;
+	font-size: 16px;
+	color: white;
+}
+.add-btn:hover {
+	color: white;
+}
+.repeat {
+	width: 240px;
+	margin: 10px auto;
+}
+.date-btn {
+	float: left;
+	width: 110px;
+	background: #c8c8c8;
+	font-size: 16px;
+	color: white;
+}
+.date-btn:hover {
+	color: white;
+}
+.week-btn {
+	@extend .date-btn;
+	float: right;
 }
 
 // undiscover message

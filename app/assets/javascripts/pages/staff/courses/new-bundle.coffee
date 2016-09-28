@@ -1,6 +1,7 @@
 # = require moment.min
 #= require fullcalendar.min
 #= require locale-all
+#= require datepicker-zh-TW
 
 $ ->
   guid = ->
@@ -28,7 +29,7 @@ $ ->
       $("#calendar").fullCalendar('removeEvents', calEvent.id)
   })
 
-  $("#course-code").css("width", $(".num-box").width() - $(".course-num").width() - 4)
+  $("#course-code").css("width", $(".num-box").width() - $(".course-num").width() - 6)
 
   $(".end-btn").click ->
     course_id = window.cid
@@ -80,12 +81,12 @@ $ ->
       )
 
 
-  $( ".datepicker" ).datepicker({
+  $( "#datepicker" ).datepicker({
         # changeMonth: true,
         # changeYear: true
       })
-  $( ".datepicker" ).datepicker( $.datepicker.regional[ "zh-TW" ] )
-  $( ".datepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd" )
+  $( "#datepicker" ).datepicker( $.datepicker.regional[ "zh-TW" ] )
+  $( "#datepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd" )
 
   $('#start-time').timepicker({
     'minTime': '7:00am'
@@ -112,3 +113,12 @@ $ ->
       end: date + "T" + end_time
     }
     $("#calendar").fullCalendar('renderEvent', e, true)
+
+
+#img upload
+  $("#upload-photo").click ->
+    $("#photo_file").trigger("click")
+
+  $("#photo_file").change (event) ->
+    photo = $(".edit-photo")[0]
+    photo.src = URL.createObjectURL(event.target.files[0])

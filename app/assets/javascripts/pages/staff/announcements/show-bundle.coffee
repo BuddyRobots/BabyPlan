@@ -82,3 +82,12 @@ $ ->
         else
           $.page_notification "服务器出错，请稍后重试"
     )
+
+
+#img upload
+  $("#upload-photo").click ->
+    $("#photo_file").trigger("click")
+
+  $("#photo_file").change (event) ->
+    photo = $(".edit-photo")[0]
+    photo.src = URL.createObjectURL(event.target.files[0])

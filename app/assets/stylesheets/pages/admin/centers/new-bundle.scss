@@ -81,11 +81,12 @@
 }
 .input-left {
 	float: left;
+	width: 50%;
 }
 #photo {
-	width: 117px;
-	height: 80px;
-	margin: 19px 0 0 60px;
+	width: 11%;
+	height: 88px;
+	margin: 15px 0 0 60px;
 }
 .input-name {
 	display: inline-block;
@@ -98,14 +99,14 @@
 }
 .form-inline {
 	margin: 20px 0;
-	width: 550px;
-	.form-control{
-		width: 440px;
-		height: 30px;
-	}
 }
+#center-name, #center-address {
+	width: 80%;
+	height: 30px;
+}
+
 .map-position {
-	margin: 15px 20px;
+	margin: 0 20px 20px 20px;
 	.map-address {
 		font-size: 16px;
 		color: #323232;

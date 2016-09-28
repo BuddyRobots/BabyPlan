@@ -1,6 +1,8 @@
 #= require moment.min
 #= require fullcalendar.min
 #= require locale-all
+#= require datepicker-zh-TW
+
 
 $ ->
 
@@ -9,9 +11,7 @@ $ ->
       Math.floor((1 + Math.random()) * 0x10000).toString(16).substring 1
     s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4()
 
-  $("#calendar-operation-wrapper").hide()
   is_edit = false
-
 
   initialLocaleCode = "zh-cn"
   $("#calendar").fullCalendar({
@@ -26,7 +26,7 @@ $ ->
     eventLimit: true
     fixedWeekCount: false
     nowIndicator: true
-    height: 500
+    height: 355
     eventClick: (calEvent, jsEvent, view) ->
       if is_edit == false
         return
@@ -99,6 +99,11 @@ $ ->
     $(".unshelve-btn").attr("disabled", true)
     $(".unedit-box").toggle()
     $(".edit-box").toggle()
+    $(".class-calendar").toggle()
+    $(".calendar-operation-wrapper").toggle()
+    $(".calendar-wrapper").css("border", "1px solid #c8c8c8")
+    $("#calendar").removeClass("show-calendar").addClass("edit-calendar")
+    $("#upload-photo").toggle()
     $("#course-num").val($("#num-span").text())
     $("#course-capacity").val(window.capacity)
     $("#course-charge").val(window.price)
@@ -107,8 +112,7 @@ $ ->
     $("#course-speaker").val($("#speaker-span").text())
     $("#course-address").val($("#address-span").text())
 
-    $("#course-num").css("width", $(".num-box").width() - $(".code-num").width()-4)
-    $("#calendar-operation-wrapper").show()
+    $("#course-num").css("width", $(".num-box").width() - $(".course-num").width()-8)
 
     $(".edit-btn").toggle()
     $(".finish-btn").toggle()
@@ -116,7 +120,11 @@ $ ->
 
   $(".finish-btn").click ->
     is_edit = false
-
+    $(".class-calendar").toggle()
+    $(".calendar-operation-wrapper").toggle()
+    $(".calendar-wrapper").css("border", "0")
+    $("#calendar").removeClass("edit-calendar").addClass("show-calendar")
+    $("#upload-photo").toggle()
     code = $("#course-num").val()
     capacity = $("#course-capacity").val()
     price = $("#course-charge").val()
@@ -157,7 +165,6 @@ $ ->
           $(".edit-box").hide()
 
           $(".unshelve-btn").attr("disabled", false)
-          $("#calendar-operation-wrapper").hide()
 
           $("#num-span").text(code)
           $("#capacity-span").text(capacity + "人")
@@ -192,9 +199,9 @@ $ ->
 
   # calender set
   $( "#datepicker" ).datepicker({
-        changeMonth: true,
-        changeYear: true
-      });
+        # changeMonth: true,
+        # changeYear: true
+      })
   $( "#datepicker" ).datepicker( $.datepicker.regional[ "zh-TW" ] )
   $( "#datepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd" )
 
@@ -225,3 +232,12 @@ $ ->
       end: date + "T" + end_time
     }
     $("#calendar").fullCalendar('renderEvent', e, true)
+
+
+#img upload
+  $("#upload-photo").click ->
+    $("#photo_file").trigger("click")
+
+  $("#photo_file").change (event) ->
+    photo = $(".edit-photo")[0]
+    photo.src = URL.createObjectURL(event.target.files[0])

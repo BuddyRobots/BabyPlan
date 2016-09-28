@@ -87,16 +87,23 @@
 .display-box {
 	margin: 0 20px;
 	.display-area {
-		width: 60%;
+		width: 57.15%;
 		margin: 0 auto;
 	}
 }
 .display-content {
+	margin-top: 20px;
 	font-size: 16px;
 	color: #323232;
+	text-indent: 2em;
 }
 .caption-header {
-	padding: 20px 70px 15px 70px;
+	padding: 30px 70px 15px 70px;
+}
+.photo {
+	width: 100%;
+	max-width: 640px;
+	height: 240px;
 }
 #show-caption {
 	font-size: 24px;
@@ -143,27 +150,45 @@
 }
 
 .edit-area {
-	margin: 0 20px;
-	padding: 20px 0;
+	margin: 0 20px 20px 20px;
 	display: none;
 }
-.form-inline {
-	text-align: center;
+.input-name {
+	font-weight: normal;
 }
-#input-caption {
-	width: 60%;
-	height: 62px;
-	padding: 0;
-	border-radius: 4px;
-	font-size: 24px;
-	text-align: center;
+.form-inline {
+	margin: 20px 0;
+	.form-control {
+		width: 500px;
+		margin-left: 10px;
+	}
+}
+.introduce {
+	float: left;
+	display: inline-block;
+	vertical-align: top;
+	margin-right: 15px;
+}
+.notice-introduce {
+	margin-top: 20px;
+}
+#upload-photo {
+	width: 11.3%;
+	height: 88px;
+	margin-left: 10px;
+}
+.edit-photo {
+	vertical-align: top;
+	width: 100%;
+	max-width: 128px;
+	height: 88px;
 }
 .wangedit-area {
-	margin: 20px 60px 0 60px;
-	font-size: 14px;
-	color: #323232;
+	float: left;
+	width: 720px;
+	font-size: 16px;
 }
 #edit-box {
-	height: 350px;
-	margin-bottom: 20px;
+	height: 360px;
+	text-indent: 2em;
 }

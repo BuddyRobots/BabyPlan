@@ -70,8 +70,9 @@
           %label.course-caption{:for => "coursename"} 添加课程
           %input.form-control#coursename{:placeholder => "请输入名称或编号并从列表中选择"}
       .modal-footer
-        %button.btn.btn-default#confirm-btn{"data-dismiss" => "modal", :type => "button"} 确定
-        %button.btn.btn-primary#cancel{:type => "button", "data-dismiss" => "modal"} 取消
+        %button.btn.btn-default#cancel{:type => "button", "data-dismiss" => "modal"} 取消
+        %button.btn.btn-primary#confirm-btn{"data-dismiss" => "modal", :type => "button"} 确定
+        
 
 
 #shelveModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 

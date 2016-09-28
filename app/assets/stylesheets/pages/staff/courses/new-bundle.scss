@@ -107,17 +107,16 @@
 }
 .photo {
 	width: 17.25%;
-	height: 138px;
 	display: inline-block;
-	margin-left: 80px;
-	margin-top: 5px;
+	margin-left: 7.5%;
+	margin-top: 0.5%;
 }
 .kids-capacity {
 	margin-left: 36px;
 }
 .input-area {
 	display: inline-block;
-	width: 198px;
+	width: 17.2%;
 	height: 30px;
 }
 .controls-row {
@@ -142,7 +141,7 @@
 	font-size: 14px;
 }
 .title {
-	font-size: 16px;
+	font-size: 18px;
 	color: #323232;
 	text-align: center;
 	margin: 20px 0 10px 0;
@@ -161,7 +160,7 @@
 	vertical-align: middle;
 	font-weight: normal;
 }
-.add-btn {
+#add-event {
 	width: 240px;
 	background: #10c078;
 	font-size: 16px;
@@ -192,3 +191,4 @@ h2 {
 	font-size: 18px;
 	padding-top: 5px;
 }
+
