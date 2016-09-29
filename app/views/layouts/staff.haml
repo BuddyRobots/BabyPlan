@@ -50,8 +50,10 @@
             %a{:href => "/staff/books"} 绘本管理
           %li{class: @active_tab == "announcement" ? "active" : ""}
             %a{:href => "/staff/announcements"} 公告信息管理
-          / %li 
-          /   %a{:href => "#"} 统计信息查询
+          %li{class: @active_tab == "statistics" ? "active" : ""}
+            %a{:href => "/staff/statistics"} 统计信息查询
+          %li{class: @active_tab == "transfers" ? "active" : ""}
+            %a{:href => "/staff/transfers"} 迁入迁出记录
 
     = yield
 = render :template => 'layouts/application'

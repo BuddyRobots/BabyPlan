@@ -107,6 +107,12 @@ Rails.application.routes.draw do
       end
     end
 
+    resources :statistics do
+    end
+
+    resources :transfers do
+    end
+
     resources :courses do
       collection do
         get :get_id_by_name
