@@ -15,7 +15,7 @@ class Announcement
   has_many :favorites
   has_many :staff_logs
 
-  def self.create_announcement(staff, announcement_info, scope)
+  def self.create_announcement(staff, center, announcement_info, scope)
     html = Nokogiri::HTML(announcement_info[:content])
     info = {
       title: announcement_info[:title],
@@ -24,7 +24,7 @@ class Announcement
       plain_text: html.text,
       image_path: html.css("img").blank? ? "" : html.css("img")[0].attr("src")
     }
-    announcement = scope == "local" ? staff.staff_center.announcements.create(info) : Announcement.create(info)
+    announcement = scope == "local" ? center.announcements.create(info) : Announcement.create(info)
 
     { announcement_id: announcement.id.to_s }
   end

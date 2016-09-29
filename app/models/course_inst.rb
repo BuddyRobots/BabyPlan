@@ -23,7 +23,7 @@ class CourseInst
   has_many :feedbacks
 
 
-  def self.create_course_inst(staff, course_inst_info)
+  def self.create_course_inst(staff, center, course_inst_info)
     course = Course.where(id: course_inst_info[:course_id]).first
     code = course.code + "-" + course_inst_info[:code]
     course_inst = CourseInst.where(code: code).first
@@ -42,7 +42,7 @@ class CourseInst
       speaker: course_inst_info[:speaker],
       date_in_calendar: course_inst_info[:date_in_calendar]
     })
-    course_inst.center = staff.staff_center
+    course_inst.center = center
     course_inst.save
     { course_inst_id: course_inst.id.to_s }
   end

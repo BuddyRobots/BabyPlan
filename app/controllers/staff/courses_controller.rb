@@ -16,7 +16,7 @@ class Staff::CoursesController < Staff::ApplicationController
   end
 
   def create
-    retval = CourseInst.create_course_inst(current_user, params[:course])
+    retval = CourseInst.create_course_inst(current_user, current_center, params[:course])
     render json: retval_wrapper(retval) and return
   end
 
