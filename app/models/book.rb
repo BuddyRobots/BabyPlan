@@ -10,6 +10,9 @@ class Book
   field :translator, type: String
   field :illustrator, type: String
   field :desc, type: String
+  field :age_lower_bound, type: Integer
+  field :age_upper_bound, type: Integer
+  field :tags, type: String
   field :recommendation, type: String
   field :stock, type: Integer
   field :available, type: Boolean
@@ -22,19 +25,22 @@ class Book
   has_many :feedbacks
   has_many :favorites
 
-  def self.create_book(staff, book_info)
-    book = staff.staff_center.books.where(isbn: book_info[:isbn]).first
+  def self.create_book(staff, center, book_info)
+    book = center.books.where(isbn: book_info[:isbn]).first
     if book.present?
       return ErrCode::BOOK_EXIST
     end
-    book = staff.staff_center.books.create(
+    book = center.books.create(
       name: book_info[:name],
       type: book_info[:type],
       isbn: book_info[:isbn],
+      tags: (book_info[:tags] || []).join(','),
       author: book_info[:author],
       translator: book_info[:translator],
       illustrator: book_info[:illustrator],
       desc: book_info[:desc],
+      age_lower_bound: book_info[:age_lower_bound],
+      age_upper_bound: book_info[:age_upper_bound],
       stock: book_info[:stock],
       available: book_info[:available]
     )
@@ -49,6 +55,7 @@ class Book
       author: self.author,
       translator: self.translator,
       illustrator: self.illustrator,
+      tags: tags,
       isbn: self.isbn,
       type: self.type,
       stock: self.stock,
@@ -63,6 +70,7 @@ class Book
         type: book_info["type"],
         stock: book_info["stock"],
         isbn: book_info["isbn"],
+        tags: (book_info[:tags] || []).join(','),
         author: book_info["author"],
         translator: book_info["translator"],
         illustrator: book_info["illustrator"]

@@ -17,7 +17,7 @@ class Admin::AnnouncementsController < Admin::ApplicationController
   end
 
   def create
-    retval = Announcement.create_announcement(current_user, params[:announcement], "global")
+    retval = Announcement.create_announcement(current_user, nil, params[:announcement], "global")
     render json: retval_wrapper(retval)
   end
 

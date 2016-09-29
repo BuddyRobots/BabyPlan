@@ -125,8 +125,7 @@ Rails.application.routes.draw do
     resources :books do
       member do
         post :set_available
-        post :update_cover
-        post :update_back
+        post :update_photos
       end
     end
 

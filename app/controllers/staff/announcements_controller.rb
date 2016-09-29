@@ -17,7 +17,7 @@ class Staff::AnnouncementsController < Staff::ApplicationController
   end
 
   def create
-    retval = Announcement.create_announcement(current_user, params[:announcement], "local")
+    retval = Announcement.create_announcement(current_user, current_center, params[:announcement], "local")
     render json: retval_wrapper(retval)
   end
 

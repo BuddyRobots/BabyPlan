@@ -2,6 +2,8 @@
 
 $ ->
 
+  has_photo = false
+
   editor = new wangEditor('edit-area')
   editor.config.menus = [
         'head',
@@ -115,8 +117,7 @@ $ ->
           $.page_notification "服务器出错，请稍后重试"
           return
         # the information is updated successfully, next step is to upload the image
-        src = $("#photo")[0].src
-        if src == "/assets/web/photo.png"
+        if has_photo == false
           # the user does not upload photo, skip photo uploading step
           location.href = "/admin/centers/" + data.center_id
         else
@@ -130,5 +131,8 @@ $ ->
     $("#photo_file").trigger("click")
 
   $("#photo_file").change (event) ->
+    if event.target.files[0] == undefined
+      return
+    has_photo = true
     photo = $("#photo")[0]
     photo.src = URL.createObjectURL(event.target.files[0])

@@ -3,6 +3,9 @@
 
 $ ->
 
+  has_cover = false
+  has_back = false
+
   editor = new wangEditor('edit-area')
  
   editor.config.menus = [
@@ -66,10 +69,14 @@ $ ->
       return
       
   $(".end-btn").click ->
+
+    tags = $("#type-tag").tagit("assignedTags")
     name = $("#book-name").val().trim()
     type = $("#type-tag").val().trim()
     stock = $("#book-stock").val().trim()
     isbn = $("#book-isbn").val().trim()
+    age_lower_bound = $("#age-lower-bound").val().trim()
+    age_upper_bound = $("#age-upper-bound").val().trim()
     author = $("#book-author").val().trim()
     translator = $("#book-translator").val().trim()
     illustrator = $("#book-illustrator").val().trim()
@@ -86,43 +93,31 @@ $ ->
           name: name
           type: type
           stock: stock
+          tags: tags
           isbn: isbn
           author: author
           translator: translator
           illustrator: illustrator
           desc: desc
+          age_lower_bound: age_lower_bound
+          age_upper_bound: age_upper_bound
           available: available
         }
       },
       (data) ->
         console.log data
         if data.success
-          location.href = "/staff/books/" + data.book_id
+          if !has_cover && !has_back
+            window.location.href = "/staff/books/" + data.book_id
+          else
+            $("#has_cover").val(has_cover)
+            $("#has_back").val(has_back)
+            $("#upload-photo-form")[0].action = "/staff/books/" + data.book_id + "/update_photos"
+            $("#upload-photo-form").submit()
         else
           if data.code == BOOK_EXIST
             $.page_notification("该书号图书已经存在")
       )
-
-# img upload
-  # $("#upload-cover").click ->
-  #   $("#uploadCoverModal").modal("show")
-
-  # coverIntervalFunc = ->
-  #   $('#cover-name').html $('#cover_file').val();
-
-  # $("#browser-cover-click").click ->
-  #   $("#cover_file").click()
-  #   setInterval(coverIntervalFunc, 1)
-
-  # $("#upload-back").click ->
-  #   $("#uploadBackModal").modal("show")
-
-  # backIntervalFunc = ->
-  #   $('#back-name').html $('#back_file').val();
-
-  # $("#browser-back-click").click ->
-  #   $("#back_file").click()
-  #   setInterval(backIntervalFunc, 1)
 
 #img upload
   $("#upload-cover").click ->
@@ -131,8 +126,14 @@ $ ->
     $("#back_file").trigger("click")
 
   $("#cover_file").change (event) ->
+    if event.target.files[0] == undefined
+      return
+    has_cover = true
     photo = $("#cover-photo")[0]
     photo.src = URL.createObjectURL(event.target.files[0])
   $("#back_file").change (event) ->
+    if event.target.files[0] == undefined
+      return
+    has_back = true
     photo = $("#back-photo")[0]
     photo.src = URL.createObjectURL(event.target.files[0])
