@@ -1,5 +1,6 @@
 @import "wangEditor";
 @import "jquery-ui";
+@import "jquery.tagit";
 
 
 .modal-body, label {
@@ -94,6 +95,13 @@
 }
 #book-type {
 	width: 79.6%;
+}
+#type-tag {
+	display: inline-block;
+	vertical-align: middle;
+	width: 79.6%;
+	border: 1px solid #ccc;
+	margin-left: 10px;
 }
 .controls-row {
 	margin: 20px 0 20px 20px;
