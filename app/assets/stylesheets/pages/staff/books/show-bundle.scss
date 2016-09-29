@@ -1,6 +1,6 @@
 @import "wangEditor";
 @import "jquery-ui";
-
+@import "jquery.tagit";
 
 .modal-body, input, label {
 	margin: 0;
@@ -112,7 +112,7 @@
 	vertical-align: middle;
 	font-size: 14px;
 	color: #323232;
-	width: 252px;
+	width: 18.5%;
 	height: 30px;
 	line-height: 30px;
 	margin: 0 20px 0 0;
@@ -123,10 +123,25 @@
 }
 .input-area {
 	display: inline-block;
-	width: 238px;
+	width: 18.5%;
 	height: 30px;
 }
-
+.type-span {
+	border: 1px solid #c8c8c8;
+	border-radius: 10px;
+	color: #969696;
+	width: 60px;
+	height: 24px;
+	text-align: center;
+	line-height: 24px;
+	margin-right: 10px;
+}
+#type-tag {
+	display: inline-block;
+	vertical-align: middle;
+	width: 73%;
+	border: 1px solid #ccc;
+}
 .controls-row {
 	margin: 20px 0 20px 20px;
 }
@@ -140,7 +155,7 @@
 }
 .wangedit-area {
 	float: left;
-	width: 76%;
+	width: 70%;
 	font-size: 16px;
 	display: none;
 }

@@ -71,11 +71,16 @@
             %span.unedit-box#stock-span= @book.stock.to_s + "本"
             %span.edit-box
               %input.input-area.form-control#stock-input{:type => "text"}
-          %form.form-inline
-            %label.input-caption 类型:
-            %span.unedit-box#type-span= @book.type
+          %form.form-inline.clearfix
+            %label.input-caption 标签:
+            %span.unedit-box.type-span 冒险
+            %span.unedit-box.type-span 奇幻 
+            %span.unedit-box.type-span 探索
+            / %span.unedit-box#type-span= @book.type
             %span.edit-box
-              %input.input-area.form-control#type-input{:type => "text"}
+              %ul#type-tag
+                %li 冒险
+                %li 奇幻
                    
           .book-introduce.clearfix
             %span.introduce 书籍介绍:
