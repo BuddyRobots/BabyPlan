@@ -46,10 +46,14 @@
         %span.wangedit-area
           #edit-area
 
+      = form_tag("/", method: "post", multipart: true, id: "upload-photo-form", class: "hide") do
+        = file_field_tag "cover_file", { class: "hide", accept: ".jpg,.png" }
+        = file_field_tag "back_file", { class: "hide", accept: ".jpg,.png" }
+
       .cover-back
         %span.cover 封面:
         %a#upload-cover{href: "javascript:void(0);"}
-          %img.photo{src: "/assets/web/addcover.png"}
+          %img#cover-photo.photo{src: "/assets/web/addcover.png"}
         / - if @book.cover.present?
         /   = image_tag(@book.cover.path, id: "cover-img")
         / - else
@@ -57,7 +61,7 @@
         /     %img.cover-img{:src => "/assets/web/photo.png"}
         %span.back 封底:
         %a#upload-back{href: "javascript:void(0);"}
-          %img.photo{src: "/assets/web/coverempty.png"}
+          %img#back-photo.photo{src: "/assets/web/addcover.png"}
         / - if @book.back.present?
         /   = image_tag(@book.back.path, id: "back-img")
         / - else

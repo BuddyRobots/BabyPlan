@@ -57,22 +57,35 @@ $ ->
       )
 
 # img upload
+  # $("#upload-cover").click ->
+  #   $("#uploadCoverModal").modal("show")
+
+  # coverIntervalFunc = ->
+  #   $('#cover-name').html $('#cover_file').val();
+
+  # $("#browser-cover-click").click ->
+  #   $("#cover_file").click()
+  #   setInterval(coverIntervalFunc, 1)
+
+  # $("#upload-back").click ->
+  #   $("#uploadBackModal").modal("show")
+
+  # backIntervalFunc = ->
+  #   $('#back-name').html $('#back_file').val();
+
+  # $("#browser-back-click").click ->
+  #   $("#back_file").click()
+  #   setInterval(backIntervalFunc, 1)
+
+#img upload
   $("#upload-cover").click ->
-    $("#uploadCoverModal").modal("show")
-
-  coverIntervalFunc = ->
-    $('#cover-name').html $('#cover_file').val();
-
-  $("#browser-cover-click").click ->
-    $("#cover_file").click()
-    setInterval(coverIntervalFunc, 1)
-
+    $("#cover_file").trigger("click")
   $("#upload-back").click ->
-    $("#uploadBackModal").modal("show")
+    $("#back_file").trigger("click")
 
-  backIntervalFunc = ->
-    $('#back-name').html $('#back_file').val();
-
-  $("#browser-back-click").click ->
-    $("#back_file").click()
-    setInterval(backIntervalFunc, 1)
+  $("#cover_file").change (event) ->
+    photo = $("#cover-photo")[0]
+    photo.src = URL.createObjectURL(event.target.files[0])
+  $("#back_file").change (event) ->
+    photo = $("#back-photo")[0]
+    photo.src = URL.createObjectURL(event.target.files[0])
