@@ -74,7 +74,7 @@ $ ->
     is_edit = true
 
     $(".unshelve-btn").attr("disabled", true)
-    $("#QRcode-btn").attr("disabled", true)
+    $(".QRcode-btn").attr("disabled", true)
     $("#name-input").val($("#name-span").text())
     $("#type-input").val($("#type-span").text())
     $("#stock-input").val(window.stock)
@@ -104,16 +104,19 @@ $ ->
     else
       $(".edit-btn").show()
     $(".unshelve-btn").show()
+    $(".QRcode-btn").show()
 
   $("#user-review").click ->
     $(".edit-btn").hide()
     $(".unshelve-btn").hide()
     $(".finish-btn").hide()
+    $(".QRcode-btn").hide()
 
   $("#borrow-message").click ->
     $(".edit-btn").hide()
     $(".unshelve-btn").hide()
     $(".finish-btn").hide()  
+    $(".QRcode-btn").hide()  
 
   # finish-btn pressdown
   $(".finish-btn").click ->

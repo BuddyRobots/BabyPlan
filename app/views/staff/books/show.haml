@@ -15,7 +15,7 @@
     .btn.edit-btn{:type => "button"} 
       %img.edit{:src => "/assets/managecenter/edit.png"}
       编辑
-    .btn#QRcode-btn{:type => "button"}
+    .btn.QRcode-btn{:type => "button"}
       %img.QRcode{src: "/assets/web/qrcode.png"} 导出二维码
     - if @book.available == true
       .btn.unshelve-btn.available{:type => "button"} 
@@ -74,7 +74,6 @@
             %span.edit-box
               %input.input-area.form-control#stock-input{:type => "text"}
           %form.form-inline.clearfix#tag-form
-            %span.unedit-box.type-span.type-span-template
             %label.input-caption 标签:
             - (@book.tags || "").split(',').each do |tag|
               %span.unedit-box.type-span.type-span-ele= tag
@@ -156,6 +155,14 @@
                   %td 小明
                   %td 2016-8-23
                   %td 2016-10-23
+                %tr
+                  %td 小明
+                  %td 2016-8-23
+                  %td.unreturn 暂未归还
+                %tr
+                  %td 小明
+                  %td 2016-8-23
+                  %td.delay 已逾期(联系电话:13245677654)
           .select-page 
             %span.totalitems= "共6页,总计12条"
             %span.choice-page

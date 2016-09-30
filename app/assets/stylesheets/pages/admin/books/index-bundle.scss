@@ -68,12 +68,33 @@
 		height: 14px;
 	}
 }
+.tabbable {
+	padding: 20px;
+}
+	
+.nav-tabs {
+	margin-bottom: 0;
+	border-bottom: 0;
+	li {
+		font-size: 16px;
+		color: #323232;
+	}
+}
+.book-nums {
+	border: 1px solid #ddd;
+	border-radius: 0 6px 6px 6px;
+	padding: 20px;
+}
+.book-migrate {
+	border: 1px solid #ddd;
+	border-radius: 6px;
+	padding: 20px;
+}
 .table-box {
 	position: relative;
 	padding: 0;
-	margin: 20px 20px auto 20px;
 }
-#user-table {
+#book-table, #migrate-table{
 	border-radius: 6px;
 	border: 1px solid #c8c8c8;
 	font-size: 14px;
@@ -86,14 +107,24 @@
 		padding: 0;
 	}
 	td {
-		font-size: 12px;
+		font-size: 14px;
 		color: #505050;
 		height:45px;
 		line-height: 45px;
 		text-align: center;
 		padding: 0;
 	}
+	.prepare {
+		color: #f7873d;
+	}
+	.transit {
+		color: #0fc077;
+	}
+	.end {
+		color: #969696;
+	}
 }
+
 .undiscover {
 	text-align: center;
 	padding: 30px;
@@ -110,8 +141,7 @@
 }
 .select-page {
 	text-align: right;
-	margin: 10px 20px;
-	padding-bottom: 10px;
+	margin-top: 10px;
 }
 .totalitems {
 	font-size: 12px;

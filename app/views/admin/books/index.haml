@@ -14,41 +14,100 @@
             %button.btn.btn-default#search-btn{:type => "button"}
 
     .manage-content
-      - if @books[:data].length == 0
-        .undiscover
-          %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
-          %span.message 抱歉！暂无查找信息
-      - else
-        .table-box
-          %table.table.table-bordered#user-table
-            %thead
-              %tr
-                %th 绘本名称
-                %th 儿童中心
-                %th 类&nbsp型
-                %th 数&nbsp量
-                %th 作&nbsp者
-                %th ISBN编码
-                %th 操&nbsp作
-            %tbody
-              - @books[:data].each do |e|
-                %tr
-                  %td= e[:name]
-                  %td= e[:center]
-                  %td= e[:type]
-                  %td= e[:stock]
-                  %td= e[:author]
-                  %td= e[:isbn]
-                  %td
-                    = link_to "详情", "/admin/books/#{e[:id]}"
-        .select-page 
-          %span.totalitems= "共#{@books[:total_page]}页,总计#{@books[:total_number]}条"
-          %span.choice-page
-            %ul.pagination.pagination-sm
-              %li
-                %a{:href => "/admin/books?keyword=#{@keyword}&page=#{@books[:previous_page]}"} «
-              - ( (@books[:previous_page] > 2 ? @books[:previous_page] - 2 : 1) .. (@books[:next_page] < @books[:total_page] - 2 ? @books[:next_page] + 2 : @books[:total_page]) ).to_a.each do |page|
-                %li
-                  %a{:href => "/admin/books?keyword=#{@keyword}&page=#{page}"}= page
-              %li
-                %a{:href => "/admin/books?keyword=#{@keyword}&page=#{@books[:next_page]}"} »
+      .tabbable
+        %ul.nav.nav-tabs
+          %li.active
+            %a{"data-toggle" => "tab", :href => "#tab1"} 全部绘本
+          %li
+            %a{"data-toggle" => "tab", :href => "#tab2"} 绘本迁移
+
+        .tab-content
+          #tab1.tab-pane.active
+            .book-nums
+              .undiscover
+                %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
+                %span.message 抱歉！暂无查找信息
+              .table-box
+                %table.table.table-bordered#book-table
+                  %thead
+                    %tr
+                      %th 绘本名称
+                      %th 儿童中心
+                      %th 类&nbsp型
+                      %th 数&nbsp量
+                      %th 作&nbsp者
+                      %th ISBN编码
+                      %th 操&nbsp作
+                  %tbody
+                    - @books[:data].each do |e|
+                      %tr
+                        %td= e[:name]
+                        %td= e[:center]
+                        %td= e[:type]
+                        %td= e[:stock]
+                        %td= e[:author]
+                        %td= e[:isbn]
+                        %td
+                          = link_to "详情", "/admin/books/#{e[:id]}"
+              .select-page 
+                %span.totalitems= "共#{@books[:total_page]}页,总计#{@books[:total_number]}条"
+                %span.choice-page
+                  %ul.pagination.pagination-sm
+                    %li
+                      %a{:href => "/admin/books?keyword=#{@keyword}&page=#{@books[:previous_page]}"} «
+                    - ( (@books[:previous_page] > 2 ? @books[:previous_page] - 2 : 1) .. (@books[:next_page] < @books[:total_page] - 2 ? @books[:next_page] + 2 : @books[:total_page]) ).to_a.each do |page|
+                      %li
+                        %a{:href => "/admin/books?keyword=#{@keyword}&page=#{page}"}= page
+                    %li
+                      %a{:href => "/admin/books?keyword=#{@keyword}&page=#{@books[:next_page]}"} »
+          #tab2.tab-pane  
+            .book-migrate
+              .undiscover
+                %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
+                %span.message 抱歉！暂无查找信息
+              .table-box
+                %table.table.table-bordered#migrate-table
+                  %thead
+                    %tr
+                      %th 迁出时间
+                      %th 迁出中心
+                      %th 迁入中心
+                      %th 绘本数量
+                      %th 迁移状态
+                      %th 操&nbsp作
+                  %tbody
+                    %tr
+                      %td　2016.10.10
+                      %td 海淀区儿童中心
+                      %td　朝阳区儿童中心
+                      %td　24
+                      %td.prepare 准备中
+                      %td
+                        = link_to "详情"
+                    %tr
+                      %td　2016.10.10
+                      %td 海淀区儿童中心
+                      %td　朝阳区儿童中心
+                      %td　24
+                      %td.transit 运输中
+                      %td
+                        = link_to "详情"
+                    %tr
+                      %td　2016.10.10
+                      %td 海淀区儿童中心
+                      %td　朝阳区儿童中心
+                      %td　24
+                      %td.end 已完成
+                      %td
+                        = link_to "详情"
+              .select-page 
+                %span.totalitems= "共6页,总计12条"
+                %span.choice-page
+                  %ul.pagination.pagination-sm
+                    %li
+                      %a{:href => "javascript:void(0);"} «
+                    / - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
+                    %li
+                      %a{:href => "javascript:void(0);"} 1
+                    %li
+                      %a{:href => "javascript:void(0);"} »
