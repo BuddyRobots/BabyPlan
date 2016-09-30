@@ -4,6 +4,8 @@
   :javascript
     window.bid = "#{@book.id.to_s}"
     window.stock = "#{@book.stock}"
+    window.age_lower_bound = "#{@book.age_lower_bound}"
+    window.age_upper_bound = "#{@book.age_upper_bound}"
 
 .content-area
   .manage-content
@@ -60,27 +62,26 @@
               %input.input-area.form-control#isbn-input{:type => "text"}
           .controls.controls-row
             %label.input-caption#mixage-label 最小适龄:
-            %span.unedit-box#mixage-span
+            %span.unedit-box#age-lower-bound-span= @book.age_lower_bound.blank? ? "未填写" : @book.age_lower_bound.to_s + "岁"
             %span.edit-box
-              %input.input-area.form-control#mixage-input{:type => "text"}      
+              %input.input-area.form-control#age-lower-bound-input{:type => "text"}      
             %label.input-caption#mixage-label 最大适龄:
-            %span.unedit-box#maxage-span
+            %span.unedit-box#age-upper-bound-span= @book.age_upper_bound.blank? ? "未填写" : @book.age_upper_bound.to_s + "岁"
             %span.edit-box
-              %input.input-area.form-control#maxage-input{:type => "text"}  
+              %input.input-area.form-control#age-upper-bound-input{:type => "text"}  
             %label.input-caption 数量:
             %span.unedit-box#stock-span= @book.stock.to_s + "本"
             %span.edit-box
               %input.input-area.form-control#stock-input{:type => "text"}
-          %form.form-inline.clearfix
+          %form.form-inline.clearfix#tag-form
+            %span.unedit-box.type-span.type-span-template
             %label.input-caption 标签:
-            %span.unedit-box.type-span 冒险
-            %span.unedit-box.type-span 奇幻 
-            %span.unedit-box.type-span 探索
-            / %span.unedit-box#type-span= @book.type
+            - (@book.tags || "").split(',').each do |tag|
+              %span.unedit-box.type-span.type-span-ele= tag
             %span.edit-box
               %ul#type-tag
-                %li 冒险
-                %li 奇幻
+                / %li 冒险
+                / %li 奇幻
                    
           .book-introduce.clearfix
             %span.introduce 书籍介绍:
@@ -88,23 +89,19 @@
               = @book.desc.html_safe
             %span.wangedit-area
               #edit-area
+
+          = form_tag("/staff/books/" + @book.id.to_s + "/upload_photo", method: "post", multipart: true, id: "upload-photo-form", class: "hide") do
+            = text_field_tag "has_cover"
+            = text_field_tag "has_back"
+            = file_field_tag "cover_file", { class: "hide", accept: ".jpg,.png" }
+            = file_field_tag "back_file", { class: "hide", accept: ".jpg,.png" }
           .cover-back
             %span.book-cover 封面:
             %a#upload-cover{href: "javascript:void(0);"}
-              %img.photo{src: "/assets/web/addcover.png"}
-            / - if @book.cover.present?
-            /   = image_tag(@book.cover.path, id: "cover-img")
-            / - else
-            /   %a#upload-cover{href: "javascript:void(0);"}
-            /     %img.photo{src: "/assets/web/addcover.png"}
+              %img#cover-photo.photo{src: @book.cover.nil? ? "/assets/web/coverempty.png" : @book.cover.path}
             %span.book-back 封底:
             %a#upload-back{href: "javascript:void(0);"}
-              %img.photo{src: "/assets/web/coverempty.png"}
-            / - if @book.back.present?
-            /   = image_tag(@book.back.path, id: "back-img")
-            / - else
-            /   %a#upload-back{href: "javascript:void(0);"}
-            /     %img.photo{src: "/assets/web/coverempty.png"}
+              %img#back-photo.photo{src: @book.back.nil? ? "/assets/web/coverempty.png" : @book.back.path}
         #tab2.tab-pane
           .undiscover
             %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
@@ -173,48 +170,4 @@
      
 #editor-content.hide
   = @book.desc.html_safe
-
-
-#uploadCoverModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
-  .modal-dialog
-    .modal-content
-      = form_tag(update_cover_staff_book_path(@book), method: "post", multipart: true) do
-        .modal-header
-          %h3.caption 上传封面
-          %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", :src => "/assets/managecenter/close.png"}
-        .modal-body
-          .form-group.hide
-            = text_field_tag :book_id, @book.id.to_s
-          .form-group
-            = file_field_tag "cover_file", { class: "hide", accept: ".jpg,.png" }
-            %span.cover-caption 上传封面图片
-            %a#browser-cover-click{href: "javascript:void(0);"} 
-              %img{:src => "/assets/managecenter/upload.png"} 
-            %span.notice 请选择10M内的.jpg或.png图片上传
-            %p#cover-name
-        .modal-footer
-          = submit_tag "上传", :class => 'btn-primary btn'
-          %a.btn.btn-default{href: "#", data: {dismiss: "modal"}, "aria-hidden" => "true"} 取消
-
-
-#uploadBackModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
-  .modal-dialog
-    .modal-content
-      = form_tag(update_back_staff_book_path(@book), method: "post", multipart: true) do
-        .modal-header
-          %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", :src => "/assets/managecenter/close.png"}
-          %h3.caption 上传封底
-        .modal-body
-          .form-group.hide
-            = text_field_tag :book_id, @book.id.to_s
-          .form-group
-            = file_field_tag "back_file", { class: "hide", accept: ".jpg,.png" }
-            %span.back-caption 上传封底图片
-            %a#browser-back-click{href: "javascript:void(0);"} 
-              %img{:src => "/assets/managecenter/upload.png"} 
-            %span.notice 请选择10M内的.jpg或.png图片上传
-            %p#back-name
-        .modal-footer
-          = submit_tag "上传", :class => 'btn-primary btn'
-          %a.btn.btn-default{href: "#", data: {dismiss: "modal"}, "aria-hidden" => "true"} 取消
 

@@ -119,13 +119,14 @@ Rails.application.routes.draw do
       end
       member do
         post :set_available
+        post :upload_photo
       end
     end
 
     resources :books do
       member do
         post :set_available
-        post :update_photos
+        post :upload_photo
       end
     end
 

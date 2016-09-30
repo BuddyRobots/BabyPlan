@@ -35,6 +35,21 @@ class Staff::CoursesController < Staff::ApplicationController
     render json: retval_wrapper(retval)
   end
 
+  def upload_photo
+    @course_inst = CourseInst.where(id: params[:id]).first
+    if @course_inst.blank?
+      redirect_to action: :index and return
+    end
+    photo = Photo.new
+    photo.photo = params[:photo_file]
+    photo.store_photo!
+    filepath = photo.photo.file.file
+    m = Material.create(path: "/uploads/photos/" + filepath.split('/')[-1])
+    @course_inst.photo = m
+    @course_inst.save
+    redirect_to action: :show, id: @course_inst.id.to_s and return
+  end
+
   def get_id_by_name
     course_name = params[:course_name]
     scan_result = course_name.scan(/\((.+)\)/)

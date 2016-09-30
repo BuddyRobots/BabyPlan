@@ -73,6 +73,8 @@ class Book
         tags: (book_info[:tags] || []).join(','),
         author: book_info["author"],
         translator: book_info["translator"],
+        age_lower_bound: book_info["age_lower_bound"],
+        age_upper_bound: book_info["age_upper_bound"],
         illustrator: book_info["illustrator"]
       }
     )

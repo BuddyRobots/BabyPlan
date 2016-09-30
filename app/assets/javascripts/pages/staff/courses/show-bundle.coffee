@@ -6,6 +6,20 @@
 
 $ ->
 
+  can_repeat = false
+  has_photo = false
+
+  enable_repeat = ->
+    can_repeat = true
+    $(".date-btn").addClass("active-btn")
+    $(".week-btn").addClass("active-btn")
+
+  disable_repeat = ->
+    can_repeat = false
+    $(".date-btn").removeClass("active-btn")
+    $(".week-btn").removeClass("active-btn")
+
+
   guid = ->
     s4 = ->
       Math.floor((1 + Math.random()) * 0x10000).toString(16).substring 1
@@ -107,6 +121,7 @@ $ ->
     $("#course-num").val($("#num-span").text())
     $("#course-capacity").val(window.capacity)
     $("#course-charge").val(window.price)
+    $("#public-charge").val(window.price_pay)
     $("#course-times").val(window.length)
     $("#course-date").val($("#date-span").text())
     $("#course-speaker").val($("#speaker-span").text())
@@ -120,6 +135,7 @@ $ ->
 
   $(".finish-btn").click ->
     is_edit = false
+    disable_repeat()
     $(".class-calendar").toggle()
     $(".calendar-operation-wrapper").toggle()
     $(".calendar-wrapper").css("border", "0")
@@ -128,6 +144,7 @@ $ ->
     code = $("#course-num").val()
     capacity = $("#course-capacity").val()
     price = $("#course-charge").val()
+    price_pay = $("#public-charge").val()
     length = $("#course-times").val()
     date = $("#course-date").val()
     speaker = $("#course-speaker").val()
@@ -149,6 +166,7 @@ $ ->
           code: code
           capacity: capacity
           price: price
+          price_pay: price_pay
           length: length
           date: date
           speaker: speaker
@@ -169,13 +187,18 @@ $ ->
           $("#num-span").text(code)
           $("#capacity-span").text(capacity + "人")
           $("#charge-span").text(price + "元")
+          $("#public-span").text(price_pay + "元")
           $("#times-span").text(length + "次")
           window.capacity = capacity
           window.price = price
+          window.price_pay = price_pay
           window.length = length
           $("#date-span").text(date)
           $("#speaker-span").text(speaker)
           $("#address-span").text(address)
+
+          if has_photo
+            $("#upload-photo-form").submit()
         else
           $.page_notification "服务器出错，请稍后重试"
     )
@@ -218,7 +241,7 @@ $ ->
     'timeFormat': 'H:i:s'
   })
 
-  $("#add-event").click ->
+  add_event = ->
     if is_edit == false
       return
     date = $("#datepicker").val()
@@ -232,12 +255,45 @@ $ ->
       end: date + "T" + end_time
     }
     $("#calendar").fullCalendar('renderEvent', e, true)
+    $("#calendar").fullCalendar("gotoDate", Date.parse(date))
+    enable_repeat()
 
+  $("#add-event").click ->
+    add_event()
+
+  $("#datepicker").change ->
+    disable_repeat()
+
+  $("#start-tiem").change ->
+    disable_repeat()
+
+  $("#end-time").change ->
+    disable_repeat()
+
+  $(".week-btn").click ->
+    if can_repeat == false
+      return
+    date = $("#datepicker").val()
+    next_week = new Date(Date.parse(date) + 7 * 86400000)
+    $("#datepicker").datepicker("setDate", next_week);
+    add_event()
+
+  $(".date-btn").click ->
+    if can_repeat == false
+      return
+    date = $("#datepicker").val()
+    next_day = new Date(Date.parse(date) + 86400000)
+    $("#datepicker").datepicker("setDate", next_day);
+    add_event()
 
 #img upload
   $("#upload-photo").click ->
-    $("#photo_file").trigger("click")
+    if is_edit
+      $("#photo_file").trigger("click")
 
   $("#photo_file").change (event) ->
+    if event.target.files[0] == undefined
+      return
+    has_photo = true
     photo = $(".edit-photo")[0]
     photo.src = URL.createObjectURL(event.target.files[0])

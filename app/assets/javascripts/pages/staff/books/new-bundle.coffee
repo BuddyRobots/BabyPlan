@@ -112,7 +112,7 @@ $ ->
           else
             $("#has_cover").val(has_cover)
             $("#has_back").val(has_back)
-            $("#upload-photo-form")[0].action = "/staff/books/" + data.book_id + "/update_photos"
+            $("#upload-photo-form")[0].action = "/staff/books/" + data.book_id + "/upload_photo"
             $("#upload-photo-form").submit()
         else
           if data.code == BOOK_EXIST

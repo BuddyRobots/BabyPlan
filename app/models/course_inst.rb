@@ -10,10 +10,12 @@ class CourseInst
   field :address, type: String
   field :capacity, type: Integer
   field :price, type: Integer
+  field :price_pay, type: Integer
   field :speaker, type: String
   field :date, type: String
   field :date_in_calendar, type: Array, default: [ ]
 
+  has_one :photo, class_name: "Material", inverse_of: :course_inst_photo
   belongs_to :course
   belongs_to :center
 
@@ -38,6 +40,7 @@ class CourseInst
       address: course_inst_info[:address],
       capacity: course_inst_info[:capacity],
       price: course_inst_info[:price],
+      price_pay: course_inst_info[:price_pay],
       date: course_inst_info[:date],
       speaker: course_inst_info[:speaker],
       date_in_calendar: course_inst_info[:date_in_calendar]
@@ -54,6 +57,7 @@ class CourseInst
       available: self.available,
       speaker: self.speaker,
       price: self.price,
+      price_pay: self.price_pay,
       address: self.address,
       date: self.date
     }
@@ -65,6 +69,7 @@ class CourseInst
         code: self.course.code + "-" + course_inst_info["code"],
         inst_code: course_inst_info["code"],
         price: course_inst_info["price"],
+        price_pay: course_inst_info["price_pay"],
         length: course_inst_info["length"],
         date: course_inst_info["date"],
         speaker: course_inst_info["speaker"],
