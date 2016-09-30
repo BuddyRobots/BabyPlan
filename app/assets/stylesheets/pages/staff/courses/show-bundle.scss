@@ -92,9 +92,8 @@ input, label {
 	margin-left: 7.5%;
 	margin-top: 0.5%;
 }
-.unedit-photo {
-	width: auto;
-	max-width: 200px;
+.unedit-photo, .edit-photo {
+	width: 200px;
 	height: 138px;
 }
 #upload-photo {
@@ -400,4 +399,8 @@ h2 {
 	.clicked {
 		background: #fdd3b9;
 	}
+}
+
+.active-btn {
+	background: #f7873d;
 }

@@ -44,7 +44,7 @@ class Staff::BooksController < Staff::ApplicationController
     render json: retval_wrapper(retval)
   end
 
-  def update_photos
+  def upload_photo
     @book = current_center.books.where(id: params[:id]).first
     if @book.blank?
       redirect_to action: :index and return

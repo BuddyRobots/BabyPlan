@@ -90,7 +90,7 @@
             %span.wangedit-area
               #edit-area
 
-          = form_tag("/staff/books/" + @book.id.to_s + "/update_photos", method: "post", multipart: true, id: "upload-photo-form", class: "hide") do
+          = form_tag("/staff/books/" + @book.id.to_s + "/upload_photo", method: "post", multipart: true, id: "upload-photo-form", class: "hide") do
             = text_field_tag "has_cover"
             = text_field_tag "has_back"
             = file_field_tag "cover_file", { class: "hide", accept: ".jpg,.png" }

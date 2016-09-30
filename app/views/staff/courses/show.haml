@@ -5,6 +5,7 @@
     window.cid = "#{@course_inst.id.to_s}"
     window.capacity = "#{@course_inst.capacity}"
     window.price = "#{@course_inst.price}"
+    window.price_pay = "#{@course_inst.price_pay}"
     window.length = "#{@course_inst.length}"
     window.date_in_calendar = "#{@course_inst.date_in_calendar_str}"
 
@@ -53,7 +54,9 @@
                 %span.edit-box
                   %input.input-area.form-control#course-address{:type => "text"}
             .photo
-              %img.unedit-photo{:src => "/assets/banner.png"}
+              %img.unedit-photo{:src => @course_inst.photo.nil? ? "/assets/banner.png" : @course_inst.photo.path }
+              = form_tag("/staff/courses/" + @course_inst.id.to_s + "/upload_photo", method: "post", multipart: true, id: "upload-photo-form", class: "hide") do
+                = file_field_tag "photo_file", { class: "hide", accept: ".jpg,.png" }
               %a#upload-photo{href: "javascript:void(0);"}
                 %img.edit-photo{:src => "/assets/web/photo.png"}
 
@@ -82,7 +85,7 @@
             %span.edit-box
               %input.input-area.form-control#course-charge{:type => "text"}
             %label.input-caption 公益价:
-            %span.unedit-box#public-span
+            %span.unedit-box#public-span= @course_inst.price_pay.to_s + "元"
             %span.edit-box
               %input.input-area.form-control#public-charge{:type => "text"}
           .calendar-wrapper.clearfix
