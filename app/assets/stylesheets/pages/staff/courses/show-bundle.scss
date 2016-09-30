@@ -379,8 +379,8 @@ h2 {
 		line-height: 40px;
 		padding: 0;
 	}
-	td {
-		font-size: 12px;
+	.td-data {
+		font-size: 14px;
 		color: #505050;
 		height:45px;
 		line-height: 45px;
@@ -400,4 +400,81 @@ h2 {
 	.clicked {
 		background: #fdd3b9;
 	}
+}
+.details {
+	color: #f7873d;
+}
+.details:link {
+	color: #f7873d;
+}
+.details:visited {
+	color: #f7873d;
+}
+.details:hover {
+	color: #f7873d;
+}
+.details:active {
+	color: #f7873d;
+}
+.triangle-down {
+	display: inline-block;
+	vertical-align: middle;
+	width: 0;
+	height: 0;
+	border-top: 5px solid #f7873d;
+	border-right: 5px solid transparent;
+	border-left: 5px solid transparent;
+}
+.triangle-up {
+	display: inline-block;
+	vertical-align: middle;
+	width: 0;
+	height: 0;
+	border-bottom: 5px solid #f7873d ;
+	border-right: 5px solid transparent;
+	border-left: 5px solid transparent;
+}
+.status {
+	// display: none;
+	padding: 0;
+}
+.course-status {
+	margin: 10px 0 5px 10px;
+}
+.comments {
+	margin-left: 38px;
+	line-height: 150%;
+}
+.comments-title {
+	float: left;
+}
+.comments-content {
+	float: left;
+} 
+.square {
+	display: inline-block;
+	width: 18px;
+	height: 18px;
+	background: #cfcfcf;
+	border-radius: 2px;
+	margin-right: 5px;
+	vertical-align: middle;
+}
+.join-square {
+	display: inline-block;
+	width: 18px;
+	height: 18px;
+	background: #0fc077;
+	border-radius: 2px;
+	margin-right: 5px;
+	vertical-align: middle;
+}
+.miss-square {
+	display: inline-block;
+	width: 18px;
+	height: 18px;
+	background: #d70c19;
+	border-radius: 2px;
+	margin-right: 5px;
+	vertical-align: middle;
 }
