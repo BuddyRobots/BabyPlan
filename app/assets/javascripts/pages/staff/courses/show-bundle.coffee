@@ -127,7 +127,7 @@ $ ->
     $("#course-speaker").val($("#speaker-span").text())
     $("#course-address").val($("#address-span").text())
 
-    $("#course-num").css("width", $(".num-box").width() - $(".course-num").width()-8)
+    $("#course-num").css("width", $(".num-box").width() - $(".course-num").width()-4)
 
     $(".edit-btn").toggle()
     $(".finish-btn").toggle()
@@ -297,3 +297,14 @@ $ ->
     has_photo = true
     photo = $(".edit-photo")[0]
     photo.src = URL.createObjectURL(event.target.files[0])
+
+
+  $(".details").click ->
+    span = $(this).find("span")
+    row = $(this).closest("tr")
+    status = row.next()
+    status.toggle()
+    if span.hasClass("triangle-down")
+      span.removeClass("triangle-down").addClass("triangle-up")
+    else
+      span.removeClass("triangle-up").addClass("triangle-down")

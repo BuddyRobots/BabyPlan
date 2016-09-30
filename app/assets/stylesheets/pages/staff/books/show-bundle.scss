@@ -50,7 +50,7 @@
 	@extend .edit-btn;
 	display: none;
 }
-#QRcode-btn {
+.QRcode-btn {
 	@extend .edit-btn;
 	right: 260px;
 	width: 136px;
@@ -430,7 +430,7 @@
 		padding: 0;
 	}
 	td {
-		font-size: 12px;
+		font-size: 14px;
 		color: #505050;
 		height:45px;
 		line-height: 45px;
@@ -446,6 +446,12 @@
 			
 			text-decoration: underline;
 		}
+	}
+	.unreturn {
+		color: #f7873d;
+	}
+	.delay {
+		color: #d70c19;
 	}
 	.clicked {
 		background: #fdd3b9;

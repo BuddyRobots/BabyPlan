@@ -32,9 +32,11 @@
         %li.active
           %a#course-message{"data-toggle" => "tab", :href => "#tab1"} 课程信息
         %li
-          %a#user-review{"data-toggle" => "tab", :href => "#tab2"} 用户评价
+          %a#register-message{"data-toggle" => "tab", :href => "#tab2"} 报名信息
         %li
-          %a#register-message{"data-toggle" => "tab", :href => "#tab3"} 报名信息
+          %a#user-review{"data-toggle" => "tab", :href => "#tab3"} 用户评价
+        %li
+          %a#register-message{"data-toggle" => "tab", :href => "#tab4"} 课程签到
 
       .tab-content
         #tab1.tab-pane.active
@@ -108,8 +110,82 @@
                 .btn.date-btn{:type => "button"} 次日重复
                 .btn.week-btn{:type => "button"} 每周重复
 
-      
         #tab2.tab-pane
+          .table-box
+            %table.table.table-bordered#register-table
+              %thead
+                %tr
+                  %th 姓&nbsp名
+                  %th 住&nbsp址
+                  %th 电&nbsp话
+                  %th 操&nbsp作
+              %tbody
+                / - @books[:data].each do |b|
+                /   %tr{class: "book-record #{ b[:available] ? "available" : "unavailable" }", "data-id" => b[:id]}
+                %tr
+                  %td.td-data 李星
+                  %td.td-data 朝阳区新街口外大街27号院
+                  %td.td-data 13324567865
+                  %td.td-data
+                    %a.details{:href => "javascript:void(0);"} 
+                      上课情况
+                      %span.triangle-down
+                %tr.status
+                  %td{:colspan => "4"}
+                    .course-status
+                      %span.item-status 上课状态：
+                      %span.join-square
+                      %span.join-square
+                      %span.join-square
+                      %span.join-square
+                      %span.square
+                      %span.miss-square
+                      %span.square
+                      %span.square
+                      %span.square
+                      %span.square
+                    .comments
+                      %span.comments-title 评论：
+                      %span.comments-content 孩子刚上完这门课程，内容很新颖，学了很多知识，丰富了孩子的视野，是一门很好的课，老师讲的也很Nice，很棒的一门课程，会继续为孩子报名参加中心其它孩子感兴趣的课程。
+                %tr
+                  %td.td-data 李星
+                  %td.td-data 朝阳区新街口外大街27号院
+                  %td.td-data 13324567865
+                  %td.td-data
+                    %a.details{:href => "javascript:void(0);"} 
+                      上课情况
+                      %span.triangle-down
+                %tr.status
+                  %td{:colspan => "4"}
+                    .course-status
+                      %span.item-status 上课状态：
+                      %span.join-square
+                      %span.join-square
+                      %span.join-square
+                      %span.join-square
+                      %span.square
+                      %span.miss-square
+                      %span.square
+                      %span.square
+                      %span.square
+                      %span.square
+                    .comments
+                      %span.comments-title 评论：
+                      %span.uncomment 暂未评论
+
+          .select-page 
+            %span.totalitems= "共6页,总计12条"
+            %span.choice-page
+              %ul.pagination.pagination-sm
+                %li
+                  %a{:href => "javascript:void(0);"} «
+                / - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
+                %li
+                  %a{:href => "javascript:void(0);"} 1
+                %li
+                  %a{:href => "javascript:void(0);"} »
+
+        #tab3.tab-pane
           .undiscover
             %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
             %span.undiscover-message 抱歉！暂无查找信息
@@ -157,7 +233,7 @@
                 %li
                   %a{:href => "javascript:void(0);"} »
           
-        #tab3.tab-pane
+        #tab4.tab-pane
           .undiscover
             %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
             %span.undiscover-message 抱歉！暂无查找信息
@@ -172,9 +248,9 @@
                 / - @books[:data].each do |b|
                 /   %tr{class: "book-record #{ b[:available] ? "available" : "unavailable" }", "data-id" => b[:id]}
                 %tr
-                  %td 小明
-                  %td 天创世缘311号楼
-                  %td 13324567865
+                  %td.td-data 小明
+                  %td.td-data 天创世缘311号楼
+                  %td.td-data 13324567865
           .select-page 
             %span.totalitems= "共6页,总计12条"
             %span.choice-page
