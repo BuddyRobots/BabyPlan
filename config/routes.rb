@@ -120,6 +120,7 @@ Rails.application.routes.draw do
       member do
         post :set_available
         post :upload_photo
+        get :show_template
       end
     end
 

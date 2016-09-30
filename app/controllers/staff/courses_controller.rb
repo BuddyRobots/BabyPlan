@@ -24,6 +24,9 @@ class Staff::CoursesController < Staff::ApplicationController
     @course = Course.where(id: params[:course_id]).first
   end
 
+  def show_template
+  end
+
   def show
     @course_inst = CourseInst.where(id: params[:id]).first
   end
