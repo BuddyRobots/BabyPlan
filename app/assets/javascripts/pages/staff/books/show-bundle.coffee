@@ -2,6 +2,9 @@
 #= require tag-it.min
 $ ->
 
+  has_cover = false
+  has_back = false
+
   is_edit = false
 
 # wangEditor
@@ -46,22 +49,16 @@ $ ->
     tabIndex: null
     placeholderText: null
     beforeTagAdded: (event, ui) ->
-      console.log ui.tag
       return
     afterTagAdded: (event, ui) ->
-      console.log ui.tag
       return
     beforeTagRemoved: (event, ui) ->
-      console.log ui.tag
       return
     onTagExists: (event, ui) ->
-      console.log ui.tag
       return
     onTagClicked: (event, ui) ->
-      console.log ui.tag
       return
     onTagLimitExceeded: (event, ui) ->
-      console.log ui.tag
       return
 
 
@@ -81,10 +78,15 @@ $ ->
     $("#name-input").val($("#name-span").text())
     $("#type-input").val($("#type-span").text())
     $("#stock-input").val(window.stock)
+    $("#age-lower-bound-input").val(window.age_lower_bound)
+    $("#age-upper-bound-input").val(window.age_upper_bound)
     $("#isbn-input").val($("#isbn-span").text())
     $("#author-input").val($("#author-span").text())
     $("#translator-input").val($("#translator-span").text())
     $("#illustrator-input").val($("#illustrator-span").text())
+
+    $(".type-span-ele").each ->
+      $("#type-tag").tagit("createTag", $(this).text());
 
     desc = $("#editor-content").html()
     console.log desc
@@ -118,6 +120,9 @@ $ ->
     name = $("#name-input").val()
     type = $("#type-input").val()
     stock = $("#stock-input").val()
+    age_lower_bound = $("#age-lower-bound-input").val()
+    age_upper_bound = $("#age-upper-bound-input").val()
+    tags = $("#type-tag").tagit("assignedTags")
     isbn = $("#isbn-input").val()
     author = $("#author-input").val()
     translator = $("#translator-input").val()
@@ -135,6 +140,9 @@ $ ->
           author: author
           translator: translator
           illustrator: illustrator
+          age_lower_bound: age_lower_bound
+          age_upper_bound: age_upper_bound
+          tags: tags
           desc: desc
         }
       },
@@ -154,6 +162,8 @@ $ ->
           $("#name-span").text(name)
           $("#type-span").text(type)
           $("#stock-span").text(stock + "本")
+          $("#stock-span").text(age_lower_bound + "岁")
+          $("#stock-span").text(age_upper_bound + "岁")
           $("#isbn-span").text(isbn)
           $("#author-span").text(author)
           $("#translator-span").text(translator)
@@ -164,10 +174,26 @@ $ ->
           # 我的方法
           # $(".introduce-details").html(desc)
 
-
           window.stock = stock
+          window.age_lower_bound = age_lower_bound
+          window.age_upper_bound = age_upper_bound
           $(".introduce-details").text("")
           $(".introduce-details").append(desc)
+
+          $("#tag-form .type-span-ele").remove()
+          $.each(
+            tags,
+            (index, tag) ->
+              ele = $(".type-span-template").clone().removeClass("hide").removeClass("type-span-template").addClass("type-span-ele")
+              ele.text(tag)
+              ele.appendTo($("#tag-form")).show()
+          )
+
+          if has_cover || has_back
+            $("#has_cover").val(has_cover)
+            $("#has_back").val(has_back)
+            $("#upload-photo-form").submit()
+
         else
           $.page_notification("服务器出错")
       )
@@ -201,29 +227,26 @@ $ ->
       )
 
 # img upload
-  $("#back-img").click ->
-    $("#uploadBackModal").modal("show")
-
-  $("#cover-img").click ->
-    $("#uploadCoverModal").modal("show")
-
   $("#upload-cover").click ->
-    $("#uploadCoverModal").modal("show")
-
-  coverIntervalFunc = ->
-    $('#cover-name').html $('#cover_file').val();
-
-  $("#browser-cover-click").click ->
-    $("#cover_file").click()
-    setInterval(coverIntervalFunc, 1)
-
+    if is_edit
+      $("#cover_file").trigger("click")
   $("#upload-back").click ->
-    $("#uploadBackModal").modal("show")
+    if is_edit
+      $("#back_file").trigger("click")
 
-  backIntervalFunc = ->
-    $('#back-name').html $('#back_file').val();
+  $("#cover_file").change (event) ->
+    if event.target.files[0] == undefined
+      return
+    has_cover = true
+    photo = $("#cover-photo")[0]
+    photo.src = URL.createObjectURL(event.target.files[0])
+  $("#back_file").change (event) ->
+    if event.target.files[0] == undefined
+      return
+    has_back = true
+    photo = $("#back-photo")[0]
+    photo.src = URL.createObjectURL(event.target.files[0])
 
-  $("#browser-back-click").click ->
-    $("#back_file").click()
-    setInterval(backIntervalFunc, 1)
+
+
 
