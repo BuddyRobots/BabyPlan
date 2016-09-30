@@ -1,3 +1,112 @@
 - content_for :head do
   = javascript_include_tag "pages/staff/transfers/index-bundle"
   = stylesheet_link_tag "pages/staff/transfers/index-bundle", :media => "all"
+
+
+.content-area
+  .content-box
+    .manage-box
+      .user-search-box
+        .input-group
+          %input.form-control#search-input{:type => "text", :placeholder => "输入中心名称", :value => "#{@keyword}"}
+          %span.input-group-btn
+            %button.btn.btn-default#search-btn{:type => "button"}
+    .manage-content
+      .tabbable
+        %ul.nav.nav-tabs
+          %li.active
+            %a{"data-toggle" => "tab", :href => "#tab1"} 迁出记录
+          %li
+            %a{"data-toggle" => "tab", :href => "#tab2"} 迁入记录
+
+        .tab-content
+          #tab1.tab-pane.active
+            .moveout-box
+              .undiscover
+                %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
+                %span.undiscover-message 抱歉！暂无查找信息
+              .table-box
+                %table.table.table-bordered#user-table
+                  %thead
+                    %tr
+                      %th 迁出时间
+                      %th 迁入中心
+                      %th 绘本数量
+                      %th 迁移状态
+                      %th 操&nbsp作
+                  %tbody
+                    %tr
+                      %td 2016.10.10
+                      %td 朝阳区儿童中心
+                      %td 24
+                      %td.prepare#status　准备中
+                      %td
+                        %a.details{:href => "javascript:void(0);"} 详情
+                    %tr
+                      %td 2016.10.10
+                      %td 朝阳区儿童中心
+                      %td 24
+                      %td.move#status　运输中
+                      %td
+                        %a.details{:href => "javascript:void(0);"} 详情
+                    %tr
+                      %td 2016.10.10
+                      %td 朝阳区儿童中心
+                      %td 24
+                      %td.end#status　已完成
+                      %td
+                        %a.details{:href => "javascript:void(0);"} 详情
+              .select-page 
+                %span.totalitems= "共6页,总计12条"
+                %span.choice-page
+                  %ul.pagination.pagination-sm
+                    %li
+                      %a{:href => "javascript:void(0);"} «
+                    / - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
+                    %li
+                      %a{:href => "javascript:void(0);"} 1
+                    %li
+                      %a{:href => "javascript:void(0);"} »
+          #tab2.tab-pane  
+            .movein-box
+              .undiscover
+                %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
+                %span.undiscover-message 抱歉！暂无查找信息
+              .table-box
+                %table.table.table-bordered#user-table
+                  %thead
+                    %tr
+                      %th 迁入时间
+                      %th 迁出中心
+                      %th 绘本数量
+                      %th 操&nbsp作
+                  %tbody
+                    %tr
+                      %td 2016.10.10
+                      %td 朝阳区儿童中心
+                      %td 24
+                      %td
+                        %a.details{:href => "javascript:void(0);"} 详情
+                    %tr
+                      %td 2016.10.10
+                      %td 朝阳区儿童中心
+                      %td 24
+                      %td
+                        %a.details{:href => "javascript:void(0);"} 详情
+                    %tr
+                      %td 2016.10.10
+                      %td 朝阳区儿童中心
+                      %td 24
+                      %td
+                        %a.details{:href => "javascript:void(0);"} 详情
+              .select-page 
+                %span.totalitems= "共6页,总计12条"
+                %span.choice-page
+                  %ul.pagination.pagination-sm
+                    %li
+                      %a{:href => "javascript:void(0);"} «
+                    / - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
+                    %li
+                      %a{:href => "javascript:void(0);"} 1
+                    %li
+                      %a{:href => "javascript:void(0);"} »

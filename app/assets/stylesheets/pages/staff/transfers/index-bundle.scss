@@ -1,0 +1,155 @@
+@import "jquery-ui";
+
+ul, li {
+	padding: 0;
+	margin: 0;
+}
+.content-area {
+	position:absolute;
+	right: 0;
+	left: 160px;
+	bottom: 0;
+	top: 60px;
+	background:#f7fcff;
+	box-shadow: -1px -1px 6px #9c9c9c inset;
+	padding: 20px;
+}
+.content-box {
+	position: relative;
+	box-shadow: 0 -1px 6px #9c9c9c inset;
+	background: white;  
+	height: 100%;
+}
+.manage-box {
+	height: 58px;
+	border-bottom: 1px solid #c8c8c8;
+	overflow: hidden;
+}
+.manage-content {
+	overflow: auto;
+	position: absolute;
+	top: 60px;
+	left: 0px;
+	bottom: 0px;
+	right: 0px;
+}
+.user-search-box {
+	position: absolute;
+	width: 200px;
+	height: 34px;
+	left:20px;
+	top: 11.5px;
+	border-top-left-radius: 6px;
+	border-bottom-left-radius: 6px;
+}
+#appendedInputButton {
+	padding: 0;
+	width: 162px;
+	height: 34px;
+}
+#search-btn {
+	width: 34px;
+	height: 34px;
+	border: 1px solid #c8c8c8;
+	background: url("/assets/managecenter/search.png") no-repeat;
+	background-size: 22px;
+	background-position: 6px 6px;
+}
+.tabbable {
+	padding: 20px;
+}
+	
+.nav-tabs {
+	margin-bottom: 0;
+	border-bottom: 0;
+	li {
+		font-size: 16px;
+		color: #323232;
+	}
+}
+.moveout-box {
+	border: 1px solid #ddd;
+	border-radius: 0 6px 6px 6px;
+	padding: 20px;
+}
+.movein-box {
+	border: 1px solid #ddd;
+	border-radius: 6px;
+	padding: 20px;
+}
+#user-table {
+	border-radius: 6px;
+	border: 1px solid #c8c8c8;
+	font-size: 14px;
+	color: #323232;
+	margin-bottom: 0;
+	th {
+		text-align: center;
+		height: 40px;
+		line-height: 40px;
+		padding: 0;
+	}
+	td {
+		font-size: 12px;
+		color: #505050;
+		height:45px;
+		line-height: 45px;
+		text-align: center;
+		padding: 0;
+		a {
+			
+			text-decoration: underline;
+		}
+	}
+	.prepare {
+		color: #f7873d;
+	}
+	.end {
+		color: #969696;
+	}
+	.move {
+		color: #10c078;
+	}
+	.unavailable {
+		background: #eaeaea;
+	}
+	.clicked {
+		background: #fdd3b9;
+	}
+}
+// undiscover message
+.undiscover {
+	text-align: center;
+	padding: 30px;
+	// border: 1px solid #ddd;
+	// border-radius: 6px;
+}
+.undiscover-icon {
+	display: inline-block;
+	width: 100%;
+	max-width: 39px;
+}
+.undiscover-message {
+	font-size: 16px;
+	color: #969696;
+	margin-left: 20px;
+}
+//pagination
+.select-page {
+	text-align: right;
+	margin: 10px 0 0 0;
+}
+.totalitems {
+	font-size: 12px;
+	color: #969696;
+	vertical-align: bottom;
+	height: 36px;
+	line-height: 36px;
+}
+
+.pagination {
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+	margin-left: 15px;
+}
