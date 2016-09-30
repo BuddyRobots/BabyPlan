@@ -68,6 +68,23 @@
 		height: 14px;
 	}
 }
+.borrowset-btn {
+	float: right;
+	margin: 11.5px 20px 0 0;
+	width: 100px;
+	height: 34px;
+	padding: 0;
+	line-height: 32px;
+	color: white;
+	background: #0fc077;
+	border-radius: 6px;
+}
+.borrowset-btn:hover {
+	color: white;
+}
+.setting {
+	margin-top: -2px;
+}
 .tabbable {
 	padding: 20px;
 }

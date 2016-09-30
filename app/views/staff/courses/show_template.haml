@@ -1,3 +1,49 @@
 - content_for :head do
   = javascript_include_tag "pages/staff/courses/show_template-bundle"
   = stylesheet_link_tag "pages/staff/courses/show_template-bundle", :media => "all"
+
+
+.content-area
+  .content-box
+    .manage-box.clearfix
+      %a#back{:href => "/staff/books"}
+        %img{:src => "/assets/web/back.png"}
+      %p.course-add 可开课程
+      .btn.newcourse-btn{:type => "button", :href => "#kidsaddModal", "data-toggle" => "modal"} 
+        %img.add{:src => "/assets/managecenter/add.png"}
+        开设课程
+
+    .manage-content
+      .desc-items
+        %span.course-name 课程名称:
+        %span.unedit-box#classname-span
+        %span.edit-box
+          %input.input-area.form-control#classname-input{:type => "text"}
+        %span.course-name#speaker 主讲人:
+        %span.unedit-box#classspeaker-span
+        %span.edit-box
+          %input.input-area.form-control#classspeaker-input{:type => "text"}
+        %span.course-name#nums 课次:
+        %span.unedit-box#nums-span
+        %span.edit-box
+          %input.input-area.form-control#nums-input{:type => "text"}
+      
+      .desc-items
+        %span.course-name 课程编号:
+        %span.unedit-box#code-span
+        %span.edit-box
+          %input.input-area.form-control#code-input{:type => "text"}
+        %span.course-name#charge 市场价:
+        %span.unedit-box#charge-span
+        %span.edit-box
+          %input.input-area.form-control#charge-input{:type => "text"}
+        %span.course-name#public-price 公益价:
+        %span.unedit-box#public-price-span
+        %span.edit-box
+          %input.input-area.form-control#public-price-input{:type => "text"}
+      .course-introduce.clearfix
+        %span.introduce 课程介绍:
+        %div.introduce-details
+          这门课程
+        .wangedit-area
+          #edit-area
