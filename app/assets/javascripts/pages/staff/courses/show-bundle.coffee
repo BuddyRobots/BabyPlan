@@ -213,6 +213,11 @@ $ ->
     $(".edit-btn").hide()
     $(".unshelve-btn").hide()
 
+  $("#course-sign").click ->
+    $(".finish-btn").hide()
+    $(".edit-btn").hide()
+    $(".unshelve-btn").hide()
+
   $("#course-message").click ->
     if is_edit
       $(".finish-btn").show()
@@ -264,7 +269,7 @@ $ ->
   $("#datepicker").change ->
     disable_repeat()
 
-  $("#start-tiem").change ->
+  $("#start-time").change ->
     disable_repeat()
 
   $("#end-time").change ->

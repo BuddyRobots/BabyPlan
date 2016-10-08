@@ -1,7 +1,7 @@
 @import "fullcalendar.min";
 @import "jquery-ui";
 
-input, label {
+input, label, h5 {
 	margin: 0;
 	padding: 0;
 }
@@ -366,12 +366,11 @@ h2 {
 	padding: 0;
 	margin: 20px 20px 0 20px;
 }
-#register-table, #user-table {
+#register-table {
 	border-radius: 6px;
 	border: 1px solid #ddd;
 	font-size: 14px;
 	color: #323232;
-	margin-bottom: 0;
 	th {
 		text-align: center;
 		height: 40px;
@@ -467,24 +466,94 @@ h2 {
 	vertical-align: middle;
 }
 .join-square {
-	display: inline-block;
-	width: 18px;
-	height: 18px;
+	@extend .square;
 	background: #0fc077;
-	border-radius: 2px;
-	margin-right: 5px;
-	vertical-align: middle;
 }
 .miss-square {
-	display: inline-block;
-	width: 18px;
-	height: 18px;
+	@extend .square;
 	background: #d70c19;
-	border-radius: 2px;
-	margin-right: 5px;
-	vertical-align: middle;
 }
 
 .active-btn {
 	background: #f7873d;
+}
+//tab4
+.sign-box {
+	margin: 20px 20px 0 20px;
+	border-radius: 6px;
+	border: 1px solid #ddd;
+}
+.sign-method {
+	width: 31.5%;
+	float: left;
+	border-right: 1px solid #ddd;
+}
+.form-horizontal {
+	padding: 40px 0;
+	border-bottom: 1px dashed #ddd;
+	.form-group {
+		margin: 0;
+	}
+}
+.control-label {
+	font-weight: normal;
+}
+.method {
+	width: 45.5%;
+	margin: 0 auto;
+}
+.caption {
+	padding: 20px 0;
+	font-size: 14px;
+	color: #323232;
+}
+#qr-code {
+	margin-bottom: 40px;
+}
+.code-figure {
+	width: 100%;
+	max-width: 160px;
+}
+.sign-btn {
+	width: 160px;
+	height: 34px;
+	padding: 0;
+	line-height: 32px;
+	color: white;
+	background: #10c078;
+	border-radius: 6px;
+	margin: 20px 0;
+}
+.sign-btn:hover {
+	color: white;
+}
+.sign-status-box {
+	float: left;
+	width: 68.5%;
+}
+.sign-status {
+	width: 60%;
+	margin: 0 auto;
+	h5 {
+		font-size: 24px;
+		color: #323232;
+		text-align: center;
+		margin-bottom: 40px;
+	}
+}
+#sign-table {
+	border-radius: 6px;
+	border: 1px solid #ddd;
+	font-size: 20px;
+	color: #323232;
+	.sign-data {
+		height:45px;
+		line-height: 45px;
+		text-align: center;
+		padding: 0;
+	}
+	.check-in {
+		background: #10c078;
+		opacity: 0.3;
+	}
 }

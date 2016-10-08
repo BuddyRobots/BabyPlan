@@ -68,16 +68,6 @@
             .wangedit-area
               #edit-area
         #tab2.tab-pane
-          / .course-box.clearfix
-          /   .user-checkbox
-          /     %span.user-review 课程名称:
-          /     %span.class-name= @course.name
-          /     %label.checkbox-inline
-          /       %input#inlineCheckbox1{:type => "checkbox", :value => "option1"} 已开课
-          /     %label.checkbox-inline
-          /       %input#inlineCheckbox2{:type => "checkbox", :value => "option2"} 未开课
-          /     %label.checkbox-inline
-          /       %input#inlineCheckbox2{:type => "checkbox", :value => "option2"} 已结课
           - if @course_insts[:data].length == 0
             .undiscover
               %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}

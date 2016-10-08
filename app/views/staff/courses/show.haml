@@ -36,7 +36,7 @@
         %li
           %a#user-review{"data-toggle" => "tab", :href => "#tab3"} 用户评价
         %li
-          %a#register-message{"data-toggle" => "tab", :href => "#tab4"} 课程签到
+          %a#course-sign{"data-toggle" => "tab", :href => "#tab4"} 课程签到
 
       .tab-content
         #tab1.tab-pane.active
@@ -234,34 +234,63 @@
                   %a{:href => "javascript:void(0);"} »
           
         #tab4.tab-pane
-          .undiscover
-            %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
-            %span.undiscover-message 抱歉！暂无查找信息
-          .table-box
-            %table.table.table-bordered#user-table
-              %thead
-                %tr
-                  %th 姓&nbsp名
-                  %th 住&nbsp址
-                  %th 电&nbsp话
-              %tbody
-                / - @books[:data].each do |b|
-                /   %tr{class: "book-record #{ b[:available] ? "available" : "unavailable" }", "data-id" => b[:id]}
-                %tr
-                  %td.td-data 小明
-                  %td.td-data 天创世缘311号楼
-                  %td.td-data 13324567865
-          .select-page 
-            %span.totalitems= "共6页,总计12条"
-            %span.choice-page
-              %ul.pagination.pagination-sm
-                %li
-                  %a{:href => "javascript:void(0);"} «
-                / - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
-                %li
-                  %a{:href => "javascript:void(0);"} 1
-                %li
-                  %a{:href => "javascript:void(0);"} »
+          .sign-box.clearfix
+            .sign-method
+              .class-choice
+                %form.form-horizontal
+                  .form-group
+                    %label.col-sm-5.col-md-3.control-label{:for => "class"} 课次选择
+                    .col-sm-6.col-md-6
+                      %select.form-control#class{:type => "text"}
+                        %option 1
+                        %option 2
+                        %option 3
+                        %option 4
+                        %option 5
+                        %option 6
+                        %option 7
+              .method
+                %p.caption 签到方式一：扫描签到
+                #qr-code
+                  %img.code-figure{:src => "/assets/web/bigqrcode.png"}
+                %p.caption 签到方式二：手机号签到
+                %input.form-control{:type => "text"}
+                .btn.sign-btn{:type => "button"} 立即签到
+            .sign-status-box
+              .sign-status
+                %h5 签到情况
+                %table.table.table-bordered#sign-table
+                  %tbody
+                    %tr
+                      %td.sign-data 小赵
+                      %td.sign-data 小钱
+                      %td.sign-data 小孙
+                      %td.sign-data 小李
+                      %td.sign-data 小周
+                    %tr
+                      %td.sign-data 小赵
+                      %td.sign-data 小钱
+                      %td.sign-data 小孙
+                      %td.sign-data 小李
+                      %td.sign-data 小周
+                    %tr
+                      %td.sign-data 小赵
+                      %td.sign-data 小钱
+                      %td.sign-data 小孙
+                      %td.sign-data 小李
+                      %td.sign-data 小周
+                    %tr
+                      %td.sign-data 小赵
+                      %td.sign-data 小钱
+                      %td.sign-data 小孙
+                      %td.sign-data 小李
+                      %td.sign-data 小周
+                    %tr
+                      %td.sign-data.check-in 小赵
+                      %td.sign-data 小钱
+                      %td.sign-data 小孙
+                      %td.sign-data 小李
+                      %td.sign-data 小周
 #dialog-confirm{:title => "警告"}
   %p
     %span.ui-icon.ui-icon-alert{:style => "float:left; margin:12px 12px 20px 0;"}>
