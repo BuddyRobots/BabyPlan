@@ -136,7 +136,7 @@ $ ->
       eventLimit: true
       fixedWeekCount: false
       nowIndicator: true
-      height: 500
+      height: 385
     })
 
   if window.profile == "area"
