@@ -256,6 +256,8 @@
                 %p.caption 签到方式二：手机号签到
                 %input.form-control{:type => "text"}
                 .btn.sign-btn{:type => "button"} 立即签到
+                .mask
+                  %p.notice 该次课程已结束点击此处补签到
             .sign-status-box
               .sign-status
                 %h5 签到情况
@@ -266,24 +268,24 @@
                       %td.sign-data 小钱
                       %td.sign-data 小孙
                       %td.sign-data 小李
-                      %td.sign-data 小周
+                      %td.sign-data.check-in 小周
                     %tr
                       %td.sign-data 小赵
-                      %td.sign-data 小钱
+                      %td.sign-data.check-in 小钱
                       %td.sign-data 小孙
                       %td.sign-data 小李
                       %td.sign-data 小周
                     %tr
                       %td.sign-data 小赵
                       %td.sign-data 小钱
-                      %td.sign-data 小孙
+                      %td.sign-data.check-in 小孙
                       %td.sign-data 小李
                       %td.sign-data 小周
                     %tr
                       %td.sign-data 小赵
                       %td.sign-data 小钱
                       %td.sign-data 小孙
-                      %td.sign-data 小李
+                      %td.sign-data.check-in 小李
                       %td.sign-data 小周
                     %tr
                       %td.sign-data.check-in 小赵

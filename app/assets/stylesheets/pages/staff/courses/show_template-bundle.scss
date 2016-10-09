@@ -61,3 +61,45 @@
 .add {
 	margin-top: -2px;
 }
+
+.desc-items {
+	margin: 15px 20px;
+}
+.unedit-box {
+	display: inline-block;
+	vertical-align: middle;
+	font-size: 14px;
+	color: #323232;
+	width: 252px;
+	height: 30px;
+	line-height: 30px;
+	margin: 0 20px 0 0;
+}
+#nums {
+	margin-left: 16px;
+}
+.course-name {
+	display: inline-block;
+	vertical-align: middle;
+	font-size: 16px;
+	color: #323232;
+	margin-right: 10px;
+}
+.course-introduce {
+	margin-bottom: 20px;
+	.introduce-details {
+		font-size: 14px;
+		color: #323232;
+		display: inline-block;
+		width: 86%;
+		text-indent: 28px;
+	}
+	.introduce {
+		display: inline-block;
+		float: left;
+		vertical-align: top;
+		font-size: 16px;
+		color: #323232;
+		margin: 0 12px 15px 20px;
+	}
+}

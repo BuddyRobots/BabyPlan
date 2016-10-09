@@ -9,41 +9,27 @@
       %a#back{:href => "/staff/courses"}
         %img{:src => "/assets/web/back.png"}
       %p.course-add 可开课程
-      .btn.newcourse-btn{:type => "button", :href => "#kidsaddModal", "data-toggle" => "modal"} 
+      .btn.newcourse-btn{:type => "button"} 
         %img.add{:src => "/assets/managecenter/add.png"}
         开设课程
 
     .manage-content
       .desc-items
         %span.course-name 课程名称:
-        %span.unedit-box#classname-span
-        %span.edit-box
-          %input.input-area.form-control#classname-input{:type => "text"}
+        %span.unedit-box#classname-span 幼儿智力启蒙上
         %span.course-name#speaker 主讲人:
-        %span.unedit-box#classspeaker-span
-        %span.edit-box
-          %input.input-area.form-control#classspeaker-input{:type => "text"}
+        %span.unedit-box#classspeaker-span 张老三
         %span.course-name#nums 课次:
-        %span.unedit-box#nums-span
-        %span.edit-box
-          %input.input-area.form-control#nums-input{:type => "text"}
+        %span.unedit-box#nums-span 10节
       
       .desc-items
         %span.course-name 课程编号:
-        %span.unedit-box#code-span
-        %span.edit-box
-          %input.input-area.form-control#code-input{:type => "text"}
+        %span.unedit-box#code-span YEZLQM
         %span.course-name#charge 市场价:
-        %span.unedit-box#charge-span
-        %span.edit-box
-          %input.input-area.form-control#charge-input{:type => "text"}
+        %span.unedit-box#charge-span 1200元
         %span.course-name#public-price 公益价:
-        %span.unedit-box#public-price-span
-        %span.edit-box
-          %input.input-area.form-control#public-price-input{:type => "text"}
+        %span.unedit-box#public-price-span 1000元
       .course-introduce.clearfix
         %span.introduce 课程介绍:
         %div.introduce-details
           这门课程
-        .wangedit-area
-          #edit-area
