@@ -105,6 +105,10 @@
 .num-box {
 	@extend .input-area;
 }
+#photo {
+	width: 200px;
+	height: 138px;
+}
 .photo {
 	width: 17.25%;
 	display: inline-block;
@@ -192,3 +196,6 @@ h2 {
 	padding-top: 5px;
 }
 
+.active-btn {
+	background: #f7873d;
+}

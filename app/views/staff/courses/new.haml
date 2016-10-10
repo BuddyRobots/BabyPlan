@@ -30,8 +30,10 @@
             %label.input-caption 上课地址:
             %input.input-area.form-control#course-address{:type => "text"}
         .photo
+          = form_tag("/", method: "post", multipart: true, id: "upload-photo-form", class: "hide") do
+            = file_field_tag "photo_file", { class: "hide", accept: ".jpg,.png" }
           %a#upload-photo{href: "javascript:void(0);"}
-            %img.edit-photo{:src => "/assets/web/photo.png"}
+            %img.edit-photo#photo{:src => "/assets/web/photo.png"}
 
       .controls.controls-row
         %label.input-caption 开课编号:
@@ -48,7 +50,7 @@
         %label.input-caption 市场价:
         %input.input-area.form-control#course-price{:type => "text", value: @course.price}
         %label.input-caption 公益价:
-        %input.input-area.form-control#public-price{:type => "text"}
+        %input.input-area.form-control#public-price{:type => "text", value: @course.price_pay}
       
       .calendar-wrapper.clearfix
         .calendar-operation-wrapper

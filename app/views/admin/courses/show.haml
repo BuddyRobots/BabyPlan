@@ -4,6 +4,7 @@
   :javascript
     window.cid = "#{@course.id.to_s}"
     window.price = "#{@course.price}"
+    window.price_pay = "#{@course.price_pay}"
     window.profile = "#{@profile}"
 
 
@@ -58,7 +59,7 @@
             %span.edit-box
               %input.input-area.form-control#charge-input{:type => "text"}
             %span.course-name#public-price 公益价:
-            %span.unedit-box#public-price-span
+            %span.unedit-box#public-price-span= @course.price_pay.to_s + "元"
             %span.edit-box
               %input.input-area.form-control#public-price-input{:type => "text"}
           .course-introduce.clearfix

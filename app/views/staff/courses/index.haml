@@ -3,6 +3,7 @@
   = stylesheet_link_tag "pages/staff/courses/index-bundle", :media => "all"
   :javascript
     window.keyword = "#{@keyword}"
+    window.profile = "#{@profile}"
 
 
 .content-area
@@ -26,79 +27,84 @@
         .tab-content
           #tab1.tab-pane.active
             .local-course
-              .undiscover
-                %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
-                %span.message 抱歉！暂无查找信息
-              .table-box
-                %table.table.table-bordered#local-course-table
-                  %thead
-                    %tr
-                      %th 课&nbsp程
-                      %th 上课时间
-                      %th 上课地址
-                      %th 主讲人
-                      %th 费用
-                      %th{:colspan => "2"} 操&nbsp作
-                  %tbody
-                    - @course_insts[:data].each do |ci|
+              - if @course_insts[:data].length == 0
+                .undiscover
+                  %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
+                  %span.message 抱歉！暂无查找信息
+              - else
+                .table-box
+                  %table.table.table-bordered#local-course-table
+                    %thead
                       %tr
-                        %td= ci[:name]
-                        %td= ci[:date]
-                        %td= ci[:address]
-                        %td= ci[:speaker]
-                        %td= ci[:price]
-                        %td 
-                          %a.details{:href => "/staff/courses/" + ci[:id]} 详情
-                        %td
-                          %a.set-available.link-available{:href => "javascript:void(0);"} 下架
+                        %th 课&nbsp程
+                        %th 上课时间
+                        %th 上课地址
+                        %th 主讲人
+                        %th 费用
+                        %th{:colspan => "2"} 操&nbsp作
+                    %tbody
+                      - @course_insts[:data].each do |ci|
+                        %tr
+                          %td= ci[:name]
+                          %td= ci[:date]
+                          %td= ci[:address]
+                          %td= ci[:speaker]
+                          %td= ci[:price]
+                          %td 
+                            %a.details{:href => "/staff/courses/" + ci[:id]} 详情
+                          %td
+                            %a.set-available.link-available{:href => "javascript:void(0);"} 下架
 
-              .select-page 
-                %span.totalitems= "共#{@course_insts[:total_page]}页,总计#{@course_insts[:total_number]}条"
-                %span.choice-page
-                  %ul.pagination.pagination-sm
-                    %li
-                      %a{:href => "/staff/courses?keyword=#{@keyword}&page=#{@course_insts[:previous_page]}"} «
-                    - ( (@course_insts[:previous_page] > 2 ? @course_insts[:previous_page] - 2 : 1) .. (@course_insts[:next_page] < @course_insts[:total_page] - 2 ? @course_insts[:next_page] + 2 : @course_insts[:total_page]) ).to_a.each do |page|
+                .select-page 
+                  %span.totalitems= "共#{@course_insts[:total_page]}页,总计#{@course_insts[:total_number]}条"
+                  %span.choice-page
+                    %ul.pagination.pagination-sm
                       %li
-                        %a{:href => "/staff/courses?keyword=#{@keyword}&page=#{page}"}= page
-                    %li
-                      %a{:href => "/staff/courses?keyword=#{@keyword}&page=#{@course_insts[:next_page]}"} »
+                        %a{:href => "/staff/courses?keyword=#{@keyword}&course_inst_page=#{@course_insts[:previous_page]}"} «
+                      - ( (@course_insts[:previous_page] > 2 ? @course_insts[:previous_page] - 2 : 1) .. (@course_insts[:next_page] < @course_insts[:total_page] - 2 ? @course_insts[:next_page] + 2 : @course_insts[:total_page]) ).to_a.each do |page|
+                        %li
+                          %a{:href => "/staff/courses?keyword=#{@keyword}&course_inst_page=#{page}"}= page
+                      %li
+                        %a{:href => "/staff/courses?keyword=#{@keyword}&course_inst_page=#{@course_insts[:next_page]}"} »
           #tab2.tab-pane
             .open-course
-              .undiscover
-                %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
-                %span.message 抱歉！暂无查找信息
-              .table-box
-                %table.table.table-bordered#course-table
-                  %thead
-                    %tr
-                      %th 课&nbsp程
-                      %th 编&nbsp号
-                      %th 主讲人
-                      %th 公益价
-                      %th 操&nbsp作
-                  %tbody
-                    - 3.times do |i|
-                      %tr{class: i == 1 ? "clicked" : (i == 2 ? "unavailable" : "") }
-                        %td
-                          = link_to "社会科学", "/staff/courses/1/show_template"
-                        %td SHKX
-                        %td　霍金
-                        %td　1000
-                        %td#open
-                          = link_to "开设课程", "/staff/courses/new", class: "prepare"
-                    
-              .select-page 
-                %span.totalitems= "共6页,总计12条"
-                %span.choice-page
-                  %ul.pagination.pagination-sm
-                    %li
-                      %a{:href => "javascript:void(0);"} «
-                    / - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
-                    %li
-                      %a{:href => "javascript:void(0);"} 1
-                    %li
-                      %a{:href => "javascript:void(0);"} »
+              - if @courses[:data].length == 0
+                .undiscover
+                  %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
+                  %span.message 抱歉！暂无查找信息
+              - else
+                .table-box
+                  %table.table.table-bordered#course-table
+                    %thead
+                      %tr
+                        %th 课&nbsp程
+                        %th 编&nbsp号
+                        %th 主讲人
+                        %th 价格
+                        %th 操&nbsp作
+                    %tbody
+                      - @courses[:data].each do |e|
+                        / %tr{class: i == 1 ? "clicked" : (i == 2 ? "unavailable" : "") }
+                        %tr{class: e[:available] == false ? "unavailable" : ""}
+                          %td
+                            = link_to e[:name], "/staff/courses/" + e[:id] + "/show_template"
+                          %td= e[:code]
+                          %td= e[:speaker]
+                          %td= e[:price]
+                          %td#open
+                            = link_to "开设课程", "/staff/courses/new?course_id=" + e[:id], class: "prepare"
+                      
+                .select-page 
+                  %span.totalitems= "共#{@courses[:total_page]}页,总计#{@courses[:total_number]}条"
+                  %span.choice-page
+                    %ul.pagination.pagination-sm
+                      %li
+                        %a{:href => "/staff/courses?keyword=#{@keyword}&course_page=#{@courses[:previous_page]}&profile=template"} «
+                      - ( (@courses[:previous_page] > 2 ? @courses[:previous_page] - 2 : 1) .. (@courses[:next_page] < @courses[:total_page] - 2 ? @courses[:next_page] + 2 : @courses[:total_page]) ).to_a.each do |page|
+                        %li
+                          %a{:href => "/staff/courses?keyword=#{@keyword}&course_page=#{page}&profile=template"}= page
+                      %li
+                        %a{:href => "/staff/courses?keyword=#{@keyword}&course_page=#{@courses[:next_page]}&profile=template"} »
         
 
 

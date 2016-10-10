@@ -3,6 +3,7 @@ class CourseInst
   include Mongoid::Document
   include Mongoid::Timestamps
 
+  field :name, type: String
   field :available, type: Boolean
   field :code, type: String
   field :inst_code, type: String
@@ -33,6 +34,7 @@ class CourseInst
       return ErrCode::COURSE_INST_EXIST
     end
     course_inst = course.course_insts.create({
+      name: course.name,
       available: course_inst_info[:available],
       code: code,
       inst_code: course_inst_info[:code],
@@ -86,6 +88,6 @@ class CourseInst
   end
 
   def date_in_calendar_str
-    self.date_in_calendar.join(';')
+    (self.date_in_calendar || []).join(';')
   end
 end

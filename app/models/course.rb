@@ -12,6 +12,7 @@ class Course
   field :desc, type: String
   field :target, type: String
   field :price, type: Integer
+  field :price_pay, type: Integer
   field :speaker, type: String
   field :available, type: Boolean
 
@@ -27,6 +28,7 @@ class Course
       length: course_info[:length].to_i,
       desc: course_info[:desc],
       price: course_info[:price],
+      price_pay: course_info[:price_pay],
       speaker: course_info[:speaker],
       code: course_info[:code],
       available: course_info[:available]
@@ -50,6 +52,7 @@ class Course
       {
         name: course_info["name"],
         price: course_info["price"],
+        price_pay: course_info["price_pay"],
         desc: course_info["desc"],
         code: course_info["code"],
         speaker: course_info["speaker"]
