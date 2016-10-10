@@ -48,12 +48,12 @@
                 %span.choice-page
                   %ul.pagination.pagination-sm
                     %li
-                      %a{:href => "/staff/announcements?profile=global&keyword=#{@keyword}&page=#{@global_eles[:previous_page]}"} «
+                      %a{:href => "/staff/announcements?profile=global&keyword=#{@keyword}&global_page=#{@global_eles[:previous_page]}"} «
                     - ( (@global_eles[:previous_page] > 2 ? @global_eles[:previous_page] - 2 : 1) .. (@global_eles[:next_page] < @global_eles[:total_page] - 2 ? @global_eles[:next_page] + 2 : @global_eles[:total_page]) ).to_a.each do |page|
                       %li
-                        %a{:href => "/staff/announcements?profile=global&keyword=#{@keyword}&page=#{page}"}= page
+                        %a{:href => "/staff/announcements?profile=global&keyword=#{@keyword}&global_page=#{page}"}= page
                     %li
-                      %a{:href => "/staff/announcements?profile=global&keyword=#{@keyword}&page=#{@global_eles[:next_page]}"} »
+                      %a{:href => "/staff/announcements?profile=global&keyword=#{@keyword}&global_page=#{@global_eles[:next_page]}"} »
           #tab2.tab-pane
             - if @local_eles[:data].length == 0
               .undiscover
@@ -77,9 +77,9 @@
                 %span.choice-page
                   %ul.pagination.pagination-sm
                     %li
-                      %a{:href => "/staff/announcements?profile=local&keyword=#{@keyword}&page=#{@local_eles[:previous_page]}"} «
+                      %a{:href => "/staff/announcements?profile=local&keyword=#{@keyword}&local_page=#{@local_eles[:previous_page]}"} «
                     - ( (@local_eles[:previous_page] > 2 ? @local_eles[:previous_page] - 2 : 1) .. (@local_eles[:next_page] < @local_eles[:total_page] - 2 ? @local_eles[:next_page] + 2 : @local_eles[:total_page]) ).to_a.each do |page|
                       %li
-                        %a{:href => "/staff/announcements?profile=local&keyword=#{@keyword}&page=#{page}"}= page
+                        %a{:href => "/staff/announcements?profile=local&keyword=#{@keyword}&local_page=#{page}"}= page
                     %li
-                      %a{:href => "/staff/announcements?profile=local&keyword=#{@keyword}&page=#{@local_eles[:next_page]}"} »
+                      %a{:href => "/staff/announcements?profile=local&keyword=#{@keyword}&local_page=#{@local_eles[:next_page]}"} »

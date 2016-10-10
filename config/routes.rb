@@ -121,6 +121,7 @@ Rails.application.routes.draw do
         post :set_available
         post :upload_photo
         get :show_template
+        get :qrcode
       end
     end
 

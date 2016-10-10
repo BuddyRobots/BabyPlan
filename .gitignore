@@ -15,3 +15,4 @@
 /config/mongoid.yml
 /.byebug_history
 /public/uploads
+/public/qrcodes

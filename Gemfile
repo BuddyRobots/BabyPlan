@@ -9,6 +9,7 @@ gem 'kaminari'
 gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
 gem 'bootstrap-sass'
 gem 'rucaptcha'
+gem 'rqrcode', '0.10.1'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

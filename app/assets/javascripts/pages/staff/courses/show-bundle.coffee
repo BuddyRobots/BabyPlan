@@ -314,3 +314,12 @@ $ ->
     else
       span.removeClass("triangle-up").addClass("triangle-down")
 
+  $(".code-figure").click ->
+    class_num = $("#class_num").val()
+    console.log class_num
+    $.getJSON "/staff/courses/" + window.cid + "/qrcode?class_num=" + class_num, (data) ->
+      if data.success
+        $(".code-figure").attr("src", data.img_src)
+      else
+        $.page_notification "服务器出错，请稍后再试"
+

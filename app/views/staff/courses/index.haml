@@ -3,6 +3,7 @@
   = stylesheet_link_tag "pages/staff/courses/index-bundle", :media => "all"
   :javascript
     window.keyword = "#{@keyword}"
+    window.profile = "#{@profile}"
 
 
 .content-area
@@ -59,12 +60,12 @@
                   %span.choice-page
                     %ul.pagination.pagination-sm
                       %li
-                        %a{:href => "/staff/courses?keyword=#{@keyword}&page=#{@course_insts[:previous_page]}"} «
+                        %a{:href => "/staff/courses?keyword=#{@keyword}&course_inst_page=#{@course_insts[:previous_page]}"} «
                       - ( (@course_insts[:previous_page] > 2 ? @course_insts[:previous_page] - 2 : 1) .. (@course_insts[:next_page] < @course_insts[:total_page] - 2 ? @course_insts[:next_page] + 2 : @course_insts[:total_page]) ).to_a.each do |page|
                         %li
-                          %a{:href => "/staff/courses?keyword=#{@keyword}&page=#{page}"}= page
+                          %a{:href => "/staff/courses?keyword=#{@keyword}&course_inst_page=#{page}"}= page
                       %li
-                        %a{:href => "/staff/courses?keyword=#{@keyword}&page=#{@course_insts[:next_page]}"} »
+                        %a{:href => "/staff/courses?keyword=#{@keyword}&course_inst_page=#{@course_insts[:next_page]}"} »
           #tab2.tab-pane
             .open-course
               - if @courses[:data].length == 0
@@ -94,16 +95,16 @@
                             = link_to "开设课程", "/staff/courses/new?course_id=" + e[:id], class: "prepare"
                       
                 .select-page 
-                  %span.totalitems= "共6页,总计12条"
+                  %span.totalitems= "共#{@courses[:total_page]}页,总计#{@courses[:total_number]}条"
                   %span.choice-page
                     %ul.pagination.pagination-sm
                       %li
-                        %a{:href => "javascript:void(0);"} «
-                      / - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
+                        %a{:href => "/staff/courses?keyword=#{@keyword}&course_page=#{@courses[:previous_page]}&profile=template"} «
+                      - ( (@courses[:previous_page] > 2 ? @courses[:previous_page] - 2 : 1) .. (@courses[:next_page] < @courses[:total_page] - 2 ? @courses[:next_page] + 2 : @courses[:total_page]) ).to_a.each do |page|
+                        %li
+                          %a{:href => "/staff/courses?keyword=#{@keyword}&course_page=#{page}&profile=template"}= page
                       %li
-                        %a{:href => "javascript:void(0);"} 1
-                      %li
-                        %a{:href => "javascript:void(0);"} »
+                        %a{:href => "/staff/courses?keyword=#{@keyword}&course_page=#{@courses[:next_page]}&profile=template"} »
         
 
 

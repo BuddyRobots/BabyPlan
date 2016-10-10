@@ -8,16 +8,20 @@ class Staff::CoursesController < Staff::ApplicationController
 
   def index
     @keyword = params[:keyword]
+    params[:page] = params[:course_inst_page]
     course_insts = @keyword.present? ? current_center.course_insts.where(name: /#{@keyword}/) : current_center.course_insts.all
     @course_insts = auto_paginate(course_insts)
     @course_insts[:data] = @course_insts[:data].map do |e|
       e.course_inst_info
     end
+    params[:page] = params[:course_page]
     courses = @keyword.present? ? Course.where(name: /#{@keyword}/) : Course.all
     @courses = auto_paginate(courses)
     @courses[:data] = @courses[:data].map do |e|
       e.course_info
     end
+
+    @profile = params[:profile]
   end
 
   def create
@@ -86,5 +90,22 @@ class Staff::CoursesController < Staff::ApplicationController
     retval = ErrCode::COURSE_INST_NOT_EXIST if @course.blank?
     retval = @course_inst.set_available(params[:available])
     render json: retval_wrapper(retval)
+  end
+
+  def qrcode
+    @course_inst = CourseInst.where(id: params[:id]).first
+    qrcode = RQRCode::QRCode.new(@course_inst.id.to_s + ';' + Time.now.to_i.to_s + ';' + params[:class_num].to_s)
+    filename = "#{@course_inst.id.to_s}_#{params[:class_num].to_s}"
+    png = qrcode.as_png(
+            resize_gte_to: false,
+            resize_exactly_to: false,
+            fill: 'white',
+            color: 'black',
+            size: 300,
+            border_modules: 4,
+            module_px_size: 6,
+            file: "public/qrcodes/#{filename}"
+            )
+    render json: retval_wrapper({img_src: "/qrcodes/#{filename}"})
   end
 end

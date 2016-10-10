@@ -241,14 +241,7 @@
                   .form-group
                     %label.col-sm-5.col-md-3.control-label{:for => "class"} 课次选择
                     .col-sm-6.col-md-6
-                      %select.form-control#class{:type => "text"}
-                        %option 1
-                        %option 2
-                        %option 3
-                        %option 4
-                        %option 5
-                        %option 6
-                        %option 7
+                      = select_tag "class_num", options_for_select((1..@course_inst.length).to_a.map { |e| ["第" + e.to_s + "次课", e-1] }), class: 'form-control'
               .method
                 %p.caption 签到方式一：扫描签到
                 #qr-code
