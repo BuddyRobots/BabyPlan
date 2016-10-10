@@ -4,6 +4,19 @@
 #= require datepicker-zh-TW
 
 $ ->
+  has_photo = false
+
+  can_repeat = false
+  enable_repeat = ->
+    can_repeat = true
+    $(".date-btn").addClass("active-btn")
+    $(".week-btn").addClass("active-btn")
+
+  disable_repeat = ->
+    can_repeat = false
+    $(".date-btn").removeClass("active-btn")
+    $(".week-btn").removeClass("active-btn")
+
   guid = ->
     s4 = ->
       Math.floor((1 + Math.random()) * 0x10000).toString(16).substring 1
@@ -37,6 +50,7 @@ $ ->
     code = $("#course-code").val()
     capacity = $("#course-capacity").val()
     price = $("#course-price").val()
+    price_pay = $("#public-price").val()
     length = $("#course-length").val()
     date = $("#course-date").val()
     speaker = $("#course-speaker").val()
@@ -64,6 +78,7 @@ $ ->
         code: code
         capacity: capacity
         price: price
+        price_pay: price_pay
         length: length
         date: date
         speaker: speaker
@@ -72,7 +87,12 @@ $ ->
       },
       (data) ->
         if data.success
-          location.href = "/staff/courses/" + data.course_inst_id
+          if has_photo == false
+            # the user does not upload photo, skip photo uploading step
+            location.href = "/staff/courses/" + data.course_inst_id
+          else
+            $("#upload-photo-form")[0].action = "/staff/courses/" + data.course_inst_id + "/upload_photo"
+            $("#upload-photo-form").submit()
         else
           if data.code == COURSE_INST_EXIST
             $.page_notification("课程编号已存在")
@@ -101,7 +121,7 @@ $ ->
     'timeFormat': 'H:i:s'
   })
 
-  $("#add-event").click ->
+  add_event = ->
     date = $("#datepicker").val()
     start_time = $("#start-time").val()
     end_time = $("#end-time").val()
@@ -113,12 +133,44 @@ $ ->
       end: date + "T" + end_time
     }
     $("#calendar").fullCalendar('renderEvent', e, true)
+    $("#calendar").fullCalendar("gotoDate", Date.parse(date))
+    enable_repeat()
 
+  $("#add-event").click ->
+    add_event()
 
-#img upload
+  $("#datepicker").change ->
+    disable_repeat()
+
+  $("#start-time").change ->
+    disable_repeat()
+
+  $("#end-time").change ->
+    disable_repeat()
+
+  $(".week-btn").click ->
+    if can_repeat == false
+      return
+    date = $("#datepicker").val()
+    next_week = new Date(Date.parse(date) + 7 * 86400000)
+    $("#datepicker").datepicker("setDate", next_week);
+    add_event()
+
+  $(".date-btn").click ->
+    if can_repeat == false
+      return
+    date = $("#datepicker").val()
+    next_day = new Date(Date.parse(date) + 86400000)
+    $("#datepicker").datepicker("setDate", next_day);
+    add_event()
+
+#photo upload
   $("#upload-photo").click ->
     $("#photo_file").trigger("click")
 
   $("#photo_file").change (event) ->
-    photo = $(".edit-photo")[0]
+    if event.target.files[0] == undefined
+      return
+    has_photo = true
+    photo = $("#photo")[0]
     photo.src = URL.createObjectURL(event.target.files[0])

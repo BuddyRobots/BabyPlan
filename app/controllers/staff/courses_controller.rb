@@ -13,6 +13,11 @@ class Staff::CoursesController < Staff::ApplicationController
     @course_insts[:data] = @course_insts[:data].map do |e|
       e.course_inst_info
     end
+    courses = @keyword.present? ? Course.where(name: /#{@keyword}/) : Course.all
+    @courses = auto_paginate(courses)
+    @courses[:data] = @courses[:data].map do |e|
+      e.course_info
+    end
   end
 
   def create
@@ -22,9 +27,16 @@ class Staff::CoursesController < Staff::ApplicationController
 
   def new
     @course = Course.where(id: params[:course_id]).first
+    if @course.blank?
+      redirect_to action: :index and return
+    end
   end
 
   def show_template
+    @course = Course.where(id: params[:id]).first
+    if @course.blank?
+      redirect_to action: :index and return
+    end
   end
 
   def show

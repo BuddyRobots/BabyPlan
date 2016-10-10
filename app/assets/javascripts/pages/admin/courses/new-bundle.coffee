@@ -23,11 +23,12 @@ $ ->
     name = $("#course-name").val()
     speaker = $("#course-speaker").val()
     price = $("#course-price").val()
+    price_pay = $("#public-price").val()
     code = $("#course-code").val()
     length = $("#course-length").val()
     desc = editor.$txt.html()
     available = $("#available").is(":checked")
-    if name == "" || speaker == "" || price == "" || desc == "" || code == ""
+    if name == "" || speaker == "" || price == "" || price_pay == "" || desc == "" || code == ""
       $.page_notification("请补全信息")
       return
     $.postJSON(
@@ -37,6 +38,7 @@ $ ->
           name: name
           speaker: speaker
           price: price
+          price_pay: price_pay
           length: length
           desc: desc
           available: available

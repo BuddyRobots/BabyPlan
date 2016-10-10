@@ -3,7 +3,6 @@
 #= require locale-all
 #= require datepicker-zh-TW
 
-
 $ ->
 
   can_repeat = false
@@ -63,20 +62,21 @@ $ ->
 
 
   parse_calendar_events = ->
-    event_str_ary = window.date_in_calendar.split(';')
+    event_str_ary = (window.date_in_calendar || "").split(';')
     $.each(
       event_str_ary,
       (index, event_str) ->
-        start_str = event_str.split(',')[0]
-        end_str = event_str.split(',')[1]
-        e = {
-          id: guid()
-          title: ""
-          allDay: false
-          start: start_str
-          end: end_str
-        }
-        $("#calendar").fullCalendar('renderEvent', e, true)
+        if event_str != ""
+          start_str = event_str.split(',')[0]
+          end_str = event_str.split(',')[1]
+          e = {
+            id: guid()
+            title: ""
+            allDay: false
+            start: start_str
+            end: end_str
+          }
+          $("#calendar").fullCalendar('renderEvent', e, true)
     )
 
   parse_calendar_events()

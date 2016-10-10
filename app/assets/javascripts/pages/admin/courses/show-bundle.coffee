@@ -65,9 +65,9 @@ $ ->
     $("#classname-input").val($("#classname-span").text())
     $("#code-input").val($("#course-span").text())
     $("#classspeaker-input").val($("#classspeaker-span").text())
-    $("#public-price-input").val($("#public-price-span").text())
     $("#nums-input").val($("#nums-span").text())
     $("#charge-input").val(window.price)
+    $("#public-price-input").val(window.price_pay)
 
     $("#edit-area").html($(".introduce-details").html())
 
@@ -86,6 +86,7 @@ $ ->
     name = $("#classname-input").val()
     speaker = $("#classspeaker-input").val()
     price = $("#charge-input").val()
+    price_pay = $("#public-price-input").val()
     code = $("#code-input").val()
     desc = editor.$txt.html()
 
@@ -96,6 +97,7 @@ $ ->
           name: name
           speaker: speaker
           price: price
+          price_pay: price_pay
           code: code
           desc: desc
         }
@@ -116,7 +118,9 @@ $ ->
           $("#classspeaker-span").text(speaker)
           $("#code-span").text(code)
           $("#charge-span").text(price + "元")
+          $("#charge-span").text(price_pay + "元")
           window.price = price
+          window.price_pay = price_pay
           $(".introduce-details").html(desc)
         else
           $.page_notification "服务器出错，请稍后重试"
