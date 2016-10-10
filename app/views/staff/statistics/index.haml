@@ -1,3 +1,32 @@
 - content_for :head do
   = javascript_include_tag "pages/staff/statistics/index-bundle"
   = stylesheet_link_tag "pages/staff/statistics/index-bundle", :media => "all"
+
+
+.content-area
+  .manage-content
+    .tabbable
+      %ul.nav.nav-tabs
+        %li.active
+          %a#kids-message{"data-toggle" => "tab", :href => "#tab1"} 儿童统计
+        %li
+          %a#course-review{"data-toggle" => "tab", :href => "#tab2"} 课程统计
+        %li
+          %a#book-review{"data-toggle" => "tab", :href => "#tab3"} 绘本统计
+
+      .tab-content
+        #tab1.tab-pane.active
+          .gender-pie
+            %p.pie-title 性别比例
+            .figure-box
+              #gender-statistics
+          .age-pie
+            %p.pie-title 年龄比例
+            .figure-box
+              #age-statistics
+          .kids-nums
+            %p.column-title 儿童数量
+            .figure-box
+              #nums-statistics
+        #tab2.tab-pane
+        #tab3.tab-pane

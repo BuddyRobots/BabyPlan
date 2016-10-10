@@ -127,7 +127,7 @@ $ ->
     $("#course-speaker").val($("#speaker-span").text())
     $("#course-address").val($("#address-span").text())
 
-    $("#course-num").css("width", $(".num-box").width() - $(".course-num").width()-4)
+    $("#course-num").css("width", $(".num-box").width() - $(".course-num").width()-5)
 
     $(".edit-btn").toggle()
     $(".finish-btn").toggle()
