@@ -37,6 +37,8 @@
           %a#user-review{"data-toggle" => "tab", :href => "#tab3"} 用户评价
         %li
           %a#course-sign{"data-toggle" => "tab", :href => "#tab4"} 课程签到
+        %li
+          %a#statistics{"data-toggle" => "tab", :href => "#tab5"} 统计信息
 
       .tab-content
         #tab1.tab-pane.active
@@ -286,6 +288,39 @@
                       %td.sign-data 小孙
                       %td.sign-data 小李
                       %td.sign-data 小周
+
+        #tab5.tab-pane
+          .courses-income-box
+            %p.income-title 课程收入
+            .income-div
+              .income-items
+                %p.income-caption 收入统计(元)
+                %p.income-nums 100000
+              .income-items
+                %p.income-caption 个人支付(元)
+                %p.income-nums 100000
+              .income-items#goverment
+                %p.income-caption 政府补贴(元)
+                %p.income-nums 100000
+          .pie-box
+            .gender-pie
+              %p.pie-title 性别比例
+              .figure-box
+                #gender-statistics
+            .age-pie
+              %p.pie-title 年龄比例
+              .figure-box
+                #age-statistics
+          .kids-nums
+            %p.column-title 报名情况
+            .figure-box
+              #nums-statistics
+          .attend-status
+            %p.attend-title 出勤情况
+            .figure-box
+              #attend-statistics
+
+
 #dialog-confirm{:title => "警告"}
   %p
     %span.ui-icon.ui-icon-alert{:style => "float:left; margin:12px 12px 20px 0;"}>

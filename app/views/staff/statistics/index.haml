@@ -16,17 +16,30 @@
 
       .tab-content
         #tab1.tab-pane.active
-          .gender-pie
-            %p.pie-title 性别比例
-            .figure-box
-              #gender-statistics
-          .age-pie
-            %p.pie-title 年龄比例
-            .figure-box
-              #age-statistics
+          .pie-box
+            .gender-pie
+              %p.pie-title 性别比例
+              .figure-box
+                #gender-statistics
+            .age-pie
+              %p.pie-title 年龄比例
+              .figure-box
+                #age-statistics
           .kids-nums
             %p.column-title 儿童数量
             .figure-box
               #nums-statistics
         #tab2.tab-pane
+
         #tab3.tab-pane
+          .desc
+            .search
+              .search-time-div
+                %form.form-inline
+                  .form-group
+                    %label.input-caption　查询时段:
+                    %input.input-area.form-control{:type => "text"}
+                  %span 至
+                  %input.input-area.form-control{:type => "text"}
+                  .btn.search-btn{:type => "button"} 查询
+            .statistics-chart

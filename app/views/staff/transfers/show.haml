@@ -1,3 +1,53 @@
 - content_for :head do
   = javascript_include_tag "pages/staff/transfers/show-bundle"
   = stylesheet_link_tag "pages/staff/transfers/show-bundle", :media => "all"
+
+
+.content-area
+  .content-box
+    .manage-box
+      %a#back{:href => "/staff/transfers"}
+        %img{:src => "/assets/web/back.png"}
+      %p.transfer-status 迁移详情
+  .manage-content
+    .desc
+      .controls.controls-row
+        %label.input-caption 迁出地点:
+        %span.unedit-box 海淀区儿童中心
+        %label.input-caption 迁入地点:
+        %span.unedit-box 朝阳区儿童中心
+        
+      .controls.controls-row
+        %label.input-caption 迁移状态:
+        %span.unedit-box 已完成
+        %label.input-caption#time 时间:
+        %span.unedit-box 2016.10.11
+        %label.input-caption 数量:
+        %span.unedit-box 3
+    .table-box
+      %table.table.table-bordered#book-table
+        %thead
+          %tr
+            %th 绘本名称
+            %th 数&nbsp量
+            %th 作&nbsp者
+            %th ISBN编码
+        %tbody
+          - 4.times do
+            %tr
+              %td.td-data 塞拉菲尼抄本
+              %td.td-data ４
+              %td.td-data 塞拉菲尼
+              %td.td-data　97834546259
+
+    .select-page 
+      %span.totalitems= "共6页,总计12条"
+      %span.choice-page
+        %ul.pagination.pagination-sm
+          %li
+            %a{:href => "javascript:void(0);"} «
+          / - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
+          %li
+            %a{:href => "javascript:void(0);"} 1
+          %li
+            %a{:href => "javascript:void(0);"} »
