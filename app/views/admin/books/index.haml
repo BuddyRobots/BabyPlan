@@ -12,9 +12,9 @@
           %input.form-control#search-input{:type => "text", :placeholder => "输入绘本名称", :value => "#{@keyword}"}
           %span.input-group-btn
             %button.btn.btn-default#search-btn{:type => "button"}
-      .btn.borrowset-btn{:type => "button", :href => "#kidsaddModal", "data-toggle" => "modal"} 
+      .btn.borrowset-btn{:type => "button", :href => "#borrowModal", "data-toggle" => "modal"} 
         %img.setting{:src => "/assets/managecenter/setting.png"}
-        开设课程  
+        借阅设置  
 
     .manage-content
       .tabbable
@@ -114,3 +114,22 @@
                       %a{:href => "javascript:void(0);"} 1
                     %li
                       %a{:href => "javascript:void(0);"} »
+
+#borrowModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
+  .modal-dialog
+    .modal-content
+      .modalheader
+        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", :src => "/assets/managecenter/close.png"}
+        %p.caption 添加儿童
+      .modal-body
+        %form.form-horizontal{:role => "form"}
+          .form-group
+            %label.col-sm-3.control-label{:for => "kid-name"} 姓&nbsp名
+            .col-sm-9
+              %input.unclicked-box#kid-name.form-control{:type => "text"}
+          .form-group
+            %label.col-sm-3.control-label{:for => "kid-gender"} 性&nbsp别
+            .col-sm-9
+              %select.unclicked-box#kid-gender.form-control
+                %option 男
+                %option 女

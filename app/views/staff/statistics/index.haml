@@ -30,6 +30,63 @@
             .figure-box
               #nums-statistics
         #tab2.tab-pane
+          .desc
+            .search
+              .search-time-div
+                %form.form-inline
+                  .form-group
+                    %label.input-caption　查询时段:
+                    %input.input-area.form-control{:type => "text"}
+                  %span 至
+                  %input.input-area.form-control{:type => "text"}
+                  .btn.search-btn{:type => "button"} 查询
+                  %select.form-control.quick-choice
+                    %option 快键选择
+                    %option 最近一个月
+                    %option 最近三个月
+                    %option 最近半年
+                    %option 最近一年
+            .statistics-chart
+              .borrow
+                .left-div
+                  %p.column-title 报名情况
+                  .tab-chart-div
+                    .total-div
+                      %p.total-nums 91234
+                      %p.total-category 人次
+                    .chart-div
+                      #register-statistics
+                .right-div
+                  %p.column-title.review-title 评价排名
+                  %table.table.table-bordered#review-table
+                    %tbody
+                    - 5.times do
+                      %tr
+                        %td.td-data 1
+                        %td.td-data 少儿计算机技术
+                        %td.td-data 4.6
+
+              .collection
+                .left-div
+                  %p.column-title 课程收入
+                  .tab-chart-div
+                    .income-div
+                      %p.total-nums 91234
+                      %p.total-category 元
+                    .chart-pie-div
+                      #bonu-statistics
+                    .chart-column-div
+                      #income-statistics
+                .right-div
+                  %p.column-title.review-title 报名排名
+                  %table.table.table-bordered#review-table
+                    %tbody
+                    - 5.times do
+                      %tr
+                        %td.td-data 1
+                        %td.td-data 少儿计算机技术
+                        %td.td-data 30
+
 
         #tab3.tab-pane
           .desc
@@ -42,4 +99,43 @@
                   %span 至
                   %input.input-area.form-control{:type => "text"}
                   .btn.search-btn{:type => "button"} 查询
+                  %select.form-control.quick-choice
+                    %option 快键选择
+                    %option 最近一个月
+                    %option 最近三个月
+                    %option 最近半年
+                    %option 最近一年
             .statistics-chart
+              .borrow
+                .left-div
+                  %p.column-title 借阅情况
+                  .tab-chart-div
+                    .total-div
+                      %p.total-nums 91234
+                      %p.total-category 人次
+                    .chart-div
+                      #borrow-statistics
+                .right-div
+                  %p.column-title.review-title 评价排名
+                  %table.table.table-bordered#review-table
+                    %tbody
+                    - 5.times do
+                      %tr
+                        %td.td-data 1
+                        %td.td-data 你今天真好看
+                        %td.td-data 4.6
+
+              .collection
+                .left-div
+                  %p.column-title 馆藏情况
+                  #collect-statistics
+                .right-div
+                  %p.column-title.review-title 借阅排名
+                  %table.table.table-bordered#review-table
+                    %tbody
+                    - 5.times do
+                      %tr
+                        %td.td-data 1
+                        %td.td-data 你今天真好看
+                        %td.td-data 30
+
