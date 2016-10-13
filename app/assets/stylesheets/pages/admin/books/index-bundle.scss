@@ -208,21 +208,36 @@
 .close:hover {
 	opacity: 1;
 }
-.modalheader {
-	height: 48px;
-	line-height: 48px;
-	box-shadow: 0 -1px 6px #9c9c9c; 
-}
-.caption {
-	font-size: 16px;
-	color: #323232;
-	margin-left: 20px;
-}
-.form-horizontal {
+.form-div {
 	width: 78%;
 	margin: 0 auto;
-	padding-top: 20px;
+	padding: 40px 0;
+	text-align: center;
+	.form-group {
+		width: 90%;
+		margin-bottom: 20px;
+	}
 }
-.form-group {
-	margin-bottom: 20px;
+.control-label {
+	font-weight: normal;
+	margin-right: 5%;
+	color: #323232;
+}
+.confirm-button {
+	text-align: center;
+}
+#confirm {
+	width: 88%;
+	height: 40px;
+	border: 0;
+	border-radius: 4px;
+	line-height: 40px;
+	font-size: 16px;
+	color: white;
+}
+.button-disabled {
+	background: #c8c8c8;
+}
+.button-enabled {
+	background: #f7873d;
 }

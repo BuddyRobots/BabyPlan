@@ -120,16 +120,13 @@
     .modal-content
       .modalheader
         %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", :src => "/assets/managecenter/close.png"}
-        %p.caption 添加儿童
       .modal-body
-        %form.form-horizontal{:role => "form"}
+        %form.form-inline.form-div{:role => "form"}
           .form-group
-            %label.col-sm-3.control-label{:for => "kid-name"} 姓&nbsp名
-            .col-sm-9
-              %input.unclicked-box#kid-name.form-control{:type => "text"}
+            %label.control-label{:for => "borrow-num"} 最大可借本数
+            %input.unclicked-box#borrow-num.form-control{:type => "text"}
           .form-group
-            %label.col-sm-3.control-label{:for => "kid-gender"} 性&nbsp别
-            .col-sm-9
-              %select.unclicked-box#kid-gender.form-control
-                %option 男
-                %option 女
+            %label.control-label{:for => "borrow-time"} 最长可借时间
+            %input.unclicked-box#borrow-time.form-control{:type => "text"}
+          .confirm-button
+            %button#confirm.button-disabled{:href => "javascript:void(0);"} 确&nbsp定

@@ -337,44 +337,72 @@ $ ->
     } ]
 
   $('#income-statistics').highcharts
-      chart: type: 'column'
-      title: text: null
-      xAxis:
-        title:
-          text: '周数' 
-      yAxis:
-        min: 0
-        title: text: '课程收入(元)'
-      tooltip: formatter: ->
-        '<b>' + @x + '</b><br/>' + @series.name + ': ' + @y + '<br/>' + 'Total: ' + @point.stackTotal
-      plotOptions: column:
-        stacking: 'normal'
-      credits:
-           enabled: false
-      legend:
-        enabled: false
-      series: [
-        {
-          name: "政府补贴"
-          color: '#227dda'
-          data: [
-            2
-            2
-            3
-            2
-            1
-          ]
-        }
-        {
-          name: "个人支付"
-          color: '#90c5fc'
-          data: [
-            5
-            6
-            7
-            9
-            5
-          ]
-        }
-      ]
-    return
+    chart: type: 'column'
+    title: text: null
+    xAxis:
+      title:
+        text: '周数' 
+    yAxis:
+      min: 0
+      title: text: '课程收入(元)'
+    tooltip: formatter: ->
+      '<b>' + @x + '</b><br/>' + @series.name + ': ' + @y + '<br/>' + 'Total: ' + @point.stackTotal
+    plotOptions: column:
+      stacking: 'normal'
+    credits:
+         enabled: false
+    legend:
+      enabled: false
+    series: [
+      {
+        name: "政府补贴"
+        color: '#227dda'
+        data: [
+          2
+          2
+          3
+          2
+          1
+        ]
+      }
+      {
+        name: "个人支付"
+        color: '#90c5fc'
+        data: [
+          5
+          6
+          7
+          9
+          5
+        ]
+      }
+    ]
+
+
+  $( "#datepicker-1" ).datepicker({
+        # changeMonth: true,
+        # changeYear: true
+      })
+  $( "#datepicker-1" ).datepicker( $.datepicker.regional[ "zh-TW" ] )
+  $( "#datepicker-1" ).datepicker( "option", "dateFormat", "yy-mm-dd" )
+
+  $( "#datepicker-2" ).datepicker({
+        # changeMonth: true,
+        # changeYear: true
+      })
+  $( "#datepicker-2" ).datepicker( $.datepicker.regional[ "zh-TW" ] )
+  $( "#datepicker-2" ).datepicker( "option", "dateFormat", "yy-mm-dd" )
+
+  $( "#datepicker-3" ).datepicker({
+      # changeMonth: true,
+      # changeYear: true
+    })
+  $( "#datepicker-3" ).datepicker( $.datepicker.regional[ "zh-TW" ] )
+  $( "#datepicker-3" ).datepicker( "option", "dateFormat", "yy-mm-dd" )
+
+  $( "#datepicker-4" ).datepicker({
+      # changeMonth: true,
+      # changeYear: true
+    })
+  $( "#datepicker-4" ).datepicker( $.datepicker.regional[ "zh-TW" ] )
+  $( "#datepicker-4" ).datepicker( "option", "dateFormat", "yy-mm-dd" ) 
