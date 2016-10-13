@@ -16,6 +16,9 @@ class Center
   has_many :announcements
   has_many :staffs, class_name: "User", inverse_of: :staff_center
 
+  has_many :out_transfers, class_name: "Transfer", inverse_of: "out_center"
+  has_many :in_transfers, class_name: "Transfer", inverse_of: "in_center"
+
   def self.create_center(center_info)
     center = Center.create(
       name: center_info[:name],
