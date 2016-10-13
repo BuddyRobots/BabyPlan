@@ -29,7 +29,6 @@ $ ->
       center: 'title'
       right: 'month,agendaWeek,agendaDay,listMonth'
     locale: initialLocaleCode
-    buttonIcons: true
     weekNumbers: true
     navLinks: true
     editable: true

@@ -12,9 +12,9 @@
           %input.form-control#search-input{:type => "text", :placeholder => "输入绘本名称", :value => "#{@keyword}"}
           %span.input-group-btn
             %button.btn.btn-default#search-btn{:type => "button"}
-      .btn.borrowset-btn{:type => "button", :href => "#kidsaddModal", "data-toggle" => "modal"} 
+      .btn.borrowset-btn{:type => "button", :href => "#borrowModal", "data-toggle" => "modal"} 
         %img.setting{:src => "/assets/managecenter/setting.png"}
-        开设课程  
+        借阅设置  
 
     .manage-content
       .tabbable
@@ -114,3 +114,19 @@
                       %a{:href => "javascript:void(0);"} 1
                     %li
                       %a{:href => "javascript:void(0);"} »
+
+#borrowModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
+  .modal-dialog
+    .modal-content
+      .modalheader
+        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", :src => "/assets/managecenter/close.png"}
+      .modal-body
+        %form.form-inline.form-div{:role => "form"}
+          .form-group
+            %label.control-label{:for => "borrow-num"} 最大可借本数
+            %input.unclicked-box#borrow-num.form-control{:type => "text"}
+          .form-group
+            %label.control-label{:for => "borrow-time"} 最长可借时间
+            %input.unclicked-box#borrow-time.form-control{:type => "text"}
+          .confirm-button
+            %button#confirm.button-disabled{:href => "javascript:void(0);"} 确&nbsp定

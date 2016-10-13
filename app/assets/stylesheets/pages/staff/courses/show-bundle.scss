@@ -371,6 +371,7 @@ h2 {
 	border: 1px solid #ddd;
 	font-size: 14px;
 	color: #323232;
+	margin-bottom: 0;
 	th {
 		text-align: center;
 		height: 40px;
@@ -585,4 +586,98 @@ h2 {
 		background: rgb(16, 192, 120);
 		background: rgba(16, 192, 120,0.3);
 	}
+}
+
+//tab5
+.courses-income-box {
+	width: 880px;
+	border: 1px solid #c8c8c8;
+	margin: 40px 0 0 40px;
+}
+.income-title {
+	font-size: 16px;
+	color: #464646;
+	background: #f6f6f6;
+	height: 44px;
+	line-height: 44px;
+	text-align: center;
+	border-bottom: 1px solid #c8c8c8;
+}
+.income-div {
+	padding: 20px 0;
+	display: flex;
+}
+.income-items {
+	flex: 1;
+	text-align: center;
+	border-right: 1px dashed #c8c8c8;
+}
+.income-caption {
+	margin: 20px 0 10px 0;
+	font-size: 16px;
+	color: #969696;
+}
+.income-nums {
+	font-size: 24px;
+	color: #227dda;
+	margin: 10px 0;
+}
+#goverment {
+	border: 0;
+}
+.pie-box {
+	width: 880px;
+	margin: 40px 0 0 40px;
+	display: flex;
+	justify-content: space-between;
+}
+.gender-pie, .age-pie {
+	width: 420px;
+	height: 350px;
+	border: 1px solid #c8c8c8;
+}
+.kids-nums {
+	width: 880px;
+	margin: 40px 0 0 40px;
+	border: 1px solid #c8c8c8;
+}
+.attend-status {
+	@extend .kids-nums;
+	margin-bottom: 20px;
+}
+.pie-title {
+	font-size: 16px;
+	color: #464646;
+	height: 44px;
+	line-height: 44px;
+	text-align: center;
+	background: #f6f6f6;
+	border-bottom: 1px solid #c8c8c8;
+}
+.column-title, .attend-title {
+	@extend .pie-title;
+	text-align: left;
+	padding-left: 20px;
+}
+.figure-box {
+	padding: 5px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+#gender-statistics {
+	width: 300px;
+	height: 280px;
+}
+#age-statistics {
+	width: 350px;
+	height: 280px;
+}
+#nums-statistics {
+	width: 800px;
+	height: 220px;
+}
+#attend-statistics {
+	width:800px;
+	height: 220px;
 }

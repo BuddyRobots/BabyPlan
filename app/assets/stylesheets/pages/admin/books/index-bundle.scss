@@ -181,3 +181,63 @@
 .button-enabled {
 	background: #ffa265;
 }
+
+
+#borrowModal {
+	.modal-dialog {
+		position:absolute;
+		left: 50%;
+		top: 50%;
+		margin-left: -220px;
+		margin-top: -120px;
+		width: 440px;
+		height: 240px;
+		border-radius: 6px;	
+	}
+}
+.modal-backdrop {
+	background-color: #999;
+}
+.close {
+	position: absolute;
+	right: -14px;
+	top: -14px;
+	opacity: 0.7;
+	z-index: 10;
+}
+.close:hover {
+	opacity: 1;
+}
+.form-div {
+	width: 78%;
+	margin: 0 auto;
+	padding: 40px 0;
+	text-align: center;
+	.form-group {
+		width: 90%;
+		margin-bottom: 20px;
+	}
+}
+.control-label {
+	font-weight: normal;
+	margin-right: 5%;
+	color: #323232;
+}
+.confirm-button {
+	text-align: center;
+}
+#confirm {
+	width: 88%;
+	height: 40px;
+	border: 0;
+	border-radius: 4px;
+	line-height: 40px;
+	font-size: 16px;
+	color: white;
+}
+.button-disabled {
+	background: #c8c8c8;
+}
+.button-enabled {
+	background: #f7873d;
+}

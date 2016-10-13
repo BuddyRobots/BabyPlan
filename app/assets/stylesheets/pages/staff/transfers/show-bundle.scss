@@ -1,0 +1,133 @@
+
+.clearfix:before, .clearfix:after {
+	content: " ";
+	display: table;
+}
+.clearfix:after {
+	clear: both;
+}
+.clearfix {
+	*zoom: 1;
+}
+.modal-body, label {
+	margin: 0;
+	padding: 0;
+	max-height: 600px;
+}
+.content-area {
+	position:absolute;
+	right: 0;
+	left: 160px;
+	bottom: 0;
+	top: 60px;
+	background:#f7fcff;
+	box-shadow: -1px -1px 6px #9c9c9c inset;
+	padding: 20px;
+}
+
+.content-box {
+	position: relative;
+	box-shadow: 0 -1px 6px #9c9c9c inset;
+	background: white;  
+	height: 100%;
+}
+.manage-box {
+	height: 58px;
+	border-bottom: 1px solid #c8c8c8;
+	overflow: hidden;
+}
+.manage-content {
+	overflow: auto;
+	position: absolute;
+	top: 60px;
+	left: 0px;
+	bottom: 0px;
+	right: 0px;
+	padding: 20px;
+}
+#back {
+	float: left;
+}
+.transfer-status {
+	float: left;
+	font-size: 16px;
+	color: #323232;
+	padding-left: 20px;
+	height: 52px;
+	line-height: 52px;
+	margin-top: 3px;
+	border-left: 1px solid #c8c8c8;
+}
+.desc {
+	margin: 20px;
+	border: 1px solid #c8c8c8;
+}
+.input-caption {
+	display: inline-block;
+	vertical-align: middle;
+	font-size: 16px;
+	color: #323232;
+	margin-right: 5px;
+	margin-left: 20px;
+	font-weight: normal;
+}
+.controls-row {
+	margin: 10px 0;
+}
+.unedit-box {
+	display: inline-block;
+	vertical-align: middle;
+	font-size: 14px;
+	color: #323232;
+	width: 17.2%;
+	height: 30px;
+	line-height: 30px;
+}
+#time {
+	margin-left: 52px;
+}
+.table-box {
+	margin: 20px 20px 0 20px;
+}
+#book-table {
+	border-radius: 6px;
+	border: 1px solid #c8c8c8;
+	font-size: 14px;
+	color: #323232;
+	margin: 0;
+	th {
+		text-align: center;
+		height: 40px;
+		line-height: 40px;
+		padding: 0;
+		border: 1px solid #c8c8c8;
+	}
+	.td-data {
+		font-size: 14px;
+		color: #505050;
+		height:45px;
+		line-height: 45px;
+		text-align: center;
+		padding: 0;
+		border: 1px solid #c8c8c8;
+	}
+}
+
+.select-page {
+	text-align: right;
+	margin: 10px 20px 0 0;
+	padding-bottom: 5px;
+}
+.totalitems {
+	font-size: 12px;
+	color: #969696;
+	vertical-align: bottom;
+	height: 36px;
+	line-height: 36px;
+}
+.pagination {
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+	margin-left: 15px;
+}

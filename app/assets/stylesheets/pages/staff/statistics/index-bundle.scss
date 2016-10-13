@@ -1,0 +1,220 @@
+@import "jquery-ui";
+
+span, ul, li, label {
+	margin: 0;
+	padding: 0;
+}
+
+$green: #10c078;
+
+.content-area {
+	position:absolute;
+	right: 0;
+	left: 160px;
+	bottom: 0;
+	top: 60px;
+	background:#f7fcff;
+	box-shadow: -1px -1px 6px #9c9c9c inset;
+	padding: 20px;
+}
+.manage-content {
+	overflow: auto;
+	position: absolute;
+	top: 20px;
+	left: 0px;
+	bottom: 0px;
+	right: 0px;
+	box-shadow: 0 -1px 6px #9c9c9c inset;
+	background: white;  
+	margin: 0 20px 20px 20px;
+}
+.tabbable {
+	padding-top: 20px;
+}	
+
+.nav-tabs {
+	padding-left: 20px;
+	li {
+		font-size: 16px;
+		color: #323232;
+	}
+}
+.pie-box {
+	width: 880px;
+	margin: 40px 0 0 40px;
+	display: flex;
+	justify-content: space-between;
+}
+.gender-pie, .age-pie {
+	width: 420px;
+	height: 350px;
+	border: 1px solid #c8c8c8;
+}
+.kids-nums {
+	width: 880px;
+	margin: 40px 0 20px 40px;
+	border: 1px solid #c8c8c8;
+}
+.pie-title {
+	font-size: 16px;
+	color: #464646;
+	height: 44px;
+	line-height: 44px;
+	text-align: center;
+	background: #f6f6f6;
+	border-bottom: 1px solid #c8c8c8;
+}
+.column-title {
+	@extend .pie-title;
+	text-align: left;
+	padding-left: 20px;
+}
+.figure-box {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+#gender-statistics {
+	width: 300px;
+	height: 300px;
+}
+#age-statistics {
+	width: 350px;
+	height: 300px;
+}
+#nums-statistics {
+	width: 800px;
+	height: 240px;
+}
+.desc {
+	margin: 20px;
+	border: 1px solid #c8c8c8;
+}
+.search {
+	background: #eee;
+}
+.search-time-div {
+	padding: 13px 20px;
+}
+.input-caption {
+	display: inline-block;
+	font-weight: normal;
+	font-size: 16px;
+	color: #464646;
+	padding-top: 2px;
+	vertical-align: middle;
+}
+.input-area {
+	margin: 0 8px;
+}
+.search-btn {
+	background: $green;
+	margin-left: 12px;
+	height: 32px;
+	color: #fff;
+}
+.search-btn:hover {
+	color: #fff;
+}
+.form-inline {
+	.quick-choice {
+		width: 18%;
+		float: right;
+		margin-right: 20px;
+		color: #969696;
+	}
+}
+.statistics-chart {
+	padding: 40px 40px 20px 40px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+.borrow, .collection {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 20px;
+}
+.left-div {
+	width: 68%;
+	border: 1px solid #c8c8c8;
+}
+.tab-chart-div {
+	display: flex;
+	justify-content: space-between;
+}
+.total-div {
+	width: 30%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	text-align: center;
+}
+.total-nums {
+	font-size: 24px;
+	color: #227dda;
+	margin-bottom: 20px;
+}
+.total-category {
+	font-size: 16px;
+	color: #969696;
+}
+.chart-div {
+	width: 69%;
+}
+#borrow-statistics {
+	min-width: 35%;
+	height: 240px;
+}
+.right-div {
+	width: 30%;
+}
+#review-table {
+	border-radius: 6px;
+	border: 1px solid #c8c8c8;
+	font-size: 14px;
+	color: #323232;
+	margin-bottom: 0;
+	.td-data {
+		font-size: 14px;
+		color: #505050;
+		height:47px;
+		line-height: 47px;
+		text-align: center;
+		padding: 0;
+		border: 1px solid #c8c8c8;
+	}
+}
+.review-title {
+	border: 1px solid #c8c8c8;
+	border-bottom: 0;
+}
+#collect-statistics {
+	min-width: 50%;
+	height: 240px;
+}
+#register-statistics {
+	min-width: 35%;
+	height: 240px;
+}
+.chart-column-div {
+	width: 54%;
+}
+.chart-pie-div {
+	width: 30%;
+}
+#bonu-statistics {
+	min-width: 15%;
+	height: 240px;
+}
+#income-statistics {
+	min-width: 25%;
+	height: 240px;
+}
+.income-div {
+	width: 20%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	text-align: center;
+}
