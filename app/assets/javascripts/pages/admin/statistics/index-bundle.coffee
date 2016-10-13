@@ -155,10 +155,23 @@ $ ->
         text: null
       xAxis: 
         title:
-          text: '周数'
+          text: '月份'
+        categories: [
+              'Jan'
+              'Feb'
+              'Mar'
+              'Apr'
+              'May'
+              'Jun'
+              'Jul'
+              'Aug'
+              'Sep'
+              'Oct'
+              'Nov'
+              'Dec'
+            ]
       yAxis:
         title: text: '儿童数量(千)'
-        max: 10
       tooltip: valueSuffix: '千'
       credits:
            enabled: false
@@ -184,9 +197,10 @@ $ ->
       title:
         text: null
       xAxis: 
-        tickInterval: 5
+        type: 'datetime'
+        tickInterval: 0
         title:
-          text: '周数'
+          text: '日期'
       yAxis:
         title: text: '借阅数量(人次)'
       tooltip: valueSuffix: '人次'
@@ -211,6 +225,8 @@ $ ->
             32
             55
           ]
+          pointStart: Date.UTC(2016, 9, 1),
+          pointInterval: 24 * 3600 * 1000
         }
       ]
 
@@ -377,7 +393,136 @@ $ ->
         ]
       }
     ]
+  $('#center-statistics').highcharts
+    chart: type: 'column'
+    title: text: null
+    xAxis:
+      type: 'category'
+    yAxis:
+      min: 0
+      title: text: '借阅数量(万人次)'
+    legend: enabled: false
+    tooltip: valueSuffix: '万人次'
+    credits:
+         enabled: false
+    series: [ {
+      name: '借阅数量'
+      data: [
+        [
+          '海淀区'
+          3.9
+        ]
+        [
+          '昌平区'
+          16.1
+        ]
+        [
+          '朝阳区'
+          14.2
+        ]
+        [
+          '大兴区'
+          14.0
+        ]
+        [
+          '东城区'
+          12.5
+        ]
+        [
+          '西城区'
+          12.1
+        ]
+        [
+          '朝阳区'
+          11.8
+        ]
+        [
+          '西城区'
+          11.7
+        ]
+        [
+          '东城区'
+          11.1
+        ]
+        [
+          '大兴区'
+          11.1
+        ]
+        [
+          '其他'
+          10.5
+        ]
+      ]
+    } ]
 
+  $('#center-income-statistics').highcharts
+    chart:
+      type: 'column'
+
+    title: text: null
+    xAxis:
+      type: 'category'
+    yAxis:
+      min: 0
+      title: text: '课程收入(万元)'
+    legend: enabled: false
+    tooltip: valueSuffix: '万元'
+    credits:
+         enabled: false
+    plotOptions: series: point: events: click: (event) ->
+      this.update { color: '#227dda' }, true, false
+      return
+    series: [ {
+      name: '课程收入'
+      
+
+      data: [
+        [
+          '海淀区'
+          3.9
+        ]
+        [
+          '昌平区'
+          16.1
+        ]
+        [
+          '朝阳区'
+          14.2
+        ]
+        [
+          '大兴区'
+          14.0
+        ]
+        [
+          '东城区'
+          12.5
+        ]
+        [
+          '西城区'
+          12.1
+        ]
+        [
+          '朝阳区'
+          11.8
+        ]
+        [
+          '西城区'
+          11.7
+        ]
+        [
+          '东城区'
+          11.1
+        ]
+        [
+          '大兴区'
+          11.1
+        ]
+        [
+          '其他'
+          10.5
+        ]
+      ]
+    } ]
 
   $( "#datepicker-1" ).datepicker({
         # changeMonth: true,
