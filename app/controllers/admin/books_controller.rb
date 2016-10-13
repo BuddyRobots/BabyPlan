@@ -21,4 +21,7 @@ class Admin::BooksController < Admin::ApplicationController
     @similar_books = auto_paginate(similar_books)
   end
 
+  def show_transfer
+  end
+
 end

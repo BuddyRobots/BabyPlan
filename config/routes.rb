@@ -65,6 +65,8 @@ Rails.application.routes.draw do
         post :reset_password
       end
     end
+    resources :statistics do
+    end
     resources :staffs do
       member do
         put :change_center
@@ -91,6 +93,9 @@ Rails.application.routes.draw do
       end
     end
     resources :books do
+      member do
+        get :show_transfer
+      end
     end
   end
 
