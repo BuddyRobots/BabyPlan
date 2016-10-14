@@ -35,15 +35,14 @@
         #tab2.tab-pane
           .desc
             .search
-              .search-time-div
+              .form-group
                 %form.form-inline
-                  .form-group
-                    %label.input-caption　查询时段:
-                    %input.input-area.form-control#datepicker-1{:type => "text"}
+                  %span.input-caption　查询时段:
+                  %input.input-area.form-control#datepicker-1{:type => "text"}
                   %span 至
                   %input.input-area.form-control#datepicker-2{:type => "text"}
                   .btn.search-btn{:type => "button"} 查询
-                  %select.form-control.quick-choice
+                  %select.form-control#quick-choice
                     %option 快键选择
                     %option 最近一个月
                     %option 最近三个月
@@ -93,15 +92,14 @@
         #tab3.tab-pane
           .desc
             .search
-              .search-time-div
+              .form-group
                 %form.form-inline
-                  .form-group
-                    %label.input-caption　查询时段:
-                    %input.input-area.form-control#datepicker-3{:type => "text"}
+                  %label.input-caption　查询时段:
+                  %input.input-area.form-control#datepicker-3{:type => "text"}
                   %span 至
                   %input.input-area.form-control#datepicker-4{:type => "text"}
                   .btn.search-btn{:type => "button"} 查询
-                  %select.form-control.quick-choice
+                  %select.form-control#quick-choice
                     %option 快键选择
                     %option 最近一个月
                     %option 最近三个月

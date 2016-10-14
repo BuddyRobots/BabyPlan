@@ -92,8 +92,9 @@ $green: #10c078;
 }
 .search {
 	background: #eee;
+	border-bottom: 1px solid #c8c8c8;
 }
-.search-time-div {
+.form-group {
 	padding: 13px 20px;
 }
 .input-caption {
@@ -116,13 +117,11 @@ $green: #10c078;
 .search-btn:hover {
 	color: #fff;
 }
-.form-inline {
-	.quick-choice {
-		width: 18%;
-		float: right;
-		margin-right: 20px;
-		color: #969696;
-	}
+#quick-choice {
+	// width: 18.2%;
+	float: right;
+	margin-right: 20px;
+	color: #969696;
 }
 .statistics-chart {
 	padding: 40px 40px 20px 40px;
@@ -162,7 +161,7 @@ $green: #10c078;
 .chart-div {
 	width: 69%;
 }
-#borrow-statistics {
+#borrow-statistics, #center-borrow-statistics {
 	min-width: 35%;
 	height: 240px;
 }
@@ -189,7 +188,7 @@ $green: #10c078;
 	border: 1px solid #c8c8c8;
 	border-bottom: 0;
 }
-#collect-statistics {
+#collect-statistics, #center-collect-statistics {
 	min-width: 50%;
 	height: 240px;
 }
@@ -225,4 +224,10 @@ $green: #10c078;
 #center-income-statistics {
 	min-width: 50%;
 	height: 240px;
+}
+.append-left {
+	border-top: 0;
+}
+.click-show-div {
+	display: none;
 }
