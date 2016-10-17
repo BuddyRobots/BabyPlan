@@ -1,0 +1,59 @@
+html {
+	font-size: 16px;
+}
+body {
+	font-family:"Microsoft YaHei";
+	font-size: 62.5%;
+}
+body, p, img, div, ul, li, a, h3 {
+	margin:0;
+	padding:0;
+}
+a{
+	border:none;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	-webkit-tap-highlight-color:transparent;
+	outline:none；
+}
+.clearfix:before, .clearfix:after {
+	display: table;
+	content: " ";
+}
+.clearfix:after {
+	clear: both;
+}
+.clearfix {
+	*zoom: 1;
+}
+
+.main-div {
+	width: 100%;
+	max-width: 640px;
+	margin: 0 auto;
+}
+.logo-div {
+	background: #fofofo;
+	text-align: center;
+}
+.logo {
+	width: 25%;
+	max-width: 160px;
+}
+.sign-in-div {
+	background: url("/assets/manager/bg_login.jpg") no-repeat;
+	text-align: center;
+}
+.content-area {
+	position:relative;
+	width:100%;
+	max-width:640px;
+	margin:0 auto;
+	background: linear-gradient(
+    45deg, 
+    #fef29c 45%, 
+    #fcc204 45%, #fcc204 50%, 
+    #fef29c 50%, #fef29c 95%, 
+    #fcc204 95%, #fcc204);
+    background-size: 10px 10px;
+}
+

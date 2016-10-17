@@ -29,6 +29,10 @@ Rails.application.routes.draw do
   get 'welcome/courseinfo'
 
 
+  get 'welcome/m_frontpage'
+
+
+
 
   get 'welcome/managecenter'
 
