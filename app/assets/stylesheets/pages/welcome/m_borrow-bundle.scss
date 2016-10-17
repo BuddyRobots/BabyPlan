@@ -29,69 +29,39 @@ a{
 }
 
 .main-div {
-	position: relative;
 	width: 100%;
 	max-width: 640px;
 	margin: 0 auto;
 	height: 100%;
 	background: #f0f0f0;
 }
-.logo-div {
-	text-align: center;
-}
-.logo {
-	width: 25%;
-	max-width: 160px;
-	padding: 12.5% 0 20% 0;
-}
-.sign-in-div {
-	position: absolute;
-	background: url("/assets/manager/bg_login.jpg") no-repeat;
-	background-size: 100%;
-	top: 44%;
-	left: 0;
-	bottom: 0;
-	right: 0;
-}
-.input-div {
-	position: relative;
+.content {
 	width: 68.75%;
 	margin: 0 auto;
+	text-align: center;
 }
-.input-group-addon {
-	padding: 0;
-	width: 16.36%;
-	max-width: 72px;
-	background: #fff;
+.telephone {
+	font-size: 3.2em;
+	color: #333;
+	padding-top: 27.27%; 
 }
-#user-input {
-	position: absolute;
-	margin-bottom: 4.55%;
-	margin-top: -11.38%;
-}
-#key-input {
-	position: absolute;
-	margin-top: 11.38%;
-	margin-bottom: 15%;
-}
-#user-bg {
-	width: 100%;
-	max-width: 72px;
+.notice {
+	font-size: 2.8em;
+	color: #666;
+	padding-top: 7.27%;
+	padding-bottom: 18.19%;
 }
 .form-control {
-	padding: 9.5%;
+	padding: 8%;
 	font-size: 3em;
 }
-.sign-in-btn {
+.next-btn {
 	width: 100%;
 	font-size: 3.2em;
 	color: #fff;
 	padding: 3.2% 0;
 	background: #227dda;
-	margin-top: 47%;
-}
-.sign-in-btn:hover {
-	color: #fff;
+	margin-top: 13.63%;
 }
 
 @media screen and (max-width:640px) {
@@ -115,4 +85,3 @@ a{
         font-size: 50%;
     }
 }
-

@@ -30,6 +30,8 @@ Rails.application.routes.draw do
 
 
   get 'welcome/m_frontpage'
+  get 'welcome/m_book'
+  get 'welcome/m_borrow'
 
 
 

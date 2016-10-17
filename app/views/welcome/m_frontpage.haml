@@ -7,6 +7,13 @@
     .logo-div
       %img.logo{:src => "/assets/manager/logo.png"}
     .sign-in-div
-      %input.form-control#user{:type => "text"}
-      %input.form-control#password{:type => "password"}
-      %button.btn.sign-in-btn{:type => "button"} 登录
+      .input-div
+        .input-group#user-input
+          .input-group-addon
+            %img#user-bg{:src => "/assets/manager/user.png"}
+          %input.form-control{:type => "text"}
+        .input-group#key-input
+          .input-group-addon
+            %img#user-bg{:src => "/assets/manager/key.png"}
+          %input.form-control{:type => "password"}
+        %button.btn.sign-in-btn{:type => "button"} 登录
