@@ -32,16 +32,20 @@ a{
 	margin: 0 auto;
 }
 .logo-div {
-	background: #fofofo;
+	background: #f0f0f0;
 	text-align: center;
 }
 .logo {
 	width: 25%;
 	max-width: 160px;
+	padding: 12.5% 0 20% 0;
 }
 .sign-in-div {
 	background: url("/assets/manager/bg_login.jpg") no-repeat;
 	text-align: center;
+}
+.form-control {
+	width: 68.75%;
 }
 .content-area {
 	position:relative;
