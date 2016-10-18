@@ -1,0 +1,27 @@
+- content_for :app_head do
+  = javascript_include_tag "pages/welcome/m_book_borrow-bundle"
+  = stylesheet_link_tag "pages/welcome/m_book_borrow-bundle", :media => "all"
+
+- content_for :app_content do
+  .main-div
+    .header.clearfix
+      %a{:href => "#"}
+        %img.logo{:src => "/assets/manager/logo_mini.png"}
+      %span.title 朝阳区儿童中心－张三
+      %a{:href => "#"}
+        %img.logout{:src => "/assets/manager/logout.png"}
+    .content
+      .book
+        .borrow-div
+          %p.word#borrow-word 绘本借出
+        .return-div
+          %p.word#return-word 绘本归还
+    .footer
+      .icon-div
+        %a{:href => "#"}
+          %img.icon.clicked-icon{:src => "/assets/manager/borrow_selected.png"}
+        %p.clicked-word 绘本借阅
+      .icon-div
+        %a{:href => "#"}
+          %img.icon.unclicked-icon{:src => "/assets/manager/transport_normal.png"}
+        %p.unclicked-word 绘本迁移

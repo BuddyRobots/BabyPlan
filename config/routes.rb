@@ -30,8 +30,20 @@ Rails.application.routes.draw do
 
 
   get 'welcome/m_frontpage'
-  get 'welcome/m_book'
+  get 'welcome/m_book_borrow'
   get 'welcome/m_borrow'
+  get 'welcome/m_unreturn'
+  get 'welcome/m_return'
+  get 'welcome/m_transfer'
+  get 'welcome/m_transfer_in'
+  get 'welcome/m_transfer_out'
+  get 'welcome/m_transfer_start'
+  get 'welcome/m_transfer_continue'
+  get 'welcome/m_transfer_back'
+  get 'welcome/m_back'
+  get 'welcome/m_transport_in'
+  get 'welcome/m_transport'
+  get 'welcome/m_transport_lost'
 
 
 

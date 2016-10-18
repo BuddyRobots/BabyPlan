@@ -1,0 +1,21 @@
+- content_for :app_head do
+  = javascript_include_tag "pages/welcome/m_transport_lost-bundle"
+  = stylesheet_link_tag "pages/welcome/m_transport_lost-bundle", :media => "all"
+
+- content_for :app_content do
+  .main-div
+    .desc-div
+      .desc
+        .lost-items
+          %span 阿狸·梦之城堡
+          %span.nums ×1
+        .lost-items
+          %span 猜猜我有多爱你
+          %span.nums ×1
+        .lost-items
+          %span 你看起来好像很好吃
+          %span.nums ×1
+      %img.icon{:src => "/assets/manager/fail_mini.png"}
+    .btn-div
+      %button.btn#clicked{:type => "button"} 继续迁入
+      %button.btn#unclicked{:type => "button"} 完成

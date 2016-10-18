@@ -33,55 +33,46 @@ a{
 	max-width: 640px;
 	margin: 0 auto;
 	height: 100%;
-	background: #f0f0f0;
-}
-.content {
-	position: relative;
-	width: 68.75%;
-	margin: 0 auto;
+	background: #fff;
 	text-align: center;
 }
-.telephone {
-	font-size: 3.2em;
+.icon {
+	width: 27.8%;
+	max-width: 178px;
+	padding: 15.625% 0 6.25% 0; 
+}
+.title {
+	font-size: 3.6em;
 	color: #333;
-	padding-top: 27.27%; 
+	padding-bottom: 13.75%;
 }
-.notice {
-	font-size: 2.8em;
-	color: #666;
-	padding-top: 7.27%;
-	padding-bottom: 18.19%;
+#wrong-qrcode {
+	display: none;
 }
-.form-control {
-	padding: 8%;
-	font-size: 3em;
+#unfound {
+	display: none;
 }
-.next-btn {
-	width: 100%;
+.btn {
+	width: 87.5%;
 	font-size: 3.2em;
 	color: #fff;
 	padding: 3.2% 0;
-	background: #227dda;
-	margin-top: 13.63%;
+	margin-bottom: 6.25%;
+	border-radius: 8px;
 }
-.next-btn:hover {
+#clicked {
+	background: #227dda;
+}
+#clicked:hover {
 	color: #fff;
 }
-.dialog {
-	position: absolute;
-	top: 57.25%;
-	left: 15.9%;
-	width: 68.18%;
-	margin: 0 auto;
-	border-radius: 8px;
-	background: rgb(28, 27, 33);
-	background: rgba(28, 27, 33,0.75);
-	display: none;
-	p {
-		font-size: 2.4em;
-		color: #fff;
-		padding: 11% 0;
-	}
+#unclicked {
+	background: #f0f0f0;
+	color: #666;
+	border: 1px solid #aaa;
+}
+#unclicked:hover {
+	color: #666;
 }
 
 @media screen and (max-width:640px) {

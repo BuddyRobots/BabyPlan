@@ -32,57 +32,58 @@ a{
 	width: 100%;
 	max-width: 640px;
 	margin: 0 auto;
-	height: 100%;
-	background: #f0f0f0;
+	overflow: auto;
+	background: #fff;
+	padding-top: 5.21%;
 }
-.content {
-	position: relative;
-	width: 68.75%;
+.box {
+	width: 87.5%;
 	margin: 0 auto;
-	text-align: center;
 }
-.telephone {
+.content-div {
+	border: 1px solid #aaa;
+	border-radius: 8px;
+	overflow: hidden;
+	margin-bottom: 3.57%;
+}
+.caption {
+	border-bottom: 1px dashed #aaa;
+	display: flex;
+	justify-content: space-between;
+}
+.blue-line {
+	background: #227dda;
+	width: 1.45%;
+}
+.title {
+	width: 98.65%;
 	font-size: 3.2em;
 	color: #333;
-	padding-top: 27.27%; 
+	padding: 1.7% 3.6%;
 }
-.notice {
+.desc {
+	padding: 7.17%;
+}
+.items {
 	font-size: 2.8em;
-	color: #666;
-	padding-top: 7.27%;
-	padding-bottom: 18.19%;
+	color: #333;
+	margin-bottom: 2.5%;
 }
-.form-control {
-	padding: 8%;
-	font-size: 3em;
+.book-nums {
+	float: right;
 }
-.next-btn {
+.btn {
 	width: 100%;
+	padding: 3.985% 0;
 	font-size: 3.2em;
 	color: #fff;
-	padding: 3.2% 0;
-	background: #227dda;
-	margin-top: 13.63%;
+	border-radius: 0;
+	background: #f7873d;
 }
-.next-btn:hover {
+.btn:hover {
 	color: #fff;
 }
-.dialog {
-	position: absolute;
-	top: 57.25%;
-	left: 15.9%;
-	width: 68.18%;
-	margin: 0 auto;
-	border-radius: 8px;
-	background: rgb(28, 27, 33);
-	background: rgba(28, 27, 33,0.75);
-	display: none;
-	p {
-		font-size: 2.4em;
-		color: #fff;
-		padding: 11% 0;
-	}
-}
+
 
 @media screen and (max-width:640px) {
 	.main-div {

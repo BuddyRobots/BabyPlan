@@ -1,0 +1,49 @@
+- content_for :app_head do
+  = javascript_include_tag "pages/welcome/m_back-bundle"
+  = stylesheet_link_tag "pages/welcome/m_back-bundle", :media => "all"
+
+- content_for :app_content do
+  .main-div
+    .box
+      .content-div
+        .caption
+          .blue-line
+          .title 迁移信息
+        .desc
+          .items
+            %span 迁移本数：
+            %span#num 24
+          .items
+            %span 迁移状态：
+            %span#status 运输中
+          .items
+            %span 迁出时间：
+            %span#date 24
+          .items
+            %span 迁出中心：
+            %span#center-out 天通苑南儿童中心
+          .items
+            %span 迁入中心：
+            %span#center-in 金台夕照儿童中心
+      .content-div
+        .caption
+          .blue-line
+          .title 绘本信息
+        .desc
+          - 2.times do
+            .items
+              %span 阿狸·梦之城堡
+              %span.book-nums ×2
+            .items
+              %span 猜猜我有多爱你
+              %span.book-nums ×1
+            .items
+              %span 你看起来好像很好吃
+              %span.book-nums ×3
+            .items
+              %span if you don't want to …
+              %span.book-nums ×1
+            .items
+              %span 爷爷一定有办法
+              %span.book-nums ×1
+    %button.btn#back{:type => "button"}　回到首页
