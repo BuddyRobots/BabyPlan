@@ -32,68 +32,41 @@ a{
 	width: 100%;
 	max-width: 640px;
 	margin: 0 auto;
-	overflow: auto;
+	height: 100%;
 	background: #f0f0f0;
-	padding-top: 5.21%;
 }
-.box {
-	width: 87.5%;
+.content {
+	position: relative;
+	width: 68.75%;
 	margin: 0 auto;
+	text-align: center;
 }
-.content-div {
-	border: 1px solid #aaa;
-	border-radius: 8px;
-	overflow: hidden;
-	background: #fff;
-	margin-bottom: 3.57%;
-}
-.caption {
-	border-bottom: 1px dashed #aaa;
-	display: flex;
-	justify-content: space-between;
-}
-.blue-line {
-	background: #227dda;
-	width: 1.45%;
-}
-.title {
-	width: 98.65%;
+.center {
 	font-size: 3.2em;
 	color: #333;
-	padding: 1.7% 3.6%;
+	padding-top: 27.27%; 
 }
-.desc {
-	padding: 7.17%;
-}
-.items {
+.notice {
 	font-size: 2.8em;
-	color: #333;
-	margin-bottom: 2.5%;
+	color: #666;
+	padding-top: 7.27%;
+	padding-bottom: 18.19%;
 }
-.lost-desc {
-	padding: 3.6%;
+#center-choice {
+	height: 2.4em;
+	font-size: 3em;
+	border-radius: 8px;
 }
-.lost-items {
-	@extend .items;
-	border-bottom: 1px dashed #eee;
-	padding: 1.45% 3.88%;
-}
-.nums {
-	float: right;
-	color: #f95d67;
-}
-.book-nums {
-	float: right;
-}
-.btn {
+.next-btn {
 	width: 100%;
-	padding: 3.985% 0;
 	font-size: 3.2em;
 	color: #fff;
-	border-radius: 0;
+	padding: 4.66% 0;
 	background: #227dda;
+	margin-top: 13.63%;
+	border-radius: 8px;
 }
-.btn:hover {
+.next-btn:hover {
 	color: #fff;
 }
 

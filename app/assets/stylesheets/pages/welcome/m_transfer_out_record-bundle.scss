@@ -32,9 +32,41 @@ a{
 	width: 100%;
 	max-width: 640px;
 	margin: 0 auto;
-	height: 100%;
 	background: #f0f0f0;
+	height: 100%;
+}
+.header {
+	background: #fff;
+	height: 8.6%;
+}
+.nav {
+	li {
+		width: 50%;
+		float: left;
+		text-align: center;
+		padding: 3.1% 0;
+		a {
+			font-size: 2.8em;
+			color: #333;
+			padding: 2.02% 0 0.5% 0;
+			&:hover {
+				background: #fff;
+			}
+		}
+		.active {
+			color: #227dda;
+		}
+		.vertical-line {
+			border-right: 1px solid #aaa;
+		}
+	}
+	.clicked {
+		border-bottom: 4px solid #227dda;
+	}
+}
+.content {
 	padding: 6.25%;
+	border-top: 1px solid #aaa;
 }
 .item-div {
 	border: 1px solid #aaa;
@@ -52,27 +84,7 @@ a{
 .desc-div {
 	width: 97.68%;
 	padding-left: 3.68%;
-	padding-right: 1.85%;
-}
-.desc-add-div {
-	width: 97.68%;
-	padding: 3.68% 1.85%;
-}
-.add-div {
-	border-top: 1px dashed #aaa;
-	border-bottom: 1px dashed #aaa;
-	font-size: 3.2em;
-	color: #227dda;
-	text-align: center;
-	padding: 6.6% 0;
-}
-.add {
-	width: 6%;
-	max-width: 30px;
-}
-.add-word {
-	margin-left: 2%;
-	vertical-align: middle;
+	padding-right: 1.34%;
 }
 .caption-div {
 	border-bottom: 1px dashed #aaa;
@@ -101,7 +113,14 @@ a{
 	width: 12%;
 	max-width: 60px;
 }
-
+#normal-end {
+	@extend .status;
+	color: #999;
+}
+#prepare {
+	@extend .status;
+	color: #f7873d;
+}
 
 @media screen and (max-width:640px) {
 	.main-div {

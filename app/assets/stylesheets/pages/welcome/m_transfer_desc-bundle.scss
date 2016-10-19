@@ -35,6 +35,8 @@ a{
 	overflow: auto;
 	background: #f0f0f0;
 	padding-top: 5.21%;
+	padding-bottom: 2.6%;
+	height: 100%;
 }
 .box {
 	width: 87.5%;
@@ -70,18 +72,6 @@ a{
 	color: #333;
 	margin-bottom: 2.5%;
 }
-.lost-desc {
-	padding: 3.6%;
-}
-.lost-items {
-	@extend .items;
-	border-bottom: 1px dashed #eee;
-	padding: 1.45% 3.88%;
-}
-.nums {
-	float: right;
-	color: #f95d67;
-}
 .book-nums {
 	float: right;
 }
@@ -91,7 +81,7 @@ a{
 	font-size: 3.2em;
 	color: #fff;
 	border-radius: 0;
-	background: #227dda;
+	background: #f7873d;
 }
 .btn:hover {
 	color: #fff;

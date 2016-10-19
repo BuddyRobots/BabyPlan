@@ -1,0 +1,50 @@
+- content_for :app_head do
+  = javascript_include_tag "pages/welcome/m_transfer_out_record-bundle"
+  = stylesheet_link_tag "pages/welcome/m_transfer_out_record-bundle", :media => "all"
+
+- content_for :app_content do
+  .main-div
+    .header
+      %ul.nav
+        %li.clicked
+          %a.vertical-line.active{:href => "#"} 迁出记录
+        %li
+          %a{:href => "#"}　迁入记录
+    .content
+      - 2.times do
+        .item-div
+          .blue-line
+          .desc-div
+            .caption-div
+              %img.icon{:src => "/assets/manager/time.png"}
+              %span.date 2016-12-12
+              %span.time 12:30
+              %span.status 运输中
+            .address-div
+              %span.start 天通苑南儿童中心
+              %img.arrow{:src => "/assets/manager/arrow.png"}
+              %span.end 金台夕照儿童中心
+      .item-div
+        .blue-line
+        .desc-div
+          .caption-div
+            %img.icon{:src => "/assets/manager/time.png"}
+            %span.date 2016-12-12
+            %span.time 12:30
+            %span#normal-end　已完成
+          .address-div
+            %span.start 天通苑南儿童中心
+            %img.arrow{:src => "/assets/manager/arrow.png"}
+            %span.end 金台夕照儿童中心
+      .item-div
+        .blue-line
+        .desc-div
+          .caption-div
+            %img.icon{:src => "/assets/manager/time.png"}
+            %span.date 2016-12-12
+            %span.time 12:30
+            %span#prepare 准备中
+          .address-div
+            %span.start 天通苑南儿童中心
+            %img.arrow{:src => "/assets/manager/arrow.png"}
+            %span.end 金台夕照儿童中心

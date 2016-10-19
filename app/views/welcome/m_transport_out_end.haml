@@ -1,0 +1,10 @@
+- content_for :app_head do
+  = javascript_include_tag "pages/welcome/m_transport_out_end-bundle"
+  = stylesheet_link_tag "pages/welcome/m_transport_out_end-bundle", :media => "all"
+
+- content_for :app_content do
+  .main-div
+    %img.icon{:src => "/assets/manager/success.png"}
+    %p.title#unreturn 已将所有绘本迁出！
+    %button.btn#clicked{:type => "button"} 完成
+    

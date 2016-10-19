@@ -35,6 +35,10 @@ Rails.application.routes.draw do
   get 'welcome/m_unreturn'
   get 'welcome/m_return'
   get 'welcome/m_transfer'
+  get 'welcome/m_transfer_desc'
+  get 'welcome/m_transfer_lost_desc'
+  get 'welcome/m_transfer_record'
+  get 'welcome/m_transfer_out_record'
   get 'welcome/m_transfer_in'
   get 'welcome/m_transfer_out'
   get 'welcome/m_transfer_start'
@@ -42,8 +46,13 @@ Rails.application.routes.draw do
   get 'welcome/m_transfer_back'
   get 'welcome/m_back'
   get 'welcome/m_transport_in'
+  get 'welcome/m_transport_out'
+  get 'welcome/m_transport_out_end'
+  get 'welcome/m_continue_transport_out'
   get 'welcome/m_transport'
   get 'welcome/m_transport_lost'
+  get 'welcome/m_transport_to_center'
+  get 'welcome/m_continue_borrow'
 
 
 

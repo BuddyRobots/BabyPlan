@@ -5,10 +5,10 @@
 - content_for :app_content do
   .main-div
     .header.clearfix
-      %a{:href => "#"}
+      %a.homepage{:href => "#"}
         %img.logo{:src => "/assets/manager/logo_mini.png"}
       %span.title 朝阳区儿童中心－张三
-      %a{:href => "#"}
+      %a.exit{:href => "#"}
         %img.logout{:src => "/assets/manager/logout.png"}
     .content
       .book
@@ -25,3 +25,11 @@
         %a{:href => "#"}
           %img.icon.unclicked-icon{:src => "/assets/manager/transport_normal.png"}
         %p.unclicked-word 绘本迁移
+  / 点击exit时显示mask-div
+  .mask-div
+    .exit-div
+      %p.account 退出账号
+      %p.question　是否确认退出当前账号！
+      .confirm-div
+        %a.line.clicked 退出
+        %a 取消
