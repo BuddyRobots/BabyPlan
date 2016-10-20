@@ -61,6 +61,8 @@ Rails.application.routes.draw do
 
   get 'welcome/test_image_uploader'
 
+  match '/' => 'welcome#weixin', :via => :post
+
   resources :centers do
   end
 
