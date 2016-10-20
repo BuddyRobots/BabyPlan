@@ -8,7 +8,7 @@ class Weixin
   format  :json
 
   APPID = "wx69353371388b899b"
-  SECRET = "432ecf07f2a5359979d6a605280cba32"
+  SECRET = "ac87a676aed464f1069f1b71e158ef68"
 
   def self.get_access_token
     @@redis ||= Redis.new

@@ -181,6 +181,25 @@ Rails.application.routes.draw do
   end
 
   namespace :staff_mobile do
+    resource :sessions do
+    end
+    resource :books do
+      collection do
+        get :borrow
+        get :borrow_result
+        get :back
+      end
+    end
+    resource :transfers do
+      collection do
+        get :list
+        get :out_list
+        get :in_list
+        get :transfer_out
+        get :transfer_in
+        get :confirm_lost
+      end
+    end
   end
 
   resources :materials do
