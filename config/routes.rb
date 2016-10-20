@@ -180,6 +180,9 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :staff_mobile do
+  end
+
   resources :materials do
   end
 
