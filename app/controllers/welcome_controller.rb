@@ -9,12 +9,14 @@ class WelcomeController < ApplicationController
   end
 
   def weixin
-    case params[:xml]["MsgType"]
+  	doc = Nokogiri::XML(request.body.read)
+  	hash = Hash.from_xml(doc.to_s)["xml"]
+    case hash["MsgType"]
     when "text"
-      if params[:xml]["Content"] == "我是工作人员"
+      if hash["Content"] == "我是工作人员"
         data = {
-          "ToUserName" => params[:xml]["FromUserName"],
-          "FromUserName" => params[:xml]["ToUserName"],
+          "ToUserName" => hash["FromUserName"],
+          "FromUserName" => hash["ToUserName"],
           "CreateTime" => Time.now.to_i,
           "MsgType" => "text",
           # "Content" => "<a href='#{Weixin.generate_authorize_link(Rails.application.config.server_host + "/coach/students")}/'>工作人员入口</a>"
@@ -26,11 +28,11 @@ class WelcomeController < ApplicationController
       end
     when "event"
 =begin
-      if params[:xml]["Event"] == "CLICK" && ["MSWK", "ZCKD", "JYZT"].include?(params[:xml]["EventKey"])
-        news = WeixinNews.where(active: true, type: params[:xml]["EventKey"]).desc(:created_at).limit(3)
+      if hash["Event"] == "CLICK" && ["MSWK", "ZCKD", "JYZT"].include?(hash["EventKey"])
+        news = WeixinNews.where(active: true, type: hash["EventKey"]).desc(:created_at).limit(3)
         data = {
-          "ToUserName" => params[:xml]["FromUserName"],
-          "FromUserName" => params[:xml]["ToUserName"],
+          "ToUserName" => hash["FromUserName"],
+          "FromUserName" => hash["ToUserName"],
           "CreateTime" => Time.now.to_i,
           "MsgType" => "news",
           "ArticleCount" => news.length,
@@ -50,10 +52,10 @@ class WelcomeController < ApplicationController
         render :xml => retval and return
       end
 =end
-      if params[:xml]["Event"] == "subscribe"
+      if hash["Event"] == "subscribe"
         data = {
-          "ToUserName" => params[:xml]["FromUserName"],
-          "FromUserName" => params[:xml]["ToUserName"],
+          "ToUserName" => hash["FromUserName"],
+          "FromUserName" => hash["ToUserName"],
           "CreateTime" => Time.now.to_i,
           "MsgType" => "text",
           "Content" => "欢迎关注北京市社区儿童中心微信公众号"
