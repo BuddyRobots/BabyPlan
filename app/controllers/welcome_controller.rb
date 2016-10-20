@@ -9,8 +9,8 @@ class WelcomeController < ApplicationController
   end
 
   def weixin
-  	doc = Nokogiri::XML(request.body.read)
-  	hash = Hash.from_xml(doc.to_s)["xml"]
+    doc = Nokogiri::XML(request.body.read)
+    hash = Hash.from_xml(doc.to_s)["xml"]
     case hash["MsgType"]
     when "text"
       if hash["Content"] == "我是工作人员"
@@ -20,7 +20,7 @@ class WelcomeController < ApplicationController
           "CreateTime" => Time.now.to_i,
           "MsgType" => "text",
           # "Content" => "<a href='#{Weixin.generate_authorize_link(Rails.application.config.server_host + "/coach/students")}/'>工作人员入口</a>"
-          "Content" => "<a href='http://www,baidu.com'>工作人员入口</a>"
+          "Content" => "<a href='http://www.baidu.com'>工作人员入口</a>"
         }
         render :xml => data.to_xml(root: "xml") and return
       else
