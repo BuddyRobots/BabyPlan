@@ -29,69 +29,72 @@ a{
 }
 
 .main-div {
+	position: relative;
 	width: 100%;
 	max-width: 640px;
 	margin: 0 auto;
 	height: 100%;
-	background: #fff;
-	padding: 17% 5.22% 0 5.22%;
+	background: #f0f0f0;
 }
-.desc-div {
-	position: relative;
-	background: linear-gradient(
-    135deg, 
-    #fff 45%, 
-    #99cafc 45%, #99cafc 50%, 
-    #fff 50%, #fff 95%, 
-    #99cafc 95%, #99cafc);
-    background-size: 10px 10px;
-    border: 1px solid #99cafc;
-    border-radius: 8px;
-    margin-bottom: 14.72%;
+.logo-div {
+	text-align: center;
 }
-.desc {
-	background: #fff;
-	border: 1px solid #99cafc;
-	margin: 10.9375% 1.56% 1.56% 1.56%;
+.logo {
+	width: 25%;
+	max-width: 160px;
+	padding: 12.5% 0 20% 0;
 }
-.items {
-	font-size: 2.8em;
-	color: #333;
-	margin: 3.45%;
-}
-#num {
-	margin-left: 3.7%;
-}
-.icon {
+.sign-in-div {
 	position: absolute;
-	top: -17.7%;
-	left: 39.285%;
-	width: 18.75%;
-	max-width: 120px;
+	background: url("/assets/manager/bg_login.jpg") no-repeat;
+	background-size: 100%;
+	top: 44%;
+	left: 0;
+	bottom: 0;
+	right: 0;
 }
-.btn {
+.input-div {
+	position: relative;
+	width: 68.75%;
+	margin: 0 auto;
+}
+.input-group-addon {
+	padding: 0;
+	width: 16.36%;
+	max-width: 72px;
+	background: #fff;
+}
+#user-input {
+	position: absolute;
+	margin-bottom: 4.55%;
+	margin-top: -11.38%;
+}
+#key-input {
+	position: absolute;
+	margin-top: 11.38%;
+	margin-bottom: 15%;
+}
+#user-bg {
+	width: 100%;
+	max-width: 72px;
+}
+.form-control {
+	padding: 9.5%;
+	font-size: 3em;
+	border-radius: 8px;
+}
+.sign-in-btn {
 	width: 100%;
 	font-size: 3.2em;
 	color: #fff;
-	padding: 3.66% 0;
-	margin-bottom: 6.25%;
-	border-radius: 8px;
-}
-#clicked {
+	padding: 4.66% 0;
 	background: #227dda;
+	border-radius: 8px;
+	margin-top: 47%;
 }
-#clicked:hover {
+.sign-in-btn:hover {
 	color: #fff;
 }
-#unclicked {
-	background: #f0f0f0;
-	color: #666;
-	border: 1px solid #aaa;
-}
-#unclicked:hover {
-	color: #666;
-}
-
 
 @media screen and (max-width:640px) {
 	.main-div {
@@ -114,3 +117,4 @@ a{
         font-size: 50%;
     }
 }
+

@@ -1,0 +1,15 @@
+- content_for :app_head do
+  = javascript_include_tag "pages/staff_mobile/transfers/new-bundle"
+  = stylesheet_link_tag "pages/staff_mobile/transfers/new-bundle", :media => "all"
+
+- content_for :app_content do
+  .main-div
+    .content
+      %p.center 迁至中心
+      %p.notice 请选择要将绘本迁移到的儿童中心
+      %select.form-control#center-choice
+        - 15.times do
+          %option 朝阳区金台路儿童中心
+      %button.btn.next-btn{:type => "button"} 下一步
+      
+        

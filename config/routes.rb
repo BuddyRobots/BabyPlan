@@ -181,16 +181,16 @@ Rails.application.routes.draw do
   end
 
   namespace :staff_mobile do
-    resource :sessions do
+    resources :sessions do
     end
-    resource :books do
+    resources :books do
       collection do
         get :borrow
         get :borrow_result
         get :back
       end
     end
-    resource :transfers do
+    resources :transfers do
       collection do
         get :list
         get :out_list

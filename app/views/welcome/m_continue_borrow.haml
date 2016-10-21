@@ -4,6 +4,13 @@
 
 - content_for :app_content do
   .main-div
+    .unreturn-div
+      %img.unreturn-icon{:src => "/assets/manager/fail.png"}
+      %p.title#unreturn 该绘本尚未归还！
+      
+      /隐藏wrong-qrcode  unfound
+      %p.title#wrong-qrcode 该二维码不属藏书二维码！
+      %p.title#unfound 该绘本不是本儿童中心藏书！
     .desc-div
       .desc
         %p.items 读者姓名：王小明

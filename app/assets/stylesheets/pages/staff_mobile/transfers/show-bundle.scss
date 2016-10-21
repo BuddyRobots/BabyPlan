@@ -1,0 +1,152 @@
+html {
+	font-size: 16px;
+	height: 100%;
+}
+body {
+	font-family:"Microsoft YaHei";
+	font-size: 62.5%;
+	height: 100%;
+}
+body, p, img, div, ul, li, a, h3 {
+	margin:0;
+	padding:0;
+}
+a{
+	border:none;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	-webkit-tap-highlight-color:transparent;
+	outline:none；
+}
+.clearfix:before, .clearfix:after {
+	display: table;
+	content: " ";
+}
+.clearfix:after {
+	clear: both;
+}
+.clearfix {
+	*zoom: 1;
+}
+
+.main-div {
+	width: 100%;
+	max-width: 640px;
+	margin: 0 auto;
+	overflow: auto;
+	background: #f0f0f0;
+	padding-top: 5.21%;
+}
+.box {
+	width: 87.5%;
+	margin: 0 auto;
+}
+.content-div {
+	border: 1px solid #aaa;
+	border-radius: 8px;
+	overflow: hidden;
+	background: #fff;
+	margin-bottom: 3.57%;
+}
+.caption {
+	border-bottom: 1px dashed #aaa;
+	display: flex;
+	justify-content: space-between;
+}
+.blue-line {
+	background: #227dda;
+	width: 1.45%;
+}
+.title {
+	width: 98.65%;
+	font-size: 3.2em;
+	color: #333;
+	padding: 1.7% 3.6%;
+}
+.desc {
+	padding: 7.17%;
+}
+.items {
+	font-size: 2.8em;
+	color: #333;
+	margin-bottom: 2.5%;
+}
+.lost-desc {
+	padding: 3.6%;
+}
+.lost-items {
+	@extend .items;
+	border-bottom: 1px dashed #eee;
+	padding: 1.45% 3.88%;
+}
+.nums {
+	float: right;
+	color: #f95d67;
+}
+.book-nums {
+	float: right;
+}
+.btn-div {
+	width: 100%;
+	display: flex;
+	justify-content: space-around;
+}
+.btn {
+	padding: 3.985% 0;
+	font-size: 3.2em;
+	color: #fff;
+	border-radius: 0;
+}
+.btn:hover {
+	color: #fff;
+}
+#finish {
+	width: 50%;
+	background: #227dda;
+}
+#finish:hover {
+	color: #fff;
+}
+#continue {
+	width: 50%;
+	background: #f7873d;
+}
+#continue:hover {
+	color: #fff;
+}
+#start {
+	width: 100%;
+	background: #f7873d;
+}
+#start:hover {
+	color: #fff;
+}
+#back {
+	width: 100%;
+	background: #227dda;
+}
+#back:hover {
+	color: #fff;
+}
+
+
+@media screen and (max-width:640px) {
+	.main-div {
+		font-size: 100%;
+	}
+}
+@media screen and (max-width: 560px) {
+    .main-div {
+        font-size: 85%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .main-div {
+        font-size: 60%;
+    }
+}
+@media screen and (max-width: 400px) {
+    .main-div {
+        font-size: 50%;
+    }
+}

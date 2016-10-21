@@ -1,30 +1,32 @@
 - content_for :app_head do
-  = javascript_include_tag "pages/staff_mobile/books/index-bundle"
-  = stylesheet_link_tag "pages/staff_mobile/books/index-bundle", :media => "all"
+  = javascript_include_tag "pages/staff_mobile/transfers/index-bundle"
+  = stylesheet_link_tag "pages/staff_mobile/transfers/index-bundle", :media => "all"
 
 - content_for :app_content do
   .main-div
     .header.clearfix
-      %a.homepage{:href => "#"}
+      %a{:href => "#"}
         %img.logo{:src => "/assets/manager/logo_mini.png"}
       %span.title 朝阳区儿童中心－张三
-      %a.exit{:href => "#"}
+      %a{:href => "#"}
         %img.logout{:src => "/assets/manager/logout.png", "data-target" => "#confirmModal", "data-toggle" => "modal"}
     .content
       .book
         .borrow-div
-          %p.word#borrow-book 绘本借出
+          %p.word#transfer_out-word 绘本迁出
         .return-div
-          %p.word#return-book 绘本归还
+          %p.word#transfer_in-word 绘本迁入
+        .record-div
+          %p.word#transfer_record-word 迁移记录
     .footer.row
       .col-xs-6.icon-div#book-borrow
         %a{:href => "#"}
-          %img.icon.clicked-icon{:src => "/assets/manager/borrow_selected.png"}
-        %p.clicked-word 绘本借阅
+          %img.icon.unclicked-icon{:src => "/assets/manager/borrow_normal.png"}
+        %p.unclicked-word 绘本借阅
       .col-xs-6.icon-div#book-transfer
         %a{:href => "#"}
-          %img.icon.unclicked-icon{:src => "/assets/manager/transport_normal.png"}
-        %p.unclicked-word 绘本迁移
+          %img.icon.clicked-icon{:src => "/assets/manager/transport_selected.png"}
+        %p.clicked-word 绘本迁移
 
 
 #confirmModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
@@ -39,5 +41,3 @@
           %a.line.clicked 退出
           %a{"data-dismiss" => "modal"} 取消
       
-          
-

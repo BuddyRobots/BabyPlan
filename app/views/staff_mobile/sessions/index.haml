@@ -1,0 +1,19 @@
+- content_for :app_head do
+  = javascript_include_tag "pages/staff_mobile/sessions/index-bundle"
+  = stylesheet_link_tag "pages/staff_mobile/sessions/index-bundle", :media => "all"
+
+- content_for :app_content do
+  .main-div
+    .logo-div
+      %img.logo{:src => "/assets/manager/logo.png"}
+    .sign-in-div
+      .input-div
+        .input-group#user-input
+          .input-group-addon
+            %img#user-bg{:src => "/assets/manager/user.png"}
+          %input.form-control#user{:type => "text"}
+        .input-group#key-input
+          .input-group-addon
+            %img#user-bg{:src => "/assets/manager/key.png"}
+          %input.form-control#password{:type => "password"}
+        %button.btn.sign-in-btn{:type => "button"} 登录

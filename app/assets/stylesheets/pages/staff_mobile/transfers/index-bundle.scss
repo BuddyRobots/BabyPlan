@@ -67,12 +67,17 @@ a{
 	margin: 0 auto;
 }
 .borrow-div {
-	background: url("/assets/manager/borrow1.jpg") no-repeat;
+	background: url("/assets/manager/transport1.jpg") no-repeat;
 	background-size: 100%;
 	margin-bottom: 7.15%;
 }
 .return-div {
-	background: url("/assets/manager/borrow2.jpg") no-repeat;
+	background: url("/assets/manager/transport2.jpg") no-repeat;
+	background-size: 100%;
+	margin-bottom: 7.15%;
+}
+.record-div {
+	background: url("/assets/manager/transport3.jpg") no-repeat;
 	background-size: 100%;
 }
 .word {
@@ -177,6 +182,7 @@ a{
 		color: #227dda;
 	}
 }
+
 
 @media screen and (max-width:640px) {
 	.main-div, #confirmModal {

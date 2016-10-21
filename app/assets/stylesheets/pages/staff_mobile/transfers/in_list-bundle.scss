@@ -33,63 +33,53 @@ a{
 	max-width: 640px;
 	margin: 0 auto;
 	height: 100%;
+	background: #f0f0f0;
+	padding: 6.25%;
+}
+.item-div {
+	border: 1px solid #aaa;
+	border-radius: 10px;
+	display: flex;
+	justify-content: space-between;
+	overflow: hidden;
+	margin-bottom: 5.55%;
 	background: #fff;
-	padding: 17% 5.22% 0 5.22%;
 }
-.desc-div {
-	position: relative;
-	background: linear-gradient(
-    135deg, 
-    #fff 45%, 
-    #99cafc 45%, #99cafc 50%, 
-    #fff 50%, #fff 95%, 
-    #99cafc 95%, #99cafc);
-    background-size: 10px 10px;
-    border: 1px solid #99cafc;
-    border-radius: 8px;
-    margin-bottom: 14.72%;
-}
-.desc {
-	background: #fff;
-	border: 1px solid #99cafc;
-	margin: 10.9375% 1.56% 1.56% 1.56%;
-}
-.items {
-	font-size: 2.8em;
-	color: #333;
-	margin: 3.45%;
-}
-#num {
-	margin-left: 3.7%;
-}
-.icon {
-	position: absolute;
-	top: -17.7%;
-	left: 39.285%;
-	width: 18.75%;
-	max-width: 120px;
-}
-.btn {
-	width: 100%;
-	font-size: 3.2em;
-	color: #fff;
-	padding: 3.66% 0;
-	margin-bottom: 6.25%;
-	border-radius: 8px;
-}
-#clicked {
+.blue-line {
+	width: 2.22%;
 	background: #227dda;
 }
-#clicked:hover {
-	color: #fff;
+.desc-div {
+	width: 97.68%;
+	padding-left: 3.68%;
+	padding-right: 1.34%;
 }
-#unclicked {
-	background: #f0f0f0;
-	color: #666;
-	border: 1px solid #aaa;
+.caption-div {
+	border-bottom: 1px dashed #aaa;
+	padding: 2.88% 0;
+	font-size: 2.4em;
+	color: #999;
 }
-#unclicked:hover {
-	color: #666;
+.icon {
+	width: 6%;
+	max-width: 28px;
+}
+.time {
+	margin-left: 6%;
+}
+.status {
+	float: right;
+	margin-right: 3.68%;
+	color: #10c078;
+}
+.address-div {
+	font-size: 2.6em;
+	color: #333;
+	padding: 5.86% 0;
+}
+.arrow {
+	width: 12%;
+	max-width: 60px;
 }
 
 

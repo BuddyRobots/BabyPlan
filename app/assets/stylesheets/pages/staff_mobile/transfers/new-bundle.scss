@@ -33,63 +33,41 @@ a{
 	max-width: 640px;
 	margin: 0 auto;
 	height: 100%;
-	background: #fff;
-	padding: 17% 5.22% 0 5.22%;
+	background: #f0f0f0;
 }
-.desc-div {
+.content {
 	position: relative;
-	background: linear-gradient(
-    135deg, 
-    #fff 45%, 
-    #99cafc 45%, #99cafc 50%, 
-    #fff 50%, #fff 95%, 
-    #99cafc 95%, #99cafc);
-    background-size: 10px 10px;
-    border: 1px solid #99cafc;
-    border-radius: 8px;
-    margin-bottom: 14.72%;
+	width: 68.75%;
+	margin: 0 auto;
+	text-align: center;
 }
-.desc {
-	background: #fff;
-	border: 1px solid #99cafc;
-	margin: 10.9375% 1.56% 1.56% 1.56%;
-}
-.items {
-	font-size: 2.8em;
+.center {
+	font-size: 3.2em;
 	color: #333;
-	margin: 3.45%;
+	padding-top: 27.27%; 
 }
-#num {
-	margin-left: 3.7%;
+.notice {
+	font-size: 2.8em;
+	color: #666;
+	padding-top: 7.27%;
+	padding-bottom: 18.19%;
 }
-.icon {
-	position: absolute;
-	top: -17.7%;
-	left: 39.285%;
-	width: 18.75%;
-	max-width: 120px;
+#center-choice {
+	height: 2.4em;
+	font-size: 3em;
+	border-radius: 8px;
 }
-.btn {
+.next-btn {
 	width: 100%;
 	font-size: 3.2em;
 	color: #fff;
-	padding: 3.66% 0;
-	margin-bottom: 6.25%;
+	padding: 4.66% 0;
+	background: #227dda;
+	margin-top: 13.63%;
 	border-radius: 8px;
 }
-#clicked {
-	background: #227dda;
-}
-#clicked:hover {
+.next-btn:hover {
 	color: #fff;
-}
-#unclicked {
-	background: #f0f0f0;
-	color: #666;
-	border: 1px solid #aaa;
-}
-#unclicked:hover {
-	color: #666;
 }
 
 

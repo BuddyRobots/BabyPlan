@@ -36,6 +36,25 @@ a{
 	background: #fff;
 	padding: 17% 5.22% 0 5.22%;
 }
+.unreturn-div {
+	text-align: center;
+}
+.unreturn-icon {
+	width: 27.8%;
+	max-width: 178px;
+	padding-bottom: 6.25%; 
+}
+.title {
+	font-size: 3.6em;
+	color: #333;
+	padding-bottom: 13.75%;
+}
+#wrong-qrcode {
+	display: none;
+}
+#unfound {
+	display: none;
+}
 .desc-div {
 	position: relative;
 	background: linear-gradient(

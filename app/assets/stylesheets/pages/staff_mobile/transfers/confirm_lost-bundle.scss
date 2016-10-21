@@ -41,30 +41,34 @@ a{
 	background: linear-gradient(
     135deg, 
     #fff 45%, 
-    #99cafc 45%, #99cafc 50%, 
+    #ffaaaa 45%, #ffaaaa 50%, 
     #fff 50%, #fff 95%, 
-    #99cafc 95%, #99cafc);
+    #ffaaaa 95%, #ffaaaa);
     background-size: 10px 10px;
-    border: 1px solid #99cafc;
+    border: 1px solid #ffaaaa;
     border-radius: 8px;
     margin-bottom: 14.72%;
 }
 .desc {
 	background: #fff;
-	border: 1px solid #99cafc;
+	border: 1px solid #ffaaaa;
 	margin: 10.9375% 1.56% 1.56% 1.56%;
+	padding: 3.6% 1.8%;
 }
-.items {
+.lost-items {
 	font-size: 2.8em;
 	color: #333;
-	margin: 3.45%;
+	margin-bottom: 2.5%;
+	border-bottom: 1px dashed #eee;
+	padding: 1.45% 3.88%;
 }
-#num {
-	margin-left: 3.7%;
+.nums {
+	float: right;
+	color: #f95d67;
 }
 .icon {
 	position: absolute;
-	top: -17.7%;
+	top: -17.5%;
 	left: 39.285%;
 	width: 18.75%;
 	max-width: 120px;
