@@ -103,12 +103,13 @@ hr {
 .evaluate-box {
 	position: relative;
 	background: #fff;
+	border-top: 1px solid #323232;
 	#input-box {
 		display: inline-block;
 		font-size: 2.8em;
 		color: #999;
 		width: 76.875%;
-		border: 1px solid #cbcbcb;
+		border: 1px solid #c8c8c8;
 		border-radius: 6px;
 		outline: 0;
 		padding: 1% 3.5%;

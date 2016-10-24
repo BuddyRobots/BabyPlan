@@ -19,21 +19,6 @@ a{
 	width:100%;
 	max-width:640px;
 	margin:0 auto;
-	/*斜条纹背景，如果反向则是-45度*/
-	// background: -webkit-gradient(
-	// linear, 
-	// left top, 
-	// right bottom, 
-	// from(#fedd02), color-stop(0.45, #fedd02), 
-	// color-stop(0.45, #fcc204), color-stop(0.5, #fcc204), 
-	// color-stop(0.5, #fedd02), color-stop(0.95, #fedd02), 
-	// color-stop(0.95, #fcc204), to(#fcc204));
-	// background: -moz-linear-gradient(
-	// -45deg, 
-	// #7aa00f 45%, 
-	// #67860e 45%, #67860e 50%, 
-	// #7aa00f 50%, #7aa00f 95%, 
-	// #67860e 95%, #67860e);
 	background: linear-gradient(
     45deg, 
     #fef29c 45%, 
@@ -41,7 +26,7 @@ a{
     #fef29c 50%, #fef29c 95%, 
     #fcc204 95%, #fcc204);
     background-size: 10px 10px;
-    padding-bottom:5%;
+    padding-bottom: 5.2%;
 }
 .header {
 	position:relative;
@@ -100,28 +85,22 @@ a{
 }
 
 .content {
-	width:95.3125%;
-	margin:0 auto;
-	background:white;
+	width: 95.3125%;
+	margin: 0 auto;
+	background: white;
 	border-radius: 10px;
-	.author {
-		font-size: 2em;
-		color:#3e3e3e;
-		padding-left:2.46%;
-		padding-top:4.1%;
-		line-height: 150%;
-	}
-	.profile {
-		font-size:2.8em;
-		color:#3e3e3e;
-		padding-top:3%;
-		padding-left:2.46%;
-		padding-bottom:3.28%;
-		line-height:150%;
-	}
+	padding: 3.12% 0 2% 2.5%;
+	font-size: 2.8em;
+	color: #3e3e3e;
+}
+.moveright {
+	margin-left: 9.6%;
+}
+.item {
+	margin-bottom: 2%;
 }
 
-.recommend {
+.title-div {
 	position:relative;
 	width:100%;
 	background:url("/assets/linecloud.png") no-repeat;
@@ -151,9 +130,6 @@ a{
 	}
 }
 
-.address {
-	@extend .recommend;
-}
 .anotherbook {
 	position:relative;
 	width:95.3125%;
@@ -161,21 +137,10 @@ a{
 	background:white;
 	border-radius: 10px;
 	margin-bottom:3.125%;
-	.center {
-		font-size: 3.2em;
-		padding-left:2.46%;
-		padding-top:3.28%;
-		padding-bottom:1%;
-		color:#3e3e3e;
-	}
-	.num {
-		font-size: 2.4em;
-		padding-left:2.46%;
-		color:#3e3e3e;
-		padding-bottom:2.46%;
-	}
 }
-
+.residual {
+	color: #d70c19;
+}
 .description {
 	position:absolute;
 	width:25.573%;

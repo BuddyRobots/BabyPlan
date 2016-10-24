@@ -13,11 +13,11 @@
     .content
       .book
         .borrow-div
-          %p.word#transfer_out-word 绘本迁出
+          %p.word#transfer_out 绘本迁出
         .return-div
-          %p.word#transfer_in-word 绘本迁入
+          %p.word#transfer_in 绘本迁入
         .record-div
-          %p.word#transfer_record-word 迁移记录
+          %p.word#transfer_record 迁移记录
     .footer.row
       .col-xs-6.icon-div#book-borrow
         %a{:href => "#"}
@@ -38,6 +38,6 @@
         %p.account 退出账号
         %p.question　是否确认退出当前账号！
         .confirm-div
-          %a.line.clicked 退出
+          %a.line.clicked#logoff 退出
           %a{"data-dismiss" => "modal"} 取消
       

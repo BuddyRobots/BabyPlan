@@ -20,21 +20,6 @@ a{
 	width:100%;
 	max-width:640px;
 	margin:0 auto;
-	/*斜条纹背景，如果反向则是-45度*/
-	// background: -webkit-gradient(
-	// linear, 
-	// left top, 
-	// right bottom, 
-	// from(#fedd02), color-stop(0.45, #fedd02), 
-	// color-stop(0.45, #fcc204), color-stop(0.5, #fcc204), 
-	// color-stop(0.5, #fedd02), color-stop(0.95, #fedd02), 
-	// color-stop(0.95, #fcc204), to(#fcc204));
-	// background: -moz-linear-gradient(
-	// -45deg, 
-	// #7aa00f 45%, 
-	// #67860e 45%, #67860e 50%, 
-	// #7aa00f 50%, #7aa00f 95%, 
-	// #67860e 95%, #67860e);
 	background: linear-gradient(
     45deg, 
     #fef29c 45%, 
@@ -42,7 +27,6 @@ a{
     #fef29c 50%, #fef29c 95%, 
     #fcc204 95%, #fcc204);
     background-size: 10px 10px;
-    padding-bottom:3em;
 }
 .header {
 	position:relative;
@@ -73,7 +57,7 @@ a{
 	p {
 		font-size: 2.8em;
 		color:#3e3e3e;
-		padding:1.4285em 1.0714em;
+		padding: 3%;
 		text-indent: 2em;
 	}
 }
@@ -98,7 +82,7 @@ a{
 	max-width:607px;
 	display:block;
 	margin:0 auto;
-	margin-bottom:6.25%;
+	margin-bottom: 4.7%;
 }
 .introduce {
 	@extend .box-radius;
@@ -107,7 +91,7 @@ a{
 	p {
 		font-size: 2.8em;
 		color:#3e3e3e;
-		padding:1.4285em 1.0714em;
+		padding: 3%;
 		text-indent: 2em;
 	}
 }
@@ -137,89 +121,99 @@ a{
 	width:95.625%;
 	max-width:612px;
 	display:block;
-	margin:6.25% auto;
+	margin: 4.7% auto;
 }
-.tag-choice {
-	width:70.3125%;
-	margin:0 auto;
-	margin-bottom:5.47%;
-	overflow:hidden;
-	list-style:none;
-	li {
-		float:left;
-		width:23.333%;
-		max-width:105px;
-		background:url("/assets/smallcloud.png") no-repeat;
-		background-size:100%;
-		background-position:center;
-		padding:3.5% 0;
-		text-align:center;
-		a {
-			text-decoration: none;
-			color:#7d7d7d;
-			font-size: 3.2em;
-			&:hover {
-				color:#d70c18;
-			}
-		}
-	}
-	.first {
-		margin-right:15.112%;
-	}
-	.third {
-		float:right;
-	}
+#concern, #cancel {
+	width: 100%;
+	background: #d70c19;
+	font-size: 3.6em;
+	color: #fff;
+	padding: 3.68%;
+	border-radius: 0;
 }
 
-.details {
-	@extend .box-radius;
-	overflow:hidden;
-	margin-bottom:3.91%;
-	.tour {
-		width:31.1475%;
-		max-width:190px;
-		float:left;
-		display:block;
-		padding:3.28% 2.46%;
-	}
-	.caption {
-		font-size:2.8em;
-		color:#3e3e3e;
-		padding-top:3.28%;
-	}
-	.article {
-		font-size:2.4em;
-		color:#666;
-		padding-top:1.313%;
-	}
-	.detail-flip {
-		float:right;
-		width:25.2459%;
-		max-width:154px;
-		text-align:center;
-		margin-right:2.63%;
-		margin-bottom:2.46%;
-		background:#d70c18;
-		padding-top:1.3%;
-		padding-bottom:0.6%;
-		border-radius:5px;
-		a {
-			font-size:2.8em;
-			color:#fff;
-			text-decoration: none;
-			&:hover {
-				color:orange;
-			}
-		}
-	}
-}
-.userservice {
-	position:fixed;
-	width:14.0625%;
-	max-width:90px;
-	bottom:20em;
-	right:1.5em;
-}
+
+// .tag-choice {
+// 	width:70.3125%;
+// 	margin:0 auto;
+// 	margin-bottom:5.47%;
+// 	overflow:hidden;
+// 	list-style:none;
+// 	li {
+// 		float:left;
+// 		width:23.333%;
+// 		max-width:105px;
+// 		background:url("/assets/smallcloud.png") no-repeat;
+// 		background-size:100%;
+// 		background-position:center;
+// 		padding:3.5% 0;
+// 		text-align:center;
+// 		a {
+// 			text-decoration: none;
+// 			color:#7d7d7d;
+// 			font-size: 3.2em;
+// 			&:hover {
+// 				color:#d70c18;
+// 			}
+// 		}
+// 	}
+// 	.first {
+// 		margin-right:15.112%;
+// 	}
+// 	.third {
+// 		float:right;
+// 	}
+// }
+
+// .details {
+// 	@extend .box-radius;
+// 	overflow:hidden;
+// 	margin-bottom:3.91%;
+// 	.tour {
+// 		width:31.1475%;
+// 		max-width:190px;
+// 		float:left;
+// 		display:block;
+// 		padding:3.28% 2.46%;
+// 	}
+// 	.caption {
+// 		font-size:2.8em;
+// 		color:#3e3e3e;
+// 		padding-top:3.28%;
+// 	}
+// 	.article {
+// 		font-size:2.4em;
+// 		color:#666;
+// 		padding-top:1.313%;
+// 	}
+// 	.detail-flip {
+// 		float:right;
+// 		width:25.2459%;
+// 		max-width:154px;
+// 		text-align:center;
+// 		margin-right:2.63%;
+// 		margin-bottom:2.46%;
+// 		background:#d70c18;
+// 		padding-top:1.3%;
+// 		padding-bottom:0.6%;
+// 		border-radius:5px;
+// 		a {
+// 			font-size:2.8em;
+// 			color:#fff;
+// 			text-decoration: none;
+// 			&:hover {
+// 				color:orange;
+// 			}
+// 		}
+// 	}
+// }
+// .userservice {
+// 	position:fixed;
+// 	width:14.0625%;
+// 	max-width:90px;
+// 	bottom:20em;
+// 	right:1.5em;
+// }
 
 
 @media screen and (max-width:640px) {
