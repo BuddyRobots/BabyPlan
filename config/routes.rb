@@ -4,7 +4,8 @@ Rails.application.routes.draw do
 
   get 'welcome/index'
   get 'welcome/test'
-  get 'welcome/kidscenter'
+  get 'welcome/search_new'
+  get 'welcome/search_book'
   get 'welcome/frontpage'
   get 'welcome/usercenter'
   get 'welcome/centerbook'
@@ -27,6 +28,10 @@ Rails.application.routes.draw do
   get 'welcome/systemmessage'
   get 'welcome/collect'
   get 'welcome/courseinfo'
+  get 'welcome/course_paid'
+  get 'welcome/course_end'
+  get 'welcome/forget_password'
+  get 'welcome/set_password'
 
 
   get 'welcome/m_frontpage'

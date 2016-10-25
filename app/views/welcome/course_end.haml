@@ -1,6 +1,6 @@
 - content_for :app_head do
-  = javascript_include_tag "pages/welcome/robotclass-bundle"
-  = stylesheet_link_tag "pages/welcome/robotclass-bundle", :media => "all"
+  = javascript_include_tag "pages/welcome/course_end-bundle"
+  = stylesheet_link_tag "pages/welcome/course_end-bundle", :media => "all"
 
 
 - content_for :app_content do
@@ -11,12 +11,7 @@
         %img.back{:src => "/assets/robotclass/back.png"}
     .boxtitle
       .bookcloud
-        %p 机器人初级班特色
-      %a{:href => "#"}
-        %img.grayheart{:src => "/assets/robotclass/grayheart.png"}
-      %a{:href => "#"}
-        %img.dialog{:src => "/assets/robotclass/dialog.png"}
-      %p.num (600)
+        %p 机器人初级班介绍
     .content
       %p.introduce
         · 机器人培训课程专业而系统，初级班细化四阶，让孩子机器人学习基础扎实，稳扎稳打。 
@@ -30,20 +25,21 @@
         学习需求。 |
         %br
         · 码高拥有强大的师资团队，拥有国内外顶尖的机器人教育专家，中国科学院叶昌青博士领衔授课。
-    .assign
-      %p#course-assign 课程安排
+    .content
+      %p.title 签到情况
+      .sign_in-div
+        - 8.times do
+          .sign_in-box 1
+        - 4.times do
+          .absence 2
     .assign-div
-      %p.center
-        海淀儿童中心
+      %p.title 课程详情
       .item-box
         .item
           .left-div
-            %span 剩余名额：
-            %span.residual 10
-            %span /35
-          .right-div
             %span 主讲人：
             %span 王老师
+          .right-div
         .item
           .left-div
             %span 课程次数：
@@ -58,7 +54,10 @@
         .item-div
           %span 上课地点：
           %span 海淀区中关村一街32号大厦2205室
+    .content
+      %img.map-jpg{:src => "/assets/web/map.jpg"}
+    %button.btn#review{:type => "button"} 我要报名
+
      
-    %button.btn#register{:type => "button"} 我要报名
 
     

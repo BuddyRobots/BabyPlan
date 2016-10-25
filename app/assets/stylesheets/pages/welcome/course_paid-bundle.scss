@@ -27,7 +27,7 @@ a{
     #fef29c 50%, #fef29c 95%, 
     #fcc204 95%, #fcc204);
     background-size: 10px 10px;
-    // padding-bottom:3em;
+    padding-bottom: 2.6%;
 }
 .header {
 	position:relative;
@@ -100,21 +100,6 @@ a{
 		padding:3.28% 2.46%;
 	}
 }
-
-.assign {
-	position:relative;
-	width:100%;
-	background:url("/assets/linecloud.png") no-repeat;
-	background-size:41.406%;
-	background-position:center;
-	margin-bottom:3.14%;
-	text-align:center;
-	p {
-		line-height:3.567em;
-		font-size: 3em;
-		color:#3e3e3e;
-	}
-}
 .assign-div {
 	position:relative;
 	width:95.3125%;
@@ -122,17 +107,7 @@ a{
 	background:white;
 	border-radius: 10px;
 	margin-bottom:3.14%;
-	.center {
-		font-size: 3em;
-		padding-left:2.46%;
-		padding-top:3.28%;
-		padding-bottom: 1.45%;
-		color:#3e3e3e;
-		border-bottom: 1px dashed #aaa;
-	}
-	.item-box {
-		padding: 3.28% 2.63% 1.5% 2.63%;
-	}
+	
 	.residual {
 		color: #d70c19;
 	}
@@ -163,15 +138,35 @@ a{
 		width: 78%;
 		float: right;
 	}
-	
 }
-#register {
-	font-size: 3.6em;
-	color: #fff;
-	padding: 3.68%;
-	background: #d70c19;
+.item-box {
+	padding: 3.28% 2.63% 1.5% 2.63%;
+}
+.title {
+	font-size: 3em;
+	padding-left:2.46%;
+	padding-top:3.28%;
+	padding-bottom: 1.45%;
+	color:#3e3e3e;
+	border-bottom: 1px dashed #aaa;
+}
+.sign_in-div {
+	padding: 3.28% 2.45% 3.28% 2.45%;
+	display: flex;
+	flex-wrap: wrap;
+}
+.sign_in-box {
+	width: 12.2%;
+	padding: 2.3%;
+	margin: 0.15%;
+	text-align: center;
+	font-size: 3.2em;
+	color: #ddd;
+	background: #eee;
+}
+.map-jpg {
 	width: 100%;
-	border-radius: 0;
+	max-width: 612px;
 }
 
 @media screen and (max-width:640px) {
