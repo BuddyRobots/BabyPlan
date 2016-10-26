@@ -8,17 +8,18 @@ body {
 	height: 100%;
 }
 body, p, img, div, ul, li, a, h3, span, input {
-	margin:0;
-	padding:0;
+	margin: 0;
+	padding: 0;
 }
 a{
-	border:none;
+	border: none;
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
-	-webkit-tap-highlight-color:transparent;
-	outline:none；
+	-webkit-tap-highlight-color: transparent;
+	outline: none；
 }
 
 .content-area{
+	position: relative;
 	width:100%;
 	max-width:640px;
 	height: 100%;
@@ -33,20 +34,12 @@ a{
     background-size: 10px 10px;
     padding-bottom: 2%;
 }
-.undiscover {
-	margin-top: 43%;
-	text-align: center;
-	.icon {
-		width: 45.3125%;
-		max-width: 290px;
-	}
-}
 .header {
 	position:relative;
 	width:100%;
 	text-align:center;
 	padding-top:3.13%;
-	padding-bottom:4.7%;
+	padding-bottom:6.25%;
 	.back {
 		position:absolute;
 		top:15.9%;
@@ -68,65 +61,44 @@ a{
 		}
 	}
 }
-
-.box-radius {
-	width:95.3125%;
-	max-width:610px;
-	margin:0 auto;
-	background:white;
-	border-radius:10px;
+.desc-add-div {
+	width: 90.625%;
+	padding: 3.13%;
+	background: #fff;
+	border-radius: 8px;
+	margin: 0 auto;
+	margin-bottom: 3.13%
 }
-.details {
-	@extend .box-radius;
-	overflow:hidden;
-	margin-bottom:3.91%;
-	.visit {
-		width:31.1475%;
-		max-width:190px;
-		float:left;
-		display:block;
-		margin:3.28% 2.46%;
-	}
-	.caption {
-		font-size:2.8em;
-		color:#3e3e3e;
-		padding-top:3%;
-		span {
-			float:right;
-			font-size:0.85714em;
-			color: #d70c19;
-			vertical-align: top;
-			margin-right:2.46%;
-		}
-		#return {
-			color: #999;
-		}
-	}
-	.article {
-		font-size:2.4em;
-		color:#7a7a7a;
-		padding-bottom: 2%;
-		padding-top:1.65%;
-	}
-	.center {
-		display: inline-block;
-		font-size: 2em;
-		color: #aaa;
-		margin-left: 1.35%;
-		vertical-align: middle;
-	}
-	.location {
-		width: 2.9%;
-		max-width: 18px;
-	}
+.add-div {
+	border: 1px solid #eee;
+	font-size: 2.8em;
+	color: #aaa;
+	text-align: center;
+	padding: 10.65% 0;
 }
-.location-div {
-	margin-bottom: 2%;
+.add {
+	width: 6%;
+	max-width: 30px;
 }
-
-
-
-
+.add-word {
+	margin-left: 2%;
+	vertical-align: middle;
+}
+.center {
+	font-size: 2.4em;
+	color: #666;
+	text-align: center;
+	margin-top: 6.25%;
+}
+.center-name {
+	font-size: 2.8em;
+	color: #3e3e3e;
+	line-height: 180%;
+}
+.center-address {
+	font-size: 2.4em;
+	color: #666;
+}
 
 @media screen and (max-width:640px) {
 	.content-area {

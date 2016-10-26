@@ -1,0 +1,19 @@
+- content_for :app_head do
+  = javascript_include_tag "pages/welcome/set_center-bundle"
+  = stylesheet_link_tag "pages/welcome/set_center-bundle", :media => "all"
+
+- content_for :app_content do
+  .content-area
+    .header
+      .cloud
+        %p 设置关注中心
+      %a{:href => "#"}
+        %img.back{:src => "/assets/mybook/back.png"}
+    .desc-add-div
+      .add-div
+        %img.add{:src => "/assets/web/add.png"}
+        %span.add-word 添加关注儿童中心
+    .desc-add-div
+      %p.center-name 北京市朝阳区新街口街道西四北六条广安门外社区儿童中心
+      %p.center-address 北京市朝阳区望花路西甲12号
+    .center ~最多可设置３个关注中心~

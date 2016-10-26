@@ -33,7 +33,14 @@ a{
     background-size: 10px 10px;
     padding-bottom:2%;
 }
-
+.undiscover {
+	margin-top: 43%;
+	text-align: center;
+	.icon {
+		width: 45.3125%;
+		max-width: 290px;
+	}
+}
 .header {
 	position:relative;
 	width:100%;

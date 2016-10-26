@@ -61,7 +61,7 @@ a{
 	outline: 0;
 	border: 0;
 	padding: 1% 0;
-	font-size: 2.8em;
+	font-size: 2.2em;
 	color: #666;
 	border-radius: 8px;
 }
@@ -115,6 +115,23 @@ a{
 	border-radius:10px;
 	background:#fff;
 } 
+.undiscover {
+	text-align: center;
+}
+.icon-empty {
+	width: 65%;
+	max-width: 416px;
+	margin-top: 33%;
+	margin-bottom: 12.5%;
+}
+#to_set {
+	width: 84.375%;
+	background: #c70d19;
+	font-size: 3.2em;
+	color: #fff;
+	border-radius: 8px;
+	padding: 3.2%;
+}
 .content {
 	position: relative;
 	@include bigbox;

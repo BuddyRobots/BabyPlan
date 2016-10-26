@@ -1,0 +1,32 @@
+- content_for :app_head do
+  = javascript_include_tag "pages/welcome/set-bundle"
+  = stylesheet_link_tag "pages/welcome/set-bundle", :media => "all"
+
+- content_for :app_content do
+  .content-area
+    .header
+      .cloud
+        %p 设置
+      %a{:href => "#"}
+        %img.back{:src => "/assets/mybook/back.png"}
+
+    .item-div
+      .item#figure
+        %p 头像
+        %a{:href => "#"}
+          %img.avatar-icon{:src => "/assets/web/avatar.png"}
+      .item.clearfix
+        %span.left 儿童姓名
+        %span.right 王小明
+      .item.clearfix
+        %span.left 账户
+        %span.right 13244556677
+    .item-div
+      .item-box
+        %p 修改密码
+        %a{:href => "#"}
+          %img.more-icon{:src => "/assets/web/more.png"}
+      .item-box
+        %p 儿童中心设置
+        %a{:href => "#"}
+          %img.more-icon{:src => "/assets/web/more.png"}

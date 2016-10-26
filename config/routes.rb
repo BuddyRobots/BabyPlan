@@ -32,6 +32,10 @@ Rails.application.routes.draw do
   get 'welcome/course_end'
   get 'welcome/forget_password'
   get 'welcome/set_password'
+  get 'welcome/wechat_pay'
+  get 'welcome/set_center'
+  get 'welcome/set_center_2'
+  get 'welcome/set'
 
 
   get 'welcome/m_frontpage'

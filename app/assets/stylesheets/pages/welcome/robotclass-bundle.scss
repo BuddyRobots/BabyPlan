@@ -91,7 +91,7 @@ a{
 	width:95.3125%;
 	margin:0 auto;
 	background:white;
-	border-radius: 10px;
+	border-radius: 8px;
 	margin-bottom: 3.14%;
 	.introduce {
 		font-size:2.4em;
@@ -137,6 +137,9 @@ a{
 		color: #d70c19;
 	}
 	#public_price {
+		color: #d70c19;
+	}
+	#market_price {
 		font-size: 83.3%;
 		color: #969696;
 	}
