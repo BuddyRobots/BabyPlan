@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   get 'welcome/courseinfo'
   get 'welcome/course_paid'
   get 'welcome/course_end'
+  get 'welcome/course_show'
   get 'welcome/forget_password'
   get 'welcome/set_password'
   get 'welcome/wechat_pay'

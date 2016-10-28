@@ -1,6 +1,6 @@
 - content_for :app_head do
-  = javascript_include_tag "pages/welcome/robotclass-bundle"
-  = stylesheet_link_tag "pages/welcome/robotclass-bundle", :media => "all"
+  = javascript_include_tag "pages/welcome/course_show-bundle"
+  = stylesheet_link_tag "pages/welcome/course_show-bundle", :media => "all"
 
 
 - content_for :app_content do
@@ -30,14 +30,18 @@
         学习需求。 |
         %br
         · 码高拥有强大的师资团队，拥有国内外顶尖的机器人教育专家，中国科学院叶昌青博士领衔授课。
-    .assign
-      %p#course-assign 课程安排
+    .content#sign-desc
+      %p.title 签到情况
+      .sign_in-div
+        - 8.times do
+          .sign_in-box 1
+        - 4.times do
+          .absence 2
     .assign-div
-      %p.center
-        海淀儿童中心
+      %p.center 课程详情
       .item-box
         .item
-          .left-div
+          .left-div#residual_num
             %span 剩余名额：
             %span.residual 10
             %span /35
@@ -58,8 +62,13 @@
         .item-div
           %span 上课地点：
           %span 海淀区中关村一街32号大厦2205室
+    .content
+      %img.map-jpg{:src => "/assets/web/map.jpg"}
+    / 去付款、我要报名、立即评价用click-btn，课程已付款无btn，立即评价和已付款有签到表，其余没有的
+    %button.btn.click-btn{:type => "button"} 立即评价
+    %button.btn.click-btn{:type => "button"} 我要报名
+    %button.btn.unclick-btn{:type => "button"} 已报名
+
      
-    %button.btn#unregister{:type => "button"} 我要报名
-    %button.btn#register{:type => "button"} 已报名
 
     

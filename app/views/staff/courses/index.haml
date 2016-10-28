@@ -44,7 +44,7 @@
                         %th{:colspan => "2"} 操&nbsp作
                     %tbody
                       - @course_insts[:data].each do |ci|
-                        %tr
+                        %tr{class: "book-record #{ ci[:available] ? "available" : "unavailable" }", "data-id" => ci[:id]}
                           %td= ci[:name]
                           %td= ci[:date]
                           %td= ci[:address]
@@ -53,7 +53,11 @@
                           %td 
                             %a.details{:href => "/staff/courses/" + ci[:id]} 详情
                           %td
-                            %a.set-available.link-available{:href => "javascript:void(0);"} 下架
+                            - if ci[:available]
+                              %a.set-available.link-available{:href => "javascript:void(0);"} 下架
+                            - else
+                              %a.set-available.link-unavailable{:href => "javascript:void(0);"} 上架
+                          
 
                 .select-page 
                   %span.totalitems= "共#{@course_insts[:total_page]}页,总计#{@course_insts[:total_number]}条"

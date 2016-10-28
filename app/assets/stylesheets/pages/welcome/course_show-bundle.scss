@@ -106,7 +106,17 @@ a{
 	background:white;
 	border-radius: 10px;
 	margin-bottom:3.14%;
-	
+	.center {
+		font-size: 3em;
+		padding-left:2.46%;
+		padding-top:3.28%;
+		padding-bottom: 1.45%;
+		color:#3e3e3e;
+		border-bottom: 1px dashed #aaa;
+	}
+	.item-box {
+		padding: 3.28% 2.63% 1.5% 2.63%;
+	}
 	.residual {
 		color: #d70c19;
 	}
@@ -141,6 +151,14 @@ a{
 		float: right;
 	}
 }
+// 不需要时恢复隐藏属性
+#sign-desc {
+	// display: none;
+}
+// 不需要剩余名额时恢复隐藏属性
+#residual_num {
+	// display: none;
+}
 .item-box {
 	padding: 3.28% 2.63% 1.5% 2.63%;
 }
@@ -174,7 +192,7 @@ a{
 	width: 100%;
 	max-width: 612px;
 }
-#review {
+.click-btn {
 	font-size: 3.6em;
 	color: #fff;
 	padding: 3.68%;
@@ -182,6 +200,16 @@ a{
 	width: 100%;
 	border-radius: 0;
 }
+.unclick-btn {
+	font-size: 3.6em;
+	color: #fff;
+	padding: 3.68%;
+	background: #aaa;
+	width: 100%;
+	border-radius: 0;
+}
+
+
 @media screen and (max-width:640px) {
 	.content-area {
 		font-size: 100%;
