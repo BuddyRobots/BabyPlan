@@ -27,6 +27,11 @@
       %form.account 
         重输密码:
         %input.input-div{:type => "password"}
+
+    / 错误码提示框已隐藏
+    .notice-div
+      / 验证码错误、该手机号已注册、两次输入密码不一致
+      %p.notice 请输入正确的手机号
     %a.signup{:href => "javascript:void(0);"} 注册
  
    
