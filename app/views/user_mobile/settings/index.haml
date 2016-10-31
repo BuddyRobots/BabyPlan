@@ -1,0 +1,71 @@
+- content_for :app_head do
+  = javascript_include_tag "pages/user_mobile/settings/index-bundle"
+  = stylesheet_link_tag "pages/user_mobile/settings/index-bundle", :media => "all"
+
+- content_for :app_content do
+  .content-area
+    %img.headcloud{:src => "/assets/headcloud.png"}
+    %a{:href => "#"}
+      %img.mail{:src => "/assets/mail.png"}
+    %a{:href => "#"}
+      %img.set{:src => "/assets/setting.png"}
+    %a{:href => "#"}
+      %img.back{:src => "/assets/back.png"}
+    .face
+      %img{:src => "/assets/face.png"}
+      %p.username 小狐狸
+    /绝对定位写法
+    .collect
+      %img.personcloud{:src => "/assets/personcloud.png"}
+      %img.heart{:src => "/assets/heart.png"}
+      %a{:href => "#"}
+        %p.content 我的收藏
+      %a{:href => "#"}
+        %img.rightarrow{:src => "/assets/rightarrow.png"}
+    .course
+      %img.personcloud{:src => "/assets/personcloud.png"}
+      %img.c-box{:src => "/assets/c-box.png"}
+      %a{:href => "#"}
+        %p.content 我的课程
+      %a{:href => "#"}
+        %img.rightarrow{:src => "/assets/rightarrow.png"}
+    .book
+      %img.personcloud{:src => "/assets/personcloud.png"}
+      %img.smile{:src => "/assets/smile.png"}
+      %a{:href => "#"}
+        %p.content 我的绘本
+      %a{:href => "#"}
+        %img.rightarrow{:src => "/assets/rightarrow.png"}
+    .sign
+      %img.personcloud{:src => "/assets/personcloud.png"}
+      %img.pen{:src => "/assets/sign.png"}
+      %a{:href => "#"}
+        %p.content 签到
+      %a{:href => "#"}
+        %img.rightarrow{:src => "/assets/rightarrow.png"}
+    
+    /背景图片加浮动写法
+    / .collect
+    /   %img.heart{:src => "/assets/heart.png"}
+    /   %a{:href => "#"}
+    /     %p.content 我的收藏
+    /   %a{:href => "#"}
+    /     %img.rightarrow{:src => "/assets/rightarrow.png"}
+    / .course
+    /   %img.c-box{:src => "/assets/c-box.png"}
+    /   %a{:href => "#"}
+    /     %p.content 我的课程
+    /   %a{:href => "#"}
+    /     %img.rightarrow{:src => "/assets/rightarrow.png"}
+    / .book
+    /   %img.smile{:src => "/assets/smile.png"}
+    /   %a{:href => "#"}
+    /     %p.content 我的绘本
+    /   %a{:href => "#"}
+    /     %img.rightarrow{:src => "/assets/rightarrow.png"}
+    / .sign
+    /   %img.pen{:src => "/assets/sign.png"}
+    /   %a{:href => "#"}
+    /     %p.content 签到
+    /   %a{:href => "#"}
+    /     %img.rightarrow{:src => "/assets/rightarrow.png"}

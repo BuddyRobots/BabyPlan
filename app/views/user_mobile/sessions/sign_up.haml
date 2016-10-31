@@ -1,0 +1,37 @@
+- content_for :app_head do
+  = javascript_include_tag "pages/user_mobile/sessions/sign_up-bundle"
+  = stylesheet_link_tag "pages/user_mobile/sessions/sign_up-bundle", :media => "all"
+
+- content_for :app_content do
+  .content-area
+    %a{:href => "#"}
+      %img.circlelogo{:src => "/assets/register/circlelogo.png"}
+    .input-box
+      %form.account 
+        账号:
+        %input.input-name{:type => "text"}
+        %a.identifycode{:href => "javascript:void(0);"} 验证码
+    .input-box
+      %form.account 
+        验证码:
+        %input.input-name{:type => "text"}
+    .input-box
+      %form.account 
+        儿童姓名:
+        %input.input-div{:type => "text"}
+    .input-box
+      %form.account 
+        设置密码:
+        %input.input-div{:type => "password"}
+    .input-box
+      %form.account 
+        重输密码:
+        %input.input-div{:type => "password"}
+
+    / 错误码提示框已隐藏
+    .notice-div
+      / 验证码错误、该手机号已注册、两次输入密码不一致
+      %p.notice 请输入正确的手机号
+    %a.signup{:href => "javascript:void(0);"} 注册
+ 
+   

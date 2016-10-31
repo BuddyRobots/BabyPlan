@@ -1,0 +1,74 @@
+- content_for :app_head do
+  = javascript_include_tag "pages/user_mobile/courses/show-bundle"
+  = stylesheet_link_tag "pages/user_mobile/courses/show-bundle", :media => "all"
+
+
+- content_for :app_content do
+  .content-area
+    .header
+      %img.robot{:src => "/assets/robotclass/robot.jpg"}
+      %a{:href => "#"}
+        %img.back{:src => "/assets/robotclass/back.png"}
+    .boxtitle
+      .bookcloud
+        %p 机器人初级班特色
+      %a{:href => "#"}
+        %img.grayheart{:src => "/assets/robotclass/grayheart.png"}
+      %a{:href => "#"}
+        %img.dialog{:src => "/assets/robotclass/dialog.png"}
+      %p.num (600)
+    .content
+      %p.introduce
+        · 机器人培训课程专业而系统，初级班细化四阶，让孩子机器人学习基础扎实，稳扎稳打。 
+        %br
+        · 因材施教，根据不同学员年龄和基础选择不同机器人的培训课程。
+        %br
+        · 小班教学，对每一个学生都有清晰的了解与认识，从而针对性的对孩子的能力作出评估，从而有效地提高长 |
+          处，补全短处，实现孩子的全面发展。 | 
+        %br
+        · 以机器人搭建为主题，延伸涉猎物理学原理。全面的课程设置，满足孩子任何年龄阶段对机器人起步阶段的 |
+        学习需求。 |
+        %br
+        · 码高拥有强大的师资团队，拥有国内外顶尖的机器人教育专家，中国科学院叶昌青博士领衔授课。
+    .content#sign-desc
+      %p.title 签到情况
+      .sign_in-div
+        - 8.times do
+          .sign_in-box 1
+        - 4.times do
+          .absence 2
+    .assign-div
+      %p.center 课程详情
+      .item-box
+        .item
+          .left-div#residual_num
+            %span 剩余名额：
+            %span.residual 10
+            %span /35
+          .right-div
+            %span 主讲人：
+            %span 王老师
+        .item
+          .left-div
+            %span 课程次数：
+            %span 12课时
+          .right-div
+            %span 公益价：
+            %span#public_price 1000
+            %span#market_price 1200
+        .item-div.clearfix
+          %span.class_time 上课时间：
+          %span.desc_time 2016/9/30~2016/11/15，每周五16:00~18:00，国庆停一周
+        .item-div
+          %span 上课地点：
+          %span 海淀区中关村一街32号大厦2205室
+    .content
+      %img.map-jpg{:src => "/assets/web/map.jpg"}
+    / 去付款、我要报名、立即评价用click-btn，课程已付款无btn，立即评价和已付款有签到表，其余没有的
+    %button.btn.click-btn{:type => "button"} 立即评价
+    %button.btn.click-btn{:type => "button"} 我要报名
+    %button.btn.unclick-btn{:type => "button"} 已报名
+
+     
+
+    

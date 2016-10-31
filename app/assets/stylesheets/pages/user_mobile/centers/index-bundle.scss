@@ -1,0 +1,136 @@
+
+
+html {
+	font-size: 16px;
+	height: 100%;
+}
+body {
+	font-family:"Microsoft YaHei";
+	font-size: 62.5%;
+	height: 100%;
+}
+body, p, img, div, ul, li, a, h3 {
+	margin:0;
+	padding:0;
+}
+a{
+	border:none;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	-webkit-tap-highlight-color:transparent;
+	outline:none；
+}
+.content-area {
+	width:100%;
+	max-width:640px;
+	height: 100%;
+	overflow: auto;
+	margin:0 auto;
+	padding-bottom:3%;
+	background: linear-gradient(
+    45deg, 
+    #fef29c 45%, 
+    #fcc204 45%, #fcc204 50%, 
+    #fef29c 50%, #fef29c 95%, 
+    #fcc204 95%, #fcc204);
+    background-size: 10px 10px;
+}
+.header {
+	position:relative;
+	width:100%;
+	text-align:center;
+	padding: 5% 0 6.25% 0;
+}
+.user {
+	position: absolute;
+	width:10.3125%;
+	max-width:66px;
+	top: 21%;
+	left: 3.75%;
+}
+.input-div {
+	width: 64.0625%;
+	display: flex;
+	background: #fff;
+	margin-left: 21.5%;
+	justify-content: space-between;
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	padding-right: 1%;
+}
+#input-box {
+	display: inline-block;
+	width: 87.5%;
+	outline: 0;
+	border: 0;
+	padding: 1% 0;
+	font-size: 2.2em;
+	color: #666;
+	border-radius: 8px;
+}
+.icon-div {
+	width: 12%;
+}
+.search {
+	width:100%;
+	max-width:48px;
+}
+.undiscover {
+	text-align: center;
+}
+.icon-none {
+	margin-top: 50%;
+	width: 58.4375%;
+	max-width: 374px;
+}
+.desc-add-div {
+	width: 90.625%;
+	padding: 3.13%;
+	background: #fff;
+	border-radius: 8px;
+	margin: 0 auto;
+	margin-bottom: 3.13%
+}
+.center-name {
+	font-size: 2.8em;
+	color: #3e3e3e;
+	line-height: 180%;
+}
+.center-address {
+	font-size: 2.4em;
+	color: #666;
+}
+
+
+
+
+@media screen and (max-width:640px) {
+	.content-area {
+		font-size: 100%;
+	}
+}
+@media screen and (max-width: 560px) {
+    .content-area {
+        font-size: 85%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .content-area {
+        font-size: 75%;
+    }
+}
+@media screen and (max-width: 450px) {
+    .content-area {
+        font-size: 70%;
+    }
+}
+@media screen and (max-width: 400px) {
+    .content-area {
+        font-size: 60%;
+    }
+}
+@media screen and (max-width: 320px) {
+    .content-area {
+        font-size: 55%;
+    }
+}

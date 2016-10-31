@@ -1,0 +1,45 @@
+- content_for :app_head do
+  = javascript_include_tag "pages/user_mobile/courses/review-bundle"
+  = stylesheet_link_tag "pages/user_mobile/courses/review-bundle", :media => "all"
+
+
+- content_for :app_content do
+  .content-area
+    .header
+      %p.caption 历史评价
+      %a{:href => "javascript:void(0);"}
+        %img.back{:src => "/assets/evaluate/back.png"}
+    %article.clearfix
+      %a{:href => "javascript:void(0);"}
+        %img.headfigure{:src => "/assets/evaluate/headfigure.png"}
+      %p.username lifd
+      %p.message 李老师教的不错，学到了很多不知道的知识，是非常有意思的课程。
+      %p.time 2分钟前
+    %hr
+    %article.clearfix
+      %a{:href => "javascript:void(0);"}
+        %img.headfigure{:src => "/assets/evaluate/headfigure.png"}
+      %p.username lifd
+      %p.message 李老师教的不错，学到了很多不知道的知识，是非常有意思的课程。
+      %p.time 2分钟前
+    %hr
+    %article.clearfix
+      %a{:href => "javascript:void(0);"}
+        %img.headfigure{:src => "/assets/evaluate/headfigure.png"}
+      %p.username lifd
+      %p.message 李老师教的不错，学到了很多不知道的知识，是非常有意思的课程。
+      %p.time 2分钟前
+    %hr
+    %article.clearfix
+      %a{:href => "javascript:void(0);"}
+        %img.headfigure{:src => "/assets/evaluate/headfigure.png"}
+      %p.username lifd
+      %p.message 李老师教的不错，学到了很多不知道的知识，是非常有意思的课程。
+      %p.time 2分钟前
+    %hr
+    .evaluate-box
+      %input#input-box
+      %a{:href => "javascript:void(0);"}
+        %img.smileface{:src => "/assets/evaluate/smileface.png"}
+
+

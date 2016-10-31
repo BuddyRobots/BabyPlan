@@ -1,0 +1,133 @@
+html {
+	font-size: 16px;
+	height: 100%;
+}
+body {
+	font-family:"Microsoft YaHei";
+	font-size: 62.5%;
+	height: 100%;
+}
+body, p, img, div, ul, li, a, h3, span, form, hr, input {
+	margin:0;
+	padding:0;
+}
+a{
+	border:none;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	-webkit-tap-highlight-color:transparent;
+	outline:none；
+}
+
+.content-area {
+	position:relative;
+	width:100%;
+	max-width:640px;
+	height: 100%;
+	overflow: auto;
+	margin:0 auto;
+	background: linear-gradient(
+    45deg, 
+    #fef29c 45%, 
+    #fcc204 45%, #fcc204 50%, 
+    #fef29c 50%, #fef29c 95%, 
+    #fcc204 95%, #fcc204);
+    background-size: 10px 10px;
+}
+.circlelogo {
+	width:38.75%;
+	max-width:248px;
+	display:block;
+	margin:0 auto;
+	padding:14.07% 0;
+}
+.input-box {
+	width:70%;
+	margin: 0 auto;
+	padding-top:5%;
+	border-bottom: 1px solid #bfbfc0;
+	.account {
+		font-size:3em;
+		color:#3e3e3e;
+		.input-name {
+			display:inline-block;
+			margin-bottom:2.03%;
+			margin-left: 2%;
+			font-size: 0.8em;
+			width:50%;
+			max-width:300px;
+			border:0;
+			background:none;
+			outline:none;
+		}
+		.input-div {
+			@extend .input-name;
+			width: 60%;
+		}
+		.identifycode {
+			display:inline-block;
+			float: right;
+			font-size:1em;
+			border:1px solid #bfbfc0;
+			text-decoration: none;
+			color:#3e3e3e;
+			padding: 0 1%;
+			border-radius: 4px;
+		}
+	}
+}
+.notice-div {
+	position: absolute;
+	width: 46.875%;
+	top: 50%;
+	left: 50%;
+	margin-top: -7.9%;
+	margin-left: -23.5%;
+	background: rgb(28, 27, 33);
+	background: rgba(28, 27, 33,0.75);
+	border-radius: 10px;
+	font-size: 2.4em;
+	color: #fff;
+	text-align: center;
+	padding: 5.16% 0;
+	display: none;
+}
+.signup {
+	display: block;
+	width: 40%;
+	margin: 0 auto;
+	margin-top: 10%;
+	border:1px solid #bfbfc0;
+	border-radius: 6px;
+	padding: 3% 0;
+	text-align: center;
+	font-size: 3.2em;
+	color: #3e3e3e;
+	text-decoration: none;
+}
+.signup:link, .signup:visited, .signup:hover, .signup:active {
+	text-decoration: none;
+	color: #3e3e3e;
+}
+
+
+@media screen and (max-width:640px) {
+	.content-area {
+		font-size: 100%;
+	}
+}
+@media screen and (max-width: 560px) {
+    .content-area {
+        font-size: 85%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .content-area {
+        font-size: 60%;
+    }
+}
+@media screen and (max-width: 400px) {
+    .content-area {
+        font-size: 50%;
+    }
+}

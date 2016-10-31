@@ -1,0 +1,179 @@
+html {
+	font-size: 16px;
+	height: 100%;
+}
+body {
+	font-family:"Microsoft YaHei";
+	font-size: 62.5%;
+	height: 100%;
+}
+body, p, img, div, ul, li, a, h3 {
+	margin:0;
+	padding:0;
+}
+a{
+	border:none;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	-webkit-tap-highlight-color:transparent;
+	outline:none；
+}
+
+.content-area {
+	position:relative;
+	width:100%;
+	max-width:640px;
+	height: 100%;
+	overflow: auto;
+	margin:0 auto;
+	padding-bottom: 2%;
+	background: linear-gradient(
+    45deg, 
+    #fef29c 45%, 
+    #fcc204 45%, #fcc204 50%, 
+    #fef29c 50%, #fef29c 95%, 
+    #fcc204 95%, #fcc204);
+    background-size: 10px 10px;
+}
+.headcloud {
+		width:100%;
+		max-width:640px;
+}
+.set {
+	position:absolute;
+	right:3.13%;
+	top:2.1%;
+	width:9.375%;
+	max-width:60px;
+}
+.mail {
+	position:absolute;
+	top:2.1%;
+	right:18.29%;
+	width:9.375%;
+	max-width:60px;
+}
+.back {
+	position:absolute;
+	top:2.1%;
+	width:9.375%;
+	max-width:60px;
+	left:7.2%;
+}
+.face {
+	position:relative;
+	overflow:hidden;
+	img {
+		display:block;
+		float:left;
+		margin-left:16.41%;
+		margin-right:3.45%;
+		width:28.4375%;
+		max-width:182px;
+	}
+	.username {
+		font-size:3.8em;
+		color:#3e3e3e;
+		padding-top:6%;
+		letter-spacing: 0.3em;
+	}
+}
+
+
+.collect {
+	position:relative;
+	width:100%;
+	.personcloud {
+		display:block;
+		width:84.0625%;
+		max-width:538px;
+		margin:0 auto;
+	}
+	.heart {
+		position:absolute;
+		top:29.3%;
+		left:12.35%;
+		width:9.375%;
+		max-width:60px;
+	}
+	.content {
+		position:absolute;
+		top:35%;
+		left:25.8%;
+		font-size:3.6em;
+		color:#3e3e3e;
+	}
+	a {
+		.rightarrow {
+			position:absolute;
+			width:9.375%;
+			max-width:60px;
+			top:23.6%;
+			right:11.72%;
+		}
+	}
+}
+
+
+// .collect {
+// 	position:relative;
+// 	width:100%;
+// 	background:url('/assets/personcloud.png') no-repeat;
+// 	background-size:84.5%;
+// 	background-position:center;
+// 	overflow:hidden;
+// 	margin-bottom:1em;
+// 	.heart {
+// 		float:left;
+// 		padding-top:4.1em;
+// 		padding-left:7.9em;
+// 		width:9.375%;
+// 		max-width:60px;
+// 	}
+// 	.content {
+// 		float:left;
+// 		line-height:3.88889em;
+// 		padding-left:0.5556em;
+// 		font-size:3.6em;
+// 		color:#3e3e3e; 
+// 	}
+// 	a {
+// 		.rightarrow {
+// 			float:right;
+// 			width:9.375%;
+// 			max-width:60px;
+// 			padding-top:3.3em;
+// 			padding-right:7.5em;
+// 		}
+// 	}
+// }
+
+.course,.book,.sign {
+	@extend .collect;
+}
+.c-box,.smile,.pen {
+	@extend .heart;
+}
+
+
+
+
+@media screen and (max-width:640px) {
+	.content-area {
+		font-size: 100%;
+	}
+}
+@media screen and (max-width: 560px) {
+    .content-area {
+        font-size: 85%;
+    }
+}
+@media screen and (max-width: 500px) {
+    .content-area {
+        font-size: 60%;
+    }
+}
+@media screen and (max-width: 400px) {
+    .content-area {
+        font-size: 55%;
+    }
+}

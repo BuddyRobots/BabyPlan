@@ -1,0 +1,66 @@
+- content_for :app_head do
+  = javascript_include_tag "pages/user_mobile/sessions/index-bundle"
+  = stylesheet_link_tag "pages/user_mobile/sessions/index-bundle", :media => "all"
+
+- content_for :app_content do
+  .content-area
+    %img.cloudblock{:src => "/assets/cloudblock.png"}
+    %img.frontcloud{:src => "/assets/frontcloud.png"}
+    %a{:href => "#"}
+      %img.user{:src => "/assets/user.png"}
+    %a{:href => "#"}
+      %img.search{:src => "/assets/search.png"}
+    
+    .img_gallery
+      .point
+        %a{:href => "#"} 1
+        %a{:href => "#"} 2
+        %a{:href => "#"} 3
+        / %a{:href => "#"} 4
+        / %a{:href => "#"} 5
+      .main_img
+        %ul
+          %li
+            %a{:href => "#"}
+              %img.img_1{:src => "/assets/banner.jpg"}
+          %li
+            %a{:href => "#"}
+              %img.img_2{:src => "/assets/banner.jpg"}
+          %li
+            %a{:href => "#"}
+              %img.img_3{:src => "/assets/banner.jpg"}
+          / %li
+          /   %img.img_4{:src => "/assets/banner.jpg"}
+          / %li
+          /   %img.img_5{:src => "/assets/banner.jpg"}
+        %a#btn_prev{:href => "#"}
+        %a#btn_next{:href => "#"}
+
+
+    / .ad
+    /   .slider
+    /     %ul
+    /       %li
+    /         %a{:href => "javascript:void(0)",:alt => "广告图片"}
+    /           %img.banner{:src => "/assets/banner.jpg"}
+    /       %li
+    /         %a{:href => "javascript:void(0)",:alt => "广告图片"}
+    /           %img.banner{:src => "/assets/banner.jpg"}
+    /       %li
+    /         %a{:href => "javascript:void(0)",:alt => "广告图片"}
+    /           %img.banner{:src => "/assets/banner.jpg"}
+      
+    .tagchoice
+      %img.circle{:src => "/assets/circle.png"}
+      %a{:href => "javascript:void(0)"}
+        %img.notice{:src => "/assets/notice.png",:alt => "公告"}
+      %a{:href => "javascript:void(0)"}
+        %img.book{:src => "/assets/book.png",:alt => "绘本"}
+      %a{:href => "javascript:void(0)"}
+        %img.course{:src => "/assets/course.png",:alt => "课程"}
+    %img.footer{:src => "/assets/tree.png"}
+
+
+
+
+

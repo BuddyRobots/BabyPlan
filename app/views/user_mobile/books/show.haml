@@ -1,0 +1,65 @@
+- content_for :app_head do
+  = javascript_include_tag "pages/user_mobile/books/show-bundle"
+  = stylesheet_link_tag "pages/user_mobile/books/show-bundle", :media => "all"
+
+- content_for :app_content do
+  .content-area
+    .header
+      %img.crocodile{:src => "/assets/crocodile.png"}
+      %a{:href => "#"}
+        %img.back{:src => "/assets/back.png"}
+
+    .boxtitle
+      .bookcloud
+        %p 我想吃一个小孩
+      %a{:href => "#"}
+        %img.smallheart{:src => "/assets/smallheart.png"}
+      %a{:href => "#"}
+        %img.dialog{:src => "/assets/dialog.png"}
+      %p.num (20)
+    .content
+      .item
+        %span 适合年龄：
+        %span.age 1~7岁
+      .item
+        %span.moveright 作者：
+        %span.author (法国)西尔维娜·多尼奥
+      .item
+        %span.moveright 译者：
+        %span.translator 文小山
+      .item
+        %span 插图作者：
+        %span.illustrtor (法国)塞尔尼奥·多尼奥
+      .item
+        %span 书籍类型：
+        %span.type 亲子、温情
+    .title-div
+      %p 书籍介绍
+    .article 
+      %p 这是一本很酷而且很有意思的图画书，书 |
+        名乍一看很吓人，但其中的故事似乎又与我们 |
+        的生活、成长有着让人更加惊讶的共同体验。 |
+        吃香蕉也能长大，可小鳄鱼偏偏要吃小孩，最 |
+        后它才明白吃香蕉也是吃小孩的一个必要过程 |
+        像是生活中积累磨炼的必要。图书有一种3到8 |
+        岁孩子都欣赏的黑色幽默，在十多个国家都已 |
+        出版，并获多项大奖。 |
+    .title-div
+      %p 借阅地点
+    .content
+      .item 
+        %p.center 海淀儿童中心
+      .item
+        %span 中心剩余
+        %span.residual 12
+        %span 本
+      .item
+        %span 地址：
+        %span#address 海淀区大厦路神经方块大厦3605室
+    
+
+
+
+
+
+
