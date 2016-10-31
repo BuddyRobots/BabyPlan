@@ -1,4 +1,4 @@
-class UserMobile::BooksController < StaffMobile::ApplicationController
+class UserMobile::SettingsController < StaffMobile::ApplicationController
   # usercenter
 	def index
   

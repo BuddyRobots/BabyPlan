@@ -1,4 +1,4 @@
-class UserMobile::BooksController < StaffMobile::ApplicationController
+class UserMobile::SessionsController < StaffMobile::ApplicationController
   # frontpage
 	def index
   

@@ -212,6 +212,38 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :user_mobile do
+    resources :announcements do
+    end
+    resources :books do
+    end
+    resources :centers do
+    end
+    resources :courses do
+      collection do
+        get :review
+      end
+    end
+    resources :feeds do
+    end
+    resources :sessions do
+      collection do
+        post :sign_up
+        post :forget_password
+        post :set_password
+      end
+    end
+    resources :settings do
+      collection do
+        get :book
+        get :course
+        get :collect
+        get :message
+        post :account
+      end
+    end
+  end
+
   resources :materials do
   end
 

@@ -1,9 +1,9 @@
-class UserMobile::BooksController < StaffMobile::ApplicationController
+class UserMobile::AnnouncementsController < StaffMobile::ApplicationController
   # similar to search_new
-	def index
-  
+  def index
+    
   end
-	# noticedescription
+  # noticedescription
   def show
-
+    
   end

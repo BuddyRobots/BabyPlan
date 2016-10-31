@@ -1,7 +1,7 @@
-class UserMobile::BooksController < StaffMobile::ApplicationController
+class UserMobile::CentersController < StaffMobile::ApplicationController
   # set_center_2
-	def index
-  
+  def index
+    
   end
   # haidiancenter
   def show
@@ -11,5 +11,3 @@ class UserMobile::BooksController < StaffMobile::ApplicationController
   def new
 
   end
-
-  
