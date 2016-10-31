@@ -7,3 +7,4 @@ class UserMobile::AnnouncementsController < StaffMobile::ApplicationController
   def show
     
   end
+end

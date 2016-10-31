@@ -11,3 +11,4 @@ class UserMobile::CentersController < StaffMobile::ApplicationController
   def new
 
   end
+end

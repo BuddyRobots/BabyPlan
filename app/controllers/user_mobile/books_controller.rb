@@ -7,6 +7,7 @@ class UserMobile::BooksController < StaffMobile::ApplicationController
   def show
 
   end
+end
 
 
 

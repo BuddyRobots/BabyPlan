@@ -23,3 +23,4 @@ class UserMobile::SettingsController < StaffMobile::ApplicationController
   def account
 
   end
+end

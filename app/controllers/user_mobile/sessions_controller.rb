@@ -19,5 +19,6 @@ class UserMobile::SessionsController < StaffMobile::ApplicationController
   def set_password
 
   end
+end
 
   

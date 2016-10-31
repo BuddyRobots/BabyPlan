@@ -15,3 +15,4 @@ class UserMobile::CoursesController < StaffMobile::ApplicationController
   def review
 
   end
+end

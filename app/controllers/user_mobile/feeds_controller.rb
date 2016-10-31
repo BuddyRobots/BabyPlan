@@ -3,5 +3,6 @@ class UserMobile::FeedsController < StaffMobile::ApplicationController
   def index
 
   end
+end
 
   
