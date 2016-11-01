@@ -1,4 +1,4 @@
-class UserMobile::SettingsController < StaffMobile::ApplicationController
+class UserMobile::SettingsController < UserMobile::ApplicationController
   # usercenter
 	def index
   end
@@ -24,5 +24,10 @@ class UserMobile::SettingsController < StaffMobile::ApplicationController
   end
 
   def reset_password
+  end
+
+  def update_password
+    retval = current_user.change_password(params[:old_password], params[:new_password])
+    render json: retval_wrapper(retval) and return 
   end
 end

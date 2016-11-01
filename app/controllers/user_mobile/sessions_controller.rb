@@ -39,8 +39,24 @@ class UserMobile::SessionsController < UserMobile::ApplicationController
   def forget_password
   end
 
+  def forget_password_submit_mobile
+    user = User.client.where(mobile: params[:mobile]).first
+    retval = user.nil? ? ErrCode::USER_NOT_EXIST : user.forget_password
+    render json: retval_wrapper(retval)
+  end
+
+  def forget_password_submit_code
+    user = User.client.where(id: params[:uid]).first
+    retval = user.nil? ? ErrCode::USER_NOT_EXIST : user.verify_password_code(params[:code])
+    render json: retval_wrapper(retval)
+  end
+
   # set_password
   def set_password
+    @uid = params[:uid]
+  end
+
+  def update_password
   end
 
   def signout
