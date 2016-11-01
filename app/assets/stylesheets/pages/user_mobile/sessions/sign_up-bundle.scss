@@ -59,11 +59,15 @@ a{
 			background:none;
 			outline:none;
 		}
+		#mobile {
+			width: 45%;
+		}
 		.input-div {
 			@extend .input-name;
 			width: 60%;
 		}
 		.identifycode {
+			width: 30%;
 			display:inline-block;
 			float: right;
 			font-size:1em;
@@ -71,6 +75,7 @@ a{
 			text-decoration: none;
 			color:#3e3e3e;
 			padding: 0 1%;
+			background: transparent;
 			border-radius: 4px;
 		}
 	}
