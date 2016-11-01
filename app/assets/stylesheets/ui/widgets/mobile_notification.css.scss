@@ -17,3 +17,25 @@ $msg_border: #F0C36D;
   text-align: center;
   padding: 5.16% 0;
 }
+
+@media screen and (max-width:640px) {
+  .content-area {
+    font-size: 100%;
+  }
+}
+@media screen and (max-width: 560px) {
+    .content-area {
+        font-size: 85%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .content-area {
+        font-size: 60%;
+    }
+}
+@media screen and (max-width: 400px) {
+    .content-area {
+        font-size: 50%;
+    }
+}
