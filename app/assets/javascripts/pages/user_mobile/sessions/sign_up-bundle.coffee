@@ -1,5 +1,23 @@
 $ ->
   uid = ""
+  timer = null
+  wait = 60
+
+  time = (o) ->
+    $(o).attr("disabled", true)
+    if wait == 0
+      $(o).attr("disabled", false)
+      $(o).text('验证码')
+      wait = 60
+    else
+      $(o).text('重发(' + wait + ')')
+      wait--
+      timer = setTimeout (->
+        time o
+        return
+      ), 1000
+    return
+
   $(".identifycode").click ->
     mobile = $("#mobile").val()
     mobile_retval = $.regex.isMobile(mobile)
@@ -15,6 +33,9 @@ $ ->
         console.log data
         if data.success
           uid = data.uid
+          if timer != null
+            clearTimeout(timer)
+          time(".identifycode")
         else
           if data.code == USER_EXIST
             location.href = "/user_mobile/sessions/new?code=" + USER_EIXST
