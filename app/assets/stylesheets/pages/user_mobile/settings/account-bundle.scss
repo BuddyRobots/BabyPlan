@@ -19,6 +19,7 @@ a{
 }
 
 .content-area{
+	position: relative;
 	width:100%;
 	max-width:640px;
 	height: 100%;
@@ -111,6 +112,8 @@ a{
 	max-width: 100px;
 }
 #exit {
+	position: absolute;
+	bottom: 0;
 	width: 100%;
 	background: #d70c19;
 	font-size: 3.6em;
