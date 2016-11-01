@@ -57,6 +57,10 @@ class User
     return self.user_type == ADMIN
   end
 
+  def is_client
+    return self.user_type == CLIENT
+  end
+
 
   def self.create_user(user_type, mobile, created_by_staff = false)
     # 1. check whether user exists?
@@ -91,6 +95,16 @@ class User
     return ErrCode::USER_NOT_VERIFIED if user.mobile_verified == false
     return ErrCode::WRONG_PASSWORD if Encryption.encrypt_password(password) != user.password
     return ErrCode::NO_CENTER if user.status == NEW
+    auth_key = user.generate_auth_key
+    user.update_attribute(:auth_key, auth_key)
+    return { auth_key: auth_key }
+  end
+
+  def self.signin_user(mobile, password)
+    user = User.client.where(mobile: mobile).first
+    return ErrCode::USER_NOT_EXIST if user.nil?
+    return ErrCode::USER_NOT_VERIFIED if user.mobile_verified == false
+    return ErrCode::WRONG_PASSWORD if Encryption.encrypt_password(password) != user.password
     auth_key = user.generate_auth_key
     user.update_attribute(:auth_key, auth_key)
     return { auth_key: auth_key }

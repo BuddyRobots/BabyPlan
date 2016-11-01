@@ -22,5 +22,7 @@
 #= require utility/err_code
 #= require handlebars.runtime
 #= require ui/widgets/notification
+#= require ui/widgets/mobile_notification
 #= require extensions/page_notification
+#= require extensions/mobile_page_notification
 
