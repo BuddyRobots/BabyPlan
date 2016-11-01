@@ -218,6 +218,9 @@ Rails.application.routes.draw do
     resources :books do
     end
     resources :centers do
+      member do
+        get :set_follow
+      end
     end
     resources :courses do
       collection do

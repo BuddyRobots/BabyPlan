@@ -1,6 +1,8 @@
 - content_for :app_head do
   = javascript_include_tag "pages/user_mobile/centers/show-bundle"
   = stylesheet_link_tag "pages/user_mobile/centers/show-bundle", :media => "all"
+  :javascript
+    window.center_id = "#{@center.id.to_s}"
 
 
 - content_for :app_content do
@@ -35,8 +37,10 @@
       地址：中国儿童中心综合楼B座305
     %a{:href => "#"}
       %img.map{:src => "/assets/haidiancenter/map.jpg"}
-    %button.btn#concern{:type => "button"} 关注此中心
-    %button.btn#cancel{:type => "button"} 取消关注
+    - if @follow
+      %a.btn#cancel{:type => "button", href: "/user_mobile/centers/#{@center.id.to_s}/set_follow?follow=false"} 取消关注
+    - else
+      %a.btn#cancel{:type => "button", href: "/user_mobile/centers/#{@center.id.to_s}/set_follow?follow=true"} 关注此中心
 
     / %ul.tag-choice
     /   %li.first

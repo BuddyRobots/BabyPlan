@@ -5,11 +5,11 @@
 - content_for :app_content do
   .content-area
     %img.headcloud{:src => "/assets/headcloud.png"}
-    %a{:href => "#"}
+    %a{:href => message_user_mobile_settings_path}
       %img.mail{:src => "/assets/mail.png"}
-    %a{:href => "#"}
+    %a{:href => account_user_mobile_settings_path}
       %img.set{:src => "/assets/setting.png"}
-    %a{:href => "#"}
+    %a{:href => user_mobile_feeds_path}
       %img.back{:src => "/assets/back.png"}
     .face
       %img{:src => "/assets/face.png"}
@@ -18,21 +18,21 @@
     .collect
       %img.personcloud{:src => "/assets/personcloud.png"}
       %img.heart{:src => "/assets/heart.png"}
-      %a{:href => "#"}
+      %a{:href => collect_user_mobile_settings_path}
         %p.content 我的收藏
       %a{:href => "#"}
         %img.rightarrow{:src => "/assets/rightarrow.png"}
     .course
       %img.personcloud{:src => "/assets/personcloud.png"}
       %img.c-box{:src => "/assets/c-box.png"}
-      %a{:href => "#"}
+      %a{:href => course_user_mobile_settings_path}
         %p.content 我的课程
       %a{:href => "#"}
         %img.rightarrow{:src => "/assets/rightarrow.png"}
     .book
       %img.personcloud{:src => "/assets/personcloud.png"}
       %img.smile{:src => "/assets/smile.png"}
-      %a{:href => "#"}
+      %a{:href => book_user_mobile_settings_path}
         %p.content 我的绘本
       %a{:href => "#"}
         %img.rightarrow{:src => "/assets/rightarrow.png"}

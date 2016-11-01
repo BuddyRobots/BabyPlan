@@ -8,15 +8,16 @@
       %a{:href => user_mobile_settings_path}
         %img.user{:src => "/assets/kidscenter/user.png"}
       .input-div
-        %input#input-box{:type => "text"}
+        %input#input-box{:type => "text", value: @keyword}
         %a.icon-div{:href => "#"}
-          %img.search{:src => "/assets/kidscenter/search.png"}
+          %img.search-center{:src => "/assets/kidscenter/search.png"}
+
 
     - if @centers.blank?
       .undiscover
         %img.icon-none{:src => "/assets/web/none.png"}
     - else
       - @centers.each do |c|
-        .desc-add-div
+        .desc-add-div{data: {id: c.id.to_s}}
           %p.center-name= c.name
           %p.center-address= c.address
