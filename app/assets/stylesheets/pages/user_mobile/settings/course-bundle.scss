@@ -31,7 +31,6 @@ a{
     #fef29c 50%, #fef29c 95%, 
     #fcc204 95%, #fcc204);
     background-size: 10px 10px;
-    padding-bottom:2%;
 }
 .undiscover {
 	margin-top: 43%;
@@ -82,17 +81,18 @@ a{
 	@extend .box-radius;
 	overflow:hidden;
 	margin-bottom:3.91%;
+	display: flex;
+	justify-content: space-between;
+	padding: 3% 2.5%;
 	.visit {
-		width:31.1475%;
-		max-width:190px;
 		float:left;
+		width:100%;
+		max-width:190px;
 		display:block;
-		margin:3.28% 2.46%;
 	}
 	.caption {
 		font-size:2.8em;
 		color:#3e3e3e;
-		padding-top:3%;
 		span {
 			float:right;
 			font-size:0.85714em;
@@ -118,12 +118,16 @@ a{
 		vertical-align: middle;
 	}
 	.location {
-		width: 2.9%;
+		width: 4.8%;
 		max-width: 18px;
 	}
-	.location-div {
-		margin-bottom: 2%;
-	}
+}
+.left-div {
+	width: 33%;
+	padding-top: 1.5%;
+}
+.right-div {
+	width: 65%;
 }
 
 

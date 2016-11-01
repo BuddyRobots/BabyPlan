@@ -88,17 +88,18 @@ a{
 .details {
 	@extend .box-radius;
 	overflow:hidden;
+	display: flex;
+	justify-content: space-between;
+	padding: 3% 2.5%;
 	.visit {
-		width:31.1475%;
-		max-width:190px;
 		float:left;
+		width:100%;
+		max-width:190px;
 		display:block;
-		margin:3.28% 2.46%;
 	}
 	.caption {
 		font-size:2.8em;
 		color:#3e3e3e;
-		padding-top:3%;
 		span {
 			float:right;
 			font-size:0.85714em;
@@ -121,12 +122,16 @@ a{
 		vertical-align: middle;
 	}
 	.location {
-		width: 2.9%;
+		width: 4.8%;
 		max-width: 18px;
 	}
 }
-.location-div {
-	margin-bottom: 2%;
+.left-div {
+	width: 33%;
+	padding-top: 1.5%;
+}
+.right-div {
+	width: 65%;
 }
 .line-wrapper { 
 	width: 100%; 

@@ -6,6 +6,18 @@
   .content-area
     = render "user_mobile/partials/list_header", list_type: "courses"
     = render "user_mobile/partials/no_centers"
+    .content
+      .left-div
+        %img.visit{:src => "/assets/kidscenter/diary.png"}
+      .right-div
+        %img.icon{:src => "/assets/kidscenter/hui.png"}
+        %p.caption 蚯蚓的日记
+        %p.message 简介:这是一本极为有趣的图画书，以日记书写的方式……
+        .location-div
+          %img.location{:src => "/assets/web/location.png"}
+          %span.center 所有儿童中心
+    .render-more
+      %p 加载更多 
     - if @courses.present?
       - @courses.each do |e|
         .content
@@ -17,6 +29,9 @@
           .location-div
             %img.location{:src => "/assets/web/location.png"}
             %span.center= e.center.name
+    - else
+      .unfound
+        %img.unfound-icon{:src => "/assets/web/cry.png"}
     / .content
     /   %img.visit{:src => "/assets/kidscenter/diary.png"}
     /   %img.icon{:src => "/assets/kidscenter/hui.png"}

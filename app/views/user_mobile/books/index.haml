@@ -20,50 +20,34 @@
         %a{:href => "javascript:void(0)"} 12~15
       %dd 
         %a{:href => "javascript:void(0)"} 15~18
-    .undiscover
-      %img.undiscover-icon{:src => "/assets/web/cry.png"}
     .content
-      %img.visit{:src => "/assets/kidscenter/diary.png"}
-      %img.icon{:src => "/assets/kidscenter/hui.png"}
-      %p.caption 蚯蚓的日记
-      %p.message 简介:这是一本极为有趣的图画书，以日记书写的方式……
-      .location-div
-        %img.location{:src => "/assets/web/location.png"}
-        %span.center 所有儿童中心
-    .content
-      %img.visit{:src => "/assets/kidscenter/visit.png"}
-      %img.icon{:src => "/assets/kidscenter/gao.png"}
-      %p.caption 机器人教育激发学生
-      %p.message 机器人培训课程专业而系统，初级班细化四阶，让孩子……
-      .location-div
-        %img.location{:src => "/assets/web/location.png"}
-        %span.center 什刹海街道西四北社区儿童中心
-    .content
-      %img.visit{:src => "/assets/kidscenter/write.jpg"}
-      %img.icon{:src => "/assets/kidscenter/ke.png"}
-      %p.caption 机器人之动力机械
-      %p.message 教学内容:机器人设计及搭建+图形化编程+科学素养……
-      .location-div
-        %img.location{:src => "/assets/web/location.png"}
-        %span.center 西城区新街口街道社区儿童中心
-    .content
-      %img.visit{:src => "/assets/kidscenter/write.jpg"}
-      %img.icon{:src => "/assets/kidscenter/ke.png"}
-      %p.caption 机器人之动力机械
-      %p.message 教学内容:机器人设计及搭建+图形化编程+科学素养……
-      .location-div
-        %img.location{:src => "/assets/web/location.png"}
-        %span.center 西城区新街口街道社区儿童中心
-    .content
-      %img.visit{:src => "/assets/kidscenter/write.jpg"}
-      %img.icon{:src => "/assets/kidscenter/ke.png"}
-      %p.caption 机器人之动力机械
-      %p.message 教学内容:机器人设计及搭建+图形化编程+科学素养……
-      .location-div
-        %img.location{:src => "/assets/web/location.png"}
-        %span.center 西城区新街口街道社区儿童中心
-
-
-
+      .left-div
+        %img.visit{:src => "/assets/kidscenter/diary.png"}
+      .right-div
+        %img.icon{:src => "/assets/kidscenter/hui.png"}
+        %p.caption 蚯蚓的日记
+        %p.message 简介:这是一本极为有趣的图画书，以日记书写的方式……
+        .location-div
+          %img.location{:src => "/assets/web/location.png"}
+          %span.center 所有儿童中心
+    .render-more
+      %p 加载更多 
+    - if @books.present?
+      - @books.each do |e|
+        .content
+          .left-div
+            %img.visit{:src => e.cover.nil? ? "/assets/banner.png" : e.cover.path}
+          .right-div
+            / 少了一个img
+            %p.caption= e.name
+            %p.message= truncate(strip_tags(e.desc).strip(), length: 50)
+            .location-div
+              %img.location{:src => "/assets/web/location.png"}
+              %span.center= e.center.name
+        .render-more
+          %p 加载更多 
+    - else
+      .unfound
+        %img.unfound-icon{:src => "/assets/web/cry.png"}
 
  

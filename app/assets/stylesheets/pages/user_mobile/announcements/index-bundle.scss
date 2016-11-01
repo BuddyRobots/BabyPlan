@@ -23,7 +23,6 @@ a{
 	height: 100%;
 	overflow: auto;
 	margin:0 auto;
-	padding-bottom:3%;
 	background: linear-gradient(
     45deg, 
     #fef29c 45%, 
@@ -116,37 +115,51 @@ a{
 	margin:0 auto;
 	border-radius:10px;
 	background:#fff;
+}
+.unfound {
+	margin-top: 43%;
+	text-align: center;
+	.unfound-icon {
+		width: 45.3125%;
+		max-width: 290px;
+	}
 } 
 .content {
 	position: relative;
 	@include bigbox;
 	overflow:hidden;
 	margin-bottom:3.91%;
+	display: flex;
+	justify-content: space-between;
+	padding: 3% 2.5%;
 	.message {
 		font-size:2.4em;
 		color:#7d7d7d;
 		line-height:150%;
 		padding-bottom: 1%;
-		padding-right: 2%;
 	}
+}
+.left-div {
+	width: 33%;
+	padding-top: 1.5%;
+}
+.right-div {
+	width: 65%;
 }
 .visit {
 	float:left;
-	width:32.5%;
-	max-width:208px;
+	width:100%;
+	max-width:190px;
 	display:block;
-	padding: 4% 3% 6% 3%;
 }
 .icon {
 	float:left;
-	width:6.557%;
+	width: 10.6667%;
 	max-width:40px;
 	display:block;
-	padding-top:1.65%;
-	padding-right:1.65%;
+	padding-right: 2.67%;
 }
 .caption {
-	padding:3.28% 0 1% 0;
 	font-size:2.8em;
 	color:#7d7d7d;
 }
@@ -158,13 +171,23 @@ a{
 	vertical-align: middle;
 }
 .location {
-	width: 2.9%;
+	width: 4.8%;
 	max-width: 18px;
 }
-.location-div {
-	margin-bottom: 2%;
+.render-more {
+	width: 37.5%;
+	margin: 0 auto;
+	background: #eee;
+	border-radius: 8px;
+	border: 1px solid #aaa;
+	margin-bottom: 4%;
+	p {
+		font-size: 2.4em;
+		color: #aaa;
+		text-align: center;
+		padding: 6.31% 0;
+	}
 }
-
 
 @media screen and (max-width:640px) {
 	.content-area {
