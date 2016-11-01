@@ -125,6 +125,15 @@ class User
     Encryption.encrypt_auth_key(info)
   end
 
+  def verify_client(name, password, verify_code)
+    if mobile_verify_code != verify_code
+      return ErrCode::WRONG_VERIFY_CODE
+    end
+    self.update_attributes(name: name, mobile_verified: true, status: NEW, password: Encryption.encrypt_password(password))
+    self.save
+    nil
+  end
+
   def verify_staff(name, center_name, password, verify_code)
     if mobile_verify_code != verify_code
       return ErrCode::WRONG_VERIFY_CODE
@@ -136,16 +145,6 @@ class User
     self.update_attributes(name: name, mobile_verified: true, status: NEW, password: Encryption.encrypt_password(password))
     self.staff_center = center
     self.save
-    nil
-  end
-
-  def verify_client(name, gender, birthday, parent, address, verify_code)
-    if mobile_verify_code != verify_code
-      return ErrCode::WRONG_VERIFY_CODE
-    end
-    ary = birthday.split('-').map { |e| e.to_i }
-    self.update_attributes(name: name, mobile_verified: true, gender: gender.to_i, birthday: Date.new(ary[0], ary[1], ary[2]), parent: parent, address: address)
-    # todo: send password message
     nil
   end
 
