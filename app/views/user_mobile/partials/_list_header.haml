@@ -1,0 +1,16 @@
+.header
+  %a{:href => account_user_mobile_settings_path}
+    %img.user{:src => "/assets/kidscenter/user.png"}
+  .input-div
+    %input#input-box{:type => "text"}
+    %a.icon-div{:href => "#"}
+      %img.search{:src => "/assets/kidscenter/search.png"}
+%ul.tag-choice
+  %li.first
+    %a{class: list_type == "feeds" ? "active" : "", :href => "javascript:void(0)"} 最新
+  %li.second 
+    %a{class: list_type == "feeds" ? "active" : "", :href => "javascript:void(0)"} 公告
+  %li.third
+    %a{class: list_type == "feeds" ? "active" : "", :href => "javascript:void(0)"} 课程
+  %li.last
+    %a{class: list_type == "feeds" ? "active" : "", :href => "javascript:void(0)"} 绘本
