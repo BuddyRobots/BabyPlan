@@ -57,6 +57,9 @@ class UserMobile::SessionsController < UserMobile::ApplicationController
   end
 
   def update_password
+    user = User.client.where(id: params[:uid]).first
+    retval = user.nil? ? ErrCode::USER_NOT_EXIST : user.set_password(params[:password])
+    render json: retval_wrapper(retval)
   end
 
   def signout

@@ -171,6 +171,11 @@ class User
     nil
   end
 
+  def set_password(password)
+    self.update_attributes(password: Encryption.encrypt_password(password))
+    nil
+  end
+
   def reset_password(password, verify_code)
     if self.mobile_verified == false
       return ErrCode::USER_NOT_VERIFIED

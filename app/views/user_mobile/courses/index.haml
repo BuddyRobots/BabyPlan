@@ -6,46 +6,57 @@
   .content-area
     = render "user_mobile/partials/list_header", list_type: "courses"
     = render "user_mobile/partials/no_centers"
-    .content
-      %img.visit{:src => "/assets/kidscenter/diary.png"}
-      %img.icon{:src => "/assets/kidscenter/hui.png"}
-      %p.caption 蚯蚓的日记
-      %p.message 简介:这是一本极为有趣的图画书，以日记书写的方式……
-      .location-div
-        %img.location{:src => "/assets/web/location.png"}
-        %span.center 所有儿童中心
-    .content
-      %img.visit{:src => "/assets/kidscenter/visit.png"}
-      %img.icon{:src => "/assets/kidscenter/gao.png"}
-      %p.caption 机器人教育激发学生
-      %p.message 机器人培训课程专业而系统，初级班细化四阶，让孩子……
-      .location-div
-        %img.location{:src => "/assets/web/location.png"}
-        %span.center 什刹海街道西四北社区儿童中心
-    .content
-      %img.visit{:src => "/assets/kidscenter/write.jpg"}
-      %img.icon{:src => "/assets/kidscenter/ke.png"}
-      %p.caption 机器人之动力机械
-      %p.message 教学内容:机器人设计及搭建+图形化编程+科学素养……
-      .location-div
-        %img.location{:src => "/assets/web/location.png"}
-        %span.center 西城区新街口街道社区儿童中心
-    .content
-      %img.visit{:src => "/assets/kidscenter/write.jpg"}
-      %img.icon{:src => "/assets/kidscenter/ke.png"}
-      %p.caption 机器人之动力机械
-      %p.message 教学内容:机器人设计及搭建+图形化编程+科学素养……
-      .location-div
-        %img.location{:src => "/assets/web/location.png"}
-        %span.center 西城区新街口街道社区儿童中心
-    .content
-      %img.visit{:src => "/assets/kidscenter/write.jpg"}
-      %img.icon{:src => "/assets/kidscenter/ke.png"}
-      %p.caption 机器人之动力机械
-      %p.message 教学内容:机器人设计及搭建+图形化编程+科学素养……
-      .location-div
-        %img.location{:src => "/assets/web/location.png"}
-        %span.center 西城区新街口街道社区儿童中心
+    - if @courses.present?
+      - @courses.each do |e|
+        .content
+          %img.visit{:src => e.photo.nil? ? "/assets/banner.png" : e.photo.path}
+          %p.caption= e.name
+          / %p.message 简介:这是一本极为有趣的图画书，以日记书写的方式……
+          %p.message= truncate(strip_tags(e.course.desc).strip(), length: 50)
+          / %p.message= strip_tags(e.course.desc)
+          .location-div
+            %img.location{:src => "/assets/web/location.png"}
+            %span.center= e.center.name
+    / .content
+    /   %img.visit{:src => "/assets/kidscenter/diary.png"}
+    /   %img.icon{:src => "/assets/kidscenter/hui.png"}
+    /   %p.caption 蚯蚓的日记
+    /   %p.message 简介:这是一本极为有趣的图画书，以日记书写的方式……
+    /   .location-div
+    /     %img.location{:src => "/assets/web/location.png"}
+    /     %span.center 所有儿童中心
+    / .content
+    /   %img.visit{:src => "/assets/kidscenter/visit.png"}
+    /   %img.icon{:src => "/assets/kidscenter/gao.png"}
+    /   %p.caption 机器人教育激发学生
+    /   %p.message 机器人培训课程专业而系统，初级班细化四阶，让孩子……
+    /   .location-div
+    /     %img.location{:src => "/assets/web/location.png"}
+    /     %span.center 什刹海街道西四北社区儿童中心
+    / .content
+    /   %img.visit{:src => "/assets/kidscenter/write.jpg"}
+    /   %img.icon{:src => "/assets/kidscenter/ke.png"}
+    /   %p.caption 机器人之动力机械
+    /   %p.message 教学内容:机器人设计及搭建+图形化编程+科学素养……
+    /   .location-div
+    /     %img.location{:src => "/assets/web/location.png"}
+    /     %span.center 西城区新街口街道社区儿童中心
+    / .content
+    /   %img.visit{:src => "/assets/kidscenter/write.jpg"}
+    /   %img.icon{:src => "/assets/kidscenter/ke.png"}
+    /   %p.caption 机器人之动力机械
+    /   %p.message 教学内容:机器人设计及搭建+图形化编程+科学素养……
+    /   .location-div
+    /     %img.location{:src => "/assets/web/location.png"}
+    /     %span.center 西城区新街口街道社区儿童中心
+    / .content
+    /   %img.visit{:src => "/assets/kidscenter/write.jpg"}
+    /   %img.icon{:src => "/assets/kidscenter/ke.png"}
+    /   %p.caption 机器人之动力机械
+    /   %p.message 教学内容:机器人设计及搭建+图形化编程+科学素养……
+    /   .location-div
+    /     %img.location{:src => "/assets/web/location.png"}
+    /     %span.center 西城区新街口街道社区儿童中心
 
 
 

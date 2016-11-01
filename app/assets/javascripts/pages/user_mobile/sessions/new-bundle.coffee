@@ -24,17 +24,14 @@ $ ->
       },
       (data) ->
         if data.success
-          # $(".error-notice").css("visibility","hidden")
           location.href = "/user_mobile/feeds"
         else
-          if data.code == NO_CENTER 
-            $.page_notification("请通知管理员开通账号", 3000)
           if data.code == USER_NOT_EXIST
-            $(".error-notice").text("帐号不存在").css("visibility","visible")
+            $.mobile_page_notification("帐号不存在", 3000)
           if data.code == USER_NOT_VERIFIED
-            $(".error-notice").text("手机号未验证").css("visibility","visible")
+            $.mobile_page_notification("手机号未验证", 3000)
           if data.code == WRONG_PASSWORD
-            $(".error-notice").text("密码错误").css("visibility","visible")
+            $.mobile_page_notification("密码错误", 3000)
       )
 
   $(".signin").click ->
