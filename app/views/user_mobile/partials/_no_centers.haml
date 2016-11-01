@@ -1,0 +1,4 @@
+- if @current_user.client_centers.blank?
+  .undiscover
+    %img.icon-empty.png{:src => "/assets/web/empty.png"}
+    %button.btn#to_set{:type => "type"} 前往设置

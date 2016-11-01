@@ -1,20 +1,22 @@
 - content_for :app_head do
-  = javascript_include_tag "pages/welcome/set_center_2-bundle"
-  = stylesheet_link_tag "pages/welcome/set_center_2-bundle", :media => "all"
+  = javascript_include_tag "pages/user_mobile/centers/index-bundle"
+  = stylesheet_link_tag "pages/user_mobile/centers/index-bundle", :media => "all"
 
 - content_for :app_content do
   .content-area
     .header
-      %a{:href => account_user_mobile_settings_path}
+      %a{:href => user_mobile_settings_path}
         %img.user{:src => "/assets/kidscenter/user.png"}
       .input-div
         %input#input-box{:type => "text"}
         %a.icon-div{:href => "#"}
           %img.search{:src => "/assets/kidscenter/search.png"}
 
-    .undiscover
-      %img.icon-none{:src => "/assets/web/none.png"}
-    - 5.times do
-      .desc-add-div
-        %p.center-name 北京市朝阳区新街口街道西四北六条广安门外社区儿童中心
-        %p.center-address 北京市朝阳区望花路西甲12号
+    - if @centers.blank?
+      .undiscover
+        %img.icon-none{:src => "/assets/web/none.png"}
+    - else
+      - @centers.each do |c|
+        .desc-add-div
+          %p.center-name= c.name
+          %p.center-address= c.address

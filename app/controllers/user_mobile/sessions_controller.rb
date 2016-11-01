@@ -1,4 +1,4 @@
-class UserMobile::SessionsController < StaffMobile::ApplicationController
+class UserMobile::SessionsController < UserMobile::ApplicationController
   # frontpage
 	def index
   end

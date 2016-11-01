@@ -1,4 +1,4 @@
-class UserMobile::BooksController < StaffMobile::ApplicationController
+class UserMobile::BooksController < UserMobile::ApplicationController
   # search_book
   def index
   

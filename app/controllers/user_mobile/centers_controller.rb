@@ -1,14 +1,11 @@
 class UserMobile::CentersController < StaffMobile::ApplicationController
-  # set_center_2
   def index
-    
+    @centers = current_user.client_centers
   end
-  # haidiancenter
+
   def show
-
   end
-  # set_center
-  def new
 
+  def new
   end
 end
