@@ -22,4 +22,7 @@ class UserMobile::SettingsController < StaffMobile::ApplicationController
   # set
   def account
   end
+
+  def reset_password
+  end
 end

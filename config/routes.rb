@@ -244,6 +244,7 @@ Rails.application.routes.draw do
         get :collect
         get :message
         get :account
+        get :reset_password
       end
     end
   end
