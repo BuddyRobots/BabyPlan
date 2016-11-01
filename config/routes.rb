@@ -234,6 +234,7 @@ Rails.application.routes.draw do
         post :verify
       end
       collection do
+        get :signout
         get :sign_up
         post :signup
         get :forget_password
