@@ -4,22 +4,7 @@
 
 - content_for :app_content do
   .content-area
-    .header
-      %a{:href => "#"}
-        %img.user{:src => "/assets/kidscenter/user.png"}
-      .input-div
-        %input#input-box{:type => "text"}
-        %a.icon-div{:href => "#"}
-          %img.search{:src => "/assets/kidscenter/search.png"}
-    %ul.tag-choice
-      %li.first
-        %a.active{:href => "javascript:void(0)"} 最新
-      %li.second 
-        %a{:href => "javascript:void(0)"} 公告
-      %li.third
-        %a{:href => "javascript:void(0)"} 课程
-      %li.last
-        %a{:href => "javascript:void(0)"} 绘本
+    = render "user_mobile/partials/list_header", list_type: "announcements"
     .content
       %img.visit{:src => "/assets/kidscenter/diary.png"}
       %img.icon{:src => "/assets/kidscenter/hui.png"}
