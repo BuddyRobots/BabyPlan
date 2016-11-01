@@ -132,6 +132,14 @@ a{
 	border-radius: 8px;
 	padding: 3.2%;
 }
+.undiscover {
+	margin-top: 43%;
+	text-align: center;
+	.undiscover-icon {
+		width: 45.3125%;
+		max-width: 290px;
+	}
+}
 .content {
 	position: relative;
 	@include bigbox;
