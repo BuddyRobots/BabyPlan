@@ -101,11 +101,10 @@ class User
   end
 
   def self.signin_user(mobile, password)
-    user = User.staff.where(mobile: mobile).first || User.admin.where(mobile: mobile).first
+    user = User.client.where(mobile: mobile).first
     return ErrCode::USER_NOT_EXIST if user.nil?
     return ErrCode::USER_NOT_VERIFIED if user.mobile_verified == false
     return ErrCode::WRONG_PASSWORD if Encryption.encrypt_password(password) != user.password
-    return ErrCode::NO_CENTER if user.status == NEW
     auth_key = user.generate_auth_key
     user.update_attribute(:auth_key, auth_key)
     return { auth_key: auth_key }

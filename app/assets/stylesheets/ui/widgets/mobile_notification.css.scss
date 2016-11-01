@@ -1,0 +1,18 @@
+$msg_background: #fdd3b9;
+$msg_border: #F0C36D;
+
+.mobile_notification {
+  visibility: hidden;
+  padding: 3px 20px;
+  z-index: 10000;
+  font-size: 14px;
+  color: #323232;
+  height: 40px;
+  line-height: 40px;
+  position: fixed;
+  display: inline;
+  top: 0px;
+  background-color: $msg_background;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+}

@@ -19,8 +19,8 @@ $ ->
       },
       (data) ->
         if data.success
-          $(".error-notice").css("visibility","hidden")
-          location.href = "/staff/clients"
+          # $(".error-notice").css("visibility","hidden")
+          location.href = "/user_mobile/feeds"
         else
           if data.code == NO_CENTER 
             $.page_notification("请通知管理员开通账号", 3000)

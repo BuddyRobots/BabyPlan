@@ -9,24 +9,24 @@
     .input-box
       %form.account 
         账号:
-        %input.input-name{:type => "text"}
+        %input#mobile.input-name{:type => "text"}
         %a.identifycode{:href => "javascript:void(0);"} 验证码
     .input-box
       %form.account 
         验证码:
-        %input.input-name{:type => "text"}
+        %input#code.input-name{:type => "text"}
     .input-box
       %form.account 
         儿童姓名:
-        %input.input-div{:type => "text"}
+        %input#name.input-div{:type => "text"}
     .input-box
       %form.account 
         设置密码:
-        %input.input-div{:type => "password"}
+        %input#password.input-div{:type => "password"}
     .input-box
       %form.account 
         重输密码:
-        %input.input-div{:type => "password"}
+        %input#password_confirm.input-div{:type => "password"}
 
     / 错误码提示框已隐藏
     .notice-div
