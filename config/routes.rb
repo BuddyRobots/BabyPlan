@@ -227,6 +227,9 @@ Rails.application.routes.draw do
     resources :feeds do
     end
     resources :sessions do
+      member do
+        post :verify
+      end
       collection do
         get :sign_up
         post :signup
