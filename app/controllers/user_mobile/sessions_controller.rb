@@ -42,6 +42,11 @@ class UserMobile::SessionsController < UserMobile::ApplicationController
   # set_password
   def set_password
   end
+
+  def signout
+    cookies.delete(:auth_key, :domain => :all)
+    redirect_to user_mobile_sessions_path
+  end
 end
 
   
