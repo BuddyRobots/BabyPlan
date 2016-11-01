@@ -1,4 +1,4 @@
-class UserMobile::CoursesController < StaffMobile::ApplicationController
+class UserMobile::CoursesController < UserMobile::ApplicationController
   # similar to search_new
   def index
   

@@ -6,7 +6,7 @@
   .content-area
     %img.cloudblock{:src => "/assets/cloudblock.png"}
     %img.frontcloud{:src => "/assets/frontcloud.png"}
-    %a{:href => (@current_user.present? && @current_user.is_client) ? account_user_mobile_settings_path : new_user_mobile_session_path }
+    %a{:href => (@current_user.present? && @current_user.is_client) ? user_mobile_settings_path : new_user_mobile_session_path }
       %img.user{:src => "/assets/user.png"}
     / %a{:href => "#"}
     /   %img.search{:src => "/assets/search.png"}

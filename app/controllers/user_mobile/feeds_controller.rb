@@ -1,4 +1,4 @@
-class UserMobile::FeedsController < StaffMobile::ApplicationController
+class UserMobile::FeedsController < UserMobile::ApplicationController
 	# search_new
   def index
 

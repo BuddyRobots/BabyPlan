@@ -37,7 +37,8 @@ class User
   field :created_by_staff, type: Boolean, default: false
 
   # relationships specific for clients
-  belongs_to :client_center
+  # belongs_to :client_center
+  has_and_belongs_to_many :client_centers, class_name: "Center", inverse_of: :clients
   has_many :course_participates, class_name: "CourseParticipate", inverse_of: :client
   has_many :book_borrows, class_name: "BookBorrow", inverse_of: :client
   has_many :feedbacks
@@ -47,6 +48,7 @@ class User
   belongs_to :staff_center, class_name: "Center", inverse_of: :staffs
   has_many :announcements
   has_many :staff_logs
+
 
   scope :client, ->{ where(user_type: CLIENT) }
   scope :staff, ->{ any_of({user_type: STAFF}, {user_type: ADMIN}) }
