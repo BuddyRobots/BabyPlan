@@ -14,11 +14,13 @@ $ ->
         console.log data
         if data.success
           uid = data.uid
-          if timer != null
-            clearTimeout(timer)
-          time(".identifycode")
+          # if timer != null
+          #   clearTimeout(timer)
+          # time(".identifycode")
         else
           if data.code == USER_EXIST
             location.href = "/user_mobile/sessions/new?code=" + USER_EIXST
     )
     return false
+
+  $(".signup")
