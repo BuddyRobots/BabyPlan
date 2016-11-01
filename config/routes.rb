@@ -238,6 +238,9 @@ Rails.application.routes.draw do
         get :sign_up
         post :signup
         get :forget_password
+        post :forget_password_submit_mobile
+        post :forget_password_submit_code
+        post :update_password
         get :set_password
       end
     end
@@ -249,6 +252,7 @@ Rails.application.routes.draw do
         get :message
         get :account
         get :reset_password
+        post :update_password
       end
     end
   end

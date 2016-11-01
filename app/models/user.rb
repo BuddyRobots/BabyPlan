@@ -164,6 +164,13 @@ class User
     { uid: self.id.to_s }
   end
 
+  def verify_password_code(verify_code)
+    if self.password_verify_code != verify_code
+      return ErrCode::WRONG_VERIFY_CODE
+    end
+    nil
+  end
+
   def reset_password(password, verify_code)
     if self.mobile_verified == false
       return ErrCode::USER_NOT_VERIFIED
@@ -173,6 +180,12 @@ class User
       return ErrCode::WRONG_VERIFY_CODE
     end
     self.update_attributes(password: Encryption.encrypt_password(password))
+    nil
+  end
+
+  def change_password(old_password, new_password)
+    return ErrCode::WRONG_PASSWORD if Encryption.encrypt_password(old_password) != self.password
+    self.update_attributes(password: Encryption.encrypt_password(new_password))
     nil
   end
 
