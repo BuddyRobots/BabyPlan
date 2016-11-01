@@ -24,9 +24,11 @@
     .item-div
       .item-box
         %p 修改密码
-        %a{:href => "#"}
+        %a{:href => reset_password_user_mobile_settings_path}
           %img.more-icon{:src => "/assets/web/more.png"}
       .item-box
         %p 儿童中心设置
         %a{:href => new_user_mobile_center_path }
           %img.more-icon{:src => "/assets/web/more.png"}
+    %button.btn#exit{:type => "button"} 退出
+    

@@ -31,7 +31,6 @@ a{
     #fef29c 50%, #fef29c 95%, 
     #fcc204 95%, #fcc204);
     background-size: 10px 10px;
-    padding-bottom: 2%;
 }
 .header {
 	position:relative;
@@ -111,7 +110,14 @@ a{
 	width: 100%;
 	max-width: 100px;
 }
-
+#exit {
+	width: 100%;
+	background: #d70c19;
+	font-size: 3.6em;
+	color: #fff;
+	padding: 3.68%;
+	border-radius: 0;
+}
 
 @media screen and (max-width:640px) {
 	.content-area {
