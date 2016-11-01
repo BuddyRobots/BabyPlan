@@ -50,7 +50,9 @@
                 %span.edit-box
                   %input.input-area.form-control#center-address{:type => "text"}
             .photo
-              %img.unedit-photo{:src => "/assets/visit.png"}
+              %img.unedit-photo{:src => @center.photo.nil? ? "/assets/banner.png" : @center.photo.path }
+              = form_tag("/admin/centers/" + @center.id.to_s + "/upload_photo", method: "post", multipart: true, id: "upload-photo-form", class: "hide") do
+                = file_field_tag "photo_file", { class: "hide", accept: ".jpg,.png" }
               %a#upload-photo{href: "javascript:void(0);"}
                 %img.edit-photo{:src => "/assets/web/add-photo.png"}
           .map-position
