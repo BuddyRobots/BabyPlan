@@ -114,6 +114,8 @@ a{
 #exit {
 	position: absolute;
 	bottom: 0;
+	display: inline-block;
+	text-align: center;
 	width: 100%;
 	background: #d70c19;
 	font-size: 3.6em;
@@ -121,6 +123,19 @@ a{
 	padding: 3.68%;
 	border-radius: 0;
 }
+#exit:link {
+	text-decoration: none;
+}
+#exit:visited {
+	text-decoration: none;
+}
+#exit:hover {
+	text-decoration: none;
+}
+#exit:active {
+	text-decoration: none;
+}
+
 
 @media screen and (max-width:640px) {
 	.content-area {
