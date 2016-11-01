@@ -229,6 +229,7 @@ Rails.application.routes.draw do
     resources :sessions do
       collection do
         get :sign_up
+        post :signup
         get :forget_password
         get :set_password
       end

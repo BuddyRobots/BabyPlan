@@ -1,5 +1,8 @@
 $ ->
 
+  if parseInt(window.code) == REQUIRE_SIGNIN
+    $.mobile_page_notification("已注册，请直接登录", 3000)
+
 
   signin = ->
     mobile = $("#mobile").val()

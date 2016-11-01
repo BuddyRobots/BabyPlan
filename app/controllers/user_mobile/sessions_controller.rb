@@ -15,8 +15,14 @@ class UserMobile::SessionsController < StaffMobile::ApplicationController
     render json: retval_wrapper(retval)
   end
 
-  # register
+  # register page
   def sign_up
+  end
+
+  # register action
+  def signup
+    retval = User.create_user(User::CLIENT, params[:mobile])
+    render json: retval_wrapper(retval) and return
   end
 
   # signin
