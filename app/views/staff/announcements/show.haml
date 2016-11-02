@@ -7,9 +7,9 @@
 .content-area
   .content-box
     .manage-box.clearfix
-      %a#back{:href => "/staff/announcements"}
+      %a#back{:href => "/staff/announcements?profile=" + (@announcement.center.present? ? "local" : "global")}
         %img{:src => "/assets/web/back.png"}
-      %p.local-notice 本区公告
+      %p.local-notice= @announcement.center.present? ? "本区公告" : "全局公告"
       - if @announcement.center.present?
         .btn.end-btn{:type => "button"} 
           %img.end-img{:src => "/assets/managecenter/ticker.png"}

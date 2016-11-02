@@ -90,4 +90,28 @@ class CourseInst
   def date_in_calendar_str
     (self.date_in_calendar || []).join(';')
   end
+
+  # -1 for unknown
+  # 1 for not begin
+  # 2 for ongoing
+  # 4 for end
+  UNKNOWN = -1
+  NOT_BEGIN = 1
+  ONGOING = 2
+  OVER = 4
+  def status
+    if self.date_in_calendar.blank?
+      return UNKNOWN
+    end
+    sort_date = self.date_in_calendar.sort.map { |e| e.split('T')[0] }
+    start_day = Time.mktime(*sort_date[0])
+    end_day = Time.mktime(*sort_date[-1])
+    if Time.now < start_day
+      return NOT_BEGIN
+    elsif Time.now < end_day + 1.days
+      return ONGOING
+    else
+      return OVER
+    end
+  end
 end

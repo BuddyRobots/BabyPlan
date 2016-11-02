@@ -41,7 +41,8 @@ class User
   has_and_belongs_to_many :client_centers, class_name: "Center", inverse_of: :clients
   has_many :course_participates, class_name: "CourseParticipate", inverse_of: :client
   has_many :book_borrows, class_name: "BookBorrow", inverse_of: :client
-  has_many :feedbacks
+  has_many :feedbacks, class_name: "Feedback", inverse_of: :client
+  has_many :audit_feedbacks, class_name: "Feedback", inverse_of: :staff
   has_many :favorites
 
   # relationships specific for staff
@@ -61,6 +62,12 @@ class User
 
   def is_client
     return self.user_type == CLIENT
+  end
+
+  def get_course_participate(course_inst)
+    self.course_participates.select do |e|
+      e.course_inst == course_inst
+    end.first
   end
 
 
