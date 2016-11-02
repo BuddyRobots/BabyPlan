@@ -67,13 +67,13 @@
     .content
       %img.map-jpg{:src => "/assets/web/map.jpg"}
     - if @course_participate.nil?
-      %button.btn.click-btn{:type => "button"} 我要报名
+      %a.btn.click-btn{href: new_user_mobile_course_path + "?course_id=" + @course.id.to_s, :type => "button"} 我要报名
     - elsif @course_participate.paid == false
-      %button.btn.click-btn{:type => "button"} 去付款
+      %a.btn.click-btn{href: new_user_mobile_course_path + "?course_id=" + @course.id.to_s, :type => "button"} 去付款
     - elsif @course_participate.status = CourseInst::NOT_BEGIN
       %button.btn.unclick-btn{:type => "button"} 已报名
     - else
-      %button.btn.click-btn{:type => "button"} 立即评价
+      %a.btn.click-btn{:type => "button"} 立即评价
 
      
 
