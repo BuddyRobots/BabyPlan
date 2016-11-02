@@ -20,7 +20,7 @@ class WelcomeController < ApplicationController
           "CreateTime" => Time.now.to_i,
           "MsgType" => "text",
           # "Content" => "<a href='#{Weixin.generate_authorize_link(Rails.application.config.server_host + "/coach/students")}/'>工作人员入口</a>"
-          "Content" => "<a href='http://www.baidu.com'>工作人员入口</a>"
+          "Content" => "<a href='http://babyplan.bjfpa.org.cn/staff_mobile/sessions'>工作人员入口</a>"
         }
         render :xml => data.to_xml(root: "xml") and return
       else
