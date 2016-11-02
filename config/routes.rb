@@ -2,76 +2,12 @@ Rails.application.routes.draw do
 
   mount RuCaptcha::Engine => "/rucaptcha"
 
-  get 'welcome/index'
-  get 'welcome/test'
-  get 'welcome/search_new'
-  get 'welcome/search_book'
-  get 'welcome/frontpage'
-  get 'welcome/usercenter'
-  get 'welcome/centerbook'
-  get 'welcome/register'
-  get 'welcome/signin'
-  get 'welcome/centernotice'
-  get 'welcome/haidianbook'
-  get 'welcome/fengtaicenter'
-  get 'welcome/centercourse'
-  get 'welcome/robotclass'
-  get 'welcome/evaluate'
-  get 'welcome/robotcourse'
-  get 'welcome/haidiancenter'
-  get 'welcome/noticedescription'
-  get 'welcome/mybook'
-  get 'welcome/mycourse'
-  get 'welcome/searchresult'
-  get 'welcome/editdemo'
-  get 'welcome/searchlink'
-  get 'welcome/systemmessage'
-  get 'welcome/collect'
-  get 'welcome/courseinfo'
-  get 'welcome/course_paid'
-  get 'welcome/course_end'
-  get 'welcome/course_show'
-  get 'welcome/forget_password'
-  get 'welcome/set_password'
-  get 'welcome/wechat_pay'
-  get 'welcome/set_center'
-  get 'welcome/set_center_2'
-  get 'welcome/set'
-
-
-  get 'welcome/m_frontpage'
-  get 'welcome/m_book_borrow'
-  get 'welcome/m_borrow'
-  get 'welcome/m_unreturn'
-  get 'welcome/m_return'
-  get 'welcome/m_transfer'
-  get 'welcome/m_transfer_desc'
-  get 'welcome/m_transfer_lost_desc'
-  get 'welcome/m_transfer_record'
-  get 'welcome/m_transfer_out_record'
-  get 'welcome/m_transfer_in'
-  get 'welcome/m_transfer_out'
-  get 'welcome/m_transfer_start'
-  get 'welcome/m_transfer_continue'
-  get 'welcome/m_transfer_back'
-  get 'welcome/m_back'
-  get 'welcome/m_transport_in'
-  get 'welcome/m_transport_out'
-  get 'welcome/m_transport_out_end'
-  get 'welcome/m_continue_transport_out'
-  get 'welcome/m_transport'
-  get 'welcome/m_transport_lost'
-  get 'welcome/m_transport_to_center'
-  get 'welcome/m_continue_borrow'
-
-
-
-
-  get 'welcome/managecenter'
-
-  get 'welcome/test_image_uploader'
-
+  match "/weixin_js_signature" => 'application#signature', :via => :get
   match '/' => 'welcome#weixin', :via => :post
+
+  get 'welcome/courseinfo'
+  get 'welcome/managecenter'
+  get 'welcome/test_image_uploader'
 
   resources :centers do
   end
@@ -192,6 +128,9 @@ Rails.application.routes.draw do
 
   namespace :staff_mobile do
     resources :sessions do
+      collection do
+        get :signout
+      end
     end
     resources :books do
       collection do

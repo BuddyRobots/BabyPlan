@@ -1,4 +1,6 @@
 class UserMobile::SessionsController < UserMobile::ApplicationController
+  skip_before_filter :require_sign_in
+
   # frontpage
 	def index
   end

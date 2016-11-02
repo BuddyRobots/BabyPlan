@@ -98,6 +98,17 @@ class User
     User.where(auth_key: auth_key).first
   end
 
+  def self.signin_staff_mobile(mobile, password)
+    user = User.only_staff.where(mobile: mobile).first
+    return ErrCode::USER_NOT_EXIST if user.nil?
+    return ErrCode::USER_NOT_VERIFIED if user.mobile_verified == false
+    return ErrCode::WRONG_PASSWORD if Encryption.encrypt_password(password) != user.password
+    return ErrCode::NO_CENTER if user.status == NEW
+    auth_key = user.generate_auth_key
+    user.update_attribute(:auth_key, auth_key)
+    return { auth_key: auth_key }
+  end
+
   def self.signin_staff(mobile, password)
     user = User.staff.where(mobile: mobile).first || User.admin.where(mobile: mobile).first
     return ErrCode::USER_NOT_EXIST if user.nil?

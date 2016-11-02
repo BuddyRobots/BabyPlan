@@ -74,4 +74,25 @@ class ApplicationController < ActionController::Base
     retval
   end
 
+  def signature
+    @jsapi_ticket = Weixin.get_jsapi_ticket
+    @noncestr = rand(36**10).to_s 36
+    @timestamp = Time.now.to_i
+    @url = CGI::unescape(params[:url])
+    string = "jsapi_ticket=#{@jsapi_ticket}&noncestr=#{@noncestr}&timestamp=#{@timestamp}&url=#{@url}"
+    @signature = Digest::SHA1.hexdigest(string)
+    retval = {
+      success: true,
+      data: {
+        signature: @signature,
+        noncestr: @noncestr,
+        timestamp: @timestamp,
+        appid: Weixin::APPID,
+        string: string,
+        jsapi_ticket: @jsapi_ticket
+      }
+    }
+    render json: retval and return
+  end
+
 end

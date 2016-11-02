@@ -4,12 +4,7 @@
 
 - content_for :app_content do
   .main-div
-    .header.clearfix
-      %a{:href => "#"}
-        %img.logo{:src => "/assets/manager/logo_mini.png"}
-      %span.title 朝阳区儿童中心－张三
-      %a{:href => "#"}
-        %img.logout{:src => "/assets/manager/logout.png", "data-target" => "#confirmModal", "data-toggle" => "modal"}
+    = render "staff_mobile/partials/header"
     .content
       .book
         .borrow-div
@@ -29,15 +24,4 @@
         %p.clicked-word 绘本迁移
 
 
-#confirmModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
-  .modal-dialog
-    .modal-content
-      .modalheader
-        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", :src => "/assets/manager/close.png"}
-      .modal-body
-        %p.account 退出账号
-        %p.question　是否确认退出当前账号！
-        .confirm-div
-          %a.line.clicked#logoff 退出
-          %a{"data-dismiss" => "modal"} 取消
-      
+= render "staff_mobile/partials/confirm_exit"
