@@ -5,7 +5,7 @@ body {
 	font-family:"Microsoft YaHei";
 	font-size: 62.5%;
 }
-body, p, img, div, ul, li, a, h2, span, input {
+body, p, img, div, ul, li, a, span, input, h1, h2, h3, h4, h5 {
 	margin:0;
 	padding:0;
 }
@@ -47,50 +47,6 @@ a{
 	display:block;
 	margin:0 auto;
 }
-.active {
-	position:relative;
-	overflow:hidden;
-	.logo {
-		width:8.75%;
-		max-width:56px;
-		display:block;
-		margin-left:4.38%;
-		margin-top:4.69%;
-		float:left;
-	}
-	.activecaption {
-		font-size: 3em;
-		color:	#3e3e3e;
-		float:left;
-		margin-top:7%;
-		margin-left:2.35%;
-	}
-}
-.content {
-	font-size:2.6em;
-	color:#3e3e3e;
-	line-height:150%;
-	padding:2% 4.7%;
-	text-indent:2em;
-	margin-bottom:3%;
-}
-.airplan {
-	width:91.5625%;
-	max-width:586px;
-	display:block;
-	margin:0 auto;
-}
-.show{
-	@extend .airplan;
-	margin-bottom:3%;
-}
-.anothernotice {
-	font-size:2.8em;
-	color:#d70c19;
-	display:block;
-	text-align:center;
-	text-decoration:none;
-}
 .back {
 	position:fixed;
 	left:3.45%;
@@ -98,7 +54,41 @@ a{
 	width: 7.5%;
 	max-width: 48px;
 }
-
+.content {
+	width: 90.625%;
+	margin: 0 auto;
+	h1, h2, h3, h4, h5 {
+		background: url("/assets/logo-mini.png") no-repeat;
+		background-size: 9.65%;
+		padding-left: 12%;
+		color: #3e3e3e;
+	}
+	h1 {
+		padding-top: 3%;
+		font-size: 3.6em;
+	}
+	h2 {
+		font-size: 3em;
+		padding-top: 4%;
+	}
+	h3 {
+		font-size: 2.4em;
+		padding-top: 5%;
+	}
+	h4 {
+		font-size: 1.8em;
+		padding-top: 6.2%;
+	}
+	h5 {
+		font-size: 1.4em;
+		padding-top: 7%;
+	}
+	p {
+		font-size:2.6em;
+		color:#3e3e3e;
+		line-height:150%;
+	}
+}
 
 
 @media screen and (max-width:640px) {
