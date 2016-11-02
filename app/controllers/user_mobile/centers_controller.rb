@@ -1,4 +1,4 @@
-class UserMobile::CentersController < StaffMobile::ApplicationController
+class UserMobile::CentersController < UserMobile::ApplicationController
   def index
     @keyword = params[:keyword]
     @centers = @keyword.blank? ? Center.all : Center.where(name: /#{@keyword}/)

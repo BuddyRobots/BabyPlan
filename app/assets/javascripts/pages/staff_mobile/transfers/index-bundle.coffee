@@ -15,6 +15,3 @@ $ ->
 
   $("#transfer_record").click ->
   	location.href = "/staff_mobile/transfers/list"
-
-  $("#logoff").click ->
-  	location.href = "/staff_mobile/sessions"

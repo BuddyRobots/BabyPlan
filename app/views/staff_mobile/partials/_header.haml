@@ -1,0 +1,7 @@
+.header.clearfix
+  %a{:href => "javascript:void(0);"}
+    %img.logo{:src => "/assets/manager/logo_mini.png"}
+  %span.title= @current_user.staff_center.name + "-" + @current_user.name
+  / %a{:href => signout_staff_mobile_sessions_path}
+  %a{:href => "javascript:void(0);"}
+    %img.logout{:src => "/assets/manager/logout.png", "data-target" => "#confirmModal", "data-toggle" => "modal"}

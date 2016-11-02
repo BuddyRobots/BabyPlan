@@ -1,6 +1,8 @@
 $ ->
 
   if parseInt(window.code) == REQUIRE_SIGNIN
+    $.mobile_page_notification("请登录", 3000)
+  if parseInt(window.code) == USER_EXIST
     $.mobile_page_notification("已注册，请直接登录", 3000)
   if parseInt(window.code) == SIGNIN_DONE
     $.mobile_page_notification("注册完成，请登录", 3000)
@@ -12,10 +14,8 @@ $ ->
     mobile_retval = $.regex.isMobile(mobile)
     console.log mobile_retval
     if mobile_retval == false
-      $(".error-notice").css("visibility","visible")
-      $("#mobile").addClass("clicked-box")
+      $.mobile_page_notification("帐号不存在", 3000)
       return
-    $("#mobile").removeClass("clicked-box")
     $.postJSON(
       '/user_mobile/sessions',
       {
