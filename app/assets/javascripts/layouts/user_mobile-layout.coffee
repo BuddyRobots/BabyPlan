@@ -7,4 +7,7 @@ $ ->
   )
 
   if parseInt(window.code) == DONE
-  	$.mobile_page_notification("操作完成", 3000)
+    $.mobile_page_notification("操作完成", 3000)
+
+  $(".last_page").click ->
+    window.history.back()

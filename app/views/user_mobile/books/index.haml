@@ -20,34 +20,21 @@
         %a{:href => "javascript:void(0)"} 12~15
       %dd 
         %a{:href => "javascript:void(0)"} 15~18
-    .content
-      .left-div
-        %img.visit{:src => "/assets/kidscenter/diary.png"}
-      .right-div
-        %img.icon{:src => "/assets/kidscenter/hui.png"}
-        %p.caption 蚯蚓的日记
-        %p.message 简介:这是一本极为有趣的图画书，以日记书写的方式……
-        .location-div
-          %img.location{:src => "/assets/web/location.png"}
-          %span.center 所有儿童中心
-    .render-more
-      %p 加载更多 
     - if @books.present?
       - @books.each do |e|
-        .content
+        .content{data: {id: e.id.to_s}}
           .left-div
             %img.visit{:src => e.cover.nil? ? "/assets/banner.png" : e.cover.path}
           .right-div
-            / 少了一个img
+            %img.icon{:src => "/assets/kidscenter/hui.png"}
             %p.caption= e.name
             %p.message= truncate(strip_tags(e.desc).strip(), length: 50)
             .location-div
               %img.location{:src => "/assets/web/location.png"}
               %span.center= e.center.name
-        .render-more
-          %p 加载更多 
+      .render-more
+        %p 加载更多
     - else
       .unfound
         %img.unfound-icon{:src => "/assets/web/cry.png"}
-
  

@@ -6,32 +6,24 @@
   .content-area
     = render "user_mobile/partials/list_header", list_type: "courses"
     = render "user_mobile/partials/no_centers"
-    .content
-      .left-div
-        %img.visit{:src => "/assets/kidscenter/diary.png"}
-      .right-div
-        %img.icon{:src => "/assets/kidscenter/hui.png"}
-        %p.caption 蚯蚓的日记
-        %p.message 简介:这是一本极为有趣的图画书，以日记书写的方式……
-        .location-div
-          %img.location{:src => "/assets/web/location.png"}
-          %span.center 所有儿童中心
-    .render-more
-      %p 加载更多 
     - if @courses.present?
       - @courses.each do |e|
-        .content
-          %img.visit{:src => e.photo.nil? ? "/assets/banner.png" : e.photo.path}
-          %p.caption= e.name
-          / %p.message 简介:这是一本极为有趣的图画书，以日记书写的方式……
-          %p.message= truncate(strip_tags(e.course.desc).strip(), length: 50)
-          / %p.message= strip_tags(e.course.desc)
-          .location-div
-            %img.location{:src => "/assets/web/location.png"}
-            %span.center= e.center.name
+        .content{data: {id: e.id.to_s}}
+          .left-div
+            %img.visit{:src => e.photo.nil? ? "/assets/banner.png" : e.photo.path}
+          .right-div
+            %img.icon{:src => "/assets/kidscenter/ke.png"}
+            %p.caption= e.name
+            %p.message= truncate(strip_tags(e.course.desc).strip(), length: 50)
+            .location-div
+              %img.location{:src => "/assets/web/location.png"}
+              %span.center= e.center.name
+      .render-more
+        %p 加载更多 
     - else
       .unfound
         %img.unfound-icon{:src => "/assets/web/cry.png"}
+
     / .content
     /   %img.visit{:src => "/assets/kidscenter/diary.png"}
     /   %img.icon{:src => "/assets/kidscenter/hui.png"}
