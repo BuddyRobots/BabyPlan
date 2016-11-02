@@ -1,3 +1,4 @@
+
 html {
 	font-size: 16px;
 }
@@ -5,7 +6,7 @@ body {
 	font-family:"Microsoft YaHei";
 	font-size: 62.5%;
 }
-body, p, img, div, ul, li, a, h3, span, br {
+body, p, img, div, ul, li, a, h1, h2, h3, h4, h5, span, br {
 	margin:0;
 	padding:0;
 }
@@ -17,6 +18,7 @@ a{
 }
 
 .content-area{
+	position: relative;
 	width:100%;
 	max-width:640px;
 	margin:0 auto;
@@ -49,7 +51,6 @@ a{
 	position:relative;
 	width:100%;
 	text-align:center;
-	padding-top:3em;
 	padding-bottom:2.3em;
 	.bookcloud {
 		background:url("/assets/robotclass/bookcloud.png") no-repeat;
@@ -65,38 +66,65 @@ a{
 			text-shadow: 1px 1px 1px black;
 		}
 	}
-	.grayheart {
-		position:absolute;
-		width:7.5%;
-		max-width:48px;
-		top:0;
-		right:22.5%;
-	}
-	.dialog {
-		@extend .grayheart;
-		top:3%;
-		right:11.4%;
-	}
-	.num {
-		position:absolute;
-		font-size: 1.8em;
-		color:#666;
-		right:3.6%;
-		top:10.8%;
-	}	
 }
-
+.right-float {
+	padding-right: 3.2%;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+.a-div {
+	width: 7.5%;
+	max-width: 48px;
+}
+.grayheart {
+	width: 100%;
+	max-width:48px;
+}
+.dialog {
+	@extend .grayheart;
+}
+.num {
+	font-size: 1.8em;
+	color:#666;
+}
 .content {
+	width:95.3125%;
+	margin:0 auto;
+	// background:white;
+	border-radius: 10px;
+	margin-bottom: 3.14%;
+	#map-container {
+		height: 41.5em;
+		width: 100%;
+	}
+}
+.course-desc {
 	width:95.3125%;
 	margin:0 auto;
 	background:white;
 	border-radius: 10px;
 	margin-bottom: 3.14%;
-	.introduce {
-		font-size:2.4em;
+	p {
+		font-size:2.6em;
 		color:#3e3e3e;
-		line-height: 150%;
-		padding:3.28% 2.46%;
+		line-height:150%;
+		padding-top: 1%;
+	}
+	h1 {
+		font-size: 3.6em;
+	}
+	h2 {
+		font-size: 3em;
+	}
+	h3 {
+		font-size: 2.4em;
+	}
+	h4 {
+		font-size: 1.8em;
+	}
+	h5 {
+		font-size: 1.4em;
 	}
 }
 .assign-div {

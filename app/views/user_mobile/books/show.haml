@@ -8,15 +8,15 @@
       %img.crocodile{:src => "/assets/crocodile.png"}
       %a{:href => @back == "books" ? "/user_mobile/books" : "/user_mobile/feeds"}
         %img.back{:src => "/assets/back.png"}
-
+    .right-float
+      %a.a-div{:href => "#"}
+        %img.smallheart{:src => "/assets/aixinhong.png"}
+      %a.a-div{:href => "#"}
+        %img.dialog{:src => "/assets/pinglun.png"}
+      %p.num= @book.feedbacks.count.to_s
     .boxtitle
       .bookcloud
         %p= @book.name
-      %a{:href => "#"}
-        %img.smallheart{:src => "/assets/smallheart.png"}
-      %a{:href => "#"}
-        %img.dialog{:src => "/assets/dialog.png"}
-      %p.num= "(" + @book.feedbacks.count.to_s + ")"
     .content
       - if @book.age_range_str.present?
         .item

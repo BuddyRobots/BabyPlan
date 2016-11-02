@@ -1,4 +1,5 @@
 - content_for :app_head do
+  = javascript_include_tag "http://map.qq.com/api/js?v=2.exp"
   = javascript_include_tag "pages/user_mobile/courses/show-bundle"
   = stylesheet_link_tag "pages/user_mobile/courses/show-bundle", :media => "all"
 
@@ -9,28 +10,18 @@
       %img.robot{:src => @course.photo.present? ? @course.photo.path : "/assets/robotclass/robot.jpg"}
       %a{:href => @back == "courses" ? "/user_mobile/courses" : "/user_mobile/feeds"}
         %img.back.last_page{:src => "/assets/robotclass/back.png"}
+    .right-float
+      %a.a-div{:href => "#"}
+        %img.grayheart{:src => "/assets/robotclass/grayheart.png"}
+      %a.a-div{:href => "#"}
+        %img.dialog{:src => "/assets/robotclass/dialog.png"}
+      %p.num= @course.feedbacks.length
     .boxtitle
       .bookcloud
         %p 机器人初级班特色
-      %a{:href => "#"}
-        %img.grayheart{:src => "/assets/robotclass/grayheart.png"}
-      %a{:href => "#"}
-        %img.dialog{:src => "/assets/robotclass/dialog.png"}
-      %p.num= @course.feedbacks.length
-    .content
+
+    .course-desc
       = @course.course.desc.html_safe
-      / %p.introduce
-      /   · 机器人培训课程专业而系统，初级班细化四阶，让孩子机器人学习基础扎实，稳扎稳打。 
-      /   %br
-      /   · 因材施教，根据不同学员年龄和基础选择不同机器人的培训课程。
-      /   %br
-      /   · 小班教学，对每一个学生都有清晰的了解与认识，从而针对性的对孩子的能力作出评估，从而有效地提高长 |
-      /     处，补全短处，实现孩子的全面发展。 | 
-      /   %br
-      /   · 以机器人搭建为主题，延伸涉猎物理学原理。全面的课程设置，满足孩子任何年龄阶段对机器人起步阶段的 |
-      /   学习需求。 |
-      /   %br
-      /   · 码高拥有强大的师资团队，拥有国内外顶尖的机器人教育专家，中国科学院叶昌青博士领衔授课。
     - if @course_participate.present?
       .content#sign-desc
         %p.title 签到情况
@@ -65,7 +56,8 @@
           %span 上课地点：
           %span= @course.address
     .content
-      %img.map-jpg{:src => "/assets/web/map.jpg"}
+      #map-container
+      / %img.map-jpg{:src => "/assets/web/map.jpg"}
     - if @course_participate.nil?
       %a.btn.click-btn{href: new_user_mobile_course_path + "?course_id=" + @course.id.to_s, :type => "button"} 我要报名
     - elsif @course_participate.paid == false
