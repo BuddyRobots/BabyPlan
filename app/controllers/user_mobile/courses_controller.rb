@@ -13,10 +13,12 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
   def show
     @course = CourseInst.where(id: params[:id]).first
     @course_participate = @current_user.get_course_participate(@course)
+    @back = params[:back]
   end
 
   # wechat_pay
   def new
+    @course = CourseInst.where(id: params[:course_id]).first
   end
 
   # evaluate

@@ -12,5 +12,6 @@ class UserMobile::AnnouncementsController < UserMobile::ApplicationController
   # noticedescription
   def show
     @announcement = Announcement.where(id: params[:id]).first
+    @back = params[:back]
   end
 end

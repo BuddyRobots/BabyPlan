@@ -23,6 +23,7 @@ class Book
   has_and_belongs_to_many :transfers
 
   belongs_to :center
+  has_many :book_borrows
   has_many :feedbacks
   has_many :favorites
 
@@ -85,5 +86,23 @@ class Book
   def set_available(available)
     self.update_attribute(:available, available == true)
     nil
+  end
+
+  def age_range_str
+    if self.age_lower_bound.present? && self.age_upper_bound.present?
+      if self.age_upper_bound < self.age_lower_bound
+        return ""
+      end
+      if self.age_upper_bound == self.age_lower_bound
+        return self.age_upper_bound.to_s + "岁"
+      end
+      return self.age_lower_bound.to_s + "~" + self.age_upper_bound.to_s + "岁"
+    elsif self.age_upper_bound.present?
+      return self.age_upper_bound.to_s + "岁以下"
+    elsif self.age_lower_bound.present?
+      return self.age_lower_bound.to_s + "岁以上"
+    else
+      ""
+    end
   end
 end

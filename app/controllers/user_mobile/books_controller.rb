@@ -11,6 +11,8 @@ class UserMobile::BooksController < UserMobile::ApplicationController
 
   # centerbook
   def show
+    @book = Book.where(id: params[:id]).first
+    @back = params[:back]
   end
 end
 
