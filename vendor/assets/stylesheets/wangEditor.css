@@ -821,3 +821,6 @@
 .hljs-chunk {
   color: #aaa;
 }
+._wangeditor-div {
+  display: none;
+}

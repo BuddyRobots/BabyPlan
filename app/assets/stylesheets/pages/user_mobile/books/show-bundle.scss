@@ -5,7 +5,7 @@ body {
 	font-family:"Microsoft YaHei";
 	font-size: 62.5%;
 }
-body, p, img, div, ul, li, a, h3 {
+body, p, img, div, ul, li, a, h1, h2, h3, h4, h5, {
 	margin:0;
 	padding:0;
 }
@@ -26,7 +26,7 @@ a{
     #fef29c 50%, #fef29c 95%, 
     #fcc204 95%, #fcc204);
     background-size: 10px 10px;
-    padding-bottom: 5.2%;
+    padding-bottom: 2%;
 }
 .header {
 	position:relative;
@@ -48,7 +48,6 @@ a{
 	position:relative;
 	width:100%;
 	text-align:center;
-	padding-top:6.25%;
 	padding-bottom:3.13%;
 	.bookcloud {
 		background:url("/assets/bookcloud.png") no-repeat;
@@ -56,34 +55,37 @@ a{
 		background-position:center;
 		width:69.4375%;
 		max-width:438px;
-		padding:5.4% 0;
+		padding:5% 0;
 		margin:0 auto;
 		p {
 			font-size: 3.6em;
 			color:#d70c18;
 		}
 	}
-	.smallheart {
-		position:absolute;
-		width:7.5%;
-		max-width:48px;
-		top:0.6%;
-		right:22%;
-	}
-	.dialog {
-		@extend .smallheart;
-		top:3.41%;
-		right:10.32%;
-	}
-	.num {
-		position:absolute;
-		font-size: 1.8em;
-		color:#666;
-		right:3.6%;
-		top:10.23%;
-	}
 }
-
+.right-float {
+	padding-right: 3.2%;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	padding-top: 1%;
+}
+.a-div {
+	width: 6.25%;
+	max-width: 40px;
+	margin-right: 2%;
+}
+.smallheart {
+	width: 100%;
+	max-width:40px;
+}
+.dialog {
+	@extend .smallheart;
+}
+.num {
+	font-size: 1.8em;
+	color:#666;
+}
 .content {
 	width: 95.3125%;
 	margin: 0 auto;
@@ -96,10 +98,6 @@ a{
 .moveright {
 	margin-left: 9.6%;
 }
-.item {
-	margin-bottom: 2%;
-}
-
 .title-div {
 	position:relative;
 	width:100%;
@@ -124,9 +122,23 @@ a{
 	p {
 		font-size: 2.8em;
 		color:#3e3e3e;
-		text-indent:2em;
 		line-height:150%;
-		padding:3.28% 2.46%;
+		padding-top: 1%;
+	}
+	h1 {
+		font-size: 3.6em;
+	}
+	h2 {
+		font-size: 3em;
+	}
+	h3 {
+		font-size: 2.4em;
+	}
+	h4 {
+		font-size: 1.8em;
+	}
+	h5 {
+		font-size: 1.4em;
 	}
 }
 
