@@ -9,7 +9,7 @@ class Util
     data = data.sort.to_h
     data_str = data.to_a.map { |e| e.join('=') } .join('&')
     with_key = data_str + "&key=" + key
-    Digest::SHA1.hexdigest(with_key).upcase
+    Digest::MD5.hexdigest(with_key).upcase
   end
 
   def self.hash_to_xml(h)
