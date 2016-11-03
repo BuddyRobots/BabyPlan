@@ -6,6 +6,7 @@ class CourseParticipate
   format  :xml
 
   APPID = "wxfe4fd89f6f5f9f57"
+  SECRET = "01265a8ba50284999508d680f7387664"
   APIKEY = "1juOmajJrHO3f2NFA0a8dIYy2qAamtnK"
   MCH_ID = "1388434302"
   NOTIFY_URL = "http://babyplan.bjfpa.org.cn/welcome/test_pay"

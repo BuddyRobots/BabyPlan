@@ -60,7 +60,7 @@ class Weixin
   end
 
   def self.get_oauth_open_id(code)
-    url = "/sns/oauth2/access_token?appid=#{APPID}&secret=#{SECRET}&code=#{code}&grant_type=authorization_code"
+    url = "/sns/oauth2/access_token?appid=#{CourseParticipate::APPID}&secret=#{CourseParticipate::SECRET}&code=#{code}&grant_type=authorization_code"
     response = Weixin.get(url)
     response["openid"]
   end
