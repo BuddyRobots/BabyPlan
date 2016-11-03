@@ -14,58 +14,37 @@
     .face
       %img{:src => "/assets/face.png"}
       %p.username 小狐狸
-    /绝对定位写法
-    .collect
-      %img.personcloud{:src => "/assets/personcloud.png"}
-      %img.heart{:src => "/assets/heart.png"}
-      %a{:href => collect_user_mobile_settings_path}
-        %p.content 我的收藏
-      %a{:href => "#"}
-        %img.rightarrow{:src => "/assets/rightarrow.png"}
-    .course
-      %img.personcloud{:src => "/assets/personcloud.png"}
-      %img.c-box{:src => "/assets/c-box.png"}
-      %a{:href => course_user_mobile_settings_path}
-        %p.content 我的课程
-      %a{:href => "#"}
-        %img.rightarrow{:src => "/assets/rightarrow.png"}
-    .book
-      %img.personcloud{:src => "/assets/personcloud.png"}
-      %img.smile{:src => "/assets/smile.png"}
-      %a{:href => book_user_mobile_settings_path}
-        %p.content 我的绘本
-      %a{:href => "#"}
-        %img.rightarrow{:src => "/assets/rightarrow.png"}
-    .sign
-      %img.personcloud{:src => "/assets/personcloud.png"}
-      %img.pen{:src => "/assets/sign.png"}
-      %a{:href => "#"}
-        %p.content 签到
-      %a{:href => "#"}
-        %img.rightarrow{:src => "/assets/rightarrow.png"}
-    
-    /背景图片加浮动写法
-    / .collect
-    /   %img.heart{:src => "/assets/heart.png"}
-    /   %a{:href => "#"}
-    /     %p.content 我的收藏
-    /   %a{:href => "#"}
-    /     %img.rightarrow{:src => "/assets/rightarrow.png"}
-    / .course
-    /   %img.c-box{:src => "/assets/c-box.png"}
-    /   %a{:href => "#"}
-    /     %p.content 我的课程
-    /   %a{:href => "#"}
-    /     %img.rightarrow{:src => "/assets/rightarrow.png"}
-    / .book
-    /   %img.smile{:src => "/assets/smile.png"}
-    /   %a{:href => "#"}
-    /     %p.content 我的绘本
-    /   %a{:href => "#"}
-    /     %img.rightarrow{:src => "/assets/rightarrow.png"}
-    / .sign
-    /   %img.pen{:src => "/assets/sign.png"}
-    /   %a{:href => "#"}
-    /     %p.content 签到
-    /   %a{:href => "#"}
-    /     %img.rightarrow{:src => "/assets/rightarrow.png"}
+
+    .collect-div
+      %a.collect{:href => collect_user_mobile_settings_path}
+        .icon-div
+          %img.icon{:src => "/assets/heart.png"}
+        .span-div
+          %span.content 我的收藏
+        .icon-div
+          %img.icon{:src => "/assets/rightarrow.png"}
+    .collect-div
+      %a.collect{:href => course_user_mobile_settings_path}
+        .icon-div
+          %img.icon{:src => "/assets/c-box.png"}
+        .span-div
+          %span.content 我的课程
+        .icon-div
+          %img.icon{:src => "/assets/rightarrow.png"}
+    .collect-div
+      %a.collect{:href => book_user_mobile_settings_path}
+        .icon-div
+          %img.icon{:src => "/assets/smile.png"}
+        .span-div
+          %span.content 我的绘本
+        .icon-div
+          %img.icon{:src => "/assets/rightarrow.png"}
+    .collect-div
+      %a.collect{:href => "#"}
+        .icon-div
+          %img.icon{:src => "/assets/sign.png"}
+        .span-div
+          %span.content 签&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp到
+        .icon-div
+          %img.icon{:src => "/assets/rightarrow.png"}
+   

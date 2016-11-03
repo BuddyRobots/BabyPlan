@@ -1,5 +1,7 @@
 
 $ ->
+
+  # QQ map set
   marker = null
   map = null
   geocoder = null
@@ -34,6 +36,7 @@ $ ->
     marker.setTitle("test")
     marker.setVisible(true)
   init()
+
 
   # click set marker
     # if window.lat != null
