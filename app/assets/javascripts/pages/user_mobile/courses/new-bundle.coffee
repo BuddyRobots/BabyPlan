@@ -17,7 +17,7 @@ $ ->
       if res.err_msg == 'get_brand_wcpay_request：ok'
         alert("SUCCESS")
       else
-        alert("FAIL")
+        alert(res.err_msg)
       return
     return
 
