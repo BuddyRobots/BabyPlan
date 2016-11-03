@@ -11,4 +11,8 @@ class Util
     with_key = data_str + "&key=" + key
     Digest::SHA1.hexdigest(with_key).upcase
   end
+
+  def self.hash_to_xml(h)
+    "<xml>" + h.to_a.map { |e| "<#{e[0]}>#{e[1]}</#{e[0]}>" } .join + "</xml>"
+  end
 end

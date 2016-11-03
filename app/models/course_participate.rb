@@ -38,7 +38,7 @@ class CourseParticipate
       "nonce_str" => nonce_str,
       "body" => self.course_inst.course.name,
       "out_trade_no" => self.order_id,
-      "total_fee" => self.course_inst.price_pay * 100,
+      "total_fee" => (self.course_inst.price_pay * 100).to_s,
       "spbill_create_ip" => remote_ip,
       "notify_url" => NOTIFY_URL,
       "trade_type" => "JSAPI",
@@ -46,8 +46,8 @@ class CourseParticipate
     signature = Util.sign(data, APIKEY)
     data["sign"] = signature
 
-    response = Weixin.post("/pay/unifiedorder",
-      :body => data.to_xml)
+    response = CourseParticipate.post("/pay/unifiedorder",
+      :body => Util.hash_to_xml(data))
     logger.info "AAAAAAAAAAAAAAAA"
     logger.info response.body
     logger.info "AAAAAAAAAAAAAAAA"
