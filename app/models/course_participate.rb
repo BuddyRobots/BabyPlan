@@ -28,7 +28,7 @@ class CourseParticipate
     cp.course_inst = course_inst
     cp.client = client
     cp.save
-    cp.unifiedorder_interface(remote_ip, openid)
+    return cp.unifiedorder_interface(remote_ip, openid)
   end
 
   def unifiedorder_interface(remote_ip, openid)
@@ -53,6 +53,20 @@ class CourseParticipate
     logger.info "AAAAAAAAAAAAAAAA"
     logger.info response.body
     logger.info "AAAAAAAAAAAAAAAA"
-    return response.body
+
+    # todo: handle error messages
+
+    doc = Nokogiri::XML(response.body)
+    prepay_id = doc.search('prepay_id').children[0].text
+    retval = {
+      "appId" => APPID,
+      "timeStamp" => Time.now.to_i.to_s,
+      "nonceStr" => Util.random_str(32),
+      "package" => "prepay_id=" + prepay_id,
+      "signType" => "MD5"
+    }
+    signature = Util.sign(retval, APIKEY)
+    retval["sign"] = signature
+    return retval
   end
 end
