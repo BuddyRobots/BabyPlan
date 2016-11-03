@@ -18,7 +18,12 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
 
   # wechat_pay
   def new
-    @course = CourseInst.where(id: params[:course_id]).first
+    @course = CourseInst.where(id: params[:state]).first
+    @open_id = Weixin.get_oauth_open_id(params[:code])
+    logger.info "!!!!!!!!!!!!!!!!!"
+    logger.info @open_id
+    logger.info "!!!!!!!!!!!!!!!!!"
+    @pay_info = CourseParticipate.create_new(@current_user, @course, @remote_ip, @open_id)
   end
 
   # evaluate

@@ -59,7 +59,8 @@
       #map-container
       / %img.map-jpg{:src => "/assets/web/map.jpg"}
     - if @course_participate.nil?
-      %a.btn.click-btn{href: new_user_mobile_course_path + "?course_id=" + @course.id.to_s, :type => "button"} 我要报名
+      / %a.btn.click-btn{href: new_user_mobile_course_path + "?course_id=" + @course.id.to_s, :type => "button"} 我要报名
+      %a.btn.click-btn{href: "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxfe4fd89f6f5f9f57&redirect_uri=#{CGI::escape('http://babyplan.bjfpa.org.cn/user_mobile/courses/new')}&response_type=code&scope=snsapi_base&state=#{@course.id.to_s}#wechat_redirect", :type => "button"} 我要报名
     - elsif @course_participate.paid == false
       %a.btn.click-btn{href: new_user_mobile_course_path + "?course_id=" + @course.id.to_s, :type => "button"} 去付款
     - elsif @course_participate.status = CourseInst::NOT_BEGIN
@@ -69,4 +70,4 @@
 
      
 
-    
+     

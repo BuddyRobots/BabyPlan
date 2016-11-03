@@ -16,6 +16,7 @@ class Book
   field :recommendation, type: String
   field :stock, type: Integer
   field :available, type: Boolean
+  field :book_codes, type: Array, default: { }
 
   #ralationships specific for material
   has_one :cover, class_name: "Material", inverse_of: :cover_book

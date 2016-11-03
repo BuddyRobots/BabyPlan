@@ -135,6 +135,7 @@ Rails.application.routes.draw do
     resources :books do
       collection do
         get :borrow
+        post :do_borrow
         get :borrow_result
         get :back
       end

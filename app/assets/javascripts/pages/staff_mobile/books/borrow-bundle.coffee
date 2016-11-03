@@ -2,18 +2,30 @@ $ ->
   weixin_jsapi_authorize(["scanQRCode"])
 
   $(".next-btn").click ->
+    # 1. check mobile
+    mobile = $("#mobile").val()
+    password = $("#password").val()
+    mobile_retval = $.regex.isMobile(mobile)
+    if mobile_retval == false
+      $.mobile_page_notification("错误的手机号", 3000)
+      return
     wx.scanQRCode
       needResult: 1
       scanType: ["qrCode"]
       success: (res) ->
         result = res.resultStr
-        alert(result)
-        # $.postJSON(
-        #   '/coach/users/bind',
-        #   {
-        #     coach_id: result
-        #   },
-        #   (data) ->
-        #     console.log data
-        #     # if data.success
-        # )
+        $.postJSON(
+          '/staff_mobile/books/do_borrow',
+          {
+            mobile: mobile
+            book_id: result
+          },
+          (data) ->
+            console.log data
+            if data.success
+            else
+              if data.code == USER_NOT_EXIST
+                $.mobile_page_notification("用户不存在", 3000)
+              if data.code == BOOK_NOT_EXIST
+                $.mobile_page_notification("绘本不存在", 3000)
+        )
