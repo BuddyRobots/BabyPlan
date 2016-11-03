@@ -3,7 +3,7 @@
   = stylesheet_link_tag "pages/user_mobile/courses/new-bundle", :media => "all"
 
 - content_for :app_content do
-  .hide
+  %div
     %span#appId= @pay_info["appId"]
     %span#timeStamp= @pay_info["timeStamp"]
     %span#nonceStr= @pay_info["nonceStr"]

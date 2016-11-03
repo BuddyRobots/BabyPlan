@@ -22,5 +22,4 @@ $ ->
     return
 
   $("#wechat-pay").click ->
-    alert("ppp")
     pay()
