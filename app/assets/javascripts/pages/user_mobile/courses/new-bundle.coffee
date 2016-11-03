@@ -1,10 +1,10 @@
 $ ->
-  alert($("#appId").text())
-  alrt($("#timeStamp").text())
-  alrt($("#nonceStr").text())
-  alrt($("#package").text())
-  alrt($("#signType").text())
-  alrt($("#paySign").text())
+  # alert($("#appId").text())
+  # alrt($("#timeStamp").text())
+  # alrt($("#nonceStr").text())
+  # alrt($("#package").text())
+  # alrt($("#signType").text())
+  # alrt($("#paySign").text())
   pay = ->
     WeixinJSBridge.invoke 'getBrandWCPayRequest', {
       'appId': $("#appId").text(),
@@ -22,4 +22,5 @@ $ ->
     return
 
   $("#wechat-pay").click ->
+    alert("ppp")
     pay()
