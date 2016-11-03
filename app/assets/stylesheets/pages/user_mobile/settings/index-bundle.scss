@@ -77,84 +77,32 @@ a{
 		letter-spacing: 0.3em;
 	}
 }
-
-
+.collect-div {
+	width: 84.0625%;
+	margin: 0 auto;
+	background: url("/assets/personcloud.png") no-repeat;
+	background-size: 100%;
+}
 .collect {
-	position:relative;
-	width:100%;
-	.personcloud {
-		display:block;
-		width:84.0625%;
-		max-width:538px;
-		margin:0 auto;
-	}
-	.heart {
-		position:absolute;
-		top:29.3%;
-		left:12.35%;
-		width:9.375%;
-		max-width:60px;
-	}
-	.content {
-		position:absolute;
-		top:35%;
-		left:25.8%;
-		font-size:3.6em;
-		color:#3e3e3e;
-	}
-	a {
-		.rightarrow {
-			position:absolute;
-			width:9.375%;
-			max-width:60px;
-			top:23.6%;
-			right:11.72%;
-		}
-	}
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	padding: 7.5% 0;
 }
-
-
-// .collect {
-// 	position:relative;
-// 	width:100%;
-// 	background:url('/assets/personcloud.png') no-repeat;
-// 	background-size:84.5%;
-// 	background-position:center;
-// 	overflow:hidden;
-// 	margin-bottom:1em;
-// 	.heart {
-// 		float:left;
-// 		padding-top:4.1em;
-// 		padding-left:7.9em;
-// 		width:9.375%;
-// 		max-width:60px;
-// 	}
-// 	.content {
-// 		float:left;
-// 		line-height:3.88889em;
-// 		padding-left:0.5556em;
-// 		font-size:3.6em;
-// 		color:#3e3e3e; 
-// 	}
-// 	a {
-// 		.rightarrow {
-// 			float:right;
-// 			width:9.375%;
-// 			max-width:60px;
-// 			padding-top:3.3em;
-// 			padding-right:7.5em;
-// 		}
-// 	}
-// }
-
-.course,.book,.sign {
-	@extend .collect;
+.icon-div {
+	width: 11.15%;
 }
-.c-box,.smile,.pen {
-	@extend .heart;
+.collect:hover {
+	text-decoration: none;
 }
-
-
+.icon {
+	width: 100%;
+	max-width:60px;
+}
+.content {
+	font-size: 3.6em;
+	color: #666;
+}
 
 
 @media screen and (max-width:640px) {

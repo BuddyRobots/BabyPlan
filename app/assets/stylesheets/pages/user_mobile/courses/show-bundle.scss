@@ -72,17 +72,19 @@ a{
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
+	padding-top: 1%;
 }
 .a-div {
 	width: 7.5%;
-	max-width: 48px;
+	max-width: 40px;
+	margin-right: 2%;
 }
-.grayheart {
+.smallheart {
 	width: 100%;
-	max-width:48px;
+	max-width:40px;
 }
 .dialog {
-	@extend .grayheart;
+	@extend .smallheart;
 }
 .num {
 	font-size: 1.8em;
@@ -226,6 +228,18 @@ a{
 	background: #d70c19;
 	width: 100%;
 	border-radius: 0;
+}
+.click-btn:link {
+	color: #fff;
+}
+.click-btn:visited {
+	color: #fff;
+}
+.click-btn:hover {
+	color: #fff;
+}
+.click-btn:active {
+	color: #fff;
 }
 .unclick-btn {
 	font-size: 3.6em;

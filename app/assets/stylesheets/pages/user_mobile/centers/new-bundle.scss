@@ -75,6 +75,9 @@ a{
 	color: #aaa;
 	text-align: center;
 	padding: 10.65% 0;
+	a:hover {
+		text-decoration: none;
+	}
 }
 .add {
 	width: 6%;
@@ -83,6 +86,7 @@ a{
 .add-word {
 	margin-left: 2%;
 	vertical-align: middle;
+	color: #aaa
 }
 .center {
 	font-size: 2.4em;

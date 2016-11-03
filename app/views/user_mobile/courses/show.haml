@@ -11,10 +11,10 @@
       %a{:href => @back == "courses" ? "/user_mobile/courses" : "/user_mobile/feeds"}
         %img.back.last_page{:src => "/assets/robotclass/back.png"}
     .right-float
-      %a.a-div{:href => "#"}
-        %img.grayheart{:src => "/assets/robotclass/grayheart.png"}
-      %a.a-div{:href => "#"}
-        %img.dialog{:src => "/assets/robotclass/dialog.png"}
+      %a.a-div#concern{:href => "#"}
+        %img.smallheart{:src => "/assets/cancel-concern.png"}
+      %a.a-div{:href => review_user_mobile_courses_path}
+        %img.dialog{:src => "/assets/pinglun.png"}
       %p.num= @course.feedbacks.length
     .boxtitle
       .bookcloud
