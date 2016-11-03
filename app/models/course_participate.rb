@@ -22,15 +22,15 @@ class CourseParticipate
   belongs_to :client, class_name: "User", inverse_of: :course_participates
 
 
-  def self.create_new(client, course_inst, remote_ip, open_id)
+  def self.create_new(client, course_inst, remote_ip, openid)
     cp = self.create({order_id: Util.random_str(32)})
     cp.course_inst = course_inst
     cp.client = client
     cp.save
-    cp.unifiedorder_interface(remote_ip, open_id)
+    cp.unifiedorder_interface(remote_ip, openid)
   end
 
-  def unifiedorder_interface(remote_ip, open_id)
+  def unifiedorder_interface(remote_ip, openid)
     nonce_str = Util.random_str(32)
     data = {
       "appid" => APPID,
@@ -42,7 +42,7 @@ class CourseParticipate
       "spbill_create_ip" => remote_ip,
       "notify_url" => NOTIFY_URL,
       "trade_type" => "JSAPI",
-      "open_id" => open_id
+      "openid" => openid
     }
     signature = Util.sign(data, APIKEY)
     data["sign"] = signature
