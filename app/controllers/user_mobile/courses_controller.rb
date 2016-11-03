@@ -19,7 +19,7 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
   # wechat_pay
   def new
     @course = CourseInst.where(id: params[:course_id]).first
-    @pay_info = CourseParticipate.create_new(@current_user, @course)
+    @pay_info = CourseParticipate.create_new(@current_user, @course, @remote_ip)
   end
 
   # evaluate

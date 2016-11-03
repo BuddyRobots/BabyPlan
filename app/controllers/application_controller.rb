@@ -14,6 +14,7 @@ class ApplicationController < ActionController::Base
   end
 
   def init
+    @remote_ip = request.remote_ip
     @code = params[:code]
     refresh_session(params[:auth_key] || cookies[:auth_key])
   end
