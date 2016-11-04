@@ -8,8 +8,7 @@
     = render "user_mobile/partials/no_centers"
     - if @courses.present?
       - @courses.each do |e|
-        / .content{data: {id: e.id.to_s}}
-        .content{"data-id" => e.id.to_s}
+        .content{data: {id: e.id.to_s}}
           .left-div
             %img.visit{:src => e.photo.nil? ? "/assets/banner.png" : e.photo.path}
           .right-div
