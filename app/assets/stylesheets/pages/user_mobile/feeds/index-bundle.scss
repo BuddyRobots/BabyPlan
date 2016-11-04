@@ -47,6 +47,7 @@ a{
 .input-div {
 	width: 64.0625%;
 	display: flex;
+	display: -webkit-flex;
 	background: #fff;
 	margin-left: 21.5%;
 	justify-content: space-between;
@@ -122,6 +123,7 @@ a{
 	overflow:hidden;
 	margin-bottom:3.91%;
 	display: flex;
+	display: -webkit-flex;
 	justify-content: space-between;
 	padding: 3% 2.5%;
 	.message {

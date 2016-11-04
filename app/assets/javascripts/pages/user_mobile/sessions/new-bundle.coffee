@@ -37,3 +37,8 @@ $ ->
   $(".signin").click ->
     signin()
     return false
+
+  $("#password").keydown (event) ->
+    code = event.which
+    if code == 13
+      signin()
