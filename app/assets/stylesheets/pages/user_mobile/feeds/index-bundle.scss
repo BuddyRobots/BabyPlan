@@ -54,6 +54,7 @@ a{
 	border: 1px solid #ddd;
 	border-radius: 8px;
 	padding-right: 1%;
+	-webkit-justify-content: space-between;
 }
 #input-box {
 	display: inline-block;
@@ -125,6 +126,7 @@ a{
 	display: flex;
 	display: -webkit-flex;
 	justify-content: space-between;
+	-webkit-justify-content: space-between;
 	padding: 3% 2.5%;
 	.message {
 		font-size:2.4em;

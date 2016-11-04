@@ -483,8 +483,9 @@ h2 {
 	margin: 20px 20px 0 20px;
 	border-radius: 6px;
 	border: 1px solid #ddd;
-	display: -webkit-flex;
 	display: flex;
+	display: -ms-flexbox;
+  	display: -webkit-flex;
 }
 .sign-method {
 	-webkit-flex: 1;
@@ -510,6 +511,7 @@ h2 {
 	right: 0;
 	background: rgb(221, 221, 221);
 	background: rgba(221, 221, 221,0.8);
+	display: -ms-flexbox;
 	display: -webkit-flex;
 	display:         flex;
 	-webkit-align-items: center;
@@ -553,8 +555,10 @@ h2 {
 	color: white;
 }
 .sign-status-box {
+	-ms-flex: 2
 	-webkit-flex: 2;
 	        flex: 2;
+	display: -ms-flexbox;
 	display: -webkit-flex;
 	display:         flex;
 	-webkit-align-items: center;
@@ -606,6 +610,8 @@ h2 {
 .income-div {
 	padding: 20px 0;
 	display: flex;
+	display: -ms-flexbox;
+  	display: -webkit-flex;
 }
 .income-items {
 	flex: 1;
@@ -630,6 +636,12 @@ h2 {
 	margin: 40px 0 0 40px;
 	display: flex;
 	justify-content: space-between;
+	display: -ms-flexbox;
+  	display: -webkit-flex;
+	-webkit-justify-content: space-between;;
+	-moz-justify-content: space-between;;
+	-ms-justify-content: space-between;;
+	-o-justify-content: space-between;;
 }
 .gender-pie, .age-pie {
 	width: 420px;
@@ -664,6 +676,16 @@ h2 {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	display: -ms-flexbox;
+  	display: -webkit-flex;
+	-webkit-align-items: center;
+	-moz-align-items: center;
+	-ms-align-items: center;
+	-o-align-items: center;
+	-webkit-justify-content: center;
+	-moz-justify-content: center;
+	-ms-justify-content: center;
+	-o-justify-content: center;
 }
 #gender-statistics {
 	width: 300px;

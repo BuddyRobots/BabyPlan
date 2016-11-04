@@ -41,6 +41,8 @@ a{
 	border-radius: 10px;
 	display: flex;
 	justify-content: space-between;
+	display: -webkit-flex;
+	-webkit-justify-content: space-between;
 	overflow: hidden;
 	margin-bottom: 5.55%;
 	background: #fff;

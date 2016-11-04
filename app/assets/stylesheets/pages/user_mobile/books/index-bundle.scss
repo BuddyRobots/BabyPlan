@@ -53,6 +53,8 @@ a{
 	border: 1px solid #ddd;
 	border-radius: 8px;
 	padding-right: 1%;
+	display: -webkit-flex;
+	-webkit-justify-content: space-between;
 }
 #input-box {
 	display: inline-block;
@@ -146,6 +148,8 @@ a{
 	margin-bottom:3.91%;
 	display: flex;
 	justify-content: space-between;
+	display: -webkit-flex;
+	-webkit-justify-content: space-between;
 	padding: 2.85% 2.5%;
 	.message {
 		font-size:2.4em;

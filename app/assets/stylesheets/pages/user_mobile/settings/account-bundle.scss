@@ -74,6 +74,9 @@ a{
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	display: -webkit-flex;
+	-webkit-align-items: center;
+	-webkit-justify-content: space-between;
 	p {
 		width: 70%;
 	}
@@ -100,6 +103,9 @@ a{
 	justify-content: space-between;
 	align-items: center;
 	border-bottom: 1px solid #eee;
+	display: -webkit-flex;
+	-webkit-align-items: center;
+	-webkit-justify-content: space-between;
 	p {
 		width: 70%;
 	}

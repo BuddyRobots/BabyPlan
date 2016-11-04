@@ -73,6 +73,9 @@ a{
 	justify-content: flex-end;
 	align-items: center;
 	padding-top: 1%;
+	display: -webkit-flex;
+	-webkit-justify-content: flex-end;
+	-webkit-align-items: center;
 }
 .a-div {
 	width: 7.5%;
@@ -162,6 +165,8 @@ a{
 		justify-content: space-between;
 		font-size: 2.4em;
 		color: #3e3e3e;
+		display: -webkit-flex;
+		-webkit-justify-content: space-between;
 	}
 	.left-div, .right-div {
 		width: 50%;
@@ -203,6 +208,8 @@ a{
 	padding: 3.28% 2.45% 3.28% 2.45%;
 	display: flex;
 	flex-wrap: wrap;
+	display: -webkit-flex;
+	-webkit-flex-wrap: wrap;
 }
 .sign_in-box {
 	width: 12.2%;
