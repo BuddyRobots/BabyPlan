@@ -24,7 +24,11 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
   end
 
   def notify
-    
+    # get out_trade_no, which is the order_id in CourseParticipate
+    ci = CourseParticipate.where(order_id: out_trade_no).first
+    # get result_code, err_code and err_code_des
+    ci.update_order(result_code, err_code, err_code_des)
+    render :xml => {return_code: "SUCCESS"} and return
   end
 
   # evaluate

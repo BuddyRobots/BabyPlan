@@ -9,7 +9,7 @@ class CourseParticipate
   SECRET = "01265a8ba50284999508d680f7387664"
   APIKEY = "1juOmajJrHO3f2NFA0a8dIYy2qAamtnK"
   MCH_ID = "1388434302"
-  NOTIFY_URL = "http://babyplan.bjfpa.org.cn/welcome/test_pay"
+  NOTIFY_URL = "http://babyplan.bjfpa.org.cn/user_mobile/courses/notify"
 
   include Mongoid::Document
   include Mongoid::Timestamps
@@ -18,8 +18,14 @@ class CourseParticipate
   field :sign_in_time, type: String
   field :paid, type: Boolean, default: false
   field :order_id, type: String
-  field :wechat_transaction_id, type: String
   field :price
+
+  field :wechat_transaction_id, type: String
+  field :result_code, type: String
+  field :err_code, type: String
+  field :err_code_des, type: String
+  field :trade_state, type: String
+  field :trade_state_desc, type: String
 
   belongs_to :course_inst
   belongs_to :client, class_name: "User", inverse_of: :course_participates
@@ -59,15 +65,24 @@ class CourseParticipate
     if success != "SUCCESS"
       return nil
     else
-      result = doc.search('result_code').children[0].text
-      if result != "SUCCESS"
+      result_code = doc.search('result_code').children[0].text
+      self.update_attributes({result_code: result_code})
+      if result_code != "SUCCESS"
         err_code = doc.search('err_code').children[0].text
         err_code_des = doc.search('err_code_des').children[0].text
+        self.update_attributes({
+          err_code: err_code,
+          err_code_des: err_code_des
+        })
         retval = { success: false, err_code: err_code, err_code_des: err_code_des }
         return retval
       else
         trade_state = doc.search('trade_state').children[0].text
         trade_state_desc = doc.search('trade_state').children[0].text
+        self.update_attributes({
+          trade_state: trade_state,
+          trade_state_desc: trade_state_desc
+        })
         retval = { success: true, trade_state: trade_state, trade_state_desc: trade_state_desc }
         return retval
       end
@@ -108,5 +123,13 @@ class CourseParticipate
     signature = Util.sign(retval, APIKEY)
     retval["sign"] = signature
     return retval
+  end
+
+  def update_order_status(result_code, err_code, err_code_des)
+    self.update_attributes({
+      result_code: result_code,
+      err_code: err_code,
+      err_code_des: err_code_des
+    })
   end
 end
