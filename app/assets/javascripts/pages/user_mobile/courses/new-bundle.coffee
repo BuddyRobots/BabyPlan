@@ -9,9 +9,10 @@ $ ->
       'paySign': $("#paySign").text()
     }, (res) ->
       if res.err_msg == 'get_brand_wcpay_request：ok'
-        alert("SUCCESS")
+        # redirect to the success page
+        # alert("SUCCESS")
       else
-        alert(res.err_msg)
+        # alert(res.err_msg)
       return
     return
 

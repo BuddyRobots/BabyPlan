@@ -165,6 +165,7 @@ Rails.application.routes.draw do
     resources :courses do
       collection do
         get :review
+        post :notify
       end
     end
     resources :feeds do
