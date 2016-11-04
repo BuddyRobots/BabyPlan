@@ -56,6 +56,8 @@ a{
 	border: 1px solid #ddd;
 	border-radius: 8px;
 	padding-right: 1%;
+	display: -webkit-flex;
+	-webkit-justify-content: space-between;
 }
 #input-box {
 	display: inline-block;

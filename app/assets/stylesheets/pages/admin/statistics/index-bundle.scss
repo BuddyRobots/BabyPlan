@@ -44,6 +44,14 @@ $green: #10c078;
 	margin: 40px 0 0 40px;
 	display: flex;
 	justify-content: space-between;
+	-webkit-display: flex;
+	-moz-display: flex;
+	-ms-display: flex;
+	-o-display: flex;
+	-webkit-justify-content: space-between;
+	-moz-justify-content: space-between;
+	-ms-justify-content: space-between;
+	-o-justify-content: space-between;
 }
 .gender-pie, .age-pie {
 	width: 48%;
@@ -73,6 +81,18 @@ $green: #10c078;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	-webkit-display: flex;
+	-moz-display: flex;
+	-ms-display: flex;
+	-o-display: flex;
+	-webkit-align-items: center;
+	-moz-align-items: center;
+	-ms-align-items: center;
+	-o-align-items: center;
+	-webkit-justify-content: center;
+	-moz-justify-content: center;
+	-ms-justify-content: center;
+	-o-justify-content: center;
 }
 #gender-statistics {
 	min-width: 71.35%;
@@ -131,11 +151,31 @@ $green: #10c078;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
+	-webkit-display: flex;
+	-moz-display: flex;
+	-ms-display: flex;
+	-o-display: flex;
+	-webkit-flex-direction: column;
+	-moz-flex-direction: column;
+	-ms-flex-direction: column;
+	-o-flex-direction: column;
+	-webkit-justify-content: space-between;
+	-moz-justify-content: space-between;
+	-ms-justify-content: space-between;
+	-o-justify-content: space-between;
 }
 .borrow, .collection {
 	display: flex;
 	justify-content: space-between;
 	margin-bottom: 20px;
+	-webkit-display: flex;
+	-moz-display: flex;
+	-ms-display: flex;
+	-o-display: flex;
+	-webkit-justify-content: space-between;
+	-moz-justify-content: space-between;
+	-ms-justify-content: space-between;
+	-o-justify-content: space-between;
 }
 .left-div {
 	width: 68%;
@@ -144,12 +184,32 @@ $green: #10c078;
 .tab-chart-div {
 	display: flex;
 	justify-content: space-between;
+	-webkit-display: flex;
+	-moz-display: flex;
+	-ms-display: flex;
+	-o-display: flex;
+	-webkit-justify-content: space-between;
+	-moz-justify-content: space-between;
+	-ms-justify-content: space-between;
+	-o-justify-content: space-between;
 }
 .total-div {
 	width: 30%;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+	-webkit-display: flex;
+	-moz-display: flex;
+	-ms-display: flex;
+	-o-display: flex;
+	-webkit-flex-direction: column;
+	-moz-flex-direction: column;
+	-ms-flex-direction: column;
+	-o-flex-direction: column;
+	-webkit-justify-content: center;
+	-moz-justify-content: center;
+	-ms-justify-content: center;
+	-o-justify-content: center;
 	text-align: center;
 }
 .total-nums {
@@ -216,8 +276,20 @@ $green: #10c078;
 .income-div {
 	width: 20%;
 	display: flex;
-	flex-direction: column;
+	-webkit-display: flex;
+	-moz-display: flex;
+	-ms-display: flex;
+	-o-display: flex;
+	-webkit-flex-direction: column;
+	-moz-flex-direction: column;
+	-ms-flex-direction: column;
+	-o-flex-direction: column;
+	-webkit-justify-content: center;
+	-moz-justify-content: center;
+	-ms-justify-content: center;
+	-o-justify-content: center;
 	justify-content: center;
+	flex-direction: column;
 	text-align: center;
 }
 #center-statistics {

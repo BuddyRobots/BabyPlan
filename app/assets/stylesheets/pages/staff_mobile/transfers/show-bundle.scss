@@ -51,6 +51,8 @@ a{
 	border-bottom: 1px dashed #aaa;
 	display: flex;
 	justify-content: space-between;
+	display: -webkit-flex;
+	-webkit-justify-content: space-between;
 }
 .blue-line {
 	background: #227dda;
@@ -89,6 +91,8 @@ a{
 	width: 100%;
 	display: flex;
 	justify-content: space-around;
+	display: -webkit-flex;
+	-webkit-justify-content: space-around;
 }
 .btn {
 	padding: 3.985% 0;

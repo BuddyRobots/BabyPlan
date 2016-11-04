@@ -78,6 +78,8 @@ a{
 	border-radius: 10px;
 	display: flex;
 	justify-content: space-between;
+	display: -webkit-flex;
+	-webkit-justify-content: space-between;
 	overflow: hidden;
 	background: #fff;
 	margin-bottom: 3.58%;

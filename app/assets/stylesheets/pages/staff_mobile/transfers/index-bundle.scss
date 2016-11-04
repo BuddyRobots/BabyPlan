@@ -100,6 +100,9 @@ a{
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
+	display: -webkit-flex;
+	-webkit-flex-direction: column;
+	-webkit-justify-content: space-around;
 	text-align: center;
 }
 .icon {
@@ -166,6 +169,8 @@ a{
 	width: 100%;
 	display: flex;
 	justify-content: space-between;
+	display: -webkit-flex;
+	-webkit-justify-content: space-between;
 	border-top: 1px solid #aaa;
 	a {
 		display: inline-block;

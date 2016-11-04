@@ -84,6 +84,8 @@ a{
 	display: flex;
 	justify-content: space-between;
 	padding: 3% 2.5%;
+	display: -webkit-flex;
+	-webkit-justify-content: space-between;
 	.visit {
 		float:left;
 		width:100%;

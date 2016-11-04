@@ -73,6 +73,9 @@ a{
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	display: -webkit-flex;
+	-webkit-align-items: center;
+	-webkit-justify-content: space-between;
 }
 .icon-div {
 	width: 33%;
@@ -96,6 +99,8 @@ a{
 	font-size: 2.4em;
 	color: #666;
 	padding: 1% 0;
+	display: -webkit-flex;
+	-webkit-justify-content: space-between;
 }
 .left {
 	width: 23%;
