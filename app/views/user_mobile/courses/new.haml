@@ -3,6 +3,13 @@
   = stylesheet_link_tag "pages/user_mobile/courses/new-bundle", :media => "all"
 
 - content_for :app_content do
+  %div
+    %span#appId= @pay_info["appId"]
+    %span#timeStamp= @pay_info["timeStamp"]
+    %span#nonceStr= @pay_info["nonceStr"]
+    %span#package= @pay_info["package"]
+    %span#signType= @pay_info["signType"]
+    %span#paySign= @pay_info["sign"]
   .content-area
     .header
       .cloud
