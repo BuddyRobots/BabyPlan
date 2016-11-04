@@ -72,3 +72,8 @@ $ ->
   $(".signup").click ->
     signup()
     return false
+
+  $("#password_confirm").keydown (event) ->
+    code = event.which
+    if code == 13
+      signup()
