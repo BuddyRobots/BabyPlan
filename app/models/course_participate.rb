@@ -18,6 +18,8 @@ class CourseParticipate
   field :sign_in_time, type: String
   field :paid, type: Boolean, default: false
   field :order_id, type: String
+  field :wechat_transaction_id, type: String
+  field :price
 
   belongs_to :course_inst
   belongs_to :client, class_name: "User", inverse_of: :course_participates
@@ -29,6 +31,47 @@ class CourseParticipate
     cp.client = client
     cp.save
     return cp.unifiedorder_interface(remote_ip, openid)
+  end
+
+  def orderquery()
+    if self.wechat_transaction_id.blank?
+      return nil
+    end
+    nonce_str = Util.random_str(32)
+    data = {
+      "appid" => APPID,
+      "mch_id" => MCH_ID,
+      "transaction_id" => self.wechat_transaction_id,
+      "nonce_str" => nonce_str,
+      "sign_type" => "MD5"
+    }
+    signature = Util.sign(data, APIKEY)
+    data["sign"] = signature
+    response = CourseParticipate.post("/pay/orderquery",
+      :body => Util.hash_to_xml(data))
+
+    logger.info "AAAAAAAAAAAAAA"
+    logger.info response.body
+    logger.info "AAAAAAAAAAAAAA"
+
+    doc = Nokogiri::XML(response.body)
+    success = doc.search('return_code').children[0].text
+    if success != "SUCCESS"
+      return nil
+    else
+      result = doc.search('result_code').children[0].text
+      if result != "SUCCESS"
+        err_code = doc.search('err_code').children[0].text
+        err_code_des = doc.search('err_code_des').children[0].text
+        retval = { success: false, err_code: err_code, err_code_des: err_code_des }
+        return retval
+      else
+        trade_state = doc.search('trade_state').children[0].text
+        trade_state_desc = doc.search('trade_state').children[0].text
+        retval = { success: true, trade_state: trade_state, trade_state_desc: trade_state_desc }
+        return retval
+      end
+    end
   end
 
   def unifiedorder_interface(remote_ip, openid)
@@ -50,9 +93,6 @@ class CourseParticipate
 
     response = CourseParticipate.post("/pay/unifiedorder",
       :body => Util.hash_to_xml(data))
-    logger.info "AAAAAAAAAAAAAAAA"
-    logger.info response.body
-    logger.info "AAAAAAAAAAAAAAAA"
 
     # todo: handle error messages
 
