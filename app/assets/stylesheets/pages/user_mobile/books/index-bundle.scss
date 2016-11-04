@@ -186,14 +186,14 @@ a{
 }
 .center {
 	display: inline-block;
-	font-size: 2em;
+	font-size: 2.4em;
 	color: #aaa;
 	margin-left: 1.35%;
-	vertical-align: middle;
 }
 .location {
 	width: 4.8%;
 	max-width: 18px;
+	vertical-align: top;
 }
 .dl-div {
 	@include bigbox;
