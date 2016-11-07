@@ -104,8 +104,8 @@ class CourseInst
       return UNKNOWN
     end
     sort_date = self.date_in_calendar.sort.map { |e| e.split('T')[0] }
-    start_day = Time.mktime(*sort_date[0])
-    end_day = Time.mktime(*sort_date[-1])
+    start_day = Time.mktime(*sort_date[0].split('-'))
+    end_day = Time.mktime(*sort_date[-1].split('-'))
     if Time.now < start_day
       return NOT_BEGIN
     elsif Time.now < end_day + 1.days
