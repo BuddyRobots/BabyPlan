@@ -166,6 +166,8 @@ class CourseParticipate
   def signin(class_num)
     if self.signin_info[class_num].blank?
       self.signin_info[class_num] = Time.now.to_i
+      self.save
+    end
     nil
   end
 
