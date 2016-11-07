@@ -1,4 +1,5 @@
 class UserMobile::CoursesController < UserMobile::ApplicationController
+  skip_before_filter :require_sign_in, only: [:notify]
   # similar to search_new
   def index
     if @current_user.client_centers.present?
@@ -24,6 +25,9 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
   end
 
   def notify
+    Rails.logger.info "AAAAAAAAAAAAAAAA"
+    Rails.logger.info params.inspect
+    Rails.logger.info "AAAAAAAAAAAAAAAA"
     # get out_trade_no, which is the order_id in CourseParticipate
     ci = CourseParticipate.where(order_id: out_trade_no).first
     # get result_code, err_code and err_code_des
