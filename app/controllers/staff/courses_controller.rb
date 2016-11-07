@@ -114,11 +114,11 @@ class Staff::CoursesController < Staff::ApplicationController
     if course_inst.blank?
       render json: retval_wrapper(ErrCode::COURSE_INST_NOT_EXIST) and return
     end
-    client = User.staff.where(mobile: params[:mobile]).first
-    if course_inst.blank?
+    client = User.client.where(mobile: params[:mobile]).first
+    if client.blank?
       render json: retval_wrapper(ErrCode::USER_NOT_EXIST) and return
     end
-    course_participate = client.course_participate.where(course_inst_id: course_inst.id).first
+    course_participate = client.course_participates.where(course_inst_id: course_inst.id).first
     if course_participate.blank?
       render json: retval_wrapper(ErrCode::COURSE_INST_NOT_EXIST) and return
     end
