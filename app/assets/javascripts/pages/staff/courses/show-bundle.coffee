@@ -554,7 +554,6 @@ $ ->
           {
             class_num: class_num
             mobile: mobile
-            is_published: is_published
           }
       },
       (data) ->
