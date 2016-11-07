@@ -40,7 +40,7 @@ class CourseParticipate
     cp.client = client
     cp.save
     expired_at = Time.now + 1.days
-    self.update_attributes({expired_at: expired_at.to_i})
+    cp.update_attributes({expired_at: expired_at.to_i})
     cp
     # return cp.unifiedorder_interface(remote_ip, openid)
   end
