@@ -40,14 +40,14 @@ class CourseParticipate
   end
 
   def orderquery()
-    if self.wechat_transaction_id.blank?
+    if self.order_id.blank?
       return nil
     end
     nonce_str = Util.random_str(32)
     data = {
       "appid" => APPID,
       "mch_id" => MCH_ID,
-      "transaction_id" => self.wechat_transaction_id,
+      "out_trade_no" => self.order_id,
       "nonce_str" => nonce_str,
       "sign_type" => "MD5"
     }
@@ -55,10 +55,6 @@ class CourseParticipate
     data["sign"] = signature
     response = CourseParticipate.post("/pay/orderquery",
       :body => Util.hash_to_xml(data))
-
-    logger.info "AAAAAAAAAAAAAA"
-    logger.info response.body
-    logger.info "AAAAAAAAAAAAAA"
 
     doc = Nokogiri::XML(response.body)
     success = doc.search('return_code').children[0].text
@@ -79,9 +75,11 @@ class CourseParticipate
       else
         trade_state = doc.search('trade_state').children[0].text
         trade_state_desc = doc.search('trade_state').children[0].text
+        wechat_transaction_id = doc.search('transaction_id').children[0].text
         self.update_attributes({
           trade_state: trade_state,
-          trade_state_desc: trade_state_desc
+          trade_state_desc: trade_state_desc,
+          wechat_transaction_id: wechat_transaction_id
         })
         retval = { success: true, trade_state: trade_state, trade_state_desc: trade_state_desc }
         return retval
