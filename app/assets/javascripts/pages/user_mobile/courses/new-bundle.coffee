@@ -1,5 +1,4 @@
 $ ->
-  alert(window.course_participate_id)
   pay = ->
     WeixinJSBridge.invoke 'getBrandWCPayRequest', {
       'appId': $("#appId").text(),
