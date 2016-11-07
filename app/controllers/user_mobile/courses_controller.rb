@@ -43,7 +43,7 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
   def pay_finished
     @course_participate = CourseParticipate.where(id: params[:id]).first
     @course_participate.update_attributes({pay_finished: true})
-    render_json retval_wrapper(nil) and return
+    render json: retval_wrapper(nil) and return
   end
 
   # evaluate
