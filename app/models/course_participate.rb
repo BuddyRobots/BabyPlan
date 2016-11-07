@@ -18,6 +18,7 @@ class CourseParticipate
   field :sign_in_time, type: String
   field :order_id, type: String
   field :price
+  field :signin_info, type: Array, default: []
 
   field :prepay_id, type: String
   # whether pay process is finished. pay attention that this does not indicate that pay is success
@@ -160,6 +161,11 @@ class CourseParticipate
       err_code: err_code,
       err_code_des: err_code_des
     })
+  end
+
+  def signin(class_num)
+    self.signin_info[class_num] = Time.now.to_i
+    self.save
   end
 
   # status related

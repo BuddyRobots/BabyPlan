@@ -49,4 +49,19 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
   # evaluate
   def review
   end
+
+  def signin
+    info_ary = params[:signin_info]
+    logger.info "AAAAAAAAAAAA"
+    logger.info info_ary.inspect
+    logger.info "AAAAAAAAAAAA"
+    course_inst_id, qr_gen_time, class_idx = info_ary.split(';')
+    course_participate = @current_user.course_participates.where(course_inst_id: course_inst_id).first
+    if course_participate.nil?
+      render json: retval_wrapper(ErrCode::COURSE_INST_NOT_EXIST) and return
+    else
+      retval = course_participate.signin(class_idx.to_i)
+      render json: retval_wrapper(retval) and return
+    end
+  end
 end

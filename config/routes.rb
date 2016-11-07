@@ -166,6 +166,7 @@ Rails.application.routes.draw do
       collection do
         get :review
         post :notify
+        post :signin
       end
       member do
         post :pay_finished
