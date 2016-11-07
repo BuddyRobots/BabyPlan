@@ -24,6 +24,7 @@ class CourseInst
   has_many :course_participates
 
   has_many :feedbacks
+  has_many :favorites
 
 
   def self.create_course_inst(staff, center, course_inst_info)
@@ -55,7 +56,7 @@ class CourseInst
   def course_inst_info
     {
       id: self.id.to_s,
-      name: self.course.name,
+      name: self.name,
       available: self.available,
       speaker: self.speaker,
       price: self.price,

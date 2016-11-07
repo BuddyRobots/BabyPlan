@@ -171,6 +171,7 @@ Rails.application.routes.draw do
       end
       member do
         post :pay_finished
+        post :favorite
       end
     end
     resources :feeds do

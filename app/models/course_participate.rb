@@ -29,7 +29,7 @@ class CourseParticipate
   field :err_code_des, type: String
   field :trade_state, type: String
   field :trade_state_desc, type: String
-  field :expired_at, type: Integer
+  field :expired_at, type: Integer, default: -1
 
   belongs_to :course_inst
   belongs_to :client, class_name: "User", inverse_of: :course_participates

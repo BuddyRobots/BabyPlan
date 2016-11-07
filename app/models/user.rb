@@ -205,8 +205,17 @@ class User
     nil
   end
 
-  def has_feedback_on(course_inst)
-    return self.feedbacks.where(course_inst: course_inst).first.present?
+  def has_feedback_on(ele)
+    if (ele.class == CourseInst)
+      return self.feedbacks.where(course_inst: ele).first.present?
+    end
+  end
+
+  def favorite_on(ele)
+    if (ele.class == CourseInst)
+      fav = self.favorites.where(course_inst: ele).first
+      return fav.present? && fav.enabled
+    end
   end
 
   def is_staff

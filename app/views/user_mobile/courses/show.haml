@@ -2,6 +2,8 @@
   = javascript_include_tag "http://map.qq.com/api/js?v=2.exp"
   = javascript_include_tag "pages/user_mobile/courses/show-bundle"
   = stylesheet_link_tag "pages/user_mobile/courses/show-bundle", :media => "all"
+  :javascript
+    window.course_inst_id = "#{@course.id.to_s}"
 
 
 - content_for :app_content do
@@ -11,14 +13,17 @@
       %a{:href => @back == "courses" ? "/user_mobile/courses" : "/user_mobile/feeds"}
         %img.back.last_page{:src => "/assets/robotclass/back.png"}
     .right-float
-      %a.a-div#concern{:href => "#"}
-        %img.smallheart{:src => "/assets/cancel-concern.png"}
+      %a.a-div#concern{:href => "javascript:void(0);"}
+        - if @current_user.favorite_on(@course)
+          %img.smallheart{:src => "/assets/concern.png", data: {fav: "false"}}
+        - else
+          %img.smallheart{:src => "/assets/cancel-concern.png", data: {fav: "true"}}
       %a.a-div{:href => review_user_mobile_courses_path}
         %img.dialog{:src => "/assets/pinglun.png"}
       %p.num= @course.feedbacks.length
     .boxtitle
       .bookcloud
-        %p 机器人初级班特色
+        %p= @course.name
 
     .course-desc
       = @course.course.desc.html_safe
@@ -26,10 +31,14 @@
       .content#sign-desc
         %p.title 签到情况
         .sign_in-div
-          - 8.times do
-            .sign_in-box 1
-          - 4.times do
-            .absence 2
+          - @course.length.times do |class_num|
+            - if @course_participate.signin_info[class_num].present?
+              .sign_in-box= class_num + 1
+            - else
+              .absence= class_num + 1
+          / - 8.times do
+          / - 4.times do
+          /   .absence 2
     .assign-div
       %p.center 课程详情
       .item-box

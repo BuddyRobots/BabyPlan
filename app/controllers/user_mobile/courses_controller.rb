@@ -61,4 +61,16 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
       render json: retval_wrapper(retval) and return
     end
   end
+
+  def favorite
+    course_inst = CourseInst.where(id: params[:id]).first
+    fav = current_user.favorites.where(course_inst: course_inst).first
+    fav = fav || current_user.favorites.create(course_inst_id: course_inst.id)
+    if params[:favorite].to_s == "true"
+      fav.enabled = true
+    else
+      fav.enabled = false
+    end
+    render json: retval_wrapper(nil) and return
+  end
 end
