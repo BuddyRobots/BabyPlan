@@ -26,7 +26,10 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
     if @course_participate.is_expired
       @course_participate.renew
     end
-    @pay_info = @course_participate.unifiedorder_interface(@remote_ip, @open_id)
+    if @course_participate.prepay_id.blank?
+      @course_participate.unifiedorder_interface(@remote_ip, @open_id)
+    end
+    @pay_info = @course_participate.get_pay_info
   end
 
   def notify

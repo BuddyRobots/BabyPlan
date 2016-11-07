@@ -49,7 +49,8 @@ class CourseParticipate
     self.update_attributes(
       {
         expired_at: (Time.now + 1.days).to_i,
-        order_id: Util.random_str(32)
+        order_id: Util.random_str(32),
+        prepay_id: ""
       })
   end
 
@@ -128,11 +129,24 @@ class CourseParticipate
     doc = Nokogiri::XML(response.body)
     prepay_id = doc.search('prepay_id').children[0].text
     self.update_attributes({prepay_id: prepay_id})
+    # retval = {
+    #   "appId" => APPID,
+    #   "timeStamp" => Time.now.to_i.to_s,
+    #   "nonceStr" => Util.random_str(32),
+    #   "package" => "prepay_id=" + prepay_id,
+    #   "signType" => "MD5"
+    # }
+    # signature = Util.sign(retval, APIKEY)
+    # retval["sign"] = signature
+    # return retval
+  end
+
+  def get_pay_info
     retval = {
       "appId" => APPID,
       "timeStamp" => Time.now.to_i.to_s,
       "nonceStr" => Util.random_str(32),
-      "package" => "prepay_id=" + prepay_id,
+      "package" => "prepay_id=" + self.prepay_id,
       "signType" => "MD5"
     }
     signature = Util.sign(retval, APIKEY)
