@@ -64,13 +64,6 @@ class User
     return self.user_type == CLIENT
   end
 
-  def get_course_participate(course_inst)
-    self.course_participates.select do |e|
-      e.course_inst == course_inst
-    end.first
-  end
-
-
   def self.create_user(user_type, mobile, created_by_staff = false)
     # 1. check whether user exists?
     u = User.where(mobile: mobile).first
@@ -210,6 +203,10 @@ class User
     return ErrCode::WRONG_PASSWORD if Encryption.encrypt_password(old_password) != self.password
     self.update_attributes(password: Encryption.encrypt_password(new_password))
     nil
+  end
+
+  def has_feedback_on(course_inst)
+    return self.feedbacks.where(course_inst: course_inst).first.present?
   end
 
   def is_staff

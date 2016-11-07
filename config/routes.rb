@@ -167,6 +167,9 @@ Rails.application.routes.draw do
         get :review
         post :notify
       end
+      member do
+        post :pay_finished
+      end
     end
     resources :feeds do
     end

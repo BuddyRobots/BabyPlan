@@ -13,7 +13,7 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
   # course_show
   def show
     @course = CourseInst.where(id: params[:id]).first
-    @course_participate = @current_user.get_course_participate(@course)
+    @course_participate = @current_user.course_participates.where(course_inst_id: @course.id).first
     @back = params[:back]
   end
 
@@ -21,18 +21,26 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
   def new
     @course = CourseInst.where(id: params[:state]).first
     @open_id = Weixin.get_oauth_open_id(params[:code])
-    @pay_info = CourseParticipate.create_new(@current_user, @course, @remote_ip, @open_id)
+    @course_participate = @current_user.course_participates.where(course_inst_id: @course.id).first
+    @course_participate = @course_participate || CourseParticipate.create_new(current_user, @course)
+    if @course_participate.is_expired
+      @course_participate.renew
+    end
+    @pay_info = @course_participate.unifiedorder_interface(@remote_ip, @open_id)
   end
 
   def notify
-    Rails.logger.info "AAAAAAAAAAAAAAAA"
-    Rails.logger.info params.inspect
-    Rails.logger.info "AAAAAAAAAAAAAAAA"
     # get out_trade_no, which is the order_id in CourseParticipate
-    ci = CourseParticipate.where(order_id: out_trade_no).first
+    # ci = CourseParticipate.where(order_id: out_trade_no).first
     # get result_code, err_code and err_code_des
-    ci.update_order(result_code, err_code, err_code_des)
+    # ci.update_order(result_code, err_code, err_code_des)
     render :xml => {return_code: "SUCCESS"} and return
+  end
+
+  def pay_finished
+    @course_participate = CourseParticipate.where(id: params[:id]).first
+    @course_participate.update_attributes({pay_finished: true})
+    render_json retval_wrapper(nil) and return
   end
 
   # evaluate

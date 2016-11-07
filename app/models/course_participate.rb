@@ -16,27 +16,41 @@ class CourseParticipate
 
   field :pay_at, type: Integer
   field :sign_in_time, type: String
-  field :paid, type: Boolean, default: false
   field :order_id, type: String
   field :price
 
+  field :prepay_id, type: String
+  # whether pay process is finished. pay attention that this does not indicate that pay is success
+  field :pay_finished, type: Boolean, default: false
   field :wechat_transaction_id, type: String
   field :result_code, type: String
   field :err_code, type: String
   field :err_code_des, type: String
   field :trade_state, type: String
   field :trade_state_desc, type: String
+  field :expired_at, type: Integer
 
   belongs_to :course_inst
   belongs_to :client, class_name: "User", inverse_of: :course_participates
 
 
-  def self.create_new(client, course_inst, remote_ip, openid)
+  def self.create_new(client, course_inst)
     cp = self.create({order_id: Util.random_str(32)})
     cp.course_inst = course_inst
     cp.client = client
     cp.save
-    return cp.unifiedorder_interface(remote_ip, openid)
+    expired_at = Time.now + 1.days
+    self.update_attributes({expired_at: expired_at.to_i})
+    cp
+    # return cp.unifiedorder_interface(remote_ip, openid)
+  end
+
+  def renew
+    self.update_attributes(
+      {
+        expired_at: (Time.now + 1.days).to_i,
+        order_id: Util.random_str(32)
+      })
   end
 
   def orderquery()
@@ -100,7 +114,8 @@ class CourseParticipate
       "spbill_create_ip" => remote_ip,
       "notify_url" => NOTIFY_URL,
       "trade_type" => "JSAPI",
-      "openid" => openid
+      "openid" => openid,
+      "time_expire" => Time.at(self.expired_at + 600).strftime("%Y%m%d%H%M%S")
     }
     signature = Util.sign(data, APIKEY)
     data["sign"] = signature
@@ -112,6 +127,7 @@ class CourseParticipate
 
     doc = Nokogiri::XML(response.body)
     prepay_id = doc.search('prepay_id').children[0].text
+    self.update_attributes({prepay_id: prepay_id})
     retval = {
       "appId" => APPID,
       "timeStamp" => Time.now.to_i.to_s,
@@ -130,5 +146,27 @@ class CourseParticipate
       err_code: err_code,
       err_code_des: err_code_des
     })
+  end
+
+  # status related
+  def is_expired
+    if self.pay_finished == true && self.trade_state != "SUCCESS"
+      self.orderquery()
+    end
+    self.trade_state != "SUCCESS" && self.expired_at < Time.now.to_i
+  end
+
+  def is_paying
+    if self.pay_finished == true && self.trade_state != "SUCCESS"
+      self.orderquery()
+    end
+    self.pay_finished == true && self.trade_state != "SUCCESS"
+  end
+
+  def is_success
+    if self.pay_finished == true && self.trade_state != "SUCCESS"
+      self.orderquery()
+    end
+    self.trade_state == "SUCCESS"
   end
 end
