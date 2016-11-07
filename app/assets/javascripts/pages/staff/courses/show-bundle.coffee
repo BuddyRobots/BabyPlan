@@ -563,3 +563,6 @@ $ ->
           if data.code == COURSE_INST_NOT_EXIST
             $.page_notification "未参加课程"
       )
+
+  $("#class_num").change ->
+    $(".code-figure").attr("src", "/assets/web/bigqrcode.png")

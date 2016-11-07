@@ -91,6 +91,25 @@ class CourseInst
     (self.date_in_calendar || []).join(';')
   end
 
+  def signin_info(class_num)
+    retval = [ ]
+    cur_group = [ ]
+    group_size = 6
+    cur_num = 0
+    self.course_participates.each do |e|
+      next if e.is_success == false
+      info = {mobile: e.client.mobile, name: e.client.name, signin: e.signin_info[class_num]}
+      if cur_num == group_size
+        cur_num = 0
+        retval << cur_group
+        cur_group = [ ]
+      end
+      cur_group << info
+      cur_num = cur_num + 1
+    end
+    return retval
+  end
+
   # -1 for unknown
   # 1 for not begin
   # 2 for ongoing
