@@ -550,11 +550,8 @@ $ ->
     $.postJSON(
       '/staff/courses/' + window.cid + '/signin_client',
       {
-        announcement: 
-          {
-            class_num: class_num
-            mobile: mobile
-          }
+        class_num: class_num
+        mobile: mobile
       },
       (data) ->
         console.log data
