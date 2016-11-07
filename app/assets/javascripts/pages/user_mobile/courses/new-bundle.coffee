@@ -8,7 +8,7 @@ $ ->
       'signType': $("#signType").text(),
       'paySign': $("#paySign").text()
     }, (res) ->
-      if res.err_msg == 'get_brand_wcpay_request：ok'
+      if res.err_msg == 'get_brand_wcpay_request:ok'
         $.postJSON(
           '/user_mobile/courses/' + window.course_participate_id + '/pay_finished',
           { },
