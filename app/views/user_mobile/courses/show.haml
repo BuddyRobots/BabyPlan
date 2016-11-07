@@ -73,7 +73,7 @@
     - elsif @course_participate.is_paying
       %button.btn.unclick-btn{:type => "button"} 支付进行中
     - else
-      %a.btn.click-btn{href: new_user_mobile_course_path + "?state=" + @course.id.to_s, :type => "button"} 去付款
+      %a.btn.click-btn{href: new_user_mobile_course_path + "/?state=" + @course.id.to_s, :type => "button"} 去付款
 
      
 
