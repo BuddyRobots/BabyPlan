@@ -52,9 +52,6 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
 
   def signin
     info_ary = params[:signin_info]
-    logger.info "AAAAAAAAAAAA"
-    logger.info info_ary.inspect
-    logger.info "AAAAAAAAAAAA"
     course_inst_id, qr_gen_time, class_idx = info_ary.split(';')
     course_participate = @current_user.course_participates.where(course_inst_id: course_inst_id).first
     if course_participate.nil?
