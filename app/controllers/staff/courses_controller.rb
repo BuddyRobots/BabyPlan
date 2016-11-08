@@ -108,4 +108,21 @@ class Staff::CoursesController < Staff::ApplicationController
             )
     render json: retval_wrapper({img_src: "/qrcodes/#{filename}"})
   end
+
+  def signin_client
+    course_inst = CourseInst.where(id: params[:id]).first
+    if course_inst.blank?
+      render json: retval_wrapper(ErrCode::COURSE_INST_NOT_EXIST) and return
+    end
+    client = User.client.where(mobile: params[:mobile]).first
+    if client.blank?
+      render json: retval_wrapper(ErrCode::USER_NOT_EXIST) and return
+    end
+    course_participate = client.course_participates.where(course_inst_id: course_inst.id).first
+    if course_participate.blank?
+      render json: retval_wrapper(ErrCode::COURSE_INST_NOT_EXIST) and return
+    end
+    retval = course_participate.signin(params[:class_num].to_i)
+    render json: retval_wrapper(retval) and return
+  end
 end

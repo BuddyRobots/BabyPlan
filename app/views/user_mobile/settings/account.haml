@@ -19,10 +19,10 @@
           %img.avatar-icon{:src => "/assets/web/avatar.png"}
       .item.clearfix
         %span.left 儿童姓名
-        %span.right 王小明
+        %span.right= @current_user.name
       .item.clearfix
         %span.left 账户
-        %span.right 13244556677
+        %span.right= @current_user.mobile
     .item-div
       .item-box
         %p 修改密码

@@ -18,7 +18,7 @@ class Course
 
   has_one :photo, class_name: "Material", inverse_of: :course_photo
   has_many :course_insts
-  has_many :favorites
+
   has_many :staff_logs
 
 

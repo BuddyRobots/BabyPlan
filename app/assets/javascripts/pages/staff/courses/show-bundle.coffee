@@ -544,3 +544,25 @@ $ ->
       else
         $.page_notification "服务器出错，请稍后再试"
 
+  $(".sign-btn").click ->
+    class_num = $("#class_num").val()
+    mobile = $("#sign-mobile").val()
+    $.postJSON(
+      '/staff/courses/' + window.cid + '/signin_client',
+      {
+        class_num: class_num
+        mobile: mobile
+      },
+      (data) ->
+        console.log data
+        if data.success
+          $.page_notification "签到完成"
+        else
+          if data.code == USER_NOT_EXIST
+            $.page_notification "用户不存在"
+          if data.code == COURSE_INST_NOT_EXIST
+            $.page_notification "未参加课程"
+      )
+
+  $("#class_num").change ->
+    $(".code-figure").attr("src", "/assets/web/bigqrcode.png")

@@ -2,10 +2,8 @@ class Favorite
 	include Mongoid::Document
 	include Mongoid::Timestamps
 	
-	field :favorite_type, type: Integer
+	field :enabled, type: Integer
 
 	belongs_to :user
-	belongs_to :book
-	belongs_to :course
-	belongs_to :announcement
+	belongs_to :course_inst
 end

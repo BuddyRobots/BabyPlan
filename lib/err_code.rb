@@ -50,6 +50,10 @@ module ErrCode
       "儿童中心不存在"
     when COURSE_NOT_EXIST
       "课程不存在"
+    when COURSE_INST_EXIST
+      "已报名"
+    when COURSE_INST_NOT_EXIST
+      "未报名"
     when WRONG_CAPTCHA
       "图形验证码错误"
     else

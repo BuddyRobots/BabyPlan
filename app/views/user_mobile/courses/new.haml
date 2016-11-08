@@ -1,9 +1,11 @@
 - content_for :app_head do
   = javascript_include_tag "pages/user_mobile/courses/new-bundle"
   = stylesheet_link_tag "pages/user_mobile/courses/new-bundle", :media => "all"
+  :javascript
+    window.course_participate_id="#{@course_participate.id.to_s}"
 
 - content_for :app_content do
-  %div
+  .hide
     %span#appId= @pay_info["appId"]
     %span#timeStamp= @pay_info["timeStamp"]
     %span#nonceStr= @pay_info["nonceStr"]

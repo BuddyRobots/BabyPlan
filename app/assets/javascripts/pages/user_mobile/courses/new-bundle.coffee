@@ -8,11 +8,15 @@ $ ->
       'signType': $("#signType").text(),
       'paySign': $("#paySign").text()
     }, (res) ->
-      if res.err_msg == 'get_brand_wcpay_request：ok'
-        # redirect to the success page
-        # alert("SUCCESS")
+      if res.err_msg == 'get_brand_wcpay_request:ok'
+        $.postJSON(
+          '/user_mobile/courses/' + window.course_participate_id + '/pay_finished',
+          { },
+          (data) ->
+            # redirect to the result page
+          )
       else
-        # alert(res.err_msg)
+        # redirect to the result page
       return
     return
 

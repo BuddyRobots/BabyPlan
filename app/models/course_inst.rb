@@ -24,6 +24,7 @@ class CourseInst
   has_many :course_participates
 
   has_many :feedbacks
+  has_many :favorites
 
 
   def self.create_course_inst(staff, center, course_inst_info)
@@ -55,7 +56,7 @@ class CourseInst
   def course_inst_info
     {
       id: self.id.to_s,
-      name: self.course.name,
+      name: self.name,
       available: self.available,
       speaker: self.speaker,
       price: self.price,
@@ -91,6 +92,25 @@ class CourseInst
     (self.date_in_calendar || []).join(';')
   end
 
+  def signin_info(class_num)
+    retval = [ ]
+    cur_group = [ ]
+    group_size = 6
+    cur_num = 0
+    self.course_participates.each do |e|
+      next if e.is_success == false
+      info = {mobile: e.client.mobile, name: e.client.name, signin: e.signin_info[class_num]}
+      if cur_num == group_size
+        cur_num = 0
+        retval << cur_group
+        cur_group = [ ]
+      end
+      cur_group << info
+      cur_num = cur_num + 1
+    end
+    return retval
+  end
+
   # -1 for unknown
   # 1 for not begin
   # 2 for ongoing
@@ -104,8 +124,8 @@ class CourseInst
       return UNKNOWN
     end
     sort_date = self.date_in_calendar.sort.map { |e| e.split('T')[0] }
-    start_day = Time.mktime(*sort_date[0])
-    end_day = Time.mktime(*sort_date[-1])
+    start_day = Time.mktime(*sort_date[0].split('-'))
+    end_day = Time.mktime(*sort_date[-1].split('-'))
     if Time.now < start_day
       return NOT_BEGIN
     elsif Time.now < end_day + 1.days
