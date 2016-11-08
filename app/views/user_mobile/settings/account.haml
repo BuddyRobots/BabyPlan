@@ -13,7 +13,9 @@
     .item-div
       .item#figure
         %p 头像
-        %a{:href => "#"}
+        = form_tag("/", method: "post", multipart: true, id: "upload-photo-form", class: "hide") do
+          = file_field_tag "photo_file", { class: "hide", accept: ".jpg,.png" }
+        %a#upload-photo{:href => "#"}
           %img.avatar-icon{:src => "/assets/web/avatar.png"}
       .item.clearfix
         %span.left 儿童姓名

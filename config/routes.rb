@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   get 'welcome/courseinfo'
   get 'welcome/managecenter'
+  get 'welcome/evaluate'
   get 'welcome/test_image_uploader'
 
   resources :centers do
@@ -139,6 +140,7 @@ Rails.application.routes.draw do
         post :do_borrow
         get :borrow_result
         get :back
+        get :scan
       end
     end
     resources :transfers do
@@ -166,6 +168,7 @@ Rails.application.routes.draw do
     resources :courses do
       collection do
         get :review
+        get :pay_success
         post :notify
         post :signin
       end
@@ -199,6 +202,7 @@ Rails.application.routes.draw do
         get :message
         get :account
         get :reset_password
+        get :sign
         post :update_password
       end
     end
