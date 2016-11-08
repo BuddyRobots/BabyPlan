@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   get 'welcome/courseinfo'
   get 'welcome/managecenter'
+  get 'welcome/evaluate'
   get 'welcome/test_image_uploader'
 
   resources :centers do
