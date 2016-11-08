@@ -23,7 +23,7 @@
       %p.num= @course.feedbacks.length
     .boxtitle
       .bookcloud
-        %p= @course.name
+        %p= @course.name || @course.course.name
 
     .course-desc
       = @course.course.desc.html_safe
