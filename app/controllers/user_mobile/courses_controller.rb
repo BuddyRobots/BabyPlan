@@ -73,4 +73,6 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
     end
     render json: retval_wrapper(nil) and return
   end
+  def pay_success
+  end
 end

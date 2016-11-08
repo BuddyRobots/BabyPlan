@@ -1,0 +1,20 @@
+- content_for :app_head do
+  = javascript_include_tag "pages/user_mobile/courses/pay_success-bundle"
+  = stylesheet_link_tag "pages/user_mobile/courses/pay_success-bundle", :media => "all"
+
+- content_for :app_content do
+  .content-area
+    .desc-div
+      .success-div
+        .item
+          %img.icon{:src => "/assets/web/finish.png"}
+          %span.success 支付已完成
+        .item
+          %span 课程：
+          %span 少儿计算机信息技术
+        .item
+          %span 将于
+          %span.time 2016/10/23 14:00
+          %span 开始上课，请提前到达～
+    .btn-div
+      %button.btn#desc 查看详情

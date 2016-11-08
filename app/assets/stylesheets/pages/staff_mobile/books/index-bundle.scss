@@ -70,9 +70,17 @@ a{
 	background: url("/assets/manager/borrow1.jpg") no-repeat;
 	background-size: 100%;
 	margin-bottom: 7.15%;
+	border-radius: 8px;
 }
 .return-div {
 	background: url("/assets/manager/borrow2.jpg") no-repeat;
+	margin-bottom: 7.15%;
+	border-radius: 8px;
+	background-size: 100%;
+}
+.scan-div {
+	background: url("/assets/manager/borrow3.jpg") no-repeat;
+	border-radius: 8px;
 	background-size: 100%;
 }
 .word {

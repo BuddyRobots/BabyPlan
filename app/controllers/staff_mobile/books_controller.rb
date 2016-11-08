@@ -27,4 +27,7 @@ class StaffMobile::BooksController < StaffMobile::ApplicationController
   # m_return
   def back
   end
+
+  def scan
+  end
 end

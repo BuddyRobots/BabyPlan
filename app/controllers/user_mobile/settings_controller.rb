@@ -30,4 +30,7 @@ class UserMobile::SettingsController < UserMobile::ApplicationController
     retval = current_user.change_password(params[:old_password], params[:new_password])
     render json: retval_wrapper(retval) and return 
   end
+
+  def sign
+  end
 end

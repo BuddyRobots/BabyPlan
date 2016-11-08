@@ -43,4 +43,4 @@
         .price.clearfix
           %span.float-left 公益价：
           %span.float-right#public-price= @course.price_pay
-    %a.btn#wechat-pay{href: "javascript:void(0);", :type => "button"}　微信支付
+    %a.btn#wechat-pay{:href => pay_success_user_mobile_courses_path, :type => "button"}　微信支付
