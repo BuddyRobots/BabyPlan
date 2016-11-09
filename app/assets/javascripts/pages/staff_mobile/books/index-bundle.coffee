@@ -11,7 +11,7 @@ $ ->
   $("#book-borrow").click ->
     location.href = "/staff_mobile/books?v=" + new Date().getTime()
 
-  $("##scan-book").click ->
+  $("#scan-book").click ->
     wx.scanQRCode
       needResult: 1
       scanType: ["qrCode"]
