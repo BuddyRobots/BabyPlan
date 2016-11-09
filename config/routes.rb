@@ -135,11 +135,13 @@ Rails.application.routes.draw do
       end
     end
     resources :books do
+      member do
+        get :back
+      end
       collection do
         get :borrow
         post :do_borrow
         get :borrow_result
-        get :back
       end
     end
     resources :transfers do
