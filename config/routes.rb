@@ -140,7 +140,6 @@ Rails.application.routes.draw do
         post :do_borrow
         get :borrow_result
         get :back
-        get :scan
       end
     end
     resources :transfers do

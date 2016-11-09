@@ -19,7 +19,6 @@ $ ->
             else
               if data.code == COURSE_INST_NOT_EXIST
                 location.href = "/user_mobile/settings/sign?success=false"
-                $.mobile_page_notification("未报名此课程", 3000)
               else
                 $.mobile_page_notification("服务器出错", 3000)
         )

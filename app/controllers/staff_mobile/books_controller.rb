@@ -28,6 +28,6 @@ class StaffMobile::BooksController < StaffMobile::ApplicationController
   def back
   end
 
-  def scan
+  def show
   end
 end
