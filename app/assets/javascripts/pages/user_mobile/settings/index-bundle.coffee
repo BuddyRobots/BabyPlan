@@ -15,7 +15,7 @@ $ ->
           (data) ->
             if data.success
               # redirect to the signin info page
-              location.href = "/user_mobile/settings/sign?success=true&course_id=" + data.course_id + "&class_num" + data.class_num
+              location.href = "/user_mobile/settings/sign?success=true&course_id=" + data.course_id + "&class_num=" + data.class_num
             else
               if data.code == COURSE_INST_NOT_EXIST
                 location.href = "/user_mobile/settings/sign?success=false"
