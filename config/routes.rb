@@ -166,9 +166,11 @@ Rails.application.routes.draw do
       end
     end
     resources :courses do
+      member do
+        get :pay_success
+      end
       collection do
         get :review
-        get :pay_success
         post :notify
         post :signin
       end

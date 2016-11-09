@@ -16,7 +16,7 @@ $ ->
             # redirect to the result page
           )
       else
-        # redirect to the result page
+        # do nothing
       return
     return
 
