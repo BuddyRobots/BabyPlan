@@ -3,6 +3,7 @@
   = stylesheet_link_tag "pages/user_mobile/courses/new-bundle", :media => "all"
   :javascript
     window.course_participate_id="#{@course_participate.id.to_s}"
+    window.course_id="#{@course.id.to_s}"
 
 - content_for :app_content do
   .hide
