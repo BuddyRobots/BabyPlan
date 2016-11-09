@@ -15,9 +15,10 @@ $ ->
           (data) ->
             if data.success
               # redirect to the signin info page
-              location.href = "/user_mobile/settings"
+              location.href = "/user_mobile/settings/sign?success=true&course_id=" + data.course_id + "&class_num" + data.class_num
             else
               if data.code == COURSE_INST_NOT_EXIST
+                location.href = "/user_mobile/settings/sign?success=false"
                 $.mobile_page_notification("未报名此课程", 3000)
               else
                 $.mobile_page_notification("服务器出错", 3000)

@@ -5,24 +5,26 @@
 - content_for :app_content do
   .content-area
     .desc-div
-      .success-div
-        .item
-          %img.icon{:src => "/assets/web/finish.png"}
-          %span.success 签到成功
-        .item
-          %span 课程：
-          %span 少儿计算机信息技术
-        .item
-          %span 上课中心:
-          %span 广安门外儿童中心
-        .item 第七次课签到成功
-      .fail-div
-        %p.fail 签到失败
-        %p.notice 您未报这门课程！
-        %p.notice 这不是课程二维码！
-        %p.notice 您已签到该次课程！
+      - if @success == true
+        .success-div
+          .item
+            %img.icon{:src => "/assets/web/finish.png"}
+            %span.success 签到成功
+          .item
+            %span 课程：
+            %span= @course.name || @course.course.name
+          .item
+            %span 上课中心:
+            %span= @course.center.name
+          .item= "第" + @class_num + "次课签到成功"
+      - else
+        .fail-div
+          %p.fail 签到失败
+          %p.notice 您未报这门课程！
     .btn-div
-      %button.btn#desc 查看详情
-      / 失败时显示为返回,需要删掉一条
-      %button.btn#desc 返回
+      - if @success == true
+        %a.btn#desc{href: "/user_mobile/courses/" + @course.id.to_s} 查看详情
+      - else
+        / 失败时显示为返回,需要删掉一条
+        %a.btn#desc{href: "/user_mobile/settings"} 返回
 
