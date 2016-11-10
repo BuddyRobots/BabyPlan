@@ -17,4 +17,21 @@ class BookInst
   def current_borrow
     self.book_borrows.where(return_at: nil).first
   end
+
+  def status_str
+    if self.current_borrow.present?
+      "借出"
+    else
+      "在架上"
+    end
+  end
+
+  def borrow_info
+    if self.current_borrow.blank?
+      ""
+    else
+      client = self.current_borrow.client
+      client.name + "，" + client.mobile
+    end
+  end
 end
