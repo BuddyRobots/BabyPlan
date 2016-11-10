@@ -6,40 +6,76 @@
 - content_for :app_content do
   .content-area
     .header
-      %p.caption 历史评价
+      .cloud
+        %p.caption 历史评价
       %a{:href => "javascript:void(0);"}
         %img.back{:src => "/assets/evaluate/back.png"}
     %article.clearfix
-      %a{:href => "javascript:void(0);"}
+      .left-div
         %img.headfigure{:src => "/assets/evaluate/headfigure.png"}
-      %p.username lifd
-      %p.message 李老师教的不错，学到了很多不知道的知识，是非常有意思的课程。
-      %p.time 2分钟前
-    %hr
+      .right-div
+        %span.username lifd
+        %span.time 2分钟前
+        .review-score
+          %span.score 课程评分
+          - 3.times do
+            %img.star{:src => "/assets/web/yellowstar2.png"}
+          - 2.times do
+            %img.star{:src => "/assets/web/greystar2.png"}
+        %p.message 李老师教的不错，学到了很多不知道的知识，是非常有意思的课程。
     %article.clearfix
-      %a{:href => "javascript:void(0);"}
+      .left-div
         %img.headfigure{:src => "/assets/evaluate/headfigure.png"}
-      %p.username lifd
-      %p.message 李老师教的不错，学到了很多不知道的知识，是非常有意思的课程。
-      %p.time 2分钟前
-    %hr
+      .right-div
+        %span.username 按时过去
+        %span.time 23小时前
+        .review-score
+          %span.score 课程评分
+          - 3.times do
+            %img.star{:src => "/assets/web/yellowstar2.png"}
+          - 2.times do
+            %img.star{:src => "/assets/web/greystar2.png"}
+        %p.message 李老师教的不错，学到了很多不知道的知识，是非常有意思的课程。
     %article.clearfix
-      %a{:href => "javascript:void(0);"}
+      .left-div
         %img.headfigure{:src => "/assets/evaluate/headfigure.png"}
-      %p.username lifd
-      %p.message 李老师教的不错，学到了很多不知道的知识，是非常有意思的课程。
-      %p.time 2分钟前
-    %hr
+      .right-div
+        %span.username 小李飞刀
+        %span.time 2016/09/23
+        .review-score
+          %span.score 课程评分
+          - 3.times do
+            %img.star{:src => "/assets/web/yellowstar2.png"}
+          - 2.times do
+            %img.star{:src => "/assets/web/greystar2.png"}
+        %p.message 李老师教的不错，学到了很多不知道的知识，是非常有意思的课程。
     %article.clearfix
-      %a{:href => "javascript:void(0);"}
+      .left-div
         %img.headfigure{:src => "/assets/evaluate/headfigure.png"}
-      %p.username lifd
-      %p.message 李老师教的不错，学到了很多不知道的知识，是非常有意思的课程。
-      %p.time 2分钟前
-    %hr
-    .evaluate-box
-      %input#input-box
-      %a{:href => "javascript:void(0);"}
-        %img.smileface{:src => "/assets/evaluate/smileface.png"}
+      .right-div
+        %span.username lifd
+        %span.time 2分钟前
+        .review-score
+          %span.score 课程评分
+          - 3.times do
+            %img.star{:src => "/assets/web/yellowstar2.png"}
+          - 2.times do
+            %img.star{:src => "/assets/web/greystar2.png"}
+        %p.message 李老师教的不错，学到了很多不知道的知识，是非常有意思的课程。
+    .mask
+      .text-div
+        %textarea#text
+        %form.review-div
+          %p.me 我的评价：
+          %p.star-div
+            %input{:checked => "checked", :name => "a", :type => "radio", :value => "0"}
+            %input{:name => "a", :type => "radio", :value => "1"}
+            %input{:name => "a", :type => "radio", :value => "2"}
+            %input{:name => "a", :type => "radio", :value => "3"}
+            %input{:name => "a", :type => "radio", :value => "4"}
+            %input{:name => "a", :type => "radio", :value => "5"}
+          %button.btn#submit 提交
+    / 评价完成后背景颜色变为#999，字变为已评价
+    %button.btn#review{:type => "button"} 立即评价
 
 

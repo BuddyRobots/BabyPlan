@@ -102,7 +102,11 @@ a{
 #map-container {
 	padding: 40%;
 }
-
+select {
+	width: 30%;
+	font-size: 3em;
+	-webkit-appearance: none;
+}
 
 @media screen and (max-width:640px) {
 	.content-area {

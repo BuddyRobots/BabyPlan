@@ -7,12 +7,14 @@
     %img.headcloud{:src => "/assets/headcloud.png"}
     %a{:href => message_user_mobile_settings_path}
       %img.mail{:src => "/assets/mail.png"}
+      .notice-num 33
     %a{:href => account_user_mobile_settings_path}
       %img.set{:src => "/assets/setting.png"}
     %a{:href => user_mobile_feeds_path}
       %img.back{:src => "/assets/back.png"}
-    .face
-      %img{:src => "/assets/face.png"}
+    .face.clearfix
+      .avator
+        %img.avator-icon{:src => "/assets/web/boy.png"}
       %p.username 小狐狸
 
     .collect-div
