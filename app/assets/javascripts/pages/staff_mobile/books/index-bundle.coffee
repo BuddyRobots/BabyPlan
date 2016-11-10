@@ -17,7 +17,7 @@ $ ->
       scanType: ["qrCode"]
       success: (res) ->
         result = res.resultStr
-        location.href="/staff_mobile/books/" + result + "/back"
+        location.href="/staff_mobile/books/" + result
 
   $("#return-book").click ->
     wx.scanQRCode
@@ -25,5 +25,5 @@ $ ->
       scanType: ["qrCode"]
       success: (res) ->
         result = res.resultStr
-        location.href="/staff_mobile/books/" + result
+        location.href="/staff_mobile/books/" + result + "/back"
 
