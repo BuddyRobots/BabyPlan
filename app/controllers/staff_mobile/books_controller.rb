@@ -6,6 +6,7 @@ class StaffMobile::BooksController < StaffMobile::ApplicationController
 
   # m_borrow
   def borrow
+    @mobile = params[:mobile]
   end
 
   def do_borrow
