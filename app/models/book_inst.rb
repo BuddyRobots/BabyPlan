@@ -5,6 +5,7 @@ class BookInst
 
   belongs_to :book
   has_many :book_borrows
+  has_and_belongs_to_many :transfers
 
   def borrow(client)
     if self.current_borrow.present?

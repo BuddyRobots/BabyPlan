@@ -22,7 +22,6 @@ class Book
   #ralationships specific for material
   has_one :cover, class_name: "Material", inverse_of: :cover_book
   has_one :back, class_name: "Material", inverse_of: :back_book
-  has_and_belongs_to_many :transfers
 
   belongs_to :center
   # has_many :book_borrows

@@ -9,6 +9,6 @@ class Transfer
 
   belongs_to :out_center, class_name: "Center", inverse_of: :out_transfers
   belongs_to :in_center, class_name: "Center", inverse_of: :in_transfers
-  has_and_belongs_to_many :books
+  has_and_belongs_to_many :book_insts
 
 end
