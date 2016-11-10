@@ -17,7 +17,7 @@
         %p.items= "手机号码：" + @book_borrow.client.mobile
         %p.items= "绘本名称：" + @book_inst.book.name
         - if @book_inst.book.isbn.present?
-          %p.items#num= "ISBN号：" @book_inst.book.isbn
+          %p.items#num= "ISBN号：" + @book_inst.book.isbn
       %img.icon{:src => "/assets/manager/success_mini.png"}
     .btn-div
       %a.btn#clicked{:type => "button", href: "javascript:void(0);"} 继续归还
