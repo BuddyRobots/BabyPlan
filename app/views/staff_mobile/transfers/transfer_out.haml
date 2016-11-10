@@ -1,12 +1,12 @@
 - content_for :app_head do
   = javascript_include_tag "pages/staff_mobile/transfers/transfer_out-bundle"
   = stylesheet_link_tag "pages/staff_mobile/transfers/transfer_out-bundle", :media => "all"
+  :javascript:
+    window.transfer_id="#{@transfer_id}"
+    window.auto="#{@auto}"
 
 - content_for :app_content do
   .main-div
-    .end-div
-      %img.success-icon{:src => "/assets/manager/success.png"}
-      %p.title#transfer_out 已将所有绘本迁出！
     .unreturn-div
       %img.fail-icon{:src => "/assets/manager/fail.png"}
       %p.title#unreturn 该绘本不是本儿童中心藏书！

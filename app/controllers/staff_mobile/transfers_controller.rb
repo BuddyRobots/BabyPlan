@@ -4,6 +4,17 @@ class StaffMobile::TransfersController < StaffMobile::ApplicationController
   def index
   end
 
+  def create
+    retval = Transfer.create_new(params[:out_transfer_id], params[:in_transfer_id])
+    render json: retval_wrapper(retval) and return
+  end
+
+  def add_to_transfer
+    transfer = Transfer.where(id: params[:id]).first
+    retval = transfer.add(params[:book_inst_id])
+    render json: retval_wrapper(retval) and return
+  end
+
   # m_transfer_out_record
   def list
   end
@@ -26,6 +37,8 @@ class StaffMobile::TransfersController < StaffMobile::ApplicationController
 
   # m_continue_transport_out, m_transport_out_end, m_transport_out
   def transfer_out
+    @transfer_id = params[:transfer_id]
+    @auto = params[:auto]
   end
 
   # m_transport_in, m_transport

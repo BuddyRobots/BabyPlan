@@ -17,6 +17,7 @@ module ErrCode
   COURSE_INST_NOT_EXIST = -14
   WRONG_CAPTCHA = -15
   BOOK_NOT_RETURNED = -16
+  BOOK_IN_TRANSFER = -17
 
   def self.ret_false(code)
     msg = self.message(code)
@@ -59,6 +60,8 @@ module ErrCode
       "图形验证码错误"
     when BOOK_NOT_RETURNED
       "该绘本未归还"
+    when BOOK_IN_TRANSFER
+      "绘本迁移中"
     else
       nil
     end

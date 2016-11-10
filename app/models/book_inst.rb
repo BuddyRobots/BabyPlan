@@ -19,6 +19,10 @@ class BookInst
     self.book_borrows.where(return_at: nil).first
   end
 
+  def current_transfer
+    self.transfers.any_of({status: Transfer::PREPARE}, {status: Transfer::ONGOING}) .first
+  end
+
   def status_str
     if self.current_borrow.present?
       "借出"

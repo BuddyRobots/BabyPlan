@@ -92,6 +92,9 @@ Rails.application.routes.draw do
     end
 
     resources :transfers do
+      member do
+        post :add_to_transfer
+      end
     end
 
     resources :courses do
