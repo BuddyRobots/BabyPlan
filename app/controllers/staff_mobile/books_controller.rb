@@ -25,7 +25,7 @@ class StaffMobile::BooksController < StaffMobile::ApplicationController
   # m_continue_borrow, m_unreturn
   def borrow_result
     if params[:borrow_id].present?
-      @borrow = m_book_borrow.where(id: params[:borrow_id]).first
+      @borrow = BookBorrow.where(id: params[:borrow_id]).first
     end
     @err = params[:err]
   end
