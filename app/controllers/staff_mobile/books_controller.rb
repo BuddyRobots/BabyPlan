@@ -22,7 +22,6 @@ class StaffMobile::BooksController < StaffMobile::ApplicationController
     render json: retval_wrapper(retval) and return
   end
 
-  # m_continue_borrow, m_unreturn
   def borrow_result
     if params[:borrow_id].present?
       @borrow = BookBorrow.where(id: params[:borrow_id]).first
@@ -30,8 +29,15 @@ class StaffMobile::BooksController < StaffMobile::ApplicationController
     @err = params[:err]
   end
 
-  # m_return
   def back
+    @book_inst = BookInst.where(id: params[:id]).first
+    if @book_inst.present?
+      @book_borrow = @book_inst.current_borrow
+      if @book_borrow.present?
+        @book_borrow.back
+        @success = true
+      end
+    end
   end
 
   def show

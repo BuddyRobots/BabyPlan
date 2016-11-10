@@ -4,12 +4,20 @@
 
 - content_for :app_content do
   .main-div
+    - if @success == false
+      .unreturn-div
+        %img.unreturn-icon{:src => "/assets/manager/fail.png"}
+        - if @book_inst.blank?
+          %p.title#unfound 该绘本不是本儿童中心藏书！
+        - else
+          %p.title#unreturn 该绘本未出借！
     .desc-div
       .desc
-        %p.items 读者姓名：王小明
-        %p.items 手机号码：12345656577
-        %p.items 绘本名称：奥菲利亚的影子剧院
-        %p.items#num ISBN号：9894743966
+        %p.items= "读者姓名：" + @book_borrow.client.name
+        %p.items= "手机号码：" + @book_borrow.client.mobile
+        %p.items= "绘本名称：" + @book_inst.book.name
+        - if @book_inst.book.isbn.present?
+          %p.items#num= "ISBN号：" @book_inst.book.isbn
       %img.icon{:src => "/assets/manager/success_mini.png"}
     .btn-div
       %a.btn#clicked{:type => "button", href: "javascript:void(0);"} 继续归还

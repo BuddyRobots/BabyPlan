@@ -11,4 +11,8 @@ class BookBorrow
   belongs_to :book_inst
   belongs_to :client, class_name: "User", inverse_of: :book_borrows
 
+
+  def back
+  	self.update_attributes({return_at: Time.now.to_i})
+  end
 end
