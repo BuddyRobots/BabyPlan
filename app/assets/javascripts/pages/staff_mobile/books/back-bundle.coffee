@@ -1,5 +1,5 @@
 $ ->
-	weixin_jsapi_authorize(["scanQRCode"])
+  weixin_jsapi_authorize(["scanQRCode"])
 
   $("#clicked").click ->
     wx.scanQRCode
