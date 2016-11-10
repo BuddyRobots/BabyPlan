@@ -6,8 +6,9 @@
   .main-div
     .desc-div
       .desc
-        %p.items 绘本名称：奥菲利亚的影子剧院
-        %p.items#num ISBN号：9894743966
+        %p.items= "绘本名称：" + @book.name
+        - if @book.isbn.present?
+          %p.items#num= "ISBN号：" + @book.isbn
       %img.icon{:src => "/assets/manager/success_mini.png"}
     .btn-div
       %a.btn#clicked{:type => "button", href: "/staff_mobile/books"} 完成

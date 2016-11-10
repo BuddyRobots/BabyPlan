@@ -29,5 +29,7 @@ class StaffMobile::BooksController < StaffMobile::ApplicationController
   end
 
   def show
+    book_inst = Book.where(id: params[:id])
+    @book = book_inst.book
   end
 end
