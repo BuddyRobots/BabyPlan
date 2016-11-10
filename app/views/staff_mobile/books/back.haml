@@ -4,7 +4,7 @@
 
 - content_for :app_content do
   .main-div
-    - if @success != false
+    - if @success != true
       .unreturn-div
         %img.unreturn-icon{:src => "/assets/manager/fail.png"}
         - if @book_inst.blank?
