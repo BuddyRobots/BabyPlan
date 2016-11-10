@@ -23,9 +23,12 @@ $ ->
           (data) ->
             console.log data
             if data.success
+              location.href = "/staff_mobile/books/borrow_result?borrow_id=" + data.borrow_id
             else
               if data.code == USER_NOT_EXIST
                 $.mobile_page_notification("用户不存在", 3000)
               if data.code == BOOK_NOT_EXIST
-                $.mobile_page_notification("绘本不存在", 3000)
+                location.href = "/staff_mobile/books/borrow_result?err=book_not_exist"
+              if data.code == BOOK_NOT_RETURNED
+                location.href = "/staff_mobile/books/borrow_result?err=book_not_returned"
         )
