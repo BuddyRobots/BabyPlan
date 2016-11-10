@@ -1,3 +1,4 @@
+require 'zip'
 class Book
 
   include Mongoid::Document
@@ -16,7 +17,7 @@ class Book
   field :recommendation, type: String
   field :stock, type: Integer
   field :available, type: Boolean
-  field :book_codes, type: Array, default: { }
+
 
   #ralationships specific for material
   has_one :cover, class_name: "Material", inverse_of: :cover_book
@@ -24,7 +25,8 @@ class Book
   has_and_belongs_to_many :transfers
 
   belongs_to :center
-  has_many :book_borrows
+  # has_many :book_borrows
+  has_many :book_insts
   has_many :feedbacks
   has_many :favorites
 
@@ -105,5 +107,38 @@ class Book
     else
       ""
     end
+  end
+
+  def generate_compressed_file(number)
+    folder = "public/qrcodes/"
+    png_files = (0...number).to_a.map do |n|
+      book_inst = self.book_insts.create
+
+      qrcode = RQRCode::QRCode.new(book_inst.id.to_s)
+
+      print(folder + book_inst.id.to_s + ".png")
+
+      png = qrcode.as_png(
+              resize_gte_to: false,
+              resize_exactly_to: false,
+              fill: 'white',
+              color: 'black',
+              size: 300,
+              border_modules: 4,
+              module_px_size: 6,
+              file: folder + book_inst.id.to_s + ".png"
+            )
+      book_inst.id.to_s + ".png"
+    end
+
+    zipfile_name = folder + SecureRandom.uuid.to_s + ".zip"
+
+    Zip::File.open(zipfile_name, Zip::File::CREATE) do |zipfile|
+      png_files.each do |filename|
+        zipfile.add(filename, folder + filename)
+      end
+      # zipfile.get_output_stream("myFile") { |os| os.write "myFile contains just this" }
+    end
+    zipfile_name
   end
 end

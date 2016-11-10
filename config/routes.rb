@@ -111,6 +111,7 @@ Rails.application.routes.draw do
       member do
         post :set_available
         post :upload_photo
+        get :download_qrcode
       end
     end
 
