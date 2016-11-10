@@ -11,10 +11,10 @@
           %span.success 支付已完成
         .item
           %span 课程：
-          %span 少儿计算机信息技术
+          %span= @course.name || @course.course.name
         .item
           %span 将于
-          %span.time 2016/10/23 14:00
+          %span.time= @course.start_time
           %span 开始上课，请提前到达～
     .btn-div
-      %button.btn#desc 查看详情
+      %a.btn#desc{href: "/user_mobile/courses/" + @course.id.to_s} 查看详情

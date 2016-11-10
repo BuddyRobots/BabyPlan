@@ -73,6 +73,8 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
     end
     render json: retval_wrapper(nil) and return
   end
+
   def pay_success
+    @course = CourseInst.where(id: params[:id]).first
   end
 end

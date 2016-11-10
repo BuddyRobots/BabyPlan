@@ -14,9 +14,10 @@ $ ->
           { },
           (data) ->
             # redirect to the result page
+            location.href = "/user_mobile/courses/" + window.course_id + '/pay_success'
           )
       else
-        # redirect to the result page
+        # do nothing
       return
     return
 

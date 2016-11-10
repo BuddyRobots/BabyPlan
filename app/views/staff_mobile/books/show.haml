@@ -1,0 +1,17 @@
+- content_for :app_head do
+  = javascript_include_tag "pages/staff_mobile/books/scan-bundle"
+  = stylesheet_link_tag "pages/staff_mobile/books/scan-bundle", :media => "all"
+
+- content_for :app_content do
+  .main-div
+    .desc-div
+      .desc
+        %p.items= "绘本名称：" + @book.name
+        - if @book.isbn.present?
+          %p.items#num= "ISBN号：" + @book.isbn
+        %p.items= "当前状态：" + @book_inst.status_str
+        - if @book_inst.current_borrow.present?
+          %p.items= "借阅人：" + @book_inst.borrow_info
+      %img.icon{:src => "/assets/manager/success_mini.png"}
+    .btn-div
+      %a.btn#clicked{:type => "button", href: "/staff_mobile/books"} 完成

@@ -3,6 +3,9 @@ class StaffMobile::SessionsController < StaffMobile::ApplicationController
 
   # m_frontpage
   def index
+    if @current_user.present?
+      redirect_to staff_mobile_books_path and return
+    end
   end
 
   def create

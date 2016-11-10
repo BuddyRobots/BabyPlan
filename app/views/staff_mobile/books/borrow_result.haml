@@ -4,20 +4,22 @@
 
 - content_for :app_content do
   .main-div
-    .unreturn-div
-      %img.unreturn-icon{:src => "/assets/manager/fail.png"}
-      %p.title#unreturn 该绘本尚未归还！
-      
-      /隐藏wrong-qrcode  unfound
-      %p.title#wrong-qrcode 该二维码不属藏书二维码！
-      %p.title#unfound 该绘本不是本儿童中心藏书！
-    .desc-div
-      .desc
-        %p.items 读者姓名：王小明
-        %p.items 手机号码：12345656577
-        %p.items 绘本名称：奥菲利亚的影子剧院
-        %p.items#num ISBN号：9894743966
-      %img.icon{:src => "/assets/manager/success_mini.png"}
+    - if @err.present?
+      .unreturn-div
+        %img.unreturn-icon{:src => "/assets/manager/fail.png"}
+        - if @err == "book_not_exist"
+          %p.title#unfound 该绘本不是本儿童中心藏书！
+        - if @err == "book_not_returned"
+          %p.title#unreturn 该绘本尚未归还！
+    - else
+      .desc-div
+        .desc
+          %p.items= "读者姓名：" + @borrow.client.name
+          %p.items= "手机号码：" + @borrow.client.mobile
+          %p.items= "绘本名称：" + @borrow.book_inst.book.name
+          - if @borrow.book_inst.book.isbn.present?
+            %p.items#num= "ISBN号：" + @borrow.book_inst.book.isbn
+        %img.icon{:src => "/assets/manager/success_mini.png"}
     .btn-div
-      %button.btn#clicked{:type => "button"} 继续借出
-      %button.btn#unclicked{:type => "button"} 完成
+      %a.btn#clicked{:type => "button", href: borrow_staff_mobile_books_path + "?mobile=" + @mobile} 继续借出
+      %a.btn#unclicked{:type => "button", href: staff_mobile_books_path} 完成

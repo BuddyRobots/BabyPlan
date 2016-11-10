@@ -3,6 +3,7 @@
   = stylesheet_link_tag "pages/user_mobile/courses/new-bundle", :media => "all"
   :javascript
     window.course_participate_id="#{@course_participate.id.to_s}"
+    window.course_id="#{@course.id.to_s}"
 
 - content_for :app_content do
   .hide
@@ -43,4 +44,4 @@
         .price.clearfix
           %span.float-left 公益价：
           %span.float-right#public-price= @course.price_pay
-    %a.btn#wechat-pay{:href => pay_success_user_mobile_courses_path, :type => "button"}　微信支付
+    %a.btn#wechat-pay{:href => "javascript:void(0);", :type => "button"}　微信支付

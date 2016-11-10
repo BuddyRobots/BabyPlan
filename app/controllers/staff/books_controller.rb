@@ -99,4 +99,12 @@ class Staff::BooksController < Staff::ApplicationController
     @book.save
     redirect_to action: :show, id: @book.id.to_s and return
   end
+
+  def download_qrcode
+    @book = current_center.books.where(id: params[:id]).first
+    if @book.blank?
+      redirect_to action: :index and return
+    end
+    send_file(@book.generate_compressed_file(@book.stock), filename: "qrcode.zip")
+  end
 end

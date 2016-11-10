@@ -169,7 +169,8 @@ class CourseParticipate
       self.signin_info[class_num] = Time.now.to_i
       self.save
     end
-    nil
+    # the class_num returned is used to show info in the page, thus convert to 1-based
+    { class_num: (class_num + 1).to_s, course_id: self.course_inst.id.to_s }
   end
 
   # status related

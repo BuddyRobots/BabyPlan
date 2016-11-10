@@ -7,11 +7,6 @@
     .content
       %p.telephone 手机号
       %p.notice 请输入借阅者的注册手机号
-      %input#mobile.form-control{:type => "text"}
+      %input#mobile.form-control{:type => "text", value: @mobile}
       %button.btn.next-btn{:type => "button"} 下一步
-      / 弹出框  现在隐藏　　手机号出错显示
-      .dialog#wrong-num
-        %p 请输入正确的手机号
-      .dialog#unregister-num
-        %p 该手机号未注册
         

@@ -92,6 +92,9 @@ Rails.application.routes.draw do
     end
 
     resources :transfers do
+      member do
+        post :add_to_transfer
+      end
     end
 
     resources :courses do
@@ -111,6 +114,7 @@ Rails.application.routes.draw do
       member do
         post :set_available
         post :upload_photo
+        get :download_qrcode
       end
     end
 
@@ -135,12 +139,13 @@ Rails.application.routes.draw do
       end
     end
     resources :books do
+      member do
+        get :back
+      end
       collection do
         get :borrow
         post :do_borrow
         get :borrow_result
-        get :back
-        get :scan
       end
     end
     resources :transfers do
@@ -166,9 +171,11 @@ Rails.application.routes.draw do
       end
     end
     resources :courses do
+      member do
+        get :pay_success
+      end
       collection do
         get :review
-        get :pay_success
         post :notify
         post :signin
       end
