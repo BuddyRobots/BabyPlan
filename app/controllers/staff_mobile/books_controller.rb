@@ -24,6 +24,7 @@ class StaffMobile::BooksController < StaffMobile::ApplicationController
   end
 
   def borrow_result
+    @mobile = params[:mobile]
     if params[:borrow_id].present?
       @borrow = BookBorrow.where(id: params[:borrow_id]).first
     end
