@@ -18,8 +18,7 @@ $ ->
           (data) ->
             console.log data
             if data.success
-              location.href = "/staff_mobile/transfers/transfer_out?transfer_id="
-                              + window.transfer_id + "&name=" + data.name + "&isbn=" + data.isbn
+              location.href = "/staff_mobile/transfers/transfer_out?transfer_id=" + window.transfer_id + "&name=" + data.name + "&isbn=" + data.isbn
               # show the book info
               # $(".unreturned-div").hide()
               # $(".desc-div").show()
@@ -31,8 +30,7 @@ $ ->
               #   $("#isbn").hide()
             else
               # show the error info
-              location.href = "/staff_mobile/transfers/transfer_out?transfer_id="
-                              + window.transfer_id + "&code=" + data.code
+              location.href = "/staff_mobile/transfers/transfer_out?transfer_id=" + window.transfer_id + "&code=" + data.code
               $(".unreturned-div").show()
               $(".desc-div").hide()
               if data.code == BOOK_NOT_EXIST
