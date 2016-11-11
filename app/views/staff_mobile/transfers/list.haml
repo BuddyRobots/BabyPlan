@@ -12,7 +12,7 @@
           %a{:href => "#"}　迁入记录
     .content.out-list
       - @current_user.staff_center.out_transfers.each do |transfer|
-        .item-div
+        .item-div{data: {id: transfer.id.to_s}}
           .blue-line
           .desc-div
             .caption-div
@@ -27,7 +27,7 @@
               %span.end= transfer.in_center.name
     .content.in-list
       - @current_user.staff_center.in_transfers.each do |transfer|
-        .item-div
+        .item-div{data: {id: transfer.id.to_s}}
           .blue-line
           .desc-div
             .caption-div

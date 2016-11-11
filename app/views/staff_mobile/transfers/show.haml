@@ -54,8 +54,12 @@
         %button.btn.left-btn#confirm-transfer-out{:type => "button", data: {id: @transfer.id.to_s}} 确定运出
         %button.btn.right-btn#continue-transfer-out{:type => "button"}　继续添加
     - if @transfer.status == Transfer::ONGOING
-      / 开始迁入button
-      %button.btn#start{:type => "button"}　开始迁入
+      - if @transfer.in_center == @current_user.staff_center
+        / 开始迁入button
+        %button.btn#start{:type => "button"}　开始迁入
+      - else
+        / 回到首页button
+        %button.btn#back{:type => "button"}　回到首页
     - if @transfer.status == Transfer::DONE
       / 回到首页button
       %button.btn#back{:type => "button"}　回到首页
