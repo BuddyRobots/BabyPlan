@@ -2,6 +2,8 @@ $ ->
   $("li").click ->
     $(this).siblings().removeClass("active")
 
+  $(".in-list").hide()
+
   $(".out-li").click ->
     $(".out-list").show()
     $(".in-list").hide()
