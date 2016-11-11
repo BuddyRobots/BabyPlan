@@ -151,6 +151,8 @@ Rails.application.routes.draw do
         post :add_to_transfer
         post :transfer_arrive
         post :confirm_transfer_out
+        post :finish_transfer
+        get :confirm_lost
       end
       collection do
         get :list
@@ -159,7 +161,6 @@ Rails.application.routes.draw do
         get :transfer_out
         get :transfer_done
         get :transfer_in
-        get :confirm_lost
       end
     end
   end

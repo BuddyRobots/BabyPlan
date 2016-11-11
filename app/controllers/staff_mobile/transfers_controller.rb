@@ -55,13 +55,21 @@ class StaffMobile::TransfersController < StaffMobile::ApplicationController
     @code = params[:code].to_s
   end
 
-  def confirm_lost
-  end
-
   def confirm_transfer_out
     @transfer = Transfer.where(id: params[:id]).first
     retval = @transfer.confirm_transfer_out
     render json: retval_wrapper(retval) and return
+  end
+
+  def finish_transfer
+    @transfer = Transfer.where(id: params[:id]).first
+    retval = @transfer.finish(params[:force].to_s == "true")
+    render json: retval_wrapper(retval) and return
+  end
+
+  def confirm_lost
+    @transfer = Transfer.where(id: params[:id]).first
+    @transfer.finish(params[:force].to_s == "true")
   end
 
   def transfer_done
