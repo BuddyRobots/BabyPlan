@@ -28,12 +28,8 @@ $ ->
               # show the error info
               $(".unreturn-div").show()
               $(".desc-div").hide()
-              if data.code == BOOK_NOT_EXIST
-                $("#unreturn").text("没有找到绘本")
-              if data.code == BOOK_NOT_RETURNED
-                $("#unreturn").text("该绘本在借出状态")
-              if data.code == BOOK_IN_TRANSFER
-                $("#unreturn").text("该绘本在迁移状态")
+              if data.code == BOOK_NOT_IN_TRANSFER
+                $("#unreturn").text("绘本不在此次迁移中")
           )
 
   if window.name != ""
