@@ -1,9 +1,11 @@
 
 $ ->
-	$("#review").click ->
-    $(".mask").show()
-    $("#review").hide()
 
-  $(".empty-div").click ->
+  $("#review").click ->
+    $(".mask").show()
+
+  $(".text-div").click ->
+    return false
+
+  $(".mask").click ->
     $(".mask").hide()
-    $("#review").show()

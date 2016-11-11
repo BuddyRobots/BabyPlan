@@ -133,19 +133,8 @@ article {
 	background: rgb(0, 0, 0);
 	background: rgba(0, 0, 0,0.36);
 	display: none;
-	display: -webkit-flex;
-	-webkit-flex-direction: column;
-	flex-direction: column;
-	-webkit-justify-content: space-between;
-	justify-content: space-between;
-}
-.empty-div {
-	-webkit-flex: 1;
-	flex: 1;
 }
 .text-div {
-	-webkit-flex: 1;
-	flex: 1;
 	position: absolute;
 	bottom: 0;
 	right: 0;
@@ -170,7 +159,6 @@ article {
 	float: left;
 	height: 2em;
 	line-height: 2em;
-	// margin-top: 1%;
 }
 .star-div{
 	width: 55%;
