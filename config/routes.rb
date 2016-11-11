@@ -92,9 +92,6 @@ Rails.application.routes.draw do
     end
 
     resources :transfers do
-      member do
-        post :add_to_transfer
-      end
     end
 
     resources :courses do
@@ -149,6 +146,9 @@ Rails.application.routes.draw do
       end
     end
     resources :transfers do
+      member do
+        post :add_to_transfer
+      end
       collection do
         get :list
         get :out_list
