@@ -12,19 +12,20 @@
         .desc
           .items
             %span 迁移本数：
-            %span#num 24
+            %span#num= @transfer.book_insts.count
           .items
             %span 迁移状态：
-            %span#status 运输中
-          .items
-            %span 迁出时间：
-            %span#date 24
+            %span#status= @transfer.status_str
+          - if @transfer.out_time.present?
+            .items
+              %span 迁出时间：
+              %span#date= Time.at(@transfer.out_time).strftime("%Y-%m-%d %H:%M")
           .items
             %span 迁出中心：
-            %span#center-out 天通苑南儿童中心
+            %span#center-out= @transfer.out_center.name
           .items
             %span 迁入中心：
-            %span#center-in 金台夕照儿童中心
+            %span#center-in= @transfer.in_center.name
       / 缺失绘本项#lost-book
       .content-div#lost-book
         .caption
