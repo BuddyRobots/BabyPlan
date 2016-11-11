@@ -10,7 +10,7 @@ $ ->
         $.postJSON(
           '/staff_mobile/transfers/' + window.transfer_id + '/add_to_transfer',
           {
-            transfer_id: window.transfer_id
+            book_inst_id: result
           },
           (data) ->
             console.log data
