@@ -1,3 +1,5 @@
+@import "jquery-ui";
+
 html {
 	font-size: 16px;
 	height: 100%;
@@ -63,84 +65,41 @@ a{
 .item-div {
 	width: 95.3125%;
 	margin: 0 auto;
-	font-size: 3em;
+	font-size: 3.2em;
 	color: #3e3e3e;
 	background: #fff;
 	border-radius: 8px;
 	margin-bottom: 6.25%;
 }
-#figure {
-	padding: 8.3% 4% 8.3% 5%; 
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	display: -webkit-flex;
-	-webkit-align-items: center;
-	-webkit-justify-content: space-between;
-	p {
-		width: 70%;
-	}
-	a {
-		width: 28.83%;
-		border-radius: 50%;
-		overflow: hidden;
-	}
-}
-.item {
+.item-box {
 	padding: 4% 5%;
 	border-bottom: 1px solid #eee;
 }
-.left {
-	float: left;
-}.right {
-	float: right;
-}
-.avatar-icon {
-	width: 100%;
-	max-width: 160px;
-}
-.item-box {
-	padding: 0 5%;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	border-bottom: 1px solid #eee;
-	display: -webkit-flex;
-	-webkit-align-items: center;
-	-webkit-justify-content: space-between;
-	p {
-		width: 70%;
-	}
-	a {
-		width: 18.22%;
-	}
-}
-.more-icon {
-	width: 100%;
-	max-width: 100px;
-}
-#exit {
+.item {
 	display: inline-block;
-	text-align: center;
+	width: 33%;
+}
+.input-div {
+	width: 60%;
+	border: none;
+	outline: none;
+	-webkit-appearance: none;
+	appearance: none;
+	background: none;
+}
+.btn-div {
+	width: 84.375%;
+	margin: 0 auto;
+}
+#confirm {
 	width: 100%;
-	background: #d70c19;
 	font-size: 3.6em;
 	color: #fff;
 	padding: 3.68%;
-	border-radius: 0;
+	background: #d70c19;
 }
-#exit:link {
-	text-decoration: none;
-}
-#exit:visited {
-	text-decoration: none;
-}
-#exit:hover {
-	text-decoration: none;
-}
-#exit:active {
-	text-decoration: none;
-}
+
+
 
 
 @media screen and (max-width:640px) {

@@ -25,6 +25,8 @@ class UserMobile::SettingsController < UserMobile::ApplicationController
 
   def reset_password
   end
+  def profile
+  end
 
   def update_password
     retval = current_user.change_password(params[:old_password], params[:new_password])

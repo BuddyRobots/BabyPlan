@@ -1,0 +1,33 @@
+- content_for :app_head do
+  = javascript_include_tag "pages/user_mobile/settings/profile-bundle"
+  = stylesheet_link_tag "pages/user_mobile/settings/profile-bundle", :media => "all"
+
+- content_for :app_content do
+  .content-area
+    .header
+      .cloud
+        %p 个人资料
+      %a{:href => account_user_mobile_settings_path}
+        %img.back{:src => "/assets/mybook/back.png"}
+
+    .item-div
+      .item-box
+        %span.item 儿童姓名：
+        %span 王小明
+      .item-box
+        %span.item 出生日期：
+        %input.input-div#datepicker
+      .item-box
+        %span.item 性别：
+        %select.input-div
+          %option 请点击选择儿童性别
+          %option 男
+          %option 女
+      .item-box
+        %span.item 家长姓名：
+        %input.input-div
+      .item-box
+        %span.item 详细地址：
+        %input.input-div
+    .btn-div
+      %button.btn#confirm 确定
