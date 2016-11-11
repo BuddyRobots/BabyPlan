@@ -4,8 +4,8 @@ $ ->
 
   $(".out-li").click ->
     $(".out-list").show()
-    $(".in-list").show()
+    $(".in-list").hide()
 
   $(".in-li").click ->
     $(".in-list").show()
-    $(".out-list").show()
+    $(".out-list").hide()

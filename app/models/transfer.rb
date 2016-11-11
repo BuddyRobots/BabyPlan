@@ -97,7 +97,7 @@ class Transfer
   end
 
   def confirm_transfer_out
-    self.update_attributes({status: ONGOING})
+    self.update_attributes({status: ONGOING, out_time: Time.now.to_i})
     nil
   end
 end
