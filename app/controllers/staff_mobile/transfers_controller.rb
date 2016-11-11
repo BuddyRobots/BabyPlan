@@ -34,6 +34,8 @@ class StaffMobile::TransfersController < StaffMobile::ApplicationController
   # m_transfer_back, m_back, m_transfer_continue, m_transfer_desc, m_transfer_start
   def show
     @transfer = Transfer.where(id: params[:id]).first
+    @books_info = @transfer.books_info
+    @lost_books_info = @transfer.lost_books_info
   end
 
   # m_continue_transport_out, m_transport_out_end, m_transport_out
