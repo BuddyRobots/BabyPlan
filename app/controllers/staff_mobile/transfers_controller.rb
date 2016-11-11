@@ -5,7 +5,7 @@ class StaffMobile::TransfersController < StaffMobile::ApplicationController
   end
 
   def create
-    retval = Transfer.create_new(params[:out_transfer_id], params[:in_transfer_id])
+    retval = Transfer.create_new(params[:out_center_id], params[:in_center_id])
     render json: retval_wrapper(retval) and return
   end
 

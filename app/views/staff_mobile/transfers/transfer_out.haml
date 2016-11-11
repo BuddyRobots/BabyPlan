@@ -1,7 +1,7 @@
 - content_for :app_head do
   = javascript_include_tag "pages/staff_mobile/transfers/transfer_out-bundle"
   = stylesheet_link_tag "pages/staff_mobile/transfers/transfer_out-bundle", :media => "all"
-  :javascript:
+  :javascript
     window.transfer_id="#{@transfer_id}"
     window.auto="#{@auto}"
 
