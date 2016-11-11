@@ -16,7 +16,7 @@ $ ->
             console.log data
             if data.success
               # show the book info
-              $(".unreturned-div").hide()
+              $(".unreturn-div").hide()
               $(".desc-div").show()
               $("#name").text("绘本名称：" + data.name)
               if data.isbn != ""
@@ -26,7 +26,7 @@ $ ->
                 $("#isbn").hide()
             else
               # show the error info
-              $(".unreturned-div").show()
+              $(".unreturn-div").show()
               $(".desc-div").hide()
               if data.code == BOOK_NOT_EXIST
                 $("#unreturn").text("没有找到绘本")
@@ -40,7 +40,7 @@ $ ->
   #   scan()isbn
   if window.name != ""
     # show the book info
-    $(".unreturned-div").hide()
+    $(".unreturn-div").hide()
     $(".desc-div").show()
     $("#name").text("绘本名称：" + window.name)
     if window.isbn != ""
@@ -50,7 +50,7 @@ $ ->
       $("#isbn").hide()
   else
     # show the error info
-    $(".unreturned-div").show()
+    $(".unreturn-div").show()
     $(".desc-div").hide()
     if window.code == BOOK_NOT_EXIST
       $("#unreturn").text("没有找到绘本")
