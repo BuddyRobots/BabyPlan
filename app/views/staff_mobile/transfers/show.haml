@@ -1,6 +1,8 @@
 - content_for :app_head do
   = javascript_include_tag "pages/staff_mobile/transfers/show-bundle"
   = stylesheet_link_tag "pages/staff_mobile/transfers/show-bundle", :media => "all"
+  :javascript
+    window.transfer_id="#{@transfer.id.to_s}"
 
 - content_for :app_content do
   .main-div
@@ -49,8 +51,8 @@
                 %span.book-nums= "×" + book[:count].to_s
     - if @transfer.status == Transfer::PREPARE
       .btn-div
-        %button.btn#confirm-transfer-out{:type => "button", data: {id: @transfer.id.to_s}} 确定运出
-        %button.btn#continue{:type => "button"}　继续添加
+        %button.btn.left-btn#confirm-transfer-out{:type => "button", data: {id: @transfer.id.to_s}} 确定运出
+        %button.btn.right-btn#continue-transfer-out{:type => "button"}　继续添加
     - if @transfer.status == Transfer::ONGOING
       / 开始迁入button
       %button.btn#start{:type => "button"}　开始迁入
