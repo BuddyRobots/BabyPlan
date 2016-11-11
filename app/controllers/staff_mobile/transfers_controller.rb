@@ -51,4 +51,7 @@ class StaffMobile::TransfersController < StaffMobile::ApplicationController
   # m_transport_lost
   def confirm_lost
   end
+
+  def transfer_done
+  end
 end

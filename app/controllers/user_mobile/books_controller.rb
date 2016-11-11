@@ -14,6 +14,9 @@ class UserMobile::BooksController < UserMobile::ApplicationController
     @book = Book.where(id: params[:id]).first
     @back = params[:back]
   end
+
+  def review
+  end
 end
 
 

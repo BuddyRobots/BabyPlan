@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get 'welcome/courseinfo'
   get 'welcome/managecenter'
   get 'welcome/evaluate'
+  get 'welcome/transfer_done'
   get 'welcome/test_image_uploader'
 
   resources :centers do
@@ -154,6 +155,7 @@ Rails.application.routes.draw do
         get :out_list
         get :in_list
         get :transfer_out
+        get :transfer_done
         get :transfer_in
         get :confirm_lost
       end
@@ -164,6 +166,9 @@ Rails.application.routes.draw do
     resources :announcements do
     end
     resources :books do
+      collection do
+        get :review
+      end
     end
     resources :centers do
       member do
@@ -210,6 +215,7 @@ Rails.application.routes.draw do
         get :account
         get :reset_password
         get :sign
+        get :profile
         post :update_password
       end
     end
