@@ -16,9 +16,8 @@
         .desc-div
           .caption-div
             %img.icon{:src => "/assets/manager/time.png"}
-            - if transfer.out_time.present?
-              %span.date= Time.at(transfer.out_time).strftime("%Y-%m-%d")
-              %span.time= Time.at(transfer.out_time).strftime("%H:%M")
+            %span.date= transfer.created_at.strftime("%Y-%m-%d")
+            %span.time= transfer.created_at.strftime("%H:%M")
             %span.status= transfer.status_str
           .address-div
             %span.start= transfer.out_center.name
