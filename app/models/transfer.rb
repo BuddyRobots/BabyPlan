@@ -41,6 +41,14 @@ class Transfer
     { name: book_inst.book.name, isbn: book_inst.book.isbn }
   end
 
+  def arrive(book_inst_id)
+    book_inst = BookInst.where(id: book_inst_id).first
+    return BOOK_NOT_IN_TRANSFER if !self.book_insts.include?(book_inst)
+    self.arrived_books << book_inst.id.to_s
+    self.save
+    { name: book_inst.book.name, isbn: book_inst.book.isbn }
+  end
+
   def status_str
     if self.status == PREPARE
       return "准备中"

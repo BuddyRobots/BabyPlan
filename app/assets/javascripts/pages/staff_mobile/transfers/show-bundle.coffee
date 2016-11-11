@@ -15,7 +15,7 @@ $ ->
           $.mobile_page_notification "服务器出错，请稍后重试"
       )
 
-  scan = ->
+  continue_out_scan = ->
     wx.scanQRCode
       needResult: 1
       scanType: ["qrCode"]
@@ -35,7 +35,29 @@ $ ->
           )
 
   $("#continue-transfer-out").click ->
-    scan()
+    continue_out_scan()
 
   $("#back").click ->
     location.href = "/staff_mobile/transfers"
+
+  start_in_scan = ->
+    wx.scanQRCode
+      needResult: 1
+      scanType: ["qrCode"]
+      success: (res) ->
+        result = res.resultStr
+        $.postJSON(
+          '/staff_mobile/transfers/' + window.transfer_id + '/transfer_arrive',
+          {
+            book_inst_id: result
+          },
+          (data) ->
+            console.log data
+            if data.success
+              location.href = "/staff_mobile/transfers/transfer_in?transfer_id=" + window.transfer_id + "&name=" + data.name + "&isbn=" + data.isbn
+            else
+              location.href = "/staff_mobile/transfers/transfer_in?transfer_id=" + window.transfer_id + "&code=" + data.code
+          )
+
+  $("#start").click ->
+    start_in_scan()

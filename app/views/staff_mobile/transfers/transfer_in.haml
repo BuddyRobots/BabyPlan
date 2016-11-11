@@ -1,6 +1,11 @@
 - content_for :app_head do
   = javascript_include_tag "pages/staff_mobile/transfers/transfer_in-bundle"
   = stylesheet_link_tag "pages/staff_mobile/transfers/transfer_in-bundle", :media => "all"
+  :javascript
+    window.transfer_id="#{@transfer_id}"
+    window.name="#{@name}"
+    window.isbn="#{@isbn}"
+    window.code="#{@code}"
 
 - content_for :app_content do
   .main-div

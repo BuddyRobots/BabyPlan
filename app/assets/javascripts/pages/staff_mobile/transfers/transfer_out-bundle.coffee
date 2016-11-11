@@ -36,8 +36,6 @@ $ ->
                 $("#unreturn").text("该绘本在迁移状态")
           )
 
-  # if window.auto == 'true'
-  #   scan()isbn
   if window.name != ""
     # show the book info
     $(".unreturn-div").hide()
