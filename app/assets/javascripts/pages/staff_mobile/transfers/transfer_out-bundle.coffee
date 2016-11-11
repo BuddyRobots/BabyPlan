@@ -1,5 +1,5 @@
 $ ->
-	weixin_jsapi_authorize(["scanQRCode"])
+  weixin_jsapi_authorize(["scanQRCode"])
 
   scan = ->
     wx.scanQRCode
@@ -7,21 +7,37 @@ $ ->
       scanType: ["qrCode"]
       success: (res) ->
         result = res.resultStr
-	      $.postJSON(
-	        '/staff_mobile/transfers/' + window.transfer_id + '/add_to_transfer',
-	        {
-	          transfer_id: window.transfer_id
-	        },
-	        (data) ->
-	          console.log data
-	          if data.success
-	          	# show the book info
-	          else
-	          	# show the error info
-	        )
+        $.postJSON(
+          '/staff_mobile/transfers/' + window.transfer_id + '/add_to_transfer',
+          {
+            transfer_id: window.transfer_id
+          },
+          (data) ->
+            console.log data
+            if data.success
+              # show the book info
+              $(".unreturned-div").hide()
+              $(".desc-div").show()
+              $("#name").text("绘本名称：" + data.name)
+              if data.isbn != ""
+                $("#isbn").show()
+                $("#isbn").text("ISBN号：" + data.isbn)
+              else
+                $("#isbn").hide()
+            else
+              # show the error info
+              $(".unreturned-div").show()
+              $(".desc-div").hide()
+              if data.code == BOOK_NOT_EXIST
+                $("#unreturn").text("没有找到绘本")
+              if data.code == BOOK_NOT_RETURNED
+                $("#unreturn").text("该绘本在借出状态")
+              if data.code == BOOK_IN_TRANSFER
+                $("#unreturn").text("该绘本在迁移状态")
+          )
 
-	if window.auto == 'true'
-		scan()
+  if window.auto == 'true'
+    scan()
 
   $("#clicked").click ->
-  	scan()
+    scan()
