@@ -40,4 +40,72 @@ class Transfer
     self.book_insts << book_inst
     { name: book_inst.book.name, isbn: book_inst.book.isbn }
   end
+
+  def arrive(book_inst_id)
+    book_inst = BookInst.where(id: book_inst_id).first
+    return BOOK_NOT_IN_TRANSFER if !self.book_insts.include?(book_inst)
+    self.arrived_books << book_inst.id.to_s
+    self.save
+    { name: book_inst.book.name, isbn: book_inst.book.isbn }
+  end
+
+  def status_str
+    if self.status == PREPARE
+      return "准备中"
+    end
+    if self.status == ONGOING
+      return "运输中"
+    end
+    if self.status == DONE
+      return "已完成"
+    end
+    if self.status == ABNORMAL
+      return "绘本有缺失"
+    end
+  end
+
+  def lost_books_info
+    lost_book_insts = []
+    self.book_insts.each do |book_inst|
+      if !self.arrived_books.include?(book_inst.id.to_s)
+        lost_book_insts << book_inst
+      end
+    end
+    lost_books = { }
+    lost_book_insts.each do |e|
+      book_id = e.book.id.to_s
+      lost_books[book_id] ||= 0
+      lost_books[book_id] += 1
+    end
+    lost_books_info = []
+    lost_books.each do |book_id, count|
+      lost_books_info << {
+        name: Book.where(id: book_id).first.name,
+        count: count
+      }
+    end
+    return lost_books_info
+  end
+
+  def books_info
+    books = { }
+    self.book_insts.each do |e|
+      book_id = e.book.id.to_s
+      books[book_id] ||= 0
+      books[book_id] += 1
+    end
+    books_info = []
+    books.each do |book_id, count|
+      books_info << {
+        name: Book.where(id: book_id).first.name,
+        count: count
+      }
+    end
+    return books_info
+  end
+
+  def confirm_transfer_out
+    self.update_attributes({status: ONGOING, out_time: Time.now.to_i})
+    nil
+  end
 end

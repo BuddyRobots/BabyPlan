@@ -19,4 +19,4 @@
       %img.icon{:src => "/assets/manager/success_mini.png"}
     .btn-div
       %button.btn#clicked{:type => "button"} 继续迁出
-      %button.btn#unclicked{:type => "button"} 完成
+      %a.btn#unclicked{:type => "button", href: "/staff_mobile/transfers/" + @transfer_id} 完成

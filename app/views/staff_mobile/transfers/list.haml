@@ -6,57 +6,37 @@
   .main-div
     .header
       %ul.nav
-        %li.active
+        %li.out-li.active
           %a.vertical-line{:href => "#"} 迁出记录
-        %li
+        %li.in-li
           %a{:href => "#"}　迁入记录
-    .content
-      - 2.times do
-        .item-div
+    .content.out-list
+      - @current_user.staff_center.out_transfers.each do |transfer|
+        .item-div{data: {id: transfer.id.to_s}}
           .blue-line
           .desc-div
             .caption-div
               %img.icon{:src => "/assets/manager/time.png"}
-              %span.date 2016-12-12
-              %span.time 12:30
-              %span.status 运输中
+              - if transfer.out_time.present?
+                %span.date= Time.at(transfer.out_time).strftime("%Y-%m-%d")
+                %span.time= Time.at(transfer.out_time).strftime("%H:%M")
+              %span.status= transfer.status_str
             .address-div
-              %span.start 天通苑南儿童中心
+              %span.start= transfer.out_center.name
               %img.arrow{:src => "/assets/manager/arrow.png"}
-              %span.end 金台夕照儿童中心
-      .item-div
-        .blue-line
-        .desc-div
-          .caption-div
-            %img.icon{:src => "/assets/manager/time.png"}
-            %span.date 2016-12-12
-            %span.time 12:30
-            %span#normal-end　已完成
-          .address-div
-            %span.start 天通苑南儿童中心
-            %img.arrow{:src => "/assets/manager/arrow.png"}
-            %span.end 金台夕照儿童中心
-      .item-div
-        .blue-line
-        .desc-div
-          .caption-div
-            %img.icon{:src => "/assets/manager/time.png"}
-            %span.date 2016-12-12
-            %span.time 12:30
-            %span#prepare 准备中
-          .address-div
-            %span.start 天通苑南儿童中心
-            %img.arrow{:src => "/assets/manager/arrow.png"}
-            %span.end 金台夕照儿童中心
-      .item-div
-        .blue-line
-        .desc-div
-          .caption-div
-            %img.icon{:src => "/assets/manager/time.png"}
-            %span.date 2016-12-12
-            %span.time 12:30
-            %span#wrong-end 已完成
-          .address-div
-            %span.start 天通苑南儿童中心
-            %img.arrow{:src => "/assets/manager/arrow.png"}
-            %span.end 金台夕照儿童中心
+              %span.end= transfer.in_center.name
+    .content.in-list
+      - @current_user.staff_center.in_transfers.each do |transfer|
+        .item-div{data: {id: transfer.id.to_s}}
+          .blue-line
+          .desc-div
+            .caption-div
+              %img.icon{:src => "/assets/manager/time.png"}
+              - if transfer.out_time.present?
+                %span.date= Time.at(transfer.out_time).strftime("%Y-%m-%d")
+                %span.time= Time.at(transfer.out_time).strftime("%H:%M")
+              %span.status= transfer.status_str
+            .address-div
+              %span.start= transfer.out_center.name
+              %img.arrow{:src => "/assets/manager/arrow.png"}
+              %span.end= transfer.in_center.name

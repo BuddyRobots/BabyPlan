@@ -10,15 +10,16 @@
         .add-div
           %img.add{:src => "/assets/manager/add.png"}
           %span.add-word 创建新迁出
-    .item-div
-      .blue-line
-      .desc-div
-        .caption-div
-          %img.icon{:src => "/assets/manager/time.png"}
-          %span.date 2016-12-12
-          %span.time 12:30
-          %span.status 运输中
-        .address-div
-          %span.start 天通苑南儿童中心
-          %img.arrow{:src => "/assets/manager/arrow.png"}
-          %span.end 金台夕照儿童中心
+    - @prepare_transfers.each do |transfer|
+      .item-div.transfer-item{data: {id: transfer.id.to_s}}
+        .blue-line
+        .desc-div
+          .caption-div
+            %img.icon{:src => "/assets/manager/time.png"}
+            %span.date= transfer.created_at.strftime("%Y-%m-%d")
+            %span.time= transfer.created_at.strftime("%H:%M")
+            %span.status= transfer.status_str
+          .address-div
+            %span.start= transfer.out_center.name
+            %img.arrow{:src => "/assets/manager/arrow.png"}
+            %span.end= transfer.in_center.name

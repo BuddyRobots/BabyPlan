@@ -1,6 +1,8 @@
 - content_for :app_head do
   = javascript_include_tag "pages/staff_mobile/transfers/show-bundle"
   = stylesheet_link_tag "pages/staff_mobile/transfers/show-bundle", :media => "all"
+  :javascript
+    window.transfer_id="#{@transfer.id.to_s}"
 
 - content_for :app_content do
   .main-div
@@ -12,60 +14,52 @@
         .desc
           .items
             %span 迁移本数：
-            %span#num 24
+            %span#num= @transfer.book_insts.count
           .items
             %span 迁移状态：
-            %span#status 运输中
-          .items
-            %span 迁出时间：
-            %span#date 24
+            %span#status= @transfer.status_str
+          - if @transfer.out_time.present?
+            .items
+              %span 迁出时间：
+              %span#date= Time.at(@transfer.out_time).strftime("%Y-%m-%d %H:%M")
           .items
             %span 迁出中心：
-            %span#center-out 天通苑南儿童中心
+            %span#center-out= @transfer.out_center.name
           .items
             %span 迁入中心：
-            %span#center-in 金台夕照儿童中心
+            %span#center-in= @transfer.in_center.name
       / 缺失绘本项#lost-book
-      .content-div#lost-book
-        .caption
-          .blue-line
-          .title 缺失绘本
-        .lost-desc
-          .lost-items
-            %span 阿狸·梦之城堡
-            %span.nums ×1
-          .lost-items
-            %span 猜猜我有多爱你
-            %span.nums ×1
-          .lost-items
-            %span 你看起来好像很好吃
-            %span.nums ×1
-      .content-div
-        .caption
-          .blue-line
-          .title 绘本信息
-        .desc
-          - 2.times do
-            .items
-              %span 阿狸·梦之城堡
-              %span.book-nums ×2
-            .items
-              %span 猜猜我有多爱你
-              %span.book-nums ×1
-            .items
-              %span 你看起来好像很好吃
-              %span.book-nums ×3
-            .items
-              %span if you don't want to …
-              %span.book-nums ×1
-            .items
-              %span 爷爷一定有办法
-              %span.book-nums ×1
-    / 开始迁入button
-    %button.btn#start{:type => "button"}　开始迁入
-    / 回到首页button
-    %button.btn#back{:type => "button"}　回到首页
-    
-    .btn-div
-      %button.btn#finish{:type => "button"} 完成
-      %button.btn#continue{:type => "button"}　继续迁入
+      - if @transfer.status == Transfer::ABNORMAL && @lost_books_info.present?
+        .content-div#lost-book
+          .caption
+            .blue-line
+            .title 缺失绘本
+          .lost-desc
+            - @lost_books_info.each do |lost_book|
+              .lost-items
+                %span= lost_book[:name]
+                %span.nums= "×" + lost_book[:count].to_s
+      - if @books_info.present?
+        .content-div
+          .caption
+            .blue-line
+            .title 绘本信息
+          .desc
+            - @books_info.each do |book|
+              .items
+                %span= book[:name]
+                %span.book-nums= "×" + book[:count].to_s
+    - if @transfer.status == Transfer::PREPARE
+      .btn-div
+        %button.btn.left-btn#confirm-transfer-out{:type => "button", data: {id: @transfer.id.to_s}} 确定运出
+        %button.btn.right-btn#continue-transfer-out{:type => "button"}　继续添加
+    - if @transfer.status == Transfer::ONGOING
+      - if @transfer.in_center == @current_user.staff_center
+        / 开始迁入button
+        %button.btn#start{:type => "button"}　开始迁入
+      - else
+        / 回到首页button
+        %button.btn#back{:type => "button"}　回到首页
+    - if @transfer.status == Transfer::DONE
+      / 回到首页button
+      %button.btn#back{:type => "button"}　回到首页

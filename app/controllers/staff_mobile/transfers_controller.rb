@@ -15,41 +15,53 @@ class StaffMobile::TransfersController < StaffMobile::ApplicationController
     render json: retval_wrapper(retval) and return
   end
 
-  # m_transfer_out_record
+  def transfer_arrive
+    transfer = Transfer.where(id: params[:id]).first
+    retval = transfer.arrive(params[:book_inst_id])
+    render json: retval_wrapper(retval) and return
+  end
+
   def list
   end
 
-  # m_transfer_out
   def out_list
+    @prepare_transfers = @current_user.staff_center.out_transfers.where(status: Transfer::PREPARE)
   end
 
-  # m_transfer_in
   def in_list
+    @ongoing_transfers = @current_user.staff_center.in_transfers.where(status: Transfer::ONGOING)
   end
 
-  # m_transport_to_center
   def new
   end
 
-  # m_transfer_back, m_back, m_transfer_continue, m_transfer_desc, m_transfer_start
   def show
+    @transfer = Transfer.where(id: params[:id]).first
+    @books_info = @transfer.books_info
+    @lost_books_info = @transfer.lost_books_info
   end
 
-  # m_continue_transport_out, m_transport_out_end, m_transport_out
   def transfer_out
     @transfer_id = params[:transfer_id]
     @name = params[:name].to_s
     @isbn = params[:isbn].to_s
     @code = params[:code].to_s
-    # @auto = params[:auto]
   end
 
-  # m_transport_in, m_transport
   def transfer_in
+    @transfer_id = params[:transfer_id]
+    @name = params[:name].to_s
+    @isbn = params[:isbn].to_s
+    @code = params[:code].to_s
   end
 
-  # m_transport_lost
   def confirm_lost
+  end
+
+  def confirm_transfer_out
+    @transfer = Transfer.where(id: params[:id]).first
+    retval = @transfer.confirm_transfer_out
+    render json: retval_wrapper(retval) and return
   end
 
   def transfer_done

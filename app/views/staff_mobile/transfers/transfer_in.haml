@@ -1,6 +1,11 @@
 - content_for :app_head do
   = javascript_include_tag "pages/staff_mobile/transfers/transfer_in-bundle"
   = stylesheet_link_tag "pages/staff_mobile/transfers/transfer_in-bundle", :media => "all"
+  :javascript
+    window.transfer_id="#{@transfer_id}"
+    window.name="#{@name}"
+    window.isbn="#{@isbn}"
+    window.code="#{@code}"
 
 - content_for :app_content do
   .main-div
@@ -9,8 +14,8 @@
       %p.title#unreturn 该绘本不在迁入图书中！
     .desc-div
       .desc
-        %p.items 绘本名称：奥菲利亚的影子剧院
-        %p.items#num ISBN号：9894743966
+        %p.items#name 绘本名称：奥菲利亚的影子剧院
+        %p.items#isbn ISBN号：9894743966
       %img.icon{:src => "/assets/manager/success_mini.png"}
     .btn-div
       %button.btn#clicked{:type => "button"} 继续迁入
