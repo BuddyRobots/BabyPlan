@@ -24,6 +24,7 @@ class StaffMobile::TransfersController < StaffMobile::ApplicationController
 
   # m_transfer_in
   def in_list
+    @ongoing_transfers = @current_user.staff_center.in_transfers.where(status: Transfer::ONGOING)
   end
 
   # m_transport_to_center
