@@ -1,20 +1,17 @@
 - content_for :app_head do
   = javascript_include_tag "pages/staff_mobile/transfers/confirm_lost-bundle"
   = stylesheet_link_tag "pages/staff_mobile/transfers/confirm_lost-bundle", :media => "all"
+  :javascript
+    window.transfer_id="#{@transfer.id.to_s}"
 
 - content_for :app_content do
   .main-div
     .desc-div
       .desc
-        .lost-items
-          %span 阿狸·梦之城堡
-          %span.nums ×1
-        .lost-items
-          %span 猜猜我有多爱你
-          %span.nums ×1
-        .lost-items
-          %span 你看起来好像很好吃
-          %span.nums ×1
+        - @transfer.lost_books_info.each do |lost_book|
+          .lost-items
+            %span= lost_book[:name]
+            %span.nums= "×" + lost_book[:count].to_s
       %img.icon{:src => "/assets/manager/fail_mini.png"}
     .btn-div
       %button.btn#clicked{:type => "button"} 继续迁入

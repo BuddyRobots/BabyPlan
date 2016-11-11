@@ -43,7 +43,7 @@ class Transfer
 
   def arrive(book_inst_id)
     book_inst = BookInst.where(id: book_inst_id).first
-    return BOOK_NOT_IN_TRANSFER if !self.book_insts.include?(book_inst)
+    return ErrCode::BOOK_NOT_IN_TRANSFER if !self.book_insts.include?(book_inst)
     self.arrived_books << book_inst.id.to_s
     self.save
     { name: book_inst.book.name, isbn: book_inst.book.isbn }
@@ -106,6 +106,26 @@ class Transfer
 
   def confirm_transfer_out
     self.update_attributes({status: ONGOING, out_time: Time.now.to_i})
+    # update the book stock of the 
     nil
+  end
+
+  def finish(force)
+    lost_book_insts = []
+    self.book_insts.each do |book_inst|
+      if !self.arrived_books.include?(book_inst.id.to_s)
+        lost_book_insts << book_inst
+      end
+    end
+    if lost_book_insts.blank?
+      self.update_attributes({status: DONE})
+      return {finish: true}
+    end
+    if force
+      self.update_attributes({status: DONE})
+      return {finish: true}
+    else
+      return {finish: false}
+    end
   end
 end
