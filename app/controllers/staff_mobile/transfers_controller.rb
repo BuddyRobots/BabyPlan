@@ -15,11 +15,11 @@ class StaffMobile::TransfersController < StaffMobile::ApplicationController
     render json: retval_wrapper(retval) and return
   end
 
-  # m_transfer_out_record
   def list
+    @out_transfers = Transfer.where(out_center_id: @current_user.staff_center.id)
+    @in_transfers = Transfer.where(in_center_id: @current_user.staff_center.id)
   end
 
-  # m_transfer_out
   def out_list
   end
 
