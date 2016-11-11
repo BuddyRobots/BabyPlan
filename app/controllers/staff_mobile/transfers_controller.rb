@@ -38,7 +38,10 @@ class StaffMobile::TransfersController < StaffMobile::ApplicationController
   # m_continue_transport_out, m_transport_out_end, m_transport_out
   def transfer_out
     @transfer_id = params[:transfer_id]
-    @auto = params[:auto]
+    @name = params[:name].to_s
+    @isbn = params[:isbn].to_s
+    @code = params[:code].to_s
+    # @auto = params[:auto]
   end
 
   # m_transport_in, m_transport

@@ -3,7 +3,10 @@
   = stylesheet_link_tag "pages/staff_mobile/transfers/transfer_out-bundle", :media => "all"
   :javascript
     window.transfer_id="#{@transfer_id}"
-    window.auto="#{@auto}"
+    window.name="#{@name}"
+    window.isbn="#{@isbn}"
+    window.code="#{@code}"
+    / window.auto="#{@auto}"
 
 - content_for :app_content do
   .main-div
