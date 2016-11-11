@@ -36,3 +36,6 @@ $ ->
 
   $("#continue-transfer-out").click ->
     scan()
+
+  $("#back").click ->
+    location.href = "/staff_mobile/transfers"
