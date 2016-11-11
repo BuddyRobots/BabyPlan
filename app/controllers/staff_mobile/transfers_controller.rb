@@ -11,7 +11,7 @@ class StaffMobile::TransfersController < StaffMobile::ApplicationController
 
   def add_to_transfer
     transfer = Transfer.where(id: params[:id]).first
-    retval = transfer.add(params[:book_inst_id])
+    retval = transfer.add(@current_user.staff_center.id.to_s, params[:book_inst_id])
     render json: retval_wrapper(retval) and return
   end
 
