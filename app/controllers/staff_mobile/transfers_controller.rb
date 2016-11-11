@@ -16,11 +16,10 @@ class StaffMobile::TransfersController < StaffMobile::ApplicationController
   end
 
   def list
-    @out_transfers = Transfer.where(out_center_id: @current_user.staff_center.id)
-    @in_transfers = Transfer.where(in_center_id: @current_user.staff_center.id)
   end
 
   def out_list
+    @prepare_transfers = @current_user.staff_center.out_transfers.where(status: Transfer::PREPARE)
   end
 
   # m_transfer_in
