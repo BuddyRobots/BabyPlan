@@ -70,7 +70,7 @@ class Transfer
       lost_books[book_id] += 1
     end
     lost_books_info = []
-    lost_book.each do |book_id, count|
+    lost_books.each do |book_id, count|
       lost_books_info << {
         name: Book.where(id: book_id).first.name,
         count: count
@@ -87,12 +87,17 @@ class Transfer
       books[book_id] += 1
     end
     books_info = []
-    book.each do |book_id, count|
+    books.each do |book_id, count|
       books_info << {
         name: Book.where(id: book_id).first.name,
         count: count
       }
     end
     return books_info
+  end
+
+  def confirm_transfer_out
+    self.update_attributes({status: ONGOING})
+    nil
   end
 end

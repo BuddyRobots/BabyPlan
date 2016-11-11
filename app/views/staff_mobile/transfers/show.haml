@@ -36,21 +36,21 @@
             - @lost_books_info.each do |lost_book|
               .lost-items
                 %span= lost_book[:name]
-                %span.nums= "×" + lost_book[:count]
+                %span.nums= "×" + lost_book[:count].to_s
       - if @books_info.present?
         .content-div
           .caption
             .blue-line
             .title 绘本信息
           .desc
-            - @books.each do |book|
+            - @books_info.each do |book|
               .items
                 %span= book[:name]
-                %span.book-nums= "×" + book[:count]
+                %span.book-nums= "×" + book[:count].to_s
     - if @transfer.status == Transfer::PREPARE
       .btn-div
-        %button.btn#finish{:type => "button"} 完成
-        %button.btn#continue{:type => "button"}　继续迁出
+        %button.btn#confirm-transfer-out{:type => "button", data: {id: @transfer.id.to_s}} 确定运出
+        %button.btn#continue{:type => "button"}　继续添加
     - if @transfer.status == Transfer::ONGOING
       / 开始迁入button
       %button.btn#start{:type => "button"}　开始迁入

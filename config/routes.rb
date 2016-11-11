@@ -149,6 +149,7 @@ Rails.application.routes.draw do
     resources :transfers do
       member do
         post :add_to_transfer
+        post :confirm_transfer_out
       end
       collection do
         get :list
