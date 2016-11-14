@@ -74,6 +74,8 @@ Rails.application.routes.draw do
         get :show_transfer
       end
     end
+    resources :transfers do
+    end
   end
 
   namespace :staff do

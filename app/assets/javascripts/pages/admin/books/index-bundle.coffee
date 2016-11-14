@@ -1,13 +1,38 @@
 $ ->
+
+  if window.profile == "transfers"
+    $('.nav-tabs a[href="#tab2"]').tab('show')
+    $("#search-input-book").hide()
+    $("#search-input-transfer").show()
+  else
+    $("#search-input-book").show()
+    $("#search-input-transfer").hide()
+
+  $('#books-tab').on 'shown.bs.tab', (e) ->
+    window.profile = "books"
+    $("#search-input-book").show()
+    $("#search-input-transfer").hide()
+
+  $('#transfers-tab').on 'shown.bs.tab', (e) ->
+    window.profile = "transfers"
+    $("#search-input-book").hide()
+    $("#search-input-transfer").show()
+
   search = ->
-    value = $("#search-input").val()
-    window.location.href = "/admin/books?keyword=" + value + "&page=1"
+    book_keyword = $("#search-input-book").val()
+    transfer_keyword = $("#search-input-transfer").val()
+    window.location.href = "/admin/books?profile=" + window.profile + "&book_keyword=" + book_keyword + "&transfer_keyword=" + transfer_keyword + "&page=1"
 
   $("#search-btn").click ->
     search()
 
   
-  $("#search-input").keydown (event) ->
+  $("#search-input-book").keydown (event) ->
+    code = event.which
+    if code == 13
+      search()
+
+  $("#search-input-transfer").keydown (event) ->
     code = event.which
     if code == 13
       search()

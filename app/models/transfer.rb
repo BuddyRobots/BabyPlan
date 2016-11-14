@@ -49,6 +49,12 @@ class Transfer
     { name: book_inst.book.name, isbn: book_inst.book.isbn }
   end
 
+  def status_class
+    return "prepare" if self.status == PREPARE
+    return "transit" if self.status == ONGOING
+    return "end" if self.status == DONE or self.status == ABNORMAL
+  end
+
   def status_str
     if self.status == PREPARE
       return "准备中"
@@ -181,5 +187,18 @@ class Transfer
         book_inst.save
       end
     end
+  end
+
+  def transfer_info
+    {
+      id: self.id.to_s,
+      out_center: self.out_center.name,
+      in_center: self.in_center.name,
+      out_time: self.out_time,
+      status: self.status,
+      status_str: self.status_str,
+      status_class: self.status_class,
+      count: self.book_insts.count
+    }
   end
 end
