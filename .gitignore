@@ -13,6 +13,8 @@
 /tmp
 
 /config/mongoid.yml
+/config/secrets.yml
 /.byebug_history
 /public/uploads
 /public/qrcodes
+/public/*.txt

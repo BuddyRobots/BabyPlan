@@ -44,9 +44,7 @@ class Transfer
   def arrive(book_inst_id)
     book_inst = BookInst.where(id: book_inst_id).first
     return ErrCode::BOOK_NOT_IN_TRANSFER if !self.book_insts.include?(book_inst)
-    if !self.arrived_books.include?(book_inst.id.to_s)
-      self.arrived_books << book_inst.id.to_s
-    end
+    self.arrived_books << book_inst.id.to_s
     self.save
     { name: book_inst.book.name, isbn: book_inst.book.isbn }
   end
