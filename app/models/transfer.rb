@@ -70,6 +70,26 @@ class Transfer
     end
   end
 
+  def books_info_detail
+    books = { }
+    self.book_insts.each do |e|
+      book_id = e.book.id.to_s
+      books[book_id] ||= { }
+      books[book_id]["book_id"] = book_id
+      books[book_id]["count"] ||= 0
+      books[book_id]["count"] += 1
+      books[book_id]["lost_count"] ||= 0
+      if !self.arrived_books.include?(e.id.to_s)
+        books[book_id]["lost_count"] += 1
+      end
+      books[book_id]["name"] = e.book.name
+      books[book_id]["author"] = e.book.author
+      books[book_id]["isbn"] = e.book.isbn
+    end
+    details = books.values
+    details.sort { |x,y| x["lost_count"] <=> y["lost_count"] }
+  end
+
   def lost_books_info
     lost_book_insts = []
     self.book_insts.each do |book_inst|

@@ -49,7 +49,7 @@
                           %td
                             %a.details{:href => "/staff/transfers/#{e[:id]}"} 详情
                 .select-page 
-                  %span.totalitems= "共6页,总计12条"
+                  %span.totalitems= "共#{@out_transfers[:total_page]}页,总计#{@out_transfers[:total_number]}条"
                   %span.choice-page
                     %ul.pagination.pagination-sm
                       %li
@@ -85,7 +85,7 @@
                           %td
                             %a.details{:href => "/staff/transfers/#{e[:id]}"} 详情
                 .select-page 
-                  %span.totalitems= "共6页,总计12条"
+                  %span.totalitems= "共#{@in_transfers[:total_page]}页,总计#{@in_transfers[:total_number]}条"
                   %span.choice-page
                     %ul.pagination.pagination-sm
                       %li

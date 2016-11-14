@@ -27,5 +27,12 @@ class Staff::TransfersController < Staff::ApplicationController
   end
 
   def show
+    @transfer = Transfer.where(id: params[:id]).first
+    if @transfer.nil?
+      redirect_to action: :index and return
+    end
+    books_info_detail = @transfer.books_info_detail
+
+    @books_info_detail = auto_paginate(books_info_detail)
   end
 end
