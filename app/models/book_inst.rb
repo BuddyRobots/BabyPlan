@@ -11,6 +11,9 @@ class BookInst
     if self.current_borrow.present?
       return ErrCode::BOOK_NOT_RETURNED
     end
+    if self.current_transfer.present?
+      return ErrCode::BOOK_IN_TRANSFER
+    end
     borrow = self.book_borrows.create(borrow_at: Time.now.to_i, client_id: client.id)
     { borrow_id: borrow.id.to_s }
   end

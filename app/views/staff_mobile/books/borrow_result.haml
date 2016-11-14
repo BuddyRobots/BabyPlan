@@ -11,6 +11,8 @@
           %p.title#unfound 该绘本不是本儿童中心藏书！
         - if @err == "book_not_returned"
           %p.title#unreturn 该绘本尚未归还！
+        - if @err == "book_in_transfer"
+          %p.title#unreturn 该绘本正在迁移途中
     - else
       .desc-div
         .desc
