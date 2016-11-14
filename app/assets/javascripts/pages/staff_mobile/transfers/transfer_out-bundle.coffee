@@ -50,11 +50,11 @@ $ ->
     # show the error info
     $(".unreturn-div").show()
     $(".desc-div").hide()
-    if window.code == BOOK_NOT_EXIST
+    if parseInt(window.code) == BOOK_NOT_EXIST
       $("#unreturn").text("没有找到绘本")
-    if window.code == BOOK_NOT_RETURNED
+    if parseInt(window.code) == BOOK_NOT_RETURNED
       $("#unreturn").text("该绘本在借出状态")
-    if window.code == BOOK_IN_TRANSFER
+    if parseInt(window.code) == BOOK_IN_TRANSFER
       $("#unreturn").text("该绘本在迁移状态")
 
   $("#clicked").click ->
