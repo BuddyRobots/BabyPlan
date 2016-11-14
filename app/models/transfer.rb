@@ -195,6 +195,7 @@ class Transfer
       out_center: self.out_center.name,
       in_center: self.in_center.name,
       out_time: self.out_time,
+      in_time: self.in_time,
       status: self.status,
       status_str: self.status_str,
       status_class: self.status_class,

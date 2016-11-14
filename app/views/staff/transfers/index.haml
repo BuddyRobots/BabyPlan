@@ -1,6 +1,9 @@
 - content_for :head do
   = javascript_include_tag "pages/staff/transfers/index-bundle"
   = stylesheet_link_tag "pages/staff/transfers/index-bundle", :media => "all"
+  :javascript
+    window.keyword="#{@keyword}"
+    window.profile="#{@profile}"
 
 
 .content-area
@@ -22,91 +25,73 @@
         .tab-content
           #tab1.tab-pane.active
             .moveout-box
-              / .undiscover
-              /   %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
-              /   %span.undiscover-message 抱歉！暂无查找信息
-              .table-box
-                %table.table.table-bordered#user-table
-                  %thead
-                    %tr
-                      %th 迁出时间
-                      %th 迁入中心
-                      %th 绘本数量
-                      %th 迁移状态
-                      %th 操&nbsp作
-                  %tbody
-                    %tr
-                      %td 2016.10.10
-                      %td 朝阳区儿童中心
-                      %td 24
-                      %td.prepare#status　准备中
-                      %td
-                        %a.details{:href => "javascript:void(0);"} 详情
-                    %tr
-                      %td 2016.10.10
-                      %td 朝阳区儿童中心
-                      %td 24
-                      %td.move#status　运输中
-                      %td
-                        %a.details{:href => "javascript:void(0);"} 详情
-                    %tr
-                      %td 2016.10.10
-                      %td 朝阳区儿童中心
-                      %td 24
-                      %td.end#status　已完成
-                      %td
-                        %a.details{:href => "javascript:void(0);"} 详情
-              .select-page 
-                %span.totalitems= "共6页,总计12条"
-                %span.choice-page
-                  %ul.pagination.pagination-sm
-                    %li
-                      %a{:href => "javascript:void(0);"} «
-                    / - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
-                    %li
-                      %a{:href => "javascript:void(0);"} 1
-                    %li
-                      %a{:href => "javascript:void(0);"} »
+              - if @out_transfers[:data].blank?
+                .undiscover
+                  %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
+                  %span.undiscover-message 抱歉！暂无查找信息
+              - else
+                .table-box
+                  %table.table.table-bordered#user-table
+                    %thead
+                      %tr
+                        %th 迁出时间
+                        %th 迁入中心
+                        %th 绘本数量
+                        %th 迁移状态
+                        %th 操&nbsp作
+                    %tbody
+                      - @out_transfers[:data].each do |e|
+                        %tr
+                          %td= e[:out_time].present? ? Time.at(e[:out_time]).strftime("%Y.%m.%d") : ""
+                          %td= e[:in_center]
+                          %td= e[:count]
+                          %td#status{class: e[:status_class]}= e[:status_str]
+                          %td
+                            %a.details{:href => "/staff/transfers/#{e[:id]}"} 详情
+                .select-page 
+                  %span.totalitems= "共6页,总计12条"
+                  %span.choice-page
+                    %ul.pagination.pagination-sm
+                      %li
+                        %a{:href => "/staff/transfers?keyword=#{@keyword}&page=#{@out_transfers[:previous_page]}"} «
+                      - ( (@out_transfers[:previous_page] > 2 ? @out_transfers[:previous_page] - 2 : 1) .. (@out_transfers[:next_page] < @out_transfers[:total_page] - 2 ? @out_transfers[:next_page] + 2 : @out_transfers[:total_page]) ).to_a.each do |page|
+                        %li
+                          %a{:href => "/staff/transfers?keyword=#{@keyword}&page=#{page}"}= page
+                      %li
+                        %a{:href => "/staff/transfers?keyword=#{@keyword}&page=#{@out_transfers[:next_page]}"} »
           #tab2.tab-pane  
             .movein-box
-              / .undiscover
-              /   %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
-              /   %span.undiscover-message 抱歉！暂无查找信息
-              .table-box
-                %table.table.table-bordered#user-table
-                  %thead
-                    %tr
-                      %th 迁入时间
-                      %th 迁出中心
-                      %th 绘本数量
-                      %th 操&nbsp作
-                  %tbody
-                    %tr
-                      %td 2016.10.10
-                      %td 朝阳区儿童中心
-                      %td 24
-                      %td
-                        %a.details{:href => "javascript:void(0);"} 详情
-                    %tr
-                      %td 2016.10.10
-                      %td 朝阳区儿童中心
-                      %td 24
-                      %td
-                        %a.details{:href => "javascript:void(0);"} 详情
-                    %tr
-                      %td 2016.10.10
-                      %td 朝阳区儿童中心
-                      %td 24
-                      %td
-                        %a.details{:href => "javascript:void(0);"} 详情
-              .select-page 
-                %span.totalitems= "共6页,总计12条"
-                %span.choice-page
-                  %ul.pagination.pagination-sm
-                    %li
-                      %a{:href => "javascript:void(0);"} «
-                    / - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
-                    %li
-                      %a{:href => "javascript:void(0);"} 1
-                    %li
-                      %a{:href => "javascript:void(0);"} »
+              - if @in_transfers[:data].blank?
+                .undiscover
+                  %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
+                  %span.undiscover-message 抱歉！暂无查找信息
+              - else
+                .table-box
+                  %table.table.table-bordered#user-table
+                    %thead
+                      %tr
+                        %th 迁入时间
+                        %th 迁出中心
+                        %th 绘本数量
+                        %th 迁移状态
+                        %th 操&nbsp作
+                    %tbody
+                      - @in_transfers[:data].each do |e|
+                        %tr
+                          %td= e[:in_time].present? ? Time.at(e[:in_time]).strftime("%Y.%m.%d") : ""
+                          %td= e[:out_center]
+                          %td= e[:count]
+                          %td#status{class: e[:status_class]}= e[:status_str]
+                          %td
+                            %a.details{:href => "/staff/transfers/#{e[:id]}"} 详情
+                .select-page 
+                  %span.totalitems= "共6页,总计12条"
+                  %span.choice-page
+                    %ul.pagination.pagination-sm
+                      %li
+                        %a{:href => "/staff/transfers?profile=in&keyword=#{@keyword}&page=#{@in_transfers[:previous_page]}"} «
+                      - ( (@in_transfers[:previous_page] > 2 ? @in_transfers[:previous_page] - 2 : 1) .. (@in_transfers[:next_page] < @in_transfers[:total_page] - 2 ? @in_transfers[:next_page] + 2 : @in_transfers[:total_page]) ).to_a.each do |page|
+                        %li
+                          %a{:href => "/staff/transfers?profile=in&keyword=#{@keyword}&page=#{page}"}= page
+                      %li
+                        %a{:href => "/staff/transfers?profile=in&keyword=#{@keyword}&page=#{@in_transfers[:next_page]}"} »
