@@ -132,6 +132,13 @@ a{
 	@extend .status;
 	color: #f95d67;
 }
+.transfer-none {
+	font-size: 2.4em;
+	color: #999;
+	margin-top: 30%;
+	text-align: center;
+}
+
 
 @media screen and (max-width:640px) {
 	.main-div {
