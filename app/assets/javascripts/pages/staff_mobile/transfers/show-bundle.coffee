@@ -5,7 +5,7 @@ $ ->
   $("#confirm-transfer-out").click ->
     transfer_id = $(this).attr("data-id")
     $.postJSON(
-      '/staff_mobile/transfers/' + transfer_id +'/confirm_transfer_out',
+      '/staff_mobile/transfers/' + transfer_id + '/confirm_transfer_out',
       { },
       (data) ->
         console.log data

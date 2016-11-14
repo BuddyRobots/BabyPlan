@@ -42,5 +42,5 @@
               %span.start= transfer.out_center.name
               %img.arrow{:src => "/assets/manager/arrow.png"}
               %span.end= transfer.in_center.name
-      - if @current_user.staff_center.out_transfers.blank?
+      - if @current_user.staff_center.in_transfers.blank?
         %p.transfer-none 还没有相关记录
