@@ -146,7 +146,8 @@ class Transfer
     end
     # 2. create new books in the in center
     books = { }
-    self.arrived_books.each do |e|
+    uniq_arrived_books = self.arrived_books.uniq
+    uniq_arrived_books.each do |e|
       book_inst = BookInst.where(id: e).first
       book_id = book_inst.book.id.to_s
       books[book_id] ||= { }
@@ -160,6 +161,7 @@ class Transfer
       cover = book.cover
       back = book.back
       new_book = book.clone
+      new_book.center = self.in_center
       if cover.present?
         new_cover = cover.clone
         new_cover.save
