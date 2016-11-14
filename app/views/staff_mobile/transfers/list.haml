@@ -25,6 +25,8 @@
               %span.start= transfer.out_center.name
               %img.arrow{:src => "/assets/manager/arrow.png"}
               %span.end= transfer.in_center.name
+      - if @current_user.staff_center.out_transfers.blank?
+        %p.transfer-none 还没有相关记录
     .content.in-list
       - @current_user.staff_center.in_transfers.each do |transfer|
         .item-div{data: {id: transfer.id.to_s}}
@@ -40,5 +42,5 @@
               %span.start= transfer.out_center.name
               %img.arrow{:src => "/assets/manager/arrow.png"}
               %span.end= transfer.in_center.name
-
-    %p.transfer-none 还没有相关记录
+      - if @current_user.staff_center.out_transfers.blank?
+        %p.transfer-none 还没有相关记录
