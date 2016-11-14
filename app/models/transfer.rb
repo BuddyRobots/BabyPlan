@@ -119,13 +119,63 @@ class Transfer
     end
     if lost_book_insts.blank?
       self.update_attributes({status: DONE})
+      self.after_finish
       return {finish: true}
     end
     if force
       self.update_attributes({status: DONE})
+      self.after_finish
       return {finish: true}
     else
       return {finish: false}
+    end
+  end
+
+  def after_finish
+    # 1. change the stock of the books in the out center
+    books = { }
+    self.book_insts.each do |e|
+      book_id = e.book.id.to_s
+      books[book_id] ||= 0
+      books[book_id] += 1
+    end
+    books.each do |book_id, out_count|
+      book = Book.where(id: book_id).first
+      stock = [book.stock - out_count, 0].max
+      book.update_attributes({stock: stock})
+    end
+    # 2. create new books in the in center
+    books = { }
+    self.arrived_books.each do |e|
+      book_inst = BookInst.where(id: e).first
+      book_id = book_inst.book.id.to_s
+      books[book_id] ||= { }
+      books[book_id]["in_count"] ||= 0
+      books[book_id]["in_count"] += 1
+      books[book_id]["book_inst"] ||= []
+      books[book_id]["book_inst"] << book_inst
+    end
+    books.each do |book_id, info|
+      book = Book.where(id: book_id).first
+      cover = book.cover
+      back = book.back
+      new_book = book.clone
+      if cover.present?
+        new_cover = cover.clone
+        new_cover.save
+        new_book.cover = new_cover
+      end
+      if back.present?
+        new_back = back.clone
+        new_back.save
+        new_book.back = new_back
+      end
+      new_book.stock = info["in_count"]
+      new_book.save
+      books[book_id]["book_inst"].each do |book_inst|
+        book_inst.book = new_book
+        book_inst.save
+      end
     end
   end
 end
