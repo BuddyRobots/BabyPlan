@@ -4,7 +4,7 @@
   .input-div
     %input#input-box{:type => "text", value: @keyword}
     %a.icon-div{:href => "#"}
-      %img.search{:src => "/assets/kidscenter/search.png"}
+      %img#search-btn.search{:src => "/assets/kidscenter/search.png"}
 %ul.tag-choice
   %li.first
     %a#feeds-link{class: list_type == "feeds" ? "active" : "", :href => "javascript:void(0)"} 最新

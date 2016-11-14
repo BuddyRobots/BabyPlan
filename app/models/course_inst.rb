@@ -17,6 +17,7 @@ class CourseInst
   field :date_in_calendar, type: Array, default: [ ]
 
   has_one :photo, class_name: "Material", inverse_of: :course_inst_photo
+  has_one :feed
   belongs_to :course
   belongs_to :center
 
@@ -50,6 +51,7 @@ class CourseInst
     })
     course_inst.center = center
     course_inst.save
+    Feed.create(course_inst_id: course_inst.id, name: course.name, center_id: center.id)
     { course_inst_id: course_inst.id.to_s }
   end
 

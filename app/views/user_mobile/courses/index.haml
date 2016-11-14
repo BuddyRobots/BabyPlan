@@ -13,15 +13,15 @@
             %img.visit{:src => e.photo.nil? ? "/assets/banner.png" : e.photo.path}
           .right-div
             %img.icon{:src => "/assets/kidscenter/ke.png"}
-            %p.caption= e.name
+            %p.caption= e.name || e.course.name
             %p.message= truncate(strip_tags(e.course.desc).strip(), length: 50)
             .location-div
               %img.location{:src => "/assets/web/location.png"}
               %span.center= e.center.name
-      .render-more
-        %p 加载更多
-      .load
-        %img.loading{:src => "/assets/loading.gif"}
+      / .render-more
+      /   %p 加载更多
+      / .load
+      /   %img.loading{:src => "/assets/loading.gif"}
     - else
       .unfound
         %img.unfound-icon{:src => "/assets/web/cry.png"}

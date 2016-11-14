@@ -14,6 +14,7 @@ class Announcement
   has_one :photo, class_name: "Material", inverse_of: :announcement_photo
   has_many :favorites
   has_many :staff_logs
+  has_one :feed
 
   def self.create_announcement(staff, center, announcement_info, scope)
     html = Nokogiri::HTML(announcement_info[:content])
@@ -25,6 +26,12 @@ class Announcement
       image_path: html.css("img").blank? ? "" : html.css("img")[0].attr("src")
     }
     announcement = scope == "local" ? center.announcements.create(info) : Announcement.create(info)
+
+    feed = Feed.create(announcement_id: announcement.id, name: announcement.title)
+    if scope == "local"
+      feed.center = center
+      feed.save
+    end
 
     { announcement_id: announcement.id.to_s }
   end

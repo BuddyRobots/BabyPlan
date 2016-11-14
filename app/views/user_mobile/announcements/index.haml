@@ -18,10 +18,10 @@
             .location-div
               %img.location{:src => "/assets/web/location.png"}
               %span.center= e.center.present? ? e.center.name : "所有儿童中心"
-      .render-more
-        %p 加载更多 
-      .load
-        %img.loading{:src => "/assets/loading.gif"}
+      / .render-more
+      /   %p 加载更多 
+      / .load
+      /   %img.loading{:src => "/assets/loading.gif"}
     - else
       .unfound
         %img.unfound-icon{:src => "/assets/web/cry.png"}

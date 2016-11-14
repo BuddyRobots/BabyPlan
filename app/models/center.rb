@@ -19,6 +19,8 @@ class Center
   has_many :out_transfers, class_name: "Transfer", inverse_of: "out_center"
   has_many :in_transfers, class_name: "Transfer", inverse_of: "in_center"
 
+  has_many :feeds
+
   has_and_belongs_to_many :clients, class_name: "User", inverse_of: :client_centers
 
   def self.create_center(center_info)

@@ -23,6 +23,8 @@ class Book
   has_one :cover, class_name: "Material", inverse_of: :cover_book
   has_one :back, class_name: "Material", inverse_of: :back_book
 
+  has_one :feed
+
   belongs_to :center
   has_many :book_insts
   has_many :book_borrows
@@ -48,6 +50,7 @@ class Book
       stock: book_info[:stock],
       available: book_info[:available]
     )
+    Feed.reate(book_id: book.id, name: book.name, center_id: center.id)
     { book_id: book.id.to_s }
   end
 
