@@ -15,6 +15,8 @@ class BookInst
       return ErrCode::BOOK_IN_TRANSFER
     end
     borrow = self.book_borrows.create(borrow_at: Time.now.to_i, client_id: client.id)
+    borrow.book = self.book
+    borrow.save
     { borrow_id: borrow.id.to_s }
   end
 

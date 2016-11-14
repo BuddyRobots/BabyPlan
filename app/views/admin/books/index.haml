@@ -41,7 +41,7 @@
                       %tr
                         %th 绘本名称
                         %th 儿童中心
-                        %th 类&nbsp型
+                        %th 标&nbsp签
                         %th 数&nbsp量
                         %th 作&nbsp者
                         %th ISBN编码
@@ -51,7 +51,7 @@
                         %tr
                           %td= e[:name]
                           %td= e[:center]
-                          %td= e[:type]
+                          %td= truncate((e[:tags] || "").gsub(',', '，'), length: 10)
                           %td= e[:stock]
                           %td= e[:author]
                           %td= e[:isbn]

@@ -24,8 +24,8 @@ class Book
   has_one :back, class_name: "Material", inverse_of: :back_book
 
   belongs_to :center
-  # has_many :book_borrows
   has_many :book_insts
+  has_many :book_borrows
   has_many :feedbacks
   has_many :favorites
 
@@ -63,6 +63,7 @@ class Book
       isbn: self.isbn,
       type: self.type,
       stock: self.stock,
+      available_stock: self.stock - self.book_borrows.where(:status.ne => BookBorrow::RETURN).length,
       available: self.available
     }
   end

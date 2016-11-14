@@ -74,6 +74,7 @@
             %span.edit-box
               %input.input-area.form-control#stock-input{:type => "text"}
           %form.form-inline.clearfix#tag-form
+            %span.unedit-box.type-span.type-span-template
             %label.input-caption 标签:
             - (@book.tags || "").split(',').each do |tag|
               %span.unedit-box.type-span.type-span-ele= tag

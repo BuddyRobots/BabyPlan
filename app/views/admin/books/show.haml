@@ -12,8 +12,8 @@
           %a#user-review{"data-toggle" => "tab", :href => "#tab2"} 用户评价
         %li
           %a#borrow-message{"data-toggle" => "tab", :href => "#tab3"} 借阅信息
-        %li
-          %a#same-book{"data-toggle" => "tab", :href => "#tab4"} 同类绘本
+        / %li
+        /   %a#same-book{"data-toggle" => "tab", :href => "#tab4"} 同类绘本
 
       .tab-content
         #tab1.tab-pane.active
@@ -34,8 +34,8 @@
               - else
                 %label#available-status.shelve 已下架
             .controls.controls-row
-              %label.input-caption 类型:
-              %span.unedit-box#type-span
+              %label.input-caption 标签:
+              %span.unedit-box#type-span= @book.tags
               / %span.unedit-box#type-span= @book.type
               %label.input-caption 数量:
               %span.unedit-box#stock-span= @book.stock.to_s + "本"

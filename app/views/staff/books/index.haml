@@ -27,9 +27,9 @@
             %thead
               %tr
                 %th 绘本名称
-                %th 类&nbsp型
+                %th 标&nbsp签
                 %th 数&nbsp量
-                %th 当前借出
+                %th 在架
                 %th 作&nbsp者
                 %th 书&nbsp号
                 %th{:colspan => "2"} 操&nbsp作
@@ -37,9 +37,9 @@
               - @books[:data].each do |b|
                 %tr{class: "book-record #{ b[:available] ? "available" : "unavailable" }", "data-id" => b[:id]}
                   %td= b[:name]
-                  %td= b[:type]
+                  %td= truncate((b[:tags] || "").gsub(',', '，'), length: 20)
                   %td= b[:stock].to_s + "本"
-                  %td
+                  %td= b[:available_stock].to_s + "本"
                   %td= b[:author]
                   %td= b[:isbn]
                   %td
