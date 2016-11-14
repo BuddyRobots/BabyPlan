@@ -165,12 +165,14 @@ class Transfer
       if cover.present?
         new_cover = cover.clone
         new_cover.save
-        new_book.cover = new_cover
+        new_cover.cover_book = new_book
+        new_cover.save
       end
       if back.present?
         new_back = back.clone
         new_back.save
-        new_book.back = new_back
+        new_back.back_book = new_book
+        new_back.save
       end
       new_book.stock = info["in_count"]
       new_book.save
