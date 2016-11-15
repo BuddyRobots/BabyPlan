@@ -1,3 +1,4 @@
+require 'open-uri'
 class User
 
   include Mongoid::Document
@@ -290,6 +291,9 @@ class User
     logger.info "AAAAAAAAAAAAAAAAA"
     logger.info "https://api.weixin.qq.com/cgi-bin/media/get?access_token=#{Weixin.get_access_token}&media_id=#{server_id}"
     logger.info "AAAAAAAAAAAAAAAAA"
+    open("image.png", "wb") do |file|
+      file << open("https://api.weixin.qq.com/cgi-bin/media/get?access_token=#{Weixin.get_access_token}&media_id=#{server_id}").read
+    end
     nil
   end
 end
