@@ -12,7 +12,7 @@ class UserMobile::SettingsController < UserMobile::ApplicationController
   end
 
   def favorite
-    favorites = @current_user.favorites.where(:enabled: true).desc(:created_at)
+    favorites = @current_user.favorites.where(enabled: true).desc(:created_at)
     @favorites = favorites.map do |e|
       e.favorite_info
     end
