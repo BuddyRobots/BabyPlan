@@ -14,7 +14,7 @@
       %img.back{:src => "/assets/back.png"}
     .face.clearfix
       .avator
-        %img.avator-icon{:src => "/assets/web/boy.png"}
+        %img.avator-icon{:src => @current_user.avatar.present? ? @current_user.avatar.path : "/assets/web/boy.png"}
       %p.username 小狐狸
 
     .collect-div

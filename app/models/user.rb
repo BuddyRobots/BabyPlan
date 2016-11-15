@@ -288,12 +288,9 @@ class User
   end
 
   def get_avatar(server_id)
-    logger.info "AAAAAAAAAAAAAAAAA"
-    logger.info "https://api.weixin.qq.com/cgi-bin/media/get?access_token=#{Weixin.get_access_token}&media_id=#{server_id}"
-    logger.info "AAAAAAAAAAAAAAAAA"
     filename = SecureRandom.uuid.to_s + ".jpg"
     save_path = "public/uploads/avatars/" + filename
-    url_path = "uploads/avatars/" + filename
+    url_path = "/uploads/avatars/" + filename
     open(save_path, "wb") do |file|
       file << open("https://api.weixin.qq.com/cgi-bin/media/get?access_token=#{Weixin.get_access_token}&media_id=#{server_id}").read
     end
