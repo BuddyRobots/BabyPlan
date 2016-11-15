@@ -121,7 +121,7 @@ $ ->
           color: '#969696'
     series: [ {
       type: 'pie'
-      name: '性别比例'
+      name: '年龄比例'
       data: [
         [
           '0-3岁'

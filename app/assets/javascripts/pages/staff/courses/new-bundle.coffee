@@ -121,6 +121,11 @@ $ ->
   })
 
   add_event = ->
+    if $("#datepicker").val().trim() == "" ||
+        $("#start-time").val().trim() == "" || 
+        $("#end-time").val().trim() == ""
+      $.page_notification("请输入完整的上课日期和时间")
+      return false
     date = $("#datepicker").val()
     start_time = $("#start-time").val()
     end_time = $("#end-time").val()
