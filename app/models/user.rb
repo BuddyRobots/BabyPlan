@@ -50,7 +50,7 @@ class User
   has_many :announcements
   has_many :staff_logs
 
-  has_one :avatar, class: "Material", inverse_of: :client
+  has_one :avatar, class_name: "Material", inverse_of: :client
 
   scope :client, ->{ where(user_type: CLIENT) }
   scope :staff, ->{ any_of({user_type: STAFF}, {user_type: ADMIN}) }
