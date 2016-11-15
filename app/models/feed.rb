@@ -55,4 +55,14 @@ class Feed
       "gao"
     end
   end
+
+  def img_src
+    if self.course_inst.present?
+      self.course_inst.photo.nil? ? "/assets/banner.png" : self.course_inst.photo.path
+    elsif self.book.present?
+      self.book.cover.nil? ? "/assets/banner.png" : self.book.cover.path
+    else
+      self.announcement.photo.nil? ? "/assets/banner.png" : self.announcement.photo.path
+    end
+  end
 end

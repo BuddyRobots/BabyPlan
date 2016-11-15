@@ -1,6 +1,4 @@
-
-
-$(document).ready (e) ->
+$ ->
   i
   # 设定每一行的宽度=屏幕宽度+按钮宽度
   # $('.line-scroll-wrapper').width $('.line-wrapper').width() + $('.line-btn-delete').width()
@@ -98,4 +96,23 @@ $(document).ready (e) ->
           # 清空上一个左滑的对象
       return
     ++i
-  return
+
+  $(".line-normal-wrapper").click ->
+    url = $(this).attr("data-url")
+    window.location.href = url
+
+  $(".delete-icon").click ->
+    fid = $(this).attr("data-id")
+    line_wrapper = $(this).closest(".line-wrapper")
+    $.postJSON(
+      '/user_mobile/settings/remove_favorite',
+      {
+        favorite_id: fid
+      },
+      (data) ->
+        console.log data
+        if data.success
+          line_wrapper.slideUp()
+        else
+          $.mobile_page_notification "服务器出错，请稍后重试"
+      )

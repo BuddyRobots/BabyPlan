@@ -221,6 +221,7 @@ Rails.application.routes.draw do
         get :book
         get :course
         get :favorite
+        post :remove_favorite
         get :message
         get :account
         get :reset_password
