@@ -1,5 +1,5 @@
 $ ->
-  weixin_jsapi_authorize(["chooseImage"])
+  weixin_jsapi_authorize(["chooseImage", "uploadImage"])
   # $("#upload-photo").click ->
   #   $("#photo_file").trigger("click")
 
@@ -18,5 +18,12 @@ $ ->
       sourceType: ['album', 'camera']
       success: (res) ->
         localIds = res.localIds
-        alert(localIds)
+        # alert(localIds)
         $(".avatar-icon").attr("src", localIds)
+
+        wx.uploadImage
+            localId: localIds
+            isShowProgressTips: 1
+            success: (res) ->
+              alert(serverId)
+              # var serverId = res.serverId; // 返回图片的服务器端ID
