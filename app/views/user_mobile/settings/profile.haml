@@ -27,6 +27,6 @@
         %input.input-div#parent{value: @current_user.parent}
       .item-box
         %span.item 详细地址：
-        %input.input-div#address{value: @current_user.address}
+        %textarea#address{value: @current_user.address, rows: "3"}
     .btn-div
       %button.btn#confirm 确定

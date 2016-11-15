@@ -65,7 +65,7 @@ a{
 .item-div {
 	width: 95.3125%;
 	margin: 0 auto;
-	font-size: 3.2em;
+	font-size: 3em;
 	color: #3e3e3e;
 	background: #fff;
 	border-radius: 8px;
@@ -86,6 +86,13 @@ a{
 	-webkit-appearance: none;
 	appearance: none;
 	background: none;
+}
+#address {
+	width: 65%;
+	border: none;
+	outline: none;
+	background: none;
+	vertical-align: middle;
 }
 .btn-div {
 	width: 84.375%;
