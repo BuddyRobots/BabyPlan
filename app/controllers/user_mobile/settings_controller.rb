@@ -11,8 +11,8 @@ class UserMobile::SettingsController < UserMobile::ApplicationController
   def course
   end
 
-  # collect
-  def collect
+  def favorite
+    
   end
 
   # systemmessage

@@ -216,6 +216,11 @@ class User
       fav = self.favorites.where(course_inst: ele).first
       return fav.present? && fav.enabled
     end
+    if (ele.class == Book)
+      fav = self.favorites.where(book: ele).first
+      return fav.present? && fav.enabled
+    end
+    return false
   end
 
   def is_staff

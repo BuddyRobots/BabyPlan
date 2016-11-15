@@ -176,6 +176,9 @@ Rails.application.routes.draw do
       collection do
         get :review
       end
+      member do
+        post :favorite
+      end
     end
     resources :centers do
       member do
@@ -217,7 +220,7 @@ Rails.application.routes.draw do
       collection do
         get :book
         get :course
-        get :collect
+        get :favorite
         get :message
         get :account
         get :reset_password

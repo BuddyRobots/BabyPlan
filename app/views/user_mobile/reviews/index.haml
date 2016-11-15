@@ -18,19 +18,20 @@
         %a{:href => "/user_mobile/courses/" + @course.id.to_s}
           %img.back{:src => "/assets/evaluate/back.png"}
     - if @reviews.present?
-      %article.clearfix
-        .left-div
-          %img.headfigure{:src => "/assets/evaluate/headfigure.png"}
-        .right-div
-          %span.username lifd
-          %span.time= time_ago_in_words(@review[:created_at])
-          .review-score
-            %span.score 课程评分
-            - @review[:score].times do
-              %img.star{:src => "/assets/web/yellowstar2.png"}
-            - (5 - @review[:score]).times do
-              %img.star{:src => "/assets/web/greystar2.png"}
-          %p.message= @review[:content]
+      - @reviews.each do |r|
+        %article.clearfix
+          .left-div
+            %img.headfigure{:src => "/assets/evaluate/headfigure.png"}
+          .right-div
+            %span.username= r[:user_name]
+            %span.time= time_ago_in_words(r[:created_at])
+            .review-score
+              %span.score 课程评分
+              - r[:score].times do
+                %img.star{:src => "/assets/web/yellowstar2.png"}
+              - (5 - r[:score]).times do
+                %img.star{:src => "/assets/web/greystar2.png"}
+            %p.message= r[:content]
     - else
       .unfound
         %img.unfound-icon{:src => "/assets/web/cry.png"}

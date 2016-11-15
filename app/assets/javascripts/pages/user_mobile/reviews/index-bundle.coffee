@@ -4,6 +4,7 @@ $ ->
   score = 0
 
   $("#review").click ->
+    $(this).hide()
     $(".mask").show()
 
   $(".text-div").click ->
@@ -13,6 +14,7 @@ $ ->
   $(".mask").click ->
     if hide == true
       $(".mask").hide()
+      $("#review").show()
     hide = true
 
   $(".review-div").submit ->
@@ -24,12 +26,9 @@ $ ->
     if score == 0
       $.mobile_page_notification("请评分", 3000)
       return
-    alert(score)
-    alert(content)
-    alert(window.review_type)
-    alert(window.book_id)
-    alert(window.course_id)
-    return
+    if content == ""
+      $.mobile_page_notification("请填写评价内容", 3000)
+      return
     $.postJSON(
       '/user_mobile/reviews',
       {

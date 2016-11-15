@@ -19,4 +19,17 @@ class UserMobile::BooksController < UserMobile::ApplicationController
     @book = Book.where(id: params[:id]).first
     @back = params[:back]
   end
+
+  def favorite
+    book = Book.where(id: params[:id]).first
+    fav = current_user.favorites.where(book: book).first
+    fav = fav || current_user.favorites.create(book_id: book.id)
+    if params[:favorite].to_s == "true"
+      fav.enabled = true
+    else
+      fav.enabled = false
+    end
+    fav.save
+    render json: retval_wrapper(nil) and return
+  end
 end

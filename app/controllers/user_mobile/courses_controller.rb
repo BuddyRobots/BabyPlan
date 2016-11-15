@@ -67,6 +67,7 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
     else
       fav.enabled = false
     end
+    fav.save
     render json: retval_wrapper(nil) and return
   end
 

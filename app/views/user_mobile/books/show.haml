@@ -1,6 +1,8 @@
 - content_for :app_head do
   = javascript_include_tag "pages/user_mobile/books/show-bundle"
   = stylesheet_link_tag "pages/user_mobile/books/show-bundle", :media => "all"
+  :javascript
+    window.book_id="#{@book.id.to_s}"
 
 - content_for :app_content do
   .content-area
@@ -9,9 +11,11 @@
       %a{:href => @back == "books" ? "/user_mobile/books" : "/user_mobile/feeds"}
         %img.back{:src => "/assets/back.png"}
     .right-float
-      %a.a-div{:href => "#"}
-        %img.smallheart{:src => "/assets/concern.png"}
-      / %a.a-div{:href => review_user_mobile_books_path}
+      %a.a-div#concern{:href => "javascript:void(0);"}
+        - if @current_user.favorite_on(@book)
+          %img.smallheart{:src => "/assets/concern.png", data: {fav: "false"}}
+        - else
+          %img.smallheart{:src => "/assets/cancel-concern.png", data: {fav: "true"}}
       %a.a-div{:href => user_mobile_reviews_path + "?review_type=book&book_id=" + @book.id.to_s}
         %img.dialog{:src => "/assets/pinglun.png"}
       %p.num= @book.reviews.count.to_s
@@ -37,7 +41,7 @@
           %span.illustrtor= @book.illustrator
       - if @book.tags.present?
         .item
-          %span 书籍类型：
+          %span 书籍标签：
           %span.type= @book.tags
     .title-div
       %p 书籍介绍
