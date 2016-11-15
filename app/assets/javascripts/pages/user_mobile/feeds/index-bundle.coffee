@@ -1,7 +1,7 @@
 $ ->
-  # $(document).on 'click', '.content', ->
-  #   aid = $(this).attr("data-id")
-  #   location.href = "/user_mobile/announcements/" + aid + "?back=announcements"
+  $(document).on 'click', '.content', ->
+    path = $(this).attr("data-path")
+    location.href = "/user_mobile/" + path
 
   $("#search-btn").click ->
     keyword = $("#input-box").val()

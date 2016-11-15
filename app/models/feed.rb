@@ -34,6 +34,18 @@ class Feed
     end
   end
 
+  def path
+    if self.course_inst.present?
+      "/courses/#{self.course_inst.id.to_s}"
+    elsif self.book.present?
+      "/books/#{self.book.id.to_s}"
+    elsif self.announcement.present?
+      "/announcements/#{self.announcement.id.to_s}"
+    else
+      ""
+    end
+  end
+
   def feed_icon
     if self.course_inst.present?
       "ke"

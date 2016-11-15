@@ -50,7 +50,7 @@ class Book
       stock: book_info[:stock],
       available: book_info[:available]
     )
-    Feed.reate(book_id: book.id, name: book.name, center_id: center.id)
+    Feed.create(book_id: book.id, name: book.name, center_id: center.id)
     { book_id: book.id.to_s }
   end
 

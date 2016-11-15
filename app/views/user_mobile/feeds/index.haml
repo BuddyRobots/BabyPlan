@@ -8,7 +8,7 @@
     = render "user_mobile/partials/no_centers"
     - if @feeds.present?
       - @feeds.each do |e|
-        .content
+        .content{data: {path: e.path.to_s}}
           .left-div
             %img.visit{:src => "/assets/kidscenter/diary.png"}
           .right-div
