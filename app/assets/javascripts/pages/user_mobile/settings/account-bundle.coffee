@@ -17,13 +17,20 @@ $ ->
       scanType: ["original", "compressed"]
       sourceType: ['album', 'camera']
       success: (res) ->
-        localIds = res.localIds
-        # alert(localIds)
-        $(".avatar-icon").attr("src", localIds)
-
+        localId = res.localIds[0]
+        $(".avatar-icon").attr("src", localId)
         wx.uploadImage
-            localId: localIds
+            localId: localId
             isShowProgressTips: 1
             success: (res) ->
-              alert(serverId)
-              # var serverId = res.serverId; // 返回图片的服务器端ID
+              serverId = res.serverId
+              $.postJSON(
+                '/user_mobile/settings/upload_avatar',
+                {
+                  server_id: serverId
+                },
+                (data) ->
+                  console.log data
+                  if !data.success
+                    $.mobile_page_notification "服务器出错，请稍后重试"
+                )

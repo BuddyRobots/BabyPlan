@@ -49,4 +49,9 @@ class UserMobile::SettingsController < UserMobile::ApplicationController
     @course = CourseInst.where(id: params[:course_id]).first
     @class_num = params[:class_num]
   end
+
+  def upload_avatar
+    retval = @current_user.get_avatar(params[:server_id])
+    render json: retval_wrapper(retval) and return
+  end
 end

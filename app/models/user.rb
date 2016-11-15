@@ -50,6 +50,7 @@ class User
   has_many :announcements
   has_many :staff_logs
 
+  has_one :avatar, class: "Material", inverse_of: :client
 
   scope :client, ->{ where(user_type: CLIENT) }
   scope :staff, ->{ any_of({user_type: STAFF}, {user_type: ADMIN}) }
@@ -282,6 +283,13 @@ class User
       self.birthday = birthday
     end
     self.save
+    nil
+  end
+
+  def get_avatar(server_id)
+    logger.info "AAAAAAAAAAAAAAAAA"
+    logger.info "https://api.weixin.qq.com/cgi-bin/media/get?access_token=#{Weixin.get_access_token}&media_id=#{server_id}"
+    logger.info "AAAAAAAAAAAAAAAAA"
     nil
   end
 end

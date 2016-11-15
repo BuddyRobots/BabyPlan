@@ -13,4 +13,6 @@ class Material
   belongs_to :course_inst_photo, class_name: "CourseInst", inverse_of: :photo
   belongs_to :course_photo, class_name: "CourseInst", inverse_of: :photo
 
+  belongs_to :client, class_name: "User", inverse_of: :avatar
+
 end
