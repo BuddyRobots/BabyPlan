@@ -9,4 +9,9 @@ class Feed
   belongs_to :announcement
 
   belongs_to :center
+
+
+  def center_str
+  	
+  end
 end
