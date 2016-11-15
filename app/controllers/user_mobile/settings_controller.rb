@@ -1,14 +1,13 @@
 class UserMobile::SettingsController < UserMobile::ApplicationController
-  # usercenter
 	def index
   end
 
-  # mybook
   def book
+    @book_borrows = @current_user.book_borrows
   end
 
-  # mycourse
   def course
+    @courses_participates = @current_user.course_participates
   end
 
   def favorite
