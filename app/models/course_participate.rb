@@ -194,4 +194,8 @@ class CourseParticipate
     end
     self.trade_state == "SUCCESS"
   end
+
+  def review
+    self.course_inst.reviews.where(client_id: self.client.id).first
+  end
 end

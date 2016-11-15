@@ -58,7 +58,7 @@ class CourseInst
   def course_inst_info
     {
       id: self.id.to_s,
-      name: self.name,
+      name: self.name || self.course.name,
       available: self.available,
       speaker: self.speaker,
       price: self.price,
@@ -121,6 +121,16 @@ class CourseInst
       cur_num = cur_num + 1
     end
     return retval
+  end
+
+  def is_class_pass?(class_num)
+    class_day = self.date_in_calendar[class_num]
+    return false if class_day.blank?
+    start_time = class_day.split(',')[0]
+    date_str = start_time.split('T')[0]
+    date_ary = date_str.split('-').map { |e| e.to_i }
+    date = Time.mktime(date_ary[0], date_ary[1], date_ary[2])
+    return Time.now - 1.days > date
   end
 
   # -1 for unknown

@@ -21,7 +21,7 @@
       - @reviews.each do |r|
         %article.clearfix
           .left-div
-            %img.headfigure{:src => "/assets/evaluate/headfigure.png"}
+            %img.headfigure{:src => r[:avatar_path].present? ? r[:avatar_path] : "/assets/web/boy.png"}
           .right-div
             %span.username= r[:user_name]
             %span.time= time_ago_in_words(r[:created_at])
@@ -89,6 +89,9 @@
             %input{:name => "a", :type => "radio", :value => "5"}
           %button.btn#submit 提交
     / 评价完成后背景颜色变为#999，字变为已评价
-    %button.btn#review{:type => "button"} 立即评价
+    - if @current_user.review_on(@course || @book)
+      %button.btn{:type => "button"} 已评价
+    - else
+      %button.btn#review{:type => "button"} 立即评价
 
 
