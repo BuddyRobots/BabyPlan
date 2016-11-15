@@ -30,7 +30,7 @@ class User
   field :status, type: Integer
 
   # for client
-  field :gender, type: Integer  # 0 for male, 1 for female
+  field :gender, type: Integer, default: -1  # 0 for male, 1 for female
   field :birthday, type: Date
   field :parent, type: String
   field :address, type: String
@@ -256,5 +256,32 @@ class User
       center: self.staff_center.try(:name),
       status: status_hash[self.status]
     }
+  end
+
+  def birthday_str
+    if self.birthday.present?
+      return self.birthday.year.to_s + "-" + self.birthday.month.to_s + "-" + self.birthday.day.to_s
+    else
+      ""
+    end
+  end
+
+  def self.genders_for_select
+    hash = { "请选择" => -1, "男" => 0, "女" => 1 }
+    hash 
+  end
+
+  def update_profile(profile)
+    self.name = profile["name"]
+    self.gender = profile["gender"].to_i
+    self.parent = profile["parent"]
+    self.address = profile["address"]
+    if profile["birthday"].present?
+      ary = profile["birthday"].split('-').map { |e| e.to_i }
+      birthday = Time.mktime(ary[0], ary[1], ary[2])
+      self.birthday = birthday
+    end
+    self.save
+    nil
   end
 end

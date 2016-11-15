@@ -30,7 +30,13 @@ class UserMobile::SettingsController < UserMobile::ApplicationController
 
   def reset_password
   end
+
   def profile
+  end
+
+  def update_profile
+    retval = @current_user.update_profile(params[:profile])
+    render json: retval_wrapper(retval) and return
   end
 
   def update_password

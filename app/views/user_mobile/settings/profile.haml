@@ -1,6 +1,8 @@
 - content_for :app_head do
   = javascript_include_tag "pages/user_mobile/settings/profile-bundle"
   = stylesheet_link_tag "pages/user_mobile/settings/profile-bundle", :media => "all"
+  :javascript
+    window.birthday_str="#{@current_user.birthday_str}"
 
 - content_for :app_content do
   .content-area
@@ -13,21 +15,18 @@
     .item-div
       .item-box
         %span.item 儿童姓名：
-        %input.input-div#name
+        %input.input-div#name{value: @current_user.name}
       .item-box
         %span.item 出生日期：
-        %input.input-div#datepicker
+        %input.input-div#datepicker{value: @current_user.birthday_str}
       .item-box
         %span.item 性别：
-        %select.input-div#gender
-          %option 请点击选择儿童性别
-          %option 男
-          %option 女
+        = select_tag "gender", options_for_select(User.genders_for_select, @current_user.gender), class: "input-div"
       .item-box
         %span.item 家长姓名：
-        %input.input-div#parent
+        %input.input-div#parent{value: @current_user.parent}
       .item-box
         %span.item 详细地址：
-        %input.input-div#address
+        %input.input-div#address{value: @current_user.address}
     .btn-div
       %button.btn#confirm 确定

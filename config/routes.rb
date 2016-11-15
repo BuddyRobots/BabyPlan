@@ -228,6 +228,7 @@ Rails.application.routes.draw do
         get :sign
         get :profile
         post :update_password
+        post :update_profile
       end
     end
   end
