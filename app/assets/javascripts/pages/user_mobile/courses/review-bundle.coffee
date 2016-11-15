@@ -1,11 +1,16 @@
 
 $ ->
+  
+  hide = true
 
-	$("#review").click ->
+  $("#review").click ->
     $(".mask").show()
 
   $(".text-div").click ->
-    return false
+    hide = false
+    return true
 
   $(".mask").click ->
-    $(".mask").hide()
+    if hide == true
+      $(".mask").hide()
+    hide = true
