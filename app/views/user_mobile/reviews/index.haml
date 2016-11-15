@@ -1,6 +1,6 @@
 - content_for :app_head do
-  = javascript_include_tag "pages/user_mobile/courses/review-bundle"
-  = stylesheet_link_tag "pages/user_mobile/courses/review-bundle", :media => "all"
+  = javascript_include_tag "pages/user_mobile/reviews/index-bundle"
+  = stylesheet_link_tag "pages/user_mobile/reviews/index-bundle", :media => "all"
 
 
 - content_for :app_content do
@@ -8,8 +8,12 @@
     .header
       .cloud
         %p.caption 历史评价
-      %a{:href => "javascript:void(0);"}
-        %img.back{:src => "/assets/evaluate/back.png"}
+      - if @review_type == "book"
+        %a{:href => "/user_mobile/books/" + @book.id.to_s}
+          %img.back{:src => "/assets/evaluate/back.png"}
+      - else
+        %a{:href => "/user_mobile/courses/" + @course.id.to_s}
+          %img.back{:src => "/assets/evaluate/back.png"}
     %article.clearfix
       .left-div
         %img.headfigure{:src => "/assets/evaluate/headfigure.png"}

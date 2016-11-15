@@ -168,6 +168,8 @@ Rails.application.routes.draw do
   end
 
   namespace :user_mobile do
+    resources :reviews do
+    end
     resources :announcements do
     end
     resources :books do
