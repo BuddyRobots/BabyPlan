@@ -6,3 +6,6 @@ $ ->
   $("#search-btn").click ->
     keyword = $("#input-box").val()
     window.location.href = "/user_mobile/books?keyword=" + keyword
+
+  $("a").click ->
+    $(this).siblings().removeClass("select")
