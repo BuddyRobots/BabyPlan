@@ -291,8 +291,16 @@ class User
     logger.info "AAAAAAAAAAAAAAAAA"
     logger.info "https://api.weixin.qq.com/cgi-bin/media/get?access_token=#{Weixin.get_access_token}&media_id=#{server_id}"
     logger.info "AAAAAAAAAAAAAAAAA"
-    open("image.png", "wb") do |file|
+    filename = SecureRandom.uuid.to_s + ".jpg"
+    save_path = "public/uploads/avatar/" + filename
+    url_path = "uploads/avatar/" + filename
+    open(save_path, "wb") do |file|
       file << open("https://api.weixin.qq.com/cgi-bin/media/get?access_token=#{Weixin.get_access_token}&media_id=#{server_id}").read
+    end
+    if self.avatar.present?
+      self.avatar.update_attributes({path: url_path})
+    else
+      Material.create_avatar(self, url_path)
     end
     nil
   end
