@@ -6,37 +6,38 @@
   .content-area
     = render "user_mobile/partials/list_header", list_type: "books"
     = render "user_mobile/partials/no_centers"
-    .dl-div
-      %dt 儿童年龄：
-      %dd.select 
-        %a{:href => "javascript:void(0)"} 0~3
-      %dd 
-        %a{:href => "javascript:void(0)"} 3~6
-      %dd 
-        %a{:href => "javascript:void(0)"} 6~9
-      %dd 
-        %a{:href => "javascript:void(0)"} 9~12
-      %dd 
-        %a{:href => "javascript:void(0)"} 12~15
-      %dd 
-        %a{:href => "javascript:void(0)"} 15~18
-    - if @books.present?
-      - @books.each do |e|
-        .content{data: {id: e.id.to_s}}
-          .left-div
-            %img.visit{:src => e.cover.nil? ? "/assets/banner.png" : e.cover.path}
-          .right-div
-            %img.icon{:src => "/assets/kidscenter/hui.png"}
-            %p.caption= e.name
-            %p.message= truncate(strip_tags(e.desc).strip(), length: 50)
-            .location-div
-              %img.location{:src => "/assets/web/location.png"}
-              %span.center= e.center.name
-      / .render-more
-      /   %p 加载更多
-      / .load
-      /   %img.loading{:src => "/assets/loading.gif"}
-    - else
-      .unfound
-        %img.unfound-icon{:src => "/assets/web/cry.png"}
+    - if @current_user.client_centers.present?
+      .dl-div
+        %dt 儿童年龄：
+        %dd 
+          %a.select{:href => "javascript:void(0)"} 0~3
+        %dd 
+          %a{:href => "javascript:void(0)"} 3~6
+        %dd 
+          %a{:href => "javascript:void(0)"} 6~9
+        %dd 
+          %a{:href => "javascript:void(0)"} 9~12
+        %dd 
+          %a{:href => "javascript:void(0)"} 12~15
+        %dd 
+          %a{:href => "javascript:void(0)"} 15~18
+      - if @books.present?
+        - @books.each do |e|
+          .content{data: {id: e.id.to_s}}
+            .left-div
+              %img.visit{:src => e.cover.nil? ? "/assets/banner.png" : e.cover.path}
+            .right-div
+              %img.icon{:src => "/assets/kidscenter/hui.png"}
+              %p.caption= e.name
+              %p.message= truncate(strip_tags(e.desc).strip(), length: 50)
+              .location-div
+                %img.location{:src => "/assets/web/location.png"}
+                %span.center= e.center.name
+        / .render-more
+        /   %p 加载更多
+        / .load
+        /   %img.loading{:src => "/assets/loading.gif"}
+      - else
+        .unfound
+          %img.unfound-icon{:src => "/assets/web/cry.png"}
  

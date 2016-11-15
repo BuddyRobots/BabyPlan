@@ -6,25 +6,26 @@
   .content-area
     = render "user_mobile/partials/list_header", list_type: "announcements"
     = render "user_mobile/partials/no_centers"
-    - if @announcements.present?
-      - @announcements.each do |e|
-        .content{data: {id: e.id.to_s}}
-          .left-div
-            %img.visit{:src => e.photo.nil? ? "/assets/banner.png" : e.photo.path}
-          .right-div
-            %img.icon{:src => "/assets/kidscenter/gao.png"}
-            %p.caption= e.title
-            %p.message= truncate(strip_tags(e.content).strip(), length: 50)
-            .location-div
-              %img.location{:src => "/assets/web/location.png"}
-              %span.center= e.center.present? ? e.center.name : "所有儿童中心"
-      / .render-more
-      /   %p 加载更多 
-      / .load
-      /   %img.loading{:src => "/assets/loading.gif"}
-    - else
-      .unfound
-        %img.unfound-icon{:src => "/assets/web/cry.png"}
+    - if @current_user.client_centers.present?
+      - if @announcements.present?
+        - @announcements.each do |e|
+          .content{data: {id: e.id.to_s}}
+            .left-div
+              %img.visit{:src => e.photo.nil? ? "/assets/banner.png" : e.photo.path}
+            .right-div
+              %img.icon{:src => "/assets/kidscenter/gao.png"}
+              %p.caption= e.title
+              %p.message= truncate(strip_tags(e.content).strip(), length: 50)
+              .location-div
+                %img.location{:src => "/assets/web/location.png"}
+                %span.center= e.center.present? ? e.center.name : "所有儿童中心"
+        / .render-more
+        /   %p 加载更多 
+        / .load
+        /   %img.loading{:src => "/assets/loading.gif"}
+      - else
+        .unfound
+          %img.unfound-icon{:src => "/assets/web/cry.png"}
 
 
     / .content
