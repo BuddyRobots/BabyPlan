@@ -19,3 +19,4 @@ $ ->
       success: (res) ->
         localIds = res.localIds
         alert(localIds)
+        $(".avatar-icon").attr("src", localIds)
