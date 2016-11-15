@@ -10,7 +10,7 @@
       - @feeds.each do |e|
         .content{data: {path: e.path.to_s}}
           .left-div
-            %img.visit{:src => "/assets/kidscenter/diary.png"}
+            %img.visit{:src => e.img_src}
           .right-div
             %img.icon{:src => "/assets/kidscenter/" + e.feed_icon + ".png"}
             %p.caption= e.name

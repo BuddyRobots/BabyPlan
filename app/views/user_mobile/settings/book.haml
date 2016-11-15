@@ -9,38 +9,41 @@
         %p 我的绘本
       %a{:href => user_mobile_settings_path}
         %img.back{:src => "/assets/mybook/back.png"}
-    .undiscover
-      %img.icon{:src => "/assets/web/cry.png"}
-    .details
-      .left-div
-        %img.visit{:src => "/assets/mybook/diary.png"}
-      .right-div
-        %p.caption 
-          蚯蚓的日记 
-          %span 8月14日归还
-        %p.article 简介：这是一本极为有趣的图画书，以日记书写的方式…
-        .location-div
-          %img.location{:src => "/assets/web/location.png"}
-          %span.center 所有儿童中心
-    .details
-      .left-div
-        %img.visit{:src => "/assets/mybook/book.jpg"}
-      .right-div
-        %p.caption 
-          蚯蚓的日记 
-          %span 已逾期
-        %p.article 简介：全套20册小学英文全套绘本各种可爱的小故事。
-        .location-div
-          %img.location{:src => "/assets/web/location.png"}
-          %span.center 什刹海街道西四北社区儿童中心
-    .details
-      .left-div
-        %img.visit{:src => "/assets/mybook/newhome.png"}
-      .right-div
-        %p.caption 
-          蚯蚓的日记 
-          %span#return 已还
-        %p.article 简介：小袋袋的伙伴们是不是有一个比他更棒的家？小…
-        .location-div
-          %img.location{:src => "/assets/web/location.png"}
-          %span.center 西城区新街口街道社区儿童中心
+    - if @book_borrows.blank?
+      .undiscover
+        %img.icon{:src => "/assets/web/cry.png"}
+    - else
+      - @book_borrows.each do |e|
+        .details{data: {id: e.book.id.to_s}}
+          .left-div
+            %img.visit{:src => e.book.cover.nil? ? "/assets/banner.png" : e.book.cover.path}
+          .right-div
+            %p.caption 
+              = e.book.name
+              / %span 8月14日归还
+            %p.article= truncate(strip_tags(e.book.desc).strip(), length: 50)
+            .location-div
+              %img.location{:src => "/assets/web/location.png"}
+              %span.center= e.book.center.name
+    / .details
+    /   .left-div
+    /     %img.visit{:src => "/assets/mybook/book.jpg"}
+    /   .right-div
+    /     %p.caption 
+    /       蚯蚓的日记 
+    /       %span 已逾期
+    /     %p.article 简介：全套20册小学英文全套绘本各种可爱的小故事。
+    /     .location-div
+    /       %img.location{:src => "/assets/web/location.png"}
+    /       %span.center 什刹海街道西四北社区儿童中心
+    / .details
+    /   .left-div
+    /     %img.visit{:src => "/assets/mybook/newhome.png"}
+    /   .right-div
+    /     %p.caption 
+    /       蚯蚓的日记 
+    /       %span#return 已还
+    /     %p.article 简介：小袋袋的伙伴们是不是有一个比他更棒的家？小…
+    /     .location-div
+    /       %img.location{:src => "/assets/web/location.png"}
+    /       %span.center 西城区新街口街道社区儿童中心

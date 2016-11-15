@@ -1,21 +1,23 @@
 class UserMobile::SettingsController < UserMobile::ApplicationController
-  # usercenter
 	def index
   end
 
-  # mybook
   def book
+    @book_borrows = @current_user.book_borrows
   end
 
-  # mycourse
   def course
+    @courses_participates = @current_user.course_participates
   end
 
   def favorite
-    favorites = @current_user.favorites.where(enabled: true).desc(:created_at)
-    @favorites = favorites.map do |e|
-      e.favorite_info
-    end
+    @favorites = @current_user.favorites.where(enabled: true).desc(:created_at)
+  end
+
+  def remove_favorite
+    @favorite = Favorite.where(id: params[:favorite_id]).first
+    @favorite.update_attributes({enabled: false})
+    render json: retval_wrapper(nil) and return
   end
 
   # systemmessage
