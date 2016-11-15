@@ -15,7 +15,7 @@
     .face.clearfix
       .avator
         %img.avator-icon{:src => @current_user.avatar.present? ? @current_user.avatar.path : "/assets/web/boy.png"}
-      %p.username 小狐狸
+      %p.username= @current_user.name
 
     .collect-div
       %a.collect{:href => favorite_user_mobile_settings_path}

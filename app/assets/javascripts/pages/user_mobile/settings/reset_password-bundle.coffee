@@ -20,11 +20,6 @@ $ ->
             $.mobile_page_notification("原密码不正确", 3000)
     )
 
-  $(".next").click ->
+  $("#end").click ->
     next()
     return false
-
-  $("#password_confirm").keydown (event) ->
-    code = event.which
-    if code == 13
-      next()
