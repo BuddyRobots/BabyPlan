@@ -5,6 +5,7 @@ html {
 body {
 	font-family:"Microsoft YaHei";
 	font-size: 62.5%;
+	height: 100%;
 }
 body, p, img, div, ul, li, a, h3, hr, input {
 	margin:0;
@@ -32,6 +33,7 @@ a{
 	width:100%;
 	max-width:640px;
 	margin:0 auto;
+	height: 100%;
 	background: linear-gradient(
     45deg, 
     #fef29c 45%, 
@@ -115,7 +117,18 @@ article {
 	width: 4.38%;
 	max-width: 20px;
 }
+.unfound {
+	width: 45.3125%;
+	margin: 0 auto;
+	margin-top: 35%;
+}
+.unfound-icon {
+	width: 100%;
+	max-width: 290px;
+}
 #review {
+	position: absolute;
+	bottom: 0;
 	width: 100%;
 	font-size: 3.6em;
 	color: #fff;

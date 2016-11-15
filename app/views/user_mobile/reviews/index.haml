@@ -28,6 +28,9 @@
             - (5 - @review[:score]).times do
               %img.star{:src => "/assets/web/greystar2.png"}
           %p.message= @review[:content]
+    - else
+      .unfound
+        %img.unfound-icon{:src => "/assets/web/cry.png"}
     / %article.clearfix
     /   .left-div
     /     %img.headfigure{:src => "/assets/evaluate/headfigure.png"}
