@@ -24,7 +24,7 @@ class CourseInst
   #relationships specific for course_participate
   has_many :course_participates
 
-  has_many :feedbacks
+  has_many :reviews
   has_many :favorites
 
 

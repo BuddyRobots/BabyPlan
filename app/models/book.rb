@@ -28,7 +28,7 @@ class Book
   belongs_to :center
   has_many :book_insts
   has_many :book_borrows
-  has_many :feedbacks
+  has_many :reviews
   has_many :favorites
 
   def self.create_book(staff, center, book_info)

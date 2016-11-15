@@ -46,10 +46,6 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
     render json: retval_wrapper(nil) and return
   end
 
-  # evaluate
-  def review
-  end
-
   def signin
     info_ary = params[:signin_info]
     course_inst_id, qr_gen_time, class_idx = info_ary.split(';')

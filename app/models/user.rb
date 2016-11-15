@@ -41,8 +41,8 @@ class User
   has_and_belongs_to_many :client_centers, class_name: "Center", inverse_of: :clients
   has_many :course_participates, class_name: "CourseParticipate", inverse_of: :client
   has_many :book_borrows, class_name: "BookBorrow", inverse_of: :client
-  has_many :feedbacks, class_name: "Feedback", inverse_of: :client
-  has_many :audit_feedbacks, class_name: "Feedback", inverse_of: :staff
+  has_many :reviews, class_name: "Review", inverse_of: :client
+  has_many :audit_reviews, class_name: "Review", inverse_of: :staff
   has_many :favorites
 
   # relationships specific for staff
@@ -205,9 +205,9 @@ class User
     nil
   end
 
-  def has_feedback_on(ele)
+  def has_review_on(ele)
     if (ele.class == CourseInst)
-      return self.feedbacks.where(course_inst: ele).first.present?
+      return self.reviews.where(course_inst: ele).first.present?
     end
   end
 
