@@ -229,7 +229,7 @@ Rails.application.routes.draw do
         get :profile
         post :update_password
         post :update_profile
-        post :update_avatar
+        post :upload_avatar
       end
     end
   end
