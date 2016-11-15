@@ -12,5 +12,6 @@ class UserMobile::ReviewsController < UserMobile::ApplicationController
   end
 
   def create
+    
   end
 end
