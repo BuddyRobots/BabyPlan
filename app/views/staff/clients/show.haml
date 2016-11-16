@@ -93,12 +93,12 @@
               %span.square
               %span.square
               %span.class-status
-                %label.checkbox-inline
-                  %input{:type => "checkbox", :value => "option1"} 未上课
-                %label.checkbox-inline
-                  %input#inlineCheckbox2{:type => "checkbox", :value => "option2"} 已上课
-                %label.checkbox-inline
-                  %input#inlineCheckbox3{:type => "checkbox", :value => "option3"} 缺课
+                %span.square 
+                %span 未上课
+                %span.square.green
+                %span 已上课
+                %span.square.red
+                %span 缺课
             .comments
               %span 评论：
               %img{:src => "/assets/managecenter/star.png"}
