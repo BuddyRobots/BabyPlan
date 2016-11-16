@@ -90,6 +90,7 @@ $ ->
         $("#kid-mobile").val().trim() == "" ||
         $("#kid-mobilecode").val().trim() == "" ||
         $("#kid-parent").val().trim() == "" ||
+        $("#kid-password").val().trim() == "" ||
         uid == ""
       $("#kid-add").addClass("button-disabled")
       $("#kid-add").removeClass("button-enabled")
@@ -109,6 +110,8 @@ $ ->
     $("#verify-code-notice").css("visibility","hidden")
   $("#kid-parent").keyup ->
     check_add_input()
+  $("#kid-password").keyup ->
+    check_add_input()
 
 
 # add button press
@@ -124,6 +127,7 @@ $ ->
     address = $("#kid-address").val()
     parent = $("#kid-parent").val()
     verify_code = $("#kid-mobilecode").val()
+    password = $("#kid-password").val()
     
     $.postJSON(
       '/staff/clients/' + uid + '/verify',
@@ -131,6 +135,7 @@ $ ->
         name: name
         gender: gender
         birthday: birthday
+        password: password
         address: address
         parent: parent
         verify_code: verify_code

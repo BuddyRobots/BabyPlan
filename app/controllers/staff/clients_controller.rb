@@ -25,7 +25,20 @@ class Staff::ClientsController < Staff::ApplicationController
 
   def verify
     user = User.where(id: params[:id]).first
-    retval = user.nil? ? ErrCode::USER_NOT_EXIST : user.verify_client(params[:name], params[:gender], params[:birthday], params[:parent], params[:address], params[:verify_code])
+    if user.nil?
+      render json: retval_wrapper(ErrCode::USER_NOT_EXIST) and return
+    end
+    retval = user.verify_client(params[:name], params[:password], params[:verify_code])
+    if retval.nil?
+      profile = {
+        "name" => params[:name],
+        "gender" => params[:gender].to_i,
+        "parent" => params[:parent],
+        "address" => params[:address],
+        "birthday" => params[:birthday]
+      }
+      retval = user.update_profile(profile)
+    end
     render json: retval_wrapper(retval)
   end
 

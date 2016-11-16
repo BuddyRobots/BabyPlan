@@ -1,4 +1,7 @@
 $ ->
+  if window.first_signin == "true"
+    $.mobile_page_notification("请先完善个人资料")
+
   $( "#datepicker" ).datepicker({
     changeMonth: true,
     changeYear: true
@@ -29,7 +32,10 @@ $ ->
       },
       (data) ->
         if data.success
-          $.mobile_page_notification("已更新")
+          if window.first_signin == "true"
+            window.location.href = "/user_mobile/feeds?code=" + DONE
+          else
+            $.mobile_page_notification("已更新")
         else
           $.mobile_page_notification("服务器出错")
       )

@@ -36,6 +36,7 @@ class User
   field :parent, type: String
   field :address, type: String
   field :created_by_staff, type: Boolean, default: false
+  field :first_signin, type: Boolean, default: true
 
   # relationships specific for clients
   # belongs_to :client_center
@@ -45,6 +46,7 @@ class User
   has_many :reviews, class_name: "Review", inverse_of: :client
   has_many :audit_reviews, class_name: "Review", inverse_of: :staff
   has_many :favorites
+  has_many :messages
 
   # relationships specific for staff
   belongs_to :staff_center, class_name: "Center", inverse_of: :staffs
@@ -290,8 +292,11 @@ class User
     end
   end
 
-  def self.genders_for_select
-    hash = { "请选择" => -1, "男" => 0, "女" => 1 }
+  def self.genders_for_select(with_default = true)
+    hash = { "男" => 0, "女" => 1 }
+    if with_default
+      hash["请选择"] = -1
+    end
     hash 
   end
 
@@ -322,5 +327,11 @@ class User
       Material.create_avatar(self, url_path)
     end
     nil
+  end
+
+  def update_first_signin
+    cur_val = self.first_signin
+    self.update_attributes({first_signin: false}) if cur_val
+    cur_val
   end
 end
