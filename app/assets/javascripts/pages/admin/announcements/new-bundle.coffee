@@ -1,6 +1,8 @@
 #= require wangEditor.min
 
 $ ->
+  has_photo = false
+
   # wangEditor
   editor = new wangEditor('edit-box')
   
@@ -39,8 +41,23 @@ $ ->
       },
       (data) ->
         console.log data
-        if data.success
+        if data.success != true
+          $.page_notification "服务器出错，请稍后重试"
+          return
+        if has_photo == false
           window.location.href = "/admin/announcements/" + data.announcement_id
         else
-          $.page_notification "服务器出错，请稍后重试"
+          $("#upload-photo-form")[0].action = "/admin/announcements/" + data.announcement_id + "/upload_photo"
+          $("#upload-photo-form").submit()
       )
+
+#img upload
+  $("#upload-photo").click ->
+    $("#photo_file").trigger("click")
+
+  $("#photo_file").change (event) ->
+    if event.target.files[0] == undefined
+      return
+    has_photo = true
+    photo = $(".photo")[0]
+    photo.src = URL.createObjectURL(event.target.files[0])

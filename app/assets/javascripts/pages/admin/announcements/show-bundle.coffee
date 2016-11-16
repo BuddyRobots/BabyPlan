@@ -1,6 +1,7 @@
 #= require wangEditor.min
 
 $ ->
+  has_photo = false
   # wangEditor
   editor = new wangEditor('edit-box')
   editor.config.menus = [
@@ -34,13 +35,11 @@ $ ->
             btn.addClass("unpublished")
             btn.find("span").text("公布")
             btn.find("img").attr("src", "/assets/managecenter/shelve.png")
-            $("#publish-status").text("未公布").removeClass("declared").addClass("undeclared")
           else
             btn.addClass("published")
             btn.removeClass("unpublished")
             btn.find("span").text("隐藏")
             btn.find("img").attr("src", "/assets/managecenter/unshelve.png")
-            $("#publish-status").text("已公布").addClass("declared").removeClass("undeclared")
       )
 
   # edit-btn press-down
@@ -70,17 +69,39 @@ $ ->
       },
       (data) ->
         console.log data
-        if data.success
-          $(".edit-btn").toggle()
-          $(".end-btn").toggle()
-          $(".display-box").toggle()
-          $(".edit-area").toggle()
-
-          $("#unshelve-btn").attr("disabled", false)
-
-          $("#show-caption").text($("#input-caption").val())
-          console.log content
-          $(".display-content").html(content)
-        else
+        if data.success != true
           $.page_notification "服务器出错，请稍后重试"
+          return
+        if has_photo == false
+          window.location.href = "/admin/announcements/" + data.announcement_id
+        else
+          $("#upload-photo-form")[0].action = "/admin/announcements/" + data.announcement_id + "/upload_photo"
+          $("#upload-photo-form").submit()
+
+
+        # console.log data
+        # if data.success
+        #   $(".edit-btn").toggle()
+        #   $(".end-btn").toggle()
+        #   $(".display-box").toggle()
+        #   $(".edit-area").toggle()
+
+        #   $("#unshelve-btn").attr("disabled", false)
+
+        #   $("#show-caption").text($("#input-caption").val())
+        #   console.log content
+        #   $(".display-content").html(content)
+        # else
+        #   $.page_notification "服务器出错，请稍后重试"
     )
+
+#img upload
+  $("#upload-photo").click ->
+    $("#photo_file").trigger("click")
+
+  $("#photo_file").change (event) ->
+    if event.target.files[0] == undefined
+      return
+    has_photo = true
+    photo = $(".edit-photo")[0]
+    photo.src = URL.createObjectURL(event.target.files[0])
