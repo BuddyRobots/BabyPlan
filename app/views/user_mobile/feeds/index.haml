@@ -21,8 +21,8 @@
                 %span.center= e.center_str
         .render-more
           %p 加载更多 
-        / .load
-        /   %img.loading{:src => "/assets/loading.gif"}
+        .load.hide
+          %img.loading{:src => "/assets/loading.gif"}
       - else
         .unfound
           %img.unfound-icon{:src => "/assets/web/cry.png"}

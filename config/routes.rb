@@ -202,6 +202,9 @@ Rails.application.routes.draw do
       end
     end
     resources :feeds do
+      collection do
+        get :more
+      end
     end
     resources :sessions do
       member do
