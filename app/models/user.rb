@@ -290,8 +290,11 @@ class User
     end
   end
 
-  def self.genders_for_select
-    hash = { "请选择" => -1, "男" => 0, "女" => 1 }
+  def self.genders_for_select(with_default = true)
+    hash = { "男" => 0, "女" => 1 }
+    if with_default
+      hash["请选择"] = -1
+    end
     hash 
   end
 

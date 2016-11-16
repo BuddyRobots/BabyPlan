@@ -39,7 +39,7 @@
               - @users[:data].each do |u|
                 %tr
                   %td= u[:name]
-                  %td= u[:age].to_s + " 岁"
+                  %td= u[:age].present? ? u[:age].to_s + " 岁" : ""
                   %td= u[:gender] == 0 ? "男" : "女"
                   %td= u[:parent]
                   %td= u[:mobile]
@@ -74,9 +74,7 @@
           .form-group
             %label.col-sm-3.control-label{:for => "kid-gender"} 性&nbsp别
             .col-sm-9
-              %select.unclicked-box#kid-gender.form-control
-                %option 男
-                %option 女
+              = select_tag "kid-gender", options_for_select(User.genders_for_select(false)), class: "unclicked-box form-control"
           .form-group
             %label.col-sm-3.control-label{:for => "datepicker"} 出生日期
             .col-sm-9
@@ -101,6 +99,10 @@
               %input.unclicked-box#kid-mobilecode.form-control{:type => "text"}
             .col-sm-4
               %button.unclicked#mobilecode{:href => "javascript:void(0);"} 获取验证码
+          .form-group#password-input
+            %label.col-sm-3.control-label{:for => "kid-password"} 密码
+            .col-sm-9
+              %input.unclicked-box#kid-password.form-control{:type => "text"}
           .add-button
             %button#kid-add.button-disabled{:href => "javascript:void(0);"} 添&nbsp加
 
