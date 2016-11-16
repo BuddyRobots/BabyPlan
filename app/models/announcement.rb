@@ -6,7 +6,7 @@ class Announcement
   field :content, type: String
   field :is_published, type: Boolean
   field :plain_text, type: String
-  field :image_path, type: String
+  # field :image_path, type: String
 
   belongs_to :center
   belongs_to :staff, class_name:"User", inverse_of: :announcement
@@ -22,8 +22,8 @@ class Announcement
       title: announcement_info[:title],
       content: announcement_info[:content],
       is_published: announcement_info[:is_published],
-      plain_text: html.text,
-      image_path: html.css("img").blank? ? "" : html.css("img")[0].attr("src")
+      plain_text: html.text
+      # image_path: html.css("img").blank? ? "" : html.css("img")[0].attr("src")
     }
     announcement = scope == "local" ? center.announcements.create(info) : Announcement.create(info)
 
@@ -41,10 +41,14 @@ class Announcement
     info = {
       title: announcement_info[:title],
       content: announcement_info[:content],
-      plain_text: html.text,
-      image_path: html.css("img").blank? ? "" : html.css("img")[0].attr("src")
+      plain_text: html.text
+      # image_path: html.css("img").blank? ? "" : html.css("img")[0].attr("src")
     }
     self.update_attributes(info)
-    nil
+    { announcement_id: self.id.to_s }
+  end
+
+  def status_str
+    self.is_published ? "已公布" : "未公布"
   end
 end
