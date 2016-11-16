@@ -220,7 +220,6 @@
 		height: 418px;
 		border-radius: 6px;
 	}
-	
 }
 .forget-password-box {
 	width: 78%;
@@ -246,6 +245,8 @@
 #forget {
 	@extend #signup;
 }
+
+// modify_password
 
 
 
