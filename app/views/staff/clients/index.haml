@@ -34,18 +34,15 @@
                 %th 家&nbsp长
                 %th 手机号
                 %th 家庭住址
-                %th 操&nbsp作
             %tbody
               - @users[:data].each do |u|
                 %tr
-                  %td= u[:name]
+                  %td= link_to u[:name], "/staff/clients/#{u[:id]}"
                   %td= u[:age].present? ? u[:age].to_s + " 岁" : ""
                   %td= u[:gender] == 0 ? "男" : "女"
                   %td= u[:parent]
                   %td= u[:mobile]
                   %td= u[:address]
-                  %td
-                    = link_to "详情", "/staff/clients/#{u[:id]}"
 
         .select-page 
           %span.totalitems= "共#{@users[:total_page]}页,总计#{@users[:total_number]}条"

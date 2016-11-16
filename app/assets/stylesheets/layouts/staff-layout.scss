@@ -183,6 +183,16 @@ body, p, img, div, ul, li, a, h3, table, tr, th, td {
 	margin: 0  auto;
 	padding: 5% 0;
 }
+.close-btn {
+	position: absolute;
+	right: -14px;
+	top: -14px;
+	opacity: 0.7;
+	z-index: 10;
+}
+.close-btn:hover {
+	opacity: 1;
+}
 .confirm-button {
 	text-align: center;
 }

@@ -7,6 +7,11 @@ $ ->
     $("#modify_passwordModal").modal("show")
     $("#modify_passwordModal input").val("")
 
+  $(".close-btn").click ->
+    $("input").val("")
+    $("input").removeClass("clicked-box")
+    $("button").removeClass("button-enabled")
+
   toggle_password_tip = (wrong) ->
     if (wrong)
       $("#password").addClass("clicked-box")
