@@ -41,6 +41,7 @@ $ ->
           price_pay: price_pay
           length: length
           desc: desc
+          code: code
           available: available
         }
       },

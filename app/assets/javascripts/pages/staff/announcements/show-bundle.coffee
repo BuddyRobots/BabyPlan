@@ -1,6 +1,7 @@
 #= require wangEditor.min
 
 $ ->
+  has_photo = false
   # wangEditor
   editor = new wangEditor('edit-box')
   editor.config.menus = [
@@ -68,19 +69,27 @@ $ ->
       },
       (data) ->
         console.log data
-        if data.success
-          $(".edit-btn").toggle()
-          $(".end-btn").toggle()
-          $(".display-box").toggle()
-          $(".edit-area").toggle()
-
-          $(".unshelve-btn").attr("disabled", false)
-
-          $("#show-caption").text($("#input-caption").val())
-          console.log content
-          $(".display-content").html(content)
-        else
+        if data.success != true
           $.page_notification "服务器出错，请稍后重试"
+          return
+        if has_photo == false
+          window.location.href = "/staff/announcements/" + data.announcement_id
+        else
+          $("#upload-photo-form")[0].action = "/staff/announcements/" + data.announcement_id + "/upload_photo"
+          $("#upload-photo-form").submit()
+
+
+        # console.log data
+        # if data.success
+        #   $(".edit-btn").toggle()
+        #   $(".end-btn").toggle()
+        #   $(".display-box").toggle()
+        #   $(".edit-area").toggle()
+        #   $(".unshelve-btn").attr("disabled", false)
+        #   $("#show-caption").text($("#input-caption").val())
+        #   $(".display-content").html(content)
+        # else
+        #   $.page_notification "服务器出错，请稍后重试"
     )
 
 
@@ -89,5 +98,8 @@ $ ->
     $("#photo_file").trigger("click")
 
   $("#photo_file").change (event) ->
+    if event.target.files[0] == undefined
+      return
+    has_photo = true
     photo = $(".edit-photo")[0]
     photo.src = URL.createObjectURL(event.target.files[0])

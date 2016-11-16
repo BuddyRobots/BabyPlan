@@ -33,11 +33,12 @@
             - else
               - @global_eles[:data].each do |e|
                 .introduce
-                  %img.visit{:src => e.image_path, width: "190", height: "129"}
+                  %a{href: "/staff/announcements/" + e.id.to_s}
+                    %img.visit{:src => e.photo.present? ? e.photo.path : "/assets/banner.png", width: "190", height: "129"}
                   %p.caption-header
                     %span.caption= e.title
                     %span#time-flag= e.created_at.strftime("%Y-%m-%d %H-%M")
-                    %a.undeclared{:href => "javascript:void(0);"} 未公布
+                    %a.undeclared{:href => "javascript:void(0);"}= e.status_str
                   .desc
                     = e.plain_text
                 %a.desc-click{:href => "/staff/announcements/" + e.id.to_s} 
@@ -62,11 +63,12 @@
             - else
               - @local_eles[:data].each do |e|
                 .introduce
-                  %img.visit{:src => e.image_path, width: "190", height: "129"}
+                  %a{href: "/staff/announcements/" + e.id.to_s}
+                    %img.visit{:src => e.photo.present? ? e.photo.path : "/assets/banner.png", width: "190", height: "129"}
                   %p.caption-header
                     %span.caption= e.title
                     %span#time-flag= e.created_at.strftime("%Y-%m-%d %H-%M")
-                    %a.undeclared{:href => "javascript:void(0);"} 未公布
+                    %a.undeclared{:href => "javascript:void(0);"}= e.status_str
                   .desc
                     = e.plain_text
                 %a.desc-click{:href => "/staff/announcements/" + e.id.to_s} 

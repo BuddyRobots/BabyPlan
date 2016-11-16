@@ -31,7 +31,7 @@
         .display-area
           %p.caption-header
             %span#show-caption= @announcement.title
-            %span#publish-status{class: @announcement.is_published ? "declared" : "undeclared", :href => "javascript:void(0);"}= @announcement.is_published ? "已公布" : "未公布"
+            %span#publish-status{class: @announcement.is_published ? "declared" : "undeclared", :href => "javascript:void(0);"}= @announcement.status_str
           .display-content
             = @announcement.content.html_safe
 
