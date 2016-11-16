@@ -168,7 +168,58 @@ body, p, img, div, ul, li, a, h3, table, tr, th, td {
 		background: #0f2c67;
 	}
 }
-
+#modify_passwordModal {
+	.modal-dialog {
+		position:absolute;
+		left: 50%;
+		top: 50%;
+		margin-left: -220px;
+		margin-top: -148px;
+		width: 440px;
+		height: 296px;
+		border-radius: 6px;
+	}
+}
+.set-password-box {
+	width: 65%;
+	margin: 0  auto;
+	padding-top: 10%;
+	padding-bottom: 5%;
+}
+.confirm-button {
+	text-align: center;
+}
+#label-name {
+	text-align: left;
+}
+#confirm {
+	width: 100%;
+	height: 40px;
+	border: 0;
+	border-radius: 4px;
+	margin-bottom: 20px;
+	line-height: 40px;
+	font-size: 16px;
+	color: white;
+}
+.button-disabled {
+	background: #c8c8c8;
+}
+.button-enabled {
+	background: #ffa265;
+}
+.unclicked-box {
+	border: 1px solid #c8c8c8;
+}
+.clicked-box {
+	border: 1px solid #d70c19;
+}
+.clicked {
+	background: #d4d4d4;
+}
+.unclicked {
+	background: #fee4d2;
+}
 
 
 

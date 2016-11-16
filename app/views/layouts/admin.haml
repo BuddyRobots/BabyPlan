@@ -26,9 +26,8 @@
                 %span.caret
               %ul.dropdown-menu
                 %li 
-                  %a{:href => "javascript:void(0);"} 相关信息
                 %li 
-                  %a{:href => "javascript:void(0);"} 修改密码
+                  %a.modify_password{:href => "javascript:void(0);"} 修改密码
           %li.manage
             %a{:href => "javascript:void(0);"}
               %img.about-icon{:src => "/assets/managecenter/about.png"}
@@ -60,3 +59,27 @@
 
     = yield
 = render :template => 'layouts/application'
+
+/ modify_password
+#modify_passwordModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", :src => "/assets/managecenter/close.png"}
+      .modal-body
+        .set-password-box
+          %form.form-horizontal{:role => "form"}
+            .form-group
+              %label.col-sm-4.control-label#label-name{:for => "forget-password"} 原始密码
+              .col-sm-8
+                %input.unclicked-box#password.form-control{:type => "password"}
+            .form-group
+              %label.col-sm-4.control-label#label-name{:for => "forget-password"} 重设密码
+              .col-sm-8
+                %input.unclicked-box#new-password.form-control{:type => "password"}
+            .form-group
+              %label.col-sm-4.control-label#label-name{:for => "forget-confirm-password"} 确认密码
+              .col-sm-8
+                %input.unclicked-box#confirm-password.form-control{:type => "password"}
+            .confirm-button
+              %button#confirm.button-disabled{:href => "javascript:void(0);"} 确定
+
