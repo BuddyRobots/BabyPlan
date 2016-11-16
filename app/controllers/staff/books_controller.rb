@@ -21,10 +21,22 @@ class Staff::BooksController < Staff::ApplicationController
   end
 
   def show
+    @profile = params[:profile]
     @book = current_center.books.where(id: params[:id]).first
     if @book.nil?
       redirect_to action: :index and return
     end
+
+    reviews = @book.reviews
+    if params[:review_type].present?
+      reviews = reviews.where(status: params[:review_type].to_i)
+    end
+    params[:page] = params[:review_page]
+    @reviews = auto_paginate(reviews)
+
+    borrows = @book.book_borrows
+    params[:page] = params[:borrow_page]
+    @borrows = auto_paginate(borrows)
   end
 
   def update

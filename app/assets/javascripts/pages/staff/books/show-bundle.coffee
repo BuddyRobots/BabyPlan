@@ -2,6 +2,12 @@
 #= require tag-it.min
 $ ->
 
+  if window.profile == "reviews"
+    $('.nav-tabs a[href="#tab2"]').tab('show')
+
+  if window.profile == "borrows"
+    $('.nav-tabs a[href="#tab3"]').tab('show')
+
   has_cover = false
   has_back = false
 
