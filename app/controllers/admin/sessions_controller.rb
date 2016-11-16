@@ -36,6 +36,11 @@ class Admin::SessionsController < Admin::ApplicationController
     render json: retval_wrapper(retval)
   end
 
+  def change_password
+    retval = @current_user.change_password(params[:password], params[:new_password])
+    render json: retval_wrapper(retval) and return
+  end
+
   def signout
     cookies.delete(:auth_key, :domain => :all)
     redirect_to admin_sessions_path
