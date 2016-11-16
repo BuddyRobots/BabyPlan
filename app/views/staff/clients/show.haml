@@ -7,7 +7,6 @@
 
 
 .content-area
-  /clients-show
   .manage-content
     / .btn.finish-btn{:type => "button"} 
     /   %img.ticker{:src => "/assets/managecenter/ticker.png"}
@@ -20,9 +19,9 @@
         %li.active
           %a#kids-message{"data-toggle" => "tab", :href => "#tab1"} 儿童信息
         %li
-          %a#course-review{"data-toggle" => "tab", :href => "#tab2"} 课程评价
+          %a#course-review{"data-toggle" => "tab", :href => "#tab2"} 课程参与
         %li
-          %a#book-review{"data-toggle" => "tab", :href => "#tab3"} 绘本评价
+          %a#book-review{"data-toggle" => "tab", :href => "#tab3"} 绘本借阅
 
       .tab-content
         #tab1.tab-pane.active
@@ -99,14 +98,38 @@
                 %span 已上课
                 %span.square.red
                 %span 缺课
-            .comments
-              %span 评论：
-              %img{:src => "/assets/managecenter/star.png"}
-              %img{:src => "/assets/managecenter/star.png"}
-              %img{:src => "/assets/managecenter/star.png"}
-              %img{:src => "/assets/managecenter/star.png"}
-              %img{:src => "/assets/managecenter/star.png"}
-              %p.comments-content 孩子刚上完这门课程，内容很新颖，学了很多知识，丰富了孩子的视野，是一门很好的课，老师讲的也很Nice，很棒的一门课程，会继续为孩子报名参加中心其它孩子感兴趣的课程。
+          .review-box
+            .course-details.clearfix
+              %span.span-attr.course-name 课程:
+              %span.span-input#course-name 社会科学
+              %span.span-attr.course-time 上课时间:
+              %span.span-input#course-time 2016-07-23--2016-08-23
+              %span.span-attr.course-teacher 主讲人:
+              %span.span-input#coure-teacher 王健林
+              %span.span-attr.course-address 地址:
+              %span.span-input#courese-address 呼伦贝尔大草原18号蒙古包
+              %span.span-right
+                %span.span-attr.course-status 状态:
+                %span.span-input#coure-status 未付款
+            .item
+              %span.item-status 上课状态：
+              %span.square
+              %span.square
+              %span.square
+              %span.square
+              %span.square
+              %span.square
+              %span.square
+              %span.square
+              %span.square
+              %span.square
+              %span.class-status
+                %span.square 
+                %span 未上课
+                %span.square.green
+                %span 已上课
+                %span.square.red
+                %span 缺课
 
           .select-page 
             %span.totalitems= "共6页,总计12条"
@@ -141,14 +164,6 @@
               %span.square
               %span.square
               %span.square
-            .comments
-              %span 评论：
-              %img{:src => "/assets/managecenter/star.png"}
-              %img{:src => "/assets/managecenter/star.png"}
-              %img{:src => "/assets/managecenter/star.png"}
-              %img{:src => "/assets/managecenter/star.png"}
-              %img{:src => "/assets/managecenter/star.png"}
-              %p.comments-content 孩子刚上完这门课程，内容很新颖，学了很多知识，丰富了孩子的视野，是一门很好的课，老师讲的也很Nice，很棒的一门课程，会继续为孩子报名参加中心其它孩子感兴趣的课程。
           .select-page 
             %span.totalitems= "共6页,总计12条"
             %span.choice-page

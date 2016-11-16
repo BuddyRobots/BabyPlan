@@ -1,6 +1,8 @@
 - content_for :app_head do
   = javascript_include_tag "pages/user_mobile/feeds/index-bundle"
   = stylesheet_link_tag "pages/user_mobile/feeds/index-bundle", :media => "all"
+  :javascript
+    window.keyword="#{@keyword}"
 
 - content_for :app_content do
   .content-area
@@ -19,10 +21,10 @@
               .location-div
                 %img.location{:src => "/assets/web/location.png"}
                 %span.center= e.center_str
+        .render-more
+          %p 加载更多 
+        .load.hide
+          %img.loading{:src => "/assets/loading.gif"}
       - else
         .unfound
           %img.unfound-icon{:src => "/assets/web/cry.png"}
-    / .render-more
-    /   %p 加载更多 
-    / .load
-    /   %img.loading{:src => "/assets/loading.gif"}

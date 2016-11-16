@@ -33,7 +33,7 @@ $ ->
       (data) ->
         if data.success
           if window.first_signin == "true"
-            window.location.href = "/user_mobile/feeds?code=" + DONE
+            window.location.href = "/user_mobile/feeds"
           else
             $.mobile_page_notification("已更新")
         else

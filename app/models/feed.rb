@@ -65,4 +65,15 @@ class Feed
       self.announcement.photo.nil? ? "/assets/banner.png" : self.announcement.photo.path
     end
   end
+
+  def more_info
+    {
+      ele_name: self.name,
+      ele_path: self.path,
+      ele_photo: self.img_src,
+      ele_content: ActionController::Base.helpers.truncate(ActionController::Base.helpers.strip_tags(self.desc).strip(), length: 50),
+      ele_icon: self.feed_icon,
+      ele_center: self.center_str
+    }
+  end
 end

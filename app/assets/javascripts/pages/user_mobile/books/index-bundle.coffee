@@ -1,4 +1,7 @@
+#= require "./_templates/book_item"
 $ ->
+  page = 2
+
   $(document).on 'click', '.content', ->
     bid = $(this).attr("data-id")
     location.href = "/user_mobile/books/" + bid + "?back=books"
@@ -20,3 +23,25 @@ $ ->
     upper = $(this).attr("data-upper")
     keyword = $("#input-box").val()
     window.location.href = "/user_mobile/books?keyword=" + keyword + "&lower=" + lower + "&upper=" + upper
+
+  $(".render-more").click ->
+    render_more = $(this)
+    render_more.hide()
+    $(".load").show()
+    $.getJSON "/user_mobile/books/more?keyword=" + window.keyword + "&lower=" + window.lower + "&upper=" + window.upper + "&page=" + page, (data) ->
+      $(".load").hide()
+      render_more.show()
+      if data.success
+        console.log data.more
+        if (data.more.length == 0)
+          $.mobile_page_notification("没有了")
+        else
+          page = page + 1
+          $.each(
+            data.more,
+            (index, book_item_data) ->
+              book_item = $(HandlebarsTemplates["book_item"](book_item_data))
+              $(".render-more").before(book_item)
+          )
+      else
+        $.mobile_page_notification "服务器出错"
