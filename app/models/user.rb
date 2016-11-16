@@ -81,8 +81,9 @@ class User
       u.update_attribute(:created_by_staff, created_by_staff)
       if center.present? || center.class == Center
         u.client_centers << center
-        u.save
       end
+      u.first_signin = false
+      u.save
     end
 
     # 2. generate random code and save
