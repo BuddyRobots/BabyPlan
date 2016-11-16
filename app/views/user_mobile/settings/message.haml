@@ -11,6 +11,8 @@
         %img.back{:src => "/assets/robotcourse/back.png"}
     .caption 系统消息
     - if @messages.blank?
+      .unfound
+        %img.unfound-icon{:src => "/assets/web/cry.png"}
     - else
       - @messages.each do |m|
         .line-wrapper

@@ -187,7 +187,10 @@
                         %img.star-img{:src => "/assets/managecenter/star.png"}
                     %p.date= r.created_at.strftime("%Y-%m-%d %H:%M")
                     %p.user-review-content= r.content
-                    %p.review-status#open 公开
+                    - if r.is_private
+                      %button.btn#open-btn{:type => "button"} 公开
+                    - else
+                      %button.btn#open-btn{:type => "button"} 隐藏
             .select-page 
               %span.totalitems= "共#{@reviews[:total_page]}页,总计#{@reviews[:total_number]}条"
               %span.choice-page

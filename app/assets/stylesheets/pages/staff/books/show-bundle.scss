@@ -352,7 +352,7 @@
 .user-review-box {
 	border-radius: 6px;
 	border: 1px solid #ddd;
-	margin: 0 20px;
+	margin: 20px 20px 0 20px;
 }
 .user-checkbox {
 	margin: 5px 0;
@@ -372,6 +372,8 @@
 }
 .book-description {
 	position: relative;
+}
+.book-description:not(:first-child) {
 	border-top: 1px solid #ddd;
 }
 .book-img {
@@ -405,10 +407,9 @@
 	position: absolute;
 	width: 100px;
 	height: 36px;
-	top: 32px;
+	top: 14px;
 	right: 20px;
 	color: white;
-	border-radius: 6px;
 	background: #f7873d;
 	border: 0;
 }
@@ -422,6 +423,7 @@
 	font-size: 14px;
 	color: #323232;
 	margin-bottom: 0;
+	margin-top: 20px;
 	th {
 		text-align: center;
 		height: 40px;
