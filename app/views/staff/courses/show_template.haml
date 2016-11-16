@@ -33,4 +33,4 @@
         %span.unedit-box#public-price-span= @course.price_pay.to_s + "元"
       .course-introduce.clearfix
         %span.introduce 课程介绍:
-        %div.introduce-details= @course.desc
+        %div.introduce-details= @course.desc.to_s.html_safe
