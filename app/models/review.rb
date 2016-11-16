@@ -29,4 +29,8 @@ class Review
     r2 = self.where(client_id: client.id)
     r1.concat(r2).uniq
   end
+
+  def is_private
+    return self.status == PRIVATE
+  end
 end

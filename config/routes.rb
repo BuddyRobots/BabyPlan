@@ -88,6 +88,7 @@ Rails.application.routes.draw do
         post :signup
         post :forget_password
         get :signout
+        post :change_password
       end
     end
 

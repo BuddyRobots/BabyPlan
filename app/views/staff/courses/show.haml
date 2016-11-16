@@ -166,11 +166,11 @@
                     %a{:href => "/staff/courses/" + @course_inst.id.to_s + "?profile=participates&participate_page=#{@participates[:next_page]}"} »
 
         #tab3.tab-pane
-          .user-checkbox
-            %label.checkbox-inline
-              %input#inlineCheckbox1{:type => "checkbox", :value => "option1"} 未公开
-            %label.checkbox-inline
-              %input#inlineCheckbox2{:type => "checkbox", :value => "option2"} 已公开
+          / .user-checkbox
+          /   %label.checkbox-inline
+          /     %input#inlineCheckbox1{:type => "checkbox", :value => "option1"} 未公开
+          /   %label.checkbox-inline
+          /     %input#inlineCheckbox2{:type => "checkbox", :value => "option2"} 已公开
           - if @reviews[:data].blank?
             .undiscover
               %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
