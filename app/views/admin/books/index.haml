@@ -45,18 +45,15 @@
                         %th 数&nbsp量
                         %th 作&nbsp者
                         %th ISBN编码
-                        %th 操&nbsp作
                     %tbody
                       - @books[:data].each do |e|
                         %tr
-                          %td= e[:name]
+                          %td= link_to e[:name], "/admin/books/#{e[:id]}"
                           %td= e[:center]
                           %td= truncate((e[:tags] || "").gsub(',', '，'), length: 10)
                           %td= e[:stock]
                           %td= e[:author]
                           %td= e[:isbn]
-                          %td
-                            = link_to "详情", "/admin/books/#{e[:id]}"
                 .select-page 
                   %span.totalitems= "共#{@books[:total_page]}页,总计#{@books[:total_number]}条"
                   %span.choice-page

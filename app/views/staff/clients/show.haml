@@ -34,7 +34,7 @@
                 %input.form-control#name-input{:type => "text"}
             .form-group
               %label.caption 年龄:
-              %span.unedit-box#age-span= (Time.now.year - @user.birthday.year).to_s + "岁"
+              %span.unedit-box#age-span= @user.birthday.present? ? (Time.now.year - @user.birthday.year).to_s + "岁" : ""
             %span.edit-box
               .form-group
                 %input.form-control#age-input{:type => "text"}

@@ -45,7 +45,7 @@
                     %tbody
                       - @course_insts[:data].each do |ci|
                         %tr{class: "book-record #{ ci[:available] ? "available" : "unavailable" }", "data-id" => ci[:id]}
-                          %td= link_to ci[:name], "/staff/courses/" + ci[:id]
+                          %td= link_to ci[:name], "/staff/courses/#{ci[:id]}"
                           %td= ci[:date]
                           %td= ci[:address]
                           %td= ci[:speaker]
