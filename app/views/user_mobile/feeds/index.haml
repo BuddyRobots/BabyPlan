@@ -19,10 +19,10 @@
               .location-div
                 %img.location{:src => "/assets/web/location.png"}
                 %span.center= e.center_str
+        .render-more
+          %p 加载更多 
+        / .load
+        /   %img.loading{:src => "/assets/loading.gif"}
       - else
         .unfound
           %img.unfound-icon{:src => "/assets/web/cry.png"}
-    / .render-more
-    /   %p 加载更多 
-    / .load
-    /   %img.loading{:src => "/assets/loading.gif"}

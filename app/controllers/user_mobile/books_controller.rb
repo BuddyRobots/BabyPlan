@@ -6,11 +6,11 @@ class UserMobile::BooksController < UserMobile::ApplicationController
       @lower = params[:lower]
       @upper = params[:upper]
       @books = Book.any_in(center_id: @current_user.client_centers.map { |e| e.id.to_s})
-      if params[:keyword].present?
+      if @keyword.present?
         @books = @books.where(name: /#{params[:keyword]}/)
-        if @lower.present? && @upper.present?
-          @books = @books.where(:age_lower_bound.lt => @upper.to_i).where(:age_upper_bound.gt => @lower.to_i)
-        end
+      end
+      if @lower.present? && @upper.present?
+        @books = @books.where(:age_lower_bound.lt => @upper.to_i).where(:age_upper_bound.gt => @lower.to_i)
       end
     end
   end
