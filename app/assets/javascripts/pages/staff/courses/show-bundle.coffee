@@ -4,6 +4,7 @@
 #= require datepicker-zh-TW
 #= require highcharts
 
+
 Highcharts.setOptions lang:
   contextButtonTitle: '图表导出菜单'
   decimalPoint: '.'
@@ -66,6 +67,11 @@ Highcharts.setOptions lang:
   ]
 
 $ ->
+  if window.profile == "participates"
+    $('.nav-tabs a[href="#tab2"]').tab('show')
+
+  if window.profile == "reviews"
+    $('.nav-tabs a[href="#tab3"]').tab('show')
 
   $('#gender-statistics').highcharts
     chart:
@@ -244,37 +250,30 @@ $ ->
   is_edit = false
 
   initialLocaleCode = "zh-cn"
-  $("#calendar").fullCalendar({
-    header:
-      left: 'prev,next today'
-      center: 'title'
-      right: 'month,agendaWeek,agendaDay,listMonth'
-    locale: initialLocaleCode
-    weekNumbers: true
-    navLinks: true
-    eventLimit: true
-    fixedWeekCount: false
-    nowIndicator: true
-    height: 355
-    eventClick: (calEvent, jsEvent, view) ->
-      if is_edit == false
-        return
-      $("#calendar").fullCalendar('removeEvents', calEvent.id)
-      # $('#dialog-confirm').dialog
-      #   resizable: false
-      #   height: 'auto'
-      #   width: 400
-      #   modal: true
-      #   buttons:
-      #     '确定': ->
-      #       $(this).dialog 'close'
-      #       $("#calendar").fullCalendar('removeEvents', calEvent.id)
-      #       return
-      #     "取消": ->
-      #       $(this).dialog 'close'
-      #       return
-      # return
-  })
+  show_calendar = ->
+    $("#calendar").fullCalendar({
+      header:
+        left: 'prev,next today'
+        center: 'title'
+        right: 'month,agendaWeek,agendaDay,listMonth'
+      locale: initialLocaleCode
+      weekNumbers: true
+      navLinks: true
+      eventLimit: true
+      fixedWeekCount: false
+      nowIndicator: true
+      height: 355
+      eventClick: (calEvent, jsEvent, view) ->
+        if is_edit == false
+          return
+        $("#calendar").fullCalendar('removeEvents', calEvent.id)
+    })
+
+  if window.profile == "" || window.profile == undefined
+    show_calendar()
+
+  $('#course-message').on 'shown.bs.tab', (e) ->
+    show_calendar()
 
 
   parse_calendar_events = ->

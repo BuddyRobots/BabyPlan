@@ -15,4 +15,10 @@ class Material
 
   belongs_to :client, class_name: "User", inverse_of: :avatar
 
+  def self.create_avatar(client, path)
+    mat = Material.create(path: path)
+    mat.client = client
+    mat.save
+  end
+
 end

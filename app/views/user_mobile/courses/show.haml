@@ -4,6 +4,8 @@
   = stylesheet_link_tag "pages/user_mobile/courses/show-bundle", :media => "all"
   :javascript
     window.course_inst_id = "#{@course.id.to_s}"
+    window.lat = "#{@course.center.lat}"
+    window.lng = "#{@course.center.lng}"
 
 
 - content_for :app_content do

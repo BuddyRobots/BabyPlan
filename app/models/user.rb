@@ -1,3 +1,4 @@
+require 'open-uri'
 class User
 
   include Mongoid::Document
@@ -212,6 +213,18 @@ class User
     end
   end
 
+  def review_on(ele)
+    if (ele.class == CourseInst)
+      review = self.reviews.where(course_inst: ele).first
+      return review.present?
+    end
+    if (ele.class == Book)
+      review = self.reviews.where(book: ele).first
+      return review.present?
+    end
+    return false
+  end
+
   def favorite_on(ele)
     if (ele.class == CourseInst)
       fav = self.favorites.where(course_inst: ele).first
@@ -287,9 +300,17 @@ class User
   end
 
   def get_avatar(server_id)
-    logger.info "AAAAAAAAAAAAAAAAA"
-    logger.info "https://api.weixin.qq.com/cgi-bin/media/get?access_token=#{Weixin.get_access_token}&media_id=#{server_id}"
-    logger.info "AAAAAAAAAAAAAAAAA"
+    filename = SecureRandom.uuid.to_s + ".jpg"
+    save_path = "public/uploads/avatars/" + filename
+    url_path = "/uploads/avatars/" + filename
+    open(save_path, "wb") do |file|
+      file << open("https://api.weixin.qq.com/cgi-bin/media/get?access_token=#{Weixin.get_access_token}&media_id=#{server_id}").read
+    end
+    if self.avatar.present?
+      self.avatar.update_attributes({path: url_path})
+    else
+      Material.create_avatar(self, url_path)
+    end
     nil
   end
 end

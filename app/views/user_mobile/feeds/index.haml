@@ -6,21 +6,22 @@
   .content-area
     = render "user_mobile/partials/list_header", list_type: "feeds"
     = render "user_mobile/partials/no_centers"
-    - if @feeds.present?
-      - @feeds.each do |e|
-        .content{data: {path: e.path.to_s}}
-          .left-div
-            %img.visit{:src => e.img_src}
-          .right-div
-            %img.icon{:src => "/assets/kidscenter/" + e.feed_icon + ".png"}
-            %p.caption= e.name
-            %p.message= truncate(strip_tags(e.desc).strip(), length: 50)
-            .location-div
-              %img.location{:src => "/assets/web/location.png"}
-              %span.center= e.center_str
-    - else
-      .unfound
-        %img.unfound-icon{:src => "/assets/web/cry.png"}
+    - if @current_user.client_centers.present?
+      - if @feeds.present?
+        - @feeds.each do |e|
+          .content{data: {path: e.path.to_s}}
+            .left-div
+              %img.visit{:src => e.img_src}
+            .right-div
+              %img.icon{:src => "/assets/kidscenter/" + e.feed_icon + ".png"}
+              %p.caption= e.name
+              %p.message= truncate(strip_tags(e.desc).strip(), length: 50)
+              .location-div
+                %img.location{:src => "/assets/web/location.png"}
+                %span.center= e.center_str
+      - else
+        .unfound
+          %img.unfound-icon{:src => "/assets/web/cry.png"}
     / .render-more
     /   %p 加载更多 
     / .load

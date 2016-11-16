@@ -8,6 +8,7 @@
     window.price_pay = "#{@course_inst.price_pay}"
     window.length = "#{@course_inst.length}"
     window.date_in_calendar = "#{@course_inst.date_in_calendar_str}"
+    window.profile = "#{@profile}"
 
 .content-area
   .manage-content
@@ -113,127 +114,91 @@
                 .btn.week-btn{:type => "button"} 每周重复
 
         #tab2.tab-pane
-          .table-box
-            %table.table.table-bordered#register-table
-              %thead
-                %tr
-                  %th 姓&nbsp名
-                  %th 住&nbsp址
-                  %th 电&nbsp话
-                  %th 操&nbsp作
-              %tbody
-                / - @books[:data].each do |b|
-                /   %tr{class: "book-record #{ b[:available] ? "available" : "unavailable" }", "data-id" => b[:id]}
-                %tr
-                  %td.td-data 李星
-                  %td.td-data 朝阳区新街口外大街27号院
-                  %td.td-data 13324567865
-                  %td.td-data
-                    %a.details{:href => "javascript:void(0);"} 
-                      上课情况
-                      %span.triangle-down
-                %tr.status
-                  %td{:colspan => "4"}
-                    .course-status
-                      %span.item-status 上课状态：
-                      %span.join-square
-                      %span.join-square
-                      %span.join-square
-                      %span.join-square
-                      %span.square
-                      %span.miss-square
-                      %span.square
-                      %span.square
-                      %span.square
-                      %span.square
-                    .comments
-                      %span.comments-title 评论：
-                      %span.comments-content 孩子刚上完这门课程，内容很新颖，学了很多知识，丰富了孩子的视野，是一门很好的课，老师讲的也很Nice，很棒的一门课程，会继续为孩子报名参加中心其它孩子感兴趣的课程。
-                %tr
-                  %td.td-data 李星
-                  %td.td-data 朝阳区新街口外大街27号院
-                  %td.td-data 13324567865
-                  %td.td-data
-                    %a.details{:href => "javascript:void(0);"} 
-                      上课情况
-                      %span.triangle-down
-                %tr.status
-                  %td{:colspan => "4"}
-                    .course-status
-                      %span.item-status 上课状态：
-                      %span.join-square
-                      %span.join-square
-                      %span.join-square
-                      %span.join-square
-                      %span.square
-                      %span.miss-square
-                      %span.square
-                      %span.square
-                      %span.square
-                      %span.square
-                    .comments
-                      %span.comments-title 评论：
-                      %span.uncomment 暂未评论
+          - if @participates[:data].blank?
+            .undiscover
+              %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
+              %span.undiscover-message 抱歉！暂无查找信息
+          - else
+            .table-box
+              %table.table.table-bordered#register-table
+                %thead
+                  %tr
+                    %th 姓&nbsp名
+                    %th 住&nbsp址
+                    %th 电&nbsp话
+                    %th 操&nbsp作
+                %tbody
+                  - @participates[:data].each do |e|
+                    %tr
+                      %td.td-data= e.client.name
+                      %td.td-data= e.client.address
+                      %td.td-data= e.client.mobile
+                      %td.td-data
+                        %a.details{:href => "javascript:void(0);"} 
+                          上课情况
+                          %span.triangle-down
+                    %tr.status
+                      %td{:colspan => "4"}
+                        .course-status
+                          %span.item-status 上课状态：
+                          - e.course_inst.length.times do |i|
+                            - if e.signin_info[i].present?
+                              %span.join-square
+                            - else
+                              - if e.course_inst.is_class_pass?(i)
+                                %span.miss-square
+                              - else
+                                %span.square
+                        .comments
+                          %span.comments-title 评论：
+                          %span.comments-content= e.review.present? ? e.review.content : "暂未评论"
 
-          .select-page 
-            %span.totalitems= "共6页,总计12条"
-            %span.choice-page
-              %ul.pagination.pagination-sm
-                %li
-                  %a{:href => "javascript:void(0);"} «
-                / - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
-                %li
-                  %a{:href => "javascript:void(0);"} 1
-                %li
-                  %a{:href => "javascript:void(0);"} »
+            .select-page 
+              %span.totalitems= "共#{@participates[:total_page]}页,总计#{@participates[:total_number]}条"
+              %span.choice-page
+                %ul.pagination.pagination-sm
+                  %li
+                    %a{:href => "/staff/courses/" + @course_inst.id.to_s + "?profile=participates&participate_page=#{@participates[:previous_page]}"} «
+                  - ( (@participates[:previous_page] > 2 ? @participates[:previous_page] - 2 : 1) .. (@participates[:next_page] < @participates[:total_page] - 2 ? @participates[:next_page] + 2 : @participates[:total_page]) ).to_a.each do |page|
+                    %li
+                      %a{:href => "/staff/courses/" + @course_inst.id.to_s + "?profile=participates&participate_page=#{page}"}= page
+                  %li
+                    %a{:href => "/staff/courses/" + @course_inst.id.to_s + "?profile=participates&participate_page=#{@participates[:next_page]}"} »
 
         #tab3.tab-pane
-          .undiscover
-            %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
-            %span.undiscover-message 抱歉！暂无查找信息
-          .user-review-box
-            .user-checkbox
-              %label.checkbox-inline
-                %input#inlineCheckbox1{:type => "checkbox", :value => "option1"} 未公开
-              %label.checkbox-inline
-                %input#inlineCheckbox2{:type => "checkbox", :value => "option2"} 已公开
-            .book-description
-              .user-item.clearfix
-                %img.book-img{:src => "/assets/managecenter/user-img.png"}
-                %p.user-name
-                  %span 大鱼海棠
-                  %img.star-img{:src => "/assets/managecenter/star.png"}
-                  %img.star-img{:src => "/assets/managecenter/star.png"}
-                  %img.star-img{:src => "/assets/managecenter/star.png"}
-                  %img.star-img{:src => "/assets/managecenter/star.png"}
-                  %img.star-img{:src => "/assets/managecenter/star.png"}
-                %p.date 2017-6-23 13:20
-                %p.user-review-content 这本书看了感觉很好，儿童容易理解。
-                %p.review-status#open 公开
-            .book-description
-              .user-item.clearfix
-                %img.book-img{:src => "/assets/managecenter/user-img.png"}
-                %p.user-name
-                  %span 大鱼海棠
-                  %img.star-img{:src => "/assets/managecenter/star.png"}
-                  %img.star-img{:src => "/assets/managecenter/star.png"}
-                  %img.star-img{:src => "/assets/managecenter/star.png"}
-                  %img.star-img{:src => "/assets/managecenter/star.png"}
-                  %img.star-img{:src => "/assets/managecenter/star.png"}
-                %p.date 2017-6-23 13:20
-                %p.user-review-content 这本书看了感觉很好，儿童容易理解。
-                %p.review-status#unopen 未公开
-          .select-page 
-            %span.totalitems= "共6页,总计12条"
-            %span.choice-page
-              %ul.pagination.pagination-sm
-                %li
-                  %a{:href => "javascript:void(0);"} «
-                / - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
-                %li
-                  %a{:href => "javascript:void(0);"} 1
-                %li
-                  %a{:href => "javascript:void(0);"} »
+          .user-checkbox
+            %label.checkbox-inline
+              %input#inlineCheckbox1{:type => "checkbox", :value => "option1"} 未公开
+            %label.checkbox-inline
+              %input#inlineCheckbox2{:type => "checkbox", :value => "option2"} 已公开
+          - if @reviews[:data].blank?
+            .undiscover
+              %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
+              %span.undiscover-message 抱歉！暂无查找信息
+          - else
+            .user-review-box
+              - @reviews[:data].each do |r|
+                .book-description
+                  .user-item.clearfix
+                    %img.book-img{:src => r.client.avatar.present? ? r.client.avatar.path : "/assets/web/boy.png"}
+                    %p.user-name
+                      %span= r.client.name
+                      - r.score.times do
+                        %img.star-img{:src => "/assets/managecenter/star.png"}
+                    %p.date= r.created_at.strftime("%Y-%m-%d %H:%M")
+                    %p.user-review-content= r.content
+                    %p.review-status#open 公开
+            .select-page 
+              %span.totalitems= "共#{@reviews[:total_page]}页,总计#{@reviews[:total_number]}条"
+              %span.choice-page
+                %ul.pagination.pagination-sm
+                  %li
+                    %a{:href => "/staff/courses/" + @course_inst.id.to_s + "?profile=reviews&review_page=#{@reviews[:previous_page]}"} «
+                  - ( (@reviews[:previous_page] > 2 ? @reviews[:previous_page] - 2 : 1) .. (@reviews[:next_page] < @reviews[:total_page] - 2 ? @reviews[:next_page] + 2 : @reviews[:total_page]) ).to_a.each do |page|
+                    %li
+                      %a{:href => "/staff/courses/" + @course_inst.id.to_s + "?profile=reviews&review_page=#{page}"}= page
+                  %li
+                    %a{:href => "/staff/courses/" + @course_inst.id.to_s + "?profile=reviews&review_page=#{@reviews[:next_page]}"} »
           
         #tab4.tab-pane
           .sign-box.clearfix
