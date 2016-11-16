@@ -5,6 +5,7 @@
     window.cid = "#{@course.id.to_s}"
     window.price = "#{@course.price}"
     window.price_pay = "#{@course.price_pay}"
+    window.length = "#{@course.length}"
     window.profile = "#{@profile}"
 
 
@@ -45,7 +46,7 @@
             %span.edit-box
               %input.input-area.form-control#classspeaker-input{:type => "text"}
             %span.course-name#nums 课次:
-            %span.unedit-box#nums-span
+            %span.unedit-box#nums-span= @course.length.to_s + "次"
             %span.edit-box
               %input.input-area.form-control#nums-input{:type => "text"}
           

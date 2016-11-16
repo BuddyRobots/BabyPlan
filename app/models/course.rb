@@ -55,6 +55,7 @@ class Course
         price_pay: course_info["price_pay"],
         desc: course_info["desc"],
         code: course_info["code"],
+        length: course_info["length"],
         speaker: course_info["speaker"]
       }
     )

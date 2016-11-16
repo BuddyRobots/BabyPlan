@@ -63,9 +63,8 @@ $ ->
     $(".edit-box").show()
     $("#code-input").val($("#code-span").text())
     $("#classname-input").val($("#classname-span").text())
-    $("#code-input").val($("#course-span").text())
     $("#classspeaker-input").val($("#classspeaker-span").text())
-    $("#nums-input").val($("#nums-span").text())
+    $("#nums-input").val(window.length)
     $("#charge-input").val(window.price)
     $("#public-price-input").val(window.price_pay)
 
@@ -88,6 +87,7 @@ $ ->
     price = $("#charge-input").val()
     price_pay = $("#public-price-input").val()
     code = $("#code-input").val()
+    length = $("#nums-input").val()
     desc = editor.$txt.html()
 
     $.putJSON(
@@ -99,6 +99,7 @@ $ ->
           price: price
           price_pay: price_pay
           code: code
+          length: length
           desc: desc
         }
       },
@@ -118,7 +119,8 @@ $ ->
           $("#classspeaker-span").text(speaker)
           $("#code-span").text(code)
           $("#charge-span").text(price + "元")
-          $("#charge-span").text(price_pay + "元")
+          $("#public-price-span").text(price_pay + "元")
+          $("#nums-span").text(length + "次")
           window.price = price
           window.price_pay = price_pay
           $(".introduce-details").html(desc)
