@@ -9,7 +9,7 @@ class Staff::ClientsController < Staff::ApplicationController
   # show the index page
   def index
     @keyword = params[:keyword]
-    users = @keyword.present? ? User.client.where(name: /#{@keyword}/) : User.client.all
+    users = @keyword.present? ? current_center.clients.where(name: /#{@keyword}/) : current_center.clients.all
     users = users.where(mobile_verified: true)
     @users = auto_paginate(users)
     @users[:data] = @users[:data].map do |e|
@@ -19,7 +19,7 @@ class Staff::ClientsController < Staff::ApplicationController
 
   # create a new user
   def create
-    retval = User.create_user(User::CLIENT, params[:mobile], true)
+    retval = User.create_user(User::CLIENT, params[:mobile], true, current_center)
     render json: retval_wrapper(retval)
   end
 

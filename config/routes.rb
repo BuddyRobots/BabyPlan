@@ -17,21 +17,6 @@ Rails.application.routes.draw do
   resources :courses do
   end
 
-  namespace :client do
-    resources :users do
-    end
-    resources :sessions do
-      collection do
-        get :signin_page
-        get :signup_page
-      end
-    end
-    resources :infos do
-    end
-    resources :centers do
-    end
-  end
-
   namespace :admin do
     resources :sessions do
       collection do
