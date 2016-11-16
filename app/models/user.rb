@@ -36,6 +36,7 @@ class User
   field :parent, type: String
   field :address, type: String
   field :created_by_staff, type: Boolean, default: false
+  field :first_signin, type: Boolean, default: true
 
   # relationships specific for clients
   # belongs_to :client_center
@@ -325,5 +326,11 @@ class User
       Material.create_avatar(self, url_path)
     end
     nil
+  end
+
+  def update_first_signin
+    cur_val = self.first_signin
+    self.update_attributes({first_signin: false}) if cur_val
+    cur_val
   end
 end

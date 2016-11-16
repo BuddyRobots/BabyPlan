@@ -32,6 +32,7 @@ class UserMobile::SettingsController < UserMobile::ApplicationController
   end
 
   def profile
+    @first_signin = params[:first_signin]
   end
 
   def update_profile
