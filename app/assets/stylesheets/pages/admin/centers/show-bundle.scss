@@ -108,6 +108,10 @@
 	max-width: 128px;
 	height: 88px;
 }
+.edit-photo {
+	width: 128px;
+	height: 88px;
+}
 #upload-photo {
 	position: absolute;
 	top: 0;
@@ -144,7 +148,7 @@
 	vertical-align: middle;
 	font-size: 14px;
 	color: #323232;
-	width: 300px;
+	width: 70%;
 	height: 30px;
 	line-height: 30px;
 	margin: 0 20px 0 0;
@@ -281,7 +285,7 @@
 		padding: 0;
 	}
 	td {
-		font-size: 12px;
+		font-size: 14px;
 		color: #505050;
 		height:45px;
 		line-height: 45px;

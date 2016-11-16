@@ -1,10 +1,9 @@
 @import "jquery-ui";
 
 $pink: #f7873d;
-.modal-body, input, label {
+input, label {
 	margin: 0;
 	padding: 0;
-	max-height: 600px;
 }
 
 .content-area {
@@ -169,64 +168,3 @@ $pink: #f7873d;
 	padding: 0;
 	margin-left: 15px;
 }
-
-
-
-// shelve modal
-
-// #shelveModal {
-// 	position:absolute;
-// 	left: 50%;
-// 	top: 50%;
-// 	margin-left: -150px;
-// 	margin-top: -100px;
-// 	width: 300px;
-// 	height: 200px;
-// 	border-radius: 10px;
-// }
-// .modal-backdrop {
-// 	background-color: #999;
-// }
-// .close {
-// 	position: absolute;
-// 	right: -14px;
-// 	top: -14px;
-// 	opacity: 0.7;
-// 	z-index: 10;
-// }
-// .close:hover {
-// 	opacity: 1;
-// }
-// .modalheader {
-// 	height: 164px;
-// 	line-height: 164px;
-// 	// box-shadow: 0 -1px 6px #9c9c9c; 
-// }
-// .caption {
-// 	font-size: 18px;
-// 	color: #323232;
-// 	text-align: center;
-// }
-
-// .footbox {
-// 	width: 100%;
-// 	height: 36px;
-// 	display: block;
-// 	background: #227dda;
-// 	text-align: center;
-// 	line-height: 36px;
-// 	font-size: 14px;
-// 	color: white;
-// 	text-decoration: none;
-// }
-// .footbox:link {
-// 	text-decoration: none;
-// }
-// .footbox:visited {
-// 	color: white;
-// 	text-decoration: none;
-// }
-// .footbox:hover {
-// 	text-decoration: none;
-// 	color: white;
-// }
