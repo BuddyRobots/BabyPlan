@@ -68,7 +68,7 @@ class User
     return self.user_type == CLIENT
   end
 
-  def self.create_user(user_type, mobile, created_by_staff = false)
+  def self.create_user(user_type, mobile, created_by_staff = false, center = nil)
     # 1. check whether user exists?
     u = User.where(mobile: mobile).first
     if u.present? && u.mobile_verified
@@ -79,6 +79,10 @@ class User
 
     if user_type == CLIENT
       u.update_attribute(:created_by_staff, created_by_staff)
+      if center.present? || center.class == Center
+        u.client_centers << center
+        u.save
+      end
     end
 
     # 2. generate random code and save
