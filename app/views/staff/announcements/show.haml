@@ -30,7 +30,6 @@
       .display-box
         .display-area
           %p.caption-header#show-caption= @announcement.title
-          / - if @announcement.photo.present?
           %img.photo{class: @announcement.photo.present? ? "" : "hide", src: @announcement.photo.try(:path)}
           .display-content
             = @announcement.content.html_safe
