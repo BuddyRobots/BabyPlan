@@ -1,5 +1,6 @@
 class UserMobile::SettingsController < UserMobile::ApplicationController
 	def index
+    @msg_num = @current_user.messages.where(unread: true).length
   end
 
   def book
@@ -22,6 +23,7 @@ class UserMobile::SettingsController < UserMobile::ApplicationController
 
   # systemmessage
   def message
+    @messages = @current_user.messages.desc(:created_at)
   end
 
   # set

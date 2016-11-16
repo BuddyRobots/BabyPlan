@@ -46,6 +46,7 @@ class User
   has_many :reviews, class_name: "Review", inverse_of: :client
   has_many :audit_reviews, class_name: "Review", inverse_of: :staff
   has_many :favorites
+  has_many :messages
 
   # relationships specific for staff
   belongs_to :staff_center, class_name: "Center", inverse_of: :staffs

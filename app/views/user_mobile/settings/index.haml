@@ -7,7 +7,8 @@
     %img.headcloud{:src => "/assets/headcloud.png"}
     %a{:href => message_user_mobile_settings_path}
       %img.mail{:src => "/assets/mail.png"}
-      .notice-num 33
+      - if @msg_num > 0
+        .notice-num= @msg_num
     %a{:href => account_user_mobile_settings_path}
       %img.set{:src => "/assets/setting.png"}
     %a{:href => user_mobile_feeds_path}

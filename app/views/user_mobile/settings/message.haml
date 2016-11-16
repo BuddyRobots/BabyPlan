@@ -10,28 +10,14 @@
       %a{:href => user_mobile_settings_path}
         %img.back{:src => "/assets/robotcourse/back.png"}
     .caption 系统消息
-    .line-wrapper
-      .line-scroll-wrapper.clearfix
-        .line-normal-wrapper
-          .notice
-            .notice-content 尊敬的客户,您好，欢迎您注册本公司的产品，如有任何疑问欢迎您致电本公司客服，电话：88888888.
-            .notice-time 2016年9月5日
-        .line-btn-delete
-          %img.delete-icon{:src => "/assets/lajitong.png"}
-    .line-wrapper
-      .line-scroll-wrapper.clearfix
-        .line-normal-wrapper
-          .notice
-            .notice-content 尊敬的客户,您好，欢迎您注册本公司的产品，如有任何疑问欢迎您致电本公司客服，电话：88888888.
-            .notice-time 2016年9月5日
-        .line-btn-delete
-          %img.delete-icon{:src => "/assets/lajitong.png"}
-    .line-wrapper
-      .line-scroll-wrapper.clearfix
-        .line-normal-wrapper
-          .notice
-            .notice-content 尊敬的客户,您好，欢迎您注册本公司的产品，如有任何疑问欢迎您致电本公司客服，电话：88888888.
-            .notice-time 2016年9月5日
-        .line-btn-delete
-          %img.delete-icon{:src => "/assets/lajitong.png"}
-    
+    - if @messages.blank?
+    - else
+      - @messages.each do |m|
+        .line-wrapper
+          .line-scroll-wrapper.clearfix
+            .line-normal-wrapper
+              .notice
+                .notice-content= m.content
+                .notice-time= m.created_at.strftime("%Y年%m月%d日")
+            .line-btn-delete
+              %img.delete-icon{:src => "/assets/lajitong.png"}
