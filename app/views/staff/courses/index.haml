@@ -41,17 +41,15 @@
                         %th 上课地址
                         %th 主讲人
                         %th 费用
-                        %th{:colspan => "2"} 操&nbsp作
+                        %th 操&nbsp作
                     %tbody
                       - @course_insts[:data].each do |ci|
                         %tr{class: "book-record #{ ci[:available] ? "available" : "unavailable" }", "data-id" => ci[:id]}
-                          %td= ci[:name]
+                          %td= link_to ci[:name], "/staff/courses/" + ci[:id]
                           %td= ci[:date]
                           %td= ci[:address]
                           %td= ci[:speaker]
                           %td= ci[:price]
-                          %td 
-                            %a.details{:href => "/staff/courses/" + ci[:id]} 详情
                           %td
                             - if ci[:available]
                               %a.set-available.link-available{:href => "javascript:void(0);"} 下架
