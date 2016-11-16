@@ -173,10 +173,14 @@ Rails.application.routes.draw do
     resources :reviews do
     end
     resources :announcements do
+      collection do
+        get :more
+      end
     end
     resources :books do
       collection do
         get :review
+        get :more
       end
       member do
         post :favorite
@@ -195,6 +199,7 @@ Rails.application.routes.draw do
         get :review
         post :notify
         post :signin
+        get :more
       end
       member do
         post :pay_finished

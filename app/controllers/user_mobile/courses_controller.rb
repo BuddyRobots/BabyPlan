@@ -2,12 +2,24 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
   skip_before_filter :require_sign_in, only: [:notify]
   # similar to search_new
   def index
+    @keyword = params[:keyword]
     if @current_user.client_centers.present?
       @courses = CourseInst.any_in(center_id: @current_user.client_centers.map { |e| e.id.to_s})
       if params[:keyword].present?
         @courses = @courses.where(name: /#{params[:keyword]}/)
       end
+      @courses = auto_paginate(@courses)[:data]
     end
+  end
+
+  def more
+    @courses = CourseInst.any_in(center_id: @current_user.client_centers.map { |e| e.id.to_s})
+    if params[:keyword].present?
+      @courses = @courses.where(name: /#{params[:keyword]}/)
+    end
+    @courses = auto_paginate(@courses)[:data]
+    @courses = @courses.map { |e| e.more_info }
+    render json: retval_wrapper({more: @courses}) and return
   end
 
   # course_show

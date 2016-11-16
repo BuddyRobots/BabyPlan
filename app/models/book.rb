@@ -144,4 +144,14 @@ class Book
     end
     zipfile_name
   end
+
+  def more_info
+    {
+      ele_name: self.name,
+      ele_id: self.id.to_s,
+      ele_photo: self.cover.nil? ? "/assets/banner.png" : self.cover.path,
+      ele_content: ActionController::Base.helpers.truncate(ActionController::Base.helpers.strip_tags(self.desc).strip(), length: 50),
+      ele_center: self.center.name
+    }
+  end
 end

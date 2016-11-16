@@ -14,7 +14,7 @@ $ ->
     render_more = $(this)
     render_more.hide()
     $(".load").show()
-    $.getJSON "/user_mobile/feeds/more?page=" + page, (data) ->
+    $.getJSON "/user_mobile/feeds/more?keyword=" + window.keyword + "&page=" + page, (data) ->
       $(".load").hide()
       render_more.show()
       if data.success
