@@ -77,6 +77,7 @@ $ ->
     $(".wangedit-area").toggle()
     $(".finish-btn").toggle()
     $(".edit-btn").toggle()
+    $(".type-span-template").hide()
     is_edit = true
 
     $(".unshelve-btn").attr("disabled", true)
@@ -165,6 +166,7 @@ $ ->
           $(".wangedit-area").toggle()
           $(".finish-btn").toggle()
           $(".edit-btn").toggle() 
+          $(".type-span-template").hide()
 
           $(".unshelve-btn").attr("disabled", false)
           $("#QRcode-btn").attr("disabled", false)
