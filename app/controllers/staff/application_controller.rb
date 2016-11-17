@@ -7,7 +7,7 @@ class Staff::ApplicationController < ApplicationController
   def require_sign_in
     respond_to do |format|
       format.html do
-        redirect_to staff_sessions_path(code: ErrCode::REQUIRE_SIGNIN) and return if current_user.blank? || !current_user.is_staff
+        redirect_to staff_sessions_path(code: ErrCode::REQUIRE_SIGNIN) and return if current_user.blank? || (!current_user.is_staff && !current_user.is_admin)
       end
       format.json do
         if current_user.blank?
