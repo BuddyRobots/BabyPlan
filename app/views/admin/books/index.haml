@@ -45,18 +45,15 @@
                         %th 数&nbsp量
                         %th 作&nbsp者
                         %th ISBN编码
-                        %th 操&nbsp作
                     %tbody
                       - @books[:data].each do |e|
                         %tr
-                          %td= e[:name]
+                          %td= link_to e[:name], "/admin/books/#{e[:id]}"
                           %td= e[:center]
                           %td= truncate((e[:tags] || "").gsub(',', '，'), length: 10)
                           %td= e[:stock]
                           %td= e[:author]
                           %td= e[:isbn]
-                          %td
-                            = link_to "详情", "/admin/books/#{e[:id]}"
                 .select-page 
                   %span.totalitems= "共#{@books[:total_page]}页,总计#{@books[:total_number]}条"
                   %span.choice-page
@@ -115,10 +112,10 @@
       .modal-body
         %form.form-inline.form-div{:role => "form"}
           .form-group
-            %label.control-label{:for => "borrow-num"} 最大可借本数
+            %label.control-label.borrow-label{:for => "borrow-num"} 最大可借本数
             %input.unclicked-box#borrow-num.form-control{:type => "text"}
           .form-group
-            %label.control-label{:for => "borrow-time"} 最长可借时间
+            %label.control-label.borrow-label{:for => "borrow-time"} 最长可借时间
             %input.unclicked-box#borrow-time.form-control{:type => "text"}
           .confirm-button
             %button#confirm.button-disabled{:href => "javascript:void(0);"} 确&nbsp定

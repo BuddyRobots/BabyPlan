@@ -32,19 +32,17 @@
               %th 工作文员
               %th 绘本种类/数量
               %th 开设课程
-              %th{:colspan => "3"} 操&nbsp作
+              %th{:colspan => "2"} 操&nbsp作
           %tbody
             - @centers[:data].each do |c|
               %tr{"data-id" => c[:id], class: c[:available] == true ? "available" : "unavailable"}
-                %td= c[:name]
+                %td= link_to c[:name], "/admin/centers/#{c[:id]}"
                 %td= c[:address]
                 %td= c[:staffs_desc]
                 %td= c[:books_desc]
                 %td= c[:courses_desc]
-                %td 
-                  %a.access{:href => "/admin/centers/#{c[:id]}/set_current"} 进入
                 %td
-                  %a.description{:href => "/admin/centers/#{c[:id]}"} 详情
+                  %a{:href => "/admin/centers/#{c[:id]}/set_current"} 进入
                 %td
                   - if c[:available] == true
                     %a.set-available.link-available{:href => "javascript:void(0);"} 关闭

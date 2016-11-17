@@ -25,16 +25,13 @@
                 %th 工作人员
                 %th 儿童中心
                 %th 联系电话
-                %th 操&nbsp作
                 %th 状&nbsp态
             %tbody
               - @staffs[:data].each do |u|
                 %tr
-                  %td= u[:name]
+                  %td= link_to u[:name], "/admin/staffs/#{u[:id]}"
                   %td= u[:center]
                   %td= u[:mobile]
-                  %td
-                    = link_to "详情", "/admin/staffs/#{u[:id]}"
                   %td= u[:status]
         .select-page 
           %span.totalitems= "共#{@staffs[:total_page]}页,总计#{@staffs[:total_number]}条"
