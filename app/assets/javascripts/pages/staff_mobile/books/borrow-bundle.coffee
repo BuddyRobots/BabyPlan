@@ -15,10 +15,9 @@ $ ->
       success: (res) ->
         result = res.resultStr
         $.postJSON(
-          '/staff_mobile/books/do_borrow',
+          '/staff_mobile/books/' + book_id + '/do_borrow',
           {
             mobile: mobile
-            book_id: result
           },
           (data) ->
             console.log data

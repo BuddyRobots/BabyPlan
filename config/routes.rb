@@ -128,10 +128,10 @@ Rails.application.routes.draw do
     resources :books do
       member do
         get :back
+        post :do_borrow
       end
       collection do
         get :borrow
-        post :do_borrow
         get :borrow_result
       end
     end
