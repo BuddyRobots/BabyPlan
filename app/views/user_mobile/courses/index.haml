@@ -13,7 +13,7 @@
         - @courses.each do |e|
           .content{data: {id: e.id.to_s}}
             .left-div
-              %img.visit{:src => e.photo.nil? ? "/assets/banner.png" : e.photo.path}
+              %img.visit{:src => e.photo.nil? ? "/assets/web/course.png" : e.photo.path}
             .right-div
               %img.icon{:src => "/assets/kidscenter/ke.png"}
               %p.caption= e.name || e.course.name
