@@ -46,7 +46,7 @@ class Transfer
     return ErrCode::BOOK_NOT_IN_TRANSFER if !self.book_insts.include?(book_inst)
     self.arrived_books << book_inst.id.to_s
     self.save
-    { name: book_inst.book.name, isbn: book_inst.book.isbn }
+    { id: book_inst.book.id.to_s, name: book_inst.book.name, isbn: book_inst.book.isbn }
   end
 
   def status_class
