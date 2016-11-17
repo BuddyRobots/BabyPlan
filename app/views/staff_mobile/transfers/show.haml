@@ -59,8 +59,9 @@
           / 开始迁入button
           %button.btn.full-btn#start{:type => "button"}　开始迁入
         - else
-          %button.btn.left-btn#confirm-transfer-out{:type => "button", data: {id: @transfer.id.to_s}} 完成
-          %button.btn.right-btn#start{:type => "button"} 继续迁入
+          .btn-div
+            %button.btn.left-btn#confirm-transfer-out{:type => "button"} 完成
+            %button.btn.right-btn#start{:type => "button"} 继续迁入
       - else
         / 回到首页button
         %button.btn.full-btn#back{:type => "button"}　回到首页
