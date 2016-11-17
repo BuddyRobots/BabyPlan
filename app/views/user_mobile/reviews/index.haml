@@ -51,7 +51,7 @@
           %button.btn#submit 提交
     - if @current_user.review_on(@course || @book)
       %button.btn#review_end{:type => "button"} 已评价
-    - else
+    - elsif @current_user.can_review_on(@course || @book)
       %button.btn#review{:type => "button"} 立即评价
 
 

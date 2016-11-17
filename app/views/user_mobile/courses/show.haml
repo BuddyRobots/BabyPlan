@@ -77,7 +77,7 @@
       -if @course.status == CourseInst::ONGOING
         %button.btn.unclick-btn{:type => "button"} 正在上课
       -if @course.status == CourseInst::OVER
-        - if @current_user.has_review_on(@course)
+        - if @current_user.review_on(@course)
           %button.btn.unclick-btn{:type => "button"} 已结束
         - else
           %button.btn.click-btn{:type => "button"} 立即评价

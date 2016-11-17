@@ -226,10 +226,14 @@ class User
     nil
   end
 
-  def has_review_on(ele)
+  def can_review_on(ele)
     if (ele.class == CourseInst)
-      return self.reviews.where(course_inst: ele).first.present?
+      return self.course_participates.map { |e| e.course_inst } .include? ele
     end
+    if (ele.class == Book)
+      return self.book_borrows.map { |e| e.book } .include? ele
+    end
+    return false
   end
 
   def review_on(ele)
