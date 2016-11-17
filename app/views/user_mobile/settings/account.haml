@@ -24,9 +24,9 @@
         %span.left 账户
         %span.right= @current_user.mobile
     .item-div
-      .item-box
+      .item-box{data: {link: reset_password_user_mobile_settings_path}}
         %p 修改密码
-        %a{:href => reset_password_user_mobile_settings_path}
+        %a{:href => "javascript:void(0);"}
           %img.more-icon{:src => "/assets/web/more.png"}
       .item-box
         %p 个人资料
