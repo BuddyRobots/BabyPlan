@@ -40,7 +40,7 @@
               %td.td-data= info["count"]
               %td.td-data= info["author"]
               %td.td-data= info["isbn"]
-              %td.td-data= (@transfer.status == Transfer::DONE && info["lost_count"] > 0) ? "缺失" + info["lost_count"].to_s + "本" : ""
+              %td.td-data= (@transfer.status == Transfer::ABNORMAL && info["lost_count"] > 0) ? "缺失" + info["lost_count"].to_s + "本" : ""
 
     .select-page 
       %span.totalitems= "共6页,总计12条"
