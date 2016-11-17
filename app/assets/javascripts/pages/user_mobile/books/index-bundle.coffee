@@ -2,7 +2,7 @@
 $ ->
   page = 2
 
-  $(document).on 'click', '.content', ->
+  $('.content-area').on 'click', '.content', ->
     bid = $(this).attr("data-id")
     location.href = "/user_mobile/books/" + bid + "?back=books"
 

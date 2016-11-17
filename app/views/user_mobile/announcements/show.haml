@@ -13,7 +13,7 @@
       %img.notice-1{:src => @announcement.photo.path}
     .content
       = @announcement.content.html_safe
-    %a.last_page{:href => @back == "announcements" ? "/user_mobile/announcements" : "/user_mobile/feeds"}
+    %a.last_page{:href => "/user_mobile/announcements"}
       %img.back{:src => "/assets/noticedescription/back.png"}
 
       

@@ -41,7 +41,6 @@ $ ->
         if data.success
           window.transfer_id = data.transfer_id
           scan()
-          # window.location.href = "/staff_mobile/transfers/transfer_out?transfer_id=" + data.transfer_id + "&auto=true"
         else
           $.page_notification "服务器出错，请稍后重试"
       )

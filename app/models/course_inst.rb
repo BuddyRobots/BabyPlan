@@ -124,7 +124,7 @@ class CourseInst
   end
 
   def is_class_pass?(class_num)
-    class_day = self.date_in_calendar[class_num]
+    class_day = (self.date_in_calendar || [])[class_num]
     return false if class_day.blank?
     start_time = class_day.split(',')[0]
     date_str = start_time.split('T')[0]

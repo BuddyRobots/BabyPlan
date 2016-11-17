@@ -19,6 +19,7 @@ module ErrCode
   BOOK_NOT_RETURNED = -16
   BOOK_IN_TRANSFER = -17
   BOOK_NOT_IN_TRANSFER = -18
+  BOOK_NOT_AVAILABLE = -19
 
   def self.ret_false(code)
     msg = self.message(code)
@@ -65,6 +66,8 @@ module ErrCode
       "绘本迁移中"
     when BOOK_NOT_IN_TRANSFER
       "绘本不在此次迁移中"
+    when BOOK_NOT_AVAILABLE
+      "绘本不在架上"
     else
       nil
     end

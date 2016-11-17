@@ -10,6 +10,8 @@ $ ->
   #   photo = $(".avatar-icon")[0]
   #   photo.src = URL.createObjectURL(event.target.files[0])
 
+  $(".item-box").click ->
+    window.location.href = $(this).attr("data-link")
 
   $("#upload-photo").click ->
     wx.chooseImage

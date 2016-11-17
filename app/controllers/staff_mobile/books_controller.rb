@@ -27,6 +27,9 @@ class StaffMobile::BooksController < StaffMobile::ApplicationController
     if @book_inst.nil?
       render json: retval_wrapper(ErrCode::BOOK_NOT_EXIST) and return
     end
+    if @book_inst.book.available == false
+      render json: retval_wrapper(ErrCode::BOOK_NOT_AVAILABLE) and return
+    end
     book = @book_inst.book
     retval = @book_inst.borrow(client)
     render json: retval_wrapper(retval) and return

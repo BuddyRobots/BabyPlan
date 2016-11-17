@@ -2,7 +2,7 @@
 $ ->
   page = 2
 
-  $(document).on 'click', '.content', ->
+  $('.content-area').on 'click', '.content', ->
     path = $(this).attr("data-path")
     location.href = "/user_mobile/" + path
 
