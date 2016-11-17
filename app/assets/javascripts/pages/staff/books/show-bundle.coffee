@@ -175,8 +175,14 @@ $ ->
           $("#name-span").text(name)
           $("#type-span").text(type)
           $("#stock-span").text(stock + "本")
-          $("#age-lower-bound-span").text(age_lower_bound + "岁")
-          $("#age-upper-bound-span").text(age_upper_bound + "岁")
+          if age_lower_bound == "" || age_lower_bound == undefined
+            $("#age-lower-bound-span").text("未设置")
+          else
+            $("#age-lower-bound-span").text(age_lower_bound + "岁")
+          if age_upper_bound == "" || age_upper_bound == undefined
+            $("#age-upper-bound-span").text("未设置")
+          else
+            $("#age-upper-bound-span").text(age_upper_bound + "岁")
           $("#isbn-span").text(isbn)
           $("#author-span").text(author)
           $("#translator-span").text(translator)
