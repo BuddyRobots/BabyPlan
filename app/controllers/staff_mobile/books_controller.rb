@@ -53,6 +53,6 @@ class StaffMobile::BooksController < StaffMobile::ApplicationController
 
   def show
     # @book_inst = BookInst.where(id: params[:id]).first
-    @book = @book_inst.book
+    @book = @book_inst.try(:book)
   end
 end
