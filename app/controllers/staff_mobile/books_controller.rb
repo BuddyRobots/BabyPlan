@@ -1,5 +1,14 @@
 class StaffMobile::BooksController < StaffMobile::ApplicationController
 
+  before_filter :get_book_inst, only: [:show, :do_borrow, :back]
+
+  def get_book_inst
+    @book_inst = BookInst.where(id: params[:id]).first
+    if @book_inst.book.center != current_center
+      @book_inst = nil
+    end
+  end
+
   # m_book_borrow
   def index
   end
@@ -14,12 +23,12 @@ class StaffMobile::BooksController < StaffMobile::ApplicationController
     if client.nil?
       render json: retval_wrapper(ErrCode::USER_NOT_EXIST) and return
     end
-    book_inst = BookInst.where(id: params[:book_id]).first
-    if book_inst.nil?
+    # book_inst = BookInst.where(id: params[:id]).first
+    if @book_inst.nil?
       render json: retval_wrapper(ErrCode::BOOK_NOT_EXIST) and return
     end
-    book = book_inst.book
-    retval = book_inst.borrow(client)
+    book = @book_inst.book
+    retval = @book_inst.borrow(client)
     render json: retval_wrapper(retval) and return
   end
 
@@ -32,7 +41,7 @@ class StaffMobile::BooksController < StaffMobile::ApplicationController
   end
 
   def back
-    @book_inst = BookInst.where(id: params[:id]).first
+    # @book_inst = BookInst.where(id: params[:id]).first
     if @book_inst.present?
       @book_borrow = @book_inst.current_borrow
       if @book_borrow.present?
@@ -43,7 +52,7 @@ class StaffMobile::BooksController < StaffMobile::ApplicationController
   end
 
   def show
-    @book_inst = BookInst.where(id: params[:id]).first
-    @book = @book_inst.book
+    # @book_inst = BookInst.where(id: params[:id]).first
+    @book = @book_inst.try(:book)
   end
 end

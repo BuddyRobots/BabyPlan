@@ -1,13 +1,13 @@
 class StaffMobile::ApplicationController < ApplicationController
   layout 'layouts/staff_mobile'
-  # before_filter :require_sign_in, :get_current_center
+  before_filter :require_sign_in, :get_current_center
 
   attr_reader :current_center
 
   def require_sign_in
     respond_to do |format|
       format.html do
-        redirect_to staff_sessions_path(code: ErrCode::REQUIRE_SIGNIN) and return if current_user.blank?
+        redirect_to staff_mobile_sessions_path(code: ErrCode::REQUIRE_SIGNIN) and return if current_user.blank? || !current_user.is_staff
       end
       format.json do
         if current_user.blank?

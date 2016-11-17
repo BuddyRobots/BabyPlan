@@ -102,7 +102,9 @@ class User
   end
 
   def self.find_by_auth_key(auth_key)
-    User.where(auth_key: auth_key).first
+    info = Encryption.decrypt_auth_key(auth_key)
+    uid = info.split(',')[0]
+    User.where(id: uid).first
   end
 
   def self.signin_staff_mobile(mobile, password)
