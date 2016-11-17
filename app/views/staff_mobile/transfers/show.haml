@@ -29,7 +29,7 @@
             %span 迁入中心：
             %span#center-in= @transfer.in_center.name
       / 缺失绘本项#lost-book
-      - if @transfer.status == Transfer::ABNORMAL && @lost_books_info.present?
+      - if @transfer.arrived_books.present? && @lost_books_info.present?
         .content-div#lost-book
           .caption
             .blue-line

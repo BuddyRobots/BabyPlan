@@ -62,12 +62,12 @@ class Transfer
     if self.status == ONGOING
       return "运输中"
     end
-    if self.status == DONE
+    if self.status == DONE || self.status == ABNORMAL
       return "已完成"
     end
-    if self.status == ABNORMAL
-      return "绘本有缺失"
-    end
+    # if self.status == ABNORMAL
+    #   return "绘本有缺失"
+    # end
   end
 
   def books_info_detail
@@ -132,7 +132,6 @@ class Transfer
 
   def confirm_transfer_out
     self.update_attributes({status: ONGOING, out_time: Time.now.to_i})
-    # update the book stock of the 
     nil
   end
 
@@ -149,7 +148,7 @@ class Transfer
       return {finish: true}
     end
     if force
-      self.update_attributes({status: DONE})
+      self.update_attributes({status: ABNORMAL})
       self.after_finish
       return {finish: true}
     else
