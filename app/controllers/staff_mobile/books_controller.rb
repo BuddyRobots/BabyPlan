@@ -19,7 +19,7 @@ class StaffMobile::BooksController < StaffMobile::ApplicationController
   end
 
   def do_borrow
-    client = User.client.where(mobile: params[:mobile]).first
+    client = current_center.clients.where(mobile: params[:mobile]).first
     if client.nil?
       render json: retval_wrapper(ErrCode::USER_NOT_EXIST) and return
     end
