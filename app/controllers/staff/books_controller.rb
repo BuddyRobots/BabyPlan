@@ -49,6 +49,9 @@ class Staff::BooksController < Staff::ApplicationController
   def new
   end
 
+  def merge
+  end
+
   def set_available
     @book = current_center.books.where(id: params[:id]).first
     retval = ErrCode::BOOK_NOT_EXIST if @book.blank?

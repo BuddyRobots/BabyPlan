@@ -8,6 +8,9 @@ $ ->
   $(".bookadd-btn").click ->
     location.href = "/staff/books/new"
 
+  $(".merge-book").click ->
+    location.href = "/staff/books/merge"
+
 # search-btn press
   search = ->
     value = $("#search-input").val()

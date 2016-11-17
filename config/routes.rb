@@ -103,6 +103,9 @@ Rails.application.routes.draw do
         post :upload_photo
         get :download_qrcode
       end
+      collection do
+        get :merge
+      end
     end
 
     resources :clients do

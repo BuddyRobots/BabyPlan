@@ -1,0 +1,116 @@
+- content_for :head do
+  = javascript_include_tag "pages/staff/books/merge-bundle"
+  = stylesheet_link_tag "pages/staff/books/merge-bundle", :media => "all"
+
+
+.content-area
+  /books-merge
+  .content-box
+    .manage-box.clearfix
+      %a#back{:href => "/staff/books"}
+        %img{:src => "/assets/web/back.png"}
+      %p.book-merge 绘本合并
+    .manage-content
+      .merge-div
+        %p.caption 自动合并
+        .desc-div
+          %p.desc 自动合并即为将全部各条信息完全一致的绘本条目分别合并
+          %button.btn#merge-btn 批量自动合并
+          %p.total 共检索到36条，已合并为8条
+      .merge-div
+        %p.caption 手动合并
+        .item-div
+          .item
+            .user-search-box
+              .input-group
+                %input.form-control#search-input{:type => "text", :placeholder => "输入绘本名称、作者", :value => "#{@keyword}"}
+                %span.input-group-btn
+                  %button.btn.btn-default#search-btn{:type => "button"}
+            .table-box
+              %table.table.table-bordered#user-table
+                %thead
+                  %tr
+                    %th 书&nbsp名
+                    %th 作&nbsp者
+                    %th 操&nbsp作
+                %tbody
+                  / 固定显示５条信息
+                  %tr
+                    %td
+                      %a 活了100万次的猫
+                    %td　佐野洋子
+                    %td　已添加
+                  %tr
+                    %td
+                      %a 活了100万次的猫
+                    %td　佐野洋子
+                    %td
+                      %a.add　添加>
+                  %tr
+                    %td
+                      %a 活了100万次的猫
+                    %td　佐野洋子
+                    %td
+                      %a.add　添加>
+                  %tr
+                    %td
+                      %a 活了100万次的猫
+                    %td　佐野洋子
+                    %td
+                      %a.add　添加>
+                  %tr
+                    %td
+                      %a 活了100万次的猫
+                    %td　佐野洋子
+                    %td
+                      %a.add　添加>
+            .select-page 
+              %span.totalitems= "共3页,总计15条"
+              %span.choice-page
+                %ul.pagination.pagination-sm
+                  %li
+                    %a{:href => "javascript:void(0);"} «
+                  / - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
+                  %li
+                    %a{:href => "javascript:void(0);"} 1
+                  %li
+                    %a{:href => "javascript:void(0);"} »
+          .item
+            .title-div
+              %span.title 合并条目
+              %button.btn#merge 立即合并
+            .table-box
+              %table.table.table-bordered#user-table
+                %thead
+                  %tr
+                    %th 保留资料
+                    %th 书&nbsp名
+                    %th 作&nbsp者
+                    %th 操&nbsp作
+                %tbody
+                  / 固定显示５条信息
+                  %tr
+                    %td
+                      %input.checkbox-div{:type => "checkbox"}
+                    %td
+                      %a 活了100万次的猫
+                    %td　佐野洋子
+                    %td
+                      %a.delete 删除
+                  - 4.times do
+                    %tr
+                      %td
+                      %td
+                      %td
+                      %td
+            .select-page 
+              %span.totalitems= "共3页,总计15条"
+              %span.choice-page
+                %ul.pagination.pagination-sm
+                  %li
+                    %a{:href => "javascript:void(0);"} «
+                  / - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
+                  %li
+                    %a{:href => "javascript:void(0);"} 1
+                  %li
+                    %a{:href => "javascript:void(0);"} »

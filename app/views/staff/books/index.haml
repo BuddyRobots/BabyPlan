@@ -12,9 +12,10 @@
           %input.form-control#search-input{:type => "text", :placeholder => "输入绘本名称", :value => "#{@keyword}"}
           %span.input-group-btn
             %button.btn.btn-default#search-btn{:type => "button"}
-      .btn.bookadd-btn{:type => "button", "data-target" => "#kidsaddModal", "data-toggle" => "modal"} 
+      .btn.bookadd-btn{:type => "button"} 
         %img.book-edit{:src => "/assets/managecenter/add.png"}
         添加绘本
+      .btn.merge-book{:type => "button"} 绘本合并
     
     .manage-content
       - if @books[:data].length == 0

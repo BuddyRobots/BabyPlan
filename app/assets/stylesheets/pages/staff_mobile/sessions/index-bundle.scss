@@ -83,7 +83,7 @@ a{
 	font-size: 3em;
 	border-radius: 8px;
 }
-.sign-in-btn {
+#sign-in-btn {
 	width: 100%;
 	font-size: 3.2em;
 	color: #fff;
@@ -92,9 +92,8 @@ a{
 	border-radius: 8px;
 	margin-top: 47%;
 }
-.sign-in-btn:hover {
-	color: #fff;
-}
+
+
 
 @media screen and (max-width:640px) {
 	.main-div {

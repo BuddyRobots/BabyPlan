@@ -59,7 +59,7 @@
 	background-position: 6px 6px;
 }
 
-.bookadd-btn {
+.bookadd-btn, .merge-book {
 	float: right;
 	margin: 11.5px 20px 0 0;
 	width: 100px;
@@ -70,7 +70,7 @@
 	background: #f7873d;
 	border-radius: 6px;
 }
-.bookadd-btn:hover {
+.bookadd-btn:hover, .merge-book:hover {
 	background: #f7873d;
 	color: white;
 }
