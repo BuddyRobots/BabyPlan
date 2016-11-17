@@ -1,6 +1,22 @@
 $ ->
   weixin_jsapi_authorize(["scanQRCode"])
 
+  $("#confirm-transfer-in").click ->
+    $.postJSON(
+      '/staff_mobile/transfers/' + window.transfer_id + '/finish_transfer',
+      {
+        force: false
+      },
+      (data) ->
+        console.log data
+        if data.success
+          if data.finish == true
+            location.href = "/staff_mobile/transfers/" + window.transfer_id
+          else
+            location.href = "/staff_mobile/transfers/" + window.transfer_id + "/confirm_lost"
+        else
+          $.mobile_page_notification("服务器错误")
+      )
 
   $("#confirm-transfer-out").click ->
     transfer_id = $(this).attr("data-id")
