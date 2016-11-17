@@ -39,7 +39,7 @@ $ ->
           if current_state == "available"
             link.removeClass("link-available")
             link.addClass("link-unavailable")
-            link.text("打开")
+            link.text("开放")
             link.closest("tr").removeClass("available")
             link.closest("tr").addClass("unavailable")
             link.closest("tr").find(".access").hide()

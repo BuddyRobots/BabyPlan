@@ -8,13 +8,9 @@
 
 .content-area
   .manage-content
-    / .btn.finish-btn{:type => "button"} 
-    /   %img.ticker{:src => "/assets/managecenter/ticker.png"}
-    /   完成
-    / .btn.edit-btn{:type => "button"} 
-    /   %img.edit{:src => "/assets/managecenter/edit.png"}
-    /   编辑
     .tabbable
+      %a{:href => "/staff/clients"}
+        %img.back{:src => "/assets/web/tab-back.png"}
       %ul.nav.nav-tabs
         %li.active
           %a#kids-message{"data-toggle" => "tab", :href => "#tab1"} 儿童信息
@@ -66,70 +62,47 @@
                 %input.form-control#address-input{:type => "text"}
 
         #tab2.tab-pane
-          .review-box
-            .course-details.clearfix
-              %span.span-attr.course-name 课程:
-              %span.span-input#course-name 社会科学
-              %span.span-attr.course-time 上课时间:
-              %span.span-input#course-time 2016-07-23--2016-08-23
-              %span.span-attr.course-teacher 主讲人:
-              %span.span-input#coure-teacher 王健林
-              %span.span-attr.course-address 地址:
-              %span.span-input#courese-address 呼伦贝尔大草原18号蒙古包
-              %span.span-right
-                %span.span-attr.course-status 状态:
-                %span.span-input#coure-status 未付款
-            .item
-              %span.item-status 上课状态：
-              %span.square
-              %span.square
-              %span.square
-              %span.square
-              %span.square
-              %span.square
-              %span.square
-              %span.square
-              %span.square
-              %span.square
-              %span.class-status
-                %span.square 
-                %span 未上课
-                %span.square.green
-                %span 已上课
-                %span.square.red
-                %span 缺课
-          .review-box
-            .course-details.clearfix
-              %span.span-attr.course-name 课程:
-              %span.span-input#course-name 社会科学
-              %span.span-attr.course-time 上课时间:
-              %span.span-input#course-time 2016-07-23--2016-08-23
-              %span.span-attr.course-teacher 主讲人:
-              %span.span-input#coure-teacher 王健林
-              %span.span-attr.course-address 地址:
-              %span.span-input#courese-address 呼伦贝尔大草原18号蒙古包
-              %span.span-right
-                %span.span-attr.course-status 状态:
-                %span.span-input#coure-status 未付款
-            .item
-              %span.item-status 上课状态：
-              %span.square
-              %span.square
-              %span.square
-              %span.square
-              %span.square
-              %span.square
-              %span.square
-              %span.square
-              %span.square
-              %span.square
-              %span.class-status
-                %span.square 
-                %span 未上课
-                %span.square.green
-                %span 已上课
-                %span.square.red
-                %span 缺课
+          .undiscover
+            %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
+            %span.undiscover-message 抱歉！暂无查找信息
+          .table-box
+            %table.table.table-bordered#register-table
+              %thead
+                %tr
+                  %th 课程名称
+                  %th 上课时间
+                  %th 上课地址
+                  %th 主讲人
+                  %th 课程状态
+                  %th 操&nbsp作
+              %tbody
+                %tr
+                  %td.td-data 少儿计算机知识
+                  %td.td-data　2016.12.12-2016.12.30
+                  %td.td-data 西二环复兴门桥向北200米路东
+                  %td.td-data 李学霸
+                  %td.td-data 已付款
+                  %td.td-data 
+                    %a.details{:href => "javascript:void(0);"} 
+                      上课情况
+                      %span.triangle-down
+                %tr.status
+                  %td{:colspan => "6"}
+                    .course-status
+                      %span.item-status 上课状态：
+                      %span.join-square
+                      %span.miss-square
+                      %span.square
+                    .comments
+                      %span.comments-title 评论：
+                      %span.comments-content 该课程很好
+                %tr
+                  %td.td-data 少儿计算机知识
+                  %td.td-data　2016.12.12-2016.12.30
+                  %td.td-data 西二环复兴门桥向北200米路东
+                  %td.td-data 李学霸
+                  %td.td-data 未付款
+                  %td.td-data 上课情况
 
           .select-page 
             %span.totalitems= "共6页,总计12条"
@@ -144,26 +117,36 @@
                   %a{:href => "javascript:void(0);"} »
 
         #tab3.tab-pane
-          .review-box
-            .course-details.clearfix
-              %span.span-attr.course-name 绘本名称:
-              %span.span-input#course-name 洪恩国际幼儿英语
-              %span.span-attr.course-time 借阅时间:
-              %span.span-input#course-time 2016-07-23--2016-08-23
-              %span.span-attr.course-teacher 作者:
-              %span.span-input#coure-teacher 王健林
-            .item.clearfix
-              %span.item-status 上课状态：
-              %span.square
-              %span.square
-              %span.square
-              %span.square
-              %span.square
-              %span.square
-              %span.square
-              %span.square
-              %span.square
-              %span.square
+          .undiscover
+            %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
+            %span.undiscover-message 抱歉！暂无查找信息
+          .table-box
+            %table.table.table-bordered#register-table
+              %thead
+                %tr
+                  %th 绘本名称
+                  %th 借阅时间
+                  %th 归还时间
+                  %th 操&nbsp作
+              %tbody
+                %tr
+                  %td.td-data 少儿计算机知识
+                  %td.td-data　2016.12.12
+                  %td.td-data 2016.12.15
+                  %td.td-data 
+                    %a.details{:href => "javascript:void(0);"} 
+                      绘本评价
+                      %span.triangle-down
+                %tr.status
+                  %td{:colspan => "6"}
+                    .comments
+                      %span 评价：
+                      %span.comments-content 该课程很好
+                %tr
+                  %td.td-data 少儿计算机知识
+                  %td.td-data　2016.12.12
+                  %td.td-data 暂未归还
+                  %td.td-data　绘本评价
           .select-page 
             %span.totalitems= "共6页,总计12条"
             %span.choice-page
