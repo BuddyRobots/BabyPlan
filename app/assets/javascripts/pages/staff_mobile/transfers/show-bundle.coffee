@@ -29,7 +29,7 @@ $ ->
           (data) ->
             console.log data
             if data.success
-              location.href = "/staff_mobile/transfers/transfer_out?transfer_id=" + window.transfer_id + "&name=" + data.name + "&isbn=" + data.isbn
+              location.href = "/staff_mobile/transfers/transfer_out?transfer_id=" + window.transfer_id + "&book_id=" + data.id
             else
               location.href = "/staff_mobile/transfers/transfer_out?transfer_id=" + window.transfer_id + "&code=" + data.code
           )

@@ -10,10 +10,9 @@ class StaffMobile::TransfersController < StaffMobile::ApplicationController
   end
 
   def add_to_transfer
-    # transfer = Transfer.where(id: params[:id]).first
-    # retval = transfer.add(@current_user.staff_center.id.to_s, params[:book_inst_id])
-    # render json: retval_wrapper(retval) and return
-    render json: retval_wrapper(nil) and return
+    transfer = Transfer.where(id: params[:id]).first
+    retval = transfer.add(@current_user.staff_center.id.to_s, params[:book_inst_id])
+    render json: retval_wrapper(retval) and return
   end
 
   def transfer_arrive
@@ -44,8 +43,11 @@ class StaffMobile::TransfersController < StaffMobile::ApplicationController
 
   def transfer_out
     @transfer_id = params[:transfer_id]
-    @name = params[:name].to_s
-    @isbn = params[:isbn].to_s
+    if params[:book_id].present?
+      @book = Book.where(id: params[:book_id])
+      @name = @book.name
+      @isbn = @book.isbn
+    end
     @code = params[:code].to_s
   end
 

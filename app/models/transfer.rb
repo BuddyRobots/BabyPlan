@@ -38,7 +38,7 @@ class Transfer
     return ErrCode::BOOK_IN_TRANSFER if book_inst.current_transfer.present?
 
     self.book_insts << book_inst
-    { name: book_inst.book.name, isbn: book_inst.book.isbn }
+    { id: book_inst.book.id.to_s, name: book_inst.book.name, isbn: book_inst.book.isbn }
   end
 
   def arrive(book_inst_id)
