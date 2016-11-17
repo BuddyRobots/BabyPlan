@@ -57,13 +57,13 @@
       - if @transfer.in_center == @current_user.staff_center
         - if @transfer.arrived_books.blank?
           / 开始迁入button
-          %button.btn#start{:type => "button"}　开始迁入
+          %button.btn.full-btn#start{:type => "button"}　开始迁入
         - else
           %button.btn.left-btn#confirm-transfer-out{:type => "button", data: {id: @transfer.id.to_s}} 完成
           %button.btn.right-btn#start{:type => "button"} 继续迁入
       - else
         / 回到首页button
-        %button.btn#back{:type => "button"}　回到首页
+        %button.btn.full-btn#back{:type => "button"}　回到首页
     - if @transfer.status == Transfer::DONE || @transfer.status == Transfer::ABNORMAL
       / 回到首页button
-      %button.btn#back{:type => "button"}　回到首页
+      %button.btn.full-btn#back{:type => "button"}　回到首页
