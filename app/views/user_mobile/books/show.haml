@@ -7,7 +7,7 @@
 - content_for :app_content do
   .content-area
     .header
-      %img.crocodile{:src => "/assets/crocodile.png"}
+      %img.crocodile{:src => @book.cover.present? ? @book.cover.path : "/assets/web/book.png"}
       %a{:href => "/user_mobile/books"}
         %img.back{:src => "/assets/back.png"}
     .right-float

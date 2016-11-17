@@ -29,7 +29,7 @@
         - @books.each do |e|
           .content{data: {id: e.id.to_s}}
             .left-div
-              %img.visit{:src => e.cover.nil? ? "/assets/banner.png" : e.cover.path}
+              %img.visit{:src => e.cover.nil? ? "/assets/web/book.png" : e.cover.path}
             .right-div
               %img.icon{:src => "/assets/kidscenter/hui.png"}
               %p.caption= e.name
