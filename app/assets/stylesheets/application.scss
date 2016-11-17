@@ -21,3 +21,7 @@
 @import 'ui/widgets/notification';
 @import 'ui/widgets/mobile_notification';
 @import 'jquery.timepicker';
+
+.ui-datepicker .ui-datepicker-title select {
+	vertical-align: middle;
+}

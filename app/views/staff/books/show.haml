@@ -96,11 +96,17 @@
             = file_field_tag "back_file", { class: "hide", accept: ".jpg,.png" }
           .cover-back
             %span.book-cover 封面:
-            %a#upload-cover{href: "javascript:void(0);"}
-              %img#cover-photo.photo{src: @book.cover.nil? ? "/assets/web/coverempty.png" : @book.cover.path}
+            .photo-div#upload-cover-div
+              %a#upload-cover{href: "javascript:void(0);"}
+                %img#cover-photo.photo{src: @book.cover.nil? ? "/assets/web/coverempty.png" : @book.cover.path}
+              %a.upload-photo{href: "javascript:void(0);"}
+                %img#cover-edit-photo.edit-photo{:src => "/assets/web/addcover.png"}
             %span.book-back 封底:
-            %a#upload-back{href: "javascript:void(0);"}
-              %img#back-photo.photo{src: @book.back.nil? ? "/assets/web/coverempty.png" : @book.back.path}
+            .photo-div#upload-back-div
+              %a#upload-back{href: "javascript:void(0);"}
+                %img#back-photo.photo{src: @book.back.nil? ? "/assets/web/coverempty.png" : @book.back.path}
+              %a.upload-photo{href: "javascript:void(0);"}
+                %img#back-edit-photo.edit-photo{:src => "/assets/web/addcover.png"}
         #tab2.tab-pane
           - if @reviews[:data].blank?
             .undiscover

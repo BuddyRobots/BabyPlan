@@ -73,6 +73,7 @@ $ ->
     $(".unedit-box").toggle()
     $(".shelve").toggle()
     $(".edit-box").toggle()
+    $(".upload-photo").toggle()
     $(".introduce-details").toggle()
     $(".wangedit-area").toggle()
     $(".finish-btn").toggle()
@@ -138,6 +139,7 @@ $ ->
     translator = $("#translator-input").val()
     illustrator = $("#illustrator-input").val()
     desc = editor.$txt.html()
+    $(".upload-photo").toggle()
 
     $.putJSON(
       '/staff/books/' + window.bid,
@@ -241,10 +243,10 @@ $ ->
     location.href = "/staff/books/" + window.bid + "/download_qrcode"
 
 # img upload
-  $("#upload-cover").click ->
+  $("#upload-cover-div").click ->
     if is_edit
       $("#cover_file").trigger("click")
-  $("#upload-back").click ->
+  $("#upload-back-div").click ->
     if is_edit
       $("#back_file").trigger("click")
 
@@ -252,13 +254,13 @@ $ ->
     if event.target.files[0] == undefined
       return
     has_cover = true
-    photo = $("#cover-photo")[0]
+    photo = $("#cover-edit-photo")[0]
     photo.src = URL.createObjectURL(event.target.files[0])
   $("#back_file").change (event) ->
     if event.target.files[0] == undefined
       return
     has_back = true
-    photo = $("#back-photo")[0]
+    photo = $("#back-edit-photo")[0]
     photo.src = URL.createObjectURL(event.target.files[0])
 
 
