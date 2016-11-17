@@ -224,6 +224,10 @@ a{
 	@extend .sign_in-box;
 	background: #f8acac;
 }
+.future {
+	@extend .sign_in-box;
+	background: #cfcfcf;
+}
 .map-jpg {
 	width: 100%;
 	max-width: 612px;
