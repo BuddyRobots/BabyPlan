@@ -25,7 +25,7 @@ $ ->
               location.href = "/staff_mobile/books/borrow_result?borrow_id=" + data.borrow_id + "&mobile=" + mobile
             else
               if data.code == USER_NOT_EXIST
-                $.mobile_page_notification("用户不存在", 3000)
+                $.mobile_page_notification("不是本儿童中心用户", 3000)
               if data.code == BOOK_NOT_EXIST
                 location.href = "/staff_mobile/books/borrow_result?err=book_not_exist" + "&mobile=" + mobile
               if data.code == BOOK_NOT_RETURNED
