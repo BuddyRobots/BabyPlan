@@ -11,7 +11,7 @@
 - content_for :app_content do
   .content-area
     .header
-      %img.robot{:src => @course.photo.present? ? @course.photo.path : "/assets/robotclass/robot.jpg"}
+      %img.robot{:src => @course.photo.present? ? @course.photo.path : "/assets/web/course.png"}
       %a{:href => "/user_mobile/courses"}
         %img.back.last_page{:src => "/assets/robotclass/back.png"}
     .right-float
@@ -29,18 +29,18 @@
 
     .course-desc
       = @course.course.desc.html_safe
-    - if @course_participate.present? && @course_participate.is_success
-      .content#sign-desc
-        %p.title 签到情况
-        .sign_in-div
-          - @course.length.times do |class_num|
-            - if @course_participate.signin_info[class_num].present?
-              .sign_in-box= class_num + 1
-            - else
-              .absence= class_num + 1
-          / - 8.times do
-          / - 4.times do
-          /   .absence 2
+      - if @course_participate.present? && @course_participate.is_success
+        .content#sign-desc
+          %p.title 签到情况
+          .sign_in-div
+            - @course.length.times do |i|
+              - if @course_participate.signin_info[i].present?
+                .sign_in-box= i + 1
+              - else
+                - if @course.is_class_pass?(i)
+                  .absence= i + 1
+                - else
+                  .future= i + 1
     .assign-div
       %p.center 课程详情
       .item-box
