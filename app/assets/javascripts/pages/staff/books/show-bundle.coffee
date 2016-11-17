@@ -176,11 +176,11 @@ $ ->
           $("#type-span").text(type)
           $("#stock-span").text(stock + "本")
           if age_lower_bound == "" || age_lower_bound == undefined
-            $("#age-lower-bound-span").text("未设置")
+            $("#age-lower-bound-span").text("未填写")
           else
             $("#age-lower-bound-span").text(age_lower_bound + "岁")
           if age_upper_bound == "" || age_upper_bound == undefined
-            $("#age-upper-bound-span").text("未设置")
+            $("#age-upper-bound-span").text("未填写")
           else
             $("#age-upper-bound-span").text(age_upper_bound + "岁")
           $("#isbn-span").text(isbn)
