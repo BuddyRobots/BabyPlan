@@ -13,7 +13,7 @@
       .desc-add-div{data: {id: c.id.to_s}}
         %p.center-name= c.name
         %p.center-address= c.address
-    - if @centers.length >= 3
+    - if @centers.length < 3
       .desc-add-div
         .add-div
           %a{:href => user_mobile_centers_path + "?search=false"}
