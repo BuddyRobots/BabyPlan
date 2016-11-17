@@ -29,7 +29,7 @@
             %tr
               %th 中心名称
               %th 中心地址
-              %th 工作文员
+              %th 工作人员
               %th 绘本种类/数量
               %th 开设课程
               %th{:colspan => "2"} 操&nbsp作
@@ -47,7 +47,7 @@
                   - if c[:available] == true
                     %a.set-available.link-available{:href => "javascript:void(0);"} 关闭
                   - else
-                    %a.set-available.link-unavailable{:href => "javascript:void(0);"} 打开
+                    %a.set-available.link-unavailable{:href => "javascript:void(0);"} 开放
         .select-page 
           %span.totalitems= "共#{@centers[:total_page]}页,总计#{@centers[:total_number]}条"
           %span.choice-page
