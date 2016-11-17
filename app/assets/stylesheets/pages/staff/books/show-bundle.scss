@@ -209,7 +209,12 @@
 		text-align: center;
 	}
 }
-
+.photo-div {
+	display: inline-block;
+	position: relative;
+	margin-right: 10px;
+	margin-left: 10px;
+}
 .cover-back {
 	margin-left: 51px;
 	margin-top: 20px;
@@ -218,7 +223,6 @@
 }
 .book-cover {
 	vertical-align: top;
-	margin-right: 10px;
 }
 .book-back {
 	@extend .book-cover;
@@ -231,6 +235,19 @@
 }
 #upload-back {
 	@extend #upload-cover;
+}
+.upload-photo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	width: 100px;
+	height: 100px;
+	display: none;
+}
+.edit-photo, .photo {
+	width: 100px;
+	height: 100px;
 }
 
 #uploadCoverModal {
@@ -257,6 +274,7 @@
 		border-radius: 10px;
 	}
 }
+
 .modal-backdrop {
 	background-color: #999;
 }
@@ -459,7 +477,3 @@
 	}
 }
 
-.photo {
-	width: 100px;
-	max-height: 200px;
-}
