@@ -16,7 +16,9 @@ class UserMobile::CentersController < UserMobile::ApplicationController
   def set_follow
     @center = Center.where(id: params[:id]).first
     if params[:follow].to_s == "true"
-      current_user.client_centers << @center
+      if @current_user.client_centers.length < 3
+        current_user.client_centers << @center
+      end
     else
       current_user.client_centers.delete(@center)
     end
