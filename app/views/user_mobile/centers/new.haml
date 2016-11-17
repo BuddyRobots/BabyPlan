@@ -9,13 +9,14 @@
         %p 设置关注中心
       %a{:href => account_user_mobile_settings_path}
         %img.back{:src => "/assets/mybook/back.png"}
-    .desc-add-div
-      .add-div
-        %a{:href => user_mobile_centers_path + "?search=false"}
-          %img.add{:src => "/assets/web/add.png"}
-          %span.add-word 添加关注儿童中心
     - @centers.each do |c|
       .desc-add-div{data: {id: c.id.to_s}}
         %p.center-name= c.name
         %p.center-address= c.address
+    - if @centers.length < 3
+      .desc-add-div
+        .add-div
+          %a{:href => user_mobile_centers_path + "?search=false"}
+            %img.add{:src => "/assets/web/add.png"}
+            %span.add-word 添加关注儿童中心
     .center ~最多可设置３个关注中心~

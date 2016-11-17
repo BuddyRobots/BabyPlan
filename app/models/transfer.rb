@@ -12,6 +12,9 @@ class Transfer
   field :in_time, type: Time
   field :status, type: Integer, default: PREPARE
   field :arrived_books, type: Array, default: []
+  field :lost_books_info_lock, type: Array, default: []
+  field :books_info_detail_lock, type: Array, default: []
+  field :books_info_lock, type: Array, default: []
 
   belongs_to :out_center, class_name: "Center", inverse_of: :out_transfers
   belongs_to :in_center, class_name: "Center", inverse_of: :in_transfers
@@ -38,7 +41,7 @@ class Transfer
     return ErrCode::BOOK_IN_TRANSFER if book_inst.current_transfer.present?
 
     self.book_insts << book_inst
-    { name: book_inst.book.name, isbn: book_inst.book.isbn }
+    { id: book_inst.book.id.to_s, name: book_inst.book.name, isbn: book_inst.book.isbn }
   end
 
   def arrive(book_inst_id)
@@ -46,7 +49,7 @@ class Transfer
     return ErrCode::BOOK_NOT_IN_TRANSFER if !self.book_insts.include?(book_inst)
     self.arrived_books << book_inst.id.to_s
     self.save
-    { name: book_inst.book.name, isbn: book_inst.book.isbn }
+    { id: book_inst.book.id.to_s, name: book_inst.book.name, isbn: book_inst.book.isbn }
   end
 
   def status_class
@@ -71,6 +74,7 @@ class Transfer
   end
 
   def books_info_detail
+    return books_info_detail_lock if self.books_info_detail_lock.present?
     books = { }
     self.book_insts.each do |e|
       book_id = e.book.id.to_s
@@ -91,6 +95,7 @@ class Transfer
   end
 
   def lost_books_info
+    return lost_books_info_lock if self.lost_books_info_lock.present?
     lost_book_insts = []
     self.book_insts.each do |book_inst|
       if !self.arrived_books.include?(book_inst.id.to_s)
@@ -114,6 +119,7 @@ class Transfer
   end
 
   def books_info
+    return books_info_lock if self.books_info_lock.present?
     books = { }
     self.book_insts.each do |e|
       book_id = e.book.id.to_s
@@ -157,6 +163,12 @@ class Transfer
   end
 
   def after_finish
+    # 0. lock the book info
+    self.update_attributes({
+      books_info_lock: self.books_info,
+      books_info_detail_lock: self.books_info_detail,
+      lost_books_info_lock: self.lost_books_info
+    })
     # 1. change the stock of the books in the out center
     books = { }
     self.book_insts.each do |e|
