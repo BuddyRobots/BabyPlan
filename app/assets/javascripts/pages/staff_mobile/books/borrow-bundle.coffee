@@ -32,4 +32,6 @@ $ ->
                 location.href = "/staff_mobile/books/borrow_result?err=book_not_returned" + "&mobile=" + mobile
               if data.code == BOOK_IN_TRANSFER
                 location.href = "/staff_mobile/books/borrow_result?err=book_in_transfer" + "&mobile=" + mobile
+              if data.code == BOOK_NOT_AVAILABLE
+                location.href = "/staff_mobile/books/borrow_result?err=book_not_available" + "&mobile=" + mobile
         )

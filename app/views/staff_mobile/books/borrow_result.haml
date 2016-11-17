@@ -13,6 +13,8 @@
           %p.title#unreturn 该绘本尚未归还！
         - if @err == "book_in_transfer"
           %p.title#unreturn 该绘本正在迁移途中
+        - if @err == "book_not_available"
+          %p.title#unreturn 绘本不在架上
     - else
       .desc-div
         .desc
