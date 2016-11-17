@@ -4,7 +4,7 @@ class StaffMobile::BooksController < StaffMobile::ApplicationController
 
   def get_book_inst
     @book_inst = BookInst.where(id: params[:id]).first
-    if @book_inst.book.center != @current_user.center
+    if @book_inst.book.center != current_center
       @book_inst = nil
     end
   end
