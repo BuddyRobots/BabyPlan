@@ -15,7 +15,7 @@ $ ->
       success: (res) ->
         result = res.resultStr
         $.postJSON(
-          '/staff_mobile/books/' + book_id + '/do_borrow',
+          '/staff_mobile/books/' + result + '/do_borrow',
           {
             mobile: mobile
           },
