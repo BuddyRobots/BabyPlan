@@ -1,5 +1,5 @@
 $ ->
-  $(".sign-in-btn").click ->
+  $("#sign-in-btn").click ->
     mobile = $("#mobile").val()
     password = $("#password").val()
     mobile_retval = $.regex.isMobile(mobile)

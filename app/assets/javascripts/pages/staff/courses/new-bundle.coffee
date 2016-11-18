@@ -45,7 +45,7 @@ $ ->
 
   $(".end-btn").click ->
     course_id = window.cid
-    available = $("#available").is(":checked")
+    available = !$("#unshelve").is(":checked")
     code = $("#course-code").val()
     capacity = $("#course-capacity").val()
     price = $("#course-price").val()
@@ -64,10 +64,12 @@ $ ->
         date_in_calendar.push(fc_event.start._i + "," + fc_event.end._i)
     )
 
-
     if code == "" || capacity == "" || price == "" || length == "" || date == "" || speaker == "" || address == ""
       $.page_notification("请将信息补充完整")
       return
+
+    if available && parseInt(length) != date_in_calendar.length
+      $.page_notification("课次与上课时间不匹配，不能上架")
 
     $.postJSON(
       '/staff/courses/',
