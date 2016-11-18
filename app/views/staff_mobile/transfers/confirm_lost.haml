@@ -8,6 +8,9 @@
   .main-div
     .desc-div
       .desc
+        .title 
+          %span.line
+          %span.caption 缺失绘本
         - @transfer.lost_books_info.each do |lost_book|
           .lost-items
             %span= lost_book[:name]
