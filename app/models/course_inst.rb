@@ -186,4 +186,8 @@ class CourseInst
       ele_center: self.center.name
     }
   end
+
+  def effective_signup_num
+    self.course_participates.where(trade_state: "SUCCESS").length
+  end
 end

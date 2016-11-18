@@ -47,7 +47,7 @@
         .item
           .left-div#residual_num
             %span 剩余名额：
-            %span.residual= @course.capacity - @course.course_participates.length
+            %span.residual= @course.capacity - @course.effective_signup_num
             %span= "/#{@course.capacity}"
           .right-div
             %span 主讲人：
@@ -69,8 +69,10 @@
     .content
       #map-container
       / %img.map-jpg{:src => "/assets/web/map.jpg"}
-    - if @course_participate.nil? || @course_participate.is_expired
+    - if @course_participate.nil?
       %a.btn.click-btn{href: "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxfe4fd89f6f5f9f57&redirect_uri=#{CGI::escape('http://babyplan.bjfpa.org.cn/user_mobile/courses/new/')}&response_type=code&scope=snsapi_base&state=#{@course.id.to_s}#wechat_redirect", :type => "button"} 我要报名
+    - elsif @course_participate.is_expired
+      %a.btn.click-btn{href: "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxfe4fd89f6f5f9f57&redirect_uri=#{CGI::escape('http://babyplan.bjfpa.org.cn/user_mobile/courses/new/')}&response_type=code&scope=snsapi_base&state=#{@course.id.to_s}#wechat_redirect", :type => "button"} 已过期，重新报名
     - elsif @course_participate.is_success
       -if @course.status == CourseInst::NOT_BEGIN
         %button.btn.unclick-btn{:type => "button"} 已报名
