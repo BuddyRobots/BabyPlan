@@ -89,6 +89,8 @@
                           %a.details{:href => "javascript:void(0);"} 
                             上课情况
                             %span.triangle-down
+                        - else
+                          .unreturn-review　上课情况
                     - if e.is_success
                       %tr.status
                         %td{:colspan => "6"}
@@ -150,7 +152,7 @@
                         %td{:colspan => "6"}
                           .comments-book
                             %span 评价：
-                            %span.comments-content= b.review.present?
+                            %span.comments-content= b.review.content
                   / %tr
                   /   %td.td-data 少儿计算机知识
                   /   %td.td-data　2016.12.12
