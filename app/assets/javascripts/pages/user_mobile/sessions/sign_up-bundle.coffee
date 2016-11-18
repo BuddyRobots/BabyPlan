@@ -38,7 +38,7 @@ $ ->
           time(".identifycode")
         else
           if data.code == USER_EXIST
-            location.href = "/user_mobile/sessions/new?code=" + USER_EIXST
+            location.href = "/user_mobile/sessions/new?code=" + USER_EXIST
     )
     return false
 
