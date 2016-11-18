@@ -67,11 +67,6 @@ Highcharts.setOptions lang:
   ]
 
 $ ->
-  if window.profile == "participates"
-    $('.nav-tabs a[href="#tab2"]').tab('show')
-
-  if window.profile == "reviews"
-    $('.nav-tabs a[href="#tab3"]').tab('show')
 
   $('#gender-statistics').highcharts
     chart:
@@ -618,3 +613,9 @@ $ ->
 
   $("#class_num").change ->
     $(".code-figure").attr("src", "/assets/web/bigqrcode.png")
+
+  if window.profile == "participates"
+    $("#register-message").trigger('click')
+
+  if window.profile == "reviews"
+    $("#user-review").trigger('click')

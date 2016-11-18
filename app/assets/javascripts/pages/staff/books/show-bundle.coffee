@@ -2,11 +2,6 @@
 #= require tag-it.min
 $ ->
 
-  if window.profile == "reviews"
-    $('.nav-tabs a[href="#tab2"]').tab('show')
-
-  if window.profile == "borrows"
-    $('.nav-tabs a[href="#tab3"]').tab('show')
 
   has_cover = false
   has_back = false
@@ -270,5 +265,8 @@ $ ->
     photo.src = URL.createObjectURL(event.target.files[0])
 
 
+  if window.profile == "reviews"
+    $("#user-review").trigger("click")
 
-
+  if window.profile == "borrows"
+    $("#borrow-message").trigger("click")
