@@ -61,15 +61,9 @@
                 #edit-area
           .cover-back
             %span.cover 封面:
-            - if @book.cover.present?
-              = image_tag(@book.cover.path, class: "cover-img")
-            - else
-              %span 未上传
+            = image_tag(@book.cover.nil? ? "/assets/web/coverempty.png" : @book.cover.path, class: "cover-img")
             %span.back 封底:
-            - if @book.back.present?
-              = image_tag(@book.back.path, class: "back-img")
-            - else
-              %span 未上传
+            = image_tag(@book.back.nil? ? "/assets/web/coverempty.png" : @book.back.path, class: "back-img")
 
         #tab2.tab-pane
           .undiscover

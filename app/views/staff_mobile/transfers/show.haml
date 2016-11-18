@@ -49,22 +49,21 @@
               .items
                 %span= book[:name]
                 %span.book-nums= "×" + book[:count].to_s
-    - if @transfer.status == Transfer::PREPARE
-      .btn-div
+    .btn-div
+      - if @transfer.status == Transfer::PREPARE
         %button.btn.left-btn#confirm-transfer-out{:type => "button", data: {id: @transfer.id.to_s}} 确定运出
         %button.btn.right-btn#continue-transfer-out{:type => "button"}　继续添加
-    - if @transfer.status == Transfer::ONGOING
-      - if @transfer.in_center == @current_user.staff_center
-        - if @transfer.arrived_books.blank?
-          / 开始迁入button
-          %button.btn.full-btn#start{:type => "button"}　开始迁入
-        - else
-          .btn-div
+      - if @transfer.status == Transfer::ONGOING
+        - if @transfer.in_center == @current_user.staff_center
+          - if @transfer.arrived_books.blank?
+            / 开始迁入button
+            %button.btn.full-btn#start{:type => "button"}　开始迁入
+          - else
             %button.btn.left-btn#confirm-transfer-in{:type => "button"} 完成
             %button.btn.right-btn#start{:type => "button"} 继续迁入
-      - else
+        - else
+          / 回到首页button
+          %button.btn.full-btn#back{:type => "button"}　回到首页
+      - if @transfer.status == Transfer::DONE || @transfer.status == Transfer::ABNORMAL
         / 回到首页button
         %button.btn.full-btn#back{:type => "button"}　回到首页
-    - if @transfer.status == Transfer::DONE || @transfer.status == Transfer::ABNORMAL
-      / 回到首页button
-      %button.btn.full-btn#back{:type => "button"}　回到首页

@@ -141,7 +141,12 @@
               .click-show-div
                 .append-borrow-div
                   .left-div.append-left
-                    %p.column-title 海淀区儿童中心绘本详情
+                    %form.form-inline
+                      .form-group.center-choice
+                        %span.center-title 海淀区儿童中心绘本详情
+                        %select.form-control#center-select
+                          - 5.times do
+                            %option 海淀区儿童中心
                     .tab-chart-div
                       .total-div
                         %p.total-nums 912
