@@ -3,7 +3,7 @@ class UserMobile::AnnouncementsController < UserMobile::ApplicationController
   def index
     @keyword = params[:keyword]
     if @current_user.client_centers.present?
-      @announcements = Announcement.any_in(center_id: @current_user.client_centers.map { |e| e.id.to_s} + [nil])
+      @announcements = Announcement.is_available.any_in(center_id: @current_user.client_centers.map { |e| e.id.to_s} + [nil])
       if params[:keyword].present?
         @announcements = @announcements.where(title: /#{params[:keyword]}/)
       end
@@ -12,7 +12,7 @@ class UserMobile::AnnouncementsController < UserMobile::ApplicationController
   end
 
   def more
-    @announcements = Announcement.any_in(center_id: @current_user.client_centers.map { |e| e.id.to_s} + [nil])
+    @announcements = Announcement.is_available.any_in(center_id: @current_user.client_centers.map { |e| e.id.to_s} + [nil])
     if params[:keyword].present?
       @announcements = @announcements.where(title: /#{params[:keyword]}/)
     end

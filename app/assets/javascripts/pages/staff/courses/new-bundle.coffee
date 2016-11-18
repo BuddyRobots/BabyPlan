@@ -43,6 +43,27 @@ $ ->
 
   $("#course-code").css("width", $(".num-box").width() - $(".course-num").width() - 6)
 
+  check_course_input = (code, capacity, price, price_pay, length, date, speaker, address, date_in_calendar) ->
+    if code == "" || capacity == "" || price == "" || length == "" || date == "" || speaker == "" || address == ""
+      $.page_notification("请将信息补充完整")
+      return false
+    if !$.isNumeric(capacity) || parseInt(capacity) <= 0
+      $.page_notification("请填写正确的课程容量")
+      return false
+    if !$.isNumeric(price) || parseInt(price) <= 0
+      $.page_notification("请填写正确的市场价")
+      return false
+    if !$.isNumeric(price_pay) || parseInt(price_pay) <= 0
+      $.page_notification("请填写正确的公益价")
+      return false
+    if !$.isNumeric(length) || parseInt(length) <= 0
+      $.page_notification("请填写正确的课次")
+      return false
+    if parseInt(length) != date_in_calendar.length
+      $.page_notification("课次与上课时间不匹配")
+      return false
+    return true
+
   $(".end-btn").click ->
     course_id = window.cid
     available = !$("#unshelve").is(":checked")
@@ -64,12 +85,9 @@ $ ->
         date_in_calendar.push(fc_event.start._i + "," + fc_event.end._i)
     )
 
-    if code == "" || capacity == "" || price == "" || length == "" || date == "" || speaker == "" || address == ""
-      $.page_notification("请将信息补充完整")
+    ret = check_course_input(code, capacity, price, price_pay, length, date, speaker, address, date_in_calendar)
+    if ret == false
       return
-
-    if available && parseInt(length) != date_in_calendar.length
-      $.page_notification("课次与上课时间不匹配，不能上架")
 
     $.postJSON(
       '/staff/courses/',
@@ -97,6 +115,8 @@ $ ->
         else
           if data.code == COURSE_INST_EXIST
             $.page_notification("课程编号已存在")
+          else if data.code == COURSE_DATE_UNMATCH
+            $.page_notification("课次与上课时间不匹配")
           else
             $.page_notification("服务器出错")
       )
@@ -124,14 +144,28 @@ $ ->
   })
 
   add_event = ->
-    if $("#datepicker").val().trim() == "" ||
-        $("#start-time").val().trim() == "" || 
-        $("#end-time").val().trim() == ""
-      $.page_notification("请输入完整的上课日期和时间")
-      return false
-    date = $("#datepicker").val()
-    start_time = $("#start-time").val()
-    end_time = $("#end-time").val()
+    date = $("#datepicker").val().match(/[0-9]{4}-[0-9]{2}-[0-9]{2}/)
+    if date == null
+      $.page_notification("请输入合法的日期", 3000)
+      return
+    date = date[0]
+
+    start_time = $("#start-time").val().match(/[0-9]{2}:[0-9]{2}:[0-9]{2}/)
+    end_time = $("#end-time").val().match(/[0-9]{2}:[0-9]{2}:[0-9]{2}/)
+    if start_time == null || end_time == null
+      $.page_notification("请输入合法的时间", 3000)
+      return
+    start_time = start_time[0]
+    end_time = end_time[0]
+
+    start_ary = start_time.split(":")
+    end_ary = end_time.split(":")
+    start_seconds = parseInt(start_ary[0]) * 3600 + parseInt(start_ary[1]) * 60 +parseInt(start_ary[2])
+    end_seconds = parseInt(end_ary[0]) * 3600 + parseInt(end_ary[1]) * 60 +parseInt(end_ary[2])
+    if start_seconds >= end_seconds
+      $.page_notification("结束时间必须在开始时间之后", 3000)
+      return
+
     e = {
       id: guid()
       title: ""

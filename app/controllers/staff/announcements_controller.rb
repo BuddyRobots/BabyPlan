@@ -36,7 +36,7 @@ class Staff::AnnouncementsController < Staff::ApplicationController
     if @announcement.nil?
       render json: retval_wrapper(ErrCode::ANNOUNCEMENT_NOT_EXIST) and return
     end
-    @announcement.update_attribute(:is_published, params[:publish] == true)
+    @announcement.set_publish(params[:publish])
     render json: retval_wrapper(nil) and return
   end
 

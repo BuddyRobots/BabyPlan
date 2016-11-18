@@ -16,6 +16,8 @@ class Announcement
   has_many :staff_logs
   has_one :feed
 
+  scope :is_available, ->{ where(is_published: true) }
+
   def self.create_announcement(staff, center, announcement_info, scope)
     html = Nokogiri::HTML(announcement_info[:content])
     info = {
@@ -27,7 +29,7 @@ class Announcement
     }
     announcement = scope == "local" ? center.announcements.create(info) : Announcement.create(info)
 
-    feed = Feed.create(announcement_id: announcement.id, name: announcement.title)
+    feed = Feed.create(announcement_id: announcement.id, name: announcement.title, available: announcement_info[:is_published])
     if scope == "local"
       feed.center = center
       feed.save
@@ -46,6 +48,12 @@ class Announcement
     }
     self.update_attributes(info)
     { announcement_id: self.id.to_s }
+  end
+
+  def set_publish(publish)
+    self.update_attribute(:is_published, publish == true)
+    self.feed.update_attributes({available: publish == true})
+    nil
   end
 
   def status_str

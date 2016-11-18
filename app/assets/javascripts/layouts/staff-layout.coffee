@@ -83,4 +83,3 @@ $ ->
     code = event.which
     if code == 13
       confirm()
- 

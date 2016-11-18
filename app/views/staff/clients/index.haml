@@ -42,7 +42,7 @@
                   %td= u[:gender] == 0 ? "男" : "女"
                   %td= u[:parent]
                   %td= u[:mobile]
-                  %td= u[:address]
+                  %td= truncate(u[:address], length: 50)
 
         .select-page 
           %span.totalitems= "共#{@users[:total_page]}页,总计#{@users[:total_number]}条"
