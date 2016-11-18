@@ -33,6 +33,7 @@ class UserMobile::BooksController < UserMobile::ApplicationController
   end
 
   def show
+    @back = params[:back]
     @book = Book.where(id: params[:id]).first
     @back = params[:back]
   end

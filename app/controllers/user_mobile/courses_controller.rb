@@ -24,6 +24,7 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
 
   # course_show
   def show
+    @back = params[:back]
     @course = CourseInst.where(id: params[:id]).first
     @course_participate = @current_user.course_participates.where(course_inst_id: @course.id).first
     @back = params[:back]

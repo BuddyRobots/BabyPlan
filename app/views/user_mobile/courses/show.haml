@@ -12,7 +12,7 @@
   .content-area
     .header
       %img.robot{:src => @course.photo.present? ? @course.photo.path : "/assets/web/course.png"}
-      %a{:href => "/user_mobile/courses"}
+      %a{:href => @back == "setting" ? "/user_mobile/settings/course" : "/user_mobile/courses"}
         %img.back.last_page{:src => "/assets/robotclass/back.png"}
     .right-float
       %a.a-div#concern{:href => "javascript:void(0);"}
