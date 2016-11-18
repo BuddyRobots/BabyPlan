@@ -345,4 +345,17 @@ class User
     self.update_attributes({first_signin: false}) if cur_val
     cur_val
   end
+
+  def has_expired_book
+    self.book_borrows.select { |e| e.is_expired } .present?
+  end
+
+  def reach_max_borrow
+    book_num = BookSetting.first.try(:book_num)
+    if book_num.blank?
+      return false
+    else
+      self.book_borrows.where(return_at: nil).count >= book_num
+    end
+  end
 end

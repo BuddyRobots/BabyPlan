@@ -59,6 +59,9 @@ Rails.application.routes.draw do
       member do
         get :show_transfer
       end
+      collection do
+        post :update_setting
+      end
     end
     resources :transfers do
     end

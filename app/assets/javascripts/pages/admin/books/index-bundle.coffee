@@ -40,14 +40,38 @@ $ ->
   check_add_input = ->
     if $("#borrow-num").val().trim() == "" ||
         $("#borrow-time").val().trim() == ""
-      $("#confirm").addClass("button-disabled")
-      $("#confirm").removeClass("button-enabled")
+      $("#confirm-borrow-setting").addClass("button-disabled")
+      $("#confirm-borrow-setting").removeClass("button-enabled")
     else
-      $("#confirm").removeClass("button-disabled")
-      $("#confirm").addClass("button-enabled")
+      $("#confirm-borrow-setting").removeClass("button-disabled")
+      $("#confirm-borrow-setting").addClass("button-enabled")
+
+  check_add_input()
 
   $("#borrow-num").keyup ->
     check_add_input()
   $("#borrow-time").keyup ->
     check_add_input()
+
+  $("#confirm-borrow-setting").click ->
+    book_num = $("#borrow-num").val()
+    if $.isNumeric(book_num) == false || parseInt(book_num) <= 0
+      $.page_notification("请输入正确的最大可借本数")
+      return
+    borrow_duration = $("#borrow-time").val()
+    if $.isNumeric(borrow_duration) == false || parseInt(borrow_duration) <= 0
+      $.page_notification("请输入正确的最长可借天数")
+      return
+    $.postJSON(
+      '/admin/books/update_setting',
+      {
+        book_num: book_num
+        borrow_duration: borrow_duration
+      },
+      (data) ->
+        if data.success
+          $.page_notification("设置完成")
+        else
+          $.page_notification("服务器出错")
+      )
 

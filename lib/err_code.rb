@@ -21,6 +21,8 @@ module ErrCode
   BOOK_NOT_IN_TRANSFER = -18
   BOOK_NOT_AVAILABLE = -19
   COURSE_DATE_UNMATCH = -20
+  HAS_EXPIRED_BOOK = -21
+  REACH_MAX_BORROW = -22
 
   def self.ret_false(code)
     msg = self.message(code)
@@ -71,6 +73,10 @@ module ErrCode
       "绘本不在架上"
     when COURSE_DATE_UNMATCH
       "课次与上课时间不匹配"
+    when HAS_EXPIRED_BOOK
+      "有绘本逾期"
+    when REACH_MAX_BORROW
+      "已达最大数目"
     else
       nil
     end

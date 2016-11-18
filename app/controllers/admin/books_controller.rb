@@ -28,6 +28,17 @@ class Admin::BooksController < Admin::ApplicationController
       e.transfer_info
     end
     @profile=params[:profile]
+
+    @book_num = BorrowSetting.first.try(:book_num)
+    @borrow_duration = BorrowSetting.first.try(:borrow_duration)
+  end
+
+  def update_setting
+    s = BorrowSetting.first || BorrowSetting.create
+    s.book_num = params[:book_num].to_i
+    s.borrow_duration = params[:borrow_duration].to_i
+    s.save
+    render json: retval_wrapper(nil) and return
   end
 
   def show

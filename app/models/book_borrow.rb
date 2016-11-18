@@ -26,7 +26,12 @@ class BookBorrow
   end
 
   def is_expired
-    return self.return_at.blank? && Time.now - 4.weeks > Time.at(self.borrow_at)
+    borrow_duration = BorrowSetting.first.try(:borrow_duration)
+    if borrow_duration.blank?
+      return false
+    else
+      return self.return_at.blank? && Time.now.to_i - borrow_duration.days.to_i > self.borrow_at
+    end
   end
 
   def return_class
