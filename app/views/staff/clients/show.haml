@@ -137,7 +137,7 @@
                     %tr
                       %td.td-data= b.book.name
                       %td.td-data= Time.at(b.borrow_at).strftime("%Y-%m-%d %H:%M")
-                      %td.td-data{class: b.return_class}= b.return_at.present? ? Time.at(b.return_at).strftime("%Y-%m-%d %H:%M") : "暂未归还"
+                      %td.td-data{class: b.return_class}= b.return_status_str
                       %td.td-data 
                         - if b.review.present?
                           %a.details{:href => "javascript:void(0);"} 

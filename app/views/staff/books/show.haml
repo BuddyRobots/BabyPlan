@@ -158,12 +158,26 @@
                     %th 借阅人
                     %th 借阅时间
                     %th 归还时间
+                    %th 操&nbsp作
                 %tbody
                   - @borrows[:data].each do |b|
                     %tr
                       %td= b.client.name
                       %td= Time.at(b.borrow_at).strftime("%Y-%m-%d %H:%M")
-                      %td= b.return_at.present? ? Time.at(b.return_at).strftime("%Y-%m-%d %H:%M") : "尚未归还"
+                      %td{class: b.return_class}= b.return_status_str
+                      %td.td-data 
+                        - if b.review.present?
+                          %a.details{:href => "javascript:void(0);"} 
+                            绘本评价
+                            %span.triangle-down
+                        - else
+                          .unreturn-review　暂未评论
+                    - if b.review.present?
+                      %tr.status
+                        %td{:colspan => "6"}
+                          .comments-book
+                            %span 评价：
+                            %span.comments-content= b.review.present?
             .select-page 
               %span.totalitems= "共#{@borrows[:total_page]}页,总计#{@borrows[:total_number]}条"
               %span.choice-page
