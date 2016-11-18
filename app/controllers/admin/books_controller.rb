@@ -37,5 +37,9 @@ class Admin::BooksController < Admin::ApplicationController
   end
 
   def show_transfer
+    @transfer = Transfer.where(id: params[:id]).first
+    redirect_to action: :index and return if @transfer.blank?
+    books_info_detail = @transfer.books_info_detail
+    @books_info_detail = auto_paginate(books_info_detail)
   end
 end

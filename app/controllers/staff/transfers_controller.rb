@@ -32,7 +32,6 @@ class Staff::TransfersController < Staff::ApplicationController
       redirect_to action: :index and return
     end
     books_info_detail = @transfer.books_info_detail
-
     @books_info_detail = auto_paginate(books_info_detail)
   end
 end

@@ -12,17 +12,19 @@
     .desc
       .controls.controls-row
         %label.input-caption 迁出地点:
-        %span.unedit-box 海淀区儿童中心
+        %span.unedit-box= @transfer.out_center.name
         %label.input-caption 迁入地点:
-        %span.unedit-box 朝阳区儿童中心
+        %span.unedit-box= @transfer.in_center.name
+        %label.input-caption 迁移状态:
+        %span.unedit-box= @transfer.status_str
         
       .controls.controls-row
-        %label.input-caption 迁移状态:
-        %span.unedit-box 已完成
-        %label.input-caption#time 时间:
-        %span.unedit-box 2016.10.11
+        %label.input-caption 迁出时间:
+        %span.unedit-box= @transfer.out_time.present? ? @transfer.out_time.strftime("%Y-%m-%d %H:%M") : ""
+        %label.input-caption 迁入时间:
+        %span.unedit-box= @transfer.in_time.present? ? @transfer.in_time.strftime("%Y-%m-%d %H:%M") : ""
         %label.input-caption 数量:
-        %span.unedit-box 3
+        %span.unedit-box= @transfer.book_insts.count
     .table-box
       %table.table.table-bordered#book-table
         %thead
@@ -31,22 +33,25 @@
             %th 数&nbsp量
             %th 作&nbsp者
             %th ISBN编码
+            %th 备注
         %tbody
-          - 4.times do
+          - @books_info_detail[:data].each do |info|
             %tr
-              %td.td-data 塞拉菲尼抄本
-              %td.td-data ４
-              %td.td-data 塞拉菲尼
-              %td.td-data　97834546259
+              %td.td-data= info["name"]
+              %td.td-data= info["count"]
+              %td.td-data= info["author"]
+              %td.td-data= info["isbn"]
+              %td.td-data.red= (@transfer.status == Transfer::ABNORMAL && info["lost_count"] > 0) ? "缺失" + info["lost_count"].to_s + "本" : ""
 
     .select-page 
-      %span.totalitems= "共6页,总计12条"
+      %span.totalitems= "共#{@books_info_detail[:total_page]}页,总计#{@books_info_detail[:total_number]}条"
       %span.choice-page
         %ul.pagination.pagination-sm
+
           %li
-            %a{:href => "javascript:void(0);"} «
-          / - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
+            %a{:href => "/admin/books/#{@transfer.id.to_s}/show_transfer?page=#{@books_info_detail[:previous_page]}"} «
+          - ( (@books_info_detail[:previous_page] > 2 ? @books_info_detail[:previous_page] - 2 : 1) .. (@books_info_detail[:next_page] < @books_info_detail[:total_page] - 2 ? @books_info_detail[:next_page] + 2 : @books_info_detail[:total_page]) ).to_a.each do |page|
+            %li
+              %a{:href => "/admin/books/#{@transfer.id.to_s}/show_transfer?page=#{page}"}= page
           %li
-            %a{:href => "javascript:void(0);"} 1
-          %li
-            %a{:href => "javascript:void(0);"} »
+            %a{:href => "/admin/books/#{@transfer.id.to_s}/show_transfer?page=#{@books_info_detail[:next_page]}"} »
