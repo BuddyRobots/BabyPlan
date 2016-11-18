@@ -27,7 +27,6 @@ $ ->
       $("#confirm-password").removeClass("clicked-box")
 
   check_modify_password_input = ->
-    console.log "check_signup_input pressed"
     if $("#password").val().trim() == "" ||
         $("#new-password").val().trim() == "" ||
         $("#confirm-password").val().trim() == ""

@@ -58,7 +58,6 @@ body, p, img, div, ul, li, a, h3, table, tr, th, td {
 		top:15px;
 		border: 0;
 		border-radius:2px;
-		line-height:30px;
 		font-size:14px;
 		color:white;
 		text-decoration: none;
@@ -66,9 +65,10 @@ body, p, img, div, ul, li, a, h3, table, tr, th, td {
 			background:#28d883;
 		}
 	}
-	.sign-in {
+	#sign-in {
 		@extend .sign-up;
 		background:#f7873d;
+		outline: none;
 		&:hover {
 			background:#ffa265;
 		}
@@ -217,9 +217,9 @@ body, p, img, div, ul, li, a, h3, table, tr, th, td {
 		border: 0;
 		border-radius: 4px;
 		margin-bottom: 20px;
-		line-height: 40px;
 		font-size: 16px;
 		color: white;
+		outline: none;
 	}
 	.button-disabled {
 		background: #c8c8c8;

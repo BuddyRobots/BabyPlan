@@ -36,7 +36,7 @@
               %img.turnoff-icon{:src => "/assets/managecenter/turnoff.png"}
       - else
         %p.rightword 您好欢迎访问管理员后台系统！
-        %button.sign-in{"data-target" => "#signinModal", "data-toggle" => "modal"} 登录
+        %button.btn#sign-in{"data-target" => "#signinModal", "data-toggle" => "modal"} 登录
         
       
     
@@ -81,5 +81,5 @@
               .col-sm-8
                 %input.unclicked-box#confirm-password.form-control{:type => "password"}
             .confirm-button
-              %button#confirm.button-disabled{:href => "javascript:void(0);"} 确定
+              %button.btn#confirm.button-disabled{:href => "javascript:void(0);"} 确定
 

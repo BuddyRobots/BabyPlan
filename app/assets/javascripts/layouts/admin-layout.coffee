@@ -26,7 +26,6 @@ $ ->
       $("#confirm-password").removeClass("clicked-box")
 
   check_modify_password_input = ->
-    console.log "check_signup_input pressed"
     if $("#password").val().trim() == "" ||
         $("#new-password").val().trim() == "" ||
         $("#confirm-password").val().trim() == ""
@@ -61,7 +60,7 @@ $ ->
       $.page_notification("两次密码输入不一致", 3000)
       return
     $.postJSON(
-      '/staff/sessions/change_password',
+      '/admin/sessions/change_password',
       {
         password: password
         new_password: new_password

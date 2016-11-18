@@ -210,11 +210,11 @@ $ ->
   check_signin_input = ->
     if $("#mobile").val().trim() == "" ||
         $("#password").val().trim() == ""
-      $(".signin").addClass("button-disabled")
-      $(".signin").removeClass("button-enabled")
+      $("#signin").addClass("button-disabled")
+      $("#signin").removeClass("button-enabled")
     else
-      $(".signin").removeClass("button-disabled")
-      $(".signin").addClass("button-enabled")
+      $("#signin").removeClass("button-disabled")
+      $("#signin").addClass("button-enabled")
 
   $("#mobile").keyup ->
     check_signin_input()
@@ -235,7 +235,7 @@ $ ->
 
 # sign in button
   signin = ->
-    if $(".signin").hasClass("button-enabled") == false
+    if $("#signin").hasClass("button-enabled") == false
       return
     mobile = $("#mobile").val()
     password = $("#password").val()
@@ -257,10 +257,10 @@ $ ->
           location.href = "/admin/staffs"
         else
           $(".error-notice").css("visibility","visible")
-          $(".signin").addClass("button-disabled")
+          $("#signin").addClass("button-disabled")
       )
 
-  $(".signin").click ->
+  $("#signin").click ->
     signin()
     return false
 

@@ -48,7 +48,7 @@ body, p, img, div, ul, li, a, h3, table, tr, th, td {
 		top:20px;
 		left:66px;
 	}
-	.sign-up {
+	#sign-up {
 		position:absolute;
 		width:60px;
 		height:30px;
@@ -58,16 +58,16 @@ body, p, img, div, ul, li, a, h3, table, tr, th, td {
 		right:20px;
 		top:15px;
 		border-radius:2px;
-		line-height:30px;
 		font-size: 14px;
 		color:white;
 		text-decoration: none;
+		outline: none;
 		&:hover {
 			background:#28d883;
 		}
 	}
-	.sign-in {
-		@extend .sign-up;
+	#sign-in {
+		@extend #sign-up;
 		background:#f7873d;
 		right:100px;
 		&:hover {
@@ -215,9 +215,9 @@ body, p, img, div, ul, li, a, h3, table, tr, th, td {
 		border: 0;
 		border-radius: 4px;
 		margin-bottom: 20px;
-		line-height: 40px;
 		font-size: 16px;
 		color: white;
+		outline: none;
 	}
 	.button-disabled {
 		background: #c8c8c8;

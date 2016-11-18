@@ -91,7 +91,7 @@
 .forget-password {
 	padding-left: 80px;
 }
-.signin{
+#signin{
 	width: 100%;
 	height: 40px;
 	border: 0;
@@ -100,6 +100,7 @@
 	border-radius: 4px;
 	font-size: 16px;
 	color: white;
+	outline: none;
 }
 #name {
 	padding: 0;
@@ -175,9 +176,9 @@
 	border: 0;
 	border-radius: 4px;
 	margin-bottom: 20px;
-	line-height: 40px;
 	font-size: 16px;
 	color: white;
+	outline: none;
 }
 .button-disabled {
 	background: #c8c8c8;

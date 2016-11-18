@@ -34,8 +34,8 @@
               %img.turnoff-icon{:src => "/assets/managecenter/turnoff.png"}
       - else
         %p.rightword 您好欢迎访问北京市社区儿童中心！
-        %button.sign-up{"data-target" => "#signupModal", "data-toggle" => "modal", :type => "button"} 注册
-        %button.sign-in{"data-target" => "#signinModal", "data-toggle" => "modal", :type => "button"} 登录
+        %button.btn#sign-up{"data-target" => "#signupModal", "data-toggle" => "modal", :type => "button"} 注册
+        %button.btn#sign-in{"data-target" => "#signinModal", "data-toggle" => "modal", :type => "button"} 登录
         
     .main
       .sidebar
@@ -77,4 +77,4 @@
               .col-sm-8
                 %input.unclicked-box#confirm-password.form-control{:type => "password"}
             .confirm-button
-              %button#confirm.button-disabled{:href => "javascript:void(0);"} 确定
+              %button.btn#confirm.button-disabled{:href => "javascript:void(0);"} 确定
