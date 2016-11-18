@@ -21,19 +21,41 @@ class CourseParticipate
   field :signin_info, type: Array, default: []
 
   field :prepay_id, type: String
-  # whether pay process is finished. pay attention that this does not indicate that pay is success
-  field :pay_finished, type: Boolean, default: false
   field :wechat_transaction_id, type: String
   field :result_code, type: String
   field :err_code, type: String
   field :err_code_des, type: String
-  field :trade_state, type: String
   field :trade_state_desc, type: String
+
+  # status related attributes
+  # course participate can have following status:
+  # 1. not signed up: course participate not created
+  # 2. signed up but not paied: course participate created, pay_finished is false
+  # 3. paying: pay_finished is true, but trade_state is not "SUCCESS"
+  # 4. paid: trade_state is "SUCCESS"
+  # whether pay process is finished. pay attention that this does not indicate that pay is success
+  field :pay_finished, type: Boolean, default: false
+  field :trade_state, type: String
   field :expired_at, type: Integer, default: -1
 
   belongs_to :course_inst
   belongs_to :client, class_name: "User", inverse_of: :course_participates
 
+  def status_str
+    if self.pay_finished == true && self.trade_state != "SUCCESS"
+      self.orderquery()
+    end
+    if pay_finished != true
+      return "未付款"
+    end
+    if trade_state == "SUCCESS"
+      return "已付款"
+    end
+    if pay_finished == true && trade_state != "SUCCESS"
+      return "付款中"
+    end
+    return ""
+  end
 
   def self.create_new(client, course_inst)
     cp = self.create({order_id: Util.random_str(32)})

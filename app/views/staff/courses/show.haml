@@ -126,6 +126,7 @@
                     %th 姓&nbsp名
                     %th 住&nbsp址
                     %th 电&nbsp话
+                    %th 报名状态
                     %th 操&nbsp作
                 %tbody
                   - @participates[:data].each do |e|
@@ -133,25 +134,28 @@
                       %td.td-data= e.client.name
                       %td.td-data= e.client.address
                       %td.td-data= e.client.mobile
+                      %td.td-data= e.status_str
                       %td.td-data
-                        %a.details{:href => "javascript:void(0);"} 
-                          上课情况
-                          %span.triangle-down
-                    %tr.status
-                      %td{:colspan => "4"}
-                        .course-status
-                          %span.item-status 上课状态：
-                          - e.course_inst.length.times do |i|
-                            - if e.signin_info[i].present?
-                              %span.join-square
-                            - else
-                              - if e.course_inst.is_class_pass?(i)
-                                %span.miss-square
+                        - if e.is_success
+                          %a.details{:href => "javascript:void(0);"} 
+                            上课情况
+                            %span.triangle-down
+                    - if e.is_success
+                      %tr.status
+                        %td{:colspan => "4"}
+                          .course-status
+                            %span.item-status 上课状态：
+                            - e.course_inst.length.times do |i|
+                              - if e.signin_info[i].present?
+                                %span.join-square
                               - else
-                                %span.square
-                        .comments
-                          %span.comments-title 评论：
-                          %span.comments-content= e.review.present? ? e.review.content : "暂未评论"
+                                - if e.course_inst.is_class_pass?(i)
+                                  %span.miss-square
+                                - else
+                                  %span.square
+                          .comments
+                            %span.comments-title 评论：
+                            %span.comments-content= e.review.present? ? e.review.content : "暂未评论"
 
             .select-page 
               %span.totalitems= "共#{@participates[:total_page]}页,总计#{@participates[:total_number]}条"

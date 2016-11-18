@@ -3,8 +3,7 @@
   = stylesheet_link_tag "pages/staff/clients/show-bundle", :media => "all"
   :javascript
     window.keyword = "#{@keyword}"
-
-
+    window.profile = "#{@profile}"
 
 .content-area
   .manage-content
@@ -62,115 +61,122 @@
                 %input.form-control#address-input{:type => "text"}
 
         #tab2.tab-pane
-          .undiscover
-            %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
-            %span.undiscover-message 抱歉！暂无查找信息
-          .table-box
-            %table.table.table-bordered#register-table
-              %thead
-                %tr
-                  %th 课程名称
-                  %th 上课时间
-                  %th 上课地址
-                  %th 主讲人
-                  %th 课程状态
-                  %th 操&nbsp作
-              %tbody
-                %tr
-                  %td.td-data 少儿计算机知识
-                  %td.td-data　2016.12.12-2016.12.30
-                  %td.td-data 西二环复兴门桥向北200米路东
-                  %td.td-data 李学霸
-                  %td.td-data 已付款
-                  %td.td-data 
-                    %a.details{:href => "javascript:void(0);"} 
-                      上课情况
-                      %span.triangle-down
-                %tr.status
-                  %td{:colspan => "6"}
-                    .course-status
-                      %span.item-status 上课状态：
-                      %span.join-square
-                      %span.miss-square
-                      %span.square
-                    .comments
-                      %span.comments-title 评论：
-                      %span.comments-content 该课程很好
-                %tr
-                  %td.td-data 少儿计算机知识
-                  %td.td-data　2016.12.12-2016.12.30
-                  %td.td-data 西二环复兴门桥向北200米路东
-                  %td.td-data 李学霸
-                  %td.td-data 未付款
-                  %td.td-data 上课情况
+          - if @participates[:data].blank?
+            .undiscover
+              %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
+              %span.undiscover-message 抱歉！暂无查找信息
+          - else
+            .table-box
+              %table.table.table-bordered#register-table
+                %thead
+                  %tr
+                    %th 课程名称
+                    %th 上课时间
+                    %th 上课地址
+                    %th 主讲人
+                    %th 报名状态
+                    %th 操&nbsp作
+                %tbody
+                  - @participates[:data].each do |e|
+                    %tr
+                      %td.td-data= e.course_inst.name || e.course_inst.course.name
+                      %td.td-data= e.course_inst.duration
+                      %td.td-data= e.course_inst.center.address
+                      %td.td-data= e.course_inst.speaker
+                      %td.td-data= e.status_str
+                      %td.td-data 
+                        - if e.is_success
+                          %a.details{:href => "javascript:void(0);"} 
+                            上课情况
+                            %span.triangle-down
+                        - else
+                          .unreturn-review　上课情况
+                    - if e.is_success
+                      %tr.status
+                        %td{:colspan => "6"}
+                          .course-status
+                            %span.item-status 上课状态：
+                            - e.course_inst.length.times do |i|
+                              - if e.signin_info[i].present?
+                                %span.join-square
+                              - else
+                                - if e.course_inst.is_class_pass?(i)
+                                  %span.miss-square
+                                - else
+                                  %span.square
+                          .comments
+                            %span.comments-title 评论：
+                            %span.comments-content= e.review.present? ? e.review.content : "暂未评论"
 
-          .select-page 
-            %span.totalitems= "共6页,总计12条"
-            %span.choice-page
-              %ul.pagination.pagination-sm
-                %li
-                  %a{:href => "javascript:void(0);"} «
-                / - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
-                %li
-                  %a{:href => "javascript:void(0);"} 1
-                %li
-                  %a{:href => "javascript:void(0);"} »
+            .select-page 
+              %span.totalitems= "共#{@participates[:total_page]}页,总计#{@participates[:total_number]}条"
+              %span.choice-page
+                %ul.pagination.pagination-sm
+                  %li
+                    %a{:href => "/staff/clients/" + @user.id.to_s + "?profile=courses&course_page=#{@participates[:previous_page]}"} «
+                  - ( (@participates[:previous_page] > 2 ? @participates[:previous_page] - 2 : 1) .. (@participates[:next_page] < @participates[:total_page] - 2 ? @participates[:next_page] + 2 : @participates[:total_page]) ).to_a.each do |page|
+                    %li
+                      %a{:href => "/staff/clients/" + @user.id.to_s + "?profile=courses&course_page=#{page}"}= page
+                  %li
+                    %a{:href => "/staff/clients/" + @user.id.to_s + "?profile=courses&course_page=#{@participates[:next_page]}"} »
 
         #tab3.tab-pane
-          .undiscover
-            %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
-            %span.undiscover-message 抱歉！暂无查找信息
-          .table-box
-            %table.table.table-bordered#register-table
-              %thead
-                %tr
-                  %th 绘本名称
-                  %th 借阅时间
-                  %th 归还时间
-                  %th 操&nbsp作
-              %tbody
-                %tr
-                  %td.td-data 少儿计算机知识
-                  %td.td-data　2016.12.12
-                  %td.td-data 2016.12.15
-                  %td.td-data 
-                    %a.details{:href => "javascript:void(0);"} 
-                      绘本评价
-                      %span.triangle-down
-                %tr.status
-                  %td{:colspan => "6"}
-                    .comments-book
-                      %span 评价：
-                      %span.comments-content 该课程很好
-                %tr
-                  %td.td-data 少儿计算机知识
-                  %td.td-data　2016.12.12
-                  %td.td-data
-                    .unreturn 暂未归还
-                  %td.td-data
-                    .unreturn-review　绘本评价
-                %tr
-                  %td.td-data 少儿计算机知识
-                  %td.td-data　2016.12.12
-                  %td.td-data
-                    .overtime 已逾期(联系电话:131111111)
-                  %td.td-data
-                    .unreturn-review　绘本评价
-          .select-page 
-            %span.totalitems= "共6页,总计12条"
-            %span.choice-page
-              %ul.pagination.pagination-sm
-                %li
-                  %a{:href => "javascript:void(0);"} «
-                / - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
-                %li
-                  %a{:href => "javascript:void(0);"} 1
-                %li
-                  %a{:href => "javascript:void(0);"} »
-      
+          - if @borrows[:data].blank?
+            .undiscover
+              %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
+              %span.undiscover-message 抱歉！暂无查找信息
+          - else
+            .table-box
+              %table.table.table-bordered#register-table
+                %thead
+                  %tr
+                    %th 绘本名称
+                    %th 借阅时间
+                    %th 归还时间
+                    %th 操&nbsp作
+                %tbody
+                  - @borrows[:data].each do |b|
+                    %tr
+                      %td.td-data= b.book.name
+                      %td.td-data= Time.at(b.borrow_at).strftime("%Y-%m-%d %H:%M")
+                      %td.td-data{class: b.return_class}= b.return_status_str
+                      %td.td-data 
+                        - if b.review.present?
+                          %a.details{:href => "javascript:void(0);"} 
+                            绘本评价
+                            %span.triangle-down
+                        - else
+                          .unreturn-review　暂未评论
+                    - if b.review.present?
+                      %tr.status
+                        %td{:colspan => "6"}
+                          .comments-book
+                            %span 评价：
+                            %span.comments-content= b.review.content
+                  / %tr
+                  /   %td.td-data 少儿计算机知识
+                  /   %td.td-data　2016.12.12
+                  /   %td.td-data
+                  /     .unreturn 暂未归还
+                  /   %td.td-data
+                  /     .unreturn-review　绘本评价
+                  / %tr
+                  /   %td.td-data 少儿计算机知识
+                  /   %td.td-data　2016.12.12
+                  /   %td.td-data
+                  /     .overtime 已逾期(联系电话:131111111)
+                  /   %td.td-data
+                  /     .unreturn-review　绘本评价
 
-      
 
-       
-        
-
+            .select-page 
+              %span.totalitems= "共#{@borrows[:total_page]}页,总计#{@borrows[:total_number]}条"
+              %span.choice-page
+                %ul.pagination.pagination-sm
+                  %li
+                    %a{:href => "/staff/clients/" + @user.id.to_s + "?profile=books&borrow_page=#{@borrows[:previous_page]}"} «
+                  - ( (@borrows[:previous_page] > 2 ? @borrows[:previous_page] - 2 : 1) .. (@borrows[:next_page] < @borrows[:total_page] - 2 ? @borrows[:next_page] + 2 : @borrows[:total_page]) ).to_a.each do |page|
+                    %li
+                      %a{:href => "/staff/clients/" + @user.id.to_s + "?profile=books&borrow_page=#{page}"}= page
+                  %li
+                    %a{:href => "/staff/clients/" + @user.id.to_s + "?profile=books&borrow_page=#{@borrows[:next_page]}"}

@@ -15,6 +15,10 @@
           %p.title#unreturn 该绘本正在迁移途中
         - if @err == "book_not_available"
           %p.title#unreturn 绘本不在架上
+        - if @err == "has_expired_book"
+          %p.title#unreturn 当前有绘本逾期
+        - if @err == "reach_max_borrow"
+          %p.title#unreturn 已达最大借阅数目
     - else
       .desc-div
         .desc

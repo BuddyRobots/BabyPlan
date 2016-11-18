@@ -43,6 +43,15 @@ class Staff::ClientsController < Staff::ApplicationController
   end
 
   def show
+    @profile = params[:profile]
     @user = User.where(id: params[:id]).first
+
+    participates = @user.course_participates
+    params[:page] = params[:course_page]
+    @participates = auto_paginate(participates)
+
+    borrows = @user.book_borrows
+    params[:page] = params[:book_page]
+    @borrows = auto_paginate(borrows)
   end
 end

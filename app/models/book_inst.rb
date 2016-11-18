@@ -8,11 +8,20 @@ class BookInst
   has_and_belongs_to_many :transfers
 
   def borrow(client)
+    if self.book.available == false
+      return ErrCode::BOOK_NOT_AVAILABLE
+    end
     if self.current_borrow.present?
       return ErrCode::BOOK_NOT_RETURNED
     end
     if self.current_transfer.present?
       return ErrCode::BOOK_IN_TRANSFER
+    end
+    if client.has_expired_book
+      return ErrCode::HAS_EXPIRED_BOOK
+    end
+    if client.reach_max_borrow
+      return ErrCode::REACH_MAX_BORROW
     end
     borrow = self.book_borrows.create(borrow_at: Time.now.to_i, client_id: client.id)
     borrow.book = self.book

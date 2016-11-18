@@ -12,7 +12,7 @@
   .content-area
     .header
       %img.robot{:src => @course.photo.present? ? @course.photo.path : "/assets/web/course.png"}
-      %a{:href => "/user_mobile/courses"}
+      %a{:href => @back == "setting" ? "/user_mobile/settings/course" : "/user_mobile/courses"}
         %img.back.last_page{:src => "/assets/robotclass/back.png"}
     .right-float
       %a.a-div#concern{:href => "javascript:void(0);"}
@@ -29,6 +29,7 @@
 
     .course-desc
       = @course.course.desc.html_safe
+    .course-desc
       - if @course_participate.present? && @course_participate.is_success
         .content#sign-desc
           %p.title 签到情况
@@ -47,7 +48,7 @@
         .item
           .left-div#residual_num
             %span 剩余名额：
-            %span.residual= @course.capacity - @course.course_participates.length
+            %span.residual= @course.capacity - @course.effective_signup_num
             %span= "/#{@course.capacity}"
           .right-div
             %span 主讲人：
@@ -68,9 +69,20 @@
           %span= @course.address
     .content
       #map-container
-      / %img.map-jpg{:src => "/assets/web/map.jpg"}
-    - if @course_participate.nil? || @course_participate.is_expired
-      %a.btn.click-btn{href: "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxfe4fd89f6f5f9f57&redirect_uri=#{CGI::escape('http://babyplan.bjfpa.org.cn/user_mobile/courses/new/')}&response_type=code&scope=snsapi_base&state=#{@course.id.to_s}#wechat_redirect", :type => "button"} 我要报名
+    - if @course_participate.nil?
+      - if @course.status == CourseInst::OVER
+        %button.btn.unclick-btn{:type => "button"} 已结束
+      - elsif @course.capacity <= @course.effective_signup_num
+        %button.btn.unclick-btn{:type => "button"} 无剩余容量
+      - else
+        %a.btn.click-btn{href: "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxfe4fd89f6f5f9f57&redirect_uri=#{CGI::escape('http://babyplan.bjfpa.org.cn/user_mobile/courses/new/')}&response_type=code&scope=snsapi_base&state=#{@course.id.to_s}#wechat_redirect", :type => "button"} 我要报名
+    - elsif @course_participate.is_expired
+      - if @course.status == CourseInst::OVER
+        %button.btn.unclick-btn{:type => "button"} 已结束
+      - elsif @course.capacity <= @course.effective_signup_num
+        %button.btn.unclick-btn{:type => "button"} 无剩余容量
+      - else
+        %a.btn.click-btn{href: "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxfe4fd89f6f5f9f57&redirect_uri=#{CGI::escape('http://babyplan.bjfpa.org.cn/user_mobile/courses/new/')}&response_type=code&scope=snsapi_base&state=#{@course.id.to_s}#wechat_redirect", :type => "button"} 去付款
     - elsif @course_participate.is_success
       -if @course.status == CourseInst::NOT_BEGIN
         %button.btn.unclick-btn{:type => "button"} 已报名
@@ -84,7 +96,12 @@
     - elsif @course_participate.is_paying
       %button.btn.unclick-btn{:type => "button"} 支付进行中
     - else
-      %a.btn.click-btn{href: new_user_mobile_course_path + "/?state=" + @course.id.to_s, :type => "button"} 去付款
+      - if @course.status == CourseInst::OVER
+        %button.btn.unclick-btn{:type => "button"} 已结束
+      - elsif @course.capacity <= @course.effective_signup_num
+        %button.btn.unclick-btn{:type => "button"} 无剩余容量
+      - else
+        %a.btn.click-btn{href: new_user_mobile_course_path + "/?state=" + @course.id.to_s, :type => "button"} 去付款
 
      
 

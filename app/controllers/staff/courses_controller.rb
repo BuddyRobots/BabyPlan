@@ -15,7 +15,7 @@ class Staff::CoursesController < Staff::ApplicationController
       e.course_inst_info
     end
     params[:page] = params[:course_page]
-    courses = @keyword.present? ? Course.where(name: /#{@keyword}/) : Course.all
+    courses = @keyword.present? ? Course.is_available.where(name: /#{@keyword}/) : Course.is_available
     @courses = auto_paginate(courses)
     @courses[:data] = @courses[:data].map do |e|
       e.course_info

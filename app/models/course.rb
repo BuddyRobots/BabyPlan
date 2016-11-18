@@ -21,8 +21,13 @@ class Course
 
   has_many :staff_logs
 
+  scope :is_available, ->{ where(available: true) }
+
 
   def self.create_course(course_info)
+    if Course.where(code: course_info[:code]).first.present?
+      return ErrCode::COURSE_CODE_EXIST
+    end
     course = Course.create(
       name: course_info[:name],
       length: course_info[:length].to_i,
@@ -48,6 +53,9 @@ class Course
   end
 
   def update_info(course_info)
+    if Course.where(code: course_info[:code]).first.present?
+      return ErrCode::COURSE_CODE_EXIST
+    end
     self.update_attributes(
       {
         name: course_info["name"],

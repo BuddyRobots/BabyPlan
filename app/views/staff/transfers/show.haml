@@ -2,7 +2,6 @@
   = javascript_include_tag "pages/staff/transfers/show-bundle"
   = stylesheet_link_tag "pages/staff/transfers/show-bundle", :media => "all"
 
-
 .content-area
   .content-box
     .manage-box
@@ -16,12 +15,14 @@
         %span.unedit-box= @transfer.out_center.name
         %label.input-caption 迁入地点:
         %span.unedit-box= @transfer.in_center.name
-        
-      .controls.controls-row
         %label.input-caption 迁移状态:
         %span.unedit-box= @transfer.status_str
-        %label.input-caption#time 时间:
-        %span.unedit-box{style: "color: red"} 迁入和迁出时间都要有
+        
+      .controls.controls-row
+        %label.input-caption 迁出时间:
+        %span.unedit-box= @transfer.out_time.present? ? @transfer.out_time.strftime("%Y-%m-%d %H:%M") : ""
+        %label.input-caption 迁入时间:
+        %span.unedit-box= @transfer.in_time.present? ? @transfer.in_time.strftime("%Y-%m-%d %H:%M") : ""
         %label.input-caption 数量:
         %span.unedit-box= @transfer.book_insts.count
     .table-box
@@ -43,13 +44,14 @@
               %td.td-data.red= (@transfer.status == Transfer::ABNORMAL && info["lost_count"] > 0) ? "缺失" + info["lost_count"].to_s + "本" : ""
 
     .select-page 
-      %span.totalitems= "共6页,总计12条"
+      %span.totalitems= "共#{@books_info_detail[:total_page]}页,总计#{@books_info_detail[:total_number]}条"
       %span.choice-page
         %ul.pagination.pagination-sm
+
           %li
-            %a{:href => "javascript:void(0);"} «
-          / - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
+            %a{:href => "/staff/transfers/#{@transfer.id.to_s}?page=#{@books_info_detail[:previous_page]}"} «
+          - ( (@books_info_detail[:previous_page] > 2 ? @books_info_detail[:previous_page] - 2 : 1) .. (@books_info_detail[:next_page] < @books_info_detail[:total_page] - 2 ? @books_info_detail[:next_page] + 2 : @books_info_detail[:total_page]) ).to_a.each do |page|
+            %li
+              %a{:href => "/staff/transfers/#{@transfer.id.to_s}?page=#{page}"}= page
           %li
-            %a{:href => "javascript:void(0);"} 1
-          %li
-            %a{:href => "javascript:void(0);"} »
+            %a{:href => "/staff/transfers/#{@transfer.id.to_s}?page=#{@books_info_detail[:next_page]}"} »

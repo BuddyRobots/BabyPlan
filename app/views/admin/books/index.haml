@@ -91,7 +91,7 @@
                           %td= e[:count]
                           %td{class: e[:status_class]}= e[:status_str]
                           %td
-                            = link_to "详情", "/admin/transfers/#{e[:id]}"
+                            = link_to "详情", "/admin/books/#{e[:id]}/show_transfer"
                 .select-page 
                   %span.totalitems= "共#{@transfers[:total_page]}页,总计#{@transfers[:total_number]}条"
                   %span.choice-page
@@ -113,9 +113,9 @@
         %form.form-inline.form-div{:role => "form"}
           .form-group
             %label.control-label.borrow-label{:for => "borrow-num"} 最大可借本数
-            %input.unclicked-box#borrow-num.form-control{:type => "text"}
+            %input.unclicked-box#borrow-num.form-control{:type => "text", value: @book_num}
           .form-group
-            %label.control-label.borrow-label{:for => "borrow-time"} 最长可借时间
-            %input.unclicked-box#borrow-time.form-control{:type => "text"}
+            %label.control-label.borrow-label{:for => "borrow-time"} 最长可借天数
+            %input.unclicked-box#borrow-time.form-control{:type => "text", value: @borrow_duration}
           .confirm-button
-            %button.btn#confirm.button-disabled{:href => "javascript:void(0);"} 确&nbsp定
+            %button.btn#confirm-borrow-setting.button-disabled{:href => "javascript:void(0);"} 确&nbsp定
