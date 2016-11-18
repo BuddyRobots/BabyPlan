@@ -29,6 +29,9 @@ class CourseInst
 
 
   def self.create_course_inst(staff, center, course_inst_info)
+    if course_inst_info["length"].to_i != course_inst_info["date_in_calendar"].length
+      return ErrCode::COURSE_DATE_UNMATCH
+    end
     course = Course.where(id: course_inst_info[:course_id]).first
     code = course.code + "-" + course_inst_info[:code]
     course_inst = CourseInst.where(code: code).first
@@ -69,6 +72,9 @@ class CourseInst
   end
 
   def update_info(course_inst_info)
+    if course_inst_info["length"].to_i != course_inst_info["date_in_calendar"].length
+      return ErrCode::COURSE_DATE_UNMATCH
+    end
     self.update_attributes(
       {
         code: self.course.code + "-" + course_inst_info["code"],

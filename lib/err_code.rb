@@ -20,6 +20,7 @@ module ErrCode
   BOOK_IN_TRANSFER = -17
   BOOK_NOT_IN_TRANSFER = -18
   BOOK_NOT_AVAILABLE = -19
+  COURSE_DATE_UNMATCH = -20
 
   def self.ret_false(code)
     msg = self.message(code)
@@ -68,6 +69,8 @@ module ErrCode
       "绘本不在此次迁移中"
     when BOOK_NOT_AVAILABLE
       "绘本不在架上"
+    when COURSE_DATE_UNMATCH
+      "课次与上课时间不匹配"
     else
       nil
     end

@@ -10,7 +10,7 @@
       %a{:href => account_user_mobile_settings_path}
         %img.back{:src => "/assets/mybook/back.png"}
     - @centers.each do |c|
-      .desc-add-div{data: {id: c.id.to_s}}
+      .desc-add-div.center-desc{data: {id: c.id.to_s}}
         %p.center-name= c.name
         %p.center-address= c.address
     - if @centers.length < 3
