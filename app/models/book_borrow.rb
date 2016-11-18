@@ -20,4 +20,17 @@ class BookBorrow
   def back
   	self.update_attributes({return_at: Time.now.to_i})
   end
+
+  def review
+    self.client.reviews.where(book_id: self.book.id).first
+  end
+
+  def return_class
+    if false
+      return "overtime"
+    end
+    if self.return_at.blank?
+      return "unreturn"
+    end
+  end
 end

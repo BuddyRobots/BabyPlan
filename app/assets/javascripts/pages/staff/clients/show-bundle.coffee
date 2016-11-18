@@ -1,6 +1,10 @@
-
-
 $ ->
+
+  if window.profile == "courses"
+    $('.nav-tabs a[href="#tab2"]').tab('show')
+
+  if window.profile == "books"
+    $('.nav-tabs a[href="#tab3"]').tab('show')
 
   is_edit = false
   # edit-btn pressdown

@@ -113,6 +113,17 @@ class CourseInst
     return date + " " + time
   end
 
+  def duration
+    first_day = (self.date_in_calendar || [])[0]
+    last_day = (self.date_in_calendar || [])[-1]
+    return nil if first_day.blank? || last_day.blank?
+    start_time = first_day.split(',')[0]
+    start_date = start_time.split('T')[0]
+    end_time = last_day.split(',')[0]
+    end_date = end_time.split('T')[0]
+    return start_date + "-" + end_date
+  end
+
   def signin_info(class_num)
     retval = [ ]
     cur_group = [ ]

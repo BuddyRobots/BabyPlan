@@ -91,7 +91,7 @@
                           %td= e[:count]
                           %td{class: e[:status_class]}= e[:status_str]
                           %td
-                            = link_to "详情", "/admin/transfers/#{e[:id]}"
+                            = link_to "详情", "/admin/books/#{e[:id]}/show_transfer"
                 .select-page 
                   %span.totalitems= "共#{@transfers[:total_page]}页,总计#{@transfers[:total_number]}条"
                   %span.choice-page

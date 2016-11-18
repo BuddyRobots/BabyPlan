@@ -38,5 +38,4 @@ class Admin::BooksController < Admin::ApplicationController
 
   def show_transfer
   end
-
 end
