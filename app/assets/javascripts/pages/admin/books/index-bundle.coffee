@@ -57,11 +57,11 @@ $ ->
     book_num = $("#borrow-num").val()
     if $.isNumeric(book_num) == false || parseInt(book_num) <= 0
       $.page_notification("请输入正确的最大可借本数")
-      return
+      return false
     borrow_duration = $("#borrow-time").val()
     if $.isNumeric(borrow_duration) == false || parseInt(borrow_duration) <= 0
       $.page_notification("请输入正确的最长可借天数")
-      return
+      return false
     $.postJSON(
       '/admin/books/update_setting',
       {
@@ -74,4 +74,5 @@ $ ->
         else
           $.page_notification("服务器出错")
       )
+    return false
 

@@ -351,7 +351,7 @@ class User
   end
 
   def reach_max_borrow
-    book_num = BookSetting.first.try(:book_num)
+    book_num = BorrowSetting.first.try(:book_num)
     if book_num.blank?
       return false
     else
