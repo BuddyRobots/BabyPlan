@@ -153,11 +153,11 @@ input, label {
 .totalitems {
   font-size: 12px;
   color: #969696;
-  vertical-align: bottom;
-  height: 36px;
-  line-height: 36px;
 }
-
+.choice-page {
+  display: inline-block;
+  vertical-align: middle;
+}
 .pagination {
   display: inline-block;
   margin: 0;
