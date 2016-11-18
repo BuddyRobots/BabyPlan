@@ -31,6 +31,8 @@ class Book
   has_many :reviews
   has_many :favorites
 
+  scope :is_available, ->{ where(available: true) }
+
   def self.create_book(staff, center, book_info)
     book = center.books.where(isbn: book_info[:isbn]).first
     if book.present?

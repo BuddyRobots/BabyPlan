@@ -16,6 +16,8 @@ class Announcement
   has_many :staff_logs
   has_one :feed
 
+  scope :is_available, ->{ where(is_published: true) }
+
   def self.create_announcement(staff, center, announcement_info, scope)
     html = Nokogiri::HTML(announcement_info[:content])
     info = {

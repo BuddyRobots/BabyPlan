@@ -27,6 +27,8 @@ class CourseInst
   has_many :reviews
   has_many :favorites
 
+  scope :is_available, ->{ where(available: true) }
+
 
   def self.create_course_inst(staff, center, course_inst_info)
     if course_inst_info["length"].to_i != course_inst_info["date_in_calendar"].length
