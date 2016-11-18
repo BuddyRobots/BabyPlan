@@ -7,6 +7,8 @@
 .content-area
   .content-box
     .manage-box.clearfix
+      %a#back{:href => "/admin/staffs"}
+        %img{:src => "/assets/web/back.png"}
       %p.staffs-name= @staff.name
       - if @staff.status == User::NEW
         %span.staff-status.new-staff 新账号，等待开通

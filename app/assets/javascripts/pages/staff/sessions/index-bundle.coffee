@@ -1,5 +1,9 @@
 
 $ ->
+  $("#sign-in").click ->
+    if $("input").val().trim() != ""
+      $("#signin").removeClass("button-disabled")
+      $("#signin").addClass("button-enabled")
 
   $(".rucaptcha-image").click ->
     $(this).attr('src', /rucaptcha/ + '?' + (new Date()).getTime())

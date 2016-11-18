@@ -27,6 +27,9 @@ input, label, span {
 	border-bottom: 1px solid #c8c8c8;
 	overflow: hidden;
 }
+#back {
+	float: left;
+}
 .manage-content {
 	overflow: auto;
 	position: absolute;
@@ -69,8 +72,11 @@ input, label, span {
 	float: left;
 	font-size: 16px;
 	color: #323232;
-	line-height: 59px;
-	margin-left: 20px;
+	padding-left: 20px;
+	height: 52px;
+	line-height: 52px;
+	margin-top: 3px;
+	border-left: 1px solid #c8c8c8;
 }
 .staff-status {
 	line-height: 59px;
