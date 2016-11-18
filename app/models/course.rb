@@ -21,6 +21,8 @@ class Course
 
   has_many :staff_logs
 
+  scope :is_available, ->{ where(available: true) }
+
 
   def self.create_course(course_info)
     if Course.where(code: course_info[:code]).first.present?
