@@ -29,6 +29,7 @@
 
     .course-desc
       = @course.course.desc.html_safe
+    .course-desc
       - if @course_participate.present? && @course_participate.is_success
         .content#sign-desc
           %p.title 签到情况
