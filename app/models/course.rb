@@ -23,6 +23,9 @@ class Course
 
 
   def self.create_course(course_info)
+    if Course.where(code: course_info[:code]).first.present?
+      return ErrCode::COURSE_CODE_EXIST
+    end
     course = Course.create(
       name: course_info[:name],
       length: course_info[:length].to_i,

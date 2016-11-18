@@ -23,6 +23,7 @@ module ErrCode
   COURSE_DATE_UNMATCH = -20
   HAS_EXPIRED_BOOK = -21
   REACH_MAX_BORROW = -22
+  COURSE_CODE_EXIST = -23
 
   def self.ret_false(code)
     msg = self.message(code)
@@ -77,6 +78,8 @@ module ErrCode
       "有绘本逾期"
     when REACH_MAX_BORROW
       "已达最大数目"
+    when COURSE_CODE_EXIST
+      "课程编号已存在"
     else
       nil
     end

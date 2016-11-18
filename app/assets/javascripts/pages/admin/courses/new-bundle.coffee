@@ -49,5 +49,8 @@ $ ->
         console.log data
         if data.success
           location.href = "/admin/courses/" + data.course_id
+        else
+          if data.code == COURSE_CODE_EXIST
+            $.page_notification("课程编号已经存在")
       )
 

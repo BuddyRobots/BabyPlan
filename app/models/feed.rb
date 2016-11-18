@@ -13,6 +13,15 @@ class Feed
 
   scope :is_available, ->{ where(available: true) }
 
+  def update_available
+    if self.announcement.present?
+      self.available = self.announcement.is_published
+    elsif self.book.present?
+      self.available = self.book.available
+    elsif self.course_inst.present?
+      self.available = self.course_inst.available
+    end
+  end
 
   def center_str
     if self.announcement.present? && self.center.blank?
