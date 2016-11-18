@@ -253,17 +253,16 @@
 // user review
 .select-page {
 	text-align: right;
-	margin: 10px 0 0 0;
-	padding-bottom: 5px;
+	margin-top: 10px;
 }
 .totalitems {
 	font-size: 12px;
 	color: #969696;
-	vertical-align: bottom;
-	height: 36px;
-	line-height: 36px;
 }
-
+.choice-page {
+	display: inline-block;
+	vertical-align: middle;
+}
 .pagination {
 	display: inline-block;
 	margin: 0;
