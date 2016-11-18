@@ -171,7 +171,7 @@ $ ->
           $(".type-span-template").hide()
 
           $(".unshelve-btn").attr("disabled", false)
-          $("#QRcode-btn").attr("disabled", false)
+          $(".QRcode-btn").attr("disabled", false)
           $("#name-span").text(name)
           $("#type-span").text(type)
           $("#stock-span").text(stock + "本")
