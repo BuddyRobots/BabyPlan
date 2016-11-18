@@ -3,12 +3,15 @@ class Feed
   include Mongoid::Timestamps
 
   field :name, type: String
+  field :available, type: Boolean
 
   belongs_to :course_inst
   belongs_to :book
   belongs_to :announcement
 
   belongs_to :center
+
+  scope :is_available, ->{ where(available: true) }
 
 
   def center_str

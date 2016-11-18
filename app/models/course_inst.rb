@@ -56,7 +56,7 @@ class CourseInst
     })
     course_inst.center = center
     course_inst.save
-    Feed.create(course_inst_id: course_inst.id, name: course.name, center_id: center.id)
+    Feed.create(course_inst_id: course_inst.id, name: course.name, center_id: center.id, available: course_inst_info[:available])
     { course_inst_id: course_inst.id.to_s }
   end
 
@@ -95,6 +95,7 @@ class CourseInst
 
   def set_available(available)
     self.update_attribute(:available, available == true)
+    self.feed.update_attributes({available: available == true})
     nil
   end
 

@@ -3,7 +3,7 @@ class UserMobile::FeedsController < UserMobile::ApplicationController
     @keyword = params[:keyword]
   	@code = params[:code]
     if @current_user.client_centers.present?
-      @feeds = Feed.any_in(center_id: @current_user.client_centers.map { |e| e.id.to_s} + [nil]).desc(:created_at)
+      @feeds = Feed.is_available.any_in(center_id: @current_user.client_centers.map { |e| e.id.to_s} + [nil]).desc(:created_at)
       if params[:keyword].present?
         @feeds = @feeds.where(name: /#{params[:keyword]}/)
       end
@@ -12,7 +12,7 @@ class UserMobile::FeedsController < UserMobile::ApplicationController
   end
 
   def more
-    @feeds = Feed.any_in(center_id: @current_user.client_centers.map { |e| e.id.to_s} + [nil]).desc(:created_at)
+    @feeds = Feed.is_available.any_in(center_id: @current_user.client_centers.map { |e| e.id.to_s} + [nil]).desc(:created_at)
     if params[:keyword].present?
       @feeds = @feeds.where(name: /#{params[:keyword]}/)
     end

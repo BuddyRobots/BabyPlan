@@ -52,7 +52,7 @@ class Book
       stock: book_info[:stock],
       available: book_info[:available]
     )
-    Feed.create(book_id: book.id, name: book.name, center_id: center.id)
+    Feed.create(book_id: book.id, name: book.name, center_id: center.id, available: book_info[:available])
     { book_id: book.id.to_s }
   end
 
@@ -93,6 +93,7 @@ class Book
 
   def set_available(available)
     self.update_attribute(:available, available == true)
+    self.feed.update_attributes({available: available == true})
     nil
   end
 
