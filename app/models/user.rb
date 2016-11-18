@@ -77,7 +77,7 @@ class User
       u = User.create(user_type: user_type, mobile: mobile)
     end
 
-    if user_type == CLIENT
+    if user_type == CLIENT && created_by_staff == true
       u.update_attribute(:created_by_staff, created_by_staff)
       if center.present? || center.class == Center
         u.client_centers << center
