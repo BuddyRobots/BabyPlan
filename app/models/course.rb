@@ -51,6 +51,9 @@ class Course
   end
 
   def update_info(course_info)
+    if Course.where(code: course_info[:code]).first.present?
+      return ErrCode::COURSE_CODE_EXIST
+    end
     self.update_attributes(
       {
         name: course_info["name"],
