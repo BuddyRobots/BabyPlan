@@ -52,7 +52,7 @@ class Announcement
 
   def set_publish(publish)
     self.update_attribute(:is_published, publish == true)
-    self.feed.update_attributes({available: publish == true})
+    self.feed.update_attributes({available: publish == true}) if self.feed.present?
     nil
   end
 

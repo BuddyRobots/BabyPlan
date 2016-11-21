@@ -100,7 +100,7 @@ class CourseInst
 
   def set_available(available)
     self.update_attribute(:available, available == true)
-    self.feed.update_attributes({available: available == true})
+    self.feed.update_attributes({available: available == true}) if self.feed.present?
     nil
   end
 
@@ -216,7 +216,7 @@ class CourseInst
   def get_stat
     cps = self.course_participates.paid
     gender = {'男生' => 0, '女生' => 0, '不详' => 0}
-    age = {'0-3岁' => 0, '3-6岁' => 0, '6-9岁' => 0, '9-12岁' => 0, '12-15岁' => 0, '15-18岁' => 0, "其他及不详" => 0}
+    age = {'0-3岁' => 0, '3-6岁' => 0, '6-9岁' => 0, '9-12岁' => 0, '12-15岁' => 0, "其他及不详" => 0}
     signin = [0] * self.length
     cps.each do |e|
       if e.client.gender == 0
@@ -230,10 +230,8 @@ class CourseInst
         age["其他及不详"] += 1
       else
         birth_at = Time.mktime(e.client.birthday.year, e.client.birthday.month, e.client.birthday.day)
-        if Time.now - 18.years > birth_at
+        if Time.now - 15.years > birth_at
           age["其他及不详"] += 1
-        elsif Time.now - 15.years > birth_at
-          age["15-18岁"] += 1
         elsif Time.now - 12.years > birth_at
           age["12-15岁"] += 1
         elsif Time.now - 9.years > birth_at

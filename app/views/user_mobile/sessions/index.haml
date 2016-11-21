@@ -13,17 +13,15 @@
     
     .img_gallery
       .point
-        %a{:href => "#"} 1
-        %a{:href => "#"} 2
-        %a{:href => "#"} 3
+        - @announcements.length.times do |e|
+          %a{:href => "#"}= "#{e + 1}"
       .main_img
         %ul
           - @announcements.each do |e|
             %li
-              .notice-div
-                .caption= truncate(e.title, length: 20)
-                / .notice-content= truncate(e.content)
-                .notice-content 讨人的睡眠规律离不开一个概念——人的昼夜节律（Circadian Rhythm），或者说生物钟。我们的唤醒水平、新陈代谢、心律、体温、激素水平在每个节律的周期里都是规律变化的。每到一定的时间，生物钟就会告诉我们：该睡觉了。
+              .notice-div{data: {id: e.id.to_s}}
+                .caption= truncate(e.title, length: 16)
+                .notice-content= truncate(e.plain_text, length: 80)
         %a#btn_prev{:href => "#"}
         %a#btn_next{:href => "#"}
       

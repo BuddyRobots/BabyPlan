@@ -82,6 +82,9 @@ Rails.application.routes.draw do
     end
 
     resources :statistics do
+      collection do
+        get :client_stats
+      end
     end
 
     resources :transfers do

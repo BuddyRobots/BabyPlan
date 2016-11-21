@@ -13,6 +13,7 @@ gem 'rqrcode', '0.10.1'
 gem 'redis'
 gem 'httparty'
 gem 'rubyzip'
+gem 'rufus-scheduler'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
