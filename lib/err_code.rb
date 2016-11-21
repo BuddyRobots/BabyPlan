@@ -26,6 +26,7 @@ module ErrCode
   COURSE_CODE_EXIST = -23
   ACCOUNT_LOCKED = -24
   NOT_PAID = -25
+  REVIEW_NOT_EXIST = -25
 
   def self.ret_false(code)
     msg = self.message(code)
@@ -86,6 +87,8 @@ module ErrCode
       "账号已被管理员锁定，无法登录"
     when NOT_PAID
       "未完成报名"
+    when REVIEW_NOT_EXIST
+      "评论不存在"
     else
       nil
     end

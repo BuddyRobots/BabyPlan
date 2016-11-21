@@ -33,4 +33,14 @@ class Review
   def is_private
     return self.status == PRIVATE
   end
+
+  def show
+    self.update_attributes({status: PUBLIC})
+    nil
+  end
+
+  def hide
+    self.update_attributes({status: PRIVATE})
+    nil
+  end
 end

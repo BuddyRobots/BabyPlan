@@ -83,3 +83,29 @@ $ ->
     code = event.which
     if code == 13
       confirm()
+
+  window.show_review = (rid, ele) ->
+    $.postJSON(
+      '/staff/reviews/' + rid + '/show_review',
+      { },
+      (data) ->
+        if data.success
+          $.page_notification("设置完成")
+          ele.removeClass("show-review").addClass("hide-review")
+          ele.text("隐藏")
+        else
+          $.page_notification("服务器出错")
+      )
+
+  window.hide_review = (rid, ele) ->
+    $.postJSON(
+      '/staff/reviews/' + rid + '/hide_review',
+      { },
+      (data) ->
+        if data.success
+          $.page_notification("设置完成")
+          ele.removeClass("hide-review").addClass("show-review")
+          ele.text("公开")
+        else
+          $.page_notification("服务器出错")
+      )

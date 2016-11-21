@@ -87,6 +87,13 @@ Rails.application.routes.draw do
     resources :transfers do
     end
 
+    resources :reviews do
+      member do
+        post :show_review
+        post :hide_review
+      end
+    end
+
     resources :courses do
       collection do
         get :get_id_by_name
