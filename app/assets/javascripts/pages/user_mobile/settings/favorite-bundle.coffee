@@ -99,7 +99,7 @@ $ ->
 
   $(".line-normal-wrapper").click ->
     url = $(this).attr("data-url")
-    window.location.href = url
+    window.location.href = url + "?back=favorite"
 
   $(".delete-icon").click ->
     fid = $(this).attr("data-id")
