@@ -17,7 +17,7 @@ class CourseParticipate
   field :pay_at, type: Integer
   field :sign_in_time, type: String
   field :order_id, type: String
-  field :price
+  field :price_pay, type: Float
   field :signin_info, type: Array, default: []
 
   field :prepay_id, type: String
@@ -41,6 +41,8 @@ class CourseParticipate
   belongs_to :course_inst
   belongs_to :client, class_name: "User", inverse_of: :course_participates
 
+  scope :paid, ->{ where(trade_state: "SUCCESS") }
+
   def status_str
     if self.pay_finished == true && self.trade_state != "SUCCESS"
       self.orderquery()
@@ -58,7 +60,7 @@ class CourseParticipate
   end
 
   def self.create_new(client, course_inst)
-    cp = self.create({order_id: Util.random_str(32)})
+    cp = self.create({order_id: Util.random_str(32), price_pay: course_inst.price_pay})
     cp.course_inst = course_inst
     cp.client = client
     cp.save
@@ -133,8 +135,7 @@ class CourseParticipate
       "nonce_str" => nonce_str,
       "body" => self.course_inst.course.name,
       "out_trade_no" => self.order_id,
-      # "total_fee" => (self.course_inst.price_pay * 100).to_s,
-      # "total_fee" => (self.course_inst.price_pay).to_s,
+      # "total_fee" => (self.price_pay * 100).to_s,
       "total_fee" => 1.to_s,
       "spbill_create_ip" => remote_ip,
       "notify_url" => NOTIFY_URL,

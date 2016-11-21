@@ -235,13 +235,13 @@
             .income-div
               .income-items
                 %p.income-caption 收入统计(元)
-                %p.income-nums 100000
+                %p.income-nums= @income_stat[:all]
               .income-items
                 %p.income-caption 个人支付(元)
-                %p.income-nums 100000
+                %p.income-nums= @income_stat[:personal]
               .income-items#goverment
                 %p.income-caption 政府补贴(元)
-                %p.income-nums 100000
+                %p.income-nums= @income_stat[:allowance]
           .pie-box
             .gender-pie
               %p.pie-title 性别比例

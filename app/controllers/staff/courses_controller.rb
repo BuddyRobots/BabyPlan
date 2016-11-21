@@ -57,6 +57,22 @@ class Staff::CoursesController < Staff::ApplicationController
     participates = @course_inst.course_participates
     params[:page] = params[:participate_page]
     @participates = auto_paginate(participates)
+
+    # stat related
+    @income_stat = @course_inst.income_stat
+  end
+
+  def stat
+    @course_inst = CourseInst.where(id: params[:id]).first
+    @stat = @course_inst.get_stat
+    # retval = {
+    #   gender: [['男生', 60], ['女生', 40]],
+    #   age: [['0-3岁', 10], ['3-6岁', 15], ['6-9岁', 20], ['9-12岁', 25], ['12-15岁', 20], ['15-18岁', 10]],
+    #   num: [1.0, 2.3, 2.8, 3.2, 4.5, 6.0, 6.6, 7.5, 8.5, 15.3],
+    #   signin: [100, 99, 97, 95, 97, 91, 93, 85, 88, 5, 96, 97, 91, 93],
+    #   signup_start_str: "2016-10-5"
+    # }
+    render json: retval_wrapper({stat: @stat}) and return
   end
 
   def update

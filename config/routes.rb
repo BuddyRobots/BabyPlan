@@ -105,6 +105,7 @@ Rails.application.routes.draw do
         get :qrcode
         post :signin_client
         get :signin_info
+        get :stat
       end
     end
 
