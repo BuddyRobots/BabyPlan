@@ -114,11 +114,6 @@
               %span.undiscover-message 抱歉！暂无查找信息
           - else
             .user-review-box
-              / .user-checkbox
-              /   %label.checkbox-inline
-              /     %input#inlineCheckbox1{:type => "checkbox", :value => "option1"} 未公开
-              /   %label.checkbox-inline
-              /     %input#inlineCheckbox2{:type => "checkbox", :value => "option2"} 已公开
               - @reviews[:data].each do |r|
                 .book-description
                   .user-item.clearfix
@@ -130,9 +125,9 @@
                     %p.date= r.created_at.strftime("%Y-%m-%d %H:%M")
                     %p.user-review-content= r.content
                     - if r.is_private
-                      %button.btn#open-btn{:type => "button"} 公开
+                      %button.btn.open-btn{:type => "button"} 公开
                     - else
-                      %button.btn#open-btn{:type => "button"} 隐藏
+                      %button.btn.open-btn{:type => "button"} 隐藏
             .select-page 
               %span.totalitems= "共#{@reviews[:total_page]}页,总计#{@reviews[:total_number]}条"
               %span.choice-page
