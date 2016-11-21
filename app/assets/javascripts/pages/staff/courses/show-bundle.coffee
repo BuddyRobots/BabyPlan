@@ -369,11 +369,12 @@ $ ->
 
   $(".finish-btn").click ->
 
+
     code = $("#course-num").val()
-    capacity = $("#course-capacity").val()
+    capacity = parseInt($("#course-capacity").val())
     price = $("#course-charge").val()
     price_pay = $("#public-charge").val()
-    length = $("#course-times").val()
+    length = parseInt($("#course-times").val())
     date = $("#course-date").val()
     speaker = $("#course-speaker").val()
     address = $("#course-address").val()

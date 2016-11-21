@@ -84,6 +84,7 @@ class CourseInst
         price: course_inst_info["price"],
         price_pay: course_inst_info["price_pay"],
         length: course_inst_info["length"],
+        capacity: course_inst_info["capacity"],
         date: course_inst_info["date"],
         speaker: course_inst_info["speaker"],
         address: course_inst_info["address"],

@@ -68,10 +68,10 @@ $ ->
     course_id = window.cid
     available = !$("#unshelve").is(":checked")
     code = $("#course-code").val()
-    capacity = $("#course-capacity").val()
+    capacity = parseInt($("#course-capacity").val())
     price = $("#course-price").val()
     price_pay = $("#public-price").val()
-    length = $("#course-length").val()
+    length = parseInt($("#course-length").val())
     date = $("#course-date").val()
     speaker = $("#course-speaker").val()
     address = $("#course-address").val()
