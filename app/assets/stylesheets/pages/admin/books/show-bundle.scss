@@ -244,7 +244,6 @@
 }
 .book-description {
 	position: relative;
-	border-top: 1px solid #ddd;
 }
 .book-img {
 	display: block;
@@ -269,12 +268,13 @@
 	color: #969696;
 }
 .user-review-content {
+	width: 85%;
 	font-size: 14px;
 	color: #787878;
 }
 .review-status {
 	position: absolute;
-	top: 39px;
+	top: 22px;
 	right: 20px;
 	color: white;
 	font-size: 14px;
@@ -340,4 +340,56 @@
 }
 #user-table2 {
 	@extend #user-table1;
+}
+.unreturn {
+	color: #f7873d !important;
+}
+.overtime {
+	color: #d70c19 !important;
+}
+.status {
+	display: none;
+}
+.details {
+	color: #f7873d;
+}
+.details:link {
+	color: #f7873d;
+}
+.details:visited {
+	color: #f7873d;
+}
+.details:hover {
+	color: #f7873d;
+}
+.details:active {
+	color: #f7873d;
+}
+.comments-content, .uncomment {
+	display: inline-block;
+	width: 95%;
+	font-size: 14px;
+	color: #787878;
+	text-align: left;
+} 
+.comments-book {
+	margin-left: 20px;
+}
+.triangle-down {
+	display: inline-block;
+	vertical-align: middle;
+	width: 0;
+	height: 0;
+	border-top: 5px solid #f7873d;
+	border-right: 5px solid transparent;
+	border-left: 5px solid transparent;
+}
+.triangle-up {
+	display: inline-block;
+	vertical-align: middle;
+	width: 0;
+	height: 0;
+	border-bottom: 5px solid #f7873d ;
+	border-right: 5px solid transparent;
+	border-left: 5px solid transparent;
 }
