@@ -167,6 +167,7 @@ GEM
     rubyzip (1.2.0)
     rucaptcha (1.0.0)
       railties (>= 3.2)
+    rufus-scheduler (3.2.2)
     sass (3.4.22)
     sass-rails (5.0.6)
       railties (>= 4.0.0, < 6)
@@ -224,6 +225,7 @@ DEPENDENCIES
   rqrcode (= 0.10.1)
   rubyzip
   rucaptcha
+  rufus-scheduler
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   spring

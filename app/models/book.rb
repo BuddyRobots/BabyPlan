@@ -93,7 +93,7 @@ class Book
 
   def set_available(available)
     self.update_attribute(:available, available == true)
-    self.feed.update_attributes({available: available == true})
+    self.feed.update_attributes({available: available == true}) if self.feed.present?
     nil
   end
 
