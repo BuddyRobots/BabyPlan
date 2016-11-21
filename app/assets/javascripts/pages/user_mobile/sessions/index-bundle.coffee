@@ -53,4 +53,7 @@ $(document).ready ->
       return
     ), 5000)
     return
-  return
+
+
+  $(".notice-div").click ->
+    window.location.href = "/user_mobile/announcements/" + $(this).attr("data-id")

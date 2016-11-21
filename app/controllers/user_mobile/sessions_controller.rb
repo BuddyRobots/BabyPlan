@@ -3,7 +3,11 @@ class UserMobile::SessionsController < UserMobile::ApplicationController
 
   # frontpage
 	def index
-    @announcements = Announcement.is_available.any_in(center_id: @current_user.client_centers.map { |e| e.id.to_s} + [nil]).limit(3)
+    if @current_user.present?
+      @announcements = Announcement.is_available.any_in(center_id: @current_user.client_centers.map { |e| e.id.to_s} + [nil]).limit(3)
+    else
+      @announcements = Announcement.is_available.where(:center_id => nil).limit(3)
+    end
   end
 
   def create
