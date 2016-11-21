@@ -22,6 +22,7 @@ a{
 	width:100%;
 	max-width:640px;
 	margin:0 auto;
+	padding-bottom: 13%;
 	background: linear-gradient(
     45deg, 
     #fef29c 45%, 
@@ -106,6 +107,7 @@ a{
 .course-desc {
 	width:95.3125%;
 	margin:0 auto;
+	padding: 0 2.345%;
 	background:white;
 	border-radius: 10px;
 	margin-bottom: 3.14%;
@@ -158,6 +160,7 @@ a{
 	#market_price {
 		font-size: 83.3%;
 		color: #969696;
+		text-decoration: line-through;
 	}
 	.item {
 		margin-bottom: 2%;
@@ -233,11 +236,14 @@ a{
 	max-width: 612px;
 }
 .click-btn {
+	position: fixed;
+	bottom: 0;
 	font-size: 3.6em;
 	color: #fff;
-	padding: 3.68%;
+	padding: 3%;
 	background: #d70c19;
 	width: 100%;
+	max-width: 640px;
 	border-radius: 0;
 }
 .click-btn:link {
@@ -253,14 +259,28 @@ a{
 	color: #fff;
 }
 .unclick-btn {
+	position: fixed;
+	bottom: 0;
 	font-size: 3.6em;
 	color: #fff;
-	padding: 3.68%;
+	padding: 3%;
 	background: #aaa;
 	width: 100%;
+	max-width: 640px;
 	border-radius: 0;
 }
-
+.unclick-btn:link {
+	color: #fff;
+}
+.unclick-btn:visited {
+	color: #fff;
+}
+.unclick-btn:hover {
+	color: #fff;
+}
+.unclick-btn:active {
+	color: #fff;
+}
 
 @media screen and (max-width:640px) {
 	.content-area {

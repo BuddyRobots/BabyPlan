@@ -17,18 +17,15 @@ a{
 }
 
 .content-area {
-	position:relative;
 	width:100%;
 	max-width:640px;
 	margin:0 auto;
+	padding-top: 6.25%;
 }
-.header {
-	position:relative;
-	width:100%;
+.header-div {
 	.caption {
 		font-size:4.2em;
 		color:#3e3e3e;
-		margin-top:6.25%;
 		text-align:center;
 	}
 	.date {
@@ -41,11 +38,12 @@ a{
 		color:#d70c19;
 	}
 }
+.photo {
+	width: 100%;
+}
 .notice-1 {
 	width: 100%;
-	max-width:586px;
-	display:block;
-	margin:0 auto;
+	max-width:640px;
 }
 .back {
 	position:fixed;
@@ -87,6 +85,10 @@ a{
 		font-size:2.6em;
 		color:#3e3e3e;
 		line-height:150%;
+	}
+	img {
+		width: 90.625% !important;
+		max-width: 580px;
 	}
 }
 

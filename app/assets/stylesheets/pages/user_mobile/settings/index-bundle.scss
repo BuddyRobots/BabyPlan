@@ -84,15 +84,18 @@ a{
 	}
 }
 .avator {
-	width: 31.82%;
+	width: 16em;
+	height: 16em;
 	border-radius: 50%;
 	overflow: hidden;
 	border: 4px solid #fff;
 	float: left;
 }
 .avator-icon {
-	width: 100%;
+	width: 16em;
+	height: 16em;
 	max-width: 160px;
+	border-radius: 50%;
 }
 .collect-div {
 	width: 84.0625%;
