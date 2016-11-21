@@ -6,6 +6,11 @@
       content: ""
 
     _create: ->
+      if this.options == undefined
+        this.options = {
+          delay: 2000
+          content: ""
+        }
       this.element.append(this.hbs(this.options))
       this.element.addClass("mobile_notification")
       width = this.element.width()
@@ -34,6 +39,11 @@
           , that.options.delay)
 
     set_delay: (delay) ->
+      if this.options == undefined
+        this.options = {
+          delay: 2000
+          content: ""
+        }
       that = this
       if delay > 0
         timer = window.setTimeout(->
