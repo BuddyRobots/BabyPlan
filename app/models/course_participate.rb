@@ -187,6 +187,9 @@ class CourseParticipate
   end
 
   def signin(class_num)
+    if self.is_success == false
+      return ErrCode::NOT_PAID
+    end
     class_num = class_num.to_i
     if self.signin_info[class_num].blank?
       self.signin_info[class_num] = Time.now.to_i

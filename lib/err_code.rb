@@ -25,6 +25,7 @@ module ErrCode
   REACH_MAX_BORROW = -22
   COURSE_CODE_EXIST = -23
   ACCOUNT_LOCKED = -24
+  NOT_PAID = -25
 
   def self.ret_false(code)
     msg = self.message(code)
@@ -83,6 +84,8 @@ module ErrCode
       "课程编号已存在"
     when ACCOUNT_LOCKED
       "账号已被管理员锁定，无法登录"
+    when NOT_PAID
+      "未完成报名"
     else
       nil
     end

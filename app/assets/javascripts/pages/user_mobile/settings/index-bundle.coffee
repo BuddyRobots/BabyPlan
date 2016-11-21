@@ -19,6 +19,8 @@ $ ->
             else
               if data.code == COURSE_INST_NOT_EXIST
                 location.href = "/user_mobile/settings/sign?success=false"
+              if data.code == NOT_PAID
+                location.href = "/user_mobile/settings/sign?success=false"
               else
                 $.mobile_page_notification("服务器出错", 3000)
         )
