@@ -389,6 +389,8 @@ $ ->
         else
           if data.code == NO_CENTER 
             $.page_notification("请通知管理员开通账号", 3000)
+          if data.code == ACCOUNT_LOCKED 
+            $.page_notification("账号已被管理员锁定，无法登录", 3000)
           if data.code == USER_NOT_EXIST
             $(".error-notice").text("帐号不存在").css("visibility","visible")
           if data.code == USER_NOT_VERIFIED
