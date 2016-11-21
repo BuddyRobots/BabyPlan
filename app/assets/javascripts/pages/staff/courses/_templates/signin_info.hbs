@@ -1,0 +1,15 @@
+<table id="sign-table" class="table table-bordered">
+  <tbody>
+    {{#each signin_info}}
+      <tr>
+        {{#each line}}
+          {{#ifCond signin "true"}}
+            <td class="sign-data check-in">{{name}}</td>
+          {{else}}
+            <td class="sign-data">{{name}}</td>
+          {{/ifCond}}
+        {{/each}}
+      </tr>
+    {{/each}}
+  </tbody>
+</table>

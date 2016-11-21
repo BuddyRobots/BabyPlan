@@ -136,16 +136,19 @@ class CourseInst
     cur_num = 0
     self.course_participates.each do |e|
       next if e.is_success == false
-      info = {mobile: e.client.mobile, name: e.client.name, signin: e.signin_info[class_num]}
+      info = {mobile: e.client.mobile, name: e.client.name, signin: e.signin_info[class_num.to_i].present?.to_s}
       if cur_num == group_size
         cur_num = 0
-        retval << cur_group
+        retval << {line: cur_group}
         cur_group = [ ]
       end
       cur_group << info
       cur_num = cur_num + 1
     end
-    return retval
+    if cur_group.present?
+      retval << {line: cur_group}
+    end
+    return {signin_info: retval}
   end
 
   def is_class_pass?(class_num)
@@ -195,4 +198,5 @@ class CourseInst
   def effective_signup_num
     self.course_participates.where(trade_state: "SUCCESS").length
   end
+
 end

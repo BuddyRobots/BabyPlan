@@ -3,7 +3,7 @@
 #= require locale-all
 #= require datepicker-zh-TW
 #= require highcharts
-
+#= require "./_templates/signin_info"
 
 Highcharts.setOptions lang:
   contextButtonTitle: '图表导出菜单'
@@ -607,6 +607,7 @@ $ ->
         console.log data
         if data.success
           $.page_notification "签到完成"
+          refresh_signin_info(parseInt(class_num))
         else
           if data.code == USER_NOT_EXIST
             $.page_notification "用户不存在"
@@ -616,6 +617,7 @@ $ ->
 
   $("#class_num").change ->
     $(".code-figure").attr("src", "/assets/web/bigqrcode.png")
+    refresh_signin_info(parseInt($(this).val()))
 
   if window.profile == "participates"
     $("#register-message").trigger('click')
@@ -630,3 +632,14 @@ $ ->
   $(document).on 'click', '.show-review', ->
     rid = $(this).attr("data-id")
     show_review(rid, $(this))
+
+  refresh_signin_info = (class_num) ->
+    $.getJSON "/staff/courses/" + window.cid + "/signin_info?class_num=" + class_num, (data) ->
+      if data.success
+        signin_info_table = $(HandlebarsTemplates["signin_info"](data))
+        $("#sign-table").remove()
+        $(".sign-status").append(signin_info_table)
+      else
+        $.mobile_page_notification "服务器出错"
+
+  refresh_signin_info(0)

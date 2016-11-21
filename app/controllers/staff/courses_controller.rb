@@ -137,4 +137,13 @@ class Staff::CoursesController < Staff::ApplicationController
     retval = course_participate.signin(params[:class_num].to_i)
     render json: retval_wrapper(retval) and return
   end
+
+  def signin_info
+    course_inst = CourseInst.where(id: params[:id]).first
+    if course_inst.blank?
+      render json: retval_wrapper(ErrCode::COURSE_INST_NOT_EXIST) and return
+    end
+    retval = course_inst.signin_info(params[:class_num])
+    render json: retval_wrapper(retval) and return
+  end
 end

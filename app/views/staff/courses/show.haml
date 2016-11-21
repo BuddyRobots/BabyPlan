@@ -142,7 +142,7 @@
                             %span.triangle-down
                     - if e.is_success
                       %tr.status
-                        %td{:colspan => "4"}
+                        %td{:colspan => "5"}
                           .course-status
                             %span.item-status 上课状态：
                             - e.course_inst.length.times do |i|
@@ -228,38 +228,6 @@
             .sign-status-box
               .sign-status
                 %h5 签到情况
-                %table.table.table-bordered#sign-table
-                  %tbody
-                    %tr
-                      %td.sign-data 小赵
-                      %td.sign-data 小钱
-                      %td.sign-data 小孙
-                      %td.sign-data 小李
-                      %td.sign-data.check-in 小周
-                    %tr
-                      %td.sign-data 小赵
-                      %td.sign-data.check-in 小钱
-                      %td.sign-data 小孙
-                      %td.sign-data 小李
-                      %td.sign-data 小周
-                    %tr
-                      %td.sign-data 小赵
-                      %td.sign-data 小钱
-                      %td.sign-data.check-in 小孙
-                      %td.sign-data 小李
-                      %td.sign-data 小周
-                    %tr
-                      %td.sign-data 小赵
-                      %td.sign-data 小钱
-                      %td.sign-data 小孙
-                      %td.sign-data.check-in 小李
-                      %td.sign-data 小周
-                    %tr
-                      %td.sign-data.check-in 小赵
-                      %td.sign-data 小钱
-                      %td.sign-data 小孙
-                      %td.sign-data 小李
-                      %td.sign-data 小周
 
         #tab5.tab-pane
           .courses-income-box
