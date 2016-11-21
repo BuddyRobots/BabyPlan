@@ -74,6 +74,10 @@ class CourseInst
   end
 
   def update_info(course_inst_info)
+    course_inst = self.course.course_insts.where(inst_code: course_inst_info["code"]).first
+    if course_inst.present?
+      return ErrCode::COURSE_INST_EXIST
+    end
     if course_inst_info["length"].to_i != course_inst_info["date_in_calendar"].length
       return ErrCode::COURSE_DATE_UNMATCH
     end
@@ -84,6 +88,7 @@ class CourseInst
         price: course_inst_info["price"],
         price_pay: course_inst_info["price_pay"],
         length: course_inst_info["length"],
+        capacity: course_inst_info["capacity"],
         date: course_inst_info["date"],
         speaker: course_inst_info["speaker"],
         address: course_inst_info["address"],
@@ -131,16 +136,19 @@ class CourseInst
     cur_num = 0
     self.course_participates.each do |e|
       next if e.is_success == false
-      info = {mobile: e.client.mobile, name: e.client.name, signin: e.signin_info[class_num]}
+      info = {mobile: e.client.mobile, name: e.client.name, signin: e.signin_info[class_num.to_i].present?.to_s}
       if cur_num == group_size
         cur_num = 0
-        retval << cur_group
+        retval << {line: cur_group}
         cur_group = [ ]
       end
       cur_group << info
       cur_num = cur_num + 1
     end
-    return retval
+    if cur_group.present?
+      retval << {line: cur_group}
+    end
+    return {signin_info: retval}
   end
 
   def is_class_pass?(class_num)
@@ -189,5 +197,75 @@ class CourseInst
 
   def effective_signup_num
     self.course_participates.where(trade_state: "SUCCESS").length
+  end
+
+  def income_stat
+    stat = {
+      all: 0,
+      personal: 0,
+      allowance: 0
+    }
+    self.course_participates.paid.each do |e|
+      stat[:personal] += (e.price_pay || self.price_pay)
+      stat[:allowance] += (self.price - self.price_pay)
+      stat[:all] += (e.price_pay || self.price_pay + self.price - self.price_pay)
+    end
+    stat
+  end
+
+  def get_stat
+    cps = self.course_participates.paid
+    gender = {'男生' => 0, '女生' => 0, '不详' => 0}
+    age = {'0-3岁' => 0, '3-6岁' => 0, '6-9岁' => 0, '9-12岁' => 0, '12-15岁' => 0, '15-18岁' => 0, "其他及不详" => 0}
+    signin = [0] * self.length
+    cps.each do |e|
+      if e.client.gender == 0
+        gender['男生'] += 1
+      elsif e.client.gender == 1
+        gender['女生'] += 1
+      else
+        gender['不详'] += 1
+      end
+      if e.client.birthday.blank?
+        age["其他及不详"] += 1
+      else
+        birth_at = Time.mktime(e.client.birthday.year, e.client.birthday.month, e.client.birthday.day)
+        if Time.now - 18.years > birth_at
+          age["其他及不详"] += 1
+        elsif Time.now - 15.years > birth_at
+          age["15-18岁"] += 1
+        elsif Time.now - 12.years > birth_at
+          age["12-15岁"] += 1
+        elsif Time.now - 9.years > birth_at
+          age["9-12岁"] += 1
+        elsif Time.now - 6.years > birth_at
+          age["6-9岁"] += 1
+        elsif Time.now - 3.years > birth_at
+          age["3-6岁"] += 1
+        else
+          age["0-3岁"] += 1
+        end
+        self.length.times do |ee|
+          if e.signin_info[ee].present?
+            signin[ee] += 1
+          end
+        end
+      end
+    end
+    num = []
+    signup_time_ary = cps.map { |e| e.created_at.to_i } .sort
+    signup_time_ary.each do |e|
+      week_idx = (e - signup_time_ary[0]) / 1.weeks.to_i
+      num[week_idx] ||= 0
+      num[week_idx] += 1
+    end
+    num.each_with_index { |e, i| num[i] ||= 0 }
+    {
+      gender: gender.to_a,
+      age: age.to_a,
+      num: num,
+      signin: signin,
+      signup_start_str: signup_time_ary.present? ? Time.at(signup_time_ary[0]).strftime('%Y-%m-%d') : nil
+    }
   end
 end

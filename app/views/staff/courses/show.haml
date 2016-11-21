@@ -142,7 +142,7 @@
                             %span.triangle-down
                     - if e.is_success
                       %tr.status
-                        %td{:colspan => "4"}
+                        %td{:colspan => "5"}
                           .course-status
                             %span.item-status 上课状态：
                             - e.course_inst.length.times do |i|
@@ -192,9 +192,9 @@
                     %p.date= r.created_at.strftime("%Y-%m-%d %H:%M")
                     %p.user-review-content= r.content
                     - if r.is_private
-                      %button.btn#open-btn{:type => "button"} 公开
+                      %button.btn.open-btn.show-review{:type => "button", data: {id: r.id.to_s}} 公开
                     - else
-                      %button.btn#open-btn{:type => "button"} 隐藏
+                      %button.btn.open-btn.hide-review{:type => "button", data: {id: r.id.to_s}} 隐藏
             .select-page 
               %span.totalitems= "共#{@reviews[:total_page]}页,总计#{@reviews[:total_number]}条"
               %span.choice-page
@@ -228,38 +228,6 @@
             .sign-status-box
               .sign-status
                 %h5 签到情况
-                %table.table.table-bordered#sign-table
-                  %tbody
-                    %tr
-                      %td.sign-data 小赵
-                      %td.sign-data 小钱
-                      %td.sign-data 小孙
-                      %td.sign-data 小李
-                      %td.sign-data.check-in 小周
-                    %tr
-                      %td.sign-data 小赵
-                      %td.sign-data.check-in 小钱
-                      %td.sign-data 小孙
-                      %td.sign-data 小李
-                      %td.sign-data 小周
-                    %tr
-                      %td.sign-data 小赵
-                      %td.sign-data 小钱
-                      %td.sign-data.check-in 小孙
-                      %td.sign-data 小李
-                      %td.sign-data 小周
-                    %tr
-                      %td.sign-data 小赵
-                      %td.sign-data 小钱
-                      %td.sign-data 小孙
-                      %td.sign-data.check-in 小李
-                      %td.sign-data 小周
-                    %tr
-                      %td.sign-data.check-in 小赵
-                      %td.sign-data 小钱
-                      %td.sign-data 小孙
-                      %td.sign-data 小李
-                      %td.sign-data 小周
 
         #tab5.tab-pane
           .courses-income-box
@@ -267,13 +235,13 @@
             .income-div
               .income-items
                 %p.income-caption 收入统计(元)
-                %p.income-nums 100000
+                %p.income-nums= @income_stat[:all]
               .income-items
                 %p.income-caption 个人支付(元)
-                %p.income-nums 100000
+                %p.income-nums= @income_stat[:personal]
               .income-items#goverment
                 %p.income-caption 政府补贴(元)
-                %p.income-nums 100000
+                %p.income-nums= @income_stat[:allowance]
           .pie-box
             .gender-pie
               %p.pie-title 性别比例

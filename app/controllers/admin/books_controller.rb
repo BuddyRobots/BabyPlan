@@ -42,9 +42,26 @@ class Admin::BooksController < Admin::ApplicationController
   end
 
   def show
+    # @book = Book.where(id: params[:id]).first
+    # similar_books = Book.where(isbn: @book.isbn).where(:center_id.ne => @book.center_id)
+    # @similar_books = auto_paginate(similar_books)
+
+    @profile = params[:profile]
     @book = Book.where(id: params[:id]).first
-    similar_books = Book.where(isbn: @book.isbn).where(:center_id.ne => @book.center_id)
-    @similar_books = auto_paginate(similar_books)
+    if @book.nil?
+      redirect_to action: :index and return
+    end
+
+    reviews = @book.reviews
+    if params[:review_type].present?
+      reviews = reviews.where(status: params[:review_type].to_i)
+    end
+    params[:page] = params[:review_page]
+    @reviews = auto_paginate(reviews)
+
+    borrows = @book.book_borrows
+    params[:page] = params[:borrow_page]
+    @borrows = auto_paginate(borrows)
   end
 
   def show_transfer

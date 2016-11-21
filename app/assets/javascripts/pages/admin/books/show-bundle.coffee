@@ -132,5 +132,10 @@ $ ->
             $("#available-status").text("在架上")
       )
 
+  if window.profile == "reviews"
+    $("#user-review").trigger("click")
+
+  if window.profile == "borrows"
+    $("#borrow-message").trigger("click")
 
 

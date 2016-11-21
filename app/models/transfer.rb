@@ -165,6 +165,7 @@ class Transfer
   def after_finish
     # 0. lock the book info
     self.update_attributes({
+      in_time: Time.now.to_i,
       books_info_lock: self.books_info,
       books_info_detail_lock: self.books_info_detail,
       lost_books_info_lock: self.lost_books_info

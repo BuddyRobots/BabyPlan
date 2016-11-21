@@ -17,6 +17,10 @@ $ ->
         if data.success
           location.href = "/staff_mobile/books"
         else
+          if data.code == NO_CENTER 
+            $.mobile_page_notification("请通知管理员开通账号", 3000)
+          if data.code == ACCOUNT_LOCKED 
+            $.mobile_page_notification("账号已被管理员锁定，无法登录", 3000)
           if data.code == USER_NOT_EXIST
             $.mobile_page_notification("帐号不存在", 3000)
           if data.code == USER_NOT_VERIFIED

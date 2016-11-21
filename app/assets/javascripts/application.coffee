@@ -28,6 +28,14 @@
 #= require "jweixin-1.0.0"
 
 $ ->
+  Handlebars.registerHelper "ifCond", (v1, v2, options) ->
+    return options.fn(this)  if v1 is v2
+    options.inverse this
+
+  Handlebars.registerHelper "ifCondNot", (v1, v2, options) ->
+    return options.fn(this)  if v1 is not v2
+    options.inverse this
+
   window.weixin_jsapi_authorize = (api_list) ->
     $.getJSON "/weixin_js_signature?url=" + encodeURIComponent(window.location.href.split('#')[0]), (retval) ->
       if retval.success

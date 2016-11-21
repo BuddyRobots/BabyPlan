@@ -270,3 +270,11 @@ $ ->
 
   if window.profile == "borrows"
     $("#borrow-message").trigger("click")
+
+  $(document).on 'click', '.hide-review', ->
+    rid = $(this).attr("data-id")
+    hide_review(rid, $(this))
+
+  $(document).on 'click', '.show-review', ->
+    rid = $(this).attr("data-id")
+    show_review(rid, $(this))

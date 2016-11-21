@@ -1,6 +1,9 @@
 - content_for :head do
   = javascript_include_tag "pages/admin/books/show-bundle"
   = stylesheet_link_tag "pages/admin/books/show-bundle", :media => "all"
+  :javascript
+    window.profile = "#{@profile}"
+    window.bid = "#{@book.id.to_s}"
 
 .content-area
   .manage-content
@@ -21,14 +24,8 @@
             %form.form-inline
               %label.input-caption 绘本名称:
               %span.unedit-box#name-span= @book.name
-              / %span.unedit-box#name-span= @book.name
-              / - if @book.available == true
-              /   %label#available-status.shelve 在架上
-              / - else
-              /   %label#available-status.shelve 已下架
               %label.input-caption#center-address 儿童中心:
               %span.unedit-box#address-span= @book.center.name
-              / %span.unedit-box#address-span= @book.address
               - if @book.available
                 %label#available-status.shelve 在架上
               - else
@@ -36,23 +33,17 @@
             .controls.controls-row
               %label.input-caption 标签:
               %span.unedit-box#type-span= @book.tags
-              / %span.unedit-box#type-span= @book.type
               %label.input-caption 数量:
               %span.unedit-box#stock-span= @book.stock.to_s + "本"
-              / %span.unedit-box#stock-span= @book.stock.to_s + "本"
               %label.input-caption#book-number 书号:
               %span.unedit-box#isbn-span= @book.isbn
-              / %span.unedit-box#isbn-span= @book.isbn
             .controls.controls-row
               %label.input-caption 作者:
               %span.unedit-box#author-span= @book.author
-              / %span.unedit-box#author-span= @book.author
               %label.input-caption 译者:
               %span.unedit-box#translator-span= @book.translator
-              / %span.unedit-box#translator-span= @book.translator
               %label.input-caption#illustrator-label 插画作者:
               %span.unedit-box#illustrator-span= @book.illustrator
-              / %span.unedit-box#illustrator-span= @book.illustrator
             .book-introduce.clearfix
               %span.introduce 书籍介绍:
               %div.introduce-details
@@ -66,108 +57,81 @@
             = image_tag(@book.back.nil? ? "/assets/web/coverempty.png" : @book.back.path, class: "back-img")
 
         #tab2.tab-pane
-          .undiscover
-            %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
-            %span.undiscover-message 抱歉！暂无查找信息
-          .user-review-box
-            .user-checkbox
-              %label.checkbox-inline
-                %input#inlineCheckbox1{:type => "checkbox", :value => "option1"} 未公开
-              %label.checkbox-inline
-                %input#inlineCheckbox2{:type => "checkbox", :value => "option2"} 已公开
-            .book-description
-              .user-item.clearfix
-                %img.book-img{:src => "/assets/managecenter/user-img.png"}
-                %p.user-name 大鱼海棠
-                %p.date 2017-6-23 13:20
-                %p.user-review-content 这本书看了感觉很好，儿童容易理解。
-                %p.review-status#open 公开
-            .book-description
-              .user-item.clearfix
-                %img.book-img{:src => "/assets/managecenter/user-img.png"}
-                %p.user-name 大鱼海棠
-                %p.date 2017-6-23 13:20
-                %p.user-review-content 这本书看了感觉很好，儿童容易理解。
-                %p.review-status#unopen 未公开
-          .select-page 
-            %span.totalitems= "共6页,总计12条"
-            %span.choice-page
-              %ul.pagination.pagination-sm
-                %li
-                  %a{:href => "javascript:void(0);"} «
-                / - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
-                %li
-                  %a{:href => "javascript:void(0);"} 1
-                %li
-                  %a{:href => "javascript:void(0);"} »
+          - if @reviews[:data].blank?
+            .undiscover
+              %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
+              %span.undiscover-message 抱歉！暂无查找信息
+          - else
+            .user-review-box
+              - @reviews[:data].each do |r|
+                .book-description
+                  .user-item.clearfix
+                    %img.book-img{:src => r.client.avatar.present? ? r.client.avatar.path : "/assets/web/boy.png"}
+                    %p.user-name
+                      %span= r.client.name
+                      - r.score.times do
+                        %img.star-img{:src => "/assets/managecenter/star.png"}
+                    %p.date= r.created_at.strftime("%Y-%m-%d %H:%M")
+                    %p.user-review-content= r.content
+                    - if r.is_private
+                      %span 已公开
+                    - else
+                      %span 未公开
+            .select-page 
+              %span.totalitems= "共#{@reviews[:total_page]}页,总计#{@reviews[:total_number]}条"
+              %span.choice-page
+                %ul.pagination.pagination-sm
+                  %li
+                    %a{:href => "/admin/books/" + @book.id.to_s + "?profile=reviews&review_page=#{@reviews[:previous_page]}"} «
+                  - ( (@reviews[:previous_page] > 2 ? @reviews[:previous_page] - 2 : 1) .. (@reviews[:next_page] < @reviews[:total_page] - 2 ? @reviews[:next_page] + 2 : @reviews[:total_page]) ).to_a.each do |page|
+                    %li
+                      %a{:href => "/admin/books/" + @book.id.to_s + "?profile=reviews&review_page=#{page}"}= page
+                  %li
+                    %a{:href => "/admin/books/" + @book.id.to_s + "?profile=reviews&review_page=#{@reviews[:next_page]}"} »
 
         #tab3.tab-pane
-          .undiscover
-            %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
-            %span.undiscover-message 抱歉！暂无查找信息
-          .table-box
-            %table.table.table-bordered#user-table1
-              %caption
-              %thead
-                %tr
-                  %th 借阅人
-                  %th 借阅时间
-                  %th 归还时间
-              %tbody
-                / - @books[:data].each do |b|
-                /   %tr{class: "book-record #{ b[:available] ? "available" : "unavailable" }", "data-id" => b[:id]}
-                %tr
-                  %td 小明
-                  %td 2016-8-23
-                  %td 2016-10-23
-          .select-page 
-            %span.totalitems= "共6页,总计12条"
-            %span.choice-page
-              %ul.pagination.pagination-sm
-                %li
-                  %a{:href => "javascript:void(0);"} «
-                / - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
-                %li
-                  %a{:href => "javascript:void(0);"} 1
-                %li
-                  %a{:href => "javascript:void(0);"} »
-
-        #tab4.tab-pane
-          .undiscover
-            %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
-            %span.undiscover-message 抱歉！暂无查找信息
-          .table-box
-            %table.table.table-bordered#user-table2
-              %caption
-              %thead
-                %tr
-                  %th 中心名称
-                  %th 数&nbsp量
-                  %th 操&nbsp作
-              %tbody
-                / - @books[:data].each do |b|
-                /   %tr{class: "book-record #{ b[:available] ? "available" : "unavailable" }", "data-id" => b[:id]}
-                - if @similar_books[:data].length == 0
-                - else
-                  - @similar_books[:data].each do |b|
+          - if @borrows[:data].blank?
+            .undiscover
+              %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
+              %span.undiscover-message 抱歉！暂无查找信息
+          - else
+            .table-box
+              %table.table.table-bordered#user-table1
+                %caption
+                %thead
+                  %tr
+                    %th 借阅人
+                    %th 借阅时间
+                    %th 归还时间
+                    %th 操&nbsp作
+                %tbody
+                  - @borrows[:data].each do |b|
                     %tr
-                      %td= b.center.name
-                      %td= b.stock.to_s + "本"
-                      %td 
-                        = link_to "详情", "/admin/books/" + b.id.to_s
-          .select-page 
-            %span.totalitems= "共6页,总计12条"
-            %span.choice-page
-              %ul.pagination.pagination-sm
-                %li
-                  %a{:href => "javascript:void(0);"} «
-                / - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
-                %li
-                  %a{:href => "javascript:void(0);"} 1
-                %li
-                  %a{:href => "javascript:void(0);"} »
-     
-#editor-content.hide
-  / = @book.desc.html_safe
-
+                      %td= b.client.name
+                      %td= Time.at(b.borrow_at).strftime("%Y-%m-%d %H:%M")
+                      %td{class: b.return_class}= b.return_status_str
+                      %td.td-data 
+                        - if b.review.present?
+                          %a.details{:href => "javascript:void(0);"} 
+                            绘本评价
+                            %span.triangle-down
+                        - else
+                          .unreturn-review　暂未评论
+                    - if b.review.present?
+                      %tr.status
+                        %td{:colspan => "6"}
+                          .comments-book
+                            %span 评价：
+                            %span.comments-content= b.review.content
+            .select-page 
+              %span.totalitems= "共#{@borrows[:total_page]}页,总计#{@borrows[:total_number]}条"
+              %span.choice-page
+                %ul.pagination.pagination-sm
+                  %li
+                    %a{:href => "/admin/books/" + @book.id.to_s + "?profile=borrows&borrow_page=#{@borrows[:previous_page]}"} «
+                  - ( (@borrows[:previous_page] > 2 ? @borrows[:previous_page] - 2 : 1) .. (@borrows[:next_page] < @borrows[:total_page] - 2 ? @borrows[:next_page] + 2 : @borrows[:total_page]) ).to_a.each do |page|
+                    %li
+                      %a{:href => "/admin/books/" + @book.id.to_s + "?profile=borrows&borrow_page=#{page}"}= page
+                  %li
+                    %a{:href => "/admin/books/" + @book.id.to_s + "?profile=borrows&borrow_page=#{@borrows[:next_page]}"} »
 

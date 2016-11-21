@@ -3,225 +3,112 @@
 #= require locale-all
 #= require datepicker-zh-TW
 #= require highcharts
-
-
-Highcharts.setOptions lang:
-  contextButtonTitle: '图表导出菜单'
-  decimalPoint: '.'
-  downloadJPEG: '下载JPEG图片'
-  downloadPDF: '下载PDF文件'
-  downloadPNG: '下载PNG文件'
-  downloadSVG: '下载SVG文件'
-  drillUpText: '返回 {series.name}'
-  loading: '加载中'
-  months: [
-    '一月'
-    '二月'
-    '三月'
-    '四月'
-    '五月'
-    '六月'
-    '七月'
-    '八月'
-    '九月'
-    '十月'
-    '十一月'
-    '十二月'
-  ]
-  noData: '没有数据'
-  numericSymbols: [
-    '千'
-    '兆'
-    'G'
-    'T'
-    'P'
-    'E'
-  ]
-  printChart: '打印图表'
-  resetZoom: '恢复缩放'
-  resetZoomTitle: '恢复图表'
-  shortMonths: [
-    'Jan'
-    'Feb'
-    'Mar'
-    'Apr'
-    'May'
-    'Jun'
-    'Jul'
-    'Aug'
-    'Sep'
-    'Oct'
-    'Nov'
-    'Dec'
-  ]
-  thousandsSep: ','
-  weekdays: [
-    '星期一'
-    '星期二'
-    '星期三'
-    '星期三'
-    '星期四'
-    '星期五'
-    '星期六'
-    '星期天'
-  ]
+#= require "./_templates/signin_info"
 
 $ ->
 
-  $('#gender-statistics').highcharts
-    chart:
-      plotBackgroundColor: null
-      plotBorderWidth: null
-      plotShadow: false
-    colors: ['#90c5fc', '#ffa1a1', '#ED561B', '#DDDF00',
-                    '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4']
-    title: text: null
-    tooltip: pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-    plotOptions: pie:
-      allowPointSelect: true
-      cursor: 'pointer'
-      dataLabels: enabled: false
-      showInLegend: true
-    credits:
-         enabled: false
-    series: [ {
-      type: 'pie'
-      name: '性别比例'
-      data: [
-        [
-          '男生'
-          60
-        ]
-        [
-          '女生'
-          40
-        ]
-      ]
-    } ]
+  refresh_stat = ->
+    $.getJSON "/staff/courses/" + window.cid + "/stat", (data) ->
+      if data.success
+        $('#gender-statistics').highcharts
+          chart:
+            plotBackgroundColor: null
+            plotBorderWidth: null
+            plotShadow: false
+          colors: ['#90c5fc', '#ffa1a1', '#ED561B', '#DDDF00',
+                          '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4']
+          title: text: null
+          tooltip: pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+          plotOptions: pie:
+            allowPointSelect: true
+            cursor: 'pointer'
+            dataLabels: enabled: false
+            showInLegend: true
+          credits:
+               enabled: false
+          series: [ {
+            type: 'pie'
+            name: '性别比例'
+            data: data.stat.gender
+          } ]
+      
+        $('#age-statistics').highcharts
+          chart:
+            plotBackgroundColor: null
+            plotBorderWidth: null
+            plotShadow: false
+          colors: ['#90c5fc', '#7fbaf7', '#67aaef', '#4898e7',
+                          '#3388df', '#227dda', '#FF9655', '#FFF263', '#6AF9C4']
+          title: text: null
+          tooltip: pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+          plotOptions: pie:
+            allowPointSelect: true
+            cursor: 'pointer'
+            dataLabels: enabled: false
+            showInLegend: true
+          credits:
+            enabled: false
+          legend:
+            layout: 'vertical'
+            align: 'right'
+            verticalAlign: 'middle'
+          series: [ {
+            type: 'pie'
+            name: '年龄比例'
+            data: data.stat.age
+          } ]
+      
+        $('#nums-statistics').highcharts
+            title:
+              text: null
+            xAxis: 
+              title:
+                text: '周数'
+            yAxis:
+              title: text: '报名数量(人次)'
+              max: 20
+            tooltip: valueSuffix: '人次'
+            credits:
+                 enabled: false
+            legend:
+              enabled: false
+            series: [
+              {
+                color: '#90c5fc'
+                data: data.stat.num
+              }
+            ]
+      
+        $('#attend-statistics').highcharts
+            title:
+              text: null
+            xAxis: 
+              title:
+                text: '课次'
+            yAxis:
+              title: text: '出勤率'
+              max: 100
+              labels:  
+                formatter: ->
+                  return this.value + '%'  
+            tooltip: valueSuffix: '人次'
+            credits:
+                 enabled: false
+            legend:
+              enabled: false
+            series: [
+              {
+                color: '#90c5fc'
+                data: data.stat.signin
+              }
+            ]
+        if data.stat.signup_start_str != undefined && data.stat.signup_start_str != null
+          $(".kids-nums .column-title").text("报名情况（从" + data.stat.signup_start_str + "开始）")
 
-  $('#age-statistics').highcharts
-    chart:
-      plotBackgroundColor: null
-      plotBorderWidth: null
-      plotShadow: false
-    colors: ['#90c5fc', '#7fbaf7', '#67aaef', '#4898e7',
-                    '#3388df', '#227dda', '#FF9655', '#FFF263', '#6AF9C4']
-    title: text: null
-    tooltip: pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-    plotOptions: pie:
-      allowPointSelect: true
-      cursor: 'pointer'
-      dataLabels: enabled: false
-      showInLegend: true
-    credits:
-      enabled: false
-    legend:
-      layout: 'vertical'
-      align: 'right'
-      verticalAlign: 'middle'
-    series: [ {
-      type: 'pie'
-      name: '性别比例'
-      data: [
-        [
-          '0-3岁'
-          10
-        ]
-        [
-          '3-6岁'
-          15
-        ]
-        [
-          '6-9岁'
-          20
-        ]
-        [
-          '9-12岁'
-          25
-        ]
-        [
-          '12-15岁'
-          20
-        ]
-        [
-          '15-18岁'
-          10
-        ]
-      ]
-    } ]
+      else
+        $.page_notification "服务器出错，请稍后再试"
 
-  $('#nums-statistics').highcharts
-      title:
-        text: null
-      xAxis: 
-        title:
-          text: '周数'
-      yAxis:
-        title: text: '报名数量(人次)'
-        max: 20
-      tooltip: valueSuffix: '人次'
-      credits:
-           enabled: false
-      legend:
-        enabled: false
-      series: [
-        {
-          color: '#90c5fc'
-          data: [
-            1.0
-            2.3
-            2.8
-            3.2
-            4.5
-            6.0
-            6.6
-            7.5
-            8.5
-            15.3
-          ]
-        }
-      ]
-
-  $('#attend-statistics').highcharts
-      title:
-        text: null
-      xAxis: 
-        title:
-          text: '课次'
-      yAxis:
-        title: text: '出勤率'
-        max: 100
-        labels:  
-          formatter: ->
-            return this.value + '%'  
-                            
-         
-      tooltip: valueSuffix: '人次'
-      credits:
-           enabled: false
-      legend:
-        enabled: false
-      series: [
-        {
-          color: '#90c5fc'
-          data: [
-            100
-            99
-            97
-            95
-            97
-            91
-            93
-            85
-            88
-            5
-            96
-            97
-            91
-            93
-          ]
-        }
-      ]
+  refresh_stat()
 
   can_repeat = false
   has_photo = false
@@ -369,11 +256,12 @@ $ ->
 
   $(".finish-btn").click ->
 
+
     code = $("#course-num").val()
-    capacity = $("#course-capacity").val()
+    capacity = parseInt($("#course-capacity").val())
     price = $("#course-charge").val()
     price_pay = $("#public-charge").val()
-    length = $("#course-times").val()
+    length = parseInt($("#course-times").val())
     date = $("#course-date").val()
     speaker = $("#course-speaker").val()
     address = $("#course-address").val()
@@ -442,6 +330,8 @@ $ ->
         else
           if data.code == COURSE_DATE_UNMATCH
             $.page_notification "更新失败，课次与上课时间不匹配"
+          else if data.code == COURSE_INST_EXIST
+            $.page_notification "更新失败，开课编号已存在"
           else
             $.page_notification "服务器出错，请稍后重试"
     )
@@ -604,6 +494,7 @@ $ ->
         console.log data
         if data.success
           $.page_notification "签到完成"
+          refresh_signin_info(parseInt(class_num))
         else
           if data.code == USER_NOT_EXIST
             $.page_notification "用户不存在"
@@ -613,9 +504,29 @@ $ ->
 
   $("#class_num").change ->
     $(".code-figure").attr("src", "/assets/web/bigqrcode.png")
+    refresh_signin_info(parseInt($(this).val()))
 
   if window.profile == "participates"
     $("#register-message").trigger('click')
 
   if window.profile == "reviews"
     $("#user-review").trigger('click')
+
+  $(document).on 'click', '.hide-review', ->
+    rid = $(this).attr("data-id")
+    hide_review(rid, $(this))
+
+  $(document).on 'click', '.show-review', ->
+    rid = $(this).attr("data-id")
+    show_review(rid, $(this))
+
+  refresh_signin_info = (class_num) ->
+    $.getJSON "/staff/courses/" + window.cid + "/signin_info?class_num=" + class_num, (data) ->
+      if data.success
+        signin_info_table = $(HandlebarsTemplates["signin_info"](data))
+        $("#sign-table").remove()
+        $(".sign-status").append(signin_info_table)
+      else
+        $.mobile_page_notification "服务器出错"
+
+  refresh_signin_info(0)
