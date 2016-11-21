@@ -3,6 +3,7 @@ class UserMobile::SessionsController < UserMobile::ApplicationController
 
   # frontpage
 	def index
+    @announcements = Announcement.is_available.any_in(center_id: @current_user.client_centers.map { |e| e.id.to_s} + [nil]).limit(3)
   end
 
   def create

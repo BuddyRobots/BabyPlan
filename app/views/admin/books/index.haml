@@ -85,7 +85,7 @@
                     %tbody
                       - @transfers[:data].each do |e|
                         %tr
-                          %td= Time.at(e[:out_time]).strftime("%Y.%m.%d")
+                          %td= e[:out_time].present? ? Time.at(e[:out_time]).strftime("%Y.%m.%d") : ""
                           %td= e[:out_center]
                           %td= e[:in_center]
                           %td= e[:count]
