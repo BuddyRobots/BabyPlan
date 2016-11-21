@@ -74,6 +74,10 @@ class CourseInst
   end
 
   def update_info(course_inst_info)
+    course_inst = self.course.course_insts.where(inst_code: course_inst_info["code"]).first
+    if course_inst.present?
+      return ErrCode::COURSE_INST_EXIST
+    end
     if course_inst_info["length"].to_i != course_inst_info["date_in_calendar"].length
       return ErrCode::COURSE_DATE_UNMATCH
     end

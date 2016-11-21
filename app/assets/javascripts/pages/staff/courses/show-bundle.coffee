@@ -443,6 +443,8 @@ $ ->
         else
           if data.code == COURSE_DATE_UNMATCH
             $.page_notification "更新失败，课次与上课时间不匹配"
+          else if data.code == COURSE_INST_EXIST
+            $.page_notification "更新失败，开课编号已存在"
           else
             $.page_notification "服务器出错，请稍后重试"
     )
