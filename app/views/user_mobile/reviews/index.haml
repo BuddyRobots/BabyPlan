@@ -12,10 +12,10 @@
       .cloud
         %p.caption 历史评价
       - if @review_type == "book"
-        %a{:href => "/user_mobile/books/" + @book.id.to_s}
+        %a{:href => "/user_mobile/books/" + @book.id.to_s + "?back=" + @back}
           %img.back{:src => "/assets/evaluate/back.png"}
       - else
-        %a{:href => "/user_mobile/courses/" + @course.id.to_s}
+        %a{:href => "/user_mobile/courses/" + @course.id.to_s + "?back=" + @back}
           %img.back{:src => "/assets/evaluate/back.png"}
     - if @reviews.present?
       - @reviews.each do |r|

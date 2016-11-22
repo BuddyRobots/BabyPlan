@@ -1,5 +1,6 @@
 class UserMobile::ReviewsController < UserMobile::ApplicationController
   def index
+    @back = params[:back]
     @review_type = params[:review_type]
     if @review_type == "book"
       @book = Book.where(id: params[:book_id]).first

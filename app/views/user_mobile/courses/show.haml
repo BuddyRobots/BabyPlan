@@ -21,7 +21,7 @@
           %img.smallheart{:src => "/assets/concern.png", data: {fav: "false"}}
         - else
           %img.smallheart{:src => "/assets/cancel-concern.png", data: {fav: "true"}}
-      %a.a-div{:href => user_mobile_reviews_path + "?review_type=course&course_id=" + @course.id.to_s}
+      %a.a-div{:href => user_mobile_reviews_path + "?back=" + @back + "review_type=course&course_id=" + @course.id.to_s}
         %img.dialog{:src => "/assets/pinglun.png"}
       %p.num= @course.reviews.length
     .boxtitle
