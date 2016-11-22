@@ -36,6 +36,7 @@ class CourseParticipate
   # whether pay process is finished. pay attention that this does not indicate that pay is success
   field :pay_finished, type: Boolean, default: false
   field :trade_state, type: String
+  field :trade_state_updated_at, type: Integer
   field :expired_at, type: Integer, default: -1
 
   belongs_to :course_inst
@@ -118,6 +119,7 @@ class CourseParticipate
         wechat_transaction_id = doc.search('transaction_id').children[0].text
         self.update_attributes({
           trade_state: trade_state,
+          trade_state_updated_at: Time.now.to_i,
           trade_state_desc: trade_state_desc,
           wechat_transaction_id: wechat_transaction_id
         })

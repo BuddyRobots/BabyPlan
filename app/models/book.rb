@@ -68,7 +68,7 @@ class Book
       isbn: self.isbn,
       type: self.type,
       stock: self.stock,
-      available_stock: self.stock - self.book_borrows.where(:status.ne => BookBorrow::RETURN).length,
+      available_stock: self.stock - self.book_borrows.where(status: BookBorrow::NORMAL, return_at: nil).length,
       available: self.available
     }
   end

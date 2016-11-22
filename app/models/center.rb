@@ -20,6 +20,7 @@ class Center
   has_many :in_transfers, class_name: "Transfer", inverse_of: "in_center"
 
   has_many :feeds
+  has_many :statistics
 
   has_and_belongs_to_many :clients, class_name: "User", inverse_of: :client_centers
 
@@ -130,4 +131,52 @@ class Center
     }
   end
 
+  def calculate_daily_stats
+    date = Date.today - 1.days
+    stat_date = Time.mktime(date.year, date.month, date.day).to_i
+    # client number
+    if self.statistics.where(type: Statistic::CLIENT_NUM, stat_date: stat_date).blank?
+      self.statistics.create(type: Statistic::CLIENT_NUM, stat_date: stat_date, value: self.clients.count)
+    end
+    # course signup number, income, and allowance
+    signup_num = 0
+    income = 0
+    allowance = 0
+    self.course_insts.each do |e|
+      cps = e.course_participates.where(:trade_state => "SUCCESS",
+                                        :trade_state_updated_at.gt => stat_date).length
+      signup_num += cps.length
+      cps.each do |cp|
+        income += cp.price_pay || 0
+        allowance += e.price - e.price_pay
+      end
+    end
+    if self.statistics.create(type: Statistic::COURSE_SIGNUP_NUM, stat_date: stat_date).blank?
+      self.statistics.create(type: Statistic::COURSE_SIGNUP_NUM, stat_date: stat_date, value: signup_num)
+    end
+    if self.statistics.create(type: Statistic::INCOME, stat_date: stat_date).blank?
+      self.statistics.create(type: Statistic::INCOME, stat_date: stat_date, value: income)
+    end
+    if self.statistics.create(type: Statistic::ALLOWANCE, stat_date: stat_date).blank?
+      self.statistics.create(type: Statistic::ALLOWANCE, stat_date: stat_date, value: allowance)
+    end
+    # borrow number, stock, and on shelf
+    borrow_num = 0
+    stock = 0
+    off_shelf = 0
+    self.books.each do |b|
+      borrow_num += b.book_borrows.where(:borrow_at.gt => stat_date).length
+      off_shelf += b.book_borrows.where(status: BookBorrow::NORMAL, return_at: nil).length
+      stock += b.stock
+    end
+    if self.statistics.create(type: Statistic::BORROW_NUM, stat_date: stat_date).blank?
+      self.statistics.create(type: Statistic::BORROW_NUM, stat_date: stat_date, value: borrow_num)
+    end
+    if self.statistics.create(type: Statistic::STOCK, stat_date: stat_date).blank?
+      self.statistics.create(type: Statistic::STOCK, stat_date: stat_date, value: stock)
+    end
+    if self.statistics.create(type: Statistic::ON_SHELF, stat_date: stat_date).blank?
+      self.statistics.create(type: Statistic::ON_SHELF, stat_date: stat_date, value: stock - off_shelf)
+    end
+  end
 end
