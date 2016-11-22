@@ -41,15 +41,15 @@
                   %input.input-area.form-control#datepicker-1{:type => "text"}
                   %span.input-caption 至
                   %input.input-area.form-control#datepicker-2{:type => "text"}
-                  .btn.search-btn{:type => "button"} 查询
-                  = select_tag "quick-choice", options_for_select(Statistic.duration_for_select), class: "form-control"
+                  .btn#course-search-btn.search-btn{:type => "button"} 查询
+                  = select_tag "course-quick-choice", options_for_select(Statistic.duration_for_select, 1.months.to_i), class: "form-control quick-choice"
             .statistics-chart
               .borrow
                 .left-div
                   %p.column-title 报名情况
                   .tab-chart-div
                     .total-div
-                      %p.total-nums 91234
+                      %p#total-signup.total-nums 91234
                       %p.total-category 人次
                     .chart-div
                       #register-statistics
@@ -57,18 +57,18 @@
                   %p.column-title.review-title 评价排名
                   %table.table.table-bordered#review-table
                     %tbody
-                    - 5.times do
+                    - @course_rank[:review_rank].each_with_index do |e, i|
                       %tr
-                        %td.td-data 1
-                        %td.td-data 少儿计算机技术
-                        %td.td-data 4.6
+                        %td.td-data= i + 1
+                        %td.td-data= link_to truncate(e[:name], length: 10), "/staff/courses/#{e[:id]}"
+                        %td.td-data= e[:review_score]
 
               .collection
                 .left-div
                   %p.column-title 课程收入
                   .tab-chart-div
                     .income-div
-                      %p.total-nums 91234
+                      %p#total-money.total-nums 91234
                       %p.total-category 元
                     .chart-pie-div
                       #bonu-statistics
@@ -78,11 +78,11 @@
                   %p.column-title.review-title 报名排名
                   %table.table.table-bordered#review-table
                     %tbody
-                    - 5.times do
+                    - @course_rank[:cp_rank].each_with_index do |e, i|
                       %tr
-                        %td.td-data 1
-                        %td.td-data 少儿计算机技术
-                        %td.td-data 30
+                        %td.td-data= i + 1
+                        %td.td-data= link_to truncate(e[:name], length: 10), "/staff/courses/#{e[:id]}"
+                        %td.td-data= e[:cp_num]
 
         #tab3.tab-pane
           .desc
@@ -93,19 +93,15 @@
                   %input.input-area.form-control#datepicker-3{:type => "text"}
                   %span.input-caption 至
                   %input.input-area.form-control#datepicker-4{:type => "text"}
-                  .btn.search-btn{:type => "button"} 查询
-                  %select.form-control#quick-choice
-                    %option 最近一个月
-                    %option 最近三个月
-                    %option 最近半年
-                    %option 最近一年
+                  .btn#book-search-btn.search-btn{:type => "button"} 查询
+                  = select_tag "book-quick-choice", options_for_select(Statistic.duration_for_select, 1.months.to_i), class: "form-control quick-choice"
             .statistics-chart
               .borrow
                 .left-div
                   %p.column-title 借阅情况
                   .tab-chart-div
                     .total-div
-                      %p.total-nums 91234
+                      %p#total-borrow.total-nums 91234
                       %p.total-category 人次
                     .chart-div
                       #borrow-statistics
@@ -113,11 +109,11 @@
                   %p.column-title.review-title 评价排名
                   %table.table.table-bordered#review-table
                     %tbody
-                    - 5.times do
+                    - @book_rank[:review_rank].each_with_index do |e, i|
                       %tr
-                        %td.td-data 1
-                        %td.td-data 你今天真好看
-                        %td.td-data 4.6
+                        %td.td-data= i + 1
+                        %td.td-data= link_to truncate(e[:name], length: 10), "/staff/books/#{e[:id]}"
+                        %td.td-data= e[:review_score]
 
               .collection
                 .left-div
@@ -127,9 +123,9 @@
                   %p.column-title.review-title 借阅排名
                   %table.table.table-bordered#review-table
                     %tbody
-                    - 5.times do
+                    - @book_rank[:borrow_rank].each_with_index do |e, i|
                       %tr
-                        %td.td-data 1
-                        %td.td-data 你今天真好看
-                        %td.td-data 30
+                        %td.td-data= i + 1
+                        %td.td-data= link_to truncate(e[:name], length: 10), "/staff/books/#{e[:id]}"
+                        %td.td-data= e[:borrow_num]
 
