@@ -149,26 +149,38 @@ a{
 }
 .line-scroll-wrapper {
 	width: 118.75%;
+	display: -webkit-flex;
+	-moz-display: flex;
+    -ms-display: flex;
+    -o-display: flex;
+	display: flex;
 }
 .line-normal-wrapper { 
-	float: left; 
 	width: 100%;
 }
 .line-btn-delete { 
-	float: left; 
 	width: 15.78%;
 	max-width: 120px;
-	padding: 8.35% 0;
+	display: -webkit-flex;
+	display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+	display: flex;
+	-webkit-align-items: center;
+	-moz-align-items: center;
+    -ms-align-items: center;
+    -o-align-items: center;
+	align-items: center;
+	-webkit-justify-content: space-around;
+	-moz-justify-content: space-around;
+	-ms-justify-content: space-around;
+	-o-justify-content: space-around;
+	justify-content: space-around;
 }
 .delete-icon {
-	display: block;
 	width: 50%;
 	max-width: 60px;
-	vertical-align: middle;
-	margin-left: 18.8%;
 }
-
-
 @media screen and (max-width:640px) {
 	.content-area {
 		font-size: 100%;

@@ -71,12 +71,21 @@ a{
 }
 #figure {
 	padding: 8.3% 4% 8.3% 5%; 
-	display: flex;
+	display: -webkit-flex;
+	display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+	-webkit-align-items: center;
+	-moz-align-items: center;
+    -ms-align-items: center;
+    -o-align-items: center;
+	-webkit-justify-content: space-between;
+	-moz-justify-content: space-between;
+	-ms-justify-content: space-between;
+	-o-justify-content: space-between;
 	justify-content: space-between;
 	align-items: center;
-	display: -webkit-flex;
-	-webkit-align-items: center;
-	-webkit-justify-content: space-between;
+	display: flex;
 	p {
 		width: 70%;
 	}
