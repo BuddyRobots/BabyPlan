@@ -29,6 +29,11 @@ Rails.application.routes.draw do
       end
     end
     resources :statistics do
+      collection do
+        get :client_stats
+        get :course_stats
+        get :book_stats
+      end
     end
     resources :staffs do
       member do

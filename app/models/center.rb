@@ -138,7 +138,9 @@ class Center
         end
       end
     end
-    num = Statistic.where(type: Statistic::CLIENT_NUM, :stat_date.gt => (Time.now - 10.weeks).to_i).asc(:stat_date).map { |e| e.value }
+    num = self.statistics.where(type: Statistic::CLIENT_NUM).
+                          where(:stat_date.gt => (Time.now - 10.weeks).to_i).
+                          asc(:stat_date).map { |e| e.value }
     num = num.each_with_index.map { |e, i| i % 7 == 0 ? e : nil } .select { |e| e }
     {
       gender: gender.to_a,
@@ -169,22 +171,22 @@ class Center
       time_unit = "月数"
       day = 30
     end
-    signup_num = Statistic.where(type: Statistic::COURSE_SIGNUP_NUM).
-                           where(:stat_date.gt => start_time).
-                           where(:stat_date.lt => end_time).
-                           desc(:stat_date).map { |e| e.value }
+    signup_num = self.statistics.where(type: Statistic::COURSE_SIGNUP_NUM).
+                                 where(:stat_date.gt => start_time).
+                                 where(:stat_date.lt => end_time).
+                                 desc(:stat_date).map { |e| e.value }
     signup_num = signup_num.each_slice(day).map { |a| a }
     signup_num = signup_num.map { |e| e.sum } .reverse
-    allowance = Statistic.where(type: Statistic::ALLOWANCE).
-                          where(:stat_date.gt => start_time).
-                          where(:stat_date.lt => end_time).
-                          desc(:stat_date).map { |e| e.value }
+    allowance = self.statistics.where(type: Statistic::ALLOWANCE).
+                                where(:stat_date.gt => start_time).
+                                where(:stat_date.lt => end_time).
+                                desc(:stat_date).map { |e| e.value }
     allowance = allowance.each_slice(day).map { |a| a }
     allowance = allowance.map { |e| e.sum } .reverse
-    income = Statistic.where(type: Statistic::INCOME).
-                       where(:stat_date.gt => start_time).
-                       where(:stat_date.lt => end_time).
-                       desc(:stat_date).map { |e| e.value }
+    income = self.statistics.where(type: Statistic::INCOME).
+                             where(:stat_date.gt => start_time).
+                             where(:stat_date.lt => end_time).
+                             desc(:stat_date).map { |e| e.value }
     income = income.each_slice(day).map { |a| a }
     income = income.map { |e| e.sum } .reverse
     {
@@ -222,22 +224,22 @@ class Center
       time_unit = "月数"
       day = 30
     end
-    borrow_num = Statistic.where(type: Statistic::BORROW_NUM).
-                           where(:stat_date.gt => start_time).
-                           where(:stat_date.lt => end_time).
-                           desc(:stat_date).map { |e| e.value }
+    borrow_num = self.statistics.where(type: Statistic::BORROW_NUM).
+                                 where(:stat_date.gt => start_time).
+                                 where(:stat_date.lt => end_time).
+                                 desc(:stat_date).map { |e| e.value }
     borrow_num = borrow_num.each_slice(day).map { |a| a }
     borrow_num = borrow_num.map { |e| e.sum } .reverse
-    stock_num = Statistic.where(type: Statistic::STOCK).
-                          where(:stat_date.gt => start_time).
-                          where(:stat_date.lt => end_time).
-                          desc(:stat_date).map { |e| e.value }
+    stock_num = self.statistics.where(type: Statistic::STOCK).
+                                where(:stat_date.gt => start_time).
+                                where(:stat_date.lt => end_time).
+                                desc(:stat_date).map { |e| e.value }
     stock_num = stock_num.each_slice(day).map { |a| a }
     stock_num = stock_num.map { |e| e.sum } .reverse
-    off_shelf_num = Statistic.where(type: Statistic::OFF_SHELF).
-                              where(:stat_date.gt => start_time).
-                              where(:stat_date.lt => end_time).
-                              desc(:stat_date).map { |e| e.value }
+    off_shelf_num = self.statistics.where(type: Statistic::OFF_SHELF).
+                                    where(:stat_date.gt => start_time).
+                                    where(:stat_date.lt => end_time).
+                                    desc(:stat_date).map { |e| e.value }
     off_shelf_num = off_shelf_num.each_slice(day).map { |a| a }
     off_shelf_num = off_shelf_num.map { |e| e.sum } .reverse
     {

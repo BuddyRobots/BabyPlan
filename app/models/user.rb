@@ -360,4 +360,43 @@ class User
       self.book_borrows.where(return_at: nil).count >= book_num
     end
   end
+
+  def self.client_stats
+    gender = {'男生' => 0, '女生' => 0, '不详' => 0}
+    age = {'0-3岁' => 0, '3-6岁' => 0, '6-9岁' => 0, '9-12岁' => 0, '12-15岁' => 0, "其他及不详" => 0}
+    User.client.each do |e|
+      if e.gender == 0
+        gender['男生'] += 1
+      elsif e.gender == 1
+        gender['女生'] += 1
+      else
+        gender['不详'] += 1
+      end
+      if e.birthday.blank?
+        age["其他及不详"] += 1
+      else
+        birth_at = Time.mktime(e.birthday.year, e.birthday.month, e.birthday.day)
+        if Time.now - 15.years > birth_at
+          age["其他及不详"] += 1
+        elsif Time.now - 12.years > birth_at
+          age["12-15岁"] += 1
+        elsif Time.now - 9.years > birth_at
+          age["9-12岁"] += 1
+        elsif Time.now - 6.years > birth_at
+          age["6-9岁"] += 1
+        elsif Time.now - 3.years > birth_at
+          age["3-6岁"] += 1
+        else
+          age["0-3岁"] += 1
+        end
+      end
+    end
+    num = Statistic.where(center_id: nil, type: Statistic::CLIENT_NUM, :stat_date.gt => (Time.now - 10.weeks).to_i).asc(:stat_date).map { |e| e.value }
+    num = num.each_with_index.map { |e, i| i % 7 == 0 ? e : nil } .select { |e| e }
+    {
+      gender: gender.to_a,
+      age: age.to_a,
+      num: num
+    }
+  end
 end

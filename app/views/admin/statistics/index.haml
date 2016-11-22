@@ -39,12 +39,13 @@
                   %span.input-caption 至
                   %input.input-area.form-control#datepicker-2{:type => "text"}
                   .btn.search-btn{:type => "button"} 查询
-                  %select.form-control#quick-choice
-                    %option 快捷选择
-                    %option 最近一个月
-                    %option 最近三个月
-                    %option 最近半年
-                    %option 最近一年
+                  = select_tag "course-quick-choice", options_for_select(Statistic.duration_for_select, 1.months.to_i), class: "form-control quick-choice"
+                  / %select.form-control#quick-choice
+                  /   %option 快捷选择
+                  /   %option 最近一个月
+                  /   %option 最近三个月
+                  /   %option 最近半年
+                  /   %option 最近一年
             .statistics-chart
               .borrow
                 .left-div
@@ -101,11 +102,12 @@
                   %span.input-caption 至
                   %input.input-area.form-control#datepicker-4{:type => "text"}
                   .btn.search-btn{:type => "button"} 查询
-                  %select.form-control#quick-choice
-                    %option 最近一个月
-                    %option 最近三个月
-                    %option 最近半年
-                    %option 最近一年
+                  = select_tag "book-quick-choice", options_for_select(Statistic.duration_for_select, 1.months.to_i), class: "form-control quick-choice"
+                  / %select.form-control#quick-choice
+                  /   %option 最近一个月
+                  /   %option 最近三个月
+                  /   %option 最近半年
+                  /   %option 最近一年
             .statistics-chart
               .borrow
                 .left-div
