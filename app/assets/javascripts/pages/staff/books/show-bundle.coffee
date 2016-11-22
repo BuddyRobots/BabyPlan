@@ -2,6 +2,10 @@
 #= require tag-it.min
 $ ->
 
+  $(".close").click -> 
+    $("#code-num").val("")
+    $("#confirm").removeClass("button-enabled")
+    $("#confirm").addClass("button-disabled")
 
   has_cover = false
   has_back = false
@@ -240,8 +244,28 @@ $ ->
             $("#available-status").text("在架上")
       )
 
-  # $(".QRcode-btn").click ->
-  #   location.href = "/staff/books/" + window.bid + "/download_qrcode"
+  check_code_input = ->
+    if $("#code-num").val().trim() == ""
+      $("#confirm").addClass("button-disabled")
+      $("#confirm").removeClass("button-enabled")
+    else
+      $("#confirm").removeClass("button-disabled")
+      $("#confirm").addClass("button-enabled")
+
+  $("#code-num").keyup ->
+    check_code_input()
+
+  $(".QRcode-btn").click ->
+    $("#QR-codeModal").modal("show")
+
+  $("#confirm").click ->
+    num = $("#code-num").val()
+    if $.isNumeric(num)
+      num = parseInt(num)
+      if num > 0
+        location.href = "/staff/books/" + window.bid + "/download_qrcode?amount=" + num
+    else
+      $.page_notification("请正确输入数量", 2000)
 
 # img upload
   $("#upload-cover-div").click ->

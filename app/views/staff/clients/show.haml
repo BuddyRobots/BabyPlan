@@ -19,47 +19,32 @@
           %a#book-review{"data-toggle" => "tab", :href => "#tab3"} 绘本借阅
 
       .tab-content
-        #tab1.tab-pane.active
-          %form.form-inline{:role => "form"}
-            .form-group
-              %label.caption 姓名:
-              %span.unedit-box#name-span= @user.name
-            %span.edit-box
+        #tab1.tab-pane.active.clearfix
+          .photo-div
+            %img.avatar{src: @user.avatar.present? ? @user.avatar.path : "/assets/web/boy.png"}
+          .message-div
+            %form.form-inline{:role => "form"}
               .form-group
-                %input.form-control#name-input{:type => "text"}
-            .form-group
-              %label.caption 年龄:
-              %span.unedit-box#age-span= @user.birthday.present? ? (Time.now.year - @user.birthday.year).to_s + "岁" : ""
-            %span.edit-box
+                %label.caption 姓名:
+                %span.unedit-box#name-span= @user.name
               .form-group
-                %input.form-control#age-input{:type => "text"}
-          %form.form-inline{:role => "form"}
-            .form-group
-              %label.caption 性别:
-              %span.unedit-box#gender-span= @user.gender == 0 ? "男" : "女"
-            %span.edit-box
+                %label.caption 年龄:
+                %span.unedit-box#age-span= @user.birthday.present? ? (Time.now.year - @user.birthday.year).to_s + "岁" : ""
+            %form.form-inline{:role => "form"}
               .form-group
-                %input.form-control#gender-input{:type => "text"}
-            .form-group
-              %label.caption 家长:
-              %span.unedit-box#parent-span= @user.parent
-            %span.edit-box
+                %label.caption 性别:
+                %span.unedit-box#gender-span= @user.gender == 0 ? "男" : "女"
               .form-group
-                %input.form-control#parent-input{:type => "text"}
-          %form.form-inline{:role => "form"}
-            .form-group
-              %label.caption 联系方式:
-              %span.unedit-box#phone-span= @user.mobile
-            %span.edit-box
+                %label.caption 家长:
+                %span.unedit-box#parent-span= @user.parent
+            %form.form-inline{:role => "form"}
               .form-group
-                %input.form-control#phone-input{:type => "text"}
-            .form-group
-              %label.caption 地址:
-              %span.unedit-box#address-span= @user.address
-            %span.edit-box
+                %label.caption 联系方式:
+                %span.unedit-box#phone-span= @user.mobile
               .form-group
-                %input.form-control#address-input{:type => "text"}
-
+                %label.caption 地址:
+                %span.unedit-box#address-span= @user.address
+          
         #tab2.tab-pane
           - if @participates[:data].blank?
             .undiscover
