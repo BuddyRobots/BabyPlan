@@ -24,7 +24,23 @@ class Admin::CentersController < Admin::ApplicationController
   end
 
   def show
+    @profile = params[:profile]
     @center = Center.where(id: params[:id]).first
+
+    params[:page] = params[:course_inst_page]
+    course_insts = @center.course_insts.all
+    @course_insts = auto_paginate(course_insts)
+    @course_insts[:data] = @course_insts[:data].map do |e|
+      e.course_inst_info
+    end
+
+
+    params[:page] = params[:book_page]
+    books = @center.books.all
+    @books = auto_paginate(books)
+    @books[:data] = @books[:data].map do |e|
+      e.book_info
+    end
   end
 
   def set_available

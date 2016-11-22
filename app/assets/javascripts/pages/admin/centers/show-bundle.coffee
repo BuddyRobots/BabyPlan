@@ -227,3 +227,10 @@ $ ->
     has_photo = true
     photo = $(".edit-photo")[0]
     photo.src = URL.createObjectURL(event.target.files[0])
+
+
+  if window.profile == "books"
+    $("#center-book").trigger('click')
+
+  if window.profile == "courses"
+    $("#center-class").trigger('click')

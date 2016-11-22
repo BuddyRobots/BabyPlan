@@ -6,6 +6,7 @@
     window.cid = "#{@center.id.to_s}"
     window.lat = "#{@center.lat.to_s}"
     window.lng = "#{@center.lng.to_s}"
+    window.profile = "#{@profile}"
 
 .content-area
   .manage-content
@@ -72,72 +73,74 @@
               #edit-area
 
         #tab2.tab-pane
-          .undiscover
-            %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
-            %span.undiscover-message 抱歉！暂无查找信息
-          .table-box
-            %table.table.table-bordered#user-table1
-              %thead
-                %tr
-                  %th 课程名称
-                  %th 主讲人
-                  %th 上课地址
-                  %th 上课时间
-                  %th 报名人数
-                  %th 费&nbsp用
-              %tbody
-                / - @books[:data].each do |b|
-                /   %tr{class: "book-record #{ b[:available] ? "available" : "unavailable" }", "data-id" => b[:id]}
-                %tr
-                  %td 儿童编程
-                  %td 王思聪
-                  %td 富仁名苑26号楼101
-                  %td 2016-8-23
-                  %td 100人
-                  %td 500\节
-          .select-page 
-            %span.totalitems= "共6页,总计12条"
-            %span.choice-page
-              %ul.pagination.pagination-sm
-                %li
-                  %a{:href => "javascript:void(0);"} «
-                / - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
-                %li
-                  %a{:href => "javascript:void(0);"} 1
-                %li
-                  %a{:href => "javascript:void(0);"} »
+          - if @course_insts[:data].blank?
+            .undiscover
+              %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
+              %span.undiscover-message 抱歉！暂无查找信息
+          - else
+            .table-box
+              %table.table.table-bordered#user-table1
+                %thead
+                  %tr
+                    %th 课&nbsp程
+                    %th 上课时间
+                    %th 上课地址
+                    %th 主讲人
+                    %th 费用（元）
+                %tbody
+                  - @course_insts[:data].each do |ci|
+                    %tr
+                      %td= ci[:name]
+                      %td= ci[:date]
+                      %td= ci[:address]
+                      %td= ci[:speaker]
+                      %td= ci[:price]
+
+            .select-page 
+              %span.totalitems= "共#{@course_insts[:total_page]}页,总计#{@course_insts[:total_number]}条"
+              %span.choice-page
+                %ul.pagination.pagination-sm
+                  %li
+                    %a{:href => "/admin/centers/" + @center.id.to_s + "?profile=courses&course_inst_page=#{@course_insts[:previous_page]}"} «
+                  - ( (@course_insts[:previous_page] > 2 ? @course_insts[:previous_page] - 2 : 1) .. (@course_insts[:next_page] < @course_insts[:total_page] - 2 ? @course_insts[:next_page] + 2 : @course_insts[:total_page]) ).to_a.each do |page|
+                    %li
+                      %a{:href => "/admin/centers/" + @center.id.to_s + "?profile=courses&course_inst_page=#{page}"}= page
+                  %li
+                    %a{:href => "/admin/centers/" + @center.id.to_s + "?profile=courses&course_inst_page=#{@course_insts[:next_page]}"} »
 
         #tab3.tab-pane
-          .undiscover
-            %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
-            %span.undiscover-message 抱歉！暂无查找信息
-          .table-box
-            %table.table.table-bordered#user-table2
-              %thead
-                %tr
-                  %th 绘本名称
-                  %th 类&nbsp型
-                  %th 数&nbsp量
-                  %th 作&nbsp者
-                  %th ISBN号
-
-              %tbody
-                / - @books[:data].each do |b|
-                /   %tr{class: "book-record #{ b[:available] ? "available" : "unavailable" }", "data-id" => b[:id]}
-                %tr
-                  %td 鳄鱼历险记
-                  %td 儿童科幻
-                  %td 30本
-                  %td 卡萨.布兰卡
-                  %td 9527
-          .select-page 
-            %span.totalitems= "共6页,总计12条"
-            %span.choice-page
-              %ul.pagination.pagination-sm
-                %li
-                  %a{:href => "javascript:void(0);"} «
-                / - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
-                %li
-                  %a{:href => "javascript:void(0);"} 1
-                %li
-                  %a{:href => "javascript:void(0);"} »
+          - if @books[:data].blank?
+            .undiscover
+              %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
+              %span.undiscover-message 抱歉！暂无查找信息
+          - else
+            .table-box
+              %table.table.table-bordered#user-table2
+                %thead
+                  %tr
+                    %th 绘本名称
+                    %th 标&nbsp签
+                    %th 数&nbsp量
+                    %th 在架
+                    %th 作&nbsp者
+                    %th 书&nbsp号
+                %tbody
+                  - @books[:data].each do |b|
+                    %tr
+                      %td= b[:name]
+                      %td= truncate((b[:tags] || "").gsub(',', '，'), length: 20)
+                      %td= b[:stock].to_s + "本"
+                      %td= b[:available_stock].to_s + "本"
+                      %td= b[:author]
+                      %td= b[:isbn]
+            .select-page 
+              %span.totalitems= "共#{@books[:total_page]}页,总计#{@books[:total_number]}条"
+              %span.choice-page
+                %ul.pagination.pagination-sm
+                  %li
+                    %a{:href => "/admin/centers/" + @center.id.to_s + "?profile=books&book_page=#{@books[:previous_page]}"} «
+                  - ( (@books[:previous_page] > 2 ? @books[:previous_page] - 2 : 1) .. (@books[:next_page] < @books[:total_page] - 2 ? @books[:next_page] + 2 : @books[:total_page]) ).to_a.each do |page|
+                    %li
+                      %a{:href => "/admin/centers/" + @center.id.to_s + "?profile=books&book_page=#{page}"}= page
+                  %li
+                    %a{:href => "/admin/centers/" + @center.id.to_s + "?profile=books&book_page=#{@books[:next_page]}"} »
