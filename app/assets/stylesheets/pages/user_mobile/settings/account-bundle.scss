@@ -89,6 +89,12 @@ a{
 	p {
 		width: 70%;
 	}
+	a {
+		width: 5.334em;
+		height: 5.334em;
+		border-radius: 50%;
+		overflow: hidden;
+	}
 }
 .item {
 	padding: 4% 5%;
@@ -100,11 +106,10 @@ a{
 	float: right;
 }
 .avatar-icon {
-	width: 5.33em;
-	height: 5.33em;
+	width: 5.334em;
+	height: 5.334em;
 	max-width: 160px;
 	border-radius: 50%;
-	overflow: hidden;
 }
 .item-box {
 	padding: 0 5%;
