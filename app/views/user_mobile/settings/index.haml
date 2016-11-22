@@ -14,8 +14,7 @@
     %a{:href => user_mobile_feeds_path}
       %img.back{:src => "/assets/back.png"}
     .face.clearfix
-      .avator
-        %img.avator-icon{:src => @current_user.avatar.present? ? @current_user.avatar.path : "/assets/web/boy.png"}
+      %img.avator-icon{:src => @current_user.avatar.present? ? @current_user.avatar.path : "/assets/web/boy.png"}
       %p.username= @current_user.name
 
     .collect-div

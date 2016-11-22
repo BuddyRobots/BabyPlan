@@ -6,7 +6,7 @@
   .content-area
     .header
       .cloud
-        %p 收藏
+        %p 我的收藏
       %a{:href => user_mobile_settings_path}
         %img.back{:src => "/assets/mybook/back.png"}
     - if @favorites.blank?
@@ -15,7 +15,7 @@
     - else
       - @favorites.each do |f|
         .line-wrapper
-          .line-scroll-wrapper.clearfix
+          .line-scroll-wrapper
             .line-normal-wrapper{data: {url: f.ele_url} }
               .details
                 .left-div
@@ -27,7 +27,6 @@
                   .location-div
                     %img.location{:src => "/assets/web/location.png"}
                     %span.center= f.center_str
-            }
             .line-btn-delete
               %img.delete-icon{:src => "/assets/lajitong.png", data: {id: f.id.to_s}}
     / .line-wrapper

@@ -71,20 +71,23 @@ a{
 }
 #figure {
 	padding: 8.3% 4% 8.3% 5%; 
-	display: flex;
+	display: -webkit-flex;
+	display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+	-webkit-align-items: center;
+	-moz-align-items: center;
+    -ms-align-items: center;
+    -o-align-items: center;
+	-webkit-justify-content: space-between;
+	-moz-justify-content: space-between;
+	-ms-justify-content: space-between;
+	-o-justify-content: space-between;
 	justify-content: space-between;
 	align-items: center;
-	display: -webkit-flex;
-	-webkit-align-items: center;
-	-webkit-justify-content: space-between;
+	display: flex;
 	p {
 		width: 70%;
-	}
-	a {
-		width: 5.334em;
-		height: 5.334em;
-		border-radius: 50%;
-		overflow: hidden;
 	}
 }
 .item {
@@ -97,10 +100,11 @@ a{
 	float: right;
 }
 .avatar-icon {
-	width: 5.334em;
-	height: 5.334em;
+	width: 28.75%;
+	height: 28.75%;
 	max-width: 160px;
 	border-radius: 50%;
+	overflow: hidden;
 }
 .item-box {
 	padding: 0 5%;

@@ -15,8 +15,8 @@
         %p 头像
         = form_tag("/", method: "post", multipart: true, id: "upload-photo-form", class: "hide") do
           = file_field_tag "photo_file", { class: "hide", accept: ".jpg,.png" }
-        %a#upload-photo{:href => "#"}
-          %img.avatar-icon{:src => @current_user.avatar.present? ? @current_user.avatar.path : "/assets/web/avatar.png"}
+        / %a#upload-photo{:href => "#"}
+        %img.avatar-icon#upload-photo{:src => @current_user.avatar.present? ? @current_user.avatar.path : "/assets/web/avatar.png"}
       .item.clearfix
         %span.left 儿童姓名
         %span.right= @current_user.name
