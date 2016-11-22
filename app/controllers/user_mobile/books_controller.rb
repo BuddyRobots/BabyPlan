@@ -35,7 +35,6 @@ class UserMobile::BooksController < UserMobile::ApplicationController
   def show
     @back = params[:back]
     @book = Book.where(id: params[:id]).first
-    @back = params[:back]
   end
 
   def favorite

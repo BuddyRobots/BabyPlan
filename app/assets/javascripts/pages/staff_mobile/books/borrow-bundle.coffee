@@ -38,4 +38,6 @@ $ ->
                 location.href = "/staff_mobile/books/borrow_result?err=has_expired_book" + "&mobile=" + mobile
               if data.code == REACH_MAX_BORROW
                 location.href = "/staff_mobile/books/borrow_result?err=reach_max_borrow" + "&mobile=" + mobile
+              if data.code == BOOK_ALL_OFF_SHELF
+                location.href = "/staff_mobile/books/borrow_result?err=book_all_off_shelf" + "&mobile=" + mobile
         )

@@ -120,6 +120,6 @@ class Staff::BooksController < Staff::ApplicationController
     if @book.blank?
       redirect_to action: :index and return
     end
-    send_file(@book.generate_compressed_file(@book.stock), filename: "qrcode.zip")
+    send_file(@book.generate_compressed_file(@book.stock), filename: @book.name + ".zip")
   end
 end

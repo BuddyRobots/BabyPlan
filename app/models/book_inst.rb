@@ -14,6 +14,10 @@ class BookInst
     if self.current_borrow.present?
       return ErrCode::BOOK_NOT_RETURNED
     end
+    on_shelf = self.book.stock - self.book_borrows.where(status: BookBorrow::NORMAL, return_at: nil).length
+    if on_shelf <= 0
+      return ErrCode::BOOK_ALL_OFF_SHELF
+    end
     if self.current_transfer.present?
       return ErrCode::BOOK_IN_TRANSFER
     end
@@ -40,6 +44,8 @@ class BookInst
   def status_str
     if self.current_borrow.present?
       "借出"
+    elsif self.book.available == false
+      "已下架"
     else
       "在架上"
     end

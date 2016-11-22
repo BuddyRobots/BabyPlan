@@ -57,6 +57,8 @@ class Book
   end
 
   def book_info
+    available_stock = self.stock - self.book_borrows.where(status: BookBorrow::NORMAL, return_at: nil).length
+    available_stock = [0, available_stock].max
     {
       id: self.id.to_s,
       name: self.name,
@@ -68,7 +70,7 @@ class Book
       isbn: self.isbn,
       type: self.type,
       stock: self.stock,
-      available_stock: self.stock - self.book_borrows.where(:status.ne => BookBorrow::RETURN).length,
+      available_stock: available_stock,
       available: self.available
     }
   end

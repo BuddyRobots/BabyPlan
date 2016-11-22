@@ -3,11 +3,10 @@ class BookBorrow
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  NOT_RETURN = 1
-  RETURN = 2
-  LOST = 4
+  NORMAL = 1
+  LOST = 2
 
-  field :status, type: Integer
+  field :status, type: Integer, default: NORMAL
   field :borrow_at, type: Integer
   field :return_at, type: Integer
   field :renew_at, type: Array
