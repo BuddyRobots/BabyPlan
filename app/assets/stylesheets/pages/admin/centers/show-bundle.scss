@@ -131,8 +131,11 @@
 	color: #0fc077;
 	vertical-align: middle;
 }
-.form-inline {
+.form-group {
 	margin: 20px 0;
+}
+.form-control {
+	display: inline-block;
 }
 .input-caption {
 	display: inline-block;
@@ -276,6 +279,7 @@
 #user-table1 {
 	font-size: 14px;
 	color: #323232;
+	margin-top: 20px;
 	margin-bottom: 0;
 	th {
 		text-align: center;

@@ -82,6 +82,7 @@
 .input-left {
 	float: left;
 	width: 50%;
+	margin-top: 20px;
 }
 #photo {
 	width: 11%;
@@ -199,7 +200,9 @@
 .form-group {
 	font-size: 14px;
 	color: #323232;
-	margin-bottom: 0;
+}
+.form-control {
+	display: inline-block;
 }
 .modal-footer {
 	background: white;
