@@ -28,6 +28,7 @@ module ErrCode
   NOT_PAID = -25
   REVIEW_NOT_EXIST = -26
   BOOK_ALL_OFF_SHELF = -27
+  CENTER_EXIST = -28
 
   def self.ret_false(code)
     msg = self.message(code)
@@ -92,6 +93,8 @@ module ErrCode
       "评论不存在"
     when BOOK_ALL_OFF_SHELF
       "该绘本已全部借出"
+    when CENTER_EXIST
+      "儿童中心已存在"
     else
       nil
     end

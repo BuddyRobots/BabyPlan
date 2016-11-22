@@ -84,6 +84,8 @@ Rails.application.routes.draw do
     resources :statistics do
       collection do
         get :client_stats
+        get :course_stats
+        get :book_stats
       end
     end
 

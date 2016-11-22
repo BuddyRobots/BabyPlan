@@ -27,6 +27,9 @@ class Center
   scope :is_available, ->{ where(available: true) }
 
   def self.create_center(center_info)
+    if Center.where(name: center_info[:name]).present?
+      return ErrCode::CENTER_EXIST
+    end
     center = Center.create(
       name: center_info[:name],
       address: center_info[:address],
@@ -89,6 +92,10 @@ class Center
   end
 
   def update_info(center_info)
+    center = Center.where(name: center_info["name"]).first
+    if center.present? && center.id != self.id
+      return ErrCode::CENTER_EXIST
+    end
     self.update_attributes(
       {
         name: center_info["name"],
@@ -131,10 +138,12 @@ class Center
         end
       end
     end
+    num = Statistic.where(type: Statistic::CLIENT_NUM, :stat_date.gt => (Time.now - 10.weeks).to_i).asc(:stat_date).map { |e| e.value }
+    num = num.each_with_index.map { |e, i| i % 7 == 0 ? e : nil } .select { |e| e }
     {
       gender: gender.to_a,
       age: age.to_a,
-      num: []
+      num: num
     }
   end
 
