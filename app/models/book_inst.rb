@@ -40,6 +40,8 @@ class BookInst
   def status_str
     if self.current_borrow.present?
       "借出"
+    elsif self.book.available == false
+      "已下架"
     else
       "在架上"
     end
