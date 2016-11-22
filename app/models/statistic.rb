@@ -12,7 +12,7 @@ class Statistic
   ALLOWANCE = 8             # amount of allowance
   BORROW_NUM = 16           # number of borrow actions
   STOCK = 32                # number of books
-  ON_SHELF = 64             # number of books on the shelf
+  OFF_SHELF = 64            # number of books off the shelf
 
   field :type, type: Integer
   field :value, type: Float
@@ -21,7 +21,7 @@ class Statistic
   belongs_to :center
 
   def self.duration_for_select
-    hash = { "最近一个月" => 1.months.to_i, "最近三个月" => 3.months.to_i, "最近半年" => 6.months.to_i, "最近一年" => 12.months.to_i }
+    hash = { "快捷选择" => -1, "最近一个月" => 1.months.to_i, "最近三个月" => 3.months.to_i, "最近半年" => 6.months.to_i, "最近一年" => 12.months.to_i }
     hash 
   end
 end
