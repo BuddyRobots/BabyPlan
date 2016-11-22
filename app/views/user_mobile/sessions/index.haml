@@ -13,8 +13,8 @@
     
     .img_gallery
       .point
-        - @announcements.length.times do |e|
-          %a{:href => "#"}= "#{e + 1}"
+        - @announcements.each_with_index do |e, i|
+          %a{:href => "#"}= "#{i + 1}"
       .main_img
         %ul
           - @announcements.each do |e|

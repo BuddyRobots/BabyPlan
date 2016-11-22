@@ -159,4 +159,7 @@ class Book
       ele_center: self.center.name
     }
   end
+
+  def self.book_stats(duration, start_date, end_date)
+  end
 end
