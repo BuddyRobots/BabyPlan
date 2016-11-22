@@ -24,6 +24,8 @@ class Center
 
   has_and_belongs_to_many :clients, class_name: "User", inverse_of: :client_centers
 
+  scope :is_available, ->{ where(available: true) }
+
   def self.create_center(center_info)
     center = Center.create(
       name: center_info[:name],
@@ -78,6 +80,11 @@ class Center
 
   def set_available(available)
     self.update_attribute(:available, available == true)
+    if available != true
+      self.clients.each do |c|
+        self.clients.delete(c)
+      end
+    end
     nil
   end
 
