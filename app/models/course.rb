@@ -75,4 +75,18 @@ class Course
     self.update_attribute(:available, available == true)
     nil
   end
+
+  def self.course_stats(duration, start_date, end_date)
+    {
+      signup_time_unit: nil,
+      signup_num: nil,
+      total_signup: nil,
+      total_income: nil,
+      total_allowance: nil,
+      income_time_unit: nil,
+      allowance: nil,
+      income:nil,
+      total_money: nil
+    }
+  end
 end

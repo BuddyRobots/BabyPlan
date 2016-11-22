@@ -11,12 +11,12 @@ class Admin::StatisticsController < Admin::ApplicationController
   end
 
   def course_stats
-    @stat = current_center.course_stats(params[:duration].to_i, params[:start_date], params[:end_date])
-    # render json: retval_wrapper({stat: @stat}) and return
+    @stat = Course.course_stats(params[:duration].to_i, params[:start_date], params[:end_date])
+    render json: retval_wrapper({stat: @stat}) and return
   end
 
   def book_stats
-    # @stat = current_center.book_stats(params[:duration].to_i, params[:start_date], params[:end_date])
-    # render json: retval_wrapper({stat: @stat}) and return
+    @stat = Book.book_stats(params[:duration].to_i, params[:start_date], params[:end_date])
+    render json: retval_wrapper({stat: @stat}) and return
   end
 end
