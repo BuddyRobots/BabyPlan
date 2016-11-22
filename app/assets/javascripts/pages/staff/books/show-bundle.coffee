@@ -240,8 +240,8 @@ $ ->
             $("#available-status").text("在架上")
       )
 
-  $(".QRcode-btn").click ->
-    location.href = "/staff/books/" + window.bid + "/download_qrcode"
+  # $(".QRcode-btn").click ->
+  #   location.href = "/staff/books/" + window.bid + "/download_qrcode"
 
 # img upload
   $("#upload-cover-div").click ->
