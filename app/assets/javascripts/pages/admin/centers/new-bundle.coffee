@@ -114,7 +114,10 @@ $ ->
       (data) ->
         console.log data
         if data.success != true
-          $.page_notification "服务器出错，请稍后重试"
+          if data.code == CENTER_EXIST
+            $.page_notification "儿童中心已存在"
+          else
+            $.page_notification "服务器出错，请稍后重试"
           return
         # the information is updated successfully, next step is to upload the image
         if has_photo == false

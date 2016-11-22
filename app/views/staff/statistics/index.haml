@@ -42,12 +42,7 @@
                   %span.input-caption 至
                   %input.input-area.form-control#datepicker-2{:type => "text"}
                   .btn.search-btn{:type => "button"} 查询
-                  %select.form-control#quick-choice
-                    %option 快捷选择
-                    %option 最近一个月
-                    %option 最近三个月
-                    %option 最近半年
-                    %option 最近一年
+                  = select_tag "quick-choice", options_for_select(Statistic.duration_for_select), class: "form-control"
             .statistics-chart
               .borrow
                 .left-div

@@ -20,4 +20,8 @@ class Statistic
 
   belongs_to :center
 
+  def self.duration_for_select
+    hash = { "最近一个月" => 1.months.to_i, "最近三个月" => 3.months.to_i, "最近半年" => 6.months.to_i, "最近一年" => 12.months.to_i }
+    hash 
+  end
 end

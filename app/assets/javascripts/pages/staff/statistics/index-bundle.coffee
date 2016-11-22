@@ -2,7 +2,7 @@
 
 $ ->
 
-  refresh_stat = ->
+  refresh_client_stat = ->
     $.getJSON "/staff/statistics/client_stats/", (data) ->
       if data.success
         $('#gender-statistics').highcharts
@@ -80,126 +80,17 @@ $ ->
       else
         $.page_notification "服务器出错，请稍后再试"
 
-  refresh_stat()
+  refresh_client_stat()
 
-  # $('#gender-statistics').highcharts
-  #   chart:
-  #     plotBackgroundColor: null
-  #     plotBorderWidth: null
-  #     plotShadow: false
-  #   colors: ['#90c5fc', '#ffa1a1', '#ED561B', '#DDDF00',
-  #                   '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4']
-  #   title: text: null
-  #   tooltip: pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-  #   plotOptions: pie:
-  #     allowPointSelect: true
-  #     cursor: 'pointer'
-  #     dataLabels: enabled: false
-  #     showInLegend: true
-  #   credits:
-  #        enabled: false
-  #   legend:
-  #     itemStyle:
-  #         color: '#969696'
-  #   series: [ {
-  #     type: 'pie'
-  #     name: '性别比例'
-  #     data: [
-  #       [
-  #         '男生'
-  #         60
-  #       ]
-  #       [
-  #         '女生'
-  #         40
-  #       ]
-  #     ]
-  #   } ]
+  refresh_course_stat = ->
+    duration = $("#quick-choice").val()
+    $.getJSON "/staff/statistics/client_stats?duration=" + duration, (data) ->
+      if data.success
+      else
+        $.page_notification "服务器出错，请稍后再试"
 
-  # $('#age-statistics').highcharts
-  #   chart:
-  #     plotBackgroundColor: null
-  #     plotBorderWidth: null
-  #     plotShadow: false
-  #   colors: ['#90c5fc', '#7fbaf7', '#67aaef', '#4898e7',
-  #                   '#3388df', '#227dda', '#FF9655', '#FFF263', '#6AF9C4']
-  #   title: text: null
-  #   tooltip: pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-  #   plotOptions: pie:
-  #     allowPointSelect: true
-  #     cursor: 'pointer'
-  #     dataLabels: enabled: false
-  #     showInLegend: true
-  #   credits:
-  #     enabled: false
-  #   legend:
-  #     layout: 'vertical'
-  #     align: 'right'
-  #     verticalAlign: 'middle'
-  #     itemStyle:
-  #         color: '#969696'
-  #   series: [ {
-  #     type: 'pie'
-  #     name: '年龄比例'
-  #     data: [
-  #       [
-  #         '0-3岁'
-  #         10
-  #       ]
-  #       [
-  #         '3-6岁'
-  #         15
-  #       ]
-  #       [
-  #         '6-9岁'
-  #         20
-  #       ]
-  #       [
-  #         '9-12岁'
-  #         25
-  #       ]
-  #       [
-  #         '12-15岁'
-  #         20
-  #       ]
-  #       [
-  #         '15-18岁'
-  #         10
-  #       ]
-  #     ]
-  #   } ]
+  refresh_course_stat()
 
-  # $('#nums-statistics').highcharts
-  #     title:
-  #       text: null
-  #     xAxis: 
-  #       title:
-  #         text: '周数'
-  #     yAxis:
-  #       title: text: '儿童数量(千)'
-  #       max: 10
-  #     tooltip: valueSuffix: '千'
-  #     credits:
-  #          enabled: false
-  #     legend:
-  #       enabled: false
-  #     series: [
-  #       {
-  #         data: [
-  #           1.0
-  #           2.3
-  #           2.8
-  #           3.2
-  #           4.5
-  #           6.0
-  #           6.6
-  #           7.5
-  #           8.5
-  #           9.7
-  #         ]
-  #       }
-  #     ]
-  
   $('#borrow-statistics').highcharts
       title:
         text: null
@@ -289,6 +180,7 @@ $ ->
           ]
         }
       ]
+
   $('#register-statistics').highcharts
       title:
         text: null

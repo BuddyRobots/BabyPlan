@@ -52,3 +52,4 @@ $ ->
             link.closest("tr").find(".access").show()
       )
     return false
+

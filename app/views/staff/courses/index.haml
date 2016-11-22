@@ -40,7 +40,7 @@
                         %th 上课时间
                         %th 上课地址
                         %th 主讲人
-                        %th 费用
+                        %th 费用（元）
                         %th 操&nbsp作
                     %tbody
                       - @course_insts[:data].each do |ci|
@@ -55,8 +55,6 @@
                               %a.set-available.link-available{:href => "javascript:void(0);"} 下架
                             - else
                               %a.set-available.link-unavailable{:href => "javascript:void(0);"} 上架
-                          
-
                 .select-page 
                   %span.totalitems= "共#{@course_insts[:total_page]}页,总计#{@course_insts[:total_number]}条"
                   %span.choice-page

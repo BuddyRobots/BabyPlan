@@ -5,7 +5,7 @@ class UserMobile::BooksController < UserMobile::ApplicationController
       @keyword = params[:keyword]
       @lower = params[:lower]
       @upper = params[:upper]
-      @books = Book.is_available.any_in(center_id: @current_user.client_centers.map { |e| e.id.to_s})
+      @books = Book.is_available.any_in(center_id: @current_user.client_centers.is_available.map { |e| e.id.to_s})
       if @keyword.present?
         @books = @books.where(name: /#{params[:keyword]}/)
       end
@@ -20,7 +20,7 @@ class UserMobile::BooksController < UserMobile::ApplicationController
     @keyword = params[:keyword]
     @lower = params[:lower]
     @upper = params[:upper]
-    @books = Book.is_available.any_in(center_id: @current_user.client_centers.map { |e| e.id.to_s})
+    @books = Book.is_available.any_in(center_id: @current_user.client_centers.is_available.map { |e| e.id.to_s})
     if @keyword.present?
       @books = @books.where(name: /#{params[:keyword]}/)
     end

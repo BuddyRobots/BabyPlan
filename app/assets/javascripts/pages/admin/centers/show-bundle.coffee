@@ -149,9 +149,6 @@ $ ->
     is_edit = true
 
   $(".finish-btn").click ->
-    is_edit = false
-    $(".notice-box").toggle()
-    $("#upload-photo").toggle()
     name = $("#name-input").val()
     address = $("#center-address").val()
     desc = editor.$txt.html()
@@ -170,6 +167,9 @@ $ ->
       (data) ->
         console.log data
         if data.success
+          is_edit = false
+          $(".notice-box").toggle()
+          $("#upload-photo").toggle()
           $(".edit-btn").toggle()
           $(".finish-btn").toggle()
           $(".introduce-details").toggle()
@@ -184,7 +184,10 @@ $ ->
           if has_photo
             $("#upload-photo-form").submit()
         else
-          $.page_notification "服务器出错，请稍后重试"
+          if data.code == CENTER_EXIST
+            $.page_notification "儿童中心已存在"
+          else
+            $.page_notification "服务器出错，请稍后重试"
     )
 
 
@@ -227,3 +230,10 @@ $ ->
     has_photo = true
     photo = $(".edit-photo")[0]
     photo.src = URL.createObjectURL(event.target.files[0])
+
+
+  if window.profile == "books"
+    $("#center-book").trigger('click')
+
+  if window.profile == "courses"
+    $("#center-class").trigger('click')
