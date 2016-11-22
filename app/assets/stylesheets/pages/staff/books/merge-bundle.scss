@@ -140,8 +140,11 @@ input, label {
     text-decoration: none;
     cursor: pointer;
   }
+  .add-over {
+    color: #999;
+  }
   .delete {
-    font-size: 12px;
+    font-size: 14px;
     color: #d70c19;
     text-decoration: none;
     cursor: pointer;

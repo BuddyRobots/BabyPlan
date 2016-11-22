@@ -13,7 +13,7 @@
     .btn.finish-btn{:type => "button"} 
       %img.ticker{:src => "/assets/managecenter/ticker.png"}
       完成
-    .btn.edit-btn{:type => "button"} 
+    .btn.edit-btn{:type => "button", "data-target" => "#QR-codeModal", "data-toggle" => "modal"} 
       %img.edit{:src => "/assets/managecenter/edit.png"}
       编辑
     .btn.QRcode-btn{:type => "button"}
@@ -187,4 +187,19 @@
      
 #editor-content.hide
   = @book.desc.html_safe
+
+
+#QR-codeModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
+  .modal-dialog
+    .modal-content
+      .modalheader
+        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", :src => "/assets/managecenter/close.png"}
+      .modal-body
+        %form.form-inline.form-div{:role => "form"}
+          .form-group
+            %label.control-label.code-label{:for => "borrow-num"} 二维码数量
+            %input.unclicked-box#code-num.form-control{:type => "text"}
+          .confirm-button
+            %button.btn#confirm.button-disabled{:href => "javascript:void(0);"} 确&nbsp定
+
 
