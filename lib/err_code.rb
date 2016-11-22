@@ -26,7 +26,8 @@ module ErrCode
   COURSE_CODE_EXIST = -23
   ACCOUNT_LOCKED = -24
   NOT_PAID = -25
-  REVIEW_NOT_EXIST = -25
+  REVIEW_NOT_EXIST = -26
+  BOOK_ALL_OFF_SHELF = -27
 
   def self.ret_false(code)
     msg = self.message(code)
@@ -89,6 +90,8 @@ module ErrCode
       "未完成报名"
     when REVIEW_NOT_EXIST
       "评论不存在"
+    when BOOK_ALL_OFF_SHELF
+      "该绘本已全部借出"
     else
       nil
     end
