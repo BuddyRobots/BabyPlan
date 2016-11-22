@@ -71,9 +71,10 @@
 .input-name {
 	font-weight: normal;
 }
-.form-inline {
+.form-group {
 	margin: 20px 0;
 	.form-control {
+		display: inline-block;
 		width: 500px;
 		margin-left: 10px;
 	}

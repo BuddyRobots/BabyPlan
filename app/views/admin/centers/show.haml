@@ -39,12 +39,12 @@
         #tab1.tab-pane.active
           .input-box.clearfix
             .input-left
-              %form.form-inline
+              .form-group
                 %label.input-caption 中心名称:
                 %span.unedit-box#name-span= @center.name
                 %span.edit-box
                   %input.input-area.form-control#name-input{:type => "text"}
-              %form.form-inline
+              .form-group
                 %label.input-caption 详细地址:
                 %span.unedit-box#address-span= @center.address
                 %span.edit-box

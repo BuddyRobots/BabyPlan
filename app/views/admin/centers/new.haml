@@ -20,10 +20,10 @@
     .manage-content
       .input-box.clearfix
         .input-left
-          %form.form-inline
+          .form-group
             %label.input-name 中心名称:
             %input.input-area.form-control#center-name{:type => "text"}
-          %form.form-inline
+          .form-group
             %label.input-name 详细地址:
             %input.input-area.form-control#center-address{:type => "text"}
         = form_tag("/", method: "post", multipart: true, id: "upload-photo-form", class: "hide") do
