@@ -47,16 +47,28 @@ a{
 .header {
 	position:relative;
 	width:100%;
-	.cloudblock {
-		width:100%;
-		max-width:640px;
-	}
+	text-align:center;
+	padding-top:3.13%;
+	padding-bottom:4.7%;
 	.back {
 		position:absolute;
-		top:20.3%;
-		left:7.5%;
+		top:15.9%;
+		left:2.345%;
 		width:9.375%;
-		max-width: 60px;
+		max-width:60px;
+	}
+	.cloud {
+		width:40.46875%;
+		max-width:259px;
+		padding:4.8% 0;
+		margin:0 auto;
+		background:url('/assets/mybook/cloud.png') no-repeat;
+		background-size:100%;
+		text-align:center;
+		p {
+			font-size: 3.6em;
+			color:#3e3e3e;
+		}
 	}
 }
 .caption {

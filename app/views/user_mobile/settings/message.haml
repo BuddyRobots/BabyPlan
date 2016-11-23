@@ -6,10 +6,10 @@
 - content_for :app_content do
   .content-area
     .header
-      %img.cloudblock{:src => "/assets/robotcourse/cloudblock.png"}
+      .cloud
+        %p 系统消息
       %a{:href => user_mobile_settings_path}
         %img.back{:src => "/assets/robotcourse/back.png"}
-    .caption 系统消息
     - if @messages.blank?
       .unfound
         %img.unfound-icon{:src => "/assets/web/cry.png"}

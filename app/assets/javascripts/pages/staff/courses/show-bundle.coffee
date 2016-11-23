@@ -76,6 +76,7 @@ $ ->
               {
                 color: '#90c5fc'
                 data: data.stat.num
+                pointStart: 1
               }
             ]
       
@@ -100,6 +101,7 @@ $ ->
               {
                 color: '#90c5fc'
                 data: data.stat.signin
+                pointStart: 1
               }
             ]
         if data.stat.signup_start_str != undefined && data.stat.signup_start_str != null
