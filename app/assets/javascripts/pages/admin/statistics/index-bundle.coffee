@@ -9,7 +9,7 @@ $ ->
             plotBackgroundColor: null
             plotBorderWidth: null
             plotShadow: false
-          colors: ['#90c5fc', '#ffa1a1', '#ED561B', '#DDDF00',
+          colors: ['#90c5fc', '#ffa1a1', '#a1aeff', '#DDDF00',
                           '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4']
           title: text: null
           tooltip: pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -45,7 +45,7 @@ $ ->
             plotBorderWidth: null
             plotShadow: false
           colors: ['#90c5fc', '#7fbaf7', '#67aaef', '#4898e7',
-                          '#3388df', '#227dda', '#FF9655', '#FFF263', '#6AF9C4']
+                          '#3388df', '#a1aeff', '#FF9655', '#FFF263', '#6AF9C4']
           title: text: null
           tooltip: pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
           plotOptions: pie:
@@ -109,6 +109,7 @@ $ ->
             series: [
               {
                 data: data.stat.num
+                pointStart: 1
                 # data: [
                 #   1.0
                 #   2.3
@@ -155,6 +156,7 @@ $ ->
               {
                 color: '#90c5fc'
                 data: data.stat.signup_num
+                pointStart: 1
               }
             ]
 
@@ -205,7 +207,7 @@ $ ->
           plotOptions: column:
             stacking: 'normal'
           credits:
-               enabled: false
+            enabled: false
           legend:
             enabled: false
           series: [
@@ -213,11 +215,13 @@ $ ->
               name: "政府补贴"
               color: '#227dda'
               data: data.stat.allowance
+              pointStart: 1
             }
             {
               name: "个人支付"
               color: '#90c5fc'
               data: data.stat.income
+              pointStart: 1
             }
           ]
       
@@ -312,11 +316,13 @@ $ ->
               {
                 name: '全部绘本'
                 color: '#90c5fc'
+                pointStart: 1
                 data: data.stat.stock_num
               }
               {
                 name: '借出绘本'
                 color: '#227dda'
+                pointStart: 1
                 data: data.stat.off_shelf_num
               }
             ]
