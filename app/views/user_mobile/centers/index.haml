@@ -5,8 +5,10 @@
 - content_for :app_content do
   .content-area
     .header
-      %a{:href => user_mobile_settings_path}
-        %img.user{:src => "/assets/kidscenter/user.png"}
+      %a{href: new_user_mobile_center_path}
+        %img.back{:src => "/assets/haidiancenter/back.png"}
+      / %a{:href => user_mobile_settings_path}
+      /   %img.user{:src => "/assets/kidscenter/user.png"}
       .input-div
         %input#input-box{:type => "text", value: @keyword}
         %a.icon-div{:href => "#"}
