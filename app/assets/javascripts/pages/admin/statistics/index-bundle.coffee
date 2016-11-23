@@ -341,7 +341,7 @@ $ ->
               previousPoint.update color: '#90c5fc'
             previousPoint = this
             this.update color: '#227dda'
-            $(".click-show-div").slideDown(1000)
+            # $(".click-show-div").slideDown(1000)
             return
           series: [ {
             name: '借阅数量'
