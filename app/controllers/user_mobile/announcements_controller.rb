@@ -4,6 +4,7 @@ class UserMobile::AnnouncementsController < UserMobile::ApplicationController
     @keyword = params[:keyword]
     if @current_user.client_centers.present?
       @announcements = Announcement.is_available.any_in(center_id: @current_user.client_centers.is_available.map { |e| e.id.to_s} + [nil])
+      @announcements = @announcements.desc(:created_at)
       if params[:keyword].present?
         @announcements = @announcements.where(title: /#{params[:keyword]}/)
       end
@@ -13,6 +14,7 @@ class UserMobile::AnnouncementsController < UserMobile::ApplicationController
 
   def more
     @announcements = Announcement.is_available.any_in(center_id: @current_user.client_centers.is_available.map { |e| e.id.to_s} + [nil])
+    @announcements = @announcements.desc(:created_at)
     if params[:keyword].present?
       @announcements = @announcements.where(title: /#{params[:keyword]}/)
     end
