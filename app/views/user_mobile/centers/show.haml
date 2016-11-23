@@ -1,8 +1,11 @@
 - content_for :app_head do
+  = javascript_include_tag "http://map.qq.com/api/js?v=2.exp"
   = javascript_include_tag "pages/user_mobile/centers/show-bundle"
   = stylesheet_link_tag "pages/user_mobile/centers/show-bundle", :media => "all"
   :javascript
     window.center_id = "#{@center.id.to_s}"
+    window.lat = "#{@center.lat}"
+    window.lng = "#{@center.lng}"
 
 - content_for :app_content do
   .content-area
@@ -11,14 +14,16 @@
       / %a{href: "#", onClick: "history.go(-1);return true;"}
       %a{href: new_user_mobile_center_path}
         %img.back{:src => "/assets/haidiancenter/back.png"}
+    .cloud
+      %p#center-name=@center.name
     .description
       %p
         = @center.desc.to_s.html_safe
-    .noticecaption-link
+    .cloud
       %p 详细地址
-    %p.linkaddress= @center.address
-    %a{:href => "#"}
-      %img.map{:src => "/assets/haidiancenter/map.jpg"}
+    %p#linkaddress= @center.address
+    .map-div
+      #map-container
     - if @follow
       %a.btn#cancel{:type => "button", href: "/user_mobile/centers/#{@center.id.to_s}/set_follow?follow=false"} 取消关注
     - else

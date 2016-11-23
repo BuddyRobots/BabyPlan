@@ -14,7 +14,7 @@ $ ->
     mobile_retval = $.regex.isMobile(mobile)
     console.log mobile_retval
     if mobile_retval == false
-      $.mobile_page_notification("帐号不存在", 1000)
+      $.mobile_page_notification("请正确输入账号", 1000)
       return
     $.postJSON(
       '/user_mobile/sessions',

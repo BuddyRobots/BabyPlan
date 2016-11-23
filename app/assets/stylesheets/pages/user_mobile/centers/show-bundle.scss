@@ -1,9 +1,11 @@
 html {
 	font-size: 16px;
+	height: 100%;
 }
 body {
 	font-family:"Microsoft YaHei";
 	font-size: 62.5%;
+	height: 100%;
 }
 body, p, img, div, ul, li, a, h3, br {
 	margin:0;
@@ -19,6 +21,8 @@ a{
 .content-area{
 	width:100%;
 	max-width:640px;
+	min-height: 100%;
+	overflow: auto;
 	margin:0 auto;
 	background: linear-gradient(
     45deg, 
@@ -27,6 +31,7 @@ a{
     #fef29c 50%, #fef29c 95%, 
     #fcc204 95%, #fcc204);
     background-size: 10px 10px;
+    padding-bottom: 13%;
 }
 .header {
 	position:relative;
@@ -52,8 +57,7 @@ a{
 }
 .description {
 	@extend .box-radius;
-	margin-top:7.82%;
-	margin-bottom:4.7%;
+	margin-top: 4.7%;
 	padding: 0 2.345%;
 	p {
 		font-size: 2.8em;
@@ -94,8 +98,11 @@ a{
 		text-indent: 2em;
 	}
 }
-
-.noticecaption-link {
+#center-name {
+	font-size: 3.6em;
+	color: #d70c19;
+}
+.cloud {
 	width:84.0625%;
 	max-width:538px;
 	margin:0 auto;
@@ -103,7 +110,8 @@ a{
 	background-size:100%;
 	background-position:center;
 	padding:7.5% 0;
-	margin-bottom:3.91%;
+	margin-top: 3.125%;
+	margin-bottom: 3.91%;
 	text-align:center;
 	p {
 		font-size:3.6em;
@@ -111,18 +119,12 @@ a{
 	}
 }
 
-.linkaddress {
+#linkaddress {
 	font-size:3em;
 	color:#333;
 	padding:0 2.35%;
 }
-.map {
-	width:95.625%;
-	max-width:612px;
-	display:block;
-	margin: 4.7% auto;
-}
-#follow, #cancel {
+#follow {
 	width: 100%;
 	background: #d70c19;
 	font-size: 3.6em;
@@ -130,8 +132,28 @@ a{
 	padding: 3.68%;
 	border-radius: 0;
 }
-
-
+#cancel {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	max-width: 640px;
+	background: #d70c19;
+	font-size: 3.6em;
+	color: #fff;
+	padding: 3%;
+	border-radius: 0;
+}
+.map-div {
+	width:95.625%;
+	max-width:612px;
+	margin: 4.7% auto;
+	margin-top: 1.57%;
+	font-size: 3em;
+}
+#map-container {
+	height: 13.933em;
+	width: 100%;
+}
 // .tag-choice {
 // 	width:70.3125%;
 // 	margin:0 auto;
