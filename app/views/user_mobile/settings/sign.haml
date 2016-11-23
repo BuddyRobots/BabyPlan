@@ -20,7 +20,10 @@
       - else
         .fail-div
           %p.fail 签到失败
-          %p.notice 您未报这门课程！
+          - if @err = "course_inst_not_exist"
+            %p.notice 课程不存在！
+          - else
+            %p.notice 您未报这门课程！
     .btn-div
       - if @success == true
         %a.btn#desc{href: "/user_mobile/courses/" + @course.id.to_s} 查看详情

@@ -26,7 +26,7 @@ $ ->
       $.page_notification "请输入标题"
       return
     content = editor.$txt.html()
-    if content == ""
+    if content.replace(/(<([^>]+)>)/ig, "").trim() == ""
       $.page_notification "请输入公告内容"
       return
     is_published = $("#publish-cb").is(":checked")

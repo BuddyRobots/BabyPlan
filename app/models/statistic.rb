@@ -34,8 +34,6 @@ class Statistic
       Statistic.create(type: Statistic::CLIENT_NUM, stat_date: stat_date, value: User.client.count)
     end
 
-
-
     # calculate statistics for each center
     Center.all.each do |e|
       e.calculate_daily_stats

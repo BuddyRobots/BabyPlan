@@ -11,6 +11,7 @@ class Review
 
   belongs_to :course_inst
   belongs_to :book
+  belongs_to :course
   belongs_to :client, class_name: "User", inverse_of: :reviews
   belongs_to :staff, class_name: "User", inverse_of: :audit_reviews
 

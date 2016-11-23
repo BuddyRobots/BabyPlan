@@ -48,6 +48,7 @@ class UserMobile::SettingsController < UserMobile::ApplicationController
   end
 
   def sign
+    @err = params[:err]
     @success = params[:success].to_s == "true"
     @course = CourseInst.where(id: params[:course_id]).first
     @class_num = params[:class_num]

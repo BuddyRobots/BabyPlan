@@ -161,5 +161,87 @@ class Book
   end
 
   def self.book_stats(duration, start_date, end_date)
+    if duration == -1
+      start_time_ary = start_date.split('-').map { |e| e.to_i }
+      start_time = Time.mktime(start_time_ary[0], start_time_ary[1], start_time_ary[2]).to_i
+      end_time_ary = end_date.split('-').map { |e| e.to_i }
+      end_time = Time.mktime(end_time_ary[0], end_time_ary[1], end_time_ary[2]).to_i
+      duration = [0, end_time - start_time].max
+    else
+      start_time = Time.now.to_i - duration
+      end_time = Time.now.to_i
+    end
+    duration_days = duration / 1.days.to_i
+    if duration_days < 15
+      time_unit = "天数"
+      day = 1
+    elsif duration_days < 120
+      time_unit = "周数"
+      day = 7
+    else
+      time_unit = "月数"
+      day = 30
+    end
+    borrow_num = Statistic.where(type: Statistic::BORROW_NUM).
+                           where(:stat_date.gt => start_time).
+                           where(:stat_date.lt => end_time).
+                           desc(:stat_date).map { |e| e.value }
+    borrow_num = borrow_num.each_slice(day).map { |a| a }
+    borrow_num = borrow_num.map { |e| e.sum } .reverse
+    stock_num = Statistic.where(type: Statistic::STOCK).
+                          where(:stat_date.gt => start_time).
+                          where(:stat_date.lt => end_time).
+                          desc(:stat_date).map { |e| e.value }
+    stock_num = stock_num.each_slice(day).map { |a| a }
+    stock_num = stock_num.map { |e| e.sum } .reverse
+    off_shelf_num = Statistic.where(type: Statistic::OFF_SHELF).
+                              where(:stat_date.gt => start_time).
+                              where(:stat_date.lt => end_time).
+                              desc(:stat_date).map { |e| e.value }
+    off_shelf_num = off_shelf_num.each_slice(day).map { |a| a }
+    off_shelf_num = off_shelf_num.map { |e| e.sum } .reverse
+
+
+    max_num = 5
+    borrow_center_hash = { }
+    Center.all.each do |c|
+      borrow_num = c.statistics.where(type: Statistic::BORROW_NUM).
+                                where(:stat_date.gt => start_time).
+                                where(:stat_date.lt => end_time).
+                                desc(:stat_date).map { |e| e.value }
+      borrow_center_hash[c.name] = borrow_num.sum
+    end
+    borrow_center = borrow_center_hash.to_a
+    borrow_center = borrow_center.sort { |x, y| -x[1] <=> -y[1] }
+    if borrow_center.length > max_num
+      ele = ["其他", borrow_center[max_num - 1..-1].map { |e| e[1] } .sum]
+      borrow_center = borrow_center[0..max_num - 2] + [ele]
+    end
+    {
+      total_borrow: borrow_num.sum,
+      borrow_time_unit: time_unit,
+      borrow_num: borrow_num,
+      stock_time_unit: time_unit,
+      stock_num: stock_num,
+      off_shelf_num: off_shelf_num,
+      borrow_center: borrow_center
+    }
+  end
+
+  def self.book_rank(max_num = 5)
+    books = Book.all.map do |e|
+      reviews = e.reviews
+      score = reviews.map { |r| r.score || 0 } .sum * 1.0
+      {
+        id: e.id.to_s,
+        name: e.name,
+        borrow_num: e.book_borrows.length,
+        review_score: (reviews.blank? ? 0 : score / reviews.length).round(1)
+      }
+    end
+    {
+      review_rank: books.sort { |x, y| -x[:review_score] <=> -y[:review_score] } [0...[max_num, books.length - 1].min],
+      borrow_rank: books.sort { |x, y| -x[:borrow_num] <=> -y[:borrow_num] } [0...[max_num, books.length - 1].min],
+    }
   end
 end
