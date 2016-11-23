@@ -59,6 +59,13 @@ $ ->
     title = $("#input-caption").val()
     content = editor.$txt.html()
 
+    if title == ""
+      $.page_notification "请输入标题"
+      return
+    if content.replace(/(<([^>]+)>)/ig, "").trim() == ""
+      $.page_notification "请输入公告内容"
+      return
+
     $.putJSON(
       '/admin/announcements/' + window.aid,
       {
