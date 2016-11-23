@@ -5,6 +5,7 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
     @keyword = params[:keyword]
     if @current_user.client_centers.present?
       @courses = CourseInst.is_available.any_in(center_id: @current_user.client_centers.is_available.map { |e| e.id.to_s})
+      @courses = @courses.desc(:created_at)
       if params[:keyword].present?
         @courses = @courses.where(name: /#{params[:keyword]}/)
       end
@@ -14,6 +15,7 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
 
   def more
     @courses = CourseInst.is_available.any_in(center_id: @current_user.client_centers.is_available.map { |e| e.id.to_s})
+    @courses = @courses.desc(:created_at)
     if params[:keyword].present?
       @courses = @courses.where(name: /#{params[:keyword]}/)
     end

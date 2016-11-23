@@ -37,7 +37,7 @@
                     %img.visit{:src => e.photo.present? ? e.photo.path : "/assets/banner.png", width: "190", height: "129"}
                   %p.caption-header
                     %span.caption= link_to e.title, "/admin/announcements/#{e.id.to_s}"
-                    %span#time-flag= e.created_at.strftime("%Y-%m-%d %H-%M")
+                    %span#time-flag= e.created_at.strftime("%Y-%m-%d %H:%M")
                     %a.undeclared{:href => "javascript:void(0);"}= e.status_str
                   .desc
                     = e.plain_text

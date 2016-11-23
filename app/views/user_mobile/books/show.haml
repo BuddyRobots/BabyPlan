@@ -55,7 +55,8 @@
         %p.center= @book.center.name
       .item
         %span 中心剩余
-        %span.residual= @book.stock - @book.book_borrows.count
+        / %span.residual= @book.stock - @book.book_borrows.count
+        %span.residual= [0, @book.stock - @book.book_borrows.where(status: BookBorrow::NORMAL, return_at: nil).length].max
         %span 本
       .item
         %span 地址：

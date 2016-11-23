@@ -10,9 +10,11 @@ class Staff::AnnouncementsController < Staff::ApplicationController
     @keyword = params[:keyword]
     params[:page] = params[:local_page]
     local_eles = @keyword.present? ? current_center.announcements.where(title: /#{@keyword}/) : current_center.announcements.all
+    local_eles = local_eles.desc(:created_at)
     @local_eles = auto_paginate(local_eles)
     params[:page] = params[:global_page]
     global_eles = @keyword.present? ? Announcement.where(center: nil).where(title: /#{@keyword}/) : Announcement.where(center: nil)
+    global_eles = global_eles.desc(:created_at)
     @global_eles = auto_paginate(global_eles)
 
     @profile = params[:profile]
