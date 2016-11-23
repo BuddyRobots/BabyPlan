@@ -40,6 +40,7 @@ class CourseParticipate
   field :expired_at, type: Integer, default: -1
 
   belongs_to :course_inst
+  belongs_to :course
   belongs_to :client, class_name: "User", inverse_of: :course_participates
 
   scope :paid, ->{ where(trade_state: "SUCCESS") }
@@ -61,9 +62,11 @@ class CourseParticipate
   end
 
   def self.create_new(client, course_inst)
-    cp = self.create({order_id: Util.random_str(32), price_pay: course_inst.price_pay})
+    cp = self.create(order_id: Util.random_str(32),
+                     price_pay: course_inst.price_pay)
     cp.course_inst = course_inst
     cp.client = client
+    cp.course = course_inst.course
     cp.save
     expired_at = Time.now + 1.days
     cp.update_attributes({expired_at: expired_at.to_i})

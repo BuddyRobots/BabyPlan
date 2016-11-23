@@ -134,13 +134,15 @@ $ ->
     end_date = $("#datepicker-2").val()
     $.getJSON "/admin/statistics/course_stats?duration=" + duration + "&start_date=" + start_date + "&end_date=" + end_date, (data) ->
       if data.success
+        $("#total-signup").text(data.stat.total_signup)
+        $("#total-money").text(data.stat.total_money)
+
         $('#register-statistics').highcharts
             title:
               text: null
             xAxis: 
               tickInterval: 5
               title:
-                # text: '周数'
                 text: data.stat.signup_time_unit
             yAxis:
               title: text: '报名数量(人次)'
@@ -153,20 +155,6 @@ $ ->
               {
                 color: '#90c5fc'
                 data: data.stat.signup_num
-                # data: [
-                #   1.0
-                #   2.3
-                #   2.8
-                #   3.2
-                #   4.5
-                #   6.0
-                #   6.6
-                #   7.5
-                #   8.5
-                #   15.3
-                #   32
-                #   55
-                # ]
               }
             ]
 
@@ -208,7 +196,7 @@ $ ->
           title: text: null
           xAxis:
             title:
-              text: '周数' 
+              text: data.stat.income_time_unit
           yAxis:
             min: 0
             title: text: '课程收入(元)'
@@ -225,25 +213,11 @@ $ ->
               name: "政府补贴"
               color: '#227dda'
               data: data.stat.allowance
-              # data: [
-              #   2
-              #   2
-              #   3
-              #   2
-              #   1
-              # ]
             }
             {
               name: "个人支付"
               color: '#90c5fc'
               data: data.stat.income
-              # data: [
-              #   5
-              #   6
-              #   7
-              #   9
-              #   5
-              # ]
             }
           ]
       
@@ -256,9 +230,9 @@ $ ->
             type: 'category'
           yAxis:
             min: 0
-            title: text: '课程收入(万元)'
+            title: text: '课程收入(元)'
           legend: enabled: false
-          tooltip: valueSuffix: '万元'
+          tooltip: valueSuffix: '元'
           credits:
                enabled: false
           plotOptions: series: point: events: click: (event) ->
@@ -270,6 +244,108 @@ $ ->
           series: [ {
             name: '课程收入'
             data: data.stat.income_center
+          } ]
+
+      else
+        $.page_notification "服务器出错，请稍后再试"
+
+  refresh_course_stat()
+
+  $("#course-quick-choice").change ->
+    $("#datepicker-1").val("")
+    $("#datepicker-2").val("")
+    refresh_course_stat()
+  $("#course-search-btn").click ->
+    $("#course-quick-choice").val(-1)
+    refresh_course_stat()
+
+  refresh_book_stat = ->
+    duration = $("#book-quick-choice").val()
+    start_date = $("#datepicker-3").val()
+    end_date = $("#datepicker-4").val()
+    $.getJSON "/admin/statistics/book_stats?duration=" + duration + "&start_date=" + start_date + "&end_date=" + end_date, (data) ->
+      if data.success
+        $("#total-borrow").text(data.stat.total_borrow)
+        $('#borrow-statistics').highcharts
+            title:
+              text: null
+            xAxis: 
+              type: 'datetime'
+              tickInterval: 0
+              title:
+                text: data.stat.borrow_time_unit
+            yAxis:
+              title: text: '借阅数量(人次)'
+            tooltip: valueSuffix: '人次'
+            credits:
+                 enabled: false
+            legend:
+              enabled: false
+            series: [
+              {
+                color: '#90c5fc'
+                data: data.stat.borrow_num
+                pointStart: Date.UTC(2016, 9, 1),
+                pointInterval: 24 * 3600 * 1000
+              }
+            ]
+
+        $('#collect-statistics').highcharts
+            title:
+              text: null
+            xAxis: 
+              tickInterval: 5
+              title:
+                # text: '周数'
+                text: data.stock_time_unit
+            yAxis:
+              title: text: '书籍数量(本)'
+            tooltip: valueSuffix: '本'
+            credits:
+                 enabled: false
+            legend:
+              enabled: true
+              verticalAlign: 'top'
+              itemStyle:
+                color: '#969696'
+            series: [
+              {
+                name: '全部绘本'
+                color: '#90c5fc'
+                data: data.stat.stock_num
+              }
+              {
+                name: '借出绘本'
+                color: '#227dda'
+                data: data.stat.off_shelf_num
+              }
+            ]
+      
+        previousPoint = null
+        $('#center-statistics').highcharts
+          chart: type: 'column'
+          title: text: null
+          xAxis:
+            type: 'category'
+          yAxis:
+            min: 0
+            title: text: '借阅数量(人次)'
+          legend: enabled: false
+          tooltip: valueSuffix: '人次'
+          credits:
+               enabled: false
+          plotOptions: series: point: events: click: (event) ->
+            # if $(".click-show-div")
+            #   $(".click-show-div").slideUp(1000)
+            if previousPoint
+              previousPoint.update color: '#90c5fc'
+            previousPoint = this
+            this.update color: '#227dda'
+            $(".click-show-div").slideDown(1000)
+            return
+          series: [ {
+            name: '借阅数量'
+            data: data.stat.borrow_center
             # data: [
             #   [
             #     '海淀区'
@@ -317,279 +393,111 @@ $ ->
             #   ]
             # ]
           } ]
-
       else
         $.page_notification "服务器出错，请稍后再试"
 
-  refresh_book_stat = ->
-    duration = $("#book-quick-choice").val()
-    start_date = $("#datepicker-3").val()
-    end_date = $("#datepicker-4").val()
-    $.getJSON "/staff/statistics/book_stats?duration=" + duration + "&start_date=" + start_date + "&end_date=" + end_date, (data) ->
-      if data.success
-        $('#borrow-statistics').highcharts
-            title:
-              text: null
-            xAxis: 
-              type: 'datetime'
-              tickInterval: 0
-              title:
-                text: '日期'
-            yAxis:
-              title: text: '借阅数量(人次)'
-            tooltip: valueSuffix: '人次'
-            credits:
-                 enabled: false
-            legend:
-              enabled: false
-            series: [
-              {
-                color: '#90c5fc'
-                data: [
-                  1.0
-                  2.3
-                  2.8
-                  3.2
-                  4.5
-                  6.0
-                  6.6
-                  7.5
-                  8.5
-                  15.3
-                  32
-                  55
-                ]
-                pointStart: Date.UTC(2016, 9, 1),
-                pointInterval: 24 * 3600 * 1000
-              }
-            ]
+  refresh_book_stat()
 
-        $('#collect-statistics').highcharts
-            title:
-              text: null
-            xAxis: 
-              tickInterval: 5
-              title:
-                text: '周数'
-            yAxis:
-              title: text: '书籍数量(本)'
-            tooltip: valueSuffix: '本'
-            credits:
-                 enabled: false
-            legend:
-              enabled: true
-              verticalAlign: 'top'
-              itemStyle:
-                color: '#969696'
-            series: [
-              {
-                name: '全部绘本'
-                color: '#90c5fc'
-                data: [
-                  1.0
-                  2.3
-                  2.8
-                  3.2
-                  4.5
-                  6.0
-                  6.6
-                  7.5
-                  8.5
-                  15.3
-                  32
-                  55
-                ]
-              }
-              {
-                name: '借出绘本'
-                color: '#227dda'
-                data: [
-                  5
-                  8
-                  11
-                  15
-                  20
-                  23
-                  26
-                  32
-                  40
-                  49
-                  55
-                  70
-                ]
-              }
-            ]
-      else
-        $.page_notification "服务器出错，请稍后再试"
+  $("#book-quick-choice").change ->
+    $("#datepicker-3").val("")
+    $("#datepicker-4").val("")
+    refresh_book_stat()
+  $("#book-search-btn").click ->
+    $("#book-quick-choice").val(-1)
+    refresh_book_stat()
 
+  # $('#center-borrow-statistics').highcharts
+  #     title:
+  #       text: null
+  #     xAxis: 
+  #       type: 'datetime'
+  #       tickInterval: 0
+  #       title:
+  #         text: '日期'
+  #     yAxis:
+  #       title: text: '借阅数量(人次)'
+  #     tooltip: valueSuffix: '人次'
+  #     credits:
+  #          enabled: false
+  #     legend:
+  #       enabled: false
+  #     series: [
+  #       {
+  #         color: '#90c5fc'
+  #         data: [
+  #           1.0
+  #           2.3
+  #           2.8
+  #           3.2
+  #           4.5
+  #           6.0
+  #           6.6
+  #           7.5
+  #           8.5
+  #           15.3
+  #           32
+  #           55
+  #         ]
+  #         pointStart: Date.UTC(2016, 9, 1),
+  #         pointInterval: 24 * 3600 * 1000
+  #       }
+  #     ]
 
-  previousPoint = null
-  $('#center-statistics').highcharts
-    chart: type: 'column'
-    title: text: null
-    xAxis:
-      type: 'category'
-    yAxis:
-      min: 0
-      title: text: '借阅数量(万人次)'
-    legend: enabled: false
-    tooltip: valueSuffix: '万人次'
-    credits:
-         enabled: false
-    plotOptions: series: point: events: click: (event) ->
-      if $(".click-show-div")
-        $(".click-show-div").slideUp(1000)
-      if previousPoint
-        previousPoint.update color: '#90c5fc'
-      previousPoint = this
-      this.update color: '#227dda'
-      $(".click-show-div").slideDown(1000)
-      return
-    series: [ {
-      name: '借阅数量'
-      data: [
-        [
-          '海淀区'
-          3.9
-        ]
-        [
-          '昌平区'
-          16.1
-        ]
-        [
-          '朝阳区'
-          14.2
-        ]
-        [
-          '大兴区'
-          14.0
-        ]
-        [
-          '东城区'
-          12.5
-        ]
-        [
-          '西城区'
-          12.1
-        ]
-        [
-          '朝阳区'
-          11.8
-        ]
-        [
-          '西城区'
-          11.7
-        ]
-        [
-          '东城区'
-          11.1
-        ]
-        [
-          '大兴区'
-          11.1
-        ]
-        [
-          '其他'
-          10.5
-        ]
-      ]
-    } ]
-
-
-  $('#center-borrow-statistics').highcharts
-      title:
-        text: null
-      xAxis: 
-        type: 'datetime'
-        tickInterval: 0
-        title:
-          text: '日期'
-      yAxis:
-        title: text: '借阅数量(人次)'
-      tooltip: valueSuffix: '人次'
-      credits:
-           enabled: false
-      legend:
-        enabled: false
-      series: [
-        {
-          color: '#90c5fc'
-          data: [
-            1.0
-            2.3
-            2.8
-            3.2
-            4.5
-            6.0
-            6.6
-            7.5
-            8.5
-            15.3
-            32
-            55
-          ]
-          pointStart: Date.UTC(2016, 9, 1),
-          pointInterval: 24 * 3600 * 1000
-        }
-      ]
-
-  $('#center-collect-statistics').highcharts
-      title:
-        text: null
-      xAxis: 
-        tickInterval: 5
-        title:
-          text: '周数'
-      yAxis:
-        title: text: '书籍数量(本)'
-      tooltip: valueSuffix: '本'
-      credits:
-           enabled: false
-      legend:
-        enabled: true
-        verticalAlign: 'top'
-        itemStyle:
-          color: '#969696'
-      series: [
-        {
-          name: '全部绘本'
-          color: '#90c5fc'
-          data: [
-            1.0
-            2.3
-            2.8
-            3.2
-            4.5
-            6.0
-            6.6
-            7.5
-            8.5
-            15.3
-            32
-            55
-          ]
-        }
-        {
-          name: '借出绘本'
-          color: '#227dda'
-          data: [
-            5
-            8
-            11
-            15
-            20
-            23
-            26
-            32
-            40
-            49
-            55
-            70
-          ]
-        }
-      ]
-
-
+  # $('#center-collect-statistics').highcharts
+  #     title:
+  #       text: null
+  #     xAxis: 
+  #       tickInterval: 5
+  #       title:
+  #         text: '周数'
+  #     yAxis:
+  #       title: text: '书籍数量(本)'
+  #     tooltip: valueSuffix: '本'
+  #     credits:
+  #          enabled: false
+  #     legend:
+  #       enabled: true
+  #       verticalAlign: 'top'
+  #       itemStyle:
+  #         color: '#969696'
+  #     series: [
+  #       {
+  #         name: '全部绘本'
+  #         color: '#90c5fc'
+  #         data: [
+  #           1.0
+  #           2.3
+  #           2.8
+  #           3.2
+  #           4.5
+  #           6.0
+  #           6.6
+  #           7.5
+  #           8.5
+  #           15.3
+  #           32
+  #           55
+  #         ]
+  #       }
+  #       {
+  #         name: '借出绘本'
+  #         color: '#227dda'
+  #         data: [
+  #           5
+  #           8
+  #           11
+  #           15
+  #           20
+  #           23
+  #           26
+  #           32
+  #           40
+  #           49
+  #           55
+  #           70
+  #         ]
+  #       }
+  #     ]
 
   $( "#datepicker-1" ).datepicker({
         changeMonth: true,
