@@ -84,7 +84,7 @@ class Weixin
         {
           "type" => "view", 
           "name" => "我", 
-          "url" => "http://babyplan.bjfpa.org.cn"
+          "url" => "http://babyplan.bjfpa.org.cn/user_mobile/sessions"
         }
       ]
     }
