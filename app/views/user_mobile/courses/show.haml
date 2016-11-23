@@ -70,7 +70,7 @@
           %span= @course.address
     .content
       #map-container
-    - if @course_participate.nil?
+    - if @course_participate.nil? || @course_participate.prepay_id.blank?
       - if @course.status == CourseInst::OVER
         %button.btn.unclick-btn{:type => "button"} 已结束
       - elsif @course.capacity <= @course.effective_signup_num

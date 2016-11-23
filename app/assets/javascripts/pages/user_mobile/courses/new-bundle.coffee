@@ -16,8 +16,16 @@ $ ->
             # redirect to the result page
             location.href = "/user_mobile/courses/" + window.course_id + '/pay_success'
           )
+      else if res.err_msg == 'get_brand_wcpay_request:fail'
+        $.postJSON(
+          '/user_mobile/courses/' + window.course_participate_id + '/pay_failed',
+          { },
+          (data) ->
+            # redirect to the result page
+            location.href = "/user_mobile/courses/" + window.course_id
+          )
       else
-        # do nothing
+        # user cancels, do nothing
       return
     return
 
