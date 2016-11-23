@@ -202,9 +202,6 @@ Rails.application.routes.draw do
       end
     end
     resources :courses do
-      member do
-        get :pay_success
-      end
       collection do
         get :review
         post :notify
@@ -212,7 +209,9 @@ Rails.application.routes.draw do
         get :more
       end
       member do
+        get :pay_success
         post :pay_finished
+        post :pay_failed
         post :favorite
       end
     end

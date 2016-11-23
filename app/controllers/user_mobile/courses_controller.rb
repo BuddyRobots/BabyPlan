@@ -24,7 +24,6 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
     render json: retval_wrapper({more: @courses}) and return
   end
 
-  # course_show
   def show
     @back = params[:back]
     @course = CourseInst.where(id: params[:id]).first
@@ -57,6 +56,12 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
   def pay_finished
     @course_participate = CourseParticipate.where(id: params[:id]).first
     @course_participate.update_attributes({pay_finished: true})
+    render json: retval_wrapper(nil) and return
+  end
+
+  def pay_failed
+    @course_participate = CourseParticipate.where(id: params[:id]).first
+    @course_participate.renew
     render json: retval_wrapper(nil) and return
   end
 
