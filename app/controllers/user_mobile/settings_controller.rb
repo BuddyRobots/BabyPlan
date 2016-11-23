@@ -21,12 +21,10 @@ class UserMobile::SettingsController < UserMobile::ApplicationController
     render json: retval_wrapper(nil) and return
   end
 
-  # systemmessage
   def message
     @messages = @current_user.messages.desc(:created_at)
   end
 
-  # set
   def account
   end
 
