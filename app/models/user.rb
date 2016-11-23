@@ -230,7 +230,7 @@ class User
 
   def can_review_on(ele)
     if (ele.class == CourseInst)
-      return self.course_participates.map { |e| e.course_inst } .include? ele
+      return self.course_participates.where(trade_state: "SUCCESS").map { |e| e.course_inst } .include? ele
     end
     if (ele.class == Book)
       return self.book_borrows.map { |e| e.book } .include? ele
