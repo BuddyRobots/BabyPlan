@@ -18,7 +18,7 @@ $ ->
           colors: ['#90c5fc', '#ffa1a1', '#ED561B', '#DDDF00',
                           '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4']
           title: text: null
-          tooltip: pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+          tooltip: pointFormat: '{series.name}: <b>{point.y}</b>'
           plotOptions: pie:
             allowPointSelect: true
             cursor: 'pointer'
@@ -28,7 +28,7 @@ $ ->
                enabled: false
           series: [ {
             type: 'pie'
-            name: '性别比例'
+            name: '人数'
             data: data.stat.gender
           } ]
       
@@ -40,7 +40,7 @@ $ ->
           colors: ['#90c5fc', '#7fbaf7', '#67aaef', '#4898e7',
                           '#3388df', '#227dda', '#FF9655', '#FFF263', '#6AF9C4']
           title: text: null
-          tooltip: pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+          tooltip: pointFormat: '{series.name}: <b>{point.y}</b>'
           plotOptions: pie:
             allowPointSelect: true
             cursor: 'pointer'
@@ -54,7 +54,7 @@ $ ->
             verticalAlign: 'middle'
           series: [ {
             type: 'pie'
-            name: '年龄比例'
+            name: '人数'
             data: data.stat.age
           } ]
       
