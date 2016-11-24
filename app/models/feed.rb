@@ -70,11 +70,11 @@ class Feed
 
   def img_src
     if self.course_inst.present?
-      self.course_inst.photo.nil? ? "/assets/web/course.png" : self.course_inst.photo.path
+      self.course_inst.photo.nil? ? ActionController::Base.helpers.asset_path("web/course.png") : self.course_inst.photo.path
     elsif self.book.present?
-      self.book.cover.nil? ? "/assets/web/book.png" : self.book.cover.path
+      self.book.cover.nil? ? ActionController::Base.helpers.asset_path("web/book.png") : self.book.cover.path
     else
-      self.announcement.photo.nil? ? "/assets/web/announcement.png" : self.announcement.photo.path
+      self.announcement.photo.nil? ? ActionController::Base.helpers.asset_path("web/announcement.png") : self.announcement.photo.path
     end
   end
 

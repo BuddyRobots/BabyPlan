@@ -13,19 +13,19 @@
         - @announcements.each do |e|
           .content{data: {id: e.id.to_s}}
             .left-div
-              %img.visit{:src => e.photo.nil? ? "/assets/web/announcement.png" : e.photo.path}
+              %img.visit{:src => e.photo.nil? ? asset_path("web/announcement.png") : e.photo.path}
             .right-div
-              %img.icon{:src => "/assets/kidscenter/gao.png"}
+              %img.icon{src: asset_path("kidscenter/gao.png")}
               %p.caption= e.title
               %p.message= truncate(strip_tags(e.content).strip(), length: 50)
               .location-div
-                %img.location{:src => "/assets/web/location.png"}
+                %img.location{src: asset_path("web/location.png")}
                 %span.center= e.center.present? ? e.center.name : "所有儿童中心"
         .render-more
           %p 加载更多 
         .load
-          %img.loading{:src => "/assets/loading.gif"}
+          %img.loading{src: asset_path("loading.gif")}
       - else
         .unfound
-          %img.unfound-icon{:src => "/assets/web/cry.png"}
+          %img.unfound-icon{src: asset_path("web/cry.png")}
  

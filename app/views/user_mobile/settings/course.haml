@@ -9,23 +9,23 @@
       .cloud
         %p 我的课程
       %a{:href => user_mobile_settings_path}
-        %img.back{:src => "/assets/mycourse/back.png"}
+        %img.back{src: asset_path("mycourse/back.png")}
     - if @courses_participates.present?
       - @courses_participates.each do |e|
         .details{data: {id: e.course_inst.id.to_s}}
           .left-div
-            %img.visit{:src => e.course_inst.photo.nil? ? "/assets/banner.png" : e.course_inst.photo.path}
+            %img.visit{:src => e.course_inst.photo.nil? ? asset_path("banner.png") : e.course_inst.photo.path}
           .right-div
             %p.caption 
               = e.course_inst.name || e.course_inst.course.name
               / %span#unpaid= e.status_str
             %p.article= truncate(strip_tags(e.course_inst.course.desc).strip(), length: 50)
             .location-div
-              %img.location{:src => "/assets/web/location.png"}
+              %img.location{src: asset_path("web/location.png")}
               %span.center= e.course_inst.center.name
     - else
       .undiscover
-        %img.icon{:src => "/assets/web/cry.png"}
+        %img.icon{src: asset_path("web/cry.png")}
 
 
     / .details

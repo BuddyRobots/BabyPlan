@@ -7,18 +7,18 @@
 - content_for :app_content do
   .content-area
     .header
-      %img.crocodile{:src => @book.cover.present? ? @book.cover.path : "/assets/web/book.png"}
+      %img.crocodile{:src => @book.cover.present? ? @book.cover.path : asset_path("web/book.png")}
       / %a{:href => @back == "setting" ? "/user_mobile/settings/book" : "/user_mobile/books"}
       %a{:href => book_back_url(@back)}
-        %img.back{:src => "/assets/back.png"}
+        %img.back{src: asset_path("back.png")}
     .right-float
       %a.a-div#concern{:href => "javascript:void(0);"}
         - if @current_user.favorite_on(@book)
-          %img.smallheart{:src => "/assets/concern.png", data: {fav: "false"}}
+          %img.smallheart{src: asset_path("concern.png"), data: {fav: "false"}}
         - else
-          %img.smallheart{:src => "/assets/cancel-concern.png", data: {fav: "true"}}
+          %img.smallheart{src: asset_path("cancel-concern.png"), data: {fav: "true"}}
       %a.a-div{:href => user_mobile_reviews_path + "?back=" + @back.to_s + "&review_type=book&book_id=" + @book.id.to_s}
-        %img.dialog{:src => "/assets/pinglun.png"}
+        %img.dialog{src: asset_path("pinglun.png")}
       %p.num= @book.reviews.public_and_mine(@current_user).count.to_s
     .boxtitle
       .bookcloud

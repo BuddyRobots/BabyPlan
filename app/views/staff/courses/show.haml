@@ -13,22 +13,22 @@
 .content-area
   .manage-content
     .btn.finish-btn{:type => "button"} 
-      %img.ticker{:src => "/assets/managecenter/ticker.png"}
+      %img.ticker{src: asset_path("managecenter/ticker.png")}
       完成
     .btn.edit-btn{:type => "button"} 
-      %img.edit{:src => "/assets/managecenter/edit.png"}
+      %img.edit{src: asset_path("managecenter/edit.png")}
       编辑
     - if @course_inst.available == true
       .btn.unshelve-btn.available{:type => "button"} 
-        %img.end{:src => "/assets/managecenter/unshelve.png"}
+        %img.end{src: asset_path("managecenter/unshelve.png")}
         %span 下架
     - else
       .btn.unshelve-btn.unavailable{:type => "button"} 
-        %img.end{:src => "/assets/managecenter/shelve.png"}
+        %img.end{src: asset_path("managecenter/shelve.png")}
         %span 上架
     .tabbable
       %a{:href => "/staff/courses"}
-        %img.back{:src => "/assets/web/tab-back.png"}
+        %img.back{src: asset_path("web/tab-back.png")}
       %ul.nav.nav-tabs
         %li.active
           %a#course-message{"data-toggle" => "tab", :href => "#tab1"} 课程信息
@@ -59,11 +59,11 @@
                 %span.edit-box
                   %input.input-area.form-control#course-address{:type => "text"}
             .photo
-              %img.unedit-photo{:src => @course_inst.photo.nil? ? "/assets/banner.png" : @course_inst.photo.path }
+              %img.unedit-photo{:src => @course_inst.photo.nil? ? asset_path("banner.png") : @course_inst.photo.path }
               = form_tag("/staff/courses/" + @course_inst.id.to_s + "/upload_photo", method: "post", multipart: true, id: "upload-photo-form", class: "hide") do
                 = file_field_tag "photo_file", { class: "hide", accept: ".jpg,.png" }
               %a#upload-photo{href: "javascript:void(0);"}
-                %img.edit-photo{:src => "/assets/web/photo.png"}
+                %img.edit-photo{src: asset_path("web/photo.png")}
 
           .controls.controls-row
             %label.input-caption 开课编号:
@@ -116,7 +116,7 @@
         #tab2.tab-pane
           - if @participates[:data].blank?
             .undiscover
-              %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
+              %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
               %span.undiscover-message 抱歉！暂无查找信息
           - else
             .table-box
@@ -177,18 +177,18 @@
           /     %input#inlineCheckbox2{:type => "checkbox", :value => "option2"} 已公开
           - if @reviews[:data].blank?
             .undiscover
-              %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
+              %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
               %span.undiscover-message 抱歉！暂无查找信息
           - else
             .user-review-box
               - @reviews[:data].each do |r|
                 .book-description
                   .user-item.clearfix
-                    %img.book-img{:src => r.client.avatar.present? ? r.client.avatar.path : "/assets/web/boy.png"}
+                    %img.book-img{:src => r.client.avatar.present? ? r.client.avatar.path : asset_path("web/boy.png")}
                     %p.user-name
                       %span= r.client.name
                       - r.score.times do
-                        %img.star-img{:src => "/assets/managecenter/star.png"}
+                        %img.star-img{src: asset_path("managecenter/star.png")}
                     %p.date= r.created_at.strftime("%Y-%m-%d %H:%M")
                     %p.user-review-content= r.content
                     - if r.is_private
@@ -210,7 +210,7 @@
         #tab4.tab-pane
           - if @course_inst.course_participates.where(trade_state: "SUCCESS").blank?
             .undiscover
-              %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
+              %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
               %span.undiscover-message 抱歉！没有学员报名
           - else
             .sign-box.clearfix
@@ -224,7 +224,7 @@
                 .method
                   %p.caption 签到方式一：扫描签到
                   #qr-code
-                    %img.code-figure{:src => "/assets/web/bigqrcode.png"}
+                    %img.code-figure{src: asset_path("web/bigqrcode.png")}
                   %p.caption 签到方式二：手机号签到
                   %input#sign-mobile.form-control{:type => "text"}
                   .btn.sign-btn{:type => "button"} 立即签到

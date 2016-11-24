@@ -1,4 +1,4 @@
 - if @current_user.client_centers.blank?
   .undiscover
-    %img.icon-empty.png{:src => "/assets/web/empty.png"}
+    %img.icon-empty.png{src: asset_path("web/empty.png")}
     %a#to_set{:href => new_user_mobile_center_path} 前往设置

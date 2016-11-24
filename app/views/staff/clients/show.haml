@@ -9,7 +9,7 @@
   .manage-content
     .tabbable
       %a{:href => "/staff/clients"}
-        %img.back{:src => "/assets/web/tab-back.png"}
+        %img.back{src: asset_path("web/tab-back.png")}
       %ul.nav.nav-tabs
         %li.active
           %a#kids-message{"data-toggle" => "tab", :href => "#tab1"} 儿童信息
@@ -21,7 +21,7 @@
       .tab-content
         #tab1.tab-pane.active.clearfix
           .photo-div
-            %img.avatar{src: @user.avatar.present? ? @user.avatar.path : "/assets/web/boy.png"}
+            %img.avatar{src: @user.avatar.present? ? @user.avatar.path : asset_path("web/boy.png")}
           .message-div
             %form.form-inline{:role => "form"}
               .form-group
@@ -48,7 +48,7 @@
         #tab2.tab-pane
           - if @participates[:data].blank?
             .undiscover
-              %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
+              %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
               %span.undiscover-message 抱歉！暂无查找信息
           - else
             .table-box
@@ -108,7 +108,7 @@
         #tab3.tab-pane
           - if @borrows[:data].blank?
             .undiscover
-              %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
+              %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
               %span.undiscover-message 抱歉！暂无查找信息
           - else
             .table-box

@@ -29,7 +29,7 @@
             .local-course
               - if @course_insts[:data].length == 0
                 .undiscover
-                  %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
+                  %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
                   %span.message 抱歉！暂无查找信息
               - else
                 .table-box
@@ -70,7 +70,7 @@
             .open-course
               - if @courses[:data].length == 0
                 .undiscover
-                  %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
+                  %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
                   %span.message 抱歉！暂无查找信息
               - else
                 .table-box

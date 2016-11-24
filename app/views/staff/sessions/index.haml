@@ -11,11 +11,11 @@
 #signinModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
   .modal-dialog
     .modal-content
-      %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", :src => "/assets/managecenter/close.png"} 
+      %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: asset_path("managecenter/close.png")} 
       .modal-body
         .content-box
           .logo-box
-            %img.sign-logo{:src => "/assets/managecenter/logo.png"}
+            %img.sign-logo{src: asset_path("managecenter/logo.png")}
               %span.kids-center 北京市社区儿童中心
           %p.notice.error-notice 您的账号或密码不正确
           %form.form-horizontal{:role => "form"}
@@ -39,11 +39,11 @@
 #signupModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-dialog
     .modal-content
-      %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", :src => "/assets/managecenter/close.png"}
+      %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: asset_path("managecenter/close.png")}
       .modal-body
         .signup-box
           .logo-box
-            %img.sign-logo{:src => "/assets/managecenter/logo.png"}
+            %img.sign-logo{src: asset_path("managecenter/logo.png")}
               %span.kids-center 北京市社区儿童中心
           %p.notice#signup-error-notice 您的账号或密码不正确
           %form.form-horizontal{:role => "form"}
@@ -89,17 +89,17 @@
       %a.footbox#signup-signin{:href => "javascript:void(0);"}
         已有账号马上登录
         %span.right-arrow
-          %img{:src => "/assets/managecenter/arrowright.png"}
+          %img{src: asset_path("managecenter/arrowright.png")}
 
 / forget-passwordModal
 #forgetModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-dialog
     .modal-content
-      %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", :src => "/assets/managecenter/close.png"}
+      %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: asset_path("managecenter/close.png")}
       .modal-body
         .forget-password-box
           .logo-box
-            %img.sign-logo{:src => "/assets/managecenter/logo.png"}
+            %img.sign-logo{src: asset_path("managecenter/logo.png")}
               %span.kids-center 北京市社区儿童中心
           %p.notice#forget-mobile-notice 请核对手机号
           %form.form-horizontal{:role => "form"}
@@ -136,7 +136,7 @@
       %a.footbox#forget-register{:href => "javascript:void(0);"}
         前往注册
         %span.right-arrow
-          %img{:src => "/assets/managecenter/arrowright.png"}
+          %img{src: asset_path("managecenter/arrowright.png")}
 
 
 

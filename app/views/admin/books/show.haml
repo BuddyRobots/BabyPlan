@@ -52,25 +52,25 @@
                 #edit-area
           .cover-back
             %span.cover 封面:
-            = image_tag(@book.cover.nil? ? "/assets/web/coverempty.png" : @book.cover.path, class: "cover-img")
+            = image_tag(@book.cover.nil? ? asset_path("web/coverempty.png") : @book.cover.path, class: "cover-img")
             %span.back 封底:
-            = image_tag(@book.back.nil? ? "/assets/web/coverempty.png" : @book.back.path, class: "back-img")
+            = image_tag(@book.back.nil? ? asset_path("web/coverempty.png") : @book.back.path, class: "back-img")
 
         #tab2.tab-pane
           - if @reviews[:data].blank?
             .undiscover
-              %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
+              %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
               %span.undiscover-message 抱歉！暂无查找信息
           - else
             .user-review-box
               - @reviews[:data].each do |r|
                 .book-description
                   .user-item.clearfix
-                    %img.book-img{:src => r.client.avatar.present? ? r.client.avatar.path : "/assets/web/boy.png"}
+                    %img.book-img{:src => r.client.avatar.present? ? r.client.avatar.path : asset_path("web/boy.png")}
                     %p.user-name
                       %span= r.client.name
                       - r.score.times do
-                        %img.star-img{:src => "/assets/managecenter/star.png"}
+                        %img.star-img{src: asset_path("managecenter/star.png")}
                     %p.date= r.created_at.strftime("%Y-%m-%d %H:%M")
                     %p.user-review-content= r.content
                     - if r.is_private
@@ -92,7 +92,7 @@
         #tab3.tab-pane
           - if @borrows[:data].blank?
             .undiscover
-              %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
+              %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
               %span.undiscover-message 抱歉！暂无查找信息
           - else
             .table-box

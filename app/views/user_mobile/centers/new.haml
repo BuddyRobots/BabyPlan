@@ -8,7 +8,7 @@
       .cloud
         %p 设置关注中心
       %a{:href => account_user_mobile_settings_path}
-        %img.back{:src => "/assets/mybook/back.png"}
+        %img.back{src: asset_path("mybook/back.png")}
     - @centers.each do |c|
       .desc-add-div.center-desc{data: {id: c.id.to_s}}
         %p.center-name= c.name
@@ -17,6 +17,6 @@
       .desc-add-div
         .add-div
           %a{:href => user_mobile_centers_path + "?search=false"}
-            %img.add{:src => "/assets/web/add.png"}
+            %img.add{src: asset_path("web/add.png")}
             %span.add-word 添加关注儿童中心
     .center ~最多可设置３个关注中心~

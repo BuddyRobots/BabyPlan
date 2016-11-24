@@ -4,7 +4,7 @@
 
 - content_for :app_content do
   .main-div
-    %img.icon{:src => "/assets/manager/success.png"}
+    %img.icon{src: asset_path("manager/success.png")}
     %p.title#unreturn 已将所有绘本迁出！
     %a.btn#clicked{:type => "button", href: "/staff_mobile/books"} 完成
     

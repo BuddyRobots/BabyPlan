@@ -6,7 +6,7 @@
   .main-div
     - if @book.blank?
       .unreturn-div
-        %img.unreturn-icon{:src => "/assets/manager/fail.png"}
+        %img.unreturn-icon{src: asset_path("manager/fail.png")}
         %p.title#unfound 该绘本不是本儿童中心藏书！
     - else
       .desc-div
@@ -17,6 +17,6 @@
           %p.items= "当前状态：" + @book_inst.status_str
           - if @book_inst.current_borrow.present?
             %p.items= "借阅人：" + @book_inst.borrow_info
-        %img.icon{:src => "/assets/manager/success_mini.png"}
+        %img.icon{src: asset_path("manager/success_mini.png")}
     .btn-div
       %a.btn#clicked{:type => "button", href: "/staff_mobile/books"} 完成

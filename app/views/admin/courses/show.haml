@@ -12,22 +12,22 @@
 .content-area
   .manage-content
     .btn.finish-btn{:type => "button"} 
-      %img.ticker{:src => "/assets/managecenter/ticker.png"}
+      %img.ticker{src: asset_path("managecenter/ticker.png")}
       完成
     .btn.edit-btn{:type => "button"} 
-      %img.edit{:src => "/assets/managecenter/edit.png"}
+      %img.edit{src: asset_path("managecenter/edit.png")}
       编辑
     - if @course.available == true
       .btn#unshelve-btn.available{:type => "button"} 
-        %img.end{:src => "/assets/managecenter/unshelve.png"}
+        %img.end{src: asset_path("managecenter/unshelve.png")}
         %span 下架
     - else
       .btn#unshelve-btn.unavailable{:type => "button"} 
-        %img.end{:src => "/assets/managecenter/shelve.png"}
+        %img.end{src: asset_path("managecenter/shelve.png")}
         %span 上架
     .tabbable
       %a{:href => "/admin/courses"}
-        %img.back{:src => "/assets/web/tab-back.png"}
+        %img.back{src: asset_path("web/tab-back.png")}
       %ul.nav.nav-tabs
         %li.active
           %a#course-message{"data-toggle" => "tab", :href => "#tab1"} 课程信息
@@ -72,7 +72,7 @@
         #tab2.tab-pane
           - if @course_insts[:data].length == 0
             .undiscover
-              %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
+              %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
               %span.message 抱歉！暂无查找信息
           - else
             .table-box

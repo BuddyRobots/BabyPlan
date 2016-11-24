@@ -16,14 +16,14 @@
           .blue-line
           .desc-div
             .caption-div
-              %img.icon{:src => "/assets/manager/time.png"}
+              %img.icon{src: asset_path("manager/time.png")}
               - if transfer.out_time.present?
                 %span.date= Time.at(transfer.out_time).strftime("%Y-%m-%d")
                 %span.time= Time.at(transfer.out_time).strftime("%H:%M")
               %span.status= transfer.status_str
             .address-div
               %span.start= transfer.out_center.name
-              %img.arrow{:src => "/assets/manager/arrow.png"}
+              %img.arrow{src: asset_path("manager/arrow.png")}
               %span.end= transfer.in_center.name
       - if @current_user.staff_center.out_transfers.blank?
         %p.transfer-none 还没有相关记录
@@ -33,14 +33,14 @@
           .blue-line
           .desc-div
             .caption-div
-              %img.icon{:src => "/assets/manager/time.png"}
+              %img.icon{src: asset_path("manager/time.png")}
               - if transfer.out_time.present?
                 %span.date= Time.at(transfer.out_time).strftime("%Y-%m-%d")
                 %span.time= Time.at(transfer.out_time).strftime("%H:%M")
               %span.status= transfer.status_str
             .address-div
               %span.start= transfer.out_center.name
-              %img.arrow{:src => "/assets/manager/arrow.png"}
+              %img.arrow{src: asset_path("manager/arrow.png")}
               %span.end= transfer.in_center.name
       - if @current_user.staff_center.in_transfers.blank?
         %p.transfer-none 还没有相关记录

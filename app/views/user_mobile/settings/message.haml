@@ -9,10 +9,10 @@
       .cloud
         %p 系统消息
       %a{:href => user_mobile_settings_path}
-        %img.back{:src => "/assets/robotcourse/back.png"}
+        %img.back{src: asset_path("robotcourse/back.png")}
     - if @messages.blank?
       .unfound
-        %img.unfound-icon{:src => "/assets/web/cry.png"}
+        %img.unfound-icon{src: asset_path("web/cry.png")}
     - else
       - @messages.each do |m|
         .line-wrapper
@@ -22,4 +22,4 @@
                 .notice-content= m.content
                 .notice-time= m.created_at.strftime("%Y年%m月%d日")
             .line-btn-delete
-              %img.delete-icon{:src => "/assets/lajitong.png"}
+              %img.delete-icon{src: asset_path("lajitong.png")}

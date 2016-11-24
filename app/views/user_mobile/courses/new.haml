@@ -18,11 +18,11 @@
       .cloud
         %p 购买课程
       %a{:href => user_mobile_course_path(@course)}
-        %img.back{:src => "/assets/mybook/back.png"}
+        %img.back{src: asset_path("mybook/back.png")}
     .item-div
       .item
         .icon-div
-          %img.icon{:src => @course.photo.present? ? @course.photo.path : "/assets/robotclass/robot.jpg"}
+          %img.icon{:src => @course.photo.present? ? @course.photo.path : asset_path("robotclass/robot.jpg")}
         .title= @course.name
       .details
         .span-div

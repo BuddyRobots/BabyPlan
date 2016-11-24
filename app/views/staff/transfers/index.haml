@@ -27,7 +27,7 @@
             .moveout-box
               - if @out_transfers[:data].blank?
                 .undiscover
-                  %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
+                  %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
                   %span.undiscover-message 抱歉！暂无查找信息
               - else
                 .table-box
@@ -63,7 +63,7 @@
             .movein-box
               - if @in_transfers[:data].blank?
                 .undiscover
-                  %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
+                  %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
                   %span.undiscover-message 抱歉！暂无查找信息
               - else
                 .table-box

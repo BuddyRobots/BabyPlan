@@ -8,18 +8,18 @@
       .blue-line
       .desc-add-div
         .add-div
-          %img.add{:src => "/assets/manager/add.png"}
+          %img.add{src: asset_path("manager/add.png")}
           %span.add-word 创建新迁出
     - @prepare_transfers.each do |transfer|
       .item-div.transfer-item{data: {id: transfer.id.to_s}}
         .blue-line
         .desc-div
           .caption-div
-            %img.icon{:src => "/assets/manager/time.png"}
+            %img.icon{src: asset_path("manager/time.png")}
             %span.date= transfer.created_at.strftime("%Y-%m-%d")
             %span.time= transfer.created_at.strftime("%H:%M")
             %span.status= transfer.status_str
           .address-div
             %span.start= transfer.out_center.name
-            %img.arrow{:src => "/assets/manager/arrow.png"}
+            %img.arrow{src: asset_path("manager/arrow.png")}
             %span.end= transfer.in_center.name

@@ -9,10 +9,10 @@
   .content-box
     .manage-box.clearfix
       %a#back{:href => "/staff/courses?profile=template"}
-        %img{:src => "/assets/web/back.png"}
+        %img{src: asset_path("web/back.png")}
       %p.course-add 可开课程
       .btn.newcourse-btn{:type => "button"} 
-        %img.add{:src => "/assets/managecenter/add.png"}
+        %img.add{src: asset_path("managecenter/add.png")}
         开设课程
 
     .manage-content

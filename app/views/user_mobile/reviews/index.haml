@@ -13,28 +13,28 @@
         %p.caption 历史评价
       - if @review_type == "book"
         %a{:href => "/user_mobile/books/" + @book.id.to_s + "?back=" + @back}
-          %img.back{:src => "/assets/evaluate/back.png"}
+          %img.back{src: asset_path("evaluate/back.png")}
       - else
         %a{:href => "/user_mobile/courses/" + @course.id.to_s + "?back=" + @back}
-          %img.back{:src => "/assets/evaluate/back.png"}
+          %img.back{src: asset_path("evaluate/back.png")}
     - if @reviews.present?
       - @reviews.each do |r|
         %article.clearfix
           .left-div
-            %img.headfigure{:src => r[:avatar_path].present? ? r[:avatar_path] : "/assets/web/boy.png"}
+            %img.headfigure{:src => r[:avatar_path].present? ? r[:avatar_path] : asset_path("web/boy.png")}
           .right-div
             %span.username= r[:user_name]
             %span.time= time_ago_in_words(r[:created_at])
             .review-score
               %span.score 课程评分
               - r[:score].times do
-                %img.star{:src => "/assets/web/yellowstar2.png"}
+                %img.star{src: asset_path("web/yellowstar2.png")}
               - (5 - r[:score]).times do
-                %img.star{:src => "/assets/web/greystar2.png"}
+                %img.star{src: asset_path("web/greystar2.png")}
             %p.message= r[:content]
     - else
       .unfound
-        %img.unfound-icon{:src => "/assets/web/cry.png"}
+        %img.unfound-icon{src: asset_path("web/cry.png")}
     .mask
       .empty-div
       .text-div

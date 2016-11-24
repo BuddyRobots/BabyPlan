@@ -10,11 +10,11 @@
         = @announcement.created_at.strftime("%Y-%m-%d")
         %span.haidian= @announcement.center.present? ? @announcement.center.name : "所有儿童中心"
     .photo
-      %img.notice-1{:src => @announcement.photo.present? ? @announcement.photo.path : "/assets/web/announcement.png"}
+      %img.notice-1{:src => @announcement.photo.present? ? @announcement.photo.path : asset_path("web/announcement.png")}
     .content
       = @announcement.content.html_safe
     %a.last_page{:href => "/user_mobile/announcements"}
-      %img.back{:src => "/assets/noticedescription/back.png"}
+      %img.back{src: asset_path("noticedescription/back.png")}
 
       
 

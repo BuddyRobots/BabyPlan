@@ -16,7 +16,7 @@
           %span.input-group-btn
             %button.btn.btn-default#search-btn{:type => "button"}
       .btn.borrowset-btn{:type => "button", :href => "#borrowModal", "data-toggle" => "modal"} 
-        %img.setting{:src => "/assets/managecenter/setting.png"}
+        %img.setting{src: asset_path("managecenter/setting.png")}
         借阅设置  
 
     .manage-content
@@ -32,7 +32,7 @@
             .book-nums
               - if @books[:data].blank?
                 .undiscover
-                  %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
+                  %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
                   %span.message 抱歉！暂无查找信息
               - else
                 .table-box
@@ -69,7 +69,7 @@
             .book-migrate
               - if @transfers[:data].blank?
                 .undiscover
-                  %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
+                  %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
                   %span.message 抱歉！暂无查找信息
               - else
                 .table-box
@@ -108,7 +108,7 @@
   .modal-dialog
     .modal-content
       .modalheader
-        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", :src => "/assets/managecenter/close.png"}
+        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: asset_path("managecenter/close.png")}
       .modal-body
         %form.form-inline.form-div{:role => "form"}
           .form-group

@@ -11,23 +11,23 @@
 .content-area
   .manage-content
     .btn.finish-btn{:type => "button"} 
-      %img.ticker{:src => "/assets/managecenter/ticker.png"}
+      %img.ticker{src: asset_path("managecenter/ticker.png")}
       完成
     .btn.edit-btn{:type => "button"} 
-      %img.edit{:src => "/assets/managecenter/edit.png"}
+      %img.edit{src: asset_path("managecenter/edit.png")}
       编辑
     - if @center.available == true
       .btn#unshelve-btn.available{:type => "button"} 
-        %img.end{:src => "/assets/managecenter/unshelve.png"}
+        %img.end{src: asset_path("managecenter/unshelve.png")}
         %span 关闭
     - else
       .btn#unshelve-btn.unavailable{:type => "button"} 
-        %img.end{:src => "/assets/managecenter/shelve.png"}
+        %img.end{src: asset_path("managecenter/shelve.png")}
         %span 开放
 
     .tabbable
       %a{:href => "/admin/centers"}
-        %img.back{:src => "/assets/web/tab-back.png"}
+        %img.back{src: asset_path("web/tab-back.png")}
       %ul.nav.nav-tabs
         %li.active
           %a#center-message{"data-toggle" => "tab", :href => "#tab1"} 基本信息
@@ -51,11 +51,11 @@
                 %span.edit-box
                   %input.input-area.form-control#center-address{:type => "text"}
             .photo
-              %img.unedit-photo{:src => @center.photo.nil? ? "/assets/banner.png" : @center.photo.path }
+              %img.unedit-photo{:src => @center.photo.nil? ? asset_path("banner.png") : @center.photo.path }
               = form_tag("/admin/centers/" + @center.id.to_s + "/upload_photo", method: "post", multipart: true, id: "upload-photo-form", class: "hide") do
                 = file_field_tag "photo_file", { class: "hide", accept: ".jpg,.png" }
               %a#upload-photo{href: "javascript:void(0);"}
-                %img.edit-photo{:src => "/assets/web/add-photo.png"}
+                %img.edit-photo{src: asset_path("web/add-photo.png")}
           .map-position
             %span.map-address 地图位置:
             .map-notice
@@ -75,7 +75,7 @@
         #tab2.tab-pane
           - if @course_insts[:data].blank?
             .undiscover
-              %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
+              %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
               %span.undiscover-message 抱歉！暂无查找信息
           - else
             .table-box
@@ -111,7 +111,7 @@
         #tab3.tab-pane
           - if @books[:data].blank?
             .undiscover
-              %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
+              %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
               %span.undiscover-message 抱歉！暂无查找信息
           - else
             .table-box

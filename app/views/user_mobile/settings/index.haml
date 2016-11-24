@@ -4,49 +4,49 @@
 
 - content_for :app_content do
   .content-area
-    %img.headcloud{:src => "/assets/headcloud.png"}
+    %img.headcloud{src: asset_path("headcloud.png")}
     %a{:href => message_user_mobile_settings_path}
-      %img.mail{:src => "/assets/mail.png"}
+      %img.mail{src: asset_path("mail.png")}
       - if @msg_num > 0
         .notice-num= @msg_num
     %a{:href => account_user_mobile_settings_path}
-      %img.set{:src => "/assets/setting.png"}
+      %img.set{src: asset_path("setting.png")}
     %a{:href => user_mobile_feeds_path}
-      %img.back{:src => "/assets/back.png"}
+      %img.back{src: asset_path("back.png")}
     .face.clearfix
-      %img.avator-icon{:src => @current_user.avatar.present? ? @current_user.avatar.path : "/assets/web/boy.png"}
+      %img.avator-icon{:src => @current_user.avatar.present? ? @current_user.avatar.path : asset_path("web/boy.png")}
       %p.username= @current_user.name
 
     .collect-div
       %a.collect{:href => favorite_user_mobile_settings_path}
         .icon-div
-          %img.icon{:src => "/assets/heart.png"}
+          %img.icon{src: asset_path("heart.png")}
         .span-div
           %span.content 我的收藏
         .icon-div
-          %img.icon{:src => "/assets/rightarrow.png"}
+          %img.icon{src: asset_path("rightarrow.png")}
     .collect-div
       %a.collect{:href => course_user_mobile_settings_path}
         .icon-div
-          %img.icon{:src => "/assets/c-box.png"}
+          %img.icon{src: asset_path("c-box.png")}
         .span-div
           %span.content 我的课程
         .icon-div
-          %img.icon{:src => "/assets/rightarrow.png"}
+          %img.icon{src: asset_path("rightarrow.png")}
     .collect-div
       %a.collect{:href => book_user_mobile_settings_path}
         .icon-div
-          %img.icon{:src => "/assets/smile.png"}
+          %img.icon{src: asset_path("smile.png")}
         .span-div
           %span.content 我的绘本
         .icon-div
-          %img.icon{:src => "/assets/rightarrow.png"}
+          %img.icon{src: asset_path("rightarrow.png")}
     .collect-div
       %a#signin-course.collect{:href => "javascript:void(0);"}
         .icon-div
-          %img.icon{:src => "/assets/sign.png"}
+          %img.icon{src: asset_path("sign.png")}
         .span-div
           %span.content 签&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp到
         .icon-div
-          %img.icon{:src => "/assets/rightarrow.png"}
+          %img.icon{src: asset_path("rightarrow.png")}
    

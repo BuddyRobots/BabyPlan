@@ -8,10 +8,10 @@
       .cloud
         %p 我的收藏
       %a{:href => user_mobile_settings_path}
-        %img.back{:src => "/assets/mybook/back.png"}
+        %img.back{src: asset_path("mybook/back.png")}
     - if @favorites.blank?
       .undiscover
-        %img.icon{:src => "/assets/web/cry.png"}
+        %img.icon{src: asset_path("web/cry.png")}
     - else
       - @favorites.each do |f|
         .line-wrapper
@@ -21,14 +21,14 @@
                 .left-div
                   %img.visit{:src => f.img_src}
                 .right-div
-                  %img.mini-icon{:src => "/assets/kidscenter/" + f.fav_icon + ".png"}
+                  %img.mini-icon{src: asset_path("kidscenter/" + f.fav_icon + ".png")}
                   %p.caption= f.name
                   %p.article= truncate(strip_tags(f.desc).strip(), length: 50)
                   .location-div
-                    %img.location{:src => "/assets/web/location.png"}
+                    %img.location{src: asset_path("web/location.png")}
                     %span.center= f.center_str
             .line-btn-delete
-              %img.delete-icon{:src => "/assets/lajitong.png", data: {id: f.id.to_s}}
+              %img.delete-icon{src: asset_path("lajitong.png"), data: {id: f.id.to_s}}
     / .line-wrapper
     /   .line-scroll-wrapper.clearfix
     /     .line-normal-wrapper

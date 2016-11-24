@@ -6,18 +6,16 @@
   .content-area
     .header
       %a{href: new_user_mobile_center_path}
-        %img.back{:src => "/assets/haidiancenter/back.png"}
-      / %a{:href => user_mobile_settings_path}
-      /   %img.user{:src => "/assets/kidscenter/user.png"}
+        %img.back{src: asset_path("haidiancenter/back.png")}
       .input-div
         %input#input-box{:type => "text", value: @keyword}
         %a.icon-div{:href => "#"}
-          %img.search-center{:src => "/assets/kidscenter/search.png"}
+          %img.search-center{src: asset_path("kidscenter/search.png")}
 
 
     - if @centers.blank?
       .undiscover
-        %img.icon-none{:src => "/assets/web/none.png"}
+        %img.icon-none{src: asset_path("web/none.png")}
     - else
       - @centers.each do |c|
         .desc-add-div{data: {id: c.id.to_s}}

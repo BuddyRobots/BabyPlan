@@ -6,7 +6,7 @@
   .main-div
     - if @err.present?
       .unreturn-div
-        %img.unreturn-icon{:src => "/assets/manager/fail.png"}
+        %img.unreturn-icon{src: asset_path("manager/fail.png")}
         - if @err == "book_not_exist"
           %p.title#unfound 该绘本不是本儿童中心藏书！
         - if @err == "book_not_returned"
@@ -29,7 +29,7 @@
           %p.items= "绘本名称：" + @borrow.book_inst.book.name
           - if @borrow.book_inst.book.isbn.present?
             %p.items#num= "ISBN号：" + @borrow.book_inst.book.isbn
-        %img.icon{:src => "/assets/manager/success_mini.png"}
+        %img.icon{src: asset_path("manager/success_mini.png")}
     .btn-div
       %a.btn#clicked{:type => "button", href: borrow_staff_mobile_books_path + "?mobile=" + @mobile} 继续借出
       %a.btn#unclicked{:type => "button", href: staff_mobile_books_path} 完成

@@ -11,24 +11,24 @@
 .content-area
   .manage-content
     .btn.finish-btn{:type => "button"} 
-      %img.ticker{:src => "/assets/managecenter/ticker.png"}
+      %img.ticker{src: asset_path("managecenter/ticker.png")}
       完成
     .btn.edit-btn{:type => "button", "data-toggle" => "modal"} 
-      %img.edit{:src => "/assets/managecenter/edit.png"}
+      %img.edit{src: asset_path("managecenter/edit.png")}
       编辑
     .btn.QRcode-btn{:type => "button"}
-      %img.QRcode{src: "/assets/web/qrcode.png"} 导出二维码
+      %img.QRcode{src: asset_path("web/qrcode.png")} 导出二维码
     - if @book.available == true
       .btn.unshelve-btn.available{:type => "button"} 
-        %img.end{:src => "/assets/managecenter/unshelve.png"}
+        %img.end{src: asset_path("managecenter/unshelve.png")}
         %span 下架
     - else
       .btn.unshelve-btn.unavailable{:type => "button"} 
-        %img.end{:src => "/assets/managecenter/shelve.png"}
+        %img.end{src: asset_path("managecenter/shelve.png")}
         %span 上架
     .tabbable
       %a{:href => "/staff/books"}
-        %img.back{:src => "/assets/web/tab-back.png"}
+        %img.back{src: asset_path("web/tab-back.png")}
       %ul.nav.nav-tabs
         %li.active
           %a#book-message{"data-toggle" => "tab", :href => "#tab1"} 绘本信息
@@ -98,30 +98,30 @@
             %span.book-cover 封面:
             .photo-div#upload-cover-div
               %a#upload-cover{href: "javascript:void(0);"}
-                %img#cover-photo.photo{src: @book.cover.nil? ? "/assets/web/coverempty.png" : @book.cover.path}
+                %img#cover-photo.photo{src: @book.cover.nil? ? asset_path("web/coverempty.png") : @book.cover.path}
               %a.upload-photo{href: "javascript:void(0);"}
-                %img#cover-edit-photo.edit-photo{:src => "/assets/web/addcover.png"}
+                %img#cover-edit-photo.edit-photo{src: asset_path("web/addcover.png")}
             %span.book-back 封底:
             .photo-div#upload-back-div
               %a#upload-back{href: "javascript:void(0);"}
-                %img#back-photo.photo{src: @book.back.nil? ? "/assets/web/coverempty.png" : @book.back.path}
+                %img#back-photo.photo{src: @book.back.nil? ? asset_path("web/coverempty.png") : @book.back.path}
               %a.upload-photo{href: "javascript:void(0);"}
-                %img#back-edit-photo.edit-photo{:src => "/assets/web/addcover.png"}
+                %img#back-edit-photo.edit-photo{src: asset_path("web/addcover.png")}
         #tab2.tab-pane
           - if @reviews[:data].blank?
             .undiscover
-              %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
+              %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
               %span.undiscover-message 抱歉！暂无查找信息
           - else
             .user-review-box
               - @reviews[:data].each do |r|
                 .book-description
                   .user-item.clearfix
-                    %img.book-img{:src => r.client.avatar.present? ? r.client.avatar.path : "/assets/web/boy.png"}
+                    %img.book-img{:src => r.client.avatar.present? ? r.client.avatar.path : asset_path("web/boy.png")}
                     %p.user-name
                       %span= r.client.name
                       - r.score.times do
-                        %img.star-img{:src => "/assets/managecenter/star.png"}
+                        %img.star-img{src: asset_path("managecenter/star.png")}
                     %p.date= r.created_at.strftime("%Y-%m-%d %H:%M")
                     %p.user-review-content= r.content
                     - if r.is_private
@@ -143,7 +143,7 @@
         #tab3.tab-pane
           - if @borrows[:data].blank?
             .undiscover
-              %img.undiscover-icon{:src => "/assets/managecenter/undiscover.png"}
+              %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
               %span.undiscover-message 抱歉！暂无查找信息
           - else
             .table-box
@@ -193,7 +193,7 @@
   .modal-dialog
     .modal-content
       .modalheader
-        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", :src => "/assets/managecenter/close.png"}
+        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: asset_path("managecenter/close.png")}
       .modal-body
         %form.form-inline.form-div{:role => "form"}
           .form-group

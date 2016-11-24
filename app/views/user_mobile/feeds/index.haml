@@ -15,16 +15,16 @@
             .left-div
               %img.visit{:src => e.img_src}
             .right-div
-              %img.icon{:src => "/assets/kidscenter/" + e.feed_icon + ".png"}
+              %img.icon{src: asset_path("kidscenter/" + e.feed_icon + ".png")}
               %p.caption= e.name
               %p.message= truncate(strip_tags(e.desc).strip(), length: 50)
               .location-div
-                %img.location{:src => "/assets/web/location.png"}
+                %img.location{src: asset_path("web/location.png")}
                 %span.center= e.center_str
         .render-more
           %p 加载更多 
         .load
-          %img.loading{:src => "/assets/loading.gif"}
+          %img.loading{src: asset_path("loading.gif")}
       - else
         .unfound
-          %img.unfound-icon{:src => "/assets/web/cry.png"}
+          %img.unfound-icon{src: asset_path("web/cry.png")}

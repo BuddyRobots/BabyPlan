@@ -15,7 +15,7 @@ $ ->
             plotBackgroundColor: null
             plotBorderWidth: null
             plotShadow: false
-          colors: ['#90c5fc', '#ffa1a1', '#ED561B', '#DDDF00',
+          colors: ['#90c5fc', '#ffa1a1', '#a1aeff', '#DDDF00',
                           '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4']
           title: text: null
           tooltip: pointFormat: '{series.name}: <b>{point.y}</b>'
@@ -38,7 +38,7 @@ $ ->
             plotBorderWidth: null
             plotShadow: false
           colors: ['#90c5fc', '#7fbaf7', '#67aaef', '#4898e7',
-                          '#3388df', '#227dda', '#FF9655', '#FFF263', '#6AF9C4']
+                          '#3388df', '#a1aeff', '#FF9655', '#FFF263', '#6AF9C4']
           title: text: null
           tooltip: pointFormat: '{series.name}: <b>{point.y}</b>'
           plotOptions: pie:

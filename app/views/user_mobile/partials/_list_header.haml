@@ -1,10 +1,10 @@
 .header
   %a{:href => user_mobile_settings_path}
-    %img.user{:src => "/assets/kidscenter/user.png"}
+    %img.user{src: asset_path("kidscenter/user.png")}
   .input-div
     %input#input-box{:type => "text", value: @keyword}
     %a.icon-div{:href => "#"}
-      %img#search-btn.search{:src => "/assets/kidscenter/search.png"}
+      %img#search-btn.search{src: asset_path("kidscenter/search.png")}
 %ul.tag-choice
   %li.first
     %a#feeds-link{class: list_type == "feeds" ? "active" : "", :href => "javascript:void(0)"} 最新

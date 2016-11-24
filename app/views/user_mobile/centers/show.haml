@@ -10,10 +10,10 @@
 - content_for :app_content do
   .content-area
     .header
-      %img.photo{:src => @center.photo.nil? ? "/assets/web/center.png" : @center.photo.path }
+      %img.photo{:src => @center.photo.nil? ? asset_path("web/center.png") : @center.photo.path }
       / %a{href: "#", onClick: "history.go(-1);return true;"}
       %a{href: user_mobile_centers_path}
-        %img.back{:src => "/assets/haidiancenter/back.png"}
+        %img.back{src: asset_path("haidiancenter/back.png")}
     .cloud
       %p#center-name=@center.name
     .description

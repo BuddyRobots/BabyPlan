@@ -8,22 +8,22 @@
   .content-box
     .manage-box.clearfix
       %a#back{:href => "/admin/announcements?profile=" + (@announcement.center.present? ? "local" : "global")}
-        %img{:src => "/assets/web/back.png"}
+        %img{src: asset_path("web/back.png")}
       %p.global-notice= @announcement.center.present? ? "本区公告" : "全局公告"
       - if @announcement.center.nil?
         .btn.end-btn{:type => "button"} 
-          %img.end-img{:src => "/assets/managecenter/ticker.png"}
+          %img.end-img{src: asset_path("managecenter/ticker.png")}
           完成
         .btn.edit-btn{:type => "button"} 
-          %img.edit-img{:src => "/assets/managecenter/edit.png"}
+          %img.edit-img{src: asset_path("managecenter/edit.png")}
           编辑
         - if @announcement.is_published
           .btn#unshelve-btn.published{:type => "button"} 
-            %img.unshelve{:src => "/assets/managecenter/unshelve.png"}
+            %img.unshelve{src: asset_path("managecenter/unshelve.png")}
             %span 隐藏
         - else
           .btn#unshelve-btn.unpublished{:type => "button"} 
-            %img.unshelve{:src => "/assets/managecenter/shelve.png"}
+            %img.unshelve{src: asset_path("managecenter/shelve.png")}
             %span 公布
 
     .manage-content
@@ -44,7 +44,7 @@
           = form_tag("/", method: "post", multipart: true, id: "upload-photo-form", class: "hide") do
             = file_field_tag "photo_file", { class: "hide", accept: ".jpg,.png" }
           %a#upload-photo{href: "javascript:void(0);"}
-            %img.edit-photo{:src => @announcement.photo.present? ? @announcement.photo.path : "/assets/web/add-photo.png"}
+            %img.edit-photo{:src => @announcement.photo.present? ? @announcement.photo.path : asset_path("web/add-photo.png")}
         .notice-introduce.clearfix
           %span.introduce 公告正文:
           .wangedit-area

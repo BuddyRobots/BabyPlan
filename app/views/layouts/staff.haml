@@ -11,14 +11,14 @@
   .container
     .header
       %a{:href => "#"}
-        %img.logo{:src => "/assets/managecenter/logo.png"}
+        %img.logo{src: asset_path("managecenter/logo.png")}
       %p.leftword= @current_center.nil? ? "北京市社区儿童中心" : @current_center.name
 
       /登录注册页面的layout
       - if @current_user.present? && ( @current_user.is_staff || @current_user.is_admin )
         %ul.kids-manage
           %li.manage#manage-photo
-            %img.manager{:src => "/assets/managecenter/headphoto.png"}
+            %img.manager{src: asset_path("managecenter/headphoto.png")}
             .btn-group
               %a.btn.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
                 = @current_user.name
@@ -31,7 +31,7 @@
           /     %img.about-icon{:src => "/assets/managecenter/about.png"}
           %li.manage
             %a{:href => signout_staff_sessions_path}
-              %img.turnoff-icon{:src => "/assets/managecenter/turnoff.png"}
+              %img.turnoff-icon{src: asset_path("managecenter/turnoff.png")}
       - else
         %p.rightword 您好欢迎访问北京市社区儿童中心！
         %button.btn#sign-up{"data-target" => "#signupModal", "data-toggle" => "modal", :type => "button"} 注册
@@ -60,7 +60,7 @@
 #modify_passwordModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-dialog
     .modal-content
-      %img.close-btn{"aria-hidden" => "true", "data-dismiss" => "modal", :src => "/assets/managecenter/close.png"}
+      %img.close-btn{"aria-hidden" => "true", "data-dismiss" => "modal", src: asset_path("managecenter/close.png")}
       .modal-body
         .set-password-box
           %form.form-horizontal#form-layout{:role => "form"}

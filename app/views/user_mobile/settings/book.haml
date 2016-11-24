@@ -8,22 +8,22 @@
       .cloud
         %p 我的绘本
       %a{:href => user_mobile_settings_path}
-        %img.back{:src => "/assets/mybook/back.png"}
+        %img.back{src: asset_path("mybook/back.png")}
     - if @book_borrows.blank?
       .undiscover
-        %img.icon{:src => "/assets/web/cry.png"}
+        %img.icon{src: asset_path("web/cry.png")}
     - else
       - @book_borrows.each do |e|
         .details{data: {id: e.book.id.to_s}}
           .left-div
-            %img.visit{:src => e.book.cover.nil? ? "/assets/banner.png" : e.book.cover.path}
+            %img.visit{:src => e.book.cover.nil? ? asset_path("banner.png") : e.book.cover.path}
           .right-div
             %p.caption 
               = e.book.name
               / %span 8月14日归还
             %p.article= truncate(strip_tags(e.book.desc).strip(), length: 50)
             .location-div
-              %img.location{:src => "/assets/web/location.png"}
+              %img.location{src: asset_path("web/location.png")}
               %span.center= e.book.center.name
     / .details
     /   .left-div

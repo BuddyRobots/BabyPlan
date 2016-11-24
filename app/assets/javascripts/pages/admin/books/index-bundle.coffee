@@ -1,5 +1,10 @@
 $ ->
 
+  $(".close").click ->
+    $("input").val("")
+    $("#confirm-borrow-setting").removeClass("button-enabled")
+    $("#confirm-borrow-setting").addClass("button-disabled")
+    
   if window.profile == "transfers"
     $('.nav-tabs a[href="#tab2"]').tab('show')
     $("#search-input-book").hide()
