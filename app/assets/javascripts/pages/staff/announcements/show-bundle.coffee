@@ -34,12 +34,12 @@ $ ->
             btn.removeClass("published")
             btn.addClass("unpublished")
             btn.find("span").text("公布")
-            btn.find("img").attr("src", "/assets/managecenter/shelve.png")
+            btn.find("img").attr("src", window.shelve_path)
           else
             btn.addClass("published")
             btn.removeClass("unpublished")
             btn.find("span").text("隐藏")
-            btn.find("img").attr("src", "/assets/managecenter/unshelve.png")
+            btn.find("img").attr("src", window.unshelve_path)
       )
 
   # edit-btn press-down

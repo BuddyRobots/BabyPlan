@@ -25,7 +25,7 @@ $ ->
   origin = new qq.maps.Point(0, 0)
   anchor = new qq.maps.Point(10, 30)
   icon = new qq.maps.MarkerImage(
-    "/assets/dingwei03.png",
+    window.marker_path,
     size,
     origin,
     anchor
@@ -209,13 +209,13 @@ $ ->
             btn.removeClass("available")
             btn.addClass("unavailable")
             btn.find("span").text("开放")
-            btn.find("img").attr("src", "/assets/managecenter/shelve.png")
+            btn.find("img").attr("src", window.shelve_path)
             $(".shelve").text("关闭中")
           else
             btn.addClass("available")
             btn.removeClass("unavailable")
             btn.find("span").text("关闭")
-            btn.find("img").attr("src", "/assets/managecenter/unshelve.png")
+            btn.find("img").attr("src", window.unshelve_path)
             $(".shelve").text("开放中")
       )
 

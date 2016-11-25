@@ -65,7 +65,7 @@ body, p, img, div, ul, li, a, h3 {
 	width:40.5%;
 	max-width:259px;
 	margin:0 auto;
-	background:url("/assets/centercourse/yun02.png") no-repeat;
+	background:image-url("centercourse/yun02.png") no-repeat;
 	background-size:100%;
 	background-position:center;
 	margin-bottom:3.13%;
@@ -77,7 +77,7 @@ body, p, img, div, ul, li, a, h3 {
 	}
 }
 .class-name {
-	background:url("/assets/centercourse/ty.png") no-repeat;
+	background:image-url("centercourse/ty.png") no-repeat;
 	background-size:87.96875%;
 	background-position:center;
 	padding-left:5.25em;

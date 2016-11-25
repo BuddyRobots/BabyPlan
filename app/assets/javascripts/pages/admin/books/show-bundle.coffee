@@ -122,13 +122,13 @@ $ ->
             btn.removeClass("available")
             btn.addClass("unavailable")
             btn.find("span").text("上架")
-            btn.find("img").attr("src", "/assets/managecenter/shelve.png")
+            btn.find("img").attr("src", window.shelve_path)
             $("#available-status").text("已下架")
           else
             btn.addClass("available")
             btn.removeClass("unavailable")
             btn.find("span").text("下架")
-            btn.find("img").attr("src", "/assets/managecenter/unshelve.png")
+            btn.find("img").attr("src", window.unshelve_path)
             $("#available-status").text("在架上")
       )
 

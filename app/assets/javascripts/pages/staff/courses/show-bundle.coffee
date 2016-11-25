@@ -198,13 +198,13 @@ $ ->
             btn.removeClass("available")
             btn.addClass("unavailable")
             btn.find("span").text("上架")
-            btn.find("img").attr("src", "/assets/managecenter/shelve.png")
+            btn.find("img").attr("src", window.shelve_path)
             $(".shelve").text("已下架")
           else
             btn.addClass("available")
             btn.removeClass("unavailable")
             btn.find("span").text("下架")
-            btn.find("img").attr("src", "/assets/managecenter/unshelve.png")
+            btn.find("img").attr("src", window.unshelve_path)
             $(".shelve").text("在架上")
       )
 
@@ -505,7 +505,7 @@ $ ->
       )
 
   $("#class_num").change ->
-    $(".code-figure").attr("src", "/assets/web/bigqrcode.png")
+    $(".code-figure").attr("src", window.qrcode_path)
     refresh_signin_info(parseInt($(this).val()))
 
   if window.profile == "participates"

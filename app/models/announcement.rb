@@ -64,7 +64,7 @@ class Announcement
     {
       ele_name: self.title,
       ele_id: self.id.to_s,
-      ele_photo: self.photo.nil? ? "/assets/banner.png" : self.photo.path,
+      ele_photo: self.photo.nil? ? ActionController::Base.helpers.asset_path("banner.png") : self.photo.path,
       ele_content: ActionController::Base.helpers.truncate(ActionController::Base.helpers.strip_tags(self.content).strip(), length: 50),
       ele_center: self.center.present? ? self.center.name : "所有儿童中心"
     }

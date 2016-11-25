@@ -189,7 +189,7 @@ class CourseInst
     {
       ele_name: self.name || self.course.name,
       ele_id: self.id.to_s,
-      ele_photo: self.photo.nil? ? "/assets/banner.png" : self.photo.path,
+      ele_photo: self.photo.nil? ? ActionController::Base.helpers.asset_path("banner.png") : self.photo.path,
       ele_content: ActionController::Base.helpers.truncate(ActionController::Base.helpers.strip_tags(self.course.desc).strip(), length: 50),
       ele_center: self.center.name
     }

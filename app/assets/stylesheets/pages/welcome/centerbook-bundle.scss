@@ -51,7 +51,7 @@ a{
 	padding-top:6.25%;
 	padding-bottom:3.13%;
 	.bookcloud {
-		background:url("/assets/bookcloud.png") no-repeat;
+		background: image-url("bookcloud.png") no-repeat;
 		background-size:100%;
 		background-position:center;
 		width:69.4375%;
@@ -103,7 +103,7 @@ a{
 .title-div {
 	position:relative;
 	width:100%;
-	background:url("/assets/linecloud.png") no-repeat;
+	background:image-url("linecloud.png") no-repeat;
 	background-size:41.406%;
 	background-position:center;
 	margin-top:4.69%;

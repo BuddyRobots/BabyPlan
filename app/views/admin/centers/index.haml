@@ -60,3 +60,16 @@
               %li
                 %a{:href => "/admin/centers?keyword=#{@keyword}&page=#{@centers[:next_page]}"} »
 
+#closeModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
+  .modal-dialog
+    .modal-content
+      .modalheader
+        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: asset_path("managecenter/close.png")}
+      .modal-body
+        %p.message 关闭儿童中心则该中心所有儿童数据将会丢失！
+        %p.message 是否确定要关闭该中心?
+        .btn-div
+          %button.btn#cancel{type: "button"} 取&nbsp消
+          %button.btn#confirm{type: "button"} 确&nbsp定
+
+

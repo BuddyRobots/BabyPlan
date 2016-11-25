@@ -24,7 +24,7 @@ $ ->
   origin = new qq.maps.Point(0, 0)
   anchor = new qq.maps.Point(10, 30)
   icon = new qq.maps.MarkerImage(
-    "/assets/dingwei03.png",
+    window.marker_path,
     size,
     origin,
     anchor

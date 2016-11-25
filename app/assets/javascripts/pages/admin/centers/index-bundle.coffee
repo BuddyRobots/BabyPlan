@@ -1,5 +1,7 @@
 $ ->
-
+  window.cid = null
+  link = null
+  current_state = null
   $(".add-btn").click ->
     location.href = "/admin/centers/new"
 
@@ -18,17 +20,25 @@ $ ->
   $(".set-available").each ->
     if $(this).hasClass("link-unavailable")
       $(this).closest("tr").find(".access").hide()
-
-
+# 没有完成
   $(".set-available").click ->
-    current_state = "unavailable"
-    if $(this).hasClass("link-available")
-      current_state = "available"
-    cid = $(this).closest("tr").attr("data-id")
     link = $(this)
-    console.log current_state
+    if $(this).hasClass("link-unavailable")
+      link.removeClass("link-unavailable")
+      link.addClass("link-available")
+      link.text("关闭")
+      link.closest("tr").addClass("available")
+      link.closest("tr").removeClass("unavailable")
+      current_state = "available"
+    else
+      $("#closeModal").modal("show")
+      window.cid = $(this).closest("tr").attr("data-id") 
+
+  $("#confirm").click ->
+    $("#closeModal").modal("hide")
+    current_state = "unavailable"
     $.postJSON(
-      '/admin/centers/' + cid + '/set_available',
+      '/admin/centers/' + window.cid + '/set_available',
       {
         available: current_state == "unavailable"
       },
@@ -36,20 +46,17 @@ $ ->
         console.log data
         if data.success
           $.page_notification("操作完成")
-          if current_state == "available"
-            link.removeClass("link-available")
-            link.addClass("link-unavailable")
-            link.text("开放")
-            link.closest("tr").removeClass("available")
-            link.closest("tr").addClass("unavailable")
-            link.closest("tr").find(".access").hide()
-          else
-            link.addClass("link-available")
-            link.removeClass("link-unavailable")
-            link.text("关闭")
-            link.closest("tr").addClass("available")
-            link.closest("tr").removeClass("unavailable")
-            link.closest("tr").find(".access").show()
+          link.text("开放")
+          link.closest("tr").removeClass("available")
+          link.closest("tr").addClass("unavailable")
+          link.addClass("link-unavailable")
+          link.removeClass("link-available")
+          # link.closest("tr").find(".access").hide()
       )
     return false
+
+  $("#cancel").click ->
+    $("#closeModal").modal("hide")
+
+  
 
