@@ -19,11 +19,11 @@
       编辑
     - if @course.available == true
       .btn#unshelve-btn.available{:type => "button"} 
-        %img.end{src: asset_path("managecenter/unshelve.png")}
+        %img.end.shelve_down{src: asset_path("managecenter/unshelve.png")}
         %span 下架
     - else
       .btn#unshelve-btn.unavailable{:type => "button"} 
-        %img.end{src: asset_path("managecenter/shelve.png")}
+        %img.end.shelve_up{src: asset_path("managecenter/shelve.png")}
         %span 上架
     .tabbable
       %a{:href => "/admin/courses"}

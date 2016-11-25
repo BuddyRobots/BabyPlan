@@ -26,6 +26,7 @@
 #= require extensions/page_notification
 #= require extensions/mobile_page_notification
 #= require "jweixin-1.0.0"
+#= require app_assets
 
 $ ->
   Handlebars.registerHelper "ifCond", (v1, v2, options) ->
