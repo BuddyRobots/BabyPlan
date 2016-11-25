@@ -95,7 +95,7 @@ body, p, img, div, ul, li, a, h3, table, tr, th, td {
 		border-left: 1px solid #c8c8c8;
 	}
 	#manage-photo {
-		background: url('/assets/managecenter/photocircle.png') no-repeat;
+		background: image-url('managecenter/photocircle.png') no-repeat;
 		background-size: 34px;
 		background-position: 15px 9px;
 		padding: 0 0 0 15px;
@@ -153,7 +153,7 @@ body, p, img, div, ul, li, a, h3, table, tr, th, td {
 		list-style: none;
 	}
 	li {
-		background: url('/assets/web/line2.png') no-repeat bottom;
+		background: image-url("web/line2.png") no-repeat bottom;
 		a {
 			width: 155px;
 			display: block;

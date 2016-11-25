@@ -54,7 +54,7 @@ a{
 }
 .notice-num {
 	width: 3.75%;
-	background: url("/assets/web/circle-min.png") no-repeat;
+	background: image-url("web/circle-min.png") no-repeat;
 	background-size: 100%;
 	position: absolute;
 	top: 2%;
@@ -95,7 +95,7 @@ a{
 .collect-div {
 	width: 84.0625%;
 	margin: 0 auto;
-	background: url("/assets/personcloud.png") no-repeat;
+	background: image-url("personcloud.png") no-repeat;
 	background-size: 100%;
 }
 .collect {
