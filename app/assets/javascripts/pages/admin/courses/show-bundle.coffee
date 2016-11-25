@@ -42,18 +42,17 @@ $ ->
       (data) ->
         if data.success
           $.page_notification("操作完成")
-          console.log btn.find("img").attr("src")
           if current_state == "available"
             btn.removeClass("available")
             btn.addClass("unavailable")
             btn.find("span").text("上架")
-            btn.find("img").attr("src", asset_path("managecenter/shelve.png"))
+            btn.find("img").attr("src", window.shelve_path)
             $(".shelve").text("未上架")
           else
             btn.addClass("available")
             btn.removeClass("unavailable")
             btn.find("span").text("下架")
-            btn.find("img").attr("src", asset_path("managecenter/unshelve.png"))
+            btn.find("img").attr("src", window.unshelve_path)
             $(".shelve").text("在架上")
       )
 
