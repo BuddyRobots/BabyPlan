@@ -37,6 +37,10 @@ class Staff::BooksController < Staff::ApplicationController
     borrows = @book.book_borrows
     params[:page] = params[:borrow_page]
     @borrows = auto_paginate(borrows)
+
+    unreturned = @book.book_borrows.unreturned
+    params[:page] = params[:unreturned_page]
+    @unreturned = auto_paginate(unreturned)
   end
 
   def update

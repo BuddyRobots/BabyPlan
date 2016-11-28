@@ -14,6 +14,12 @@ $ ->
     $("#lostModal").modal("hide")
 
   $(".return").click ->
+    client_name = $(this).closest('tr').attr('data-clientname')
+    name = $(this).closest('tr').attr('data-name')
+    id = $(this).closest('tr').attr('data-id')
+    console.log(client_name)
+    console.log(name)
+    console.log(id)
     $("#returnModal").modal("show")
 
   $(".lost").click ->
@@ -132,6 +138,12 @@ $ ->
     $(".QRcode-btn").hide()
 
   $("#borrow-message").click ->
+    $(".edit-btn").hide()
+    $(".unshelve-btn").hide()
+    $(".finish-btn").hide()  
+    $(".QRcode-btn").hide()  
+
+  $("#return-book").click ->
     $(".edit-btn").hide()
     $(".unshelve-btn").hide()
     $(".finish-btn").hide()  
@@ -307,6 +319,9 @@ $ ->
   if window.profile == "borrows"
     $("#borrow-message").trigger("click")
 
+  if window.profile == "return"
+    $("#return-book").trigger("click")
+
   $(document).on 'click', '.hide-review', ->
     rid = $(this).attr("data-id")
     hide_review(rid, $(this))
@@ -324,3 +339,4 @@ $ ->
       span.removeClass("triangle-down").addClass("triangle-up")
     else
       span.removeClass("triangle-up").addClass("triangle-down")
+

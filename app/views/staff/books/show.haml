@@ -188,48 +188,42 @@
                     %a{:href => "/staff/books/" + @book.id.to_s + "?profile=borrows&borrow_page=#{@borrows[:next_page]}"} »
 
         #tab4.tab-pane
-          .undiscover
-            %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
-            %span.undiscover-message 抱歉！暂无查找信息
-          .table-box
-            %table.table.table-bordered#user-table1
-              %thead
-                %tr
-                  %th 借阅人
-                  %th 手机号码
-                  %th 借阅时间
-                  %th 逾期天数
-                  %th{colspan: "2"} 操&nbsp作
-              %tbody
-                %tr
-                  %td 王小明
-                  %td 1311111111
-                  %td 2016.11.20
-                  %td 10
-                  %td
-                    %a.return{href: "javascript:void(0);"} 归还
-                  %td
-                    %a.lost{href: "javascript:void(0);"} 丢失
-                %tr
-                  %td 王小明
-                  %td 1311111111
-                  %td 2016.11.20
-                  %td.date-over 未逾期
-                  %td
-                    %a.return{href: "javascript:void(0);"} 归还
-                  %td
-                    %a.lost{href: "javascript:void(0);"} 丢失
-          .select-page 
-            %span.totalitems= "共#{@borrows[:total_page]}页,总计#{@borrows[:total_number]}条"
-            %span.choice-page
-              %ul.pagination.pagination-sm
-                %li
-                  %a{:href => "/admin/books/" + @book.id.to_s + "?profile=borrows&borrow_page=#{@borrows[:previous_page]}"} «
-                - ( (@borrows[:previous_page] > 2 ? @borrows[:previous_page] - 2 : 1) .. (@borrows[:next_page] < @borrows[:total_page] - 2 ? @borrows[:next_page] + 2 : @borrows[:total_page]) ).to_a.each do |page|
+          - if @unreturned[:data].blank?
+            .undiscover
+              %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
+              %span.undiscover-message 抱歉！暂无查找信息
+          - else
+            .table-box
+              %table.table.table-bordered#user-table1
+                %thead
+                  %tr
+                    %th 借阅人
+                    %th 手机号码
+                    %th 借阅时间
+                    %th 逾期天数
+                    %th{colspan: "2"} 操&nbsp作
+                %tbody
+                  - @unreturned[:data].each do |b|
+                    %tr{data: {id: b.id.to_s, name: b.book.name, clientname: b.client.name}}
+                      %td= b.client.name
+                      %td= b.client.mobile
+                      %td= Time.at(b.borrow_at).strftime("%Y-%m-%d %H:%M")
+                      %td{class: b.return_class}= b.expire_days_str
+                      %td
+                        %a.return{href: "javascript:void(0);"} 归还
+                      %td
+                        %a.lost{href: "javascript:void(0);"} 丢失
+            .select-page 
+              %span.totalitems= "共#{@unreturned[:total_page]}页,总计#{@unreturned[:total_number]}条"
+              %span.choice-page
+                %ul.pagination.pagination-sm
                   %li
-                    %a{:href => "/admin/books/" + @book.id.to_s + "?profile=borrows&borrow_page=#{page}"}= page
-                %li
-                  %a{:href => "/admin/books/" + @book.id.to_s + "?profile=borrows&borrow_page=#{@borrows[:next_page]}"} »
+                    %a{:href => "/staff/books/" + @book.id.to_s + "?profile=return&unreturned_page=#{@unreturned[:previous_page]}"} «
+                  - ( (@unreturned[:previous_page] > 2 ? @unreturned[:previous_page] - 2 : 1) .. (@unreturned[:next_page] < @unreturned[:total_page] - 2 ? @unreturned[:next_page] + 2 : @unreturned[:total_page]) ).to_a.each do |page|
+                    %li
+                      %a{:href => "/staff/books/" + @book.id.to_s + "?profile=return&unreturned_page=#{page}"}= page
+                  %li
+                    %a{:href => "/staff/books/" + @book.id.to_s + "?profile=return&unreturned_page=#{@unreturned[:next_page]}"} »
 #editor-content.hide
   = @book.desc.html_safe
 
