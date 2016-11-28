@@ -59,6 +59,3 @@ $ ->
   $("#cancel").click ->
     $("#closeModal").modal("hide")
 
-
-  
-
