@@ -623,9 +623,13 @@
 	opacity: 1;
 }
 .message {
-	font-size: 16px;
-	color: #323232;
+	font-size: 0;
 	margin: 20px 0;
+	span {
+		font-size: 16px;
+		color: #323232;
+	}
+	
 }
 .btn-div {
 	display: -webkit-flex;
