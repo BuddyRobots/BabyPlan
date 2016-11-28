@@ -253,9 +253,11 @@ span, ul, li, label {
 	@extend .square;
 	background: #d70c19;
 }
-
 .active-btn {
 	background: #f7873d;
+}
+#tab3 {
+	width: 80%;
 }
 // select-page
 .select-page {

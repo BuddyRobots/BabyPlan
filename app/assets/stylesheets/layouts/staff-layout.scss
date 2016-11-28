@@ -101,7 +101,7 @@ body, p, img, div, ul, li, a, h3, table, tr, th, td {
 		background-position: 15px 9px;
 		padding: 0 0 0 15px;
 	}
-	.turnoff-icon, .about-icon {
+	.turnoff-icon, .important-icon {
 		width: 100%;
 		max-width: 24px;
 	}
@@ -237,4 +237,64 @@ body, p, img, div, ul, li, a, h3, table, tr, th, td {
 	.unclicked {
 		background: #fee4d2;
 	}
+}
+
+
+#importantModal {
+	.modal-dialog {
+		position:absolute;
+		left: 50%;
+		top: 50%;
+		margin-left: -220px;
+		margin-top: -128px;
+		width: 438px;
+		height: 256px;
+		border-radius: 6px;	
+	}
+	.modal-body {
+		padding: 40px;
+	}
+}
+.modal-backdrop {
+	background-color: #999;
+}
+.close {
+	position: absolute;
+	right: -14px;
+	top: -14px;
+	opacity: 0.7;
+	z-index: 10;
+}
+.close:hover {
+	opacity: 1;
+}
+.refund-message {
+	font-size: 16px;
+	color: #323232;
+}
+.btn-div {
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	-webkit-justify-content: space-between;
+	-moz-justify-content: space-between;
+	-ms-justify-content: space-between;
+	-o-justify-content: space-between;
+	display: flex;
+	justify-content: space-between;
+	.btn {
+		width: 45%;
+		font-size: 16px;
+		color: white;
+		border: 0;
+		height: 40px;
+	}
+}
+#reason {
+	margin: 20px 0;
+}
+#reject, #agree-refund {
+	background: #f7873d;
+	outline: none;
 }

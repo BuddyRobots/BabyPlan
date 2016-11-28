@@ -32,7 +32,7 @@
       = @course.course.desc.html_safe
     .course-desc
       - if @course_participate.present? && @course_participate.is_success
-        .content#sign-desc
+        #sign-desc
           %p.title 签到情况
           .sign_in-div
             - @course.length.times do |i|
@@ -44,7 +44,10 @@
                 - else
                   .future= i + 1
     .assign-div
-      %p.center 课程详情
+      .center 
+        %span#course-detail 课程详情
+        %span#refund 申请退款
+        %span#applied 已申请退款
       .item-box
         .item
           .left-div#residual_num
@@ -103,3 +106,14 @@
         %button.btn.unclick-btn{:type => "button"} 无剩余容量
       - else
         %a.btn.click-btn{href: new_user_mobile_course_path + "/?state=" + @course.id.to_s, :type => "button"} 去付款
+
+
+#refundModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
+  .modal-dialog
+    .modal-content
+      .modal-body
+        %p.account 申请退款
+        %p.question　是否确认退出当前课程！
+        .confirm-div
+          %a.line.clicked#confirm-refund 退款
+          %a{"data-dismiss" => "modal"} 取消

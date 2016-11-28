@@ -24,6 +24,7 @@ a{
 	min-height: 100%;
 	overflow: auto;
 	margin:0 auto;
+	padding-bottom: 13.5%;
 	background: linear-gradient(
     45deg, 
     #fef29c 45%, 
@@ -31,7 +32,6 @@ a{
     #fef29c 50%, #fef29c 95%, 
     #fcc204 95%, #fcc204);
     background-size: 10px 10px;
-    padding-bottom: 2%;
 }
 .undiscover {
 	margin-top: 43%;
@@ -79,7 +79,7 @@ a{
 .details {
 	@extend .box-radius;
 	overflow:hidden;
-	margin-bottom:3.91%;
+	margin-bottom: 3.91%;
 	display: flex;
 	justify-content: space-between;
 	padding: 3% 2.5%;
@@ -130,7 +130,30 @@ a{
 .right-div {
 	width: 65%;
 }
-
+.btn {
+	position: fixed;
+	width: 100%;
+	bottom: 0;
+	font-size: 3.6em;
+	padding: 3.18%;
+	width: 100%;
+	max-width: 640px;
+	border-radius: 0;
+	border: 0;
+	outline: none;
+}
+#deposit {
+	color: #fff;
+	background: #999;
+}
+#redeposit {
+	color: #fff;
+	background: #d70c19;
+}
+#deposit-pay {
+	color: #fff;
+	background: #d70c19;
+}
 
 @media screen and (max-width:640px) {
 	.content-area {

@@ -105,7 +105,6 @@ a{
 .course-desc {
 	width:95.3125%;
 	margin:0 auto;
-	padding: 0 2.345%;
 	background:white;
 	border-radius: 10px;
 	margin-bottom: 3.14%;
@@ -139,12 +138,31 @@ a{
 	border-radius: 10px;
 	margin-bottom:3.14%;
 	.center {
+		padding-top: 1.8%;
+		padding-bottom: 0.5%;
+		border-bottom: 1px dashed #aaa;
+	}
+	#course-detail {
 		font-size: 3em;
 		padding-left:2.46%;
-		padding-top:3.28%;
-		padding-bottom: 1.45%;
 		color:#3e3e3e;
-		border-bottom: 1px dashed #aaa;
+	}
+	#applied {
+		font-size: 2em;
+		color: #aaa;
+		float: right;
+		margin-right: 6.56%;
+		padding-top: 1.5%;
+	}
+	#refund {
+		font-size: 2em;
+		color: #666;
+		float: right;
+		padding-top: 1.5%;
+		margin-right: 3.28%;
+	}
+	#refund:hover {
+		cursor: pointer;
 	}
 	.item-box {
 		padding: 3.28% 2.63% 1.5% 2.63%;
@@ -280,34 +298,87 @@ a{
 	color: #fff;
 }
 
+#refundModal {
+	width: 100%;
+	max-width: 640px;
+	margin: 0 auto;
+	.modal-body {
+		padding: 0;
+	}
+	.modal-dialog {
+		width: 84.375%;
+		margin: 0 auto;
+		background: #fff;
+		text-align: center;
+		margin-top: 40%;
+		border-radius: 8px;
+	}
+}
+.modal-backdrop {
+	background-color: #999;
+}
+.account {
+	font-size: 3.4em;
+	color: #333;
+	padding: 7% 0 3% 0;
+}
+.question {
+	font-size: 2.6em;
+	color: #666;
+	margin-bottom: 3.5%;
+}
+.confirm-div {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	display: -webkit-flex;
+	-webkit-justify-content: space-between;
+	border-top: 1px solid #aaa;
+	a {
+		display: inline-block;
+		width: 50%;
+		font-size: 3.2em;
+		color: #666;
+		padding: 4% 0;
+		text-decoration: none;
+	}
+	.line {
+		border-right: 1px solid #aaa;
+	}
+	.clicked {
+		color: #227dda;
+	}
+}
+
+
 @media screen and (max-width:640px) {
-	.content-area {
+	.content-area, #refundModal {
 		font-size: 100%;
 	}
 }
 @media screen and (max-width: 560px) {
-    .content-area {
+    .content-area, #refundModal {
         font-size: 85%;
     }
 }
 
 @media screen and (max-width: 500px) {
-    .content-area {
+    .content-area, #refundModal {
         font-size: 67%;
     }
 }
 @media screen and (max-width: 420px) {
-    .content-area {
+    .content-area, #refundModal {
         font-size: 63%;
     }
 }
 @media screen and (max-width: 400px) {
-    .content-area {
+    .content-area, #refundModal {
         font-size: 56%;
     }
 }
 @media screen and (max-width: 320px) {
-    .content-area {
+    .content-area, #refundModal {
         font-size: 50%;
     }
 }

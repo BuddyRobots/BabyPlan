@@ -26,9 +26,9 @@
               %ul.dropdown-menu
                 %li 
                   %a.modify_password{:href => "javascript:void(0);"} 修改密码
-          / %li.manage
-          /   %a{:href => "javascript:void(0);"}
-          /     %img.about-icon{:src => "/assets/managecenter/about.png"}
+          %li.manage
+            %a#important-modal{:href => "javascript:void(0);"}
+              %img.important-icon{src: asset_path("managecenter/important.png")}
           %li.manage
             %a{:href => signout_staff_sessions_path}
               %img.turnoff-icon{src: asset_path("managecenter/turnoff.png")}
@@ -78,3 +78,16 @@
                 %input.unclicked-box#confirm-password.form-control{:type => "password"}
             .confirm-button
               %button.btn#confirm.button-disabled{:href => "javascript:void(0);"} 确定
+
+
+#importantModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
+  .modal-dialog
+    .modal-content
+      .modalheader
+        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: asset_path("managecenter/close.png")}
+      .modal-body
+        %p.fefund-message 课程名为很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的学生王小明已申请退款，是否确定通过此次退款申请？
+        %input.form-control#reason{placeholder: "拒绝理由"}
+        .btn-div
+          %button.btn#reject{type: "button"} 拒&nbsp绝
+          %button.btn#agree-refund{type: "button"} 退&nbsp款

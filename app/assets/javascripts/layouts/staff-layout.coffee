@@ -109,3 +109,9 @@ $ ->
         else
           $.page_notification("服务器出错")
       )
+
+  $("#important-modal").click ->
+    $("#importantModal").modal("show")
+
+  $(".close").click ->
+    $("input").val("")

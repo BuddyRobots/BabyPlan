@@ -53,3 +53,7 @@ $ ->
     marker.setTitle("test")
     marker.setVisible(true)
   init()
+
+  $("#refund").click ->
+    $("#refundModal").modal("show")
+
