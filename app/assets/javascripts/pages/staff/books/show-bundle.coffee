@@ -7,6 +7,18 @@ $ ->
     $("#confirm").removeClass("button-enabled")
     $("#confirm").addClass("button-disabled")
 
+  $("#return-cancel").click ->
+    $("#returnModal").modal("hide")
+
+  $("#lost-cancel").click ->
+    $("#lostModal").modal("hide")
+
+  $(".return").click ->
+    $("#returnModal").modal("show")
+
+  $(".lost").click ->
+    $("#lostModal").modal("show")
+
   has_cover = false
   has_back = false
 

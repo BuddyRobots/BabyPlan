@@ -18,53 +18,106 @@
       .btn.merge-book{:type => "button"} 绘本合并
     
     .manage-content
-      - if @books[:data].length == 0
-        .undiscover
-          %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
-          %span.message 抱歉！暂无查找信息
-      - else
-        .table-box
-          %table.table.table-bordered#user-table
-            %thead
-              %tr
-                %th 绘本名称
-                %th 标&nbsp签
-                %th 数&nbsp量
-                %th 在架
-                %th 作&nbsp者
-                %th 书&nbsp号
-                %th 操&nbsp作
-            %tbody
-              - @books[:data].each do |b|
-                %tr{class: "book-record #{ b[:available] ? "available" : "unavailable" }", "data-id" => b[:id]}
-                  %td= link_to b[:name], "/staff/books/#{b[:id]}"
-                  %td= truncate((b[:tags] || "").gsub(',', '，'), length: 20)
-                  %td= b[:stock].to_s + "本"
-                  %td= b[:available_stock].to_s + "本"
-                  %td= b[:author]
-                  %td= b[:isbn]
-                  %td
-                    - if b[:available]
-                      %a.set-available.link-available{:href => "javascript:void(0);"} 下架
-                    - else
-                      %a.set-available.link-unavailable{:href => "javascript:void(0);"} 上架
-        .select-page 
-          %span.totalitems= "共#{@books[:total_page]}页,总计#{@books[:total_number]}条"
-          %span.choice-page
-            %ul.pagination.pagination-sm
-              %li
-                %a{:href => "/staff/books?keyword=#{@keyword}&page=#{@books[:previous_page]}"} «
-              - ( (@books[:previous_page] > 2 ? @books[:previous_page] - 2 : 1) .. (@books[:next_page] < @books[:total_page] - 2 ? @books[:next_page] + 2 : @books[:total_page]) ).to_a.each do |page|
-                %li
-                  %a{:href => "/staff/books?keyword=#{@keyword}&page=#{page}"}= page
-              %li
-                %a{:href => "/staff/books?keyword=#{@keyword}&page=#{@books[:next_page]}"} »
-          
+      .tabbable
+        %ul.nav.nav-tabs
+          %li.active
+            %a#book-list{"data-toggle" => "tab", :href => "#tab1"} 绘本列表
+          %li
+            %a#timeover{"data-toggle" => "tab", :href => "#tab2"} 逾期绘本
+
+        .tab-content
+          #tab1.tab-pane.active
+            .tab-box
+              - if @books[:data].length == 0
+                .undiscover
+                  %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
+                  %span.message 抱歉！暂无查找信息
+              - else
+                .table-box
+                  %table.table.table-bordered#user-table
+                    %thead
+                      %tr
+                        %th 绘本名称
+                        %th 标&nbsp签
+                        %th 数&nbsp量
+                        %th 在架
+                        %th 作&nbsp者
+                        %th 书&nbsp号
+                        %th 操&nbsp作
+                    %tbody
+                      - @books[:data].each do |b|
+                        %tr{class: "book-record #{ b[:available] ? "available" : "unavailable" }", "data-id" => b[:id]}
+                          %td= link_to b[:name], "/staff/books/#{b[:id]}"
+                          %td= truncate((b[:tags] || "").gsub(',', '，'), length: 20)
+                          %td= b[:stock].to_s + "本"
+                          %td= b[:available_stock].to_s + "本"
+                          %td= b[:author]
+                          %td= b[:isbn]
+                          %td
+                            - if b[:available]
+                              %a.set-available.link-available{:href => "javascript:void(0);"} 下架
+                            - else
+                              %a.set-available.link-unavailable{:href => "javascript:void(0);"} 上架
+                .select-page 
+                  %span.totalitems= "共#{@books[:total_page]}页,总计#{@books[:total_number]}条"
+                  %span.choice-page
+                    %ul.pagination.pagination-sm
+                      %li
+                        %a{:href => "/staff/books?keyword=#{@keyword}&page=#{@books[:previous_page]}"} «
+                      - ( (@books[:previous_page] > 2 ? @books[:previous_page] - 2 : 1) .. (@books[:next_page] < @books[:total_page] - 2 ? @books[:next_page] + 2 : @books[:total_page]) ).to_a.each do |page|
+                        %li
+                          %a{:href => "/staff/books?keyword=#{@keyword}&page=#{page}"}= page
+                      %li
+                        %a{:href => "/staff/books?keyword=#{@keyword}&page=#{@books[:next_page]}"} »
+          #tab2.tab-pane
+            .tab-box
+              .undiscover
+                %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
+                %span.undiscover-message 抱歉！暂无查找信息
+              .table-box
+                %table.table.table-bordered#user-table1
+                  %thead
+                    %tr
+                      %th 借阅人
+                      %th 手机号码
+                      %th 借阅时间
+                      %th 逾期天数
+                      %th{colspan: "2"} 操&nbsp作
+                  %tbody
+                    %tr
+                      %td 王小明
+                      %td 1311111111
+                      %td 2016.11.20
+                      %td 10
+                      %td
+                        %a.return{href: "javascript:void(0);"} 归还
+                      %td
+                        %a.lost{href: "javascript:void(0);"} 丢失
+                    %tr
+                      %td 王小明
+                      %td 1311111111
+                      %td 2016.11.20
+                      %td 120
+                      %td
+                        %a.return{href: "javascript:void(0);"} 归还
+                      %td
+                        %a.lost{href: "javascript:void(0);"} 丢失
+              .select-page 
+                %span.totalitems= "共#{@books[:total_page]}页,总计#{@books[:total_number]}条"
+                %span.choice-page
+                  %ul.pagination.pagination-sm
+                    %li
+                      %a{:href => "/staff/books?keyword=#{@keyword}&page=#{@books[:previous_page]}"} «
+                    - ( (@books[:previous_page] > 2 ? @books[:previous_page] - 2 : 1) .. (@books[:next_page] < @books[:total_page] - 2 ? @books[:next_page] + 2 : @books[:total_page]) ).to_a.each do |page|
+                      %li
+                        %a{:href => "/staff/books?keyword=#{@keyword}&page=#{page}"}= page
+                    %li
+                      %a{:href => "/staff/books?keyword=#{@keyword}&page=#{@books[:next_page]}"} »
 
 #shelveModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
   .modal-dialog
     .modal-content
-      .modalheader
+      .modalheader.shelve-header
         %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: asset_path("managecenter/close.png")}
         %p.caption 请填写完整信息后再选择上架
       .modal-body
@@ -72,6 +125,29 @@
           点击前往补全信息
           %span.right-arrow
             %img{src: asset_path("managecenter/right-arrow.png")}
+
+#returnModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
+  .modal-dialog
+    .modal-content
+      .modalheader
+        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: asset_path("managecenter/close.png")}
+      .modal-body
+        %p.message 王小明借阅的绘本《书名很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长》将归还，是否确定立即归还该书？
+        .btn-div
+          %button.btn#return-cancel{type: "button"} 取&nbsp消
+          %button.btn#return-confirm{type: "button"} 确&nbsp定
+
+#lostModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
+  .modal-dialog
+    .modal-content
+      .modalheader
+        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: asset_path("managecenter/close.png")}
+      .modal-body
+        %p.lost-caption 绘本丢失
+        %p.message 王小明借阅的绘本《书名很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长》已丢失？
+        .btn-div
+          %button.btn#lost-cancel{type: "button"} 取&nbsp消
+          %button.btn#lost-confirm{type: "button"} 确&nbsp定
       
 
 

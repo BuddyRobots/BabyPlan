@@ -21,7 +21,7 @@ a{
 .content-area{
 	width:100%;
 	max-width:640px;
-	height: 100%;
+	min-height: 100%;
 	overflow: auto;
 	margin:0 auto;
 	background: linear-gradient(

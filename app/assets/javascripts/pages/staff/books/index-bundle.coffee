@@ -11,6 +11,18 @@ $ ->
   $(".merge-book").click ->
     location.href = "/staff/books/merge"
 
+  $("#return-cancel").click ->
+    $("#returnModal").modal("hide")
+
+  $("#lost-cancel").click ->
+    $("#lostModal").modal("hide")
+
+  $(".return").click ->
+    $("#returnModal").modal("show")
+
+  $(".lost").click ->
+    $("#lostModal").modal("show")
+
 # search-btn press
   search = ->
     value = $("#search-input").val()

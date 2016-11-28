@@ -36,6 +36,8 @@
           %a#user-review{"data-toggle" => "tab", :href => "#tab2"} 用户评价
         %li
           %a#borrow-message{"data-toggle" => "tab", :href => "#tab3"} 借阅信息
+        %li
+          %a#return-book{"data-toggle" => "tab", :href => "#tab4"} 绘本归还
 
       .tab-content
         #tab1.tab-pane.active
@@ -184,7 +186,50 @@
                       %a{:href => "/staff/books/" + @book.id.to_s + "?profile=borrows&borrow_page=#{page}"}= page
                   %li
                     %a{:href => "/staff/books/" + @book.id.to_s + "?profile=borrows&borrow_page=#{@borrows[:next_page]}"} »
-     
+
+        #tab4.tab-pane
+          .undiscover
+            %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
+            %span.undiscover-message 抱歉！暂无查找信息
+          .table-box
+            %table.table.table-bordered#user-table1
+              %thead
+                %tr
+                  %th 借阅人
+                  %th 手机号码
+                  %th 借阅时间
+                  %th 逾期天数
+                  %th{colspan: "2"} 操&nbsp作
+              %tbody
+                %tr
+                  %td 王小明
+                  %td 1311111111
+                  %td 2016.11.20
+                  %td 10
+                  %td
+                    %a.return{href: "javascript:void(0);"} 归还
+                  %td
+                    %a.lost{href: "javascript:void(0);"} 丢失
+                %tr
+                  %td 王小明
+                  %td 1311111111
+                  %td 2016.11.20
+                  %td.date-over 未逾期
+                  %td
+                    %a.return{href: "javascript:void(0);"} 归还
+                  %td
+                    %a.lost{href: "javascript:void(0);"} 丢失
+          .select-page 
+            %span.totalitems= "共#{@borrows[:total_page]}页,总计#{@borrows[:total_number]}条"
+            %span.choice-page
+              %ul.pagination.pagination-sm
+                %li
+                  %a{:href => "/admin/books/" + @book.id.to_s + "?profile=borrows&borrow_page=#{@borrows[:previous_page]}"} «
+                - ( (@borrows[:previous_page] > 2 ? @borrows[:previous_page] - 2 : 1) .. (@borrows[:next_page] < @borrows[:total_page] - 2 ? @borrows[:next_page] + 2 : @borrows[:total_page]) ).to_a.each do |page|
+                  %li
+                    %a{:href => "/admin/books/" + @book.id.to_s + "?profile=borrows&borrow_page=#{page}"}= page
+                %li
+                  %a{:href => "/admin/books/" + @book.id.to_s + "?profile=borrows&borrow_page=#{@borrows[:next_page]}"} »
 #editor-content.hide
   = @book.desc.html_safe
 
@@ -201,5 +246,28 @@
             %input.unclicked-box#code-num.form-control{:type => "text"}
           .confirm-button
             %button.btn#confirm.button-disabled{:href => "javascript:void(0);"} 确&nbsp定
+
+#returnModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
+  .modal-dialog
+    .modal-content
+      .modalheader
+        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: asset_path("managecenter/close.png")}
+      .modal-body
+        %p.message 王小明借阅的绘本《书名很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长》将归还，是否确定立即归还该书？
+        .btn-div
+          %button.btn#return-cancel{type: "button"} 取&nbsp消
+          %button.btn#return-confirm{type: "button"} 确&nbsp定
+
+#lostModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
+  .modal-dialog
+    .modal-content
+      .modalheader
+        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: asset_path("managecenter/close.png")}
+      .modal-body
+        %p.lost-caption 绘本丢失
+        %p.message 王小明借阅的绘本《书名很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长》已丢失？
+        .btn-div
+          %button.btn#lost-cancel{type: "button"} 取&nbsp消
+          %button.btn#lost-confirm{type: "button"} 确&nbsp定
 
 

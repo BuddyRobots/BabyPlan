@@ -15,8 +15,7 @@
           %a#user-review{"data-toggle" => "tab", :href => "#tab2"} 用户评价
         %li
           %a#borrow-message{"data-toggle" => "tab", :href => "#tab3"} 借阅信息
-        / %li
-        /   %a#same-book{"data-toggle" => "tab", :href => "#tab4"} 同类绘本
+        
 
       .tab-content
         #tab1.tab-pane.active
@@ -133,4 +132,6 @@
                       %a{:href => "/admin/books/" + @book.id.to_s + "?profile=borrows&borrow_page=#{page}"}= page
                   %li
                     %a{:href => "/admin/books/" + @book.id.to_s + "?profile=borrows&borrow_page=#{@borrows[:next_page]}"} »
+
+       
 
