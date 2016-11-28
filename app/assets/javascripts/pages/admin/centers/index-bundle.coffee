@@ -20,17 +20,19 @@ $ ->
     link = $(this)
     window.cid = $(this).closest("tr").attr("data-id") 
     if $(this).hasClass("link-unavailable")
-      link.removeClass("link-unavailable")
-      link.addClass("link-available")
-      link.text("关闭")
-      link.closest("tr").addClass("available")
-      link.closest("tr").removeClass("unavailable")
       $.postJSON(
         '/admin/centers/' + window.cid + '/set_available',
         {
           available: true
         },
         (data) ->
+          if data.success
+            link.removeClass("link-unavailable")
+            link.addClass("link-available")
+            link.text("关闭")
+            link.closest("tr").addClass("available")
+            link.closest("tr").removeClass("unavailable")
+            $.page_notification("操作完成")
       )
     else
       $("#closeModal").modal("show")
