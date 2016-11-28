@@ -66,3 +66,6 @@ $ ->
             link.closest("tr").removeClass("unavailable")
       )
     return false
+
+  if window.profile == "borrows"
+    $("#timeover").trigger("click")

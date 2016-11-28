@@ -247,10 +247,10 @@
       .modalheader
         %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: asset_path("managecenter/close.png")}
       .modal-body
-        %p.message 
-          %span 王小明
+        %p.message
+          %span.client-name 王小明
           %span 借阅的绘本
-          %span《书名很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长》
+          %span.book-name《书名很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长》
           %span 将归还，是否确定立即归还该书？
         .btn-div
           %button.btn#return-cancel{type: "button"} 取&nbsp消
@@ -264,9 +264,9 @@
       .modal-body
         %p.lost-caption 绘本丢失
         %p.message 
-          %span 王小明
+          %span.client-name 王小明
           %span 借阅的绘本
-          %span《书名很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长》
+          %span.book-name《书名很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长》
           %span 已丢失？
         .btn-div
           %button.btn#lost-cancel{type: "button"} 取&nbsp消
