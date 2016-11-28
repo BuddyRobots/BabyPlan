@@ -107,16 +107,30 @@
 
         #tab3.tab-pane
           .deposit-div
-            .deposit-pay
-            .late-fee
-          .table-box
+            .desc-div
+              %p.title 押金缴纳
+              .deposit-pay-desc
+                %p.cash 押金缴纳情况
+                %p.cash 当前借阅本数
+                .btn-div
+                  %button.btn#deposit-btn 缴纳押金100元
+                  %button.btn#deposit-refund 退回押金
+            .desc-div
+              %p.title 滞纳金缴纳
+              .late-fee-desc
+                %p.cash 滞纳金总金额
+                %p.cash 当前逾期未还
+                .btn-div
+                  %button.btn#late-fee-unpaied 已缴清滞纳金
+                  %button.btn#late-fee-pay 缴纳滞纳金
+          .table-box#tab3-table
             %table.table.table-bordered#register-table
               %thead
                 %tr
                   %th 绘本名称
                   %th 借阅时间
                   %th 归还时间
-                  %th 操&nbsp作
+                  %th 操&n
               %tbody
                 %tr
                   %td.td-data 少儿计算机知识

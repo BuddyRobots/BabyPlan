@@ -258,6 +258,24 @@ span, ul, li, label {
 }
 #tab3 {
 	width: 80%;
+	margin: 40px 0 20px 40px;
+}
+#tab3-table {
+	margin: 20px 0 0 0;
+}
+.deposit-div {
+	display: -webkit-flex;
+}
+.desc-div {
+	border: 1px solid #ddd;
+}
+.title {
+	font-size: 16px;
+	color: #464646;
+	text-align: center;
+	background: #f6f6f6;
+	padding: 10px 0;
+	border-bottom: 1px solid #ddd;
 }
 // select-page
 .select-page {
