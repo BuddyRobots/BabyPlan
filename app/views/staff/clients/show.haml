@@ -106,6 +106,32 @@
                     %a{:href => "/staff/clients/" + @user.id.to_s + "?profile=courses&course_page=#{@participates[:next_page]}"} »
 
         #tab3.tab-pane
+          .deposit-div
+            .deposit-pay
+            .late-fee
+          .table-box
+            %table.table.table-bordered#register-table
+              %thead
+                %tr
+                  %th 绘本名称
+                  %th 借阅时间
+                  %th 归还时间
+                  %th 操&nbsp作
+              %tbody
+                %tr
+                  %td.td-data 少儿计算机知识
+                  %td.td-data　2016.12.12
+                  %td.td-data
+                    .unreturn 暂未归还
+                  %td.td-data
+                    .unreturn-review　绘本评价
+                %tr
+                  %td.td-data 少儿计算机知识
+                  %td.td-data　2016.12.12
+                  %td.td-data
+                    .overtime 已逾期(联系电话:131111111)
+                  %td.td-data
+                    .unreturn-review　绘本评价
           - if @borrows[:data].blank?
             .undiscover
               %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
@@ -138,22 +164,6 @@
                           .comments-book
                             %span 评价：
                             %span.comments-content= b.review.content
-                  / %tr
-                  /   %td.td-data 少儿计算机知识
-                  /   %td.td-data　2016.12.12
-                  /   %td.td-data
-                  /     .unreturn 暂未归还
-                  /   %td.td-data
-                  /     .unreturn-review　绘本评价
-                  / %tr
-                  /   %td.td-data 少儿计算机知识
-                  /   %td.td-data　2016.12.12
-                  /   %td.td-data
-                  /     .overtime 已逾期(联系电话:131111111)
-                  /   %td.td-data
-                  /     .unreturn-review　绘本评价
-
-
             .select-page 
               %span.totalitems= "共#{@borrows[:total_page]}页,总计#{@borrows[:total_number]}条"
               %span.choice-page
