@@ -299,7 +299,7 @@ class Center
     allowance = 0
     self.course_insts.each do |e|
       cps = e.course_participates.where(:trade_state => "SUCCESS",
-                                        :trade_state_updated_at.gt => stat_date).length
+                                        :trade_state_updated_at.gt => stat_date)
       signup_num += cps.length
       cps.each do |cp|
         income += cp.price_pay || 0
