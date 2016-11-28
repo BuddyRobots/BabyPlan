@@ -109,17 +109,25 @@
           .deposit-div
             .desc-div
               %p.title 押金缴纳
-              .deposit-pay-desc
-                %p.cash 押金缴纳情况
-                %p.cash 当前借阅本数
+              .cash-div
+                %p.cash
+                  %span 押金缴纳情况：
+                  %span 未缴纳
+                %p.cash
+                  %span 当前借阅本数：
+                  %span 0
                 .btn-div
                   %button.btn#deposit-btn 缴纳押金100元
                   %button.btn#deposit-refund 退回押金
             .desc-div
               %p.title 滞纳金缴纳
-              .late-fee-desc
-                %p.cash 滞纳金总金额
-                %p.cash 当前逾期未还
+              .cash-div
+                %p.cash
+                  %span 滞纳金总金额：
+                  %span 0
+                %p.cash
+                  %span 当前逾期未还：
+                  %span 0
                 .btn-div
                   %button.btn#late-fee-unpaied 已缴清滞纳金
                   %button.btn#late-fee-pay 缴纳滞纳金
