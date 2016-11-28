@@ -247,7 +247,11 @@
       .modalheader
         %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: asset_path("managecenter/close.png")}
       .modal-body
-        %p.message 王小明借阅的绘本《书名很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长》将归还，是否确定立即归还该书？
+        %p.message 
+          %span 王小明
+          %span 借阅的绘本
+          %span《书名很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长》
+          %span 将归还，是否确定立即归还该书？
         .btn-div
           %button.btn#return-cancel{type: "button"} 取&nbsp消
           %button.btn#return-confirm{type: "button"} 确&nbsp定
@@ -259,7 +263,11 @@
         %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: asset_path("managecenter/close.png")}
       .modal-body
         %p.lost-caption 绘本丢失
-        %p.message 王小明借阅的绘本《书名很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长》已丢失？
+        %p.message 
+          %span 王小明
+          %span 借阅的绘本
+          %span《书名很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长》
+          %span 已丢失？
         .btn-div
           %button.btn#lost-cancel{type: "button"} 取&nbsp消
           %button.btn#lost-confirm{type: "button"} 确&nbsp定
