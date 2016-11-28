@@ -19,6 +19,14 @@ class BookBorrow
 
   def back
   	self.update_attributes({return_at: Time.now.to_i})
+    nil
+  end
+
+  def lost
+    self.update_attributes({return_at: Time.now.to_i, status: LOST})
+    new_stock = [self.book.stock - 1, 0].max
+    self.book.update_attributes({stock: new_stock})
+    nil
   end
 
   def review
@@ -34,8 +42,17 @@ class BookBorrow
     end
   end
 
+  def self.expired
+    borrow_duration = BorrowSetting.first.try(:borrow_duration)
+    if borrow_duration.blank?
+      return nil
+    else
+      self.where(return_at: nil, :borrow_at.lt => Time.now.to_i - borrow_duration.days.to_i)
+    end
+  end
+
   def return_class
-    if self.is_expired
+    if self.status == LOST || self.is_expired
       return "overtime"
     end
     if self.return_at.blank?
@@ -44,6 +61,9 @@ class BookBorrow
   end
 
   def return_status_str
+    if self.status == LOST
+      return "已丢失"
+    end
     if self.is_expired
       return "已逾期，联系电话 " + self.client.mobile
     end

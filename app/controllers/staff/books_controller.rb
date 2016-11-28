@@ -7,12 +7,17 @@ class Staff::BooksController < Staff::ApplicationController
   end
 
   def index
+    @profile = params[:profile]
     @keyword = params[:keyword]
     books = @keyword.present? ? current_center.books.where(name: /#{@keyword}/) : current_center.books.all
     @books = auto_paginate(books)
     @books[:data] = @books[:data].map do |e|
       e.book_info
     end
+
+    params[:page] = params[:borrow_page]
+    borrows = BookBorrow.expired.any_in(book_id: books.map { |e| e.id.to_s}) 
+    @borrows = auto_paginate(borrows)
   end
 
   def create
@@ -41,6 +46,18 @@ class Staff::BooksController < Staff::ApplicationController
     unreturned = @book.book_borrows.unreturned
     params[:page] = params[:unreturned_page]
     @unreturned = auto_paginate(unreturned)
+  end
+
+  def back
+    book_borrow = BookBorrow.where(id: params[:id]).first
+    retval = book_borrow.back
+    render json: retval_wrapper(retval) and return
+  end
+
+  def lost
+    book_borrow = BookBorrow.where(id: params[:id]).first
+    retval = book_borrow.lost
+    render json: retval_wrapper(retval) and return
   end
 
   def update

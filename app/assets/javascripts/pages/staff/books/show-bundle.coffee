@@ -7,27 +7,52 @@ $ ->
     $("#confirm").removeClass("button-enabled")
     $("#confirm").addClass("button-disabled")
 
-  $("#return-cancel").click ->
-    $("#returnModal").modal("hide")
-
-  $("#lost-cancel").click ->
-    $("#lostModal").modal("hide")
-
   $(".return").click ->
     client_name = $(this).closest('tr').attr('data-clientname')
     name = $(this).closest('tr').attr('data-name')
     id = $(this).closest('tr').attr('data-id')
-    console.log(client_name)
-    console.log(name)
-    console.log(id)
     $("#returnModal").modal("show")
+    $("#returnModal .client-name").text(client_name)
+    $("#returnModal .book-name").text("《" + name + "》")
+    $("#returnModal").attr("data-id", id)
+
+  $("#return-cancel").click ->
+    $("#returnModal").modal("hide")
+
+  $("#return-confirm").click ->
+    id = $("#returnModal").attr("data-id")
+    $.postJSON(
+      '/staff/books/' + id + '/back',
+      { },
+      (data) ->
+        if data.success
+          window.location.href = "/staff/books/" + window.bid + "?code=" + DONE + "&profile=return"
+      )
 
   $(".lost").click ->
+    client_name = $(this).closest('tr').attr('data-clientname')
+    name = $(this).closest('tr').attr('data-name')
+    id = $(this).closest('tr').attr('data-id')
     $("#lostModal").modal("show")
+    $("#lostModal .client-name").text(client_name)
+    $("#lostModal .book-name").text("《" + name + "》")
+    $("#lostModal").attr("data-id", id)
+
+  $("#lost-cancel").click ->
+    $("#lostModal").modal("hide")
+
+  $("#lost-confirm").click ->
+    id = $("#lostModal").attr("data-id")
+    $.postJSON(
+      '/staff/books/' + id + '/lost',
+      { },
+      (data) ->
+        if data.success
+          window.location.href = "/staff/books/" + window.bid + "?code=" + DONE + "&profile=return"
+      )
 
   has_cover = false
   has_back = false
-
   is_edit = false
 
 # wangEditor

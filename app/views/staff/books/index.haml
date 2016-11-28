@@ -3,6 +3,7 @@
   = stylesheet_link_tag "pages/staff/books/index-bundle", :media => "all"
   :javascript
     window.keyword = "#{@keyword}"
+    window.profile = "#{@profile}"
 .content-area
   /books-index
   .content-box
@@ -71,48 +72,51 @@
                         %a{:href => "/staff/books?keyword=#{@keyword}&page=#{@books[:next_page]}"} »
           #tab2.tab-pane
             .tab-box
-              .undiscover
-                %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
-                %span.undiscover-message 抱歉！暂无查找信息
-              .table-box
-                %table.table.table-bordered#user-table1
-                  %thead
-                    %tr
-                      %th 借阅人
-                      %th 手机号码
-                      %th 借阅时间
-                      %th 逾期天数
-                      %th{colspan: "2"} 操&nbsp作
-                  %tbody
-                    %tr
-                      %td 王小明
-                      %td 1311111111
-                      %td 2016.11.20
-                      %td 10
-                      %td
-                        %a.return{href: "javascript:void(0);"} 归还
-                      %td
-                        %a.lost{href: "javascript:void(0);"} 丢失
-                    %tr
-                      %td 王小明
-                      %td 1311111111
-                      %td 2016.11.20
-                      %td 120
-                      %td
-                        %a.return{href: "javascript:void(0);"} 归还
-                      %td
-                        %a.lost{href: "javascript:void(0);"} 丢失
-              .select-page 
-                %span.totalitems= "共#{@books[:total_page]}页,总计#{@books[:total_number]}条"
-                %span.choice-page
-                  %ul.pagination.pagination-sm
-                    %li
-                      %a{:href => "/staff/books?keyword=#{@keyword}&page=#{@books[:previous_page]}"} «
-                    - ( (@books[:previous_page] > 2 ? @books[:previous_page] - 2 : 1) .. (@books[:next_page] < @books[:total_page] - 2 ? @books[:next_page] + 2 : @books[:total_page]) ).to_a.each do |page|
+              - if @borrows[:data].blank?
+                .undiscover
+                  %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
+                  %span.undiscover-message 抱歉！暂无查找信息
+              - else
+                .table-box
+                  %table.table.table-bordered#user-table1
+                    %thead
+                      %tr
+                        %th 借阅人
+                        %th 手机号码
+                        %th 借阅时间
+                        %th 逾期天数
+                        %th{colspan: "2"} 操&nbsp作
+                    %tbody
+                      - @borrows[:data].each do |b|
+                        %tr
+                          %td= b.client.name
+                          %td= b.client.mobile
+                          %td= Time.at(b.borrow_at).strftime("%Y-%m-%d %H:%M")
+                          %td{class: b.return_class}= b.expire_days_str
+                          %td
+                            %a.return{href: "javascript:void(0);"} 归还
+                          %td
+                            %a.lost{href: "javascript:void(0);"} 丢失
+                      / %tr
+                      /   %td 王小明
+                      /   %td 1311111111
+                      /   %td 2016.11.20
+                      /   %td 120
+                      /   %td
+                      /     %a.return{href: "javascript:void(0);"} 归还
+                      /   %td
+                      /     %a.lost{href: "javascript:void(0);"} 丢失
+                .select-page 
+                  %span.totalitems= "共#{@borrows[:total_page]}页,总计#{@borrows[:total_number]}条"
+                  %span.choice-page
+                    %ul.pagination.pagination-sm
                       %li
-                        %a{:href => "/staff/books?keyword=#{@keyword}&page=#{page}"}= page
-                    %li
-                      %a{:href => "/staff/books?keyword=#{@keyword}&page=#{@books[:next_page]}"} »
+                        %a{:href => "/staff/books?keyword=#{@keyword}&profile=borrows&borrow_page=#{@borrows[:previous_page]}"} «
+                      - ( (@borrows[:previous_page] > 2 ? @borrows[:previous_page] - 2 : 1) .. (@borrows[:next_page] < @borrows[:total_page] - 2 ? @borrows[:next_page] + 2 : @borrows[:total_page]) ).to_a.each do |page|
+                        %li
+                          %a{:href => "/staff/books?keyword=#{@keyword}&profile=borrows&borrow_page=#{page}"}= page
+                      %li
+                        %a{:href => "/staff/books?keyword=#{@keyword}&profile=borrows&borrow_page=#{@borrows[:next_page]}"} »
 
 #shelveModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
   .modal-dialog
@@ -132,7 +136,11 @@
       .modalheader
         %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: asset_path("managecenter/close.png")}
       .modal-body
-        %p.message 王小明借阅的绘本《书名很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长》将归还，是否确定立即归还该书？
+        %p.message
+          %span.client-name 王小明
+          %span 借阅的绘本
+          %span.book-name《书名很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长》
+          %span 将归还，是否确定立即归还该书？
         .btn-div
           %button.btn#return-cancel{type: "button"} 取&nbsp消
           %button.btn#return-confirm{type: "button"} 确&nbsp定
@@ -144,7 +152,11 @@
         %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: asset_path("managecenter/close.png")}
       .modal-body
         %p.lost-caption 绘本丢失
-        %p.message 王小明借阅的绘本《书名很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长》已丢失？
+        %p.message
+          %span.client-name 王小明
+          %span 借阅的绘本
+          %span.book-name《书名很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长》
+          %span 已丢失？
         .btn-div
           %button.btn#lost-cancel{type: "button"} 取&nbsp消
           %button.btn#lost-confirm{type: "button"} 确&nbsp定

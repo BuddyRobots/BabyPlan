@@ -123,6 +123,8 @@ Rails.application.routes.draw do
       member do
         post :set_available
         post :upload_photo
+        post :back
+        post :lost
         get :download_qrcode
       end
       collection do

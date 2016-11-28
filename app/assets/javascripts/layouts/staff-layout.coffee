@@ -1,8 +1,10 @@
-
 $ ->
   if parseInt(window.code) == REQUIRE_SIGNIN
     $.page_notification("请登录工作人员后台", 3000)
     $("#signinModal").modal("show")
+
+  if parseInt(window.code) == DONE
+    $.page_notification("操作完成", 3000)
 
   $(".modify_password").click ->
     $("#modify_passwordModal").modal("show")
