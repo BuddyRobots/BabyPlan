@@ -26,9 +26,10 @@
               %ul.dropdown-menu
                 %li 
                   %a.modify_password{:href => "javascript:void(0);"} 修改密码
-          %li.manage
-            %a#important-modal{:href => "javascript:void(0);"}
-              %img.important-icon{src: asset_path("managecenter/important.png")}
+          - if CourseParticipate.waiting_for_refund(@current_center).present?
+            %li.manage#important-item
+              %a#important-modal{:href => "javascript:void(0);"}
+                %img.important-icon{src: asset_path("managecenter/important.png")}
           %li.manage
             %a{:href => signout_staff_sessions_path}
               %img.turnoff-icon{src: asset_path("managecenter/turnoff.png")}
@@ -88,9 +89,9 @@
       .modal-body
         %p.refund-message 
           %span 课程名为
-          %span 很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长
+          = link_to "", "", {id: "refund-course-name"}
           %span 的学生
-          %span 王小明
+          = link_to "", "", {id: "refund-client-name"}
           %span 已申请退款，是否确定通过此次退款申请？
         %input.form-control#reason{placeholder: "拒绝理由"}
         .btn-div

@@ -10,10 +10,10 @@ $ ->
     $("#modify_passwordModal").modal("show")
     $("#modify_passwordModal input").val("")
 
-  $(".close-btn").click ->
-    $("input").val("")
-    $("input").removeClass("clicked-box")
-    $("button").removeClass("button-enabled")
+  $("#modify_passwordModal .close-btn").click ->
+    $("#modify_passwordModal input").val("")
+    $("#modify_passwordModal input").removeClass("clicked-box")
+    $("#modify_passwordModal button").removeClass("button-enabled")
 
   toggle_password_tip = (wrong) ->
     if (wrong)
@@ -112,8 +112,58 @@ $ ->
           $.page_notification("服务器出错")
       )
 
+  show_refund_modal = (begin) ->
+    # $("#importantModal").modal("hide")
+    $.getJSON "/staff/courses/next_refund_request/", (data) ->
+      if data.success
+        $('#importantModal #refund-course-name').attr("href", "/staff/courses/" + data.course_id)
+        $('#importantModal #refund-course-name').text(data.course_name)
+        $('#importantModal #refund-client-name').attr("href", "/staff/clients/" + data.course_id)
+        $('#importantModal #refund-client-name').text(data.client_name)
+        $('#importantModal #reason').val("")
+        $('#importantModal').attr("data-id", data.id)
+        $("#importantModal").modal("show")
+        if begin == false
+          $.page_notification("操作完成，显示下一条")
+      else
+        if data.code == BLANK_DATA
+          $("#important-item").hide()
+          $.page_notification("所有退款申请处理完毕")
+        else
+          $.page_notification("服务器出错")
+
   $("#important-modal").click ->
-    $("#importantModal").modal("show")
+    show_refund_modal(true)
 
   $(".close").click ->
-    $("input").val("")
+    $("#importantModal #reason").val("")
+
+  $("#reject").click ->
+    cp_id = $("#importantModal").attr("data-id")
+    feedback = $("#importantModal input").val()
+    $.postJSON(
+      '/staff/courses/' + cp_id + '/reject_refund',
+      {
+        feedback: feedback
+      },
+      (data) ->
+        if data.success
+          show_refund_modal(false)
+        else
+          $.page_notification("服务器出错")
+      )
+
+  $("#agree-refund").click ->
+    cp_id = $("#importantModal").attr("data-id")
+    feedback = $("#importantModal input").val()
+    $.postJSON(
+      '/staff/courses/' + cp_id + '/approve_refund',
+      {
+        feedback: feedback
+      },
+      (data) ->
+        if data.success
+          show_refund_modal(false)
+        else
+          $.page_notification("服务器出错")
+      )

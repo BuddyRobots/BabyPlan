@@ -132,7 +132,7 @@ class CourseInst
   def signin_info(class_num)
     retval = [ ]
     cur_group = [ ]
-    group_size = 6
+    group_size = 5
     cur_num = 0
     self.course_participates.each do |e|
       next if e.is_success == false

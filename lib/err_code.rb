@@ -30,6 +30,8 @@ module ErrCode
   BOOK_ALL_OFF_SHELF = -27
   CENTER_EXIST = -28
   REFUND_NOT_ALLOWED = -29
+  BLANK_DATA = -30
+
 
   def self.ret_false(code)
     msg = self.message(code)

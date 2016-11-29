@@ -117,7 +117,7 @@
           - if @participates[:data].blank?
             .undiscover
               %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
-              %span.undiscover-message 抱歉！暂无查找信息
+              %span.undiscover-message 抱歉！没有学员报名
           - else
             .table-box
               %table.table.table-bordered#register-table
@@ -178,7 +178,7 @@
           - if @reviews[:data].blank?
             .undiscover
               %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
-              %span.undiscover-message 抱歉！暂无查找信息
+              %span.undiscover-message 抱歉！没有学员报名
           - else
             .user-review-box
               - @reviews[:data].each do |r|
