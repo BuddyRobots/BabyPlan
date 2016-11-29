@@ -131,35 +131,12 @@
                 .btn-div
                   %button.btn#late-fee-unpaied 已缴清滞纳金
                   %button.btn#late-fee-pay 缴纳滞纳金
-          .table-box#tab3-table
-            %table.table.table-bordered#register-table
-              %thead
-                %tr
-                  %th 绘本名称
-                  %th 借阅时间
-                  %th 归还时间
-                  %th 操&nbsp作
-              %tbody
-                %tr
-                  %td.td-data 少儿计算机知识
-                  %td.td-data　2016.12.12
-                  %td.td-data
-                    .unreturn 暂未归还
-                  %td.td-data
-                    .unreturn-review　绘本评价
-                %tr
-                  %td.td-data 少儿计算机知识
-                  %td.td-data　2016.12.12
-                  %td.td-data
-                    .overtime 已逾期(联系电话:131111111)
-                  %td.td-data
-                    .unreturn-review　绘本评价
           - if @borrows[:data].blank?
             .undiscover
               %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
               %span.undiscover-message 抱歉！暂无查找信息
           - else
-            .table-box
+            .table-box#tab3-table
               %table.table.table-bordered#register-table
                 %thead
                   %tr
@@ -186,7 +163,7 @@
                           .comments-book
                             %span 评价：
                             %span.comments-content= b.review.content
-            .select-page 
+            .select-page.tab3-page 
               %span.totalitems= "共#{@borrows[:total_page]}页,总计#{@borrows[:total_number]}条"
               %span.choice-page
                 %ul.pagination.pagination-sm
