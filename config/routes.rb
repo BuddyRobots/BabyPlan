@@ -107,6 +107,7 @@ Rails.application.routes.draw do
     resources :courses do
       collection do
         get :get_id_by_name
+        get :next_refund_request
       end
       member do
         post :set_available
@@ -116,6 +117,8 @@ Rails.application.routes.draw do
         post :signin_client
         get :signin_info
         get :stat
+        post :reject_refund
+        post :approve_refund
       end
     end
 

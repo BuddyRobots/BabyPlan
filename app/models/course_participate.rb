@@ -26,6 +26,16 @@ class CourseParticipate
   field :err_code_des, type: String
   field :trade_state_desc, type: String
 
+  # refund related
+  field :refund_feedback, type: String, default: ""
+  field :refund_result_code, type: String
+  field :refund_err_code, type: String
+  field :refund_err_code_des, type: String
+  field :wechat_refund_id, type: String
+  field :wechat_refund_channel, type: String
+  field :wechat_refund_fee, type: Integer
+  field :wechat_settlement_refund_fee, type: Integer
+
   # status related attributes
   # course participate can have following status:
   # 1. not signed up: course participate not created
@@ -38,8 +48,8 @@ class CourseParticipate
   field :trade_state_updated_at, type: Integer
   field :expired_at, type: Integer, default: -1
   field :refund_requested, type: Boolean, default: false
+  field :refund_request_handled, type: Boolean, default: false
   field :refund_approved, type: Boolean, default: false
-  field :refund_feedback, type: String, default: ""
 
   belongs_to :course_inst
   belongs_to :course
@@ -244,5 +254,85 @@ class CourseParticipate
 
   def review
     self.course_inst.reviews.where(client_id: self.client.id).first
+  end
+
+  def self.waiting_for_refund(center)
+    course_insts = center.course_insts
+    CourseParticipate.any_in(course_inst_id: course_insts.map { |e| e.id.to_s}).where(refund_requested: true, refund_request_handled: false).first
+  end
+
+  def reject_refund(feedback)
+    self.update_attributes({
+      refund_request_handled: true,
+      refund_approved: false,
+      refund_feedback: feedback
+    })
+    nil
+  end
+
+  def approve_refund(feedback)
+    self.refund
+    self.update_attributes({
+      refund_request_handled: true,
+      refund_approved: true,
+      refund_feedback: feedback
+    })
+  end
+
+  def refund
+    if self.order_id.blank?
+      return nil
+    end
+    nonce_str = Util.random_str(32)
+    data = {
+      "appid" => APPID,
+      "mch_id" => MCH_ID,
+      "op_user_id" => MCH_ID,
+      "out_trade_no" => self.order_id,
+      "out_refund_no" => self.order_id,
+      # "total_fee" => (self.price_pay * 100).to_s,
+      "total_fee" => 1.to_s,
+      "nonce_str" => nonce_str,
+      "sign_type" => "MD5"
+    }
+    signature = Util.sign(data, APIKEY)
+    data["sign"] = signature
+    response = CourseParticipate.post("/secapi/pay/refund",
+      :body => Util.hash_to_xml(data))
+
+    doc = Nokogiri::XML(response.body)
+    success = doc.search('return_code').children[0].text
+    if success != "SUCCESS"
+      return nil
+    else
+      refund_result_code = doc.search('result_code').children[0].text
+      self.update_attributes({refund_result_code: refund_result_code})
+      if result_code != "SUCCESS"
+        err_code = doc.search('err_code').children[0].text
+        err_code_des = doc.search('err_code_des').children[0].text
+        self.update_attributes({
+          refund_err_code: err_code,
+          refund_err_code_des: err_code_des
+        })
+        retval = { success: false, err_code: err_code, err_code_des: err_code_des }
+        return retval
+      else
+        wechat_refund_id = doc.search('refund_id').children[0].text
+        wechat_refund_channel = doc.search('refund_channel').children[0].text
+        wechat_refund_fee = doc.search('refund_fee').children[0].text
+        wechat_settlement_refund_fee = doc.search('settlement_refund_fee').children[0].text
+        self.update_attributes({
+          wechat_refund_id: wechat_refund_id,
+          wechat_refund_channel: wechat_refund_channel,
+          wechat_refund_fee: wechat_refund_fee,
+          wechat_settlement_refund_fee: wechat_settlement_refund_fee
+        })
+        retval = { success: true, wechat_refund_id: wechat_refund_id, wechat_settlement_refund_fee: wechat_settlement_refund_fee }
+        return retval
+      end
+    end
+  end
+
+  def refundquery
   end
 end
