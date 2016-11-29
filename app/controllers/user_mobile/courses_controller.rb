@@ -93,4 +93,10 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
   def pay_success
     @course = CourseInst.where(id: params[:id]).first
   end
+
+  def request_refund
+    @course_participate = CourseParticipate.where(id: params[:id]).first
+    retval = @course_participate.request_refund
+    render json: retval_wrapper(retval) and return
+  end
 end

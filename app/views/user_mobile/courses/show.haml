@@ -4,6 +4,7 @@
   = stylesheet_link_tag "pages/user_mobile/courses/show-bundle", :media => "all"
   :javascript
     window.course_inst_id = "#{@course.id.to_s}"
+    window.course_participate_id = "#{@course_participate.id.to_s}"
     window.lat = "#{@course.center.lat}"
     window.lng = "#{@course.center.lng}"
 
@@ -46,8 +47,10 @@
     .assign-div
       .center.clearfix 
         %span#course-detail 课程详情
-        %span#refund 申请退款
-        %span#applied 已申请退款
+        - if @course_participate.present? && @course_participate.refund_allowed
+          %span#refund 申请退款
+        - if @course_participate.refund_requested
+          %span#applied 已申请退款
       .item-box
         .item
           .left-div#residual_num
