@@ -59,7 +59,7 @@
                 %span.edit-box
                   %input.input-area.form-control#course-address{:type => "text"}
             .photo
-              %img.unedit-photo{:src => @course_inst.photo.nil? ? asset_path("banner.png") : @course_inst.photo.path }
+              %img.unedit-photo{:src => @course_inst.photo.nil? ? asset_path("web/course.png") : @course_inst.photo.path }
               = form_tag("/staff/courses/" + @course_inst.id.to_s + "/upload_photo", method: "post", multipart: true, id: "upload-photo-form", class: "hide") do
                 = file_field_tag "photo_file", { class: "hide", accept: ".jpg,.png" }
               %a#upload-photo{href: "javascript:void(0);"}
@@ -231,8 +231,8 @@
                   .mask
                     %p.notice 该次课程已结束点击此处补签到
               .sign-status-box
-              .sign-status
-                %h5 签到情况
+                .sign-status
+                  %h5 签到情况
 
         #tab5.tab-pane
           .courses-income-box

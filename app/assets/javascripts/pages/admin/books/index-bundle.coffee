@@ -1,7 +1,7 @@
 $ ->
 
   $(".close").click ->
-    $("input").val("")
+    $("#borrowModal input").val("")
     $("#confirm-borrow-setting").removeClass("button-enabled")
     $("#confirm-borrow-setting").addClass("button-disabled")
     

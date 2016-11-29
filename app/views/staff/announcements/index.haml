@@ -34,7 +34,7 @@
               - @global_eles[:data].each do |e|
                 .introduce
                   %a{href: "/staff/announcements/" + e.id.to_s}
-                    %img.visit{:src => e.photo.present? ? e.photo.path : asset_path("banner.png"), width: "190", height: "129"}
+                    %img.visit{:src => e.photo.present? ? e.photo.path : asset_path("web/announcement.png"), width: "190", height: "129"}
                   %p.caption-header
                     %span.caption= link_to e.title, "/staff/announcements/#{e.id.to_s}"
                     %span#time-flag= e.created_at.strftime("%Y-%m-%d %H:%M")
@@ -61,7 +61,7 @@
               - @local_eles[:data].each do |e|
                 .introduce
                   %a{href: "/staff/announcements/" + e.id.to_s}
-                    %img.visit{:src => e.photo.present? ? e.photo.path : asset_path("banner.png"), width: "190", height: "129"}
+                    %img.visit{:src => e.photo.present? ? e.photo.path : asset_path("web/announcement.png"), width: "190", height: "129"}
                   %p.caption-header
                     %span.caption= link_to e.title, "/staff/announcements/#{e.id.to_s}"
                     %span#time-flag= e.created_at.strftime("%Y-%m-%d %H-%M")

@@ -153,23 +153,6 @@ $ ->
     $(".edit-btn").hide()
     $("#unshelve-btn").hide()
 
-  parse_calendar_events = ->
-    event_str_ary = window.date_in_calendar.split(';')
-    $.each(
-      event_str_ary,
-      (index, event_str) ->
-        start_str = event_str.split(',')[0]
-        end_str = event_str.split(',')[1]
-        e = {
-          id: guid()
-          title: ""
-          allDay: false
-          start: start_str
-          end: end_str
-        }
-        $("#calendar").fullCalendar('renderEvent', e, true)
-    )
-
   $(".course-inst-tr").click ->
     ci_id = $(this).attr("data-id")
     tr = $(this)
