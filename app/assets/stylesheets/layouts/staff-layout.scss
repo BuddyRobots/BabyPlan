@@ -269,8 +269,11 @@ body, p, img, div, ul, li, a, h3, table, tr, th, td {
 	opacity: 1;
 }
 .refund-message {
-	font-size: 16px;
-	color: #323232;
+	font-size: 0;
+	span {
+		font-size: 16px;
+		color: #323232;	
+	}
 }
 .btn-div {
 	display: -webkit-flex;

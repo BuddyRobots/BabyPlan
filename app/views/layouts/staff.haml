@@ -86,7 +86,12 @@
       .modalheader
         %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: asset_path("managecenter/close.png")}
       .modal-body
-        %p.fefund-message 课程名为很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的学生王小明已申请退款，是否确定通过此次退款申请？
+        %p.refund-message 
+          %span 课程名为
+          %span 很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长
+          %span 的学生
+          %span 王小明
+          %span 已申请退款，是否确定通过此次退款申请？
         %input.form-control#reason{placeholder: "拒绝理由"}
         .btn-div
           %button.btn#reject{type: "button"} 拒&nbsp绝
