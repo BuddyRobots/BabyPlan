@@ -292,7 +292,7 @@ span, ul, li, label {
 }
 .cash {
 	font-size: 0;
-	margin: 10px 0;
+	margin-bottom: 10px;
 	padding-left: 20%;
 	span {
 		font-size: 16px;
@@ -308,8 +308,31 @@ span, ul, li, label {
 		left: 0;
 		bottom: 0;
 		width: 100%;
+		border: 0;
+		height: 36px;
+		padding: 0;
+		line-height: 36px;
 	}
 }
+#deposit-btn {
+	outline: none;
+	background: #10c078;
+}
+#deposit-refund {
+	outline: none;
+	background: #f7873d;
+	// display: none;
+}
+#late-fee-unpaied {
+	outline: none;
+	background: #c8c8c8;
+}
+#late-fee-pay {
+	outline: none;
+	background: #10c078;
+	// display: none;
+}
+
 // select-page
 .select-page {
 	text-align: right;
