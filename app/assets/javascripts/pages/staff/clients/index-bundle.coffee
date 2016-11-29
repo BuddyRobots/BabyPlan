@@ -15,15 +15,14 @@ $ ->
   $(".close").click ->
     clearTimeout(timer)
     wait = 60
-    $("#mobile-code").text("获取验证码")
-    $("#mobile-code").addClass("unclicked")
-    $("#mobile-code").removeClass("clicked")
-    $("#mobile-code").attr("disabled", false)
+    $("#mobilecode").text("获取验证码")
+    $("#mobilecode").addClass("unclicked")
+    $("#mobilecode").removeClass("clicked")
+    $("#mobilecode").attr("disabled", false)
     $("input").val("")
     $(".notice").css("visibility", "hidden")
 
   time = (o) ->
-    console.log wait
     $(o).attr("disabled", true)
     $(o).addClass("clicked")
     $(o).removeClass("unclicked")
@@ -46,7 +45,6 @@ $ ->
   $("#mobilecode").click ->
     mobile = $("#kid-mobile").val()
     mobile_retval = $.regex.isMobile(mobile)
-    console.log mobile_retval
     if mobile_retval == false
       $("#mobile-notice").css("visibility","visible")
       $("#kid-mobile").addClass("clicked-box")
@@ -58,34 +56,20 @@ $ ->
         mobile: mobile
       },
       (data) ->
-        console.log data
         if data.success
           $("#mobile-notice").css("visibility","hidden")
           uid = data.uid
-          console.log uid
           if timer != null
             clearTimeout(timer)
           time("#mobilecode")
         #需要修改
         else
           $("#mobile-notice").text("帐号已存在").css("visibility","visible") 
-          console.log $("#mobile-notice").text()
     )
     return false
     
-  # toggle_signin_password_tip = (wrong) ->
-  #   if (wrong)
-  #     $("#kid-mobile").addClass("clicked-box")
-  #     $("#kid-mobilecode").addClass("clicked-box")
-  #     $(".error-notice").css("visibility","visible")
-  #   else
-  #     $("#kid-mobile").removeClass("clicked-box")
-  #     $("#kid-mobilecode").removeClass("clicked-box")
-  #     $(".error-notice").css("visibility","hidden")
-
 
   check_add_input = ->
-    console.log "check_add_input pressed"
     if $("#kid-name").val().trim() == "" ||
         $("#kid-address").val().trim() == "" ||
         $("#kid-mobile").val().trim() == "" ||

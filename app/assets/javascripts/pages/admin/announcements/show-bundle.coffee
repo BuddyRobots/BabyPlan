@@ -84,22 +84,6 @@ $ ->
         else
           $("#upload-photo-form")[0].action = "/admin/announcements/" + data.announcement_id + "/upload_photo"
           $("#upload-photo-form").submit()
-
-
-        # console.log data
-        # if data.success
-        #   $(".edit-btn").toggle()
-        #   $(".end-btn").toggle()
-        #   $(".display-box").toggle()
-        #   $(".edit-area").toggle()
-
-        #   $("#unshelve-btn").attr("disabled", false)
-
-        #   $("#show-caption").text($("#input-caption").val())
-        #   console.log content
-        #   $(".display-content").html(content)
-        # else
-        #   $.page_notification "服务器出错，请稍后重试"
     )
 
 #img upload
