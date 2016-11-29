@@ -29,6 +29,7 @@ module ErrCode
   REVIEW_NOT_EXIST = -26
   BOOK_ALL_OFF_SHELF = -27
   CENTER_EXIST = -28
+  REFUND_NOT_ALLOWED = -29
 
   def self.ret_false(code)
     msg = self.message(code)
@@ -95,6 +96,8 @@ module ErrCode
       "该绘本已全部借出"
     when CENTER_EXIST
       "儿童中心已存在"
+    when REFUND_NOT_ALLOWED
+      "不允许退款"
     else
       nil
     end

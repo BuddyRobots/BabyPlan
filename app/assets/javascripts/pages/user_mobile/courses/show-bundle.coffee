@@ -57,3 +57,13 @@ $ ->
   $("#refund").click ->
     $("#refundModal").modal("show")
 
+  $("#confirm-refund").click ->
+    $.postJSON(
+      '/user_mobile/courses/' + window.course_participate_id + '/request_refund',
+      { },
+      (data) ->
+        if data.success
+          $.mobile_page_notification("申请已提交，工作人员将在5个工作日内审核")
+        else
+          $.mobile_page_notification("该课程不允许退款")
+      )

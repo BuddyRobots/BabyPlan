@@ -214,6 +214,7 @@ Rails.application.routes.draw do
         get :pay_success
         post :pay_finished
         post :pay_failed
+        post :request_refund
         post :favorite
       end
     end

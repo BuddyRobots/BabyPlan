@@ -38,6 +38,9 @@ class CourseParticipate
   field :trade_state, type: String
   field :trade_state_updated_at, type: Integer
   field :expired_at, type: Integer, default: -1
+  field :refund_requested, type: Boolean, default: false
+  field :refund_approved, type: Boolean, default: false
+  field :refund_feedback, type: String, default: ""
 
   belongs_to :course_inst
   belongs_to :course
@@ -83,7 +86,7 @@ class CourseParticipate
       })
   end
 
-  def orderquery()
+  def orderquery
     if self.order_id.blank?
       return nil
     end
@@ -225,6 +228,19 @@ class CourseParticipate
       self.orderquery()
     end
     self.trade_state == "SUCCESS"
+  end
+
+  def refund_allowed
+    return self.is_success && self.course_inst.status == CourseInst::NOT_BEGIN && self.refund_requested == false
+  end
+
+  def request_refund
+    if self.refund_allowed
+      self.update_attributes({refund_requested: true})
+      nil
+    else
+      ErrCode::REFUND_NOT_ALLOWED
+    end
   end
 
   def review
