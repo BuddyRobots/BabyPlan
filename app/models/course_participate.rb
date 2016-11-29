@@ -14,7 +14,6 @@ class CourseParticipate
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  field :pay_at, type: Integer
   field :sign_in_time, type: String
   field :order_id, type: String
   field :price_pay, type: Float
