@@ -11,17 +11,49 @@ $ ->
   $(".merge-book").click ->
     location.href = "/staff/books/merge"
 
+  $(".return").click ->
+    client_name = $(this).closest('tr').attr('data-clientname')
+    name = $(this).closest('tr').attr('data-name')
+    id = $(this).closest('tr').attr('data-id')
+    $("#returnModal").modal("show")
+    $("#returnModal .client-name").text(client_name)
+    $("#returnModal .book-name").text("《" + name + "》")
+    $("#returnModal").attr("data-id", id)
+
   $("#return-cancel").click ->
     $("#returnModal").modal("hide")
+
+  $("#return-confirm").click ->
+    id = $("#returnModal").attr("data-id")
+    $.postJSON(
+      '/staff/books/' + id + '/back',
+      { },
+      (data) ->
+        if data.success
+          window.location.href = "/staff/books?code=" + DONE + "&profile=borrows"
+      )
+
+  $(".lost").click ->
+    client_name = $(this).closest('tr').attr('data-clientname')
+    name = $(this).closest('tr').attr('data-name')
+    id = $(this).closest('tr').attr('data-id')
+    $("#lostModal").modal("show")
+    $("#lostModal .client-name").text(client_name)
+    $("#lostModal .book-name").text("《" + name + "》")
+    $("#lostModal").attr("data-id", id)
 
   $("#lost-cancel").click ->
     $("#lostModal").modal("hide")
 
-  $(".return").click ->
-    $("#returnModal").modal("show")
-
-  $(".lost").click ->
-    $("#lostModal").modal("show")
+  $("#lost-confirm").click ->
+    id = $("#lostModal").attr("data-id")
+    $.postJSON(
+      '/staff/books/' + id + '/lost',
+      { },
+      (data) ->
+        if data.success
+          window.location.href = "/staff/books?code=" + DONE + "&profile=borrows"
+      )
 
 # search-btn press
   search = ->

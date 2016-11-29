@@ -205,7 +205,7 @@
                 %tbody
                   - @unreturned[:data].each do |b|
                     %tr{data: {id: b.id.to_s, name: b.book.name, clientname: b.client.name}}
-                      %td= b.client.name
+                      %td= link_to b.client.name, "/staff/clients/#{b.client.id.to_s}"
                       %td= b.client.mobile
                       %td= Time.at(b.borrow_at).strftime("%Y-%m-%d %H:%M")
                       %td{class: b.return_class}= b.expire_days_str

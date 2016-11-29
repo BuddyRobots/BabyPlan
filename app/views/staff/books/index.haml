@@ -82,14 +82,16 @@
                     %thead
                       %tr
                         %th 借阅人
+                        %th 绘本名称
                         %th 手机号码
                         %th 借阅时间
                         %th 逾期天数
                         %th{colspan: "2"} 操&nbsp作
                     %tbody
                       - @borrows[:data].each do |b|
-                        %tr
-                          %td= b.client.name
+                        %tr{data: {id: b.id.to_s, name: b.book.name, clientname: b.client.name}}
+                          %td= link_to b.client.name, "/staff/clients/#{b.client.id.to_s}"
+                          %td= link_to b.book.name, "/staff/books/#{b.book.id.to_s}"
                           %td= b.client.mobile
                           %td= Time.at(b.borrow_at).strftime("%Y-%m-%d %H:%M")
                           %td{class: b.return_class}= b.expire_days_str
@@ -97,15 +99,6 @@
                             %a.return{href: "javascript:void(0);"} 归还
                           %td
                             %a.lost{href: "javascript:void(0);"} 丢失
-                      / %tr
-                      /   %td 王小明
-                      /   %td 1311111111
-                      /   %td 2016.11.20
-                      /   %td 120
-                      /   %td
-                      /     %a.return{href: "javascript:void(0);"} 归还
-                      /   %td
-                      /     %a.lost{href: "javascript:void(0);"} 丢失
                 .select-page 
                   %span.totalitems= "共#{@borrows[:total_page]}页,总计#{@borrows[:total_number]}条"
                   %span.choice-page
