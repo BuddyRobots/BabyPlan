@@ -97,3 +97,20 @@
         .btn-div
           %button.btn#reject{type: "button"} 拒&nbsp绝
           %button.btn#agree-refund{type: "button"} 退&nbsp款
+
+
+#refund-failModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
+  .modal-dialog
+    .modal-content
+      .modalheader
+        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: asset_path("managecenter/close.png")}
+      .modal-body
+        %p.refund-fail-caption 退款失败
+        %p.refund-message 
+          %span 因对方银行卡出现问题，
+          = link_to "", "", {id: "refund-course-name"}
+          %span 的学生
+          = link_to "", "", {id: "refund-client-name"}
+          %span 的退款申请处理失败，请联系学生以其他方式处理退款。
+        .refund-fail-btn-div
+          %button.btn#refund-fail-confirm{type: "button"} 确&nbsp定

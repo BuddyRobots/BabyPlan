@@ -41,7 +41,7 @@ $ ->
       $("#calendar").fullCalendar('removeEvents', calEvent.id)
   })
 
-  $("#course-code").css("width", $(".num-box").width() - $(".course-num").width() - 6)
+  $("#course-code").css("width", $(".num-box").width() - $(".course-num").width() - 5)
 
   check_course_input = (code, capacity, price, price_pay, length, date, speaker, address, date_in_calendar) ->
     if code == "" || capacity == "" || price == "" || length == "" || date == "" || speaker == "" || address == ""

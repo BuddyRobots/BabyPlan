@@ -227,14 +227,20 @@ span, ul, li, label {
 	display: inline-block;
 	float: left;
 }
+.comment-caption {
+	vertical-align: top;
+}
 .comments-content, .uncomment {
 	display: inline-block;
-	width: 95%;
+	width: 92%;
 	font-size: 14px;
 	color: #787878;
 } 
 .comments-book {
 	margin-left: 20px;
+}
+#bookborrow-review {
+	padding: 12px 0;
 }
 .square {
 	display: inline-block;
@@ -258,7 +264,7 @@ span, ul, li, label {
 }
 #tab3 {
 	width: 80%;
-	margin: 20px 0 20px 40px;
+	margin: 20px 0 20px 20px;
 }
 #tab3-table {
 	margin: 20px 0 0 0;

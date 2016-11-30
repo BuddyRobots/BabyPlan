@@ -37,6 +37,7 @@ a{
 	overflow: auto;
 	background: #f0f0f0;
 	padding-top: 5.21%;
+	padding-bottom: 13.5%;
 }
 .box {
 	width: 87.5%;
@@ -91,7 +92,7 @@ a{
 	float: right;
 }
 .btn-div {
-	position: absolute;
+	position: fixed;
 	bottom: 0;
 	width: 100%;
 	display: flex;

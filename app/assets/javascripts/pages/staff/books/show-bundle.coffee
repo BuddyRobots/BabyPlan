@@ -142,11 +142,6 @@ $ ->
     console.log desc
     editor.$txt.html(desc)
 
-    # 我的方法
-    #   desc = $(".introduce-details").html()
-    #   console.log desc
-    #   editor.$txt.html(desc)
-
 # button hide
   $("#book-message").click ->
     if is_edit
