@@ -34,8 +34,13 @@ a{
 	margin: 0 auto;
 	background: #f0f0f0;
 	min-height: 100%;
+	overflow: auto;
 }
 .header {
+	position: fixed;
+	top: 0;
+	width: 100%;
+	max-width: 640px;
 	background: #fff;
 	height: 8.6%;
 }
@@ -69,8 +74,7 @@ a{
 	}
 }
 .content {
-	padding: 6.25%;
-	padding-bottom: 3.125%;
+	padding: 17% 6.25% 3.125% 6.25%;
 	border-top: 1px solid #aaa;
 }
 .item-div {
