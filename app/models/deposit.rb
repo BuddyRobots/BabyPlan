@@ -63,7 +63,7 @@ class Deposit
       "appid" => APPID,
       "mch_id" => MCH_ID,
       "nonce_str" => nonce_str,
-      "body" => self.course_inst.course.name,
+      "body" => "绘本借阅押金",
       "out_trade_no" => self.order_id,
       # "total_fee" => (self.amount * 100).to_s,
       "total_fee" => 1.to_s,
