@@ -139,6 +139,8 @@ Rails.application.routes.draw do
       member do
         post :verify
         post :pay_latefee
+        post :pay_deposit
+        post :refund_deposit
       end
     end
 

@@ -59,5 +59,31 @@ $ ->
           $.page_notification("服务器出错")
     )
 
+  $("#deposit-btn").click ->
+    # pay deposit
+    $.postJSON(
+      '/staff/clients/' + window.uid + '/pay_deposit',
+      { },
+      (data) ->
+        console.log data
+        if data.success
+          window.location.href = "/staff/clients/" + window.uid + "?profile=books&code=" + DONE
+        else
+          $.page_notification("服务器出错")
+    )
+
+
+  $("#deposit-refund").click ->
+    # refund deposit
+    $.postJSON(
+      '/staff/clients/' + window.uid + '/refund_deposit',
+      { },
+      (data) ->
+        console.log data
+        if data.success
+          window.location.href = "/staff/clients/" + window.uid + "?profile=books&code=" + DONE
+        else
+          $.page_notification("服务器出错")
+    )
 
 

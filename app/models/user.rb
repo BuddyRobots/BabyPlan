@@ -419,4 +419,24 @@ class User
     end
     nil
   end
+
+  def deposit_status_str
+    self.deposit.present? ? self.deposit.status_str : "当前未缴纳"
+  end
+
+  def deposit_paid
+    self.deposit.blank? ? false : self.deposit.paid
+  end
+
+  def pay_deposit
+    deposit = self.deposit || Deposit.create_new(self)
+    deposit.offline_pay
+    nil
+  end
+
+  def refund_deposit
+    deposit = self.deposit || Deposit.create_new(self)
+    deposit.refund
+    nil
+  end
 end

@@ -60,4 +60,16 @@ class Staff::ClientsController < Staff::ApplicationController
     retval = @user.pay_latefee
     render json: retval_wrapper(retval) and return
   end
+
+  def pay_deposit
+    @client = User.where(id: params[:id]).first
+    retval = @client.pay_deposit
+    render json: retval_wrapper(retval) and return
+  end
+
+  def refund_deposit
+    @client = User.where(id: params[:id]).first
+    retval = @client.refund_deposit
+    render json: retval_wrapper(retval) and return
+  end
 end
