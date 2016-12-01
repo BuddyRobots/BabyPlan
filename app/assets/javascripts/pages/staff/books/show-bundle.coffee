@@ -321,8 +321,11 @@ $ ->
       if num > 0
         location.href = "/staff/books/" + window.bid + "/download_qrcode?amount=" + num
         $("#QR-codeModal").modal("hide")
+      else
+        $.page_notification("请正确输入数量", 2000)
     else
       $.page_notification("请正确输入数量", 2000)
+    return false
 
 # img upload
   $("#upload-cover-div").click ->
