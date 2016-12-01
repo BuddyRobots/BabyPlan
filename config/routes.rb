@@ -132,6 +132,8 @@ Rails.application.routes.draw do
       end
       collection do
         get :merge
+        post :auto_merge
+        post :mannual_merge
       end
     end
 

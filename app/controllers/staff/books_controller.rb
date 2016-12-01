@@ -70,7 +70,26 @@ class Staff::BooksController < Staff::ApplicationController
   def new
   end
 
+  def auto_merge
+    retval = Book.auto_merge(@current_center)
+    render json: retval_wrapper(retval) and return
+  end
+
+  def mannual_merge
+    retval = Book.mannual_merge(params[:books_id_ary], params[:default_id])
+    render json: retval_wrapper(retval) and return
+  end
+
   def merge
+    @page = params[:page].to_s
+    @keyword = params[:keyword].to_s
+    books = params[:keyword].present? ? @current_center.books.any_of({name: /#{params[:keyword]}/}, {author: /#{params[:keyword]}/}) : @current_center.books
+    @books = auto_paginate(books)
+    @merge_books = (params[:books_id_str] || "").split(',').select { |e| e.present? } .map do |e|
+      Book.find(e)
+    end
+    @books_id_str = params[:books_id_str].to_s
+    @books_id_ary = params[:books_id_str].to_s.split(',')
   end
 
   def set_available

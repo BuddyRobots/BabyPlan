@@ -14,10 +14,8 @@ class Book
   field :age_lower_bound, type: Integer
   field :age_upper_bound, type: Integer
   field :tags, type: String
-  field :recommendation, type: String
   field :stock, type: Integer
   field :available, type: Boolean
-
 
   #ralationships specific for material
   has_one :cover, class_name: "Material", inverse_of: :cover_book
@@ -243,5 +241,79 @@ class Book
       review_rank: books.sort { |x, y| -x[:review_score] <=> -y[:review_score] } [0...[max_num, books.length - 1].min],
       borrow_rank: books.sort { |x, y| -x[:borrow_num] <=> -y[:borrow_num] } [0...[max_num, books.length - 1].min],
     }
+  end
+
+  def self.auto_merge(center)
+    books_info = center.books.map do |b|
+      info_str = b.name + b.isbn + b.author + b.translator + b.illustrator +
+        b.desc + b.age_upper_bound.to_s + b.age_lower_bound.to_s + b.tags +
+        b.cover.try(:path).to_s + b.back.try(:path).to_s
+      {
+        id: b.id.to_s,
+        md5_str: Digest::MD5.new.hexdigest(info_str)
+      }
+    end
+    groups = books_info.group_by do |e|
+      e[:md5_str]
+    end
+    group_num = 0
+    book_num = 0
+    groups.each do |k, group|
+      next if group.length <= 1
+      group_num += 1
+      book_num += group.length
+      target = Book.find(group[0][:id])
+      group.each_with_index do |ele, idx|
+        next if idx == 0
+        b = Book.find(group[idx][:id])
+        target.merge(b)
+      end
+    end
+    {
+      group_num: group_num,
+      book_num: book_num
+    }
+  end
+
+  def self.mannual_merge(default_id, book_id_ary)
+    target == Book.find(default_id)
+    book_num = target.stock
+    book_id_ary.each do |bid|
+      b = Book.find(bid)
+      target.merge(b)
+      book_num += b.stock
+    end
+    {
+      group_num: book_id_ary.length + 1,
+      book_num: book_num
+    }
+  end
+
+  def merge(target)
+    # only books in the same center can be merged
+    return false if self.center != target.center
+    target.book_insts.each do |bi|
+      bi.book = self
+      bi.save
+    end
+    target.book_borrows.each do |bb|
+      bb.book = self
+      bb.save
+    end
+    target.reviews.each do |r|
+      r.book = self
+      r.save
+    end
+    target.favorites.each do |f|
+      f.book = self
+      f.save
+    end
+    feed = target.feed
+    if feed.present? && self.feed.blank?
+      feed.book = self
+      feed.save
+    end
+    target.destroy
+    return true
   end
 end
