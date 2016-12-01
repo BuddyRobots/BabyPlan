@@ -16,6 +16,7 @@ class UserMobile::SettingsController < UserMobile::ApplicationController
       if @deposit.prepay_id.blank?
         @deposit.unifiedorder_interface(@remote_ip, @open_id)
       end
+      @pay_info = @deposit.get_pay_info
     end
   end
 

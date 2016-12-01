@@ -86,6 +86,19 @@ class Deposit
     self.update_attributes({prepay_id: prepay_id})
   end
 
+  def get_pay_info
+    retval = {
+      "appId" => APPID,
+      "timeStamp" => Time.now.to_i.to_s,
+      "nonceStr" => Util.random_str(32),
+      "package" => "prepay_id=" + self.prepay_id,
+      "signType" => "MD5"
+    }
+    signature = Util.sign(retval, APIKEY)
+    retval["sign"] = signature
+    return retval
+  end
+
   def renew
     self.update_attributes(
       {
