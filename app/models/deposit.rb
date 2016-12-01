@@ -1,3 +1,4 @@
+require 'httparty'
 class Deposit
 
   include HTTParty
@@ -8,6 +9,7 @@ class Deposit
   SECRET = "01265a8ba50284999508d680f7387664"
   APIKEY = "1juOmajJrHO3f2NFA0a8dIYy2qAamtnK"
   MCH_ID = "1388434302"
+  NOTIFY_URL = "http://babyplan.bjfpa.org.cn/user_mobile/courses/notify"
 
   include Mongoid::Document
   include Mongoid::Timestamps
@@ -37,4 +39,146 @@ class Deposit
 
   belongs_to :user
 
+  def self.create_new(client)
+    deposit_amount = BorrowSetting.first.try(:deposit) || 100
+    deposit = self.create(order_id: Util.random_str(32),
+                          amount: deposit_amount)
+    deposit.user = client
+    deposit.save
+    expired_at = Time.now + 1.days
+    deposit.update_attributes({expired_at: expired_at.to_i})
+    deposit
+    # return cp.unifiedorder_interface(remote_ip, openid)
+  end
+
+  def paid
+    if self.pay_finished == true && self.trade_state != "SUCCESS"
+      self.orderquery()
+    end
+    return false if self.trade_state != "SUCCESS"
+    return false if self.trade_state == "SUCCESS" && self.refunded == true
+    return true
+  end
+
+  def unifiedorder_interface(remote_ip, openid)
+    nonce_str = Util.random_str(32)
+    data = {
+      "appid" => APPID,
+      "mch_id" => MCH_ID,
+      "nonce_str" => nonce_str,
+      "body" => "绘本借阅押金",
+      "out_trade_no" => self.order_id,
+      # "total_fee" => (self.amount * 100).to_s,
+      "total_fee" => 1.to_s,
+      "spbill_create_ip" => remote_ip,
+      "notify_url" => NOTIFY_URL,
+      "trade_type" => "JSAPI",
+      "openid" => openid,
+      "time_expire" => Time.at(self.expired_at + 600).strftime("%Y%m%d%H%M%S")
+    }
+    signature = Util.sign(data, APIKEY)
+    data["sign"] = signature
+
+    response = CourseParticipate.post("/pay/unifiedorder",
+      :body => Util.hash_to_xml(data))
+
+    # todo: handle error messages
+
+    doc = Nokogiri::XML(response.body)
+    prepay_id = doc.search('prepay_id').children[0].text
+    self.update_attributes({prepay_id: prepay_id})
+  end
+
+  def get_pay_info
+    retval = {
+      "appId" => APPID,
+      "timeStamp" => Time.now.to_i.to_s,
+      "nonceStr" => Util.random_str(32),
+      "package" => "prepay_id=" + self.prepay_id,
+      "signType" => "MD5"
+    }
+    signature = Util.sign(retval, APIKEY)
+    retval["sign"] = signature
+    return retval
+  end
+
+  def renew
+    self.update_attributes(
+      {
+        expired_at: (Time.now + 1.days).to_i,
+        order_id: Util.random_str(32),
+        prepay_id: ""
+      })
+  end
+
+  def orderquery
+    if self.order_id.blank?
+      return nil
+    end
+    nonce_str = Util.random_str(32)
+    data = {
+      "appid" => APPID,
+      "mch_id" => MCH_ID,
+      "out_trade_no" => self.order_id,
+      "nonce_str" => nonce_str,
+      "sign_type" => "MD5"
+    }
+    signature = Util.sign(data, APIKEY)
+    data["sign"] = signature
+    response = CourseParticipate.post("/pay/orderquery",
+      :body => Util.hash_to_xml(data))
+
+    doc = Nokogiri::XML(response.body)
+    success = doc.search('return_code').children[0].text
+    if success != "SUCCESS"
+      return nil
+    else
+      result_code = doc.search('result_code').children[0].text
+      self.update_attributes({result_code: result_code})
+      if result_code != "SUCCESS"
+        err_code = doc.search('err_code').children[0].text
+        err_code_des = doc.search('err_code_des').children[0].text
+        self.update_attributes({
+          err_code: err_code,
+          err_code_des: err_code_des
+        })
+        retval = { success: false, err_code: err_code, err_code_des: err_code_des }
+        return retval
+      else
+        trade_state = doc.search('trade_state').children[0].text
+        trade_state_desc = doc.search('trade_state').children[0].text
+        wechat_transaction_id = doc.search('transaction_id').children[0].text
+        self.update_attributes({
+          trade_state: trade_state,
+          trade_state_updated_at: Time.now.to_i,
+          trade_state_desc: trade_state_desc,
+          wechat_transaction_id: wechat_transaction_id
+        })
+        retval = { success: true, trade_state: trade_state, trade_state_desc: trade_state_desc }
+        return retval
+      end
+    end
+  end
+
+  # status related
+  def is_expired
+    if self.pay_finished == true && self.trade_state != "SUCCESS"
+      self.orderquery()
+    end
+    self.trade_state != "SUCCESS" && self.expired_at < Time.now.to_i
+  end
+
+  def is_paying
+    if self.pay_finished == true && self.trade_state != "SUCCESS"
+      self.orderquery()
+    end
+    self.pay_finished == true && self.trade_state != "SUCCESS"
+  end
+
+  def is_success
+    if self.pay_finished == true && self.trade_state != "SUCCESS"
+      self.orderquery()
+    end
+    self.trade_state == "SUCCESS"
+  end
 end

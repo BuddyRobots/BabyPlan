@@ -256,6 +256,8 @@ Rails.application.routes.draw do
         post :update_password
         post :update_profile
         post :upload_avatar
+        post :pay_finished
+        post :pay_failed
       end
     end
   end

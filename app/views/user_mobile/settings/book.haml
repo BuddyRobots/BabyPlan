@@ -1,8 +1,18 @@
 - content_for :app_head do
   = javascript_include_tag "pages/user_mobile/settings/book-bundle"
   = stylesheet_link_tag "pages/user_mobile/settings/book-bundle", :media => "all"
+  :javascript
+    window.pay_deposit = "#{@pay_deposit.to_s}"
 
 - content_for :app_content do
+  - if @pay_info.present?
+    .hide
+      %span#appId= @pay_info["appId"]
+      %span#timeStamp= @pay_info["timeStamp"]
+      %span#nonceStr= @pay_info["nonceStr"]
+      %span#package= @pay_info["package"]
+      %span#signType= @pay_info["signType"]
+      %span#paySign= @pay_info["sign"]
   .content-area
     .header
       .cloud
@@ -26,9 +36,18 @@
               %img.location{src: asset_path("web/location.png")}
               %span.center= e.book.center.name
 
-    %button.btn#deposit{type: "button"} 已缴押金
-    %button.btn#redeposit{type: "button"} 重新缴纳押金
-    %button.btn#deposit-pay{type: "button"} 缴纳押金
+    - if @pay_info.present?
+      %a.btn.click-btn#confirm-pay{href: "javascript:void(0);"} 押金100元，确认支付
+    - elsif @current_user.deposit.blank? || @current_user.deposit.paid == false
+      %a.btn.click-btn#deposit-pay{href: "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxfe4fd89f6f5f9f57&redirect_uri=#{CGI::escape('http://babyplan.bjfpa.org.cn/user_mobile/settings/book/')}&response_type=code&scope=snsapi_base&state=#{true}#wechat_redirect", :type => "button"} 缴纳押金
+    - elsif @current_user.deposit.is_paying
+      %button.btn.unclick-btn{type: "button"} 支付进行中
+    - else
+      %button.btn#deposit{type: "button"} 已缴押金
+
+    / %button.btn#redeposit{type: "button"} 重新缴纳押金
+    / %button.btn#deposit-pay{type: "button"} 缴纳押金
+
     / .details
     /   .left-div
     /     %img.visit{:src => "/assets/mybook/book.jpg"}
