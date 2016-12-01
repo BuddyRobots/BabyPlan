@@ -2,6 +2,8 @@ require 'httparty'
 class CourseParticipate
 
   include HTTParty
+  # pkcs12 File.read('public/cert/applient_cert.p12'), "1388434302"
+  pkcs12 File.read('public/cert/apiclient_cert.p12'), "1388434302"
   base_uri "https://api.mch.weixin.qq.com"
   format  :xml
 
@@ -280,10 +282,12 @@ class CourseParticipate
   end
 
   def refund
+    print("AAAAA")
     if self.order_id.blank?
       return nil
     end
     nonce_str = Util.random_str(32)
+    print("BBBBB")
     data = {
       "appid" => APPID,
       "mch_id" => MCH_ID,
@@ -297,9 +301,12 @@ class CourseParticipate
     }
     signature = Util.sign(data, APIKEY)
     data["sign"] = signature
-    response = CourseParticipate.post("/secapi/pay/refund",
+    print("CCCCC")
+    response = CourseParticipate.post("/secapi/pay/refund/",
       :body => Util.hash_to_xml(data))
 
+    print(response.body)
+    print("DDDDD")
     doc = Nokogiri::XML(response.body)
     success = doc.search('return_code').children[0].text
     if success != "SUCCESS"
