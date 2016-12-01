@@ -12,7 +12,6 @@ $ ->
     mobile = $("#mobile").val()
     password = $("#password").val()
     mobile_retval = $.regex.isMobile(mobile)
-    console.log mobile_retval
     if mobile_retval == false
       $.mobile_page_notification("请正确输入账号", 1000)
       return

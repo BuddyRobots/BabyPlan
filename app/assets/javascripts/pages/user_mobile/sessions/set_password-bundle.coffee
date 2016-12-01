@@ -12,7 +12,6 @@ $ ->
         password: password
       },
       (data) ->
-        console.log data
         if data.success
           location.href="/user_mobile/sessions/new?code=" + DONE
         else
