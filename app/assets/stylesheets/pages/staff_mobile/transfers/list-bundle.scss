@@ -33,7 +33,7 @@ a{
 	max-width: 640px;
 	margin: 0 auto;
 	background: #f0f0f0;
-	height: 100%;
+	min-height: 100%;
 }
 .header {
 	background: #fff;
@@ -70,7 +70,7 @@ a{
 }
 .content {
 	padding: 6.25%;
-	padding-bottom: 0;
+	padding-bottom: 3.125%;
 	border-top: 1px solid #aaa;
 }
 .item-div {
@@ -120,16 +120,16 @@ a{
 	width: 12%;
 	max-width: 60px;
 }
-#normal-end {
-	@extend .status;
+.normal-end {
+	@extend .transit;
 	color: #999;
 }
-#prepare {
-	@extend .status;
+.prepare {
+	@extend .transit;
 	color: #f7873d;
 }
-#wrong-end {
-	@extend .status;
+.wrong-end {
+	@extend .transit;
 	color: #f95d67;
 }
 .transfer-none {
