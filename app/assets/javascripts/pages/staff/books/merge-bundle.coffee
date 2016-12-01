@@ -63,16 +63,7 @@ $ ->
       },
       (data) ->
         if data.success == true
-          # show the auto merge result
-          if (data.book_num != data.group_num)
-            $("#auto-merge-book-num").text(data.book_num)
-            $("#auto-merge-group-num").text(data.group_num)
-            $("#auto-merge-result").removeClass("hide")
-            $("#auto-merge-none").addClass("hide")
-          else
-            $("#auto-merge-result").addClass("hide")
-            $("#auto-merge-none").removeClass("hide")
-          $.page_notification "操作完成"
+          window.location.href = "/staff/books/merge?code=" + DONE
         else
           $.page_notification "服务器出错，请稍后重试"
       )
