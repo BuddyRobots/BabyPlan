@@ -52,8 +52,8 @@ class Deposit
   end
 
   def paid
-    return false if self.deposit.trade_state != "SUCCESS"
-    return false if self.deposit.trade_state == "SUCCESS" && self.refunded == true
+    return false if self.trade_state != "SUCCESS"
+    return false if self.trade_state == "SUCCESS" && self.refunded == true
     return true
   end
 
