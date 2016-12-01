@@ -55,7 +55,8 @@ class Transfer
   def status_class
     return "prepare" if self.status == PREPARE
     return "transit" if self.status == ONGOING
-    return "end" if self.status == DONE or self.status == ABNORMAL
+    return "normal-end" if self.status == DONE
+    return "wrong-end" if self.status == ABNORMAL
   end
 
   def status_str
