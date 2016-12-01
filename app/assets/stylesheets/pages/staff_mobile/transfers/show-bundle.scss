@@ -95,10 +95,16 @@ a{
 	bottom: 0;
 	width: 100%;
 	max-width: 640px;
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	-webkit-justify-content: space-around;
+	-moz-justify-content: space-around;
+	-ms-justify-content: space-around;
+	-o-justify-content: space-around;
 	display: flex;
 	justify-content: space-around;
-	display: -webkit-flex;
-	-webkit-justify-content: space-around;
 }
 .btn {
 	padding: 3.985% 0;

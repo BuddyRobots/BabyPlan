@@ -21,7 +21,6 @@ $ ->
 # end-btn press-down
   $(".end-btn").click ->
     title = $("#input-caption").val().trim()
-    console.log title
     if title == ""
       $.page_notification "请输入标题"
       return

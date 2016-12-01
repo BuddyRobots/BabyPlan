@@ -1,5 +1,5 @@
 $ ->
-  $("#sign-in-btn").click ->
+  sign_in = ->
     mobile = $("#mobile").val()
     password = $("#password").val()
     mobile_retval = $.regex.isMobile(mobile)
@@ -13,7 +13,6 @@ $ ->
         password: password
       },
       (data) ->
-        console.log data.code
         if data.success
           location.href = "/staff_mobile/books"
         else
@@ -28,3 +27,12 @@ $ ->
           if data.code == WRONG_PASSWORD
             $.mobile_page_notification("密码错误", 3000)
       )
+
+  $("#sign-in-btn").click ->
+    sign_in()
+
+  $("#password").keydown (event) ->
+    code = event.which
+    if code == 13
+      sign_in()
+
