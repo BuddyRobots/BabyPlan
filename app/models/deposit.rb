@@ -43,7 +43,7 @@ class Deposit
     deposit_amount = BorrowSetting.first.try(:deposit) || 100
     deposit = self.create(order_id: Util.random_str(32),
                           amount: deposit_amount)
-    deposit.client = client
+    deposit.user = client
     deposit.save
     expired_at = Time.now + 1.days
     deposit.update_attributes({expired_at: expired_at.to_i})
