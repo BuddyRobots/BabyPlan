@@ -5,6 +5,30 @@ class UserMobile::SettingsController < UserMobile::ApplicationController
 
   def book
     @book_borrows = @current_user.book_borrows
+    if params[:state].to_s == "true"
+      @pay_deposit = "true"
+      @open_id = Weixin.get_oauth_open_id(params[:code])
+      @deposit = @current_user.deposit
+      @deposit = @deposit || Deposit.create_new(@current_user)
+      if @deposit.is_expired
+        @deposit.renew
+      end
+      if @deposit.prepay_id.blank?
+        @deposit.unifiedorder_interface(@remote_ip, @open_id)
+      end
+    end
+  end
+
+  def pay_finished
+    @deposit = current_user.deposit
+    @deposit.update_attributes({pay_finished: true})
+    render json: retval_wrapper(nil) and return
+  end
+
+  def pay_failed
+    @deposit = current_user.deposit
+    @deposit.renew
+    render json: retval_wrapper(nil) and return
   end
 
   def course

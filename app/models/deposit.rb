@@ -1,3 +1,4 @@
+require 'httparty'
 class Deposit
 
   include HTTParty
@@ -8,6 +9,7 @@ class Deposit
   SECRET = "01265a8ba50284999508d680f7387664"
   APIKEY = "1juOmajJrHO3f2NFA0a8dIYy2qAamtnK"
   MCH_ID = "1388434302"
+  NOTIFY_URL = "http://babyplan.bjfpa.org.cn/user_mobile/courses/notify"
 
   include Mongoid::Document
   include Mongoid::Timestamps
@@ -37,4 +39,59 @@ class Deposit
 
   belongs_to :user
 
+  def self.create_new(client)
+    deposit_amount = BorrowSetting.first.try(:deposit) || 100
+    deposit = self.create(order_id: Util.random_str(32),
+                          price_pay: deposit_amount)
+    deposit.client = client
+    deposit.save
+    expired_at = Time.now + 1.days
+    deposit.update_attributes({expired_at: expired_at.to_i})
+    deposit
+    # return cp.unifiedorder_interface(remote_ip, openid)
+  end
+
+  def paid
+    return false if self.deposit.trade_state != "SUCCESS"
+    return false if self.deposit.trade_state == "SUCCESS" && self.refunded == true
+    return true
+  end
+
+  def unifiedorder_interface(remote_ip, openid)
+    nonce_str = Util.random_str(32)
+    data = {
+      "appid" => APPID,
+      "mch_id" => MCH_ID,
+      "nonce_str" => nonce_str,
+      "body" => self.course_inst.course.name,
+      "out_trade_no" => self.order_id,
+      # "total_fee" => (self.price_pay * 100).to_s,
+      "total_fee" => 1.to_s,
+      "spbill_create_ip" => remote_ip,
+      "notify_url" => NOTIFY_URL,
+      "trade_type" => "JSAPI",
+      "openid" => openid,
+      "time_expire" => Time.at(self.expired_at + 600).strftime("%Y%m%d%H%M%S")
+    }
+    signature = Util.sign(data, APIKEY)
+    data["sign"] = signature
+
+    response = CourseParticipate.post("/pay/unifiedorder",
+      :body => Util.hash_to_xml(data))
+
+    # todo: handle error messages
+
+    doc = Nokogiri::XML(response.body)
+    prepay_id = doc.search('prepay_id').children[0].text
+    self.update_attributes({prepay_id: prepay_id})
+  end
+
+  def renew
+    self.update_attributes(
+      {
+        expired_at: (Time.now + 1.days).to_i,
+        order_id: Util.random_str(32),
+        prepay_id: ""
+      })
+  end
 end
