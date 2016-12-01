@@ -10,9 +10,7 @@ class UserMobile::SettingsController < UserMobile::ApplicationController
       @open_id = Weixin.get_oauth_open_id(params[:code])
       @deposit = @current_user.deposit
       @deposit = @deposit || Deposit.create_new(@current_user)
-      if @deposit.is_expired
-        @deposit.renew
-      end
+      @deposit.renew
       if @deposit.prepay_id.blank?
         @deposit.unifiedorder_interface(@remote_ip, @open_id)
       end

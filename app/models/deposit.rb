@@ -24,6 +24,7 @@ class Deposit
   field :err_code, type: String
   field :err_code_des, type: String
   field :trade_state_desc, type: String
+  field :offline_paid, type: Boolean, default: false
 
   # status related attributes
   # deposit can have following status:
@@ -35,7 +36,6 @@ class Deposit
   field :trade_state, type: String
   field :trade_state_updated_at, type: Integer
   field :expired_at, type: Integer, default: -1
-  field :refunded, type: Boolean, default: false
 
   belongs_to :user
 
@@ -52,11 +52,11 @@ class Deposit
   end
 
   def paid
+    return true if self.offline_paid == true
     if self.pay_finished == true && self.trade_state != "SUCCESS"
       self.orderquery()
     end
     return false if self.trade_state != "SUCCESS"
-    return false if self.trade_state == "SUCCESS" && self.refunded == true
     return true
   end
 
@@ -162,6 +162,7 @@ class Deposit
 
   # status related
   def is_expired
+    return false if offline_paid == true
     if self.pay_finished == true && self.trade_state != "SUCCESS"
       self.orderquery()
     end
@@ -169,6 +170,7 @@ class Deposit
   end
 
   def is_paying
+    return false if offline_paid == true
     if self.pay_finished == true && self.trade_state != "SUCCESS"
       self.orderquery()
     end
@@ -176,9 +178,26 @@ class Deposit
   end
 
   def is_success
+    return true if offline_paid == true
     if self.pay_finished == true && self.trade_state != "SUCCESS"
       self.orderquery()
     end
     self.trade_state == "SUCCESS"
+  end
+
+  def refund
+    self.update_attributes({pay_finished: false, offline_paid: false, trade_state: ""})
+    nil
+  end
+
+  def status_str
+    return "已缴纳" + self.amount.to_s + "元" if self.paid
+    return "支付中" if self.is_paying
+    return "当前未缴纳"
+  end
+
+  def offline_pay
+    self.update_attributes({offline_paid: true})
+    nil
   end
 end
