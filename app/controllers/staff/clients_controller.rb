@@ -54,4 +54,10 @@ class Staff::ClientsController < Staff::ApplicationController
     params[:page] = params[:book_page]
     @borrows = auto_paginate(borrows)
   end
+
+  def pay_latefee
+    @user = User.where(id: params[:id]).first
+    retval = @user.pay_latefee
+    render json: retval_wrapper(retval) and return
+  end
 end

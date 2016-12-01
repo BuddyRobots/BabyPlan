@@ -400,4 +400,23 @@ class User
       num: num
     }
   end
+
+  def latefee_amount
+    self.book_borrows.where(latefee_paid: false).map { |e| e.latefee } .sum
+  end
+
+  def expired_books_num
+    self.book_borrows.expired.length
+  end
+
+  def cur_books_num
+      self.book_borrows.where(return_at: nil).count
+  end
+
+  def pay_latefee
+    self.book_borrows.where(latefee_paid: false).each do |bb|
+      bb.pay_latefee
+    end
+    nil
+  end
 end

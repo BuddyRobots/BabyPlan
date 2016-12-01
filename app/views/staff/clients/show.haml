@@ -4,6 +4,7 @@
   :javascript
     window.keyword = "#{@keyword}"
     window.profile = "#{@profile}"
+    window.uid = "#{@user.id.to_s}"
 
 .content-area
   .manage-content
@@ -114,7 +115,7 @@
                   %span 未缴纳
                 %p.cash
                   %span 当前借阅本数：
-                  %span 0
+                  %span= @user.cur_books_num
                 .btn-div
                   %button.btn#deposit-btn 缴纳押金100元
                   %button.btn#deposit-refund 退回押金
@@ -123,17 +124,17 @@
               .cash-div
                 %p.cash
                   %span 滞纳金总金额：
-                  %span 0
+                  %span= @user.latefee_amount
                 %p.cash
                   %span 当前逾期未还：
-                  %span 0
+                  %span= @user.expired_books_num
                 .btn-div
-                  %button.btn#late-fee-unpaied 已缴清滞纳金
-                  %button.btn#late-fee-pay 缴纳滞纳金
+                  %button.btn#pay-late-fee{class: @user.latefee_amount <= 0 ? "hide" : ""} 缴纳滞纳金
+                  %button.btn#no-late-fee{class: @user.latefee_amount > 0 ? "hide" : ""} 当前无滞纳金
           - if @borrows[:data].blank?
-            .undiscover
-              %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
-              %span.undiscover-message 抱歉！暂无查找信息
+            / .undiscover
+            /   %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
+            /   %span.undiscover-message 抱歉！暂无查找信息
           - else
             .table-box#tab3-table
               %table.table.table-bordered#register-table

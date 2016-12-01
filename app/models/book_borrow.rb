@@ -10,6 +10,8 @@ class BookBorrow
   field :borrow_at, type: Integer
   field :return_at, type: Integer
   field :renew_at, type: Array
+  field :latefee, type: Float, default: 0.0
+  field :latefee_paid, type: Boolean, default: true
 
   belongs_to :book_inst
   belongs_to :book
@@ -19,11 +21,22 @@ class BookBorrow
 
   def back
   	self.update_attributes({return_at: Time.now.to_i})
+    # calculate whether need to pay latefee, and the amount of latefee
+    latefee_per_day = BorrowSetting.first.try(:latefee_per_day) || 0.1
+    self.latefee = self.expire_days * latefee_per_day
+    self.latefee_paid = self.latefee == 0.0
+    self.save
     nil
   end
 
   def lost
     self.update_attributes({return_at: Time.now.to_i, status: LOST})
+    # calculate whether need to pay latefee, and the amount of latefee
+    latefee_per_day = BorrowSetting.first.try(:latefee_per_day) || 0.1
+    self.latefee = self.expire_days * latefee_per_day
+    self.latefee_paid = self.latefee == 0.0
+    self.save
+    # decrease stock by 1
     new_stock = [self.book.stock - 1, 0].max
     self.book.update_attributes({stock: new_stock})
     nil
@@ -90,5 +103,9 @@ class BookBorrow
     else
       return "逾期" + day.to_s + "天"
     end
+  end
+
+  def pay_latefee
+    self.update_attributes({latefee_paid: true})
   end
 end
