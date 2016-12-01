@@ -33,5 +33,5 @@ $ ->
       return
     return
 
-  if window.pay_deposit == "true"
+  $("#confirm-pay").click ->
     pay()
