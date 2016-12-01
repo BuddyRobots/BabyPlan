@@ -100,6 +100,8 @@ module ErrCode
       "儿童中心已存在"
     when REFUND_NOT_ALLOWED
       "不允许退款"
+    when BLANK_DATA
+      "空数据"
     else
       nil
     end
