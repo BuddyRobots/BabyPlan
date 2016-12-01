@@ -36,7 +36,6 @@ class CourseParticipate
   field :wechat_refund_id, type: String
   field :wechat_refund_channel, type: String
   field :wechat_refund_fee, type: Integer
-  field :wechat_settlement_refund_fee, type: Integer
 
   # status related attributes
   # course participate can have following status:
@@ -373,6 +372,7 @@ class CourseParticipate
         retval = { success: false, err_code: err_code, err_code_des: err_code_des }
         return retval
       else
+        self.clear_refund
         refund_status = doc.search('refund_status_0').children[0].text
         self.update_attributes({ refund_status: refund_status })
         retval = { success: true, refund_status: refund_status }
@@ -412,6 +412,22 @@ class CourseParticipate
       refund_approved: false,
       refund_finished: false,
       refund_status: ""
+    })
+  end
+
+  def clear_pay
+    self.update_attributes({
+      order_id: "",
+      prepay_id: "",
+      wechat_transaction_id: "",
+      result_code: "",
+      err_code: "",
+      err_code_des: "",
+      trade_state_desc: "",
+      pay_finished: false,
+      trade_state: "",
+      trade_state_updated_at: nil,
+      expired_at: -1
     })
   end
 end
