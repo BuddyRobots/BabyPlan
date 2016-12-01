@@ -94,4 +94,75 @@ class Deposit
         prepay_id: ""
       })
   end
+
+  def orderquery
+    if self.order_id.blank?
+      return nil
+    end
+    nonce_str = Util.random_str(32)
+    data = {
+      "appid" => APPID,
+      "mch_id" => MCH_ID,
+      "out_trade_no" => self.order_id,
+      "nonce_str" => nonce_str,
+      "sign_type" => "MD5"
+    }
+    signature = Util.sign(data, APIKEY)
+    data["sign"] = signature
+    response = CourseParticipate.post("/pay/orderquery",
+      :body => Util.hash_to_xml(data))
+
+    doc = Nokogiri::XML(response.body)
+    success = doc.search('return_code').children[0].text
+    if success != "SUCCESS"
+      return nil
+    else
+      result_code = doc.search('result_code').children[0].text
+      self.update_attributes({result_code: result_code})
+      if result_code != "SUCCESS"
+        err_code = doc.search('err_code').children[0].text
+        err_code_des = doc.search('err_code_des').children[0].text
+        self.update_attributes({
+          err_code: err_code,
+          err_code_des: err_code_des
+        })
+        retval = { success: false, err_code: err_code, err_code_des: err_code_des }
+        return retval
+      else
+        trade_state = doc.search('trade_state').children[0].text
+        trade_state_desc = doc.search('trade_state').children[0].text
+        wechat_transaction_id = doc.search('transaction_id').children[0].text
+        self.update_attributes({
+          trade_state: trade_state,
+          trade_state_updated_at: Time.now.to_i,
+          trade_state_desc: trade_state_desc,
+          wechat_transaction_id: wechat_transaction_id
+        })
+        retval = { success: true, trade_state: trade_state, trade_state_desc: trade_state_desc }
+        return retval
+      end
+    end
+  end
+
+  # status related
+  def is_expired
+    if self.pay_finished == true && self.trade_state != "SUCCESS"
+      self.orderquery()
+    end
+    self.trade_state != "SUCCESS" && self.expired_at < Time.now.to_i
+  end
+
+  def is_paying
+    if self.pay_finished == true && self.trade_state != "SUCCESS"
+      self.orderquery()
+    end
+    self.pay_finished == true && self.trade_state != "SUCCESS"
+  end
+
+  def is_success
+    if self.pay_finished == true && self.trade_state != "SUCCESS"
+      self.orderquery()
+    end
+    self.trade_state == "SUCCESS"
+  end
 end
