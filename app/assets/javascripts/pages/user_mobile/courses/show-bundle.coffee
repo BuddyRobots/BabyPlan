@@ -64,6 +64,8 @@ $ ->
       (data) ->
         if data.success
           $.mobile_page_notification("申请已提交，工作人员将在5个工作日内审核")
+          $("#refundModal").modal('hide')
         else
           $.mobile_page_notification("该课程不允许退款")
+          $("#refundModal").modal('hide')
       )
