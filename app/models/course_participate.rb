@@ -383,7 +383,7 @@ class CourseParticipate
   end
 
   def refund_status_str
-    if self.refund_finished == true && %w[SUCCESS, FAIL, CHANGE].include?(self.refund_status)
+    if self.refund_finished == true && !%w[SUCCESS, FAIL, CHANGE].include?(self.refund_status)
       self.refundquery
     end
     if self.refund_requested == false
