@@ -36,6 +36,7 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
     @open_id = Weixin.get_oauth_open_id(params[:code])
     @course_participate = @current_user.course_participates.where(course_inst_id: @course.id).first
     @course_participate = @course_participate || CourseParticipate.create_new(current_user, @course)
+    @course_participate.clear_refund
     if @course_participate.is_expired
       @course_participate.renew
     end

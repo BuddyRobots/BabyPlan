@@ -52,6 +52,8 @@ class CourseParticipate
   field :refund_requested, type: Boolean, default: false
   field :refund_request_handled, type: Boolean, default: false
   field :refund_approved, type: Boolean, default: false
+  field :refund_finished, type: Boolean, default: false
+  field :refund_status, type: String
 
   belongs_to :course_inst
   belongs_to :course
@@ -282,12 +284,10 @@ class CourseParticipate
   end
 
   def refund
-    print("AAAAA")
     if self.order_id.blank?
       return nil
     end
     nonce_str = Util.random_str(32)
-    print("BBBBB")
     data = {
       "appid" => APPID,
       "mch_id" => MCH_ID,
@@ -296,17 +296,15 @@ class CourseParticipate
       "out_refund_no" => self.order_id,
       # "total_fee" => (self.price_pay * 100).to_s,
       "total_fee" => 1.to_s,
+      "refund_fee" => 1.to_s,
       "nonce_str" => nonce_str,
       "sign_type" => "MD5"
     }
     signature = Util.sign(data, APIKEY)
     data["sign"] = signature
-    print("CCCCC")
-    response = CourseParticipate.post("/secapi/pay/refund/",
+    response = CourseParticipate.post("/secapi/pay/refund",
       :body => Util.hash_to_xml(data))
 
-    print(response.body)
-    print("DDDDD")
     doc = Nokogiri::XML(response.body)
     success = doc.search('return_code').children[0].text
     if success != "SUCCESS"
@@ -327,19 +325,93 @@ class CourseParticipate
         wechat_refund_id = doc.search('refund_id').children[0].text
         wechat_refund_channel = doc.search('refund_channel').children[0].text
         wechat_refund_fee = doc.search('refund_fee').children[0].text
-        wechat_settlement_refund_fee = doc.search('settlement_refund_fee').children[0].text
         self.update_attributes({
           wechat_refund_id: wechat_refund_id,
           wechat_refund_channel: wechat_refund_channel,
           wechat_refund_fee: wechat_refund_fee,
-          wechat_settlement_refund_fee: wechat_settlement_refund_fee
+          refund_finished: true
         })
-        retval = { success: true, wechat_refund_id: wechat_refund_id, wechat_settlement_refund_fee: wechat_settlement_refund_fee }
+        retval = { success: true, wechat_refund_id: wechat_refund_id, wechat_refund_channel: wechat_refund_channel }
         return retval
       end
     end
   end
 
   def refundquery
+    if self.refund_finished != true
+      return
+    end
+    nonce_str = Util.random_str(32)
+    data = {
+      "appid" => APPID,
+      "mch_id" => MCH_ID,
+      "op_user_id" => MCH_ID,
+      "out_trade_no" => self.order_id,
+      "nonce_str" => nonce_str,
+      "sign_type" => "MD5"
+    }
+    signature = Util.sign(data, APIKEY)
+    data["sign"] = signature
+    response = CourseParticipate.post("/pay/refundquery",
+      :body => Util.hash_to_xml(data))
+
+    print(response.body)
+    doc = Nokogiri::XML(response.body)
+    success = doc.search('return_code').children[0].text
+    if success != "SUCCESS"
+      return
+    else
+      refund_result_code = doc.search('result_code').children[0].text
+      self.update_attributes({refund_result_code: refund_result_code})
+      if result_code != "SUCCESS"
+        err_code = doc.search('err_code').children[0].text
+        err_code_des = doc.search('err_code_des').children[0].text
+        self.update_attributes({
+          refund_err_code: err_code,
+          refund_err_code_des: err_code_des
+        })
+        retval = { success: false, err_code: err_code, err_code_des: err_code_des }
+        return retval
+      else
+        refund_status = doc.search('refund_status_0').children[0].text
+        self.update_attributes({ refund_status: refund_status })
+        retval = { success: true, refund_status: refund_status }
+        return retval
+      end
+    end
+  end
+
+  def refund_status_str
+    if self.refund_finished == true && %w[SUCCESS, FAIL, CHANGE].include?(self.refund_status)
+      self.refundquery
+    end
+    if self.refund_requested == false
+      ""
+    elsif self.refund_request_handled == false
+      "已申请退款"
+    elsif self.refund_approved == false
+      "退款申请被拒绝"
+    elsif self.refund_finished == false
+      "退款失败"
+    elsif self.refund_status == "PROCESSING"
+      "退款处理中"
+    elsif self.refund_status == 'FAIL' || self.refund_status == 'CHANGE'
+      "退款失败"
+    elsif self.refund_status == 'SUCCESS'
+      "退款已完成"
+    else
+      ""
+    end
+  end
+
+  def clear_refund
+    return if self.refund_requested = false
+    self.update_attributes({
+      refund_requested: false,
+      refund_request_handled: false,
+      refund_approved: false,
+      refund_finished: false,
+      refund_status: ""
+    })
   end
 end
