@@ -129,6 +129,7 @@ $ ->
         if data.code == BLANK_DATA
           $("#important-item").hide()
           $.page_notification("所有退款申请处理完毕")
+          $("importantModal").modal("hide")
         else
           $.page_notification("服务器出错")
 
@@ -143,6 +144,7 @@ $ ->
     feedback = $("#importantModal input").val()
     if feedback == ""
       $.page_notification("需要给出拒绝理由")
+      return
     $.postJSON(
       '/staff/courses/' + cp_id + '/reject_refund',
       {
