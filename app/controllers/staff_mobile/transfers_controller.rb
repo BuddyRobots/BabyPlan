@@ -25,11 +25,11 @@ class StaffMobile::TransfersController < StaffMobile::ApplicationController
   end
 
   def out_list
-    @prepare_transfers = @current_user.staff_center.out_transfers.where(status: Transfer::PREPARE)
+    @prepare_transfers = @current_user.staff_center.out_transfers.where(status: Transfer::PREPARE).desc(:created_at)
   end
 
   def in_list
-    @ongoing_transfers = @current_user.staff_center.in_transfers.where(status: Transfer::ONGOING)
+    @ongoing_transfers = @current_user.staff_center.in_transfers.where(status: Transfer::ONGOING).desc(:created_at)
   end
 
   def new
