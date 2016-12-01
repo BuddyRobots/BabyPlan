@@ -68,7 +68,7 @@ $ ->
       $.page_notification("请输入正确的押金数")
       return false
     latefee_per_day = $("#borrow-late-fee").val()
-    if parseInt(latefee_per_day) <= 0
+    if parseFloat(latefee_per_day) <= 0
       $.page_notification("请输入正确的滞纳金数")
       return false
     $.postJSON(
@@ -82,6 +82,7 @@ $ ->
       (data) ->
         if data.success
           $.page_notification("设置完成")
+          $("#borrowModal").modal("hide")
         else
           $.page_notification("服务器出错")
       )
