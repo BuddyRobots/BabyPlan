@@ -138,6 +138,7 @@ Rails.application.routes.draw do
     resources :clients do
       member do
         post :verify
+        post :pay_latefee
       end
     end
 

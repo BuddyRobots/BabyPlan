@@ -45,4 +45,19 @@ $ ->
     else
       span.removeClass("triangle-up").addClass("triangle-down")
 
+  $("#pay-late-fee").click ->
+    $.postJSON(
+      '/staff/clients/' + window.uid + '/pay_latefee',
+      { },
+      (data) ->
+        console.log data
+        if data.success
+          $("#pay-late-fee").addClass("hide")
+          $("#no-late-fee").removeClass("hide")
+          $.page_notification("操作完成")
+        else
+          $.page_notification("服务器出错")
+    )
+
+
 
