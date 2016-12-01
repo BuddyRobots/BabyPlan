@@ -67,8 +67,8 @@ $ ->
     if $.isNumeric(deposit) == false || parseInt(deposit) <= 0
       $.page_notification("请输入正确的押金数")
       return false
-    late_fee = $("#borrow-late-fee").val()
-    if parseInt(late_fee) <= 0
+    latefee_per_day = $("#borrow-late-fee").val()
+    if parseInt(latefee_per_day) <= 0
       $.page_notification("请输入正确的滞纳金数")
       return false
     $.postJSON(
@@ -77,7 +77,7 @@ $ ->
         book_num: book_num
         borrow_duration: borrow_duration
         deposit: deposit
-        late_fee: late_fee
+        latefee_per_day: latefee_per_day
       },
       (data) ->
         if data.success

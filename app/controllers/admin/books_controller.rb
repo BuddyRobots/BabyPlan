@@ -31,12 +31,16 @@ class Admin::BooksController < Admin::ApplicationController
 
     @book_num = BorrowSetting.first.try(:book_num)
     @borrow_duration = BorrowSetting.first.try(:borrow_duration)
+    @latefee_per_day = BorrowSetting.first.try(:latefee_per_day)
+    @deposit = BorrowSetting.first.try(:deposit)
   end
 
   def update_setting
     s = BorrowSetting.first || BorrowSetting.create
     s.book_num = params[:book_num].to_i
     s.borrow_duration = params[:borrow_duration].to_i
+    s.latefee_per_day = params[:latefee_per_day].to_f
+    s.deposit = params[:deposit].to_i
     s.save
     render json: retval_wrapper(nil) and return
   end
