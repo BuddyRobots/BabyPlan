@@ -314,7 +314,7 @@ $ ->
   $(".QRcode-btn").click ->
     $("#QR-codeModal").modal("show")
 
-  $("#confirm").click ->
+  $("#confirm-qr-code").click ->
     num = $("#code-num").val()
     if $.isNumeric(num)
       num = parseInt(num)
