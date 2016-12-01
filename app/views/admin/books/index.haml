@@ -117,5 +117,11 @@
           .form-group
             %label.control-label.borrow-label{:for => "borrow-time"} 最长可借天数
             %input.unclicked-box#borrow-time.form-control{:type => "text", value: @borrow_duration}
+          .form-group
+            %label.control-label.borrow-label#borrow-deposit-lable{:for => "borrow-time"} 绘本押金
+            %input.unclicked-box#borrow-deposit.form-control{:type => "text", value: @deposit}
+          .form-group
+            %label.control-label.borrow-label#borrow-late-fee-lable{:for => "borrow-time"} 滞纳金(每天)
+            %input.unclicked-box#borrow-late-fee.form-control{:type => "text", value: @late_fee}
           .confirm-button
             %button.btn#confirm-borrow-setting.button-disabled{:href => "javascript:void(0);"} 确&nbsp定

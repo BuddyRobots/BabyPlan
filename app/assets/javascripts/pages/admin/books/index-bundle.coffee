@@ -63,11 +63,21 @@ $ ->
     if $.isNumeric(borrow_duration) == false || parseInt(borrow_duration) <= 0
       $.page_notification("请输入正确的最长可借天数")
       return false
+    deposit = $("#borrow-deposit").val()
+    if $.isNumeric(deposit) == false || parseInt(deposit) <= 0
+      $.page_notification("请输入正确的押金数")
+      return false
+    late_fee = $("#borrow-late-fee").val()
+    if parseInt(late_fee) <= 0
+      $.page_notification("请输入正确的滞纳金数")
+      return false
     $.postJSON(
       '/admin/books/update_setting',
       {
         book_num: book_num
         borrow_duration: borrow_duration
+        deposit: deposit
+        late_fee: late_fee
       },
       (data) ->
         if data.success
