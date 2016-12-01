@@ -56,17 +56,17 @@
                         - else
                           %td
                             %a.add{href: "javascript:void(0);"}　添加>
-            .select-page 
-              %span.totalitems= "共#{@books[:total_page]}页,总计#{@books[:total_number]}条"
-              %span.choice-page
-                %ul.pagination.pagination-sm
-                  %li
-                    %a.page-link{:href => "/staff/books/merge?books_id_str=#{@books_id_str}&keyword=#{@keyword}&page=#{@books[:previous_page]}"} «
-                  - ( (@books[:previous_page] > 2 ? @books[:previous_page] - 2 : 1) .. (@books[:next_page] < @books[:total_page] - 2 ? @books[:next_page] + 2 : @books[:total_page]) ).to_a.each do |page|
+              .select-page 
+                %span.totalitems= "共#{@books[:total_page]}页,总计#{@books[:total_number]}条"
+                %span.choice-page
+                  %ul.pagination.pagination-sm
                     %li
-                      %a.page-link{:href => "/staff/books/merge?books_id_str=#{@books_id_str}&keyword=#{@keyword}&page=#{page}"} 1
-                  %li
-                    %a.page-link{:href => "/staff/books/merge?books_id_str=#{@books_id_str}&keyword=#{@keyword}&page=#{@books[:next_page]}"} »
+                      %a.page-link{:href => "/staff/books/merge?books_id_str=#{@books_id_str}&keyword=#{@keyword}&page=#{@books[:previous_page]}"} «
+                    - ( (@books[:previous_page] > 2 ? @books[:previous_page] - 2 : 1) .. (@books[:next_page] < @books[:total_page] - 2 ? @books[:next_page] + 2 : @books[:total_page]) ).to_a.each do |page|
+                      %li
+                        %a.page-link{:href => "/staff/books/merge?books_id_str=#{@books_id_str}&keyword=#{@keyword}&page=#{page}"} 1
+                    %li
+                      %a.page-link{:href => "/staff/books/merge?books_id_str=#{@books_id_str}&keyword=#{@keyword}&page=#{@books[:next_page]}"} »
           .item
             .title-div
               %span.title 合并条目
