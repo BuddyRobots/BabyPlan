@@ -49,7 +49,7 @@
         %span#course-detail 课程详情
         - if @course_participate.present? && @course_participate.refund_allowed
           %span#refund 申请退款
-        - elsif @course_participate.present? && @course_participate.refund_approved == false
+        - elsif @course_participate.present? && @course_participate.refund_request_handled && !@course_participate.refund_approved
           %span#applied 退款申请被拒绝
         - elsif @course_participate.present? && @course_participate.refund_requested
           %span#applied 已申请退款
