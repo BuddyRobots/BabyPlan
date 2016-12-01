@@ -4,8 +4,8 @@ $ ->
 
   $(".close").click -> 
     $("#code-num").val("")
-    $("#confirm").removeClass("button-enabled")
-    $("#confirm").addClass("button-disabled")
+    $("#confirm-qr-code").removeClass("button-enabled")
+    $("#confirm-qr-code").addClass("button-disabled")
 
   $(".return").click ->
     client_name = $(this).closest('tr').attr('data-clientname')
@@ -302,11 +302,11 @@ $ ->
 
   check_code_input = ->
     if $("#code-num").val().trim() == ""
-      $("#confirm").addClass("button-disabled")
-      $("#confirm").removeClass("button-enabled")
+      $("#confirm-qr-code").addClass("button-disabled")
+      $("#confirm-qr-code").removeClass("button-enabled")
     else
-      $("#confirm").removeClass("button-disabled")
-      $("#confirm").addClass("button-enabled")
+      $("#confirm-qr-code").removeClass("button-disabled")
+      $("#confirm-qr-code").addClass("button-enabled")
 
   $("#code-num").keyup ->
     check_code_input()
