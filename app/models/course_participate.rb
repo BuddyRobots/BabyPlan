@@ -280,6 +280,7 @@ class CourseParticipate
       refund_approved: true,
       refund_feedback: feedback
     })
+    nil
   end
 
   def refund
