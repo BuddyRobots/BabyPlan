@@ -29,7 +29,6 @@ $ ->
       (data) ->
         if data.success
           $.page_notification("操作完成")
-          console.log btn.find("img").attr("src")
           if current_state == "published"
             btn.removeClass("published")
             btn.addClass("unpublished")
