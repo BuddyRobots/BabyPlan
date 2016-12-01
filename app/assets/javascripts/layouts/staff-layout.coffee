@@ -141,6 +141,8 @@ $ ->
   $("#reject").click ->
     cp_id = $("#importantModal").attr("data-id")
     feedback = $("#importantModal input").val()
+    if feedback == ""
+      $.page_notification("需要给出拒绝理由")
     $.postJSON(
       '/staff/courses/' + cp_id + '/reject_refund',
       {
