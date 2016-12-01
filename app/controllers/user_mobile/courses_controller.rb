@@ -28,6 +28,7 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
     @back = params[:back]
     @course = CourseInst.where(id: params[:id]).first
     @course_participate = @current_user.course_participates.where(course_inst_id: @course.id).first
+    @refund_status_str = @course_participate.refund_status_str
   end
 
   # wechat_pay

@@ -50,7 +50,7 @@
         - if @course_participate.present? && @course_participate.refund_allowed
           %span#refund 申请退款
         - elsif @course_participate.present?
-          %span#applied= @course_participate.refund_status_str
+          %span#applied= @refund_status_str
       .item-box
         .item
           .left-div#residual_num

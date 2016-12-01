@@ -373,7 +373,7 @@ class CourseParticipate
         retval = { success: false, err_code: err_code, err_code_des: err_code_des }
         return retval
       else
-        self.clear_refund
+        self.clear_pay
         refund_status = doc.search('refund_status_0').children[0].text
         self.update_attributes({ refund_status: refund_status })
         retval = { success: true, refund_status: refund_status }
