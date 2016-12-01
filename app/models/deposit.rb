@@ -42,7 +42,7 @@ class Deposit
   def self.create_new(client)
     deposit_amount = BorrowSetting.first.try(:deposit) || 100
     deposit = self.create(order_id: Util.random_str(32),
-                          price_pay: deposit_amount)
+                          amount: deposit_amount)
     deposit.client = client
     deposit.save
     expired_at = Time.now + 1.days
@@ -65,7 +65,7 @@ class Deposit
       "nonce_str" => nonce_str,
       "body" => self.course_inst.course.name,
       "out_trade_no" => self.order_id,
-      # "total_fee" => (self.price_pay * 100).to_s,
+      # "total_fee" => (self.amount * 100).to_s,
       "total_fee" => 1.to_s,
       "spbill_create_ip" => remote_ip,
       "notify_url" => NOTIFY_URL,
