@@ -28,7 +28,7 @@
               - if @out_transfers[:data].blank?
                 .undiscover
                   %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
-                  %span.undiscover-message 抱歉！暂无查找信息
+                  %span.undiscover-message 抱歉！暂无迁移信息
               - else
                 .table-box
                   %table.table.table-bordered#user-table
@@ -64,7 +64,7 @@
               - if @in_transfers[:data].blank?
                 .undiscover
                   %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
-                  %span.undiscover-message 抱歉！暂无查找信息
+                  %span.undiscover-message 抱歉！暂无迁移信息
               - else
                 .table-box
                   %table.table.table-bordered#user-table
