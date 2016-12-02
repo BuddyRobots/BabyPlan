@@ -88,12 +88,12 @@ class User
     end
 
     # 2. generate random code and save
-    code = "111111"
-    # code = 6.times { a = a + (rand * 10).to_i.to_s }
+    code = ""
+    6.times { code = code + (rand * 10).to_i.to_s }
     u.update_attribute(:mobile_verify_code, code)
 
     # 3. send message
-    # ret = Sms.send(mobile, code)
+    ret = Sms.send(mobile, code)
     # logger.info "AAAAAAAAAAAAAAAAAAA"
     # logger.info ret.inspect
     # logger.info "AAAAAAAAAAAAAAAAAAA"
@@ -186,12 +186,12 @@ class User
     end
 
     # generate random code and save
-    code = "111111"
-    # code = 6.times { a = a + (rand * 10).to_i.to_s }
+    code = ""
+    6.times { code = code + (rand * 10).to_i.to_s }
     self.update_attribute(:password_verify_code, code)
 
     # todo: send message
-    # ret = Sms.send(self.mobile, code)
+    ret = Sms.send(self.mobile, code)
     # logger.info "AAAAAAAAAAAAAAAAAAA"
     # logger.info ret.inspect
     # logger.info "AAAAAAAAAAAAAAAAAAA"
