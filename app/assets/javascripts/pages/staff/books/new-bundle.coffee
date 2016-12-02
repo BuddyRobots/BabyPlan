@@ -80,7 +80,7 @@ $ ->
     author = $("#book-author").val().trim()
     translator = $("#book-translator").val().trim()
     illustrator = $("#book-illustrator").val().trim()
-    available = $("#inlineCheckbox1").is(":checked")
+    available = !$("#inlineCheckbox1").is(":checked")
     
     desc = editor.$txt.html()
     if name == "" || stock == "" || isbn == "" || desc == ""
