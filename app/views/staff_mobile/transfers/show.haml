@@ -51,8 +51,11 @@
                 %span.book-nums= "×" + book[:count].to_s
     .btn-div
       - if @transfer.status == Transfer::PREPARE
-        %button.btn.left-btn#confirm-transfer-out{:type => "button", data: {id: @transfer.id.to_s}} 确定运出
-        %button.btn.right-btn#continue-transfer-out{:type => "button"}　继续添加
+        - if @transfer.out_center == @current_user.staff_center
+          %button.btn.left-btn#confirm-transfer-out{:type => "button", data: {id: @transfer.id.to_s}} 确定运出
+          %button.btn.right-btn#continue-transfer-out{:type => "button"}　继续添加
+        - else
+          %button.btn.full-btn#back{:type => "button"}　回到首页
       - if @transfer.status == Transfer::ONGOING
         - if @transfer.in_center == @current_user.staff_center
           - if @transfer.arrived_books.blank?
