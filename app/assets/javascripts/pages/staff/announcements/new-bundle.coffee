@@ -28,7 +28,7 @@ $ ->
     if content.replace(/(<([^>]+)>)/ig, "").trim() == ""
       $.page_notification "请输入公告内容"
       return
-    is_published = $("#publish-cb").is(":checked")
+    is_published = !$("#publish-cb").is(":checked")
     $.postJSON(
       '/staff/announcements',
       {
