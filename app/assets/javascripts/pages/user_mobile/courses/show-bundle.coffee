@@ -1,5 +1,5 @@
 $ ->
-
+  
   $(".smallheart").click ->
     fav = $(this).attr("data-fav")
     $.postJSON(
@@ -17,7 +17,7 @@ $ ->
             $(".smallheart").attr("src", window.unconcern_path)
             $(".smallheart").attr("data-fav", "true")
         else
-          $.page_notification "服务器出错，请稍后重试"
+          $.mobile_page_notification "服务器出错，请稍后重试"
       )
 
 
