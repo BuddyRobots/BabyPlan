@@ -66,6 +66,9 @@ $ ->
           $.mobile_page_notification("申请已提交，工作人员将在5个工作日内审核")
           $("#refundModal").modal('hide')
         else
-          $.mobile_page_notification("该课程不允许退款")
+          if data.code == REFUND_REQUESTED
+            $.mobile_page_notification("退款申请已提交")
+          else
+            $.mobile_page_notification("该课程不允许退款")
           $("#refundModal").modal('hide')
       )
