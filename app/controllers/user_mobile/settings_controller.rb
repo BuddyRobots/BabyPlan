@@ -4,7 +4,7 @@ class UserMobile::SettingsController < UserMobile::ApplicationController
   end
 
   def book
-    @book_borrows = @current_user.book_borrows
+    @book_borrows = @current_user.book_borrows.desc(:created_at)
     if params[:state].to_s == "true"
       @pay_deposit = "true"
       @open_id = Weixin.get_oauth_open_id(params[:code])
@@ -31,7 +31,7 @@ class UserMobile::SettingsController < UserMobile::ApplicationController
   end
 
   def course
-    @courses_participates = @current_user.course_participates
+    @courses_participates = @current_user.course_participates.desc(:created_at)
   end
 
   def favorite

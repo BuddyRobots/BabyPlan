@@ -31,7 +31,7 @@ module ErrCode
   CENTER_EXIST = -28
   REFUND_NOT_ALLOWED = -29
   BLANK_DATA = -30
-
+  REFUND_REQUESTED = -31
 
   def self.ret_false(code)
     msg = self.message(code)
@@ -102,6 +102,8 @@ module ErrCode
       "不允许退款"
     when BLANK_DATA
       "空数据"
+    when REFUND_REQUESTED
+      "退款申请已提交"
     else
       nil
     end

@@ -250,6 +250,8 @@ class CourseParticipate
     if self.refund_allowed
       self.update_attributes({refund_requested: true})
       nil
+    elsif self.refund_requested == true
+      ErrCode::REFUND_REQUESTED
     else
       ErrCode::REFUND_NOT_ALLOWED
     end

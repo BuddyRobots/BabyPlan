@@ -33,5 +33,10 @@ class Staff::TransfersController < Staff::ApplicationController
     end
     books_info_detail = @transfer.books_info_detail
     @books_info_detail = auto_paginate(books_info_detail)
+    if @transfer.in_center_id == @current_center.id
+      @profile = "in"
+    else
+      @profile = "out"
+    end
   end
 end

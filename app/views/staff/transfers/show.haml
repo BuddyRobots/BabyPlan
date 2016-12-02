@@ -5,7 +5,7 @@
 .content-area
   .content-box
     .manage-box
-      %a#back{:href => "/staff/transfers"}
+      %a#back{:href => "/staff/transfers?profile=" + @profile.to_s}
         %img{src: asset_path("web/back.png")}
       %p.transfer-status 迁移详情
   .manage-content
