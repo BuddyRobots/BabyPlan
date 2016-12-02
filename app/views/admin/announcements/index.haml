@@ -29,7 +29,7 @@
             - if @global_eles[:data].length == 0
               .undiscover
                 %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
-                %span.message 抱歉！暂无查找信息
+                %span.message 抱歉！暂无公告信息
             - else
               - @global_eles[:data].each do |e|
                 .introduce
@@ -59,7 +59,7 @@
             - if @local_eles[:data].length == 0
               .undiscover
                 %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
-                %span.message 抱歉！暂无查找信息
+                %span.message 抱歉！暂无公告信息
             - else
               - @local_eles[:data].each do |e|
                 .introduce

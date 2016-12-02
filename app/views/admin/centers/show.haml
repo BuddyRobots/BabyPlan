@@ -76,7 +76,7 @@
           - if @course_insts[:data].blank?
             .undiscover
               %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
-              %span.undiscover-message 抱歉！暂无查找信息
+              %span.undiscover-message 抱歉！暂无课程信息
           - else
             .table-box
               %table.table.table-bordered#user-table1
@@ -112,7 +112,7 @@
           - if @books[:data].blank?
             .undiscover
               %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
-              %span.undiscover-message 抱歉！暂无查找信息
+              %span.undiscover-message 抱歉！暂无绘本信息
           - else
             .table-box
               %table.table.table-bordered#user-table2

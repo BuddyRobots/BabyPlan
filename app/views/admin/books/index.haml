@@ -33,7 +33,7 @@
               - if @books[:data].blank?
                 .undiscover
                   %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
-                  %span.message 抱歉！暂无查找信息
+                  %span.message 抱歉！暂无绘本信息
               - else
                 .table-box
                   %table.table.table-bordered#book-table
@@ -70,7 +70,7 @@
               - if @transfers[:data].blank?
                 .undiscover
                   %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
-                  %span.message 抱歉！暂无查找信息
+                  %span.message 抱歉！暂无绘本信息
               - else
                 .table-box
                   %table.table.table-bordered#migrate-table
