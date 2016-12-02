@@ -3,7 +3,7 @@ $msg_border: #F0C36D;
 .mobile_notification {
   visibility: hidden;
   z-index: 10000;
-  position: absolute;
+  position: fixed;
   width: 46.875%;
   top: 50%;
   left: 50%;
