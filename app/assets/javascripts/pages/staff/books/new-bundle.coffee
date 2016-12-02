@@ -86,6 +86,15 @@ $ ->
     if name == "" || stock == "" || isbn == "" || desc == ""
       $.page_notification("请补全信息")
       return
+
+    if $.isNumeric(stock) == false || parseInt(stock) < 0
+      $.page_notification("请输入合法的库存数量")
+      return
+
+    if !$.isNumeric(age_lower_bound) || !$.isNumeric(age_upper_bound) || parseInt(age_lower_bound) < 0 || parseInt(age_upper_bound) < 0 || parseInt(age_lower_bound) >= parseInt(age_lower_bound)
+      $.page_notification("请输入合法的年龄限制")
+      return
+
     $.postJSON(
       '/staff/books',
       {

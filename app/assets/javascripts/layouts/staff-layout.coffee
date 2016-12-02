@@ -127,9 +127,9 @@ $ ->
           $.page_notification("操作完成，显示下一条")
       else
         if data.code == BLANK_DATA
-          $("#importantModal").hide()
           $.page_notification("所有退款申请处理完毕")
-          $("importantModal").modal("hide")
+          $("#importantModal").modal("hide")
+          $("#important-item").hide()
         else
           $.page_notification("服务器出错")
 

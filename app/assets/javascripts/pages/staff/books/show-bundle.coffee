@@ -4,8 +4,8 @@ $ ->
 
   $(".close").click -> 
     $("#code-num").val("")
-    $("#confirm").removeClass("button-enabled")
-    $("#confirm").addClass("button-disabled")
+    $("#confirm-qr-code").removeClass("button-enabled")
+    $("#confirm-qr-code").addClass("button-disabled")
 
   $(".return").click ->
     client_name = $(this).closest('tr').attr('data-clientname')
@@ -184,19 +184,31 @@ $ ->
     desc = editor.$txt.html()
     $(".upload-photo").toggle()
 
+    if name == "" || stock == "" || isbn == "" || desc == ""
+      $.page_notification("请补全信息")
+      return
+
+    if $.isNumeric(stock) == false || parseInt(stock) < 0
+      $.page_notification("请输入合法的库存数量")
+      return
+
+    if !$.isNumeric(age_lower_bound) || !$.isNumeric(age_upper_bound) || parseInt(age_lower_bound) < 0 || parseInt(age_upper_bound) < 0 || parseInt(age_lower_bound) > parseInt(age_upper_bound)
+      $.page_notification("请输入合法的年龄限制")
+      return
+
     $.putJSON(
       '/staff/books/' + window.bid,
       {
         book: {
           name: name
           type: type
-          stock: stock
+          stock: parseInt(stock)
           isbn: isbn
           author: author
           translator: translator
           illustrator: illustrator
-          age_lower_bound: age_lower_bound
-          age_upper_bound: age_upper_bound
+          age_lower_bound: parseInt(age_lower_bound)
+          age_upper_bound: parseInt(age_upper_bound)
           tags: tags
           desc: desc
         }
@@ -290,11 +302,11 @@ $ ->
 
   check_code_input = ->
     if $("#code-num").val().trim() == ""
-      $("#confirm").addClass("button-disabled")
-      $("#confirm").removeClass("button-enabled")
+      $("#confirm-qr-code").addClass("button-disabled")
+      $("#confirm-qr-code").removeClass("button-enabled")
     else
-      $("#confirm").removeClass("button-disabled")
-      $("#confirm").addClass("button-enabled")
+      $("#confirm-qr-code").removeClass("button-disabled")
+      $("#confirm-qr-code").addClass("button-enabled")
 
   $("#code-num").keyup ->
     check_code_input()
@@ -302,15 +314,18 @@ $ ->
   $(".QRcode-btn").click ->
     $("#QR-codeModal").modal("show")
 
-  $("#confirm").click ->
+  $("#confirm-qr-code").click ->
     num = $("#code-num").val()
     if $.isNumeric(num)
       num = parseInt(num)
       if num > 0
         location.href = "/staff/books/" + window.bid + "/download_qrcode?amount=" + num
         $("#QR-codeModal").modal("hide")
+      else
+        $.page_notification("请正确输入数量", 2000)
     else
       $.page_notification("请正确输入数量", 2000)
+    return false
 
 # img upload
   $("#upload-cover-div").click ->
