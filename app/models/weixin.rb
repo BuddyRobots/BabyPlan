@@ -83,8 +83,18 @@ class Weixin
       "button" => [
         {
           "type" => "view", 
-          "name" => "我", 
-          "url" => "http://babyplan.bjfpa.org.cn/user_mobile/sessions"
+          "name" => "课程", 
+          "url" => "http://babyplan.bjfpa.org.cn/user_mobile/courses"
+        },
+        {
+          "type" => "view", 
+          "name" => "绘本", 
+          "url" => "http://babyplan.bjfpa.org.cn/user_mobile/books"
+        },
+        {
+          "type" => "view", 
+          "name" => "公告", 
+          "url" => "http://babyplan.bjfpa.org.cn/user_mobile/announcements"
         }
       ]
     }

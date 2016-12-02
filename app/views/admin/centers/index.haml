@@ -23,42 +23,42 @@
           %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
           %span.message 抱歉！暂无查找信息
       - else
-      .table-box
-        %table.table.table-bordered#user-table
-          %thead
-            %tr
-              %th 中心名称
-              %th 中心地址
-              %th 工作人员
-              %th 绘本种类/数量
-              %th 开设课程
-              %th{:colspan => "2"} 操&nbsp作
-          %tbody
-            - @centers[:data].each do |c|
-              %tr{"data-id" => c[:id], class: c[:available] == true ? "available" : "unavailable"}
-                %td= link_to c[:name], "/admin/centers/#{c[:id]}"
-                %td= c[:address]
-                %td= c[:staffs_desc]
-                %td= c[:books_desc]
-                %td= c[:courses_desc]
-                %td
-                  %a#enter{:href => "/admin/centers/#{c[:id]}/set_current"} 进入
-                %td
-                  - if c[:available] == true
-                    %a.set-available.link-available{:href => "javascript:void(0);"} 关闭
-                  - else
-                    %a.set-available.link-unavailable{:href => "javascript:void(0);"} 开放
-        .select-page 
-          %span.totalitems= "共#{@centers[:total_page]}页,总计#{@centers[:total_number]}条"
-          %span.choice-page
-            %ul.pagination.pagination-sm
-              %li
-                %a{:href => "/admin/centers?keyword=#{@keyword}&page=#{@centers[:previous_page]}"} «
-              - ( (@centers[:previous_page] > 2 ? @centers[:previous_page] - 2 : 1) .. (@centers[:next_page] < @centers[:total_page] - 2 ? @centers[:next_page] + 2 : @centers[:total_page]) ).to_a.each do |page|
+        .table-box
+          %table.table.table-bordered#user-table
+            %thead
+              %tr
+                %th 中心名称
+                %th 中心地址
+                %th 工作人员
+                %th 绘本种类/数量
+                %th 开设课程
+                %th{:colspan => "2"} 操&nbsp作
+            %tbody
+              - @centers[:data].each do |c|
+                %tr{"data-id" => c[:id], class: c[:available] == true ? "available" : "unavailable"}
+                  %td= link_to c[:name], "/admin/centers/#{c[:id]}"
+                  %td= c[:address]
+                  %td= c[:staffs_desc]
+                  %td= c[:books_desc]
+                  %td= c[:courses_desc]
+                  %td
+                    %a#enter{:href => "/admin/centers/#{c[:id]}/set_current"} 进入
+                  %td
+                    - if c[:available] == true
+                      %a.set-available.link-available{:href => "javascript:void(0);"} 关闭
+                    - else
+                      %a.set-available.link-unavailable{:href => "javascript:void(0);"} 开放
+          .select-page 
+            %span.totalitems= "共#{@centers[:total_page]}页,总计#{@centers[:total_number]}条"
+            %span.choice-page
+              %ul.pagination.pagination-sm
                 %li
-                  %a{:href => "/admin/centers?keyword=#{@keyword}&page=#{page}"}= page
-              %li
-                %a{:href => "/admin/centers?keyword=#{@keyword}&page=#{@centers[:next_page]}"} »
+                  %a{:href => "/admin/centers?keyword=#{@keyword}&page=#{@centers[:previous_page]}"} «
+                - ( (@centers[:previous_page] > 2 ? @centers[:previous_page] - 2 : 1) .. (@centers[:next_page] < @centers[:total_page] - 2 ? @centers[:next_page] + 2 : @centers[:total_page]) ).to_a.each do |page|
+                  %li
+                    %a{:href => "/admin/centers?keyword=#{@keyword}&page=#{page}"}= page
+                %li
+                  %a{:href => "/admin/centers?keyword=#{@keyword}&page=#{@centers[:next_page]}"} »
 
 #closeModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
   .modal-dialog

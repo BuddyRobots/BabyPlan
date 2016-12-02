@@ -92,7 +92,7 @@ $ ->
     name = $("#center-name").val()
     address = $("#center-address").val()
     desc = editor.$txt.html()
-    available = $("#available").is(":checked")
+    available = !$("#inlineCheckbox1").is(":checked")
     if name == "" || address == "" || desc == ""
       $.page_notification("请补全信息")
       return
