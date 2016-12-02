@@ -1,7 +1,4 @@
 $ ->
-  if window.profile == "in"
-    $('.nav-tabs a[href="#tab2"]').tab('show')
-
 
   search = ->
     keyword = $("#search-input").val()
@@ -14,3 +11,6 @@ $ ->
     code = event.which
     if code == 13
       search()
+
+  if window.profile == "in"
+    $("#in-transfers").trigger('click')
