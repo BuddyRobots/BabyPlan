@@ -67,7 +67,7 @@
                     %img.visit{:src => e.photo.present? ? e.photo.path : asset_path("web/announcement.png"), width: "190", height: "129"}
                   %p.caption-header
                     %span.caption= link_to e.title, "/admin/announcements/#{e.id.to_s}"
-                    %span.kids-center 朝阳区儿童中心
+                    %span.kids-center= e.center.name
                     %span#time-flag= e.created_at.strftime("%Y-%m-%d %H-%M")
                     %a.undeclared{:href => "javascript:void(0);"}= e.status_str
                   .desc
