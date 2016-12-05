@@ -18,6 +18,7 @@ $ ->
     $("#mobilecode").text("获取验证码")
     $("#mobilecode").addClass("unclicked")
     $("#mobilecode").removeClass("clicked")
+    $("#kid-mobile").removeClass("clicked-box")
     $("#mobilecode").attr("disabled", false)
     $("input").val("")
     $(".notice").css("visibility", "hidden")

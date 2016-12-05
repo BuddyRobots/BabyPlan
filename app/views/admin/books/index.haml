@@ -110,7 +110,7 @@
       .modalheader
         %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: asset_path("managecenter/close.png")}
       .modal-body
-        %form.form-inline.form-div{:role => "form"}
+        .form-inline.form-div{:role => "form"}
           .form-group
             %label.control-label.borrow-label{:for => "borrow-num"} 最大可借本数
             %input.unclicked-box#borrow-num.form-control{:type => "text", value: @book_num}
