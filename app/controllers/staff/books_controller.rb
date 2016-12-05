@@ -160,6 +160,6 @@ class Staff::BooksController < Staff::ApplicationController
     if @book.blank?
       redirect_to action: :index and return
     end
-    send_file(@book.generate_compressed_file(params[:amount].to_i), filename: @book.name + ".zip")
+    send_file(@book.generate_compressed_file(params[:amount].to_i), filename: @book.name + ".pdf")
   end
 end

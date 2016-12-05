@@ -137,15 +137,50 @@ class Book
       book_inst.id.to_s + ".png"
     end
 
-    zipfile_name = folder + SecureRandom.uuid.to_s + ".zip"
+    pdf_filename = Book.export_qrcode_pdf(self.name, folder, png_files)
 
-    Zip::File.open(zipfile_name, Zip::File::CREATE) do |zipfile|
-      png_files.each do |filename|
-        zipfile.add(filename, folder + filename)
+    # zipfile_name = folder + SecureRandom.uuid.to_s + ".zip"
+
+    # Zip::File.open(zipfile_name, Zip::File::CREATE) do |zipfile|
+    #   png_files.each do |filename|
+    #     zipfile.add(filename, folder + filename)
+    #   end
+    #   # zipfile.get_output_stream("myFile") { |os| os.write "myFile contains just this" }
+    # end
+    # zipfile_name
+  end
+
+
+  def self.export_qrcode_pdf(book_name, folder, png_files)
+    start_point = [-20, 750]
+    hor_interval = 100
+    ver_interval = 110
+    per_line = 6
+    line_per_page = 7
+    per_page = line_per_page * per_line
+    last_page_idx = 0
+    pdf_filename = folder + SecureRandom.uuid.to_s + ".pdf"
+    Prawn::Document.generate(pdf_filename) do
+      png_files.each_with_index do |png_file, e|
+        page_idx = e / per_page
+        if page_idx != last_page_idx
+          start_new_page
+          last_page_idx = page_idx
+        end
+        in_page_idx = e % per_page
+        ver_idx = in_page_idx / per_line
+        hor_idx = in_page_idx % per_line
+        start_y = start_point[1] - ver_interval * ver_idx
+        start_x = start_point[0] + hor_interval * hor_idx
+        bounding_box([start_x, start_y], width: 70, height: 90) do
+          font("public/simsun/simsun.ttf") do
+            text ActionController::Base.helpers.truncate(book_name, length: 8), size: 10
+          end
+          image folder + png_file, position: :center, width: 70, height: 70
+        end
       end
-      # zipfile.get_output_stream("myFile") { |os| os.write "myFile contains just this" }
     end
-    zipfile_name
+    return pdf_filename
   end
 
   def more_info
@@ -317,3 +352,4 @@ class Book
     return true
   end
 end
+
