@@ -205,6 +205,14 @@ a{
 		float: right;
 	}
 }
+#course-address {
+	width: 78%;
+	display: inline-block;
+}
+.address-label {
+	display: inline-block;
+	vertical-align: top;
+}
 // 不需要时恢复隐藏属性
 #sign-desc {
 	// display: none;
