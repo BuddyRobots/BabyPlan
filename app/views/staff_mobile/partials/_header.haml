@@ -1,7 +1,7 @@
 .header.clearfix
   %a{:href => "javascript:void(0);"}
     %img.logo{src: asset_path("manager/logo_mini.png")}
-  %span.title= @current_user.staff_center.name + "-" + @current_user.name
+  %span.title= "北京市社区儿童中心-" + @current_user.name
   / %a{:href => signout_staff_mobile_sessions_path}
   %a{:href => "javascript:void(0);"}
     %img.logout{src: asset_path("manager/logout.png"), "data-target" => "#confirmModal", "data-toggle" => "modal"}
