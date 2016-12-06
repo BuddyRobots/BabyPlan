@@ -271,6 +271,10 @@ class User
     return self.user_type == User::ADMIN
   end
 
+  def is_staff_or_admin
+    return self.user_type == User::ADMIN || self.user_type == User::STAFF
+  end
+
   def client_info
     {
       id: self.id.to_s,

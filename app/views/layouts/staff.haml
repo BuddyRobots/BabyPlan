@@ -8,7 +8,7 @@
 
 
 - content_for :app_content do
-  .container
+  .wrapper
     .header
       %a{:href => "#"}
         %img.logo{src: asset_path("managecenter/logo.png")}
@@ -37,24 +37,24 @@
         %p.rightword 您好欢迎访问北京市社区儿童中心！
         %button.btn#sign-up{"data-target" => "#signupModal", "data-toggle" => "modal", :type => "button"} 注册
         %button.btn#sign-in{"data-target" => "#signinModal", "data-toggle" => "modal", :type => "button"} 登录
-        
-    .main
-      .sidebar
-        %ul
-          %li{class: @active_tab == "client" ? "active" : ""}
-            %a{:href => "/staff/clients"} 儿童管理
-          %li{class: @active_tab == "course" ? "active" : ""}
-            %a{:href => "/staff/courses"} 课程管理
-          %li{class: @active_tab == "book" ? "active" : ""}
-            %a{:href => "/staff/books"} 绘本管理
-          %li{class: @active_tab == "announcement" ? "active" : ""}
-            %a{:href => "/staff/announcements"} 公告信息管理
-          %li{class: @active_tab == "statistics" ? "active" : ""}
-            %a{:href => "/staff/statistics"} 统计信息查询
-          %li{class: @active_tab == "transfers" ? "active" : ""}
-            %a{:href => "/staff/transfers"} 迁入迁出记录
-
-    = yield
+    - if @current_user.try(:is_staff_or_admin)    
+      .main
+        .sidebar
+          %ul
+            %li{class: @active_tab == "client" ? "active" : ""}
+              %a{:href => "/staff/clients"} 儿童管理
+            %li{class: @active_tab == "course" ? "active" : ""}
+              %a{:href => "/staff/courses"} 课程管理
+            %li{class: @active_tab == "book" ? "active" : ""}
+              %a{:href => "/staff/books"} 绘本管理
+            %li{class: @active_tab == "announcement" ? "active" : ""}
+              %a{:href => "/staff/announcements"} 公告信息管理
+            %li{class: @active_tab == "statistics" ? "active" : ""}
+              %a{:href => "/staff/statistics"} 统计信息查询
+            %li{class: @active_tab == "transfers" ? "active" : ""}
+              %a{:href => "/staff/transfers"} 迁入迁出记录
+    %div{class: @current_user.try(:is_staff_or_admin) ? "user_sign_in" : "user_unsign_in" }
+      = yield
 = render :template => 'layouts/application'
 
 / modify_password

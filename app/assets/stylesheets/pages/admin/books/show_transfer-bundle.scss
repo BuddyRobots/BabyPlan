@@ -15,11 +15,10 @@
 	max-height: 600px;
 }
 .content-area {
-	position:absolute;
-	right: 0;
-	left: 160px;
+	position: absolute;
+	width: 100%;
 	bottom: 0;
-	top: 60px;
+	top: 0;
 	background:#f7fcff;
 	box-shadow: -1px -1px 6px #9c9c9c inset;
 	padding: 20px;

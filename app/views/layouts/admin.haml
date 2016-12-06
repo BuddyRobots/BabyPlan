@@ -8,7 +8,7 @@
 
 
 - content_for :app_content do
-  .container
+  .wrapper
     .header
       %a{:href => "#"}
         %img.logo{src: asset_path("managecenter/logo.png")}
@@ -39,25 +39,25 @@
         %button.btn#sign-in{"data-target" => "#signinModal", "data-toggle" => "modal"} 登录
         
       
-    
-    .main
-      .sidebar
-        %ul
-          %li{class: @active_tab == "staff" ? "active" : ""}
-            %a{:href => "/admin/staffs"} 工作人员管理
-          %li{class: @active_tab == "course" ? "active" : ""}
-            %a{:href => "/admin/courses"} 课程管理
-          %li{class: @active_tab == "book" ? "active" : ""}
-            %a{:href => "/admin/books"} 绘本管理
-          %li{class: @active_tab == "announcement" ? "active" : ""}
-            %a{:href => "/admin/announcements"} 公告信息管理
-          %li{class: @active_tab == "center" ? "active" : ""}
-            %a{:href => "/admin/centers"} 儿童中心管理
-          %li{class: @active_tab == "statistics" ? "active" : ""}
-            %a{:href => "/admin/statistics"} 统计信息查询
+    - if @current_user.try(:is_staff_or_admin)
+      .main
+        .sidebar
+          %ul
+            %li{class: @active_tab == "staff" ? "active" : ""}
+              %a{:href => "/admin/staffs"} 工作人员管理
+            %li{class: @active_tab == "course" ? "active" : ""}
+              %a{:href => "/admin/courses"} 课程管理
+            %li{class: @active_tab == "book" ? "active" : ""}
+              %a{:href => "/admin/books"} 绘本管理
+            %li{class: @active_tab == "announcement" ? "active" : ""}
+              %a{:href => "/admin/announcements"} 公告信息管理
+            %li{class: @active_tab == "center" ? "active" : ""}
+              %a{:href => "/admin/centers"} 儿童中心管理
+            %li{class: @active_tab == "statistics" ? "active" : ""}
+              %a{:href => "/admin/statistics"} 统计信息查询
 
-
-    = yield
+    %div{class: @current_user.try(:is_staff_or_admin) ? "user_sign_in" : "user_unsign_in" }
+      = yield
 = render :template => 'layouts/application'
 
 / modify_password
