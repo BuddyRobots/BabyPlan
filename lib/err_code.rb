@@ -32,6 +32,8 @@ module ErrCode
   REFUND_NOT_ALLOWED = -29
   BLANK_DATA = -30
   REFUND_REQUESTED = -31
+  LATEFEE_NOT_PAID = -32
+  DEPOSIT_NOT_PAID = -33
 
   def self.ret_false(code)
     msg = self.message(code)
@@ -104,6 +106,10 @@ module ErrCode
       "空数据"
     when REFUND_REQUESTED
       "退款申请已提交"
+    when LATEFEE_NOT_PAID
+      "滞纳金未缴清"
+    when DEPOSIT_NOT_PAID
+      "押金未缴"
     else
       nil
     end

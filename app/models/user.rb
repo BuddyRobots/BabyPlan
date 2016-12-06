@@ -353,6 +353,10 @@ class User
     self.book_borrows.select { |e| e.is_expired } .present?
   end
 
+  def latefee_not_paid
+    self.book_borrows.where(latefee_paid: false).map { |e| e.latefee } .sum > 0
+  end
+
   def reach_max_borrow
     book_num = BorrowSetting.first.try(:book_num)
     if book_num.blank?
