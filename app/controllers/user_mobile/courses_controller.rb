@@ -31,20 +31,21 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
     @refund_status_str = @course_participate.try(:refund_status_str).to_s
   end
 
-  # wechat_pay
   def new
     @course = CourseInst.where(id: params[:state]).first
-    @open_id = Weixin.get_oauth_open_id(params[:code])
     @course_participate = @current_user.course_participates.where(course_inst_id: @course.id).first
     @course_participate = @course_participate || CourseParticipate.create_new(current_user, @course)
     @course_participate.clear_refund
-    if @course_participate.is_expired
-      @course_participate.renew
+    if @course.price_pay > 0
+      @open_id = Weixin.get_oauth_open_id(params[:code])
+      if @course_participate.is_expired
+        @course_participate.renew
+      end
+      if @course_participate.prepay_id.blank?
+        @course_participate.unifiedorder_interface(@remote_ip, @open_id)
+      end
+      @pay_info = @course_participate.get_pay_info
     end
-    if @course_participate.prepay_id.blank?
-      @course_participate.unifiedorder_interface(@remote_ip, @open_id)
-    end
-    @pay_info = @course_participate.get_pay_info
   end
 
   def notify
@@ -58,6 +59,12 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
   def pay_finished
     @course_participate = CourseParticipate.where(id: params[:id]).first
     @course_participate.update_attributes({pay_finished: true})
+    if @course_participate.price_pay == 0
+      @course_participate.update_attributes({
+        prepay_id: "free",
+        trade_state: "SUCCESS"
+      })
+    end
     render json: retval_wrapper(nil) and return
   end
 

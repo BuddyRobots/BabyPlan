@@ -27,7 +27,7 @@ $ ->
     code = $("#course-code").val()
     length = $("#course-length").val()
     desc = editor.$txt.html()
-    available = $("#available").is(":checked")
+    available = !$("#inlineCheckbox1").is(":checked")
     if name == "" || speaker == "" || price == "" || price_pay == "" || desc == "" || code == ""
       $.page_notification("请补全信息")
       return

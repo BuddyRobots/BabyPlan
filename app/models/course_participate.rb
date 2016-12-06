@@ -222,6 +222,9 @@ class CourseParticipate
 
   # status related
   def is_expired
+    if self.price_pay == 0
+      return false
+    end
     if self.pay_finished == true && self.trade_state != "SUCCESS"
       self.orderquery()
     end
@@ -229,6 +232,9 @@ class CourseParticipate
   end
 
   def is_paying
+    if self.price_pay == 0
+      return false
+    end
     if self.pay_finished == true && self.trade_state != "SUCCESS"
       self.orderquery()
     end
@@ -236,6 +242,9 @@ class CourseParticipate
   end
 
   def is_success
+    if self.price_pay == 0
+      return self.pay_finished
+    end
     if self.pay_finished == true && self.trade_state != "SUCCESS"
       self.orderquery()
     end
@@ -286,6 +295,14 @@ class CourseParticipate
   end
 
   def refund
+    if self.price_pay == 0
+      self.update_attributes({
+        refund_status: "SUCCESS",
+        refund_finished: true
+      })
+      self.clear_pay
+      return { success: true }
+    end
     if self.order_id.blank?
       return nil
     end
@@ -340,7 +357,7 @@ class CourseParticipate
   end
 
   def refundquery
-    if self.refund_finished != true
+    if self.refund_finished != true || self.price_pay == 0
       return
     end
     nonce_str = Util.random_str(32)

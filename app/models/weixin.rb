@@ -95,6 +95,11 @@ class Weixin
           "type" => "view", 
           "name" => "公告", 
           "url" => "http://babyplan.bjfpa.org.cn/user_mobile/announcements"
+        },
+        {
+          "type" => "view", 
+          "name" => "我", 
+          "url" => "http://babyplan.bjfpa.org.cn/user_mobile/settings"
         }
       ]
     }
