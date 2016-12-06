@@ -40,4 +40,8 @@ $ ->
                 location.href = "/staff_mobile/books/borrow_result?err=reach_max_borrow" + "&mobile=" + mobile
               if data.code == BOOK_ALL_OFF_SHELF
                 location.href = "/staff_mobile/books/borrow_result?err=book_all_off_shelf" + "&mobile=" + mobile
+              if data.code == LATEFEE_NOT_PAID
+                location.href = "/staff_mobile/books/borrow_result?err=latefee_not_paid" + "&mobile=" + mobile
+              if data.code == DEPOSIT_NOT_PAID
+                location.href = "/staff_mobile/books/borrow_result?err=deposit_not_paid" + "&mobile=" + mobile
         )

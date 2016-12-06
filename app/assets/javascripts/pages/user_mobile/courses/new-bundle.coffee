@@ -31,3 +31,12 @@ $ ->
 
   $("#wechat-pay").click ->
     pay()
+
+  $("#free-course-signup").click ->
+    $.postJSON(
+      '/user_mobile/courses/' + window.course_participate_id + '/pay_finished',
+      { },
+      (data) ->
+        # redirect to the result page
+        location.href = "/user_mobile/courses/" + window.course_id + '/pay_success'
+      )

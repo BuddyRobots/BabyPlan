@@ -6,13 +6,14 @@
     window.course_id="#{@course.id.to_s}"
 
 - content_for :app_content do
-  .hide
-    %span#appId= @pay_info["appId"]
-    %span#timeStamp= @pay_info["timeStamp"]
-    %span#nonceStr= @pay_info["nonceStr"]
-    %span#package= @pay_info["package"]
-    %span#signType= @pay_info["signType"]
-    %span#paySign= @pay_info["sign"]
+  - if @course.price_pay > 0
+    .hide
+      %span#appId= @pay_info["appId"]
+      %span#timeStamp= @pay_info["timeStamp"]
+      %span#nonceStr= @pay_info["nonceStr"]
+      %span#package= @pay_info["package"]
+      %span#signType= @pay_info["signType"]
+      %span#paySign= @pay_info["sign"]
   .content-area
     .header
       .cloud
@@ -44,4 +45,7 @@
         .price.clearfix
           %span.float-left 公益价：
           %span.float-right#public-price= @course.price_pay
-    %a.btn#wechat-pay{:href => "javascript:void(0);", :type => "button"}　微信支付
+    - if @course.price_pay > 0
+      %a.btn#wechat-pay{:href => "javascript:void(0);", :type => "button"}　微信支付
+    - else
+      %a.btn#free-course-signup{:href => "javascript:void(0);", :type => "button"}　确认参加

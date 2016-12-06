@@ -24,6 +24,12 @@ class BookInst
     if client.has_expired_book
       return ErrCode::HAS_EXPIRED_BOOK
     end
+    if !clent.deposit_paid
+      return ErrCode::DEPOSIT_NOT_PAID
+    end
+    if clent.latefee_not_paid
+      return ErrCode::LATEFEE_NOT_PAID
+    end
     if client.reach_max_borrow
       return ErrCode::REACH_MAX_BORROW
     end

@@ -126,7 +126,7 @@ a{
 #public-price {
 	color: #c70d19;
 }
-#wechat-pay {
+#wechat-pay, #free-course-signup {
 	position: absolute;
 	bottom: 0;
 	width: 100%;
@@ -136,10 +136,6 @@ a{
 	font-size: 3.6em;
 	border-radius: 0;
 }
-
-
-
-
 
 
 @media screen and (max-width:640px) {

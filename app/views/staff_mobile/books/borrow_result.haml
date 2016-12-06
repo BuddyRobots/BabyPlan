@@ -21,6 +21,10 @@
           %p.title#unreturn 已达最大借阅数目
         - if @err == "book_all_off_shelf"
           %p.title#unreturn 绘本已全部借出
+        - if @err == "latefee_not_paid"
+          %p.title#unreturn 滞纳金未缴清
+        - if @err == "deposit_not_paid"
+          %p.title#unreturn 未缴纳绘本押金
     - else
       .desc-div
         .desc
