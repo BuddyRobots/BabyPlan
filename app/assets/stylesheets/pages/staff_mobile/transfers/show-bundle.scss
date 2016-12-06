@@ -29,7 +29,8 @@ a{
 }
 
 .main-div {
-	position: relative;
+	position: fixed;
+	top: 0;
 	width: 100%;
 	max-width: 640px;
 	margin: 0 auto;
@@ -38,7 +39,7 @@ a{
 	overflow: auto;
 	background: #f0f0f0;
 	padding-top: 5.21%;
-	padding-bottom: 15%;
+	padding-bottom: 13%;
 }
 .box {
 	width: 87.5%;
@@ -96,6 +97,8 @@ a{
 	bottom: 0;
 	width: 100%;
 	max-width: 640px;
+	display: -moz-box;
+	display: -webkit-box;
 	display: -webkit-flex;
 	display: -moz-flex;
 	display: -ms-flex;
@@ -148,23 +151,23 @@ a{
 
 
 @media screen and (max-width:640px) {
-	.main-div {
+	.main-div, .btn-div {
 		font-size: 100%;
 	}
 }
 @media screen and (max-width: 560px) {
-    .main-div {
+    .main-div, .btn-div {
         font-size: 85%;
     }
 }
 
 @media screen and (max-width: 500px) {
-    .main-div {
+    .main-div, .btn-div {
         font-size: 60%;
     }
 }
 @media screen and (max-width: 400px) {
-    .main-div {
+    .main-div, .btn-div {
         font-size: 50%;
     }
 }
