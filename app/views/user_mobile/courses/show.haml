@@ -31,8 +31,8 @@
 
     .course-desc
       = @course.course.desc.html_safe
-    .course-desc
-      - if @course_participate.present? && @course_participate.is_success
+    - if @course_participate.present? && @course_participate.is_success
+      .course-desc
         #sign-desc
           %p.title 签到情况
           .sign_in-div
@@ -72,8 +72,8 @@
           %span.class_time 上课时间：
           %span.desc_time= @course.date
         .item-div
-          %span 上课地点：
-          %span= @course.address
+          %span.address-label 上课地点：
+          %span#course-address= @course.address
     .content
       #map-container
     - if @course_participate.nil? || @course_participate.prepay_id.blank?
