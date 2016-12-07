@@ -82,23 +82,28 @@ class Weixin
     data = {
       "button" => [
         {
-          "type" => "view", 
-          "name" => "课程", 
-          "url" => "http://babyplan.bjfpa.org.cn/user_mobile/courses"
+          "name": "服务",
+          "sub_button": [
+            {
+              "type": "view", 
+              "name": "课程", 
+              "url": "http://babyplan.bjfpa.org.cn/user_mobile/courses"
+            },
+            {
+              "type": "view", 
+              "name": "绘本", 
+              "url": "http://babyplan.bjfpa.org.cn/user_mobile/books"
+            }
+          ]
         },
         {
-          "type" => "view", 
-          "name" => "绘本", 
-          "url" => "http://babyplan.bjfpa.org.cn/user_mobile/books"
+          "type": "view", 
+          "name": "公告", 
+          "url": "http://babyplan.bjfpa.org.cn/user_mobile/announcements"
         },
         {
-          "type" => "view", 
-          "name" => "公告", 
-          "url" => "http://babyplan.bjfpa.org.cn/user_mobile/announcements"
-        },
-        {
-         "name":"我",
-         "sub_button":[
+         "name": "我",
+         "sub_button": [
             {  
               "type": "view",
               "name": "收藏",
@@ -112,7 +117,7 @@ class Weixin
             {
               "type": "view",
               "name": "绘本",
-              "url": "http://babyplan.bjfpa.org.cn/user_mobile/settings/course"
+              "url": "http://babyplan.bjfpa.org.cn/user_mobile/settings/book"
             },
             {
               "type": "view",
@@ -122,7 +127,7 @@ class Weixin
             {
               "type": "view",
               "name": "中心设置",
-              "url": "http://babyplan.bjfpa.org.cn/user_mobile/centers"
+              "url": "http://babyplan.bjfpa.org.cn/user_mobile/centers/new"
             }
           ]
         }
