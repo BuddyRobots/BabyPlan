@@ -89,7 +89,7 @@ class User
 
     # 2. generate random code and save
     code = ""
-    6.times { code = code + (rand * 10).to_i.to_s }
+    6.times { code = code + rand(10).to_s }
     u.update_attribute(:mobile_verify_code, code)
 
     # 3. send message
@@ -187,7 +187,7 @@ class User
 
     # generate random code and save
     code = ""
-    6.times { code = code + (rand * 10).to_i.to_s }
+    6.times { code = code + rand(10).to_s }
     self.update_attribute(:password_verify_code, code)
 
     # todo: send message
