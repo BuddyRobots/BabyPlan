@@ -1,7 +1,7 @@
 $ ->
   weixin_jsapi_authorize(["scanQRCode"])
 
-  $("#signin-course").click ->
+  sign_in = ->
     wx.scanQRCode
       needResult: 1
       scanType: ["qrCode"]
@@ -24,3 +24,13 @@ $ ->
               else
                 $.mobile_page_notification("服务器出错", 3000)
         )
+
+  $("#signin-course").click ->
+    sign_in()
+
+  if window.signin == "true"
+    setTimeout (->
+      sign_in()
+      return
+    ), 1000
+    # sign_in()

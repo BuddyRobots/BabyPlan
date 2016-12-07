@@ -1,6 +1,8 @@
 class UserMobile::SettingsController < UserMobile::ApplicationController
 	def index
     @msg_num = @current_user.messages.where(unread: true).length
+
+    @signin = params[:signin]
   end
 
   def book

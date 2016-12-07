@@ -82,24 +82,54 @@ class Weixin
     data = {
       "button" => [
         {
-          "type" => "view", 
-          "name" => "课程", 
-          "url" => "http://babyplan.bjfpa.org.cn/user_mobile/courses"
+          "name": "服务",
+          "sub_button": [
+            {
+              "type": "view", 
+              "name": "课程", 
+              "url": "http://babyplan.bjfpa.org.cn/user_mobile/courses"
+            },
+            {
+              "type": "view", 
+              "name": "绘本", 
+              "url": "http://babyplan.bjfpa.org.cn/user_mobile/books"
+            }
+          ]
         },
         {
-          "type" => "view", 
-          "name" => "绘本", 
-          "url" => "http://babyplan.bjfpa.org.cn/user_mobile/books"
+          "type": "view", 
+          "name": "公告", 
+          "url": "http://babyplan.bjfpa.org.cn/user_mobile/announcements"
         },
         {
-          "type" => "view", 
-          "name" => "公告", 
-          "url" => "http://babyplan.bjfpa.org.cn/user_mobile/announcements"
-        },
-        {
-          "type" => "view", 
-          "name" => "我", 
-          "url" => "http://babyplan.bjfpa.org.cn/user_mobile/settings"
+         "name": "我",
+         "sub_button": [
+            {  
+              "type": "view",
+              "name": "收藏",
+              "url": "http://babyplan.bjfpa.org.cn/user_mobile/settings/favorite"
+            },
+            {
+              "type": "view",
+              "name": "课程",
+              "url": "http://babyplan.bjfpa.org.cn/user_mobile/settings/course"
+            },
+            {
+              "type": "view",
+              "name": "绘本",
+              "url": "http://babyplan.bjfpa.org.cn/user_mobile/settings/book"
+            },
+            {
+              "type": "view",
+              "name": "签到",
+              "url": "http://babyplan.bjfpa.org.cn/user_mobile/settings?signin=true"
+            },
+            {
+              "type": "view",
+              "name": "中心设置",
+              "url": "http://babyplan.bjfpa.org.cn/user_mobile/centers/new"
+            }
+          ]
         }
       ]
     }
