@@ -29,4 +29,8 @@ $ ->
     sign_in()
 
   if window.signin == "true"
-    sign_in()
+    setTimeout (->
+      sign_in()
+      return
+    ), 1000
+    # sign_in()
