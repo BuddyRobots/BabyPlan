@@ -121,7 +121,8 @@ class Weixin
             },
             {
               "type": "scancode_push",
-              "name": "签到"
+              "name": "签到",
+              "key": "signin_key"
             },
             {
               "type": "view",
