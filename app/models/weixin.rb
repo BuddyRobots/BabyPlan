@@ -120,9 +120,8 @@ class Weixin
               "url": "http://babyplan.bjfpa.org.cn/user_mobile/settings/book"
             },
             {
-              "type": "view",
-              "name": "签到",
-              "url": "http://babyplan.bjfpa.org.cn/user_mobile/settings?signin=true"
+              "type": "scancode_push",
+              "name": "签到"
             },
             {
               "type": "view",

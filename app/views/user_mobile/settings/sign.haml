@@ -16,7 +16,7 @@
           .item
             %span 上课中心:
             %span= @course.center.name
-          .item= "第" + @class_num + "次课签到成功"
+          .item= "第" + (@class_num.to_i + 1).to_s + "次课签到成功"
       - else
         .fail-div
           %p.fail 签到失败
