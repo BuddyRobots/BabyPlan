@@ -140,7 +140,7 @@ class Center
     end
     num = self.statistics.where(type: Statistic::CLIENT_NUM).
                           where(:stat_date.gt => (Time.now - 10.weeks).to_i).
-                          asc(:stat_date).map { |e| e.value }
+                          asc(:stat_date).map { |e| e.value || 0 }
     num = num.each_with_index.map { |e, i| i % 7 == 0 ? e : nil } .select { |e| e }
     {
       gender: gender.to_a,
@@ -174,19 +174,19 @@ class Center
     signup_num = self.statistics.where(type: Statistic::COURSE_SIGNUP_NUM).
                                  where(:stat_date.gt => start_time).
                                  where(:stat_date.lt => end_time).
-                                 desc(:stat_date).map { |e| e.value }
+                                 desc(:stat_date).map { |e| e.value || 0 }
     signup_num = signup_num.each_slice(day).map { |a| a }
-    signup_num = signup_num.map { |e| e.sum } .reverse
+    signup_num = signup_num.blank? ? 0 : signup_num.map { |e| e.sum } .reverse
     allowance = self.statistics.where(type: Statistic::ALLOWANCE).
                                 where(:stat_date.gt => start_time).
                                 where(:stat_date.lt => end_time).
-                                desc(:stat_date).map { |e| e.value }
+                                desc(:stat_date).map { |e| e.value || 0 }
     allowance = allowance.each_slice(day).map { |a| a }
     allowance = allowance.map { |e| e.sum } .reverse
     income = self.statistics.where(type: Statistic::INCOME).
                              where(:stat_date.gt => start_time).
                              where(:stat_date.lt => end_time).
-                             desc(:stat_date).map { |e| e.value }
+                             desc(:stat_date).map { |e| e.value || 0 }
     income = income.each_slice(day).map { |a| a }
     income = income.map { |e| e.sum } .reverse
     {
@@ -227,19 +227,19 @@ class Center
     borrow_num = self.statistics.where(type: Statistic::BORROW_NUM).
                                  where(:stat_date.gt => start_time).
                                  where(:stat_date.lt => end_time).
-                                 desc(:stat_date).map { |e| e.value }
+                                 desc(:stat_date).map { |e| e.value || 0 }
     borrow_num = borrow_num.each_slice(day).map { |a| a }
-    borrow_num = borrow_num.map { |e| e.sum } .reverse
+    borrow_num = borrow_num.blank? ? 0 : borrow_num.map { |e| e.sum } .reverse
     stock_num = self.statistics.where(type: Statistic::STOCK).
                                 where(:stat_date.gt => start_time).
                                 where(:stat_date.lt => end_time).
-                                desc(:stat_date).map { |e| e.value }
+                                desc(:stat_date).map { |e| e.value || 0 }
     stock_num = stock_num.each_slice(day).map { |a| a }
     stock_num = stock_num.map { |e| e.sum } .reverse
     off_shelf_num = self.statistics.where(type: Statistic::OFF_SHELF).
                                     where(:stat_date.gt => start_time).
                                     where(:stat_date.lt => end_time).
-                                    desc(:stat_date).map { |e| e.value }
+                                    desc(:stat_date).map { |e| e.value || 0 }
     off_shelf_num = off_shelf_num.each_slice(day).map { |a| a }
     off_shelf_num = off_shelf_num.map { |e| e.sum } .reverse
     {
@@ -306,13 +306,13 @@ class Center
         allowance += e.price - e.price_pay
       end
     end
-    if self.statistics.create(type: Statistic::COURSE_SIGNUP_NUM, stat_date: stat_date).blank?
+    if self.statistics.where(type: Statistic::COURSE_SIGNUP_NUM, stat_date: stat_date).blank?
       self.statistics.create(type: Statistic::COURSE_SIGNUP_NUM, stat_date: stat_date, value: signup_num)
     end
-    if self.statistics.create(type: Statistic::INCOME, stat_date: stat_date).blank?
+    if self.statistics.where(type: Statistic::INCOME, stat_date: stat_date).blank?
       self.statistics.create(type: Statistic::INCOME, stat_date: stat_date, value: income)
     end
-    if self.statistics.create(type: Statistic::ALLOWANCE, stat_date: stat_date).blank?
+    if self.statistics.where(type: Statistic::ALLOWANCE, stat_date: stat_date).blank?
       self.statistics.create(type: Statistic::ALLOWANCE, stat_date: stat_date, value: allowance)
     end
     # borrow number, stock, and on shelf
@@ -324,13 +324,13 @@ class Center
       off_shelf += b.book_borrows.where(status: BookBorrow::NORMAL, return_at: nil).length
       stock += b.stock
     end
-    if self.statistics.create(type: Statistic::BORROW_NUM, stat_date: stat_date).blank?
+    if self.statistics.where(type: Statistic::BORROW_NUM, stat_date: stat_date).blank?
       self.statistics.create(type: Statistic::BORROW_NUM, stat_date: stat_date, value: borrow_num)
     end
-    if self.statistics.create(type: Statistic::STOCK, stat_date: stat_date).blank?
+    if self.statistics.where(type: Statistic::STOCK, stat_date: stat_date).blank?
       self.statistics.create(type: Statistic::STOCK, stat_date: stat_date, value: stock)
     end
-    if self.statistics.create(type: Statistic::OFF_SHELF, stat_date: stat_date).blank?
+    if self.statistics.where(type: Statistic::OFF_SHELF, stat_date: stat_date).blank?
       self.statistics.create(type: Statistic::OFF_SHELF, stat_date: stat_date, value: off_shelf)
     end
   end

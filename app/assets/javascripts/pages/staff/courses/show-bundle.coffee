@@ -92,7 +92,7 @@ $ ->
               labels:  
                 formatter: ->
                   return this.value + '%'  
-            tooltip: valueSuffix: '人次'
+            tooltip: valueSuffix: '%'
             credits:
                  enabled: false
             legend:

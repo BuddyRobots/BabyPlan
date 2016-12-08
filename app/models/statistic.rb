@@ -1,4 +1,3 @@
-require 'zip'
 class Statistic
 
   include Mongoid::Document

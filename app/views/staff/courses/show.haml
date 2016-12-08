@@ -178,7 +178,7 @@
           - if @reviews[:data].blank?
             .undiscover
               %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
-              %span.undiscover-message 抱歉！没有学员报名
+              %span.undiscover-message 抱歉！没有学员评价
           - else
             .user-review-box
               - @reviews[:data].each do |r|
