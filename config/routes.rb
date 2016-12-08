@@ -215,11 +215,11 @@ Rails.application.routes.draw do
       collection do
         get :review
         post :notify
-        post :signin
         get :more
       end
       member do
         get :pay_success
+        get :signin
         post :pay_finished
         post :pay_failed
         post :request_refund

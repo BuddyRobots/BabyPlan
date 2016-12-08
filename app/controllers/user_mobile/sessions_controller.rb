@@ -19,6 +19,9 @@ class UserMobile::SessionsController < UserMobile::ApplicationController
         :domain => :all
       }
     end
+    if retval.class == Hash
+      retval[:user_return_to] = session[:user_return_to]
+    end
     render json: retval_wrapper(retval)
   end
 

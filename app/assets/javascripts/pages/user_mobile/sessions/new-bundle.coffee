@@ -23,7 +23,10 @@ $ ->
       },
       (data) ->
         if data.success
-          location.href = "/user_mobile/feeds"
+          if data.user_return_to != null
+            location.href = data.user_return_to
+          else
+            location.href = "/user_mobile/feeds"
         else
           if data.code == USER_NOT_EXIST
             $.mobile_page_notification("帐号不存在", 1000)

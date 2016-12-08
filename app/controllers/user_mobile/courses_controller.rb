@@ -75,13 +75,11 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
   end
 
   def signin
-    info_ary = params[:signin_info]
-    course_inst_id, qr_gen_time, class_idx = info_ary.split(';')
-    course_participate = @current_user.course_participates.where(course_inst_id: course_inst_id).first
+    course_participate = @current_user.course_participates.where(course_inst_id: params[:id]).first
     if course_participate.nil?
       render json: retval_wrapper(ErrCode::COURSE_INST_NOT_EXIST) and return
     else
-      retval = course_participate.signin(class_idx.to_i)
+      retval = course_participate.signin(params[:class_idx].to_i)
       render json: retval_wrapper(retval) and return
     end
   end
