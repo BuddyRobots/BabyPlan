@@ -74,7 +74,7 @@ class UserMobile::SessionsController < UserMobile::ApplicationController
 
   def signout
     cookies.delete(:auth_key, :domain => :all)
-    redirect_to user_mobile_sessions_path
+    redirect_to new_user_mobile_sessions_path
   end
 end
 
