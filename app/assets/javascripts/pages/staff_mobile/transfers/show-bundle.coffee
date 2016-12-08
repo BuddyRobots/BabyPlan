@@ -28,6 +28,8 @@ $ ->
         if data.success
           window.location.href = "/staff_mobile/transfers/transfer_done"
         else
+          if data.code == NO_BOOKS_IN_TRANSFER
+            $.mobile_page_notification "迁移书目为空"
           $.mobile_page_notification "服务器出错，请稍后重试"
       )
 

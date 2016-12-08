@@ -34,6 +34,7 @@ module ErrCode
   REFUND_REQUESTED = -31
   LATEFEE_NOT_PAID = -32
   DEPOSIT_NOT_PAID = -33
+  NO_BOOKS_IN_TRANSFER = -34
 
   def self.ret_false(code)
     msg = self.message(code)
@@ -110,8 +111,12 @@ module ErrCode
       "滞纳金未缴清"
     when DEPOSIT_NOT_PAID
       "押金未缴"
+    when NO_BOOKS_IN_TRANSFER
+      "迁移书目为空"
     else
       nil
     end
   end
+
+  DONE = 2
 end

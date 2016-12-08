@@ -15,6 +15,9 @@ class Transfer
   field :lost_books_info_lock, type: Array, default: []
   field :books_info_detail_lock, type: Array, default: []
   field :books_info_lock, type: Array, default: []
+  field :deleted, type: Boolean, default: false
+
+  default_scope ->{ where(deleted: false) }
 
   belongs_to :out_center, class_name: "Center", inverse_of: :out_transfers
   belongs_to :in_center, class_name: "Center", inverse_of: :in_transfers
@@ -138,6 +141,9 @@ class Transfer
   end
 
   def confirm_transfer_out
+    if self.book_insts.blank?
+      return ErrCode::NO_BOOKS_IN_TRANSFER
+    end
     self.update_attributes({status: ONGOING, out_time: Time.now.to_i})
     nil
   end
