@@ -77,10 +77,18 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
   def signin
     course_participate = @current_user.course_participates.where(course_inst_id: params[:id]).first
     if course_participate.nil?
-      render json: retval_wrapper(ErrCode::COURSE_INST_NOT_EXIST) and return
+      redirect_to "/user_mobile/settings/sign?err=course_inst_not_exist&success=false" and return
+      # render json: retval_wrapper(ErrCode::COURSE_INST_NOT_EXIST) and return
     else
       retval = course_participate.signin(params[:class_idx].to_i)
-      render json: retval_wrapper(retval) and return
+      if retval.class == Hash
+        redirect_to "/user_mobile/settings/sign?success=true&course_id=#{params[:id]}&class_num=#{params[:class_idx]}"
+      elsif retval == ErrCode::NOT_PAID
+        redirect_to "/user_mobile/settings/sign?err=not_paid&success=false" and return
+      else
+        redirect_to "/user_mobile/settings/sign?err=course_inst_not_exist&success=false" and return
+      end
+      # render json: retval_wrapper(retval) and return
     end
   end
 

@@ -24,7 +24,7 @@ $ ->
         #         location.href = "/user_mobile/settings/sign?err=not_paid&success=false"
         #       else
         #         $.mobile_page_notification("服务器出错", 3000)
-        )
+        # )
 
   $("#signin-course").click ->
     sign_in()
