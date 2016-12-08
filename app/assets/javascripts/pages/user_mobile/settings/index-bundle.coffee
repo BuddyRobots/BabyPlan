@@ -7,7 +7,8 @@ $ ->
       scanType: ["qrCode"]
       success: (res) ->
         result = res.resultStr
-        alert(result)
+        window.location.href = result
+        # alert(result)
         # $.postJSON(
         #   '/user_mobile/courses/signin',
         #   {
