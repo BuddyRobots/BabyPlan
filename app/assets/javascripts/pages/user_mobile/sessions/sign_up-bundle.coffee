@@ -22,7 +22,7 @@ $ ->
     mobile = $("#mobile").val()
     mobile_retval = $.regex.isMobile(mobile)
     if mobile_retval == false
-      $.mobile_page_notification("请输入正确的手机号", 3000)
+      $.mobile_page_notification("请输入正确的手机号", 1000)
       return false
     $.postJSON(
       '/user_mobile/sessions/signup',
@@ -44,14 +44,17 @@ $ ->
 
   signup = ->
     if uid == ""
+      $.mobile_page_notification("请输入手机号获取验证码", 1000)
       return
     name = $("#name").val()
     password = $("#password").val()
     verify_code = $("#code").val()
     password_confirm = $("#password-confirm").val()
-    
+    if name == "" || password == "" || verify_code == "" || password_confirm == ""
+      $.mobile_page_notification("请补全信息", 1000)
+      return
     if password != password_confirm
-      $.mobile_page_notification("两次输入密码不一致", 2000)
+      $.mobile_page_notification("两次输入密码不一致", 1000)
       return
     
     $.postJSON(
@@ -66,7 +69,7 @@ $ ->
           location.href = "/user_mobile/sessions/new?code=" + SIGNIN_DONE
         else
           if data.code == WRONG_VERIFY_CODE
-            $.mobile_page_notification("验证码错误", 2000)
+            $.mobile_page_notification("验证码错误", 1000)
       )
 
   $(".signup").click ->

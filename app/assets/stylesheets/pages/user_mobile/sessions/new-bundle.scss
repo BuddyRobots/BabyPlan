@@ -35,11 +35,12 @@ a{
     background-size: 10px 10px;
 }
 .circlelogo {
-	width:38.75%;
-	max-width:248px;
-	display:block;
-	margin:0 auto;
-	padding:14.07% 0;
+	width: 37.5%;
+	max-width: 240px;
+	display: block;
+	margin: 0 auto;
+	padding-top: 9.38%;
+	padding-bottom: 15.34%
 }
 .input-box {
 	width:70%;
@@ -94,6 +95,16 @@ a{
 	border:1px solid #bfbfc0;
 	border-radius: 6px;
 }
+.footer-logo-div {
+	text-align: center;
+}
+.footer-logo {
+	display: inline-block;
+	width: 58.9%;
+	max-width: 370px;
+	margin-top: 20%;
+}
+
 
 @media screen and (max-width:640px) {
 	.content-area {
