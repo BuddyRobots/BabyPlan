@@ -95,6 +95,9 @@ Rails.application.routes.draw do
     end
 
     resources :transfers do
+      member do
+        get :remove
+      end
     end
 
     resources :reviews do
