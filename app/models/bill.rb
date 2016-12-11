@@ -27,6 +27,7 @@ class Bill
   def self.create_course_participate_item(course_participate)
     if course_participate.price_pay <= 0
       return
+    end
     Bill.create({
       center_id: course_participate.course_inst.center.id,
       user_id: course_participate.client.id,
@@ -43,6 +44,7 @@ class Bill
   def self.create_course_refund_item(course_participate)
     if course_participate.price_pay <= 0
       return
+    end
     Bill.create({
       center_id: course_participate.course_inst.center.id,
       user_id: course_participate.client.id,
@@ -53,7 +55,7 @@ class Bill
       order_id: course_participate.order_id,
       wechat_trasaction_id: course_participate.wechat_trasaction_id,
       finished: false
-    )}
+    })
   end
 
   def self.confirm_course_refund_item(course_participate)
