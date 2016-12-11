@@ -90,12 +90,15 @@ class CourseParticipate
   end
 
   def renew
-    self.update_attributes(
-      {
-        expired_at: (Time.now + 1.days).to_i,
-        order_id: Util.random_str(32),
-        prepay_id: ""
-      })
+    if (self.is_expired || self.price_pay != self.course_inst.price_pay) && self.course_inst.price_pay > 0
+      self.update_attributes(
+        {
+          expired_at: (Time.now + 1.days).to_i,
+          order_id: Util.random_str(32),
+          price_pay: self.course_inst.price_pay,
+          prepay_id: ""
+        })
+    end
   end
 
   def orderquery
