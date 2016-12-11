@@ -31,8 +31,8 @@
 
     .course-desc
       = @course.course.desc.html_safe
-    .course-desc
-      - if @course_participate.present? && @course_participate.is_success
+    - if @course_participate.present? && @course_participate.is_success
+      .course-desc
         #sign-desc
           %p.title 签到情况
           .sign_in-div
@@ -48,7 +48,10 @@
       .center.clearfix 
         %span#course-detail 课程详情
         - if @course_participate.present? && @course_participate.refund_allowed
-          %span#refund 申请退款
+          - if @course.price_pay == 0
+            %span#refund 申请退出
+          - else
+            %span#refund 申请退款
         - elsif @course_participate.present?
           %span#applied= @refund_status_str
       .item-box
@@ -72,8 +75,8 @@
           %span.class_time 上课时间：
           %span.desc_time= @course.date
         .item-div
-          %span 上课地点：
-          %span= @course.address
+          %span.address-label 上课地点：
+          %span#course-address= @course.address
     .content
       #map-container
     - if @course_participate.nil? || @course_participate.prepay_id.blank?
@@ -82,7 +85,10 @@
       - elsif @course.capacity <= @course.effective_signup_num
         %button.btn.unclick-btn{:type => "button"} 无剩余容量
       - else
-        %a.btn.click-btn{href: "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxfe4fd89f6f5f9f57&redirect_uri=#{CGI::escape('http://babyplan.bjfpa.org.cn/user_mobile/courses/new/')}&response_type=code&scope=snsapi_base&state=#{@course.id.to_s}#wechat_redirect", :type => "button"} 我要报名
+        - if @course.price_pay > 0
+          %a.btn.click-btn{href: "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxfe4fd89f6f5f9f57&redirect_uri=#{CGI::escape('http://babyplan.bjfpa.org.cn/user_mobile/courses/new/')}&response_type=code&scope=snsapi_base&state=#{@course.id.to_s}#wechat_redirect", :type => "button"} 我要报名
+        - else
+          %a.btn.click-btn{href: "/user_mobile/courses/new/?state=#{@course.id.to_s}"} 我要报名
     - elsif @course_participate.is_expired
       - if @course.status == CourseInst::OVER
         %button.btn.unclick-btn{:type => "button"} 已结束
@@ -115,8 +121,11 @@
   .modal-dialog
     .modal-content
       .modal-body
-        %p.account 申请退款
+        - if @course.price_pay == 0
+          %p.account 申请退出
+        - else
+          %p.account 申请退款
         %p.question　是否确认退出当前课程！
         .confirm-div
-          %a.line.clicked#confirm-refund 退款
+          %a.line.clicked#confirm-refund 确认
           %a{"data-dismiss" => "modal"} 取消

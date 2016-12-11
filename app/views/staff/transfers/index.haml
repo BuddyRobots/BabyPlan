@@ -48,6 +48,8 @@
                           %td#status{class: e[:status_class]}= e[:status_str]
                           %td
                             %a.details{:href => "/staff/transfers/#{e[:id]}"} 详情
+                            - if e[:count] == 0 && e[:status] == Transfer::PREPARE
+                              %a.details{:href => "/staff/transfers/#{e[:id]}/remove"} 删除
                 .select-page 
                   %span.totalitems= "共#{@out_transfers[:total_page]}页,总计#{@out_transfers[:total_number]}条"
                   %span.choice-page

@@ -7,7 +7,7 @@
     .header
       .cloud
         %p 设置关注中心
-      %a{:href => account_user_mobile_settings_path}
+      %a{:href => user_mobile_settings_path}
         %img.back{src: asset_path("mybook/back.png")}
     - @centers.each do |c|
       .desc-add-div.center-desc{data: {id: c.id.to_s}}

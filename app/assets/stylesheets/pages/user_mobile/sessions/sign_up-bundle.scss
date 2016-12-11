@@ -7,7 +7,7 @@ body {
 	font-size: 62.5%;
 	height: 100%;
 }
-body, p, img, div, ul, li, a, h3, span, form, hr, input {
+body, p, img, div, ul, li, a, h3, span, form, hr, input, label {
 	margin:0;
 	padding:0;
 }
@@ -23,6 +23,7 @@ a{
 	width:100%;
 	max-width:640px;
 	height: 100%;
+	-webkit-overflow-scrolling: touch;
 	overflow: auto;
 	margin:0 auto;
 	background: linear-gradient(
@@ -34,11 +35,12 @@ a{
     background-size: 10px 10px;
 }
 .circlelogo {
-	width:38.75%;
-	max-width:248px;
-	display:block;
-	margin:0 auto;
-	padding:14.07% 0;
+	width: 37.5%;
+	max-width: 240px;
+	display: block;
+	margin: 0 auto;
+	padding-top: 9.38%;
+	padding-bottom: 15.34%
 }
 .input-box {
 	width:70%;
@@ -49,6 +51,7 @@ a{
 		font-size:3em;
 		color:#3e3e3e;
 		padding-bottom: 1.8%;
+		font-weight: normal;
 		.input-name {
 			display:inline-block;
 			margin-left: 2%;

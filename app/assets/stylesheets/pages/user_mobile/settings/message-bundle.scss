@@ -33,6 +33,7 @@ a{
 	width:100%;
 	max-width:640px;
 	height: 100%;
+	-webkit-overflow-scrolling: touch;
 	overflow: auto;
 	margin:0 auto;
 	background: linear-gradient(

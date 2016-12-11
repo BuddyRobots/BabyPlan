@@ -89,7 +89,7 @@ class User
 
     # 2. generate random code and save
     code = ""
-    6.times { code = code + (rand * 10).to_i.to_s }
+    6.times { code = code + rand(10).to_s }
     u.update_attribute(:mobile_verify_code, code)
 
     # 3. send message
@@ -187,7 +187,7 @@ class User
 
     # generate random code and save
     code = ""
-    6.times { code = code + (rand * 10).to_i.to_s }
+    6.times { code = code + rand(10).to_s }
     self.update_attribute(:password_verify_code, code)
 
     # todo: send message
@@ -271,6 +271,10 @@ class User
     return self.user_type == User::ADMIN
   end
 
+  def is_staff_or_admin
+    return self.user_type == User::ADMIN || self.user_type == User::STAFF
+  end
+
   def client_info
     {
       id: self.id.to_s,
@@ -351,6 +355,10 @@ class User
 
   def has_expired_book
     self.book_borrows.select { |e| e.is_expired } .present?
+  end
+
+  def latefee_not_paid
+    self.book_borrows.where(latefee_paid: false).map { |e| e.latefee } .sum > 0
   end
 
   def reach_max_borrow

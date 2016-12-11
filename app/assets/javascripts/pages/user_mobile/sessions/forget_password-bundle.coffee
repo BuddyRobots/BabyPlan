@@ -23,7 +23,7 @@ $ ->
     mobile = $("#mobile").val()
     mobile_retval = $.regex.isMobile(mobile)
     if mobile_retval == false
-      $.mobile_page_notification("请输入正确的手机号", 3000)
+      $.mobile_page_notification("请输入正确的手机号", 1000)
       return false
     $.postJSON(
       '/user_mobile/sessions/forget_password_submit_mobile',
@@ -39,12 +39,12 @@ $ ->
           time(".identifycode")
         else
           if data.code == USER_NOT_EXIST
-            $.mobile_page_notification("用户不存在", 3000)
+            $.mobile_page_notification("用户不存在", 1000)
     )
 
   $(".next").click ->
     if uid == ""
-      $.mobile_page_notification("验证码不正确", 3000)
+      $.mobile_page_notification("验证码不正确", 1000)
       return
     code = $("#code").val()
     $.postJSON(
@@ -59,5 +59,5 @@ $ ->
           location.href = "/user_mobile/sessions/set_password?uid=" + uid
         else
           if data.code == WRONG_VERIFY_CODE
-            $.mobile_page_notification("验证码不正确", 3000)
+            $.mobile_page_notification("验证码不正确", 1000)
     )

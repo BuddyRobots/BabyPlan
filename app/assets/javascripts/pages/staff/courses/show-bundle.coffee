@@ -92,7 +92,7 @@ $ ->
               labels:  
                 formatter: ->
                   return this.value + '%'  
-            tooltip: valueSuffix: '人次'
+            tooltip: valueSuffix: '%'
             credits:
                  enabled: false
             legend:
@@ -241,10 +241,10 @@ $ ->
     if !$.isNumeric(capacity) || parseInt(capacity) <= 0
       $.page_notification("请填写正确的课程容量")
       return false
-    if !$.isNumeric(price) || parseInt(price) <= 0
+    if !$.isNumeric(price) || parseInt(price) < 0
       $.page_notification("请填写正确的市场价")
       return false
-    if !$.isNumeric(price_pay) || parseInt(price_pay) <= 0
+    if !$.isNumeric(price_pay) || parseInt(price_pay) < 0
       $.page_notification("请填写正确的公益价")
       return false
     if !$.isNumeric(length) || parseInt(length) <= 0

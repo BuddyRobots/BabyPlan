@@ -110,7 +110,7 @@
       .modalheader
         %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: asset_path("managecenter/close.png")}
       .modal-body
-        %form.form-inline.form-div{:role => "form"}
+        .form-inline.form-div{:role => "form"}
           .form-group
             %label.control-label.borrow-label{:for => "borrow-num"} 最大可借本数
             %input.unclicked-box#borrow-num.form-control{:type => "text", value: @book_num}
@@ -121,7 +121,7 @@
             %label.control-label.borrow-label#borrow-deposit-lable{:for => "borrow-time"} 绘本押金
             %input.unclicked-box#borrow-deposit.form-control{:type => "text", value: @deposit}
           .form-group
-            %label.control-label.borrow-label#borrow-late-fee-lable{:for => "borrow-time"} 滞纳金(每天)
+            %label.control-label.borrow-label#borrow-late-fee-lable{:for => "borrow-time"} 滞纳金(每天每本)
             %input.unclicked-box#borrow-late-fee.form-control{:type => "text", value: @latefee_per_day}
           .confirm-button
             %button.btn#confirm-borrow-setting.button-disabled{:href => "javascript:void(0);"} 确&nbsp定

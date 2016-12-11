@@ -45,15 +45,15 @@
         #tab1.tab-pane.active
           .top-box.clearfix
             .text-message
-              %form.form-inline
+              .form-inline
                 %label.input-caption 课程名称:
                 %span#name-span= @course_inst.name
-              %form.form-inline
+              .form-inline
                 %label.input-caption 上课时间:
                 %span.unedit-box#date-span= @course_inst.date
                 %span.edit-box
                   %input.input-area.form-control#course-date{:type => "text"}
-              %form.form-inline
+              .form-inline
                 %label.input-caption 上课地址:
                 %span.unedit-box#address-span= @course_inst.address
                 %span.edit-box
@@ -99,13 +99,13 @@
             .calendar-operation-wrapper
               %p.title 课程日历
               %p.small-tips （单击日历中的时间进行删除）
-              %form.form-inline
+              .form-inline
                 %label.input-date 上课日期:
                 %input.input-area.form-control#datepicker{:type => "text"}
-              %form.form-inline
+              .form-inline
                 %label.input-date 开始时间:
                 %input.input-area.form-control#start-time{:type => "text"}
-              %form.form-inline
+              .form-inline
                 %label.input-date 结束时间:
                 %input.input-area.form-control#end-time{:type => "text"}
               .btn#add-event{:type => "button"} 添加单次
@@ -178,7 +178,7 @@
           - if @reviews[:data].blank?
             .undiscover
               %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
-              %span.undiscover-message 抱歉！没有学员报名
+              %span.undiscover-message 抱歉！没有学员评价
           - else
             .user-review-box
               - @reviews[:data].each do |r|

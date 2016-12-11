@@ -155,7 +155,7 @@ class CourseParticipate
       "nonce_str" => nonce_str,
       "body" => self.course_inst.course.name,
       "out_trade_no" => self.order_id,
-      "total_fee" => (self.price_pay * 100).to_s,
+      "total_fee" => (self.price_pay * 100).round.to_s,
       # "total_fee" => 1.to_s,
       "spbill_create_ip" => remote_ip,
       "notify_url" => NOTIFY_URL,
@@ -222,6 +222,9 @@ class CourseParticipate
 
   # status related
   def is_expired
+    if self.price_pay == 0
+      return false
+    end
     if self.pay_finished == true && self.trade_state != "SUCCESS"
       self.orderquery()
     end
@@ -229,6 +232,9 @@ class CourseParticipate
   end
 
   def is_paying
+    if self.price_pay == 0
+      return false
+    end
     if self.pay_finished == true && self.trade_state != "SUCCESS"
       self.orderquery()
     end
@@ -236,6 +242,9 @@ class CourseParticipate
   end
 
   def is_success
+    if self.price_pay == 0
+      return self.pay_finished
+    end
     if self.pay_finished == true && self.trade_state != "SUCCESS"
       self.orderquery()
     end
@@ -286,6 +295,14 @@ class CourseParticipate
   end
 
   def refund
+    if self.price_pay == 0
+      self.update_attributes({
+        refund_status: "SUCCESS",
+        refund_finished: true
+      })
+      self.clear_pay
+      return { success: true }
+    end
     if self.order_id.blank?
       return nil
     end
@@ -296,7 +313,7 @@ class CourseParticipate
       "op_user_id" => MCH_ID,
       "out_trade_no" => self.order_id,
       "out_refund_no" => self.order_id,
-      "total_fee" => (self.price_pay * 100).to_s,
+      "total_fee" => (self.price_pay * 100).round.to_s,
       # "total_fee" => 1.to_s,
       "refund_fee" => 1.to_s,
       "nonce_str" => nonce_str,
@@ -340,7 +357,7 @@ class CourseParticipate
   end
 
   def refundquery
-    if self.refund_finished != true
+    if self.refund_finished != true || self.price_pay == 0
       return
     end
     nonce_str = Util.random_str(32)

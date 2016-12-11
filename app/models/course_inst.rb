@@ -250,6 +250,7 @@ class CourseInst
         end
       end
     end
+    signin.map! { |e| (e * 1.0 / self.effective_signup_num * 100).round(1) }
     num = []
     signup_time_ary = cps.map { |e| e.created_at.to_i } .sort
     signup_time_ary.each do |e|

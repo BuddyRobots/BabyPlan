@@ -39,4 +39,12 @@ class Staff::TransfersController < Staff::ApplicationController
       @profile = "out"
     end
   end
+
+  def remove
+    @transfer = Transfer.where(id: params[:id]).first
+    if @transfer.status == Transfer::PREPARE && @transfer.book_insts.blank?
+      @transfer.update_attribute(:deleted, true)
+    end
+    redirect_to "/staff/transfers?code=" + ErrCode::DONE.to_s and return
+  end
 end

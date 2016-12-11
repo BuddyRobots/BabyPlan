@@ -7,15 +7,17 @@
 - content_for :app_content do
   .content-area
     %a{:href => "#"}
-      %img.circlelogo{src: asset_path("register/circlelogo.png")}
+      %img.circlelogo{src: asset_path("user_logo.png")}
     .input-box
-      %form.account 
-        账号:
+      %label.account 
+        手机:
         %input#mobile.input-name{:type => "text"}
     .input-box
-      %form.account 
+      %label.account 
         密码:
         %input#password.input-name{:type => "password"}
       %a.forgetpass{:href => forget_password_user_mobile_sessions_path } 忘记密码
     %a.signin.clicked{:href => "javascript:void(0);"} 登录
     %a.signup{:href => sign_up_user_mobile_sessions_path } 注册
+    .footer-logo-div
+      %img.footer-logo{src: asset_path("footer_logo.png")}

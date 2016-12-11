@@ -95,6 +95,9 @@ Rails.application.routes.draw do
     end
 
     resources :transfers do
+      member do
+        get :remove
+      end
     end
 
     resources :reviews do
@@ -215,11 +218,11 @@ Rails.application.routes.draw do
       collection do
         get :review
         post :notify
-        post :signin
         get :more
       end
       member do
         get :pay_success
+        get :signin
         post :pay_finished
         post :pay_failed
         post :request_refund

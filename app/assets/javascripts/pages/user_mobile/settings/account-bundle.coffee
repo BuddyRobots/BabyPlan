@@ -36,3 +36,6 @@ $ ->
                   if !data.success
                     $.mobile_page_notification "服务器出错，请稍后重试"
                 )
+
+  $("#logoff").click ->
+    location.href = "/user_mobile/sessions/signout"
