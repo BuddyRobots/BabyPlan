@@ -47,6 +47,7 @@ class User
   has_many :audit_reviews, class_name: "Review", inverse_of: :staff
   has_many :favorites
   has_many :messages
+  has_many :bills
   has_one :deposit
 
   # relationships specific for staff
@@ -421,7 +422,11 @@ class User
       self.book_borrows.where(return_at: nil).count
   end
 
-  def pay_latefee
+  def pay_latefee(center)
+    amount = self.latefee_amount
+    if amount > 0
+      Bill.create_latefee_pay_item(center, self, amount)
+    end
     self.book_borrows.where(latefee_paid: false).each do |bb|
       bb.pay_latefee
     end
@@ -436,15 +441,15 @@ class User
     self.deposit.blank? ? false : self.deposit.paid
   end
 
-  def pay_deposit
+  def pay_deposit(center)
     deposit = self.deposit || Deposit.create_new(self)
-    deposit.offline_pay
+    deposit.offline_pay(center)
     nil
   end
 
-  def refund_deposit
+  def refund_deposit(center)
     deposit = self.deposit || Deposit.create_new(self)
-    deposit.refund
+    deposit.refund(center)
     nil
   end
 end

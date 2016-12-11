@@ -57,19 +57,19 @@ class Staff::ClientsController < Staff::ApplicationController
 
   def pay_latefee
     @user = User.where(id: params[:id]).first
-    retval = @user.pay_latefee
+    retval = @user.pay_latefee(current_center)
     render json: retval_wrapper(retval) and return
   end
 
   def pay_deposit
     @client = User.where(id: params[:id]).first
-    retval = @client.pay_deposit
+    retval = @client.pay_deposit(current_center)
     render json: retval_wrapper(retval) and return
   end
 
   def refund_deposit
     @client = User.where(id: params[:id]).first
-    retval = @client.refund_deposit
+    retval = @client.refund_deposit(current_center)
     render json: retval_wrapper(retval) and return
   end
 end
