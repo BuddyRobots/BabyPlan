@@ -21,6 +21,7 @@ class Center
 
   has_many :feeds
   has_many :statistics
+  has_many :bills
 
   has_and_belongs_to_many :clients, class_name: "User", inverse_of: :client_centers
 

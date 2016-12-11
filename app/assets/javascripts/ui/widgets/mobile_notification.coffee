@@ -32,6 +32,11 @@
       ), ->
         timer = undefined
         return if !that.element.is(":visible")
+        if this.options == undefined
+          this.options = {
+            delay: 2000
+            content: ""
+          }
         if this.options.delay > 0
           timer = window.setTimeout(->
             that.element.fadeOut "slow"
@@ -55,6 +60,11 @@
         ), ->
           timer = undefined
           return if !that.element.is(":visible")
+          if this.options == undefined
+            this.options = {
+              delay: 2000
+              content: ""
+            }
           if this.options.delay > 0
             timer = window.setTimeout(->
               that.element.fadeOut "slow"
