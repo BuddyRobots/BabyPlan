@@ -49,6 +49,7 @@ class UserMobile::SettingsController < UserMobile::ApplicationController
 
   def message
     @messages = @current_user.messages.desc(:created_at)
+    @messages.where(unread: true).each { |e| e.update_attributes({unread: false}) }
   end
 
   def account

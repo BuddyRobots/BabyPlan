@@ -287,6 +287,7 @@ class CourseParticipate
       refund_approved: false,
       refund_feedback: feedback
     })
+    Message.create_refund_reject_message(self)
     nil
   end
 
