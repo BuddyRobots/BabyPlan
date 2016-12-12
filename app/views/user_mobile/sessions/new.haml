@@ -6,6 +6,8 @@
 
 - content_for :app_content do
   .content-area
+    .header-logo-div.clearfix
+      %img.footer-logo{src: asset_path("footer_logo.png")}
     %a{:href => "#"}
       %img.circlelogo{src: asset_path("user_logo.png")}
     .input-box
@@ -19,5 +21,4 @@
       %a.forgetpass{:href => forget_password_user_mobile_sessions_path } 忘记密码
     %a.signin.clicked{:href => "javascript:void(0);"} 登录
     %a.signup{:href => sign_up_user_mobile_sessions_path } 注册
-    .footer-logo-div
-      %img.footer-logo{src: asset_path("footer_logo.png")}
+    

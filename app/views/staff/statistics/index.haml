@@ -13,6 +13,8 @@
           %a#course-review{"data-toggle" => "tab", :href => "#tab2"} 课程统计
         %li
           %a#book-review{"data-toggle" => "tab", :href => "#tab3"} 绘本统计
+        %li
+          %a#cash-statistics{"data-toggle" => "tab", :href => "#tab4"} 金额统计
 
       .tab-content
         #tab1.tab-pane.active
@@ -128,4 +130,71 @@
                         %td.td-data= i + 1
                         %td.td-data= link_to truncate(e[:name], length: 10), "/staff/books/#{e[:id]}"
                         %td.td-data= e[:borrow_num]
+
+        #tab4.tab-pane
+          .desc
+            .search
+              %form.form-inline
+                .form-group.form-time
+                  %span.input-caption　查询时段:
+                  %input.input-area.form-control#datepicker-5{:type => "text"}
+                  %span.input-caption 至
+                  %input.input-area.form-control#datepicker-6{:type => "text"}
+                  .btn#book-search-btn.search-btn{:type => "button"} 查询
+                  = select_tag "book-quick-choice", options_for_select(Statistic.duration_for_select, 1.months.to_i), class: "form-control quick-choice"
+            .courses-income-box
+              %p.income-title 金额合计
+              .income-box
+                .income-items
+                  %p.income-caption 收入合计(元)
+                  %p.income-nums 10,0000
+                .income-items
+                  %p.income-caption 微信收入(元)
+                  %p.income-nums 8,0000
+                .income-items#goverment
+                  %p.income-caption 现金收入(元)
+                  %p.income-nums 2,000
+            .table-box
+              %table.table.table-bordered#income-table
+                %thead
+                  %tr
+                    %th 操作日期
+                    %th 具体时间
+                    %th 学生姓名
+                    %th 款项来源
+                    %th 具体项目
+                    %th 收费方式
+                    %th 金&nbsp额
+                %tbody
+                  %tr
+                    %td.td-data 2016.10.08
+                    %td.td-data 13:10
+                    %td.td-data 王小明
+                    %td.td-data 课程退款
+                    %td.td-data　少儿计算机知识学习
+                    %td.td-data 微信
+                    %td.td-data#income_out -2000
+                  %tr
+                    %td.td-data 2016.10.08
+                    %td.td-data 13:10
+                    %td.td-data 王小明
+                    %td.td-data 课程退款
+                    %td.td-data　少儿计算机知识学习
+                    %td.td-data 现金
+                    %td.td-data#income_in 1000
+            / .select-page 
+            /   %span.totalitems= "共#{@reviews[:total_page]}页,总计#{@reviews[:total_number]}条"
+            /   %span.choice-page
+            /     %ul.pagination.pagination-sm
+            /       %li
+            /         %a{:href => "/staff/courses/" + @course_inst.id.to_s + "?profile=participates&participate_page=#{@participates[:previous_page]}"} «
+            /       - ( (@participates[:previous_page] > 2 ? @participates[:previous_page] - 2 : 1) .. (@participates[:next_page] < @participates[:total_page] - 2 ? @participates[:next_page] + 2 : @participates[:total_page]) ).to_a.each do |page|
+            /         %li
+            /           %a{:href => "/staff/courses/" + @course_inst.id.to_s + "?profile=participates&participate_page=#{page}"}= page
+            /       %li
+            /         %a{:href => "/staff/courses/" + @course_inst.id.to_s + "?profile=participates&participate_page=#{@participates[:next_page]}"} »
+
+                    
+
+
 
