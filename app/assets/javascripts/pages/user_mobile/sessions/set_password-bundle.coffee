@@ -2,8 +2,11 @@ $ ->
   $(".next").click ->
     password = $("#password").val()
     password_confirm = $("#password_confirm").val()
+    if password == ""
+      $.mobile_page_notification("请输入新密码", 2000)
+      return
     if password != password_confirm
-      $.mobile_page_notification("密码不一致", 3000)
+      $.mobile_page_notification("密码不一致", 2000)
       return
     $.postJSON(
       '/user_mobile/sessions/update_password',
