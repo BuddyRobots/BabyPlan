@@ -94,7 +94,7 @@ class Bill
     })
   end
 
-  def confirm_online_deposit_pay_item(deposit)
+  def self.confirm_online_deposit_pay_item(deposit)
     bill_item = Bill.where(order_id: deposit.order_id, type: DEPOSIT_PAY).first
     if bill_item.present?
       bill_item.update_attribute(:finished, true)
