@@ -46,7 +46,7 @@ class User
   has_many :reviews, class_name: "Review", inverse_of: :client
   has_many :audit_reviews, class_name: "Review", inverse_of: :staff
   has_many :favorites
-  has_many :messages
+  has_many :messages, class_name: "Message", inverse_of: :client
   has_many :bills
   has_one :deposit
 
