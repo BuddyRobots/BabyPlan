@@ -154,6 +154,9 @@ class Deposit
           trade_state_desc: trade_state_desc,
           wechat_transaction_id: wechat_transaction_id
         })
+        if trade_state == "SUCCESS"
+          Bill.confirm_online_deposit_pay_item(self)
+        end
         retval = { success: true, trade_state: trade_state, trade_state_desc: trade_state_desc }
         return retval
       end
@@ -185,8 +188,9 @@ class Deposit
     self.trade_state == "SUCCESS"
   end
 
-  def refund
+  def refund(center)
     self.update_attributes({pay_finished: false, offline_paid: false, trade_state: ""})
+    Bill.create_deposit_refund_item(center, self)
     nil
   end
 
@@ -196,8 +200,9 @@ class Deposit
     return "当前未缴纳"
   end
 
-  def offline_pay
+  def offline_pay(center)
     self.update_attributes({offline_paid: true})
+    Bill.create_offline_deposit_pay_item(center, self)
     nil
   end
 end

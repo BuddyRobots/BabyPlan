@@ -90,12 +90,15 @@ class CourseParticipate
   end
 
   def renew
-    self.update_attributes(
-      {
-        expired_at: (Time.now + 1.days).to_i,
-        order_id: Util.random_str(32),
-        prepay_id: ""
-      })
+    if (self.is_expired || self.price_pay != self.course_inst.price_pay) && self.course_inst.price_pay > 0
+      self.update_attributes(
+        {
+          expired_at: (Time.now + 1.days).to_i,
+          order_id: Util.random_str(32),
+          price_pay: self.course_inst.price_pay,
+          prepay_id: ""
+        })
+    end
   end
 
   def orderquery
@@ -141,6 +144,9 @@ class CourseParticipate
           trade_state_desc: trade_state_desc,
           wechat_transaction_id: wechat_transaction_id
         })
+        if trade_state == "SUCCESS"
+          Bill.confirm_course_participate_item(self)
+        end
         retval = { success: true, trade_state: trade_state, trade_state_desc: trade_state_desc }
         return retval
       end
@@ -315,7 +321,7 @@ class CourseParticipate
       "out_refund_no" => self.order_id,
       "total_fee" => (self.price_pay * 100).round.to_s,
       # "total_fee" => 1.to_s,
-      "refund_fee" => 1.to_s,
+      "refund_fee" => (self.price_pay * 100).round.to_s,
       "nonce_str" => nonce_str,
       "sign_type" => "MD5"
     }
@@ -350,6 +356,7 @@ class CourseParticipate
           wechat_refund_fee: wechat_refund_fee,
           refund_finished: true
         })
+        Bill.create_course_refund_item(self)
         retval = { success: true, wechat_refund_id: wechat_refund_id, wechat_refund_channel: wechat_refund_channel }
         return retval
       end
@@ -396,6 +403,7 @@ class CourseParticipate
         self.update_attributes({ refund_status: refund_status })
         retval = { success: true, refund_status: refund_status }
         if refund_status == "SUCCESS"
+          Bill.confirm_course_refund_item(self)
           self.clear_pay
         end
         return retval

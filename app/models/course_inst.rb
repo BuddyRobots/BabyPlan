@@ -26,6 +26,7 @@ class CourseInst
 
   has_many :reviews
   has_many :favorites
+  has_many :bills
 
   scope :is_available, ->{ where(available: true) }
 

@@ -35,12 +35,10 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
     @course = CourseInst.where(id: params[:state]).first
     @course_participate = @current_user.course_participates.where(course_inst_id: @course.id).first
     @course_participate = @course_participate || CourseParticipate.create_new(current_user, @course)
+    @course_participate.renew
     @course_participate.clear_refund
     if @course.price_pay > 0
       @open_id = Weixin.get_oauth_open_id(params[:code])
-      if @course_participate.is_expired
-        @course_participate.renew
-      end
       if @course_participate.prepay_id.blank?
         @course_participate.unifiedorder_interface(@remote_ip, @open_id)
       end
@@ -64,6 +62,8 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
         prepay_id: "free",
         trade_state: "SUCCESS"
       })
+    else
+      Bill.create_course_participate_item(@course_participate)
     end
     render json: retval_wrapper(nil) and return
   end
