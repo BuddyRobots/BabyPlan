@@ -168,12 +168,14 @@ a{
 }
 .center {
 	display: inline-block;
+	width: 92%;
 	font-size: 2.4em;
 	color: #aaa;
 	margin-left: 1.35%;
 }
 .location {
 	width: 4.8%;
+	padding-top: 0.5%;
 	max-width: 18px;
 	vertical-align: top;
 }
