@@ -7,4 +7,8 @@ class Message
 
   belongs_to :client
 
+  def self.create_refund_reject_message(course_participate)
+    content = "课程《" + course_participate.course_inst.course.name + "》退款申请被工作人员拒绝，拒绝理由：" + course_participate.refund_feedback
+    course_participate.client.messages.create(content: content)
+  end
 end
