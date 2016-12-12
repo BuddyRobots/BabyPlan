@@ -155,7 +155,7 @@ class Deposit
           wechat_transaction_id: wechat_transaction_id
         })
         if trade_state == "SUCCESS"
-          Bill.create_online_deposit_pay_item(deposit)
+          Bill.create_online_deposit_pay_item(self)
         end
         retval = { success: true, trade_state: trade_state, trade_state_desc: trade_state_desc }
         return retval
