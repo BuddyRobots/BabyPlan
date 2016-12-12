@@ -11,5 +11,8 @@ scheduler.every("1d") do
     if cp.refund_finished == true && !%w[CourseParticipate::SUCCESS, CourseParticipate::FAIL, CourseParticipate::CHANGE].include?(cp.refund_status)
       cp.refundquery
     end
+    if cp.pay_finished == true && cp.trade_state != "SUCCESS" && cp.price_pay > 0
+      cp.orderquery
+    end
   end
 end

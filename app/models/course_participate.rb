@@ -145,7 +145,7 @@ class CourseParticipate
           wechat_transaction_id: wechat_transaction_id
         })
         if trade_state == "SUCCESS"
-          Bill.create_course_participate_item(self)
+          Bill.confirm_course_participate_item(self)
         end
         retval = { success: true, trade_state: trade_state, trade_state_desc: trade_state_desc }
         return retval

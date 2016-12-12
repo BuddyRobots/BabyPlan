@@ -37,8 +37,15 @@ class Bill
       channel: WECHAT,
       order_id: course_participate.order_id,
       wechat_transaction_id: course_participate.wechat_transaction_id,
-      finished: true
+      finished: false
     })
+  end
+
+  def self.confirm_course_participate_item(course_participate)
+    bill_item = Bill.where(order_id: course_participate.order_id, type: COURSE_PARTICIPATE).first
+    if bill_item.present?
+      bill_item.update_attribute(:finished, true)
+    end
   end
 
   def self.create_course_refund_item(course_participate)

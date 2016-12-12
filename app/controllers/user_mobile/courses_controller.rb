@@ -62,6 +62,8 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
         prepay_id: "free",
         trade_state: "SUCCESS"
       })
+    else
+      Bill.create_course_participate_item(@course_participate)
     end
     render json: retval_wrapper(nil) and return
   end
