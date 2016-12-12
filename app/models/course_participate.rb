@@ -321,7 +321,7 @@ class CourseParticipate
       "out_refund_no" => self.order_id,
       "total_fee" => (self.price_pay * 100).round.to_s,
       # "total_fee" => 1.to_s,
-      "refund_fee" => 1.to_s,
+      "refund_fee" => (self.price_pay * 100).round.to_s,
       "nonce_str" => nonce_str,
       "sign_type" => "MD5"
     }

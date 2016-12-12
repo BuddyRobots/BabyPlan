@@ -18,7 +18,7 @@ class Bill
   field :finished, type: Boolean, default: true
 
   field :order_id, type: String
-  field :wechat_trasaction_id, type: String
+  field :wechat_transaction_id, type: String
 
   belongs_to :center
   belongs_to :user
@@ -36,7 +36,7 @@ class Bill
       type: COURSE_PARTICIPATE,
       channel: WECHAT,
       order_id: course_participate.order_id,
-      wechat_trasaction_id: course_participate.wechat_trasaction_id,
+      wechat_transaction_id: course_participate.wechat_transaction_id,
       finished: true
     })
   end
@@ -53,7 +53,7 @@ class Bill
       type: COURSE_REFUND,
       channel: WECHAT,
       order_id: course_participate.order_id,
-      wechat_trasaction_id: course_participate.wechat_trasaction_id,
+      wechat_transaction_id: course_participate.wechat_transaction_id,
       finished: false
     })
   end
@@ -83,7 +83,7 @@ class Bill
       type: DEPOSIT_PAY,
       channel: WECHAT,
       order_id: deposit.order_id,
-      wechat_trasaction_id: deposit.wechat_trasaction_id
+      wechat_transaction_id: deposit.wechat_transaction_id
     })
   end
 
