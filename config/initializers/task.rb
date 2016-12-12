@@ -15,4 +15,10 @@ scheduler.every("1d") do
       cp.orderquery
     end
   end
+
+  Deposit.all.each do |ele|
+    if ele.pay_finished == true && ele.trade_state != "SUCCESS" && ele.offline_paid == false
+      ele.orderquery
+    end
+  end
 end

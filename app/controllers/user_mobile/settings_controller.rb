@@ -23,6 +23,7 @@ class UserMobile::SettingsController < UserMobile::ApplicationController
   def pay_finished
     @deposit = current_user.deposit
     @deposit.update_attributes({pay_finished: true})
+    Bill.create_online_deposit_pay_item(@deposit)
     render json: retval_wrapper(nil) and return
   end
 

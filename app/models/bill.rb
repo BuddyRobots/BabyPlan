@@ -84,14 +84,21 @@ class Bill
 
   def self.create_online_deposit_pay_item(deposit)
     Bill.create({
-      center_id: center.id,
       user_id: deposit.user.id,
       amount: deposit.amount,
       type: DEPOSIT_PAY,
       channel: WECHAT,
       order_id: deposit.order_id,
-      wechat_transaction_id: deposit.wechat_transaction_id
+      wechat_transaction_id: deposit.wechat_transaction_id,
+      finished: false
     })
+  end
+
+  def confirm_online_deposit_pay_item(deposit)
+    bill_item = Bill.where(order_id: deposit.order_id, type: DEPOSIT_PAY).first
+    if bill_item.present?
+      bill_item.update_attribute(:finished, true)
+    end
   end
 
   def self.create_deposit_refund_item(center, deposit)
