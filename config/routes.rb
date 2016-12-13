@@ -17,6 +17,9 @@ Rails.application.routes.draw do
   resources :courses do
   end
 
+  resources :deploys do
+  end
+
   namespace :admin do
     resources :sessions do
       collection do
