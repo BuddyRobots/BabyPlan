@@ -344,8 +344,10 @@ $ ->
   $( "#datepicker-4" ).datepicker( $.datepicker.regional[ "zh-TW" ] )
   $( "#datepicker-4" ).datepicker( "option", "dateFormat", "yy-mm-dd" ) 
 
-  $("#datepicker-5").focus ->
-    $(".ui-datepicker-calendar").hide()
+  $("#cash-statistics").on 'shown.bs.tab', (e) ->
+    $("#datepicker-5").focus ->
+      $(".ui-datepicker-calendar").hide()
+      $("#ui-datepicker-div").css("padding-bottom", "0.2em")
 
   $( "#datepicker-5" ).datepicker({
         changeMonth: true,
@@ -357,6 +359,11 @@ $ ->
       })
   $( "#datepicker-5" ).datepicker( $.datepicker.regional[ "zh-TW" ] )
   $( "#datepicker-5" ).datepicker( "option", "dateFormat", "yy-mm-dd" )
+
+  $("#cash-statistics").on 'shown.bs.tab', (e) ->
+    $("#datepicker-6").focus ->
+      $(".ui-datepicker-calendar").hide()
+      $("#ui-datepicker-div").css("padding-bottom", "0.2em")
 
   $( "#datepicker-6" ).datepicker({
         changeMonth: true,
