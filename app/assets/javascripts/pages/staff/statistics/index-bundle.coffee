@@ -375,3 +375,21 @@ $ ->
       })
   $( "#datepicker-6" ).datepicker( $.datepicker.regional[ "zh-TW" ] )
   $( "#datepicker-6" ).datepicker( "option", "dateFormat", "yy-mm-dd" )
+
+  if window.profile == "amount"
+    $('.nav-tabs a[href="#tab4"]').tab('show')
+
+  refresh_amount_stat = ->
+    duration = $("#bill-quick-choice").val()
+    start_date = $("#datepicker-5").val()
+    end_date = $("#datepicker-6").val()
+    location.href = "/staff/statistics?profile=amount&duration=" + duration + "&start_date=" + start_date + "&end_date=" + end_date
+  $("#bill-quick-choice").change ->
+    $("#datepicker-5").val("")
+    $("#datepicker-6").val("")
+    refresh_amount_stat
+  $("#bill-search-btn").click ->
+    $("#bill-quick-choice").val(-1)
+    refresh_amount_stat 
+
+  
