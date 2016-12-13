@@ -277,6 +277,89 @@ $green: #10c078;
 	-ms-justify-content: center;
 	-o-justify-content: center;
 }
+
+.courses-income-box {
+	border: 1px solid #c8c8c8;
+	margin: 40px 40px 20px 40px;
+}
+.income-title {
+	font-size: 16px;
+	color: #464646;
+	background: #f6f6f6;
+	height: 44px;
+	line-height: 44px;
+	text-align: center;
+	border-bottom: 1px solid #c8c8c8;
+}
+.income-box {
+	padding: 20px 0;
+	display: flex;
+	display: -ms-flexbox;
+  	display: -webkit-flex;
+}
+.income-items {
+	flex: 1;
+	text-align: center;
+	border-right: 1px dashed #c8c8c8;
+}
+.income-caption {
+	margin: 20px 0 10px 0;
+	font-size: 16px;
+	color: #969696;
+}
+.income-nums {
+	font-size: 24px;
+	color: #227dda;
+	margin: 10px 0;
+}
+#goverment {
+	border: 0;
+}
+.table-box {
+	margin: 20px 40px;
+}
+#income-table {
+	border-radius: 6px;
+	border: 1px solid #c8c8c8;
+	font-size: 14px;
+	color: #323232;
+	th {
+		text-align: center;
+		height: 40px;
+		line-height: 40px;
+		border: 1px solid #c8c8c8;
+		padding: 0;
+	}
+	.td-data {
+		font-size: 14px;
+		color: #505050;
+		height:45px;
+		line-height: 45px;
+		text-align: center;
+		border: 1px solid #c8c8c8;
+		padding: 0;
+		.unshelve {
+			color: #969696;
+		}
+		.shelve {
+			color: #f7873d;
+		}
+		a {
+			
+			text-decoration: underline;
+		}
+	}
+	#income_out {
+		color: #d70c19;
+	}
+	#income_in {
+		color: #10c078;
+	}
+	.clicked {
+		background: #fdd3b9;
+	}
+}
+
 //undiscover
 .undiscover {
 	text-align: center;
@@ -292,4 +375,24 @@ $green: #10c078;
 	font-size: 20px;
 	color: #969696;
 	margin-top: 30px;
+}
+//select-page
+.select-page {
+	text-align: right;
+	margin: 10px 40px 20px 0;
+	padding-bottom: 5px;
+}
+.totalitems {
+	font-size: 12px;
+	color: #969696;
+}
+.choice-page {
+	display: inline-block;
+	vertical-align: middle;
+}
+.pagination {
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+	margin-left: 15px;
 }

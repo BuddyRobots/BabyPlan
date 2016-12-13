@@ -343,3 +343,28 @@ $ ->
     })
   $( "#datepicker-4" ).datepicker( $.datepicker.regional[ "zh-TW" ] )
   $( "#datepicker-4" ).datepicker( "option", "dateFormat", "yy-mm-dd" ) 
+
+  $("#datepicker-5").focus ->
+    $(".ui-datepicker-calendar").hide()
+
+  $( "#datepicker-5" ).datepicker({
+        changeMonth: true,
+        changeYear: true,
+        yearRange : '-20:+10'
+        # only month search
+        onChangeMonthYear: (year, month, inst) ->
+          $(this).val($.datepicker.formatDate('yy-mm', new Date(year, month - 1, 1)))
+      })
+  $( "#datepicker-5" ).datepicker( $.datepicker.regional[ "zh-TW" ] )
+  $( "#datepicker-5" ).datepicker( "option", "dateFormat", "yy-mm-dd" )
+
+  $( "#datepicker-6" ).datepicker({
+        changeMonth: true,
+        changeYear: true,
+        yearRange : '-20:+10'
+        # only month search
+        onChangeMonthYear: (year, month, inst) ->
+          $(this).val($.datepicker.formatDate('yy-mm', new Date(year, month - 1, 1)))
+      })
+  $( "#datepicker-6" ).datepicker( $.datepicker.regional[ "zh-TW" ] )
+  $( "#datepicker-6" ).datepicker( "option", "dateFormat", "yy-mm-dd" )
