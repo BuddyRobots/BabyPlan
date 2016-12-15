@@ -313,9 +313,6 @@ $ ->
         changeMonth: true,
         changeYear: true,
         yearRange : '-20:+10'
-        # only month search
-        # onChangeMonthYear: (year, month, inst) ->
-        #   $(this).val($.datepicker.formatDate('yy-mm', new Date(year, month - 1, 1)))
       })
   $( "#datepicker-1" ).datepicker( $.datepicker.regional[ "zh-TW" ] )
   $( "#datepicker-1" ).datepicker( "option", "dateFormat", "yy-mm-dd" )
@@ -352,44 +349,64 @@ $ ->
   $( "#datepicker-5" ).datepicker({
         changeMonth: true,
         changeYear: true,
-        yearRange : '-20:+10'
+        yearRange : '-20:+10',
+        dateFormat: "yy-mm"
         # only month search
         onChangeMonthYear: (year, month, inst) ->
           $(this).val($.datepicker.formatDate('yy-mm', new Date(year, month - 1, 1)))
+        onClose: (dateText, inst) ->
+          $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1))
+          $(".ui-datepicker-calendar").hide()
       })
   $( "#datepicker-5" ).datepicker( $.datepicker.regional[ "zh-TW" ] )
-  $( "#datepicker-5" ).datepicker( "option", "dateFormat", "yy-mm-dd" )
+
+  date_5 = null
+  if window.start_time == ""
+    date_5 = null
+  else
+    date_5 = new Date(window.start_time)
+  $( "#datepicker-5" ).datepicker( "setDate", date_5 )
 
   $("#cash-statistics").on 'shown.bs.tab', (e) ->
     $("#datepicker-6").focus ->
       $(".ui-datepicker-calendar").hide()
       $("#ui-datepicker-div").css("padding-bottom", "0.2em")
 
+ 
   $( "#datepicker-6" ).datepicker({
         changeMonth: true,
         changeYear: true,
-        yearRange : '-20:+10'
+        yearRange : '-20:+10',
+        dateFormat: "yy-mm"
         # only month search
         onChangeMonthYear: (year, month, inst) ->
           $(this).val($.datepicker.formatDate('yy-mm', new Date(year, month - 1, 1)))
+        onClose: (dateText, inst) ->
+          $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1))
+          $(".ui-datepicker-calendar").hide()
       })
   $( "#datepicker-6" ).datepicker( $.datepicker.regional[ "zh-TW" ] )
-  $( "#datepicker-6" ).datepicker( "option", "dateFormat", "yy-mm-dd" )
 
+  date_6 = null
+  if window.end_time == ""
+    date_6 = null
+  else
+    date_6 = new Date(window.end_time)
+  $( "#datepicker-6" ).datepicker( "setDate", date_6 )
+  
   if window.profile == "amount"
     $('.nav-tabs a[href="#tab4"]').tab('show')
 
-  refresh_amount_stat = ->
-    duration = $("#bill-quick-choice").val()
-    start_date = $("#datepicker-5").val()
-    end_date = $("#datepicker-6").val()
-    location.href = "/staff/statistics?profile=amount&duration=" + duration + "&start_date=" + start_date + "&end_date=" + end_date
-  $("#bill-quick-choice").change ->
-    $("#datepicker-5").val("")
-    $("#datepicker-6").val("")
-    refresh_amount_stat
   $("#bill-search-btn").click ->
     $("#bill-quick-choice").val(-1)
-    refresh_amount_stat 
+    start_time = $("#datepicker-5").val()
+    if start_time == ""
+      $.page_notification("请正确输入查询时间", 1000)
+      return
+    end_time = $("#datepicker-6").val()
+    if end_time == ""
+      $.page_notification("请正确输入查询时间", 1000)
+    else
+      location.href = "/staff/statistics?start_time=" + start_time + "&end_time=" + end_time + "&profile=amount"
 
   

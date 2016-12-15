@@ -118,7 +118,7 @@ $green: #10c078;
 	padding: 13px 20px;
 	margin: 0;
 }
-#datepicker-1, #datepicker-2, #datepicker-3, #datepicker-4 {
+#datepicker-1, #datepicker-2, #datepicker-3, #datepicker-4, #datepicker-5, #datepicker-6{
 	width: 14.85%;
 }
 .input-caption {
@@ -368,7 +368,8 @@ $green: #10c078;
 .undiscover {
 	text-align: center;
 	padding: 30px;
-	margin-top: 172px;
+	margin-top: 100px;
+	margin-bottom: 120px;
 }
 .undiscover-icon {
 	display: inline-block;
@@ -399,4 +400,7 @@ $green: #10c078;
 	margin: 0;
 	padding: 0;
 	margin-left: 15px;
+}
+.pagination > li > a {
+	border: 1px solid #c8c8c8;
 }

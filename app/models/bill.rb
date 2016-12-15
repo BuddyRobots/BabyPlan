@@ -181,4 +181,16 @@ class Bill
       amount_class: self.amount_class
     }
   end
+
+  def self.amount_stats(bills)
+    total_amount = bills.sum("amount")
+    # 两种方法都可以在mongoid中应用
+    weixin_amount = bills.where(channel: WECHAT).map { |e| e.amount}.sum()
+    offline_amount = bills.where(channel: OFFLINE).sum("amount")
+    {
+      total_amount: total_amount,
+      weixin_amount: weixin_amount,
+      offline_amount: offline_amount
+    }
+  end
 end
