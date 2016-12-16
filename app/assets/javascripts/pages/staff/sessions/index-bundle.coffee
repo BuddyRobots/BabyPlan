@@ -175,6 +175,7 @@ $ ->
         if data.success
           $.page_notification("注册完成，请通知管理员开通账号", 3000)
           $("#signupModal").modal('hide')
+          $("#signupModal input").val("")
           $("#signinModal").modal('show')
         else
           if data.code == WRONG_VERIFY_CODE

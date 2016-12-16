@@ -120,4 +120,77 @@ class Bill
       channel: OFFLINE
     })
   end
+
+  def fund_type
+    if self.type == LATEFEE_PAY
+      return "滞纳金缴纳"
+    end
+    if self.type == DEPOSIT_REFUND
+      return "押金退回"
+    end
+    if self.type == DEPOSIT_PAY
+      return "押金缴纳"
+    end
+    if self.type = COURSE_REFUND
+      return "课程退款"
+    end
+    if self.type == COURSE_PARTICIPATE
+      return "课程报名"
+    end
+  end
+
+  def fund_channel
+    if self.channel == OFFLINE
+      return "现金"
+    end
+    if self.channel == WECHAT
+      return "微信"
+    end
+  end
+
+  def amount_nums
+    if self.amount >= 0
+      return "+" + self.amount.to_s
+    else
+      return self.amount
+    end
+  end
+
+  def amount_class
+    if self.amount >= 0
+      return "income_in"
+    else
+      return "income_out"
+    end
+  end
+
+  def course_name
+    self.course_inst.nil? ? "无" : self.course_inst.name
+  end
+
+  def bills_info
+    {
+      id: self.id.to_s,
+      date: Time.at(self.created_at).strftime("%Y.%m.%d"),
+      time: Time.at(self.created_at).strftime("%H:%M"),
+      name: self.user.name,
+      fund_type: self.fund_type,
+      fund_channel: self.fund_channel,
+      course_name: self.course_name,
+      amount_nums: self.amount_nums,
+      amount_class: self.amount_class
+    }
+  end
+
+  def self.amount_stats(bills)
+    total_amount = bills.sum("amount")
+    # 两种方法都可以在mongoid中应用
+    weixin_amount = bills.where(channel: WECHAT).map { |e| e.amount}.sum()
+    offline_amount = bills.where(channel: OFFLINE).sum("amount")
+    {
+      total_amount: total_amount,
+      weixin_amount: weixin_amount,
+      offline_amount: offline_amount
+    }
+  end
 end

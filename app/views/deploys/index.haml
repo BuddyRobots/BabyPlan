@@ -3,4 +3,26 @@
   = stylesheet_link_tag "pages/deploys/index-bundle", :media => "all"
 
 - content_for :app_content do
-  %button.btn#deploy-btn 部署
+  .wrap-div
+    .form-group.btn-div
+      %input#address.form-control{type:"text"}
+      %button.btn#deploy-btn 部署
+    .tabbable
+      %ul.nav.nav-tabs
+        %li.active
+          %a#auto_deploy{"data-toggle" => "tab", :href => "#tab1"} 代码更新
+        %li
+          %a#bundle{"data-toggle" => "tab", :href => "#tab2"} 插件安装
+        %li
+          %a#compile{"data-toggle" => "tab", :href => "#tab3"} 编&nbsp&nbsp译
+      .tab-content
+        #tab1.tab-pane.active
+          .message-div
+            %p.message-conten
+        #tab2.tab-pane
+          .message-div
+            %p.message-content
+        #tab3.tab-pane
+          .message-div
+            %p.message-content
+          

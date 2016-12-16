@@ -1,7 +1,10 @@
 - content_for :head do
   = javascript_include_tag "pages/staff/statistics/index-bundle"
   = stylesheet_link_tag "pages/staff/statistics/index-bundle", :media => "all"
-
+  :javascript
+    window.start_time = "#{@start_time}"
+    window.end_time = "#{@end_time}"
+    window.profile = "#{@profile}"
 
 .content-area
   .manage-content
@@ -140,59 +143,56 @@
                   %input.input-area.form-control#datepicker-5{:type => "text"}
                   %span.input-caption 至
                   %input.input-area.form-control#datepicker-6{:type => "text"}
-                  .btn#book-search-btn.search-btn{:type => "button"} 查询
-                  = select_tag "book-quick-choice", options_for_select(Statistic.duration_for_select, 1.months.to_i), class: "form-control quick-choice"
-            .courses-income-box
-              %p.income-title 金额合计
-              .income-box
-                .income-items
-                  %p.income-caption 收入合计(元)
-                  %p.income-nums 10,0000
-                .income-items
-                  %p.income-caption 微信收入(元)
-                  %p.income-nums 8,0000
-                .income-items#goverment
-                  %p.income-caption 现金收入(元)
-                  %p.income-nums 2,000
-            .table-box
-              %table.table.table-bordered#income-table
-                %thead
-                  %tr
-                    %th 操作日期
-                    %th 具体时间
-                    %th 学生姓名
-                    %th 款项来源
-                    %th 具体项目
-                    %th 收费方式
-                    %th 金&nbsp额
-                %tbody
-                  %tr
-                    %td.td-data 2016.10.08
-                    %td.td-data 13:10
-                    %td.td-data 王小明
-                    %td.td-data 课程退款
-                    %td.td-data　少儿计算机知识学习
-                    %td.td-data 微信
-                    %td.td-data#income_out -2000
-                  %tr
-                    %td.td-data 2016.10.08
-                    %td.td-data 13:10
-                    %td.td-data 王小明
-                    %td.td-data 课程退款
-                    %td.td-data　少儿计算机知识学习
-                    %td.td-data 现金
-                    %td.td-data#income_in 1000
-            / .select-page 
-            /   %span.totalitems= "共#{@reviews[:total_page]}页,总计#{@reviews[:total_number]}条"
-            /   %span.choice-page
-            /     %ul.pagination.pagination-sm
-            /       %li
-            /         %a{:href => "/staff/courses/" + @course_inst.id.to_s + "?profile=participates&participate_page=#{@participates[:previous_page]}"} «
-            /       - ( (@participates[:previous_page] > 2 ? @participates[:previous_page] - 2 : 1) .. (@participates[:next_page] < @participates[:total_page] - 2 ? @participates[:next_page] + 2 : @participates[:total_page]) ).to_a.each do |page|
-            /         %li
-            /           %a{:href => "/staff/courses/" + @course_inst.id.to_s + "?profile=participates&participate_page=#{page}"}= page
-            /       %li
-            /         %a{:href => "/staff/courses/" + @course_inst.id.to_s + "?profile=participates&participate_page=#{@participates[:next_page]}"} »
+                  .btn#bill-search-btn.search-btn{:type => "button"} 查询
+            - if @bills[:data].length == 0
+              .undiscover
+                %img.undiscover-icon{src: asset_path("managecenter/no-data.png")}
+                %p.no-data-message 暂无统计数据
+            - else
+              .courses-income-box
+                %p.income-title 金额合计
+                .income-box
+                  .income-items
+                    %p.income-caption 收入合计(元)
+                    %p.income-nums= @stat[:total_amount]
+                  .income-items
+                    %p.income-caption 微信收入(元)
+                    %p.income-nums= @stat[:weixin_amount]
+                  .income-items#goverment
+                    %p.income-caption 现金收入(元)
+                    %p.income-nums= @stat[:offline_amount]
+              .table-box
+                %table.table.table-bordered#income-table
+                  %thead
+                    %tr
+                      %th 操作日期
+                      %th 具体时间
+                      %th 学生姓名
+                      %th 款项来源
+                      %th 具体项目
+                      %th 收费方式
+                      %th 金&nbsp额
+                  %tbody
+                    - @bills[:data].each do |e|
+                      %tr
+                        %td.td-data= e[:date]
+                        %td.td-data= e[:time]
+                        %td.td-data= e[:name]
+                        %td.td-data= e[:fund_type]
+                        %td.td-data= e[:course_name]
+                        %td.td-data= e[:fund_channel]
+                        %td.td-data{class: e[:amount_class]}= e[:amount_nums]
+              .select-page 
+                %span.totalitems= "共#{@bills[:total_page]}页,总计#{@bills[:total_number]}条"
+                %span.choice-page
+                  %ul.pagination.pagination-sm
+                    %li
+                      %a{:href => "/staff/statistics?start_time=#{@start_time}&end_time=#{@end_time}&page=#{@bills[:previous_page]}&profile=amount"} «
+                    - ( (@bills[:previous_page] > 2 ? @bills[:previous_page] - 2 : 1) .. (@bills[:next_page] < @bills[:total_page] - 2 ? @bills[:next_page] + 2 : @bills[:total_page]) ).to_a.each do |page|
+                      %li
+                        %a{:href => "/staff/statistics?start_time=#{@start_time}&end_time=#{@end_time}&page=#{page}&profile=amount"}= page
+                    %li
+                      %a{:href => "/staff/statistics?start_time=#{@start_time}&end_time=#{@end_time}&page=#{@bills[:next_page]}&profile=amount"} »
 
                     
 

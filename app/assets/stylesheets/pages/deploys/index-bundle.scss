@@ -1,0 +1,36 @@
+p {
+	margin: 0;
+	padding: 0;
+}
+.wrap-div {
+	width: 800px;
+	margin: 0 auto;
+}
+.btn-div {
+	margin-top: 30px;
+	text-align: center;
+}
+#address {
+	width: 50%;
+	display: inline-block;
+}
+#deploy-btn {
+	color: #fff;
+	background: #10c078;
+	outline: none;
+}
+.tabbable {
+	padding: 0;
+}
+.message-div {
+	border: 1px solid #ddd;
+	border-top: 0;
+	height: 500px;
+	border-radius: 0 0 8px 8px;
+	padding: 15px;
+	overflow: auto;
+}
+.message-content {
+	font-size: 14px;
+	line-height: 1.5em;
+}

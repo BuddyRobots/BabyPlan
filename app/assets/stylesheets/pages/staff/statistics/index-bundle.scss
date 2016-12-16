@@ -90,15 +90,18 @@ $green: #10c078;
 	-o-justify-content: center;
 }
 #gender-statistics {
-	min-width: 71.35%;
+	width: 71.35%;
+	max-width: 300px;
 	height: 300px;
 }
 #age-statistics {
-	min-width: 83.3%;
+	width: 83.3%;
+	max-width: 350px;
 	height: 300px;
 }
 #nums-statistics {
-	min-width: 91%;
+	width: 91%;
+	max-width: 800px;
 	height: 240px;
 }
 .desc {
@@ -115,7 +118,7 @@ $green: #10c078;
 	padding: 13px 20px;
 	margin: 0;
 }
-#datepicker-1, #datepicker-2, #datepicker-3, #datepicker-4 {
+#datepicker-1, #datepicker-2, #datepicker-3, #datepicker-4, #datepicker-5, #datepicker-6{
 	width: 14.85%;
 }
 .input-caption {
@@ -316,13 +319,14 @@ $green: #10c078;
 	border: 0;
 }
 .table-box {
-	margin: 20px 40px;
+	margin: 20px 40px 0 40px;
 }
 #income-table {
 	border-radius: 6px;
 	border: 1px solid #c8c8c8;
 	font-size: 14px;
 	color: #323232;
+	margin-bottom: 0;
 	th {
 		text-align: center;
 		height: 40px;
@@ -349,10 +353,10 @@ $green: #10c078;
 			text-decoration: underline;
 		}
 	}
-	#income_out {
+	.income_out {
 		color: #d70c19;
 	}
-	#income_in {
+	.income_in {
 		color: #10c078;
 	}
 	.clicked {
@@ -364,7 +368,8 @@ $green: #10c078;
 .undiscover {
 	text-align: center;
 	padding: 30px;
-	margin-top: 172px;
+	margin-top: 100px;
+	margin-bottom: 120px;
 }
 .undiscover-icon {
 	display: inline-block;
@@ -379,7 +384,7 @@ $green: #10c078;
 //select-page
 .select-page {
 	text-align: right;
-	margin: 10px 40px 20px 0;
+	margin: 10px 40px 10px 0;
 	padding-bottom: 5px;
 }
 .totalitems {
@@ -395,4 +400,7 @@ $green: #10c078;
 	margin: 0;
 	padding: 0;
 	margin-left: 15px;
+}
+.pagination > li > a {
+	border: 1px solid #c8c8c8;
 }
