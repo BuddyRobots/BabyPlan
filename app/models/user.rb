@@ -73,6 +73,9 @@ class User
   def self.create_user(user_type, mobile, created_by_staff = false, center = nil)
     # 1. check whether user exists?
     u = User.where(mobile: mobile).first
+    if u.present? && user_type != u.type
+      return ErrCode::OTHER_TYPE_USER_EXIST
+    end
     if u.present? && u.mobile_verified
       return ErrCode::USER_EXIST
     elsif u.blank?

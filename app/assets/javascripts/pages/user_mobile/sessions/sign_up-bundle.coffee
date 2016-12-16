@@ -39,6 +39,8 @@ $ ->
         else
           if data.code == USER_EXIST
             location.href = "/user_mobile/sessions/new?code=" + USER_EXIST
+          if data.code == OTHER_TYPE_USER_EXIST
+            location.href = "/user_mobile/sessions/new?code=" + OTHER_TYPE_USER_EXIST
     )
     return false
 

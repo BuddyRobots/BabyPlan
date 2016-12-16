@@ -4,6 +4,8 @@ $ ->
     $.mobile_page_notification("请登录", 1000)
   if parseInt(window.code) == USER_EXIST
     $.mobile_page_notification("已注册，请直接登录", 1000)
+  if parseInt(window.code) == OTHER_TYPE_USER_EXIST
+    $.mobile_page_notification("手机号已注册为工作人员", 1000)
   if parseInt(window.code) == SIGNIN_DONE
     $.mobile_page_notification("注册完成，请登录", 1000)
 

@@ -35,6 +35,7 @@ module ErrCode
   LATEFEE_NOT_PAID = -32
   DEPOSIT_NOT_PAID = -33
   NO_BOOKS_IN_TRANSFER = -34
+  OTHER_TYPE_USER_EXIST = -35
 
   def self.ret_false(code)
     msg = self.message(code)
@@ -113,6 +114,8 @@ module ErrCode
       "押金未缴"
     when NO_BOOKS_IN_TRANSFER
       "迁移书目为空"
+    when OTHER_TYPE_USER_EXIST
+      "已注册为其他类型用户"
     else
       nil
     end
