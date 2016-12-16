@@ -6,6 +6,6 @@ class DeploysController < ApplicationController
 
   def create
     @address = Deploy.deploy(params[:address])
-    render json: retval_wrapper(stat: @address) and return
+    render json: retval_wrapper(@address) and return
   end
 end

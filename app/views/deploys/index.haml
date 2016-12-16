@@ -10,7 +10,7 @@
     .tabbable
       %ul.nav.nav-tabs
         %li.active
-          %a#auto_deploy{"data-toggle" => "tab", :href => "#tab1"} 代码更新
+          %a#update{"data-toggle" => "tab", :href => "#tab1"} 代码更新
         %li
           %a#bundle{"data-toggle" => "tab", :href => "#tab2"} 插件安装
         %li
@@ -18,11 +18,11 @@
       .tab-content
         #tab1.tab-pane.active
           .message-div
-            %p.message-conten
+            %p.message-conten#code_update
         #tab2.tab-pane
           .message-div
-            %p.message-content
+            %p.message-content#bundle_message
         #tab3.tab-pane
           .message-div
-            %p.message-content
+            %p.message-content#compile_message
           

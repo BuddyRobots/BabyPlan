@@ -2,7 +2,7 @@
 class Deploy
 
   def self.deploy(address)
-    `cd ~#{address}`
+    `cd #{address}`
     pull_result = `git pull origin practice`
     bundle_result = `bundle`
     compile_result = `RAILS_ENV=production rake assets:precompile`
