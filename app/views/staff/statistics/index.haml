@@ -144,7 +144,6 @@
                   %span.input-caption 至
                   %input.input-area.form-control#datepicker-6{:type => "text"}
                   .btn#bill-search-btn.search-btn{:type => "button"} 查询
-                  = select_tag "bill-quick-choice", options_for_select(Statistic.duration_for_select, 1.months.to_i), class: "form-control quick-choice"
             - if @bills[:data].length == 0
               .undiscover
                 %img.undiscover-icon{src: asset_path("managecenter/no-data.png")}
