@@ -73,7 +73,7 @@ class User
   def self.create_user(user_type, mobile, created_by_staff = false, center = nil)
     # 1. check whether user exists?
     u = User.where(mobile: mobile).first
-    if u.present? && user_type != u.type
+    if u.present? && user_type != u.user_type
       return ErrCode::OTHER_TYPE_USER_EXIST
     end
     if u.present? && u.mobile_verified
@@ -93,7 +93,11 @@ class User
 
     # 2. generate random code and save
     code = ""
-    6.times { code = code + rand(10).to_s }
+    if Rails.env.production?
+      6.times { code = code + rand(10).to_s }
+    else
+      code = "111111"
+    end
     u.update_attribute(:mobile_verify_code, code)
 
     # 3. send message
@@ -191,7 +195,11 @@ class User
 
     # generate random code and save
     code = ""
-    6.times { code = code + rand(10).to_s }
+    if Rails.env.production?
+      6.times { code = code + rand(10).to_s }
+    else
+      code = "111111"
+    end
     self.update_attribute(:password_verify_code, code)
 
     # todo: send message
