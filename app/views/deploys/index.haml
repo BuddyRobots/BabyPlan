@@ -5,7 +5,9 @@
 - content_for :app_content do
   .wrap-div
     .form-group.btn-div
-      %button.btn#deploy-btn 部署
+      %button.btn#deploy-production 部署production
+      %button.btn#deploy-staging 部署staging
+      %button.btn#deploy-development 部署development
     .tabbable
       %ul.nav.nav-tabs
         %li.active
