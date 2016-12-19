@@ -5,7 +5,14 @@ class DeploysController < ApplicationController
   end
 
   def create
-    @address = Deploy.deploy()
-    render json: retval_wrapper(stat: @address) and return
+  	if params[:deploy_type] == "production"
+  		@retval = Deploy.deploy()
+  	elsif params[:deploy_type] == "staging"
+  		@retval = Deploy.deploy_staging()
+  	else params[:deploy_type] == "development"
+  		@retval = Deploy.deploy_practice()
+  	end
+    render json: retval_wrapper(stat: @retval) and return
   end
+
 end

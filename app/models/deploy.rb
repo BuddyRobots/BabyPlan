@@ -1,7 +1,7 @@
 # encoding: utf-8
 class Deploy
 
-  def self.deploy
+  def self.deploy()
     pull_result = `git pull origin deploy`
     bundle_result = `bundle`
     `RAILS_ENV=production rake assets:precompile`
@@ -12,7 +12,7 @@ class Deploy
     }
   end
 
-  def self.deploy_staging
+  def self.deploy_staging()
     # first copy database from production server
     `mongodump --db baby_plan_production --username db_user --password Brs@2016`
     `mongorestore --db baby_plan_staging --username db_user --password Brs@2016 --drop dump/baby_plan_production`
@@ -26,7 +26,7 @@ class Deploy
     }
   end
 
-  def self.deploy_practice
+  def self.deploy_practice()
     pull_result = `git pull origin practice`
     bundle_result = `bundle`
     {
