@@ -1,6 +1,7 @@
-p {
+pre {
 	margin: 0;
 	padding: 0;
+	border: none;
 }
 .wrap-div {
 	width: 800px;
@@ -33,4 +34,5 @@ p {
 .message-content {
 	font-size: 14px;
 	line-height: 1.5em;
+	word-break: break-all;
 }
