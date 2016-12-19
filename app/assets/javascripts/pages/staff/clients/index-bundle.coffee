@@ -1,4 +1,3 @@
-
 $ ->
   # calender set
   $( "#datepicker" ).datepicker({
