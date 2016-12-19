@@ -1,7 +1,7 @@
 # encoding: utf-8
 class Deploy
 
-  def self.deploy(address)
+  def self.deploy
     pull_result = `git pull origin deploy`
     bundle_result = `bundle`
     `RAILS_ENV=production rake assets:precompile`

@@ -5,7 +5,6 @@
 - content_for :app_content do
   .wrap-div
     .form-group.btn-div
-      %input#address.form-control{type:"text"}
       %button.btn#deploy-btn 部署
     .tabbable
       %ul.nav.nav-tabs
@@ -13,8 +12,6 @@
           %a#update{"data-toggle" => "tab", :href => "#tab1"} 代码更新
         %li
           %a#bundle{"data-toggle" => "tab", :href => "#tab2"} 插件安装
-        %li
-          %a#compile{"data-toggle" => "tab", :href => "#tab3"} 编&nbsp&nbsp译
       .tab-content
         #tab1.tab-pane.active
           .message-div
@@ -22,7 +19,3 @@
         #tab2.tab-pane
           .message-div
             %pre.message-content#bundle_message
-        #tab3.tab-pane
-          .message-div
-            %pre.message-content#compile_message
-          
