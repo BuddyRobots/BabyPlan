@@ -23,4 +23,4 @@ $ ->
     post("staging", $("#deploy_staging"))
 
   $("#deploy_development").click ->
-   post("development", $("#deploy-development"))
+    post("development", $("#deploy-development"))
