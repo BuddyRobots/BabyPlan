@@ -1,0 +1,19 @@
+- content_for :app_head do
+  = stylesheet_link_tag "layouts/session-layout", :media => "all"
+  = javascript_include_tag "layouts/session-layout"
+  = yield :head
+  :javascript
+    window.code = "#{@code}"
+
+
+- content_for :app_content do
+  .wrapper
+
+
+
+    = yield
+
+= render :template => 'layouts/application'
+
+
+

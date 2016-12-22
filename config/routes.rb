@@ -75,6 +75,15 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :sessions do
+    collection do
+      get :signin_page
+      get :signup_page
+      get :forgetpassword_page
+    end
+  end
+
+
   namespace :staff do
     resources :sessions do
       member do

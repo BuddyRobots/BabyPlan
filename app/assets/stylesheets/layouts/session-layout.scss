@@ -1,0 +1,226 @@
+html {
+	font-family:"Microsoft YaHei";
+	height: 100%;
+  font-size: 16px;
+}
+body {
+	font-size: 62.5%;
+	height: 100%;
+}
+
+/*css reset*/
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6,pre, form, fieldset, input, textarea, p, 
+blockquote, th, td {
+  margin: 0;
+  padding: 0;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+fieldset, img {
+  border: 0;
+}
+address, caption, cite, code, dfn, em, strong, th, var {
+  font-style: normal;
+  font-weight: normal;
+}
+ol, ul {
+  list-style: none;
+}
+caption, th {
+  text-align: left;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-size: 100%;
+  font-weight: normal;
+}
+q:before, q:after {
+  content: '';
+}
+abbr, acronym {
+  border: 0;
+}
+
+
+/*文字排版*/
+.f12 {
+  font-size: 12px;
+}
+.f13 {
+  font-size: 13px;
+}
+.f14 {
+  font-size: 14px;
+}
+.f16 {
+  font-size: 16px;
+}
+.f18 {
+  font-size: 18px;
+}
+.f20 {
+  font-size: 20px;
+}
+.fb {
+  font-weight: bold;
+}
+.fn {
+  font-weight: normal;
+}
+.t2 {
+  text-indent: 2em;
+}
+.lh150 {
+  line-height: 150%;
+}
+.lh180 {
+  line-height: 180%;
+}
+.lh200 {
+  line-height: 200%;
+}
+.unl {
+  text-decoration: underline;
+}
+.no_unl {
+  text-decoration: none;
+}
+
+/*定位*/
+.tl {
+  text-align: left;
+}
+.tr {
+  text-align: right;
+}
+.tc {
+  text-align: center;
+}
+.fl {
+  float: left;
+  display: inline;
+}
+.fr {
+  float: right;
+  display: inline;
+}
+.cb {
+  clear: both;
+}
+.cl {
+  clear: left;
+}
+.cr {
+  clear: right;
+}
+.clearfix:before, .clearfix:after {
+  content: " ";
+  display: table;
+}
+.clearfix:after {
+  clear: both;
+}
+.clearfix {
+  *zoom: 1;
+}
+.vm {
+  text-align: middle;
+}
+.pr {
+  position: relative;
+}
+.pa {
+  position: absolute;
+}
+.zoom {
+  zoom: 1;
+}
+.hidden {
+  visibility: hidden;
+}
+.none {
+  display: none;
+}
+
+/*web project layout*/
+.new_normal {
+  background: #40ca85;
+}
+.new_hover {
+  background: #5fd399;
+}
+.new_click {
+  background: #3db97b;
+}
+.edit_normal {
+  background: #4a8ce3;
+}
+.edit_hover {
+  background: #679ee8;
+}
+.edit_click {
+  background: #4681d0;
+}
+.finish_normal {
+  background: #e9885d;
+}
+.finish_hover {
+  background: #ed9b77;
+}
+.finish_click {
+  background: #d57d57;
+}
+.delete_normal {
+  background: #e9657e;
+}
+.delete_hover {
+  background: #ed7e93;
+}
+.delete_click {
+  background: #d55e75;
+}
+.bg1 {
+  background: #2e2f4a;
+}
+.bg2 {
+  background: #eaebf2;
+}
+.bg3 {
+  background: #fff;
+}
+.th_bg {
+  background: #f5f6fa;
+}
+.table_hover {
+  background: #f4f6ff;
+}
+.font_color1 {
+  color: #fff;
+}
+.font_color2 {
+  color: #3c3d45;
+}
+.font_color3 {
+  color: #6f6f7e;
+}
+.font_color4 {
+  color: #adadbe;
+}
+.font_color_green {
+  color: #40ca85;
+}
+.font_color_red {
+  color: #e9657e;
+}
+.font_color_brown {
+  color: #e9885d;
+}
+
+.wrapper {
+	position: relative;
+	width: 100%;
+	height: 100%;
+  background: image-url('bg.png') no-repeat;
+  background-size: 100%;
+}
