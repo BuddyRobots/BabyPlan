@@ -79,7 +79,7 @@ $ ->
       (data) ->
         console.log data
         if data.success
-          $("#mobile-notice").css("visibility","hidden")
+          $("#mobile-notice").css("visibility", "hidden")
           uid = data.uid
           if timer != null
             clearTimeout(timer)

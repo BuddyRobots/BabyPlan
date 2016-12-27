@@ -80,6 +80,12 @@ Rails.application.routes.draw do
       get :signin_page
       get :signup_page
       get :forgetpassword_page
+      post :signup
+      post :forget_password
+    end
+    member do
+      post :verify
+      post :reset_password
     end
   end
 

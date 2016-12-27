@@ -3,9 +3,53 @@
   = stylesheet_link_tag "pages/staff/sessions/index-bundle", :media => "all"
 
 .content-area
-  / sessions-index
-  %p.caption 欢迎访问北京市社区儿童中心
-  %img.master{:src => asset_path("managecenter/master.png")}
+  .main-top.clearfix
+    %ul.set
+      %li
+        %a.f16{href: "#"} 账号设置
+      %li
+        %a.f16.set-left-border{href: "#"} 退出登录
+  .main-content.bg2
+    %button.btn.finish-normal.font-color1.finish{type: "button"} 完成
+    .tabbable
+      %ul.nav.nav-tabs
+        %li.active
+          %a.f16#course-message{"data-toggle" => "tab", :href => "#tab1"} 账号设置
+      .tab-content.bg3
+        #tab1.tab-pane.active
+          .desc
+            %p.f24.font-color4.tc.bg2.work-cert 工作证
+            .person-div
+              %img.photo{src: asset_path("photo.png")}
+              %p.mobile
+                %span.f20.font-color3.mobile-num 手机号:
+                %span.f20.font-color3 13211112222
+              .form-horizontal
+                .form-group
+                  %lable.control-lable.f20.font-color3.col-sm-3#name 姓名:
+                  .col-sm-6
+                    %input.form-control{type: "text"}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 / signin
 #signinModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
