@@ -18,6 +18,7 @@ class User
   field :mobile_verify_code, type: String
   field :password_verify_code, type: String
   field :auth_key, type: String
+  field :user_type, type: Integer, default: CLIENT
 
 
   # field :email, type: String
@@ -65,10 +66,11 @@ class User
   has_many :staff_logs
 
   has_one :avatar, class_name: "Material", inverse_of: :client
+  has_one :avatar, class_name: "Material", inverse_of: :staff
 
   # scope :client, ->{ where(user_type: CLIENT) }
   # scope :staff, ->{ any_of({user_type: STAFF}, {user_type: ADMIN}) }
-  # scope :admin, ->{ where(user_type: ADMIN) }
+  scope :staff, ->{ where(user_type: STAFF) }
   # scope :only_staff, ->{ where(user_type: STAFF) }
 
   # def is_admin
@@ -79,12 +81,15 @@ class User
   #   return self.user_type == CLIENT
   # end
 
-  def self.create_user(mobile)
+  def self.create_user(user_type, mobile)
     u = User.where(mobile: mobile).first
+    if u.present? && user_type != u.user_type
+      return ErrCode::OTHER_TYPE_USER_EXIST
+    end
     if u.present? && u.mobile_verified
       return ErrCode::USER_EXIST
     elsif u.blank?
-      u = User.create(mobile: mobile)
+      u = User.create(user_type: user_type, mobile: mobile)
     end
 
     code = ""

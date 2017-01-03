@@ -116,6 +116,9 @@ class Staff::BooksController < Staff::ApplicationController
     if params[:has_back].to_s == "true"
       back = Back.new
       back.back = params[:back_file]
+      logger.info "AAAAAAAAAAAAA"
+      logger.info params[:back_file]
+      logger.info "AAAAAAAAAAAAA"
       back.store_back!
       filepath = back.back.file.file
       m = Material.create(path: "/uploads/backs/" + filepath.split('/')[-1])

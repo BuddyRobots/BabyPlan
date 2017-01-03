@@ -14,6 +14,7 @@ class Material
   belongs_to :course_photo, class_name: "CourseInst", inverse_of: :photo
 
   belongs_to :client, class_name: "User", inverse_of: :avatar
+  belongs_to :staff, class_name: "User", inverse_of: :avatar
 
   def self.create_avatar(client, path)
     mat = Material.create(path: path)

@@ -1,0 +1,67 @@
+.direction {
+  -webkit-justify-content: flex-end;
+  -moz-justify-content: flex-end;
+  -os-justify-content: flex-end;
+  -o-justify-content: flex-end;
+  justify-content: flex-end;
+}
+#finish {
+  color: #fff;
+  width: 7.143em;
+  outline: none;
+}
+.tab-content {
+  padding: 5% 0;
+}
+.desc {
+  width: 35%;
+  margin: 0 auto;
+  border: 4px solid #eaebf2;
+  border-top: 0;
+}
+.work-cert {
+  padding: 2.37% 0;
+}
+.person-div {
+  width: 80%;
+  margin: 0 auto;
+  padding: 9% 0 7.3% 0;
+}
+.photo-div {
+  position: relative;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 180px;
+}
+.fingure {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  display: none;
+}
+.photo, .fingure {
+  width: 100%;
+  max-width: 180px;
+  height: 25.2em;
+  object-fit: contain;
+}
+.mobile {
+  margin-top: 9%;
+  margin-bottom: 5%;
+}
+.mobile-num {
+  margin-right: 5%;
+}
+.name {
+ line-height: 34px;
+ padding: 0;
+ padding-right: 5.7%;
+ padding-left: 6.2%;
+}
+
+.form-control {
+  display: inline-block;
+  width: 50%;
+}

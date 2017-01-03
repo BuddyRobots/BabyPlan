@@ -12,8 +12,8 @@
     .layout-left
       %img.logo2{src: asset_path("logo2.png")}
       .avator-div.f16
-        %img.layout-avator{src: asset_path("default.png")}
-        %p.layout-name 王小明
+        %img.layout-avator{ src: @current_user.avatar.nil? ?  asset_path("default.png") : @current_user.avatar.path }
+        %p.layout-name= @current_user.name.nil? ? "欢迎您" : @current_user.name
       .main
         .sidebar
           %ul
@@ -21,19 +21,19 @@
             /   %a{:href => "/staff/courses"}
             /     %img.course-icon{src: asset_path("1class.png")}
             /     %span 课程管理
-            %li.active-li
+            %li{class: @active_tab == "course" ? "active-li" : ""}
               %a{:href => "#"}
                 %img.mini-icon{src: asset_path("1class.png")}
                 %span.f18.sidebar-title 课程管理
-            %li
+            %li{class: @active_tab == "client" ? "active-li" : ""}
               %a{:href => "#"}
                 %img.mini-icon{src: asset_path("2kid.png")}
                 %span.f18.sidebar-title 儿童管理
-            %li
+            %li{class: @active_tab == "announcement" ? "active-li" : ""}
               %a{:href => "#"}
                 %img.mini-icon{src: asset_path("3announcement.png")}
                 %span.f18.sidebar-title 公告管理
-            %li
+            %li{class: @active_tab == "statistics" ? "active-li" : ""}
               %a{:href => "#"}
                 %img.mini-icon{src: asset_path("4data.png")}
                 %span.f18.sidebar-title 统计数据
@@ -43,108 +43,3 @@
 
 
 
-/     .header
-/       %a{:href => "#"}
-/         %img.logo{src: asset_path("managecenter/logo.png")}
-/       %p.leftword= @current_center.nil? ? "北京市社区儿童中心" : @current_center.name
-
-/       /登录注册页面的layout
-/       - if @current_user.present? && ( @current_user.is_staff || @current_user.is_admin )
-/         %ul.kids-manage
-/           %li.manage#manage-photo
-/             %img.manager{src: asset_path("managecenter/headphoto.png")}
-/             .btn-group
-/               %a.btn.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-/                 = @current_user.name
-/                 %span.caret
-/               %ul.dropdown-menu
-/                 %li 
-/                   %a.modify_password{:href => "javascript:void(0);"} 修改密码
-/           - if CourseParticipate.waiting_for_refund(@current_center).present?
-/             %li.manage#important-item
-/               %a#important-modal{:href => "javascript:void(0);"}
-/                 %img.important-icon{src: asset_path("managecenter/important.png")}
-/           %li.manage
-/             %a{:href => signout_staff_sessions_path}
-/               %img.turnoff-icon{src: asset_path("managecenter/turnoff.png")}
-/       - else
-/         %p.rightword 您好欢迎访问北京市社区儿童中心！
-/         %button.btn#sign-up{"data-target" => "#signupModal", "data-toggle" => "modal", :type => "button"} 注册
-/         %button.btn#sign-in{"data-target" => "#signinModal", "data-toggle" => "modal", :type => "button"} 登录
-/     - if @current_user.try(:is_staff_or_admin)    
-/       .main
-/         .sidebar
-/           %ul
-/             %li{class: @active_tab == "client" ? "active" : ""}
-/               %a{:href => "/staff/clients"} 儿童管理
-/             %li{class: @active_tab == "course" ? "active" : ""}
-/               %a{:href => "/staff/courses"} 课程管理
-/             %li{class: @active_tab == "book" ? "active" : ""}
-/               %a{:href => "/staff/books"} 绘本管理
-/             %li{class: @active_tab == "announcement" ? "active" : ""}
-/               %a{:href => "/staff/announcements"} 公告信息管理
-/             %li{class: @active_tab == "statistics" ? "active" : ""}
-/               %a{:href => "/staff/statistics"} 统计信息查询
-/             %li{class: @active_tab == "transfers" ? "active" : ""}
-/               %a{:href => "/staff/transfers"} 迁入迁出记录
-/     %div{class: @current_user.try(:is_staff_or_admin) ? "user_sign_in" : "user_unsign_in" }
-/ /       = yield
-/ / = render :template => 'layouts/application'
-
-/ / modify_password
-/ #modify_passwordModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
-/   .modal-dialog
-/     .modal-content
-/       %img.close-btn{"aria-hidden" => "true", "data-dismiss" => "modal", src: asset_path("managecenter/close.png")}
-/       .modal-body
-/         .set-password-box
-/           %form.form-horizontal#form-layout{:role => "form"}
-/             .form-group.change
-/               %label.col-sm-4.control-label#label-name{:for => "forget-password"} 原始密码
-/               .col-sm-8
-/                 %input.unclicked-box#password.form-control{:type => "password"}
-/             .form-group.change
-/               %label.col-sm-4.control-label#label-name{:for => "forget-password"} 重设密码
-/               .col-sm-8
-/                 %input.unclicked-box#new-password.form-control{:type => "password"}
-/             .form-group.change
-/               %label.col-sm-4.control-label#label-name{:for => "forget-confirm-password"} 确认密码
-/               .col-sm-8
-/                 %input.unclicked-box#confirm-password.form-control{:type => "password"}
-/             .confirm-button
-/               %button.btn#confirm.button-disabled{:href => "javascript:void(0);"} 确定
-
-
-/ #importantModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
-/   .modal-dialog
-/     .modal-content
-/       .modalheader
-/         %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: asset_path("managecenter/close.png")}
-/       .modal-body
-/         %p.refund-message 
-/           %span 课程名为
-/           = link_to "", "", {id: "refund-course-name"}
-/           %span 的学生
-/           = link_to "", "", {id: "refund-client-name"}
-/           %span 已申请退款，是否确定通过此次退款申请？
-/         %input.form-control#reason{placeholder: "拒绝理由"}
-/         .btn-div
-/           %button.btn#reject{type: "button"} 拒&nbsp绝
-/           %button.btn#agree-refund{type: "button"} 退&nbsp款
-
-
-/ #refund-failModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
-/   .modal-dialog
-/     .modal-content
-/       .modalheader
-/         %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: asset_path("managecenter/close.png")}
-/       .modal-body
-/         %p.refund-fail-caption 退款失败
-/         %p.refund-message 
-/           %span 因对方银行卡出现问题，
-/           = link_to "", "", {id: "refund-course-name"}
-/           %span 的学生
-/           = link_to "", "", {id: "refund-client-name"}
-/           %span 的退款申请处理失败，请联系学生以其他方式处理退款。
-/         .refund-fail-btn-div
-/           %button.btn#refund-fail-confirm{type: "button"} 确&nbsp定

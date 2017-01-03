@@ -82,6 +82,7 @@ Rails.application.routes.draw do
       get :forgetpassword_page
       post :signup
       post :forget_password
+      get :signout
     end
     member do
       post :verify
@@ -91,10 +92,11 @@ Rails.application.routes.draw do
 
 
   namespace :staff do
-    resources :sessions do
+    resources :accounts do
       member do
         post :verify
         post :reset_password
+        post :upload_photo
       end
       collection do
         post :signup

@@ -1,16 +1,16 @@
 html {
 	font-family:"Microsoft YaHei";
-	height: 100%;
   font-size: 16px;
+  height: 100%;
 }
 body {
+  height: 100%;
 	font-size: 62.5%;
-	height: 100%;
 }
 
 /*css reset*/
 body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6,pre, form, fieldset, input, textarea, p, 
-blockquote, th, td, button, label {
+blockquote, th, td, button, label, table {
   margin: 0;
   padding: 0;
 }
@@ -198,7 +198,7 @@ a:hover {
 .th-bg {
   background: #f5f6fa;
 }
-.table-hover {
+.tb-hover {
   background: #f4f6ff;
 }
 .font-color1 {
@@ -225,18 +225,30 @@ a:hover {
 
 
 // page css
+.wrapper {
+  min-height: 100%;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  -webkit-justify-content: space-between;
+  -moz-justify-content: space-between;
+  -ms-justify-content: space-between;
+  -o-justify-content: space-between;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+}
 .layout-left {
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 200px;
-  overflow: auto;
+  width: 20em;
+  min-height: 100%;
   background: #2e2f4a;
 }
 .logo2 {
   background: rgb(255,255,255);
   background: rgba(255,255,255, .16);
+  width: 100%;
+  max-width: 200px;
 }
 .avator-div {
   width: 92px;
@@ -251,6 +263,7 @@ a:hover {
   border-radius: 50%;
   overflow: hidden;
   border: 2px solid #eaebf2;
+  object-fit: cover;
 }
 .layout-name {
   margin-top: 20%;
@@ -278,19 +291,19 @@ a:hover {
     background: rgba(255,255,255, .16);
   }
   .active-li::before {
-    content:"";
-    width:4px;
-    height:60px;
-    position:absolute;
-    top:0;
-    left:0;
+    content: "";
+    width: 4px;
+    height: 6em;
+    position: absolute;
+    top: 0;
+    left: 0;
     background: rgba(255,255,255, .16);
   }
   .active-li::after {
-    content:"";
-    position:absolute;
-    top:10;
-    right:0;
+    content: "";
+    position: absolute;
+    top: 10;
+    right: 0;
     width: 0;
     height: 0;
     border-right: 12px solid #eaebf2;
@@ -305,3 +318,142 @@ a:hover {
 }
 
 
+.content-area {
+  position: relative;
+  width: 100%;
+  min-height: 100%;
+}
+.main-top {
+  padding-left: 24px;
+  padding-right: 24px; 
+  height: 8.8em;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -os-flex;
+  display: -o-flex;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -os-align-items: center;
+  -o-align-items: center;
+  display: flex;
+  align-items: center;
+}
+.main-content {
+  position: absolute;
+  padding: 68px 24px 24px 24px;
+  top: 8.8em;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.table-div {
+  position: absolute;
+  margin: 24px;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.tabbable {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.tab-content {
+  position: absolute;
+  top: 44px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: auto;
+}
+.set {
+  list-style: none;
+  li {
+    float: left;
+    a {
+      color: #6f6f7e;
+      height: 1.5em;
+      padding: 0 10px;
+    }
+    .set-left-border {
+      border-left: 1px solid #adadbe;
+      padding-right: 0;
+    }
+  }
+}
+// search input
+.user-search-box {
+  width: 36%;
+  border-radius: 20px;
+  padding: 0 1.8%;
+  margin: 2.2% 0;
+}
+.input-style {
+  width: 100%;
+  padding: 3% 0;
+  border: none;
+  outline: none;
+  background: transparent;
+}
+#search-btn {
+  width: 24px;
+  height: 24px;
+  background: image-url("search.png") no-repeat;
+  outline: none;
+}
+// table right btn
+.btn-position {
+  position: absolute;
+  right: 24px;
+  top: 24px;
+  z-index: 10;
+}
+.nav {
+  margin-left: -1px;
+  a {
+    background: #adadbe;
+  }
+}
+.desc-div {
+  padding: 3.24%;
+}
+// undiscover style
+.undiscover {
+  width: 20%;
+  margin: 0 auto;
+  text-align: center;
+}
+// table td height
+.table-height {
+  th, td {
+    vertical-align: middle !important;
+    height: 48px;
+    line-height: 48px;
+  }
+  tbody {
+    tr:last-child {
+      border-bottom: 4px solid #eaebf2;
+    }
+  }
+}
+//pagination
+.select-page {
+  text-align: right;
+}
+.totalitems {
+  font-size: 12px;
+  color: #969696;
+}
+.choice-page {
+  display: inline-block;
+  vertical-align: middle;
+}
+.pagination {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  margin-left: 15px;
+}

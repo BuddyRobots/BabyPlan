@@ -7,104 +7,225 @@
 
 
 .content-area
-  /courses-index
-  .content-box
-    .manage-box
-      .user-search-box
-        .input-group
-          %input.form-control#search-input{:type => "text", :placeholder => "输入课程名称", value: "#{@keyword}"}
-          %span.input-group-btn
-            %button.btn.btn-default#search-btn{:type => "button"}
-
-    .manage-content
+  .main-top.direction
+    .user-search-box.f14.bg2
+      .input-group
+        %input.input-style#search-input{:type => "text", :placeholder => "输入课程名称、课程编号、主讲人姓名", value: "#{@keyword}"}
+        %span.input-group-btn
+          %button.btn#search-btn{:type => "button"}
+    %ul.set
+      %li
+        %a.f16{href: staff_accounts_path} 账号设置
+      %li
+        %a.f16.set-left-border{href: signout_sessions_path} 退出登录
+        / %a.f16.set-left-border= link_to "退出登录",  signin_page_sessions_path, class: "类名", method: :delete
+  .main-content.bg2
+    %button.btn.new-normal.font-color1.btn-position#new-template{type: "button"} 新建课程模板
+    .table-div
       .tabbable
         %ul.nav.nav-tabs
           %li.active
-            %a{"data-toggle" => "tab", :href => "#tab1"} 本区开课
+            %a.f16.font-color1{"data-toggle" => "tab", :href => "#tab1"} 已开课程
           %li
-            %a{"data-toggle" => "tab", :href => "#tab2"} 可开课程
+            %a.f16.font-color1{"data-toggle" => "tab", :href => "#tab2"} 课程模板
 
-        .tab-content
+        .tab-content.bg3
           #tab1.tab-pane.active
-            .local-course
-              - if @course_insts[:data].length == 0
-                .undiscover
-                  %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
-                  %span.message 抱歉！暂无课程信息
-              - else
-                .table-box
-                  %table.table.table-bordered#local-course-table
-                    %thead
-                      %tr
-                        %th 课&nbsp程
-                        %th 上课时间
-                        %th 上课地址
-                        %th 主讲人
-                        %th 市场价
-                        %th 操&nbsp作
-                    %tbody
-                      - @course_insts[:data].each do |ci|
-                        %tr{class: "book-record #{ ci[:available] ? "available" : "unavailable" }", "data-id" => ci[:id]}
-                          %td= link_to ci[:name], "/staff/courses/#{ci[:id]}"
-                          %td= ci[:date]
-                          %td= ci[:address]
-                          %td= ci[:speaker]
-                          %td= ci[:price]
-                          %td
-                            - if ci[:available]
-                              %a.set-available.link-available{:href => "javascript:void(0);"} 下架
-                            - else
-                              %a.set-available.link-unavailable{:href => "javascript:void(0);"} 上架
-                .select-page 
-                  %span.totalitems= "共#{@course_insts[:total_page]}页,总计#{@course_insts[:total_number]}条"
-                  %span.choice-page
-                    %ul.pagination.pagination-sm
-                      %li
-                        %a{:href => "/staff/courses?keyword=#{@keyword}&course_inst_page=#{@course_insts[:previous_page]}"} «
-                      - ( (@course_insts[:previous_page] > 2 ? @course_insts[:previous_page] - 2 : 1) .. (@course_insts[:next_page] < @course_insts[:total_page] - 2 ? @course_insts[:next_page] + 2 : @course_insts[:total_page]) ).to_a.each do |page|
-                        %li
-                          %a{:href => "/staff/courses?keyword=#{@keyword}&course_inst_page=#{page}"}= page
-                      %li
-                        %a{:href => "/staff/courses?keyword=#{@keyword}&course_inst_page=#{@course_insts[:next_page]}"} »
+            .desc-div
+              .undiscover.f14
+                %img.undiscover-icon{src: asset_path("undiscover.png")}
+                %span.message 抱歉！暂无课程信息
+              .table-box.f14
+                %table.table.table-hover.table-height
+                  %thead.th-bg.font-color2
+                    %tr
+                      %th 课程名称
+                      %th 上课时间
+                      %th 上课地址
+                      %th 主讲人
+                      %th 价&nbsp格
+                      %th 操&nbsp作
+                  %tbody.font-color3
+                    %tr
+                      %td 高等数学
+                      %td 2016/12/12-2017/1/12
+                      %td 北京市东三环南路2号瑞赛商务楼
+                      %td 数学老师
+                      %td 2800
+                      %td
+                        %a.font-color-red.unshelve{href: "#"} 下架
+                    %tr
+                      %td 高等数学
+                      %td 2016/12/12-2017/1/12
+                      %td 北京市东三环南路2号瑞赛商务楼
+                      %td 数学老师
+                      %td 2800
+                      %td
+                        %a.font-color-green.shelve{href: "#"} 上架
+                    %tr
+                      %td 高等数学
+                      %td 2016/12/12-2017/1/12
+                      %td 北京市东三环南路2号瑞赛商务楼
+                      %td 数学老师
+                      %td 2800
+                      %td.font-color4 已结课
+              .select-page 
+                %span.totalitems 共2页，总计18条
+                %span.choice-page
+                  %ul.pagination.pagination-sm
+                    %li
+                      %a{:href => "#"} «
+                    %li
+                      %a{:href => "#"} 1
+                    %li
+                      %a{:href => "#"} »
           #tab2.tab-pane
-            .open-course
-              - if @courses[:data].length == 0
-                .undiscover
-                  %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
-                  %span.message 抱歉！暂无课程信息
-              - else
-                .table-box
-                  %table.table.table-bordered#course-table
-                    %thead
-                      %tr
-                        %th 课&nbsp程
-                        %th 编&nbsp号
-                        %th 主讲人
-                        %th 市场价
-                        %th 操&nbsp作
-                    %tbody
-                      - @courses[:data].each do |e|
-                        / %tr{class: i == 1 ? "clicked" : (i == 2 ? "unavailable" : "") }
-                        %tr{class: e[:available] == false ? "unavailable" : ""}
-                          %td
-                            = link_to e[:name], "/staff/courses/" + e[:id] + "/show_template"
-                          %td= e[:code]
-                          %td= e[:speaker]
-                          %td= e[:price]
-                          %td#open
-                            = link_to "开设课程", "/staff/courses/new?course_id=" + e[:id], class: "prepare"
+            .desc-div
+              .undiscover.f14
+                %img.undiscover-icon{src: asset_path("undiscover.png")}
+                %span.message 抱歉！暂无课程信息
+              .table-box.f14
+                %table.table.table-hover.table-height
+                  %thead.th-bg.font-color2
+                    %tr
+                      %th 课程名称
+                      %th 课程编号
+                      %th 主讲人
+                      %th 价&nbsp格
+                      %th 操&nbsp作
+                  %tbody.font-color3
+                    %tr
+                      %td 高等数学
+                      %td GDSX
+                      %td 数学老师
+                      %td 2800
+                      %td.font-color-green 开设课程
+                    %tr
+                      %td 高等数学
+                      %td GDSX
+                      %td 数学老师
+                      %td 2800
+                      %td.font-color-green 开设课程
+                    %tr
+                      %td 高等数学
+                      %td GDSX
+                      %td 数学老师
+                      %td 2800
+                      %td.font-color-green 开设课程
+              .select-page 
+                %span.totalitems 共2页，总计18条
+                %span.choice-page
+                  %ul.pagination.pagination-sm
+                    %li
+                      %a{:href => "#"} «
+                    %li
+                      %a{:href => "#"} 1
+                    %li
+                      %a{:href => "#"} »
+            
+
+
+
+
+/ .content-area
+/   /courses-index
+/   .content-box
+/     .manage-box
+/       .user-search-box
+/         .input-group
+/           %input.form-control#search-input{:type => "text", :placeholder => "输入课程名称", value: "#{@keyword}"}
+/           %span.input-group-btn
+/             %button.btn.btn-default#search-btn{:type => "button"}
+
+/     .manage-content
+/       .tabbable
+/         %ul.nav.nav-tabs
+/           %li.active
+/             %a{"data-toggle" => "tab", :href => "#tab1"} 本区开课
+/           %li
+/             %a{"data-toggle" => "tab", :href => "#tab2"} 可开课程
+
+/         .tab-content
+/           #tab1.tab-pane.active
+/             .local-course
+/               - if @course_insts[:data].length == 0
+/                 .undiscover
+/                   %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
+/                   %span.message 抱歉！暂无课程信息
+/               - else
+/                 .table-box
+/                   %table.table.table-bordered#local-course-table
+/                     %thead
+/                       %tr
+/                         %th 课&nbsp程
+/                         %th 上课时间
+/                         %th 上课地址
+/                         %th 主讲人
+/                         %th 市场价
+/                         %th 操&nbsp作
+/                     %tbody
+/                       - @course_insts[:data].each do |ci|
+/                         %tr{class: "book-record #{ ci[:available] ? "available" : "unavailable" }", "data-id" => ci[:id]}
+/                           %td= link_to ci[:name], "/staff/courses/#{ci[:id]}"
+/                           %td= ci[:date]
+/                           %td= ci[:address]
+/                           %td= ci[:speaker]
+/                           %td= ci[:price]
+/                           %td
+/                             - if ci[:available]
+/                               %a.set-available.link-available{:href => "javascript:void(0);"} 下架
+/                             - else
+/                               %a.set-available.link-unavailable{:href => "javascript:void(0);"} 上架
+/                 .select-page 
+/                   %span.totalitems= "共#{@course_insts[:total_page]}页,总计#{@course_insts[:total_number]}条"
+/                   %span.choice-page
+/                     %ul.pagination.pagination-sm
+/                       %li
+/                         %a{:href => "/staff/courses?keyword=#{@keyword}&course_inst_page=#{@course_insts[:previous_page]}"} «
+/                       - ( (@course_insts[:previous_page] > 2 ? @course_insts[:previous_page] - 2 : 1) .. (@course_insts[:next_page] < @course_insts[:total_page] - 2 ? @course_insts[:next_page] + 2 : @course_insts[:total_page]) ).to_a.each do |page|
+/                         %li
+/                           %a{:href => "/staff/courses?keyword=#{@keyword}&course_inst_page=#{page}"}= page
+/                       %li
+/                         %a{:href => "/staff/courses?keyword=#{@keyword}&course_inst_page=#{@course_insts[:next_page]}"} »
+/           #tab2.tab-pane
+/             .open-course
+/               - if @courses[:data].length == 0
+/                 .undiscover
+/                   %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
+/                   %span.message 抱歉！暂无课程信息
+/               - else
+/                 .table-box
+/                   %table.table.table-bordered#course-table
+/                     %thead
+/                       %tr
+/                         %th 课&nbsp程
+/                         %th 编&nbsp号
+/                         %th 主讲人
+/                         %th 市场价
+/                         %th 操&nbsp作
+/                     %tbody
+/                       - @courses[:data].each do |e|
+/                         / %tr{class: i == 1 ? "clicked" : (i == 2 ? "unavailable" : "") }
+/                         %tr{class: e[:available] == false ? "unavailable" : ""}
+/                           %td
+/                             = link_to e[:name], "/staff/courses/" + e[:id] + "/show_template"
+/                           %td= e[:code]
+/                           %td= e[:speaker]
+/                           %td= e[:price]
+/                           %td#open
+/                             = link_to "开设课程", "/staff/courses/new?course_id=" + e[:id], class: "prepare"
                       
-                .select-page 
-                  %span.totalitems= "共#{@courses[:total_page]}页,总计#{@courses[:total_number]}条"
-                  %span.choice-page
-                    %ul.pagination.pagination-sm
-                      %li
-                        %a{:href => "/staff/courses?keyword=#{@keyword}&course_page=#{@courses[:previous_page]}&profile=template"} «
-                      - ( (@courses[:previous_page] > 2 ? @courses[:previous_page] - 2 : 1) .. (@courses[:next_page] < @courses[:total_page] - 2 ? @courses[:next_page] + 2 : @courses[:total_page]) ).to_a.each do |page|
-                        %li
-                          %a{:href => "/staff/courses?keyword=#{@keyword}&course_page=#{page}&profile=template"}= page
-                      %li
-                        %a{:href => "/staff/courses?keyword=#{@keyword}&course_page=#{@courses[:next_page]}&profile=template"} »
+/                 .select-page 
+/                   %span.totalitems= "共#{@courses[:total_page]}页,总计#{@courses[:total_number]}条"
+/                   %span.choice-page
+/                     %ul.pagination.pagination-sm
+/                       %li
+/                         %a{:href => "/staff/courses?keyword=#{@keyword}&course_page=#{@courses[:previous_page]}&profile=template"} «
+/                       - ( (@courses[:previous_page] > 2 ? @courses[:previous_page] - 2 : 1) .. (@courses[:next_page] < @courses[:total_page] - 2 ? @courses[:next_page] + 2 : @courses[:total_page]) ).to_a.each do |page|
+/                         %li
+/                           %a{:href => "/staff/courses?keyword=#{@keyword}&course_page=#{page}&profile=template"}= page
+/                       %li
+/                         %a{:href => "/staff/courses?keyword=#{@keyword}&course_page=#{@courses[:next_page]}&profile=template"} »
         
 
 

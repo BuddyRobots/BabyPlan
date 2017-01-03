@@ -1,8 +1,8 @@
-# = require moment.min
+F# = require moment.min
 #= require fullcalendar.min
 #= require locale-all
 #= require datepicker-zh-TW
-
+#= require wangEditor.min
 $ ->
   has_photo = false
 

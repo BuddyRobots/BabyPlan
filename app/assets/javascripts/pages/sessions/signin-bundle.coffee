@@ -50,8 +50,7 @@ $ ->
       },
       (data) ->
         if data.success
-          location.href = "/sessions"
-          $("input").val("")
+          location.href = "/staff/accounts"
         else
           if data.code == USER_NOT_EXIST
             $("#error_notice").text("帐号不存在").css("visibility","visible")

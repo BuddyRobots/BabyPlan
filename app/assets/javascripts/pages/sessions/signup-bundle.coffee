@@ -45,6 +45,8 @@ $ ->
         else
           if data.code == USER_EXIST
             $("#mobile_notice").text("该手机号已注册，请直接登录").css("visibility", "visible")
+          if data.code == OTHER_TYPE_USER_EXIST
+            $("#mobile_notice").text("用户类型错误").css("visibility", "visible")
       )
     return false
 
