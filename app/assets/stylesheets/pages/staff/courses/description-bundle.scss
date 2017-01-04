@@ -1,0 +1,172 @@
+@import "wangEditor";
+@import "fullcalendar.min";
+@import "jquery-ui";
+
+.direction {
+	justify-content: space-between;
+}
+#open-now {
+	width: 10.35%;
+  color: #fff;
+  outline: none;
+}
+.input-caption {
+  color: #323232;
+  font-weight: normal;
+}
+.input-area {
+  display: inline-block;
+  width: 20%;
+  height: 2.143em;
+  margin: 0 5% 0 1%;
+}
+.finish-btn-position {
+  position: absolute;
+  right: 24px;
+  top: 24px;
+  z-index: 10;
+}
+#finish-btn {
+  width: 8.63%;
+  color: #fff;
+  outline: none;
+}
+.controls-row {
+  margin-bottom: 2%;
+}
+.value-margin {
+  margin-left: 1.5%;
+}
+.course-introduce {
+  vertical-align: top;
+  margin-right: 1%;
+}
+.wangedit-area {
+  display: inline-block;
+  width: 81.5%;
+}
+#edit-area {
+  height: 20em;
+}
+
+// input
+.text-message {
+  width: 60%;
+  float: left;
+}
+.date {
+  width: 80.4%;
+}
+.form-inline {
+  margin-bottom: 2.7%;
+}
+.select-input {
+  width: 32.5%;
+  padding: 0 1%;
+}
+.open {
+  position: absolute;
+  top: 32px;
+  right: 148px;
+  z-index: 10;
+}
+.code {
+  margin: 0;
+}
+.input-length {
+  display: inline-block;
+  height: 2.143em;
+  width: 19.6%;
+  margin-left: 0.6%;
+  margin-right: 4.45%;
+}
+.num-box {
+  @extend .input-length;
+}
+.kids-capacity {
+  margin-left: 2.7%;
+}
+.form-group {
+  margin: 20px 0;
+}
+.edit-photo {
+  width: 100%;
+  height: 138px;
+  object-fit: contain;
+}
+.photo {
+  width: 19.5%;
+  display: inline-block;
+  margin-left: 7.5%;
+}
+.calendar-wrapper {
+  width: 87%;
+  border: 1px solid #c8c8c8;
+  border-radius: 6px;
+}
+.calendar-operation-wrapper {
+  width: 35%;
+  float: left;
+  text-align: center;
+}
+#calendar {
+  width: 65%;
+  float: right;
+  font-size: 14px;
+}
+.title {
+  font-size: 18px;
+  color: #323232;
+  text-align: center;
+  margin: 20px 0 10px 0;
+}
+.small-tips {
+  font-size: 16px;
+  color: #c8c8c8;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.input-date {
+  display: inline-block;
+  margin-right: 5px;
+  font-size: 16px;
+  color: #323232;
+  vertical-align: middle;
+  font-weight: normal;
+}
+#add-event {
+  width: 240px;
+  background: #10c078;
+  font-size: 16px;
+  color: white;
+}
+.add-btn:hover {
+  color: white;
+}
+.repeat {
+  width: 240px;
+  margin: 10px auto;
+}
+.date-btn {
+  float: left;
+  width: 110px;
+  background: #c8c8c8;
+  font-size: 16px;
+  color: white;
+}
+.date-btn:hover {
+  color: white;
+}
+.week-btn {
+  @extend .date-btn;
+  float: right;
+}
+h2 {
+  font-size: 18px;
+  padding-top: 5px;
+}
+
+.active-btn {
+  background: #f7873d;
+}
+

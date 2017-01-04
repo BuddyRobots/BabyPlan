@@ -1,36 +1,125 @@
 - content_for :head do
   = javascript_include_tag "pages/staff/courses/show_template-bundle"
   = stylesheet_link_tag "pages/staff/courses/show_template-bundle", :media => "all"
-  :javascript
-    window.course_id = "#{@course.id.to_s}"
+  / :javascript
+  /   window.course_id = "#{@course.id.to_s}"
 
 
 .content-area
-  .content-box
-    .manage-box.clearfix
-      %a#back{:href => "/staff/courses?profile=template"}
-        %img{src: asset_path("web/back.png")}
-      %p.course-add 可开课程
-      .btn.newcourse-btn{:type => "button"} 
-        %img.add{src: asset_path("managecenter/add.png")}
-        开设课程
+  .main-top.direction
+    %a{href: "#"}
+      %img.back{src: asset_path("back.png")}
+    %ul.set
+      %li
+        %a.f16{href: staff_accounts_path} 账号设置
+      %li
+        %a.f16.set-left-border{href: signout_sessions_path} 退出登录
+        / %a.f16.set-left-border= link_to "退出登录",  signin_page_sessions_path, class: "类名", method: :delete
+  .main-content.bg2
+    %button.btn.delete-normal.font-color1.delete-btn-position#delete-btn{type: "button"} 删除
+    %button.btn.new-normal.font-color1.create-btn-position#create-btn{type: "button"} 开设课程
+    .table-div
+      .tabbable
+        %ul.nav.nav-tabs
+          %li.active
+            %a.f16.font-color1{"data-toggle" => "tab", :href => "#tab1"} 模板详情
+          %li
+            %a.f16.font-color1{"data-toggle" => "tab", :href => "#tab2"} 系列课程
+        .tab-content.bg3
+          #tab1.tab-pane.active
+            .desc-div
+              .desc-items
+                %span.course-name 课程名称:
+                %span.unedit-box#classname-span 少儿计算机课程
+                %span.course-name#speaker 主讲人:
+                %span.unedit-box#classspeaker-span 计算机老师
+              
+              .desc-items
+                %span.course-name 课程编号:
+                %span.unedit-box#code-span SEJSJ
+                %span.course-name#charge 价格:
+                %span.unedit-box#charge-span 4200
+                %span.course-name#nums 课次:
+                %span.unedit-box#nums-span 21
+              .course-introduce.clearfix
+                %span.introduce 课程介绍:
+                %div.introduce-details 计算机的应用在中国越来越普遍，改革开放以后，中国计算机用户的数量不断攀升，应用水平不断提高，特别是互联网、通信、多媒体等领域的应用取得了不错的成绩。1996年至2009 年，计算机用户数量从原来的630万增长至6710 万台，联网计算机台数由原来的2.9万台上升至5940万台。互联网用户已经达到3.16 亿，无线互联网有6.7 亿移动用户，其中手机上网用户达1.17 亿，为全球第一位。
+          #tab2.tab-pane
+            .desc-div
+              .undiscover.f14
+                %img.undiscover-icon{src: asset_path("undiscover.png")}
+              .table-box.f14
+                %table.table.table-hover.table-height
+                  %thead.th-bg.font-color2
+                    %tr
+                      %th 课程编号
+                      %th 上课时间
+                      %th 上课地址
+                      %th 主讲人
+                      %th 价&nbsp格
+                      %th 课&nbsp次
+                  %tbody.font-color3
+                    %tr
+                      %td 高等数学
+                      %td 2016/12/12-2017/1/12
+                      %td 北京市东三环南路2号瑞赛商务楼
+                      %td 数学老师
+                      %td 2800
+                      %td 21
+                    %tr
+                      %td 高等数学
+                      %td 2016/12/12-2017/1/12
+                      %td 北京市东三环南路2号瑞赛商务楼
+                      %td 数学老师
+                      %td 2800
+                      %td 21
+                    - 7.times do
+                      %tr
+                        %td 高等数学
+                        %td 2016/12/12-2017/1/12
+                        %td 北京市东三环南路2号瑞赛商务楼
+                        %td 数学老师
+                        %td 2800
+                        %td 21
+              .select-page 
+                %span.totalitems 共2页，总计18条
+                %span.choice-page
+                  %ul.pagination.pagination-sm
+                    %li
+                      %a{:href => "#"} «
+                    %li
+                      %a{:href => "#"} 1
+                    %li
+                      %a{:href => "#"} »
 
-    .manage-content
-      .desc-items
-        %span.course-name 课程名称:
-        %span.unedit-box#classname-span= @course.name
-        %span.course-name#speaker 主讲人:
-        %span.unedit-box#classspeaker-span= @course.speaker
-        %span.course-name#nums 课次:
-        %span.unedit-box#nums-span= @course.length.to_s + "节"
+
+
+/ .content-area
+/   .content-box
+/     .manage-box.clearfix
+/       %a#back{:href => "/staff/courses?profile=template"}
+/         %img{src: asset_path("web/back.png")}
+/       %p.course-add 可开课程
+/       .btn.newcourse-btn{:type => "button"} 
+/         %img.add{src: asset_path("managecenter/add.png")}
+/         开设课程
+
+/     .manage-content
+/       .desc-items
+/         %span.course-name 课程名称:
+/         %span.unedit-box#classname-span= @course.name
+/         %span.course-name#speaker 主讲人:
+/         %span.unedit-box#classspeaker-span= @course.speaker
+/         %span.course-name#nums 课次:
+/         %span.unedit-box#nums-span= @course.length.to_s + "节"
       
-      .desc-items
-        %span.course-name 课程编号:
-        %span.unedit-box#code-span= @course.code
-        %span.course-name#charge 市场价:
-        %span.unedit-box#charge-span= @course.price.to_s + "元"
-        %span.course-name#public-price 公益价:
-        %span.unedit-box#public-price-span= @course.price_pay.to_s + "元"
-      .course-introduce.clearfix
-        %span.introduce 课程介绍:
-        %div.introduce-details= @course.desc.to_s.html_safe
+/       .desc-items
+/         %span.course-name 课程编号:
+/         %span.unedit-box#code-span= @course.code
+/         %span.course-name#charge 市场价:
+/         %span.unedit-box#charge-span= @course.price.to_s + "元"
+/         %span.course-name#public-price 公益价:
+/         %span.unedit-box#public-price-span= @course.price_pay.to_s + "元"
+/       .course-introduce.clearfix
+/         %span.introduce 课程介绍:
+/         %div.introduce-details= @course.desc.to_s.html_safe

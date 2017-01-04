@@ -11,17 +11,14 @@
   outline: none;
 }
 .input-caption {
-  display: inline-block;
-  vertical-align: middle;
-  font-size: 16px;
   color: #323232;
   font-weight: normal;
 }
 .input-area {
   display: inline-block;
-  width: 238px;
-  height: 30px;
-  margin: 0 20px 0 10px;
+  width: 20%;
+  height: 2.143em;
+  margin: 0 5% 0 1%;
 }
 .finish-btn-position {
   position: absolute;
@@ -34,5 +31,20 @@
   color: #fff;
   outline: none;
 }
-
-
+.controls-row {
+  margin-bottom: 2%;
+}
+.value-margin {
+  margin-left: 1.5%;
+}
+.course-introduce {
+  vertical-align: top;
+  margin-right: 1%;
+}
+.wangedit-area {
+  display: inline-block;
+  width: 81.5%;
+}
+#edit-area {
+  height: 20em;
+}

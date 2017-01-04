@@ -23,6 +23,9 @@ class Staff::CoursesController < Staff::ApplicationController
 
     @profile = params[:profile]
   end
+  
+  def description
+  end
 
   def create
     retval = CourseInst.create_course_inst(current_user, current_center, params[:course])
@@ -37,10 +40,10 @@ class Staff::CoursesController < Staff::ApplicationController
   end
 
   def show_template
-    @course = Course.where(id: params[:id]).first
-    if @course.blank?
-      redirect_to action: :index and return
-    end
+    # @course = Course.where(id: params[:id]).first
+    # if @course.blank?
+    #   redirect_to action: :index and return
+    # end
   end
 
   def show

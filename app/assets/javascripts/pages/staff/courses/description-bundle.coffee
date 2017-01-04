@@ -5,21 +5,6 @@
 #= require datepicker-zh-TW
 
 $ ->
-  editor = new wangEditor('edit-area')
-  
-  editor.config.menus = [
-        'head',
-        'img'
-     ]
-  editor.config.uploadImgUrl = '/materials'
-
-  editor.config.uploadHeaders = {
-    'Accept' : 'HTML'
-  }
-
-  editor.config.hideLinkImg = true
-
-  editor.create()
   
   has_photo = false
 
@@ -52,13 +37,15 @@ $ ->
     eventLimit: true
     fixedWeekCount: false
     nowIndicator: true
-    height: 355
-    # aspectRatio: 2
+    height: 310
+    # contentHeight: 'auto'
+    # aspectRatio: 15
     eventClick: (calEvent, jsEvent, view) ->
       $("#calendar").fullCalendar('removeEvents', calEvent.id)
   })
 
-  $("#course-code").css("width", $(".num-box").width() - $(".course-num").width() - 5)
+
+  $("#course-code").css("width", $(".num-box").width() - $(".course-num").width() - 6)
 
   check_course_input = (code, capacity, price, price_pay, length, date, speaker, address, date_in_calendar) ->
     if code == "" || capacity == "" || price == "" || length == "" || date == "" || speaker == "" || address == ""

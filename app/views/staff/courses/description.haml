@@ -1,0 +1,153 @@
+- content_for :head do
+  = javascript_include_tag "pages/staff/courses/description-bundle"
+  = stylesheet_link_tag "pages/staff/courses/description-bundle", :media => "all"
+  / :javascript
+  /   window.cid = "#{@course.id.to_s}"
+
+.content-area
+  .main-top.direction
+    %a{href: "#"}
+      %img.back{src: asset_path("back.png")}
+    %ul.set
+      %li
+        %a.f16{href: staff_accounts_path} 账号设置
+      %li
+        %a.f16.set-left-border{href: signout_sessions_path} 退出登录
+        / %a.f16.set-left-border= link_to "退出登录",  signin_page_sessions_path, class: "类名", method: :delete
+  .main-content.bg2
+    %label.checkbox-inline.open.f14.font-color3#available
+      %input#unshelve{:type => "checkbox"} 暂不上架
+    %button.btn.finish-normal.font-color1.finish-btn-position#finish-btn{type: "button"} 完成
+    .table-div
+      .tabbable
+        %ul.nav.nav-tabs
+          %li.active
+            %a.f16.font-color1{"data-toggle" => "tab", :href => "#tab1"} 模板详情
+        .tab-content.bg3
+          #tab1.tab-pane.active
+            .desc-div
+              .top-box.clearfix
+                .text-message
+                  %form.form-inline
+                    %label.input-caption.f16 课程名称:
+                    %span.unedit-box.f16#name-span 少儿计算机知识学习
+                  .form-group
+                    %label.input-caption.f16 上课时间:
+                    %input.input-area.form-control.date#course-date{:type => "text"}
+                  .form-group
+                    %label.input-caption.f16 上课中心:
+                    %select.form-control.input-area.select-input
+                      %option 朝阳儿童中心
+                      %option 朝阳儿童中心
+                      %option 朝阳儿童中心
+                    %label.input-caption.f16 主讲人:
+                    %input.input-area.form-control.select-input#course-speaker{:type => "text"}
+                .photo
+                  = form_tag("/", method: "post", multipart: true, id: "upload-photo-form", class: "hide") do
+                    = file_field_tag "photo_file", { class: "hide", accept: ".jpg,.png" }
+                  %a#upload-photo{href: "javascript:void(0);"}
+                    %img.edit-photo#photo{src: asset_path("photo-course.png")}
+              .controls.controls-row
+                %label.input-caption.f16 开课编号:
+                %span.num-box
+                  %span.course-num.f14 SESJ-
+                  %input.input-area.form-control.code#course-code{:type => "text"}
+                %label.input-caption.f16 课次:
+                %input.input-area.form-control.input-length#course-length{:type => "text"}
+              .controls.controls-row
+                %label.input-caption.f16 上课教室:
+                %input.form-control.input-length#course-classroom{:type => "text"}
+                %label.input-caption.f16 价格:
+                %input.form-control.input-length#course-price{:type => "text"}
+                %label.input-caption.kids-capacity.f16 容量:
+                %input.form-control.input-length#course-capacity{:type => "text"}
+
+              .calendar-wrapper.clearfix
+                .calendar-operation-wrapper
+                  %p.title 课程日历
+                  %p.small-tips （单击日历中的时间进行删除）
+                  .form-inline
+                    %label.input-date 上课日期:
+                    %input.input-area.form-control#datepicker{:type => "text"}
+                  .form-inline
+                    %label.input-date 开始时间:
+                    %input.input-area.form-control#start-time{:type => "text"}
+                  .form-inline
+                    %label.input-date 结束时间:
+                    %input.input-area.form-control#end-time{:type => "text"}
+                  .btn#add-event{:type => "button"} 添加单次
+                  .repeat.clearfix
+                    .btn.date-btn{:type => "button"} 次日重复
+                    .btn.week-btn{:type => "button"} 每周重复
+                #calendar
+
+
+
+/ .content-area
+/   /courses-new
+/   .content-box
+/     .manage-box
+/       %a#back{:href => "/staff/courses?profile=template"}
+/         %img{src: asset_path("web/back.png")}
+/       %p.course-add 添加课程
+/       .btn.end-btn{:type => "button"} 
+/         %img.end{src: asset_path("managecenter/ticker.png")}
+/         完成
+/       %label.checkbox-inline.open#available
+/         %input#unshelve{:type => "checkbox"} 暂不上架
+
+/     .manage-content
+/       .top-box.clearfix
+/         .text-message
+/           %form.form-inline
+/             %label.input-caption 课程名称:
+/             %span.unedit-box#name-span= @course.name
+/           .form-group
+/             %label.input-caption 上课时间:
+/             %input.input-area.form-control#course-date{:type => "text"}
+/           .form-group
+/             %label.input-caption 上课地址:
+/             %input.input-area.form-control#course-address{:type => "text"}
+/         .photo
+/           = form_tag("/", method: "post", multipart: true, id: "upload-photo-form", class: "hide") do
+/             = file_field_tag "photo_file", { class: "hide", accept: ".jpg,.png" }
+/           %a#upload-photo{href: "javascript:void(0);"}
+/             %img.edit-photo#photo{src: asset_path("web/photo.png")}
+
+/       .controls.controls-row
+/         %label.input-caption 开课编号:
+/         %span.num-box
+/           %span.course-num= @course.code + "-"
+/           %input.input-area.form-control#course-code{:type => "text"}
+/         %label.input-caption 主讲人:
+/         %input.input-area.form-control#course-speaker{:type => "text", value: @course.speaker}
+/         %label.input-caption.kids-capacity 容量:
+/         %input.input-area.form-control#course-capacity{:type => "text"}
+/       .controls.controls-row
+/         %label.input-caption.course-length 课次:
+/         %input.input-area.form-control#course-length{:type => "text", value: @course.length}
+/         %label.input-caption 市场价:
+/         %input.input-area.form-control#course-price{:type => "text", value: @course.price}
+/         %label.input-caption 公益价:
+/         %input.input-area.form-control#public-price{:type => "text", value: @course.price_pay}
+      
+/       .calendar-wrapper.clearfix
+/         .calendar-operation-wrapper
+/           %p.title 课程日历
+/           %p.small-tips （单击日历中的时间进行删除）
+/           .form-inline
+/             %label.input-date 上课日期:
+/             %input.input-area.form-control#datepicker{:type => "text"}
+/           .form-inline
+/             %label.input-date 开始时间:
+/             %input.input-area.form-control#start-time{:type => "text"}
+/           .form-inline
+/             %label.input-date 结束时间:
+/             %input.input-area.form-control#end-time{:type => "text"}
+/           .btn#add-event{:type => "button"} 添加单次
+/           .repeat.clearfix
+/             .btn.date-btn{:type => "button"} 次日重复
+/             .btn.week-btn{:type => "button"} 每周重复
+/         #calendar
+
+

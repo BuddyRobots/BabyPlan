@@ -129,6 +129,7 @@ Rails.application.routes.draw do
 
     resources :courses do
       collection do
+        get :description
         get :get_id_by_name
         get :next_refund_request
       end

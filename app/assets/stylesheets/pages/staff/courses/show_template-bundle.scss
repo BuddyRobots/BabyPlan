@@ -1,94 +1,52 @@
 
-
-.content-area {
-	position: absolute;
-	width: 100%;
-	bottom: 0;
-	top: 0;
-	background:#f7fcff;
-	box-shadow: -1px -1px 6px #9c9c9c inset;
-	padding: 20px;
+.direction {
+	justify-content: space-between;
 }
-
-.content-box {
-	position: relative;
-	box-shadow: 0 -1px 6px #9c9c9c inset;
-	background: white;  
-	height: 100%;
+.create-btn-position {
+  position: absolute;
+  right: 24px;
+  top: 24px;
+  z-index: 10;
 }
-.manage-box {
-	height: 58px;
-	border-bottom: 1px solid #c8c8c8;
-	overflow: hidden;
+.delete-btn-position {
+  position: absolute;
+  right: 160px;
+  top: 24px;
+  z-index: 10;
 }
-.manage-content {
-	overflow: auto;
-	position: absolute;
-	top: 60px;
-	left: 0px;
-	bottom: 0px;
-	right: 0px;
+#create-btn, #delete-btn {
+  width: 10.35%;
+  color: #fff;
+  outline: none;
 }
-#back {
-	float: left;
-}
-.course-add {
-	float: left;
-	font-size: 16px;
-	color: #323232;
-	padding-left: 20px;
-	height: 52px;
-	line-height: 54px;
-	margin-top: 3px;
-	border-left: 1px solid #c8c8c8;
-}
-.newcourse-btn {
-	float: right;
-	margin: 11.5px 20px 0 0;
-	width: 100px;
-	height: 34px;
-	padding: 0;
-	line-height: 32px;
-	color: white;
-	background: #f7873d;
-	border-radius: 6px;
-}
-.newcourse-btn:hover {
-	background: #f7873d;
-	color: white;
-}
-.add {
-	margin-top: -2px;
-}
-
 .desc-items {
-	margin: 15px 20px;
+	margin: 1.5% 0;
 }
 .unedit-box {
 	display: inline-block;
 	vertical-align: middle;
 	font-size: 14px;
-	color: #323232;
-	width: 252px;
-	height: 30px;
-	line-height: 30px;
-	margin: 0 20px 0 0;
+	color: #3c3d45;
+	width: 20%;
+	height: 2.143em;
+	line-height: 2.143em;
+	margin: 0 2% 0 0;
 }
-#nums {
-	margin-left: 16px;
+#charge {
+	margin-left: 1.6%;
 }
 .course-name {
 	display: inline-block;
 	vertical-align: middle;
-	font-size: 16px;
-	color: #323232;
-	margin-right: 10px;
+	font-size: 14px;
+	color: #3c3d45;
+	margin-right: 1%;
 }
 .course-introduce {
-	margin-bottom: 20px;
+	margin-bottom: 2%;
 	.introduce-details {
 		font-size: 14px;
-		color: #323232;
+		color: #3c3d45;
 		display: inline-block;
 		width: 86%;
 		text-indent: 28px;
@@ -98,7 +56,8 @@
 		float: left;
 		vertical-align: top;
 		font-size: 16px;
-		color: #323232;
-		margin: 0 12px 15px 20px;
+		color: #3c3d45;
+		margin: 0 1.2% 1.5% 0;
 	}
 }
+

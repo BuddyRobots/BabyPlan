@@ -34,7 +34,6 @@
             .desc-div
               .undiscover.f14
                 %img.undiscover-icon{src: asset_path("undiscover.png")}
-                %span.message 抱歉！暂无课程信息
               .table-box.f14
                 %table.table.table-hover.table-height
                   %thead.th-bg.font-color2
@@ -62,13 +61,14 @@
                       %td 2800
                       %td
                         %a.font-color-green.shelve{href: "#"} 上架
-                    %tr
-                      %td 高等数学
-                      %td 2016/12/12-2017/1/12
-                      %td 北京市东三环南路2号瑞赛商务楼
-                      %td 数学老师
-                      %td 2800
-                      %td.font-color4 已结课
+                    - 7.times do
+                      %tr
+                        %td 高等数学
+                        %td 2016/12/12-2017/1/12
+                        %td 北京市东三环南路2号瑞赛商务楼
+                        %td 数学老师
+                        %td 2800
+                        %td.font-color4 已结课
               .select-page 
                 %span.totalitems 共2页，总计18条
                 %span.choice-page
@@ -83,7 +83,6 @@
             .desc-div
               .undiscover.f14
                 %img.undiscover-icon{src: asset_path("undiscover.png")}
-                %span.message 抱歉！暂无课程信息
               .table-box.f14
                 %table.table.table-hover.table-height
                   %thead.th-bg.font-color2
