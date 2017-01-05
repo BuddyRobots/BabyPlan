@@ -1,194 +1,136 @@
 @import "fullcalendar.min";
 @import "jquery-ui";
 
-input, label, h5 {
-	margin: 0;
-	padding: 0;
+.table-height {
+  margin-bottom: 0;
+  tbody {
+    tr:last-child {
+      border-bottom: none;
+    }
+  }
 }
-.content-area {
-	position: absolute;
-	width: 100%;
-	bottom: 0;
-	top: 0;
-	background:#f7fcff;
-	box-shadow: -1px -1px 6px #9c9c9c inset;
-	padding: 20px;
+.select-page {
+  margin-top: 2%;
 }
-
-.manage-content {
-	overflow: auto;
-	position: absolute;
-	top: 20px;
-	left: 0px;
-	bottom: 0px;
-	right: 0px;
-	box-shadow: 0 -1px 6px #9c9c9c inset;
-	background: white;  
-	margin: 0 20px 20px 20px;
+.direction {
+	justify-content: space-between;
 }
-.edit-btn {
-	position: absolute;
-	top: 15px;
-	right: 20px;
-	z-index: 10;
-	width: 100px;
-	height: 34px;
-	padding: 0;
-	line-height: 32px;
-	color: white;
-	background: #f7873d;
-	border-radius: 6px;
+.create-btn-position {
+  position: absolute;
+  right: 2.07%;
+  top: 24px;
+  z-index: 10;
 }
-.edit-btn:hover {
-	color: white;
+.delete-btn-position {
+  position: absolute;
+  right: 22%;
+  top: 24px;
+  z-index: 10;
 }
-.finish-btn {
-	@extend .edit-btn;
-	display: none;
+.unshelve-btn-position {
+  position: absolute;
+  right: 12%;
+  top: 24px;
+  z-index: 10;
 }
-.unshelve-btn {
-	@extend .edit-btn;
-	right: 140px;
+#edit-btn, #delete-btn, #unshelve-btn {
+  width: 8.63%;
+  color: #fff;
+  outline: none;
 }
-.unshelve-btn:hover {
-	color: white;
+.edit-photo, .unedit-photo {
+  width: 100%;
+  height: 138px;
+  object-fit: contain;
 }
-.available {
-	background: #f7873d;
+.photo {
+  position: relative;
+  width: 19.5%;
+  display: inline-block;
+  margin-left: 7.5%;
 }
-.unavailable {
-		background: #10c078;
-	}
-.tabbable {
-	margin: 20px 0 0 0;
-}
-.back {
-	position: absolute;
-	top: 19px;
-}
-.nav-tabs {
-	margin-bottom: 0;
-	padding-left: 55px;
-	li {
-		font-size: 16px;
-		color: #323232;
-	}
-}
-.top-box {
-	margin-top: 10px;
+#upload-photo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  // display: none;
 }
 .text-message {
-	width: 50%;
+	width: 60%;
 	float: left;
 }
 .form-inline {
-	margin: 20px 0;
+	margin: 3.3% 0;
 }
-.photo {
-	position: relative;
-	width: 17.25%;
-	display: inline-block;
-	margin-left: 7.5%;
-	margin-top: 0.5%;
-}
-.unedit-photo, .edit-photo {
-	width: 200px;
-	height: 138px;
-}
-#upload-photo {
-	position: absolute;
-	top: 0;
-	left: 0;
-	bottom: 0;
-	display: none;
+#name-span {
+  vertical-align: middle;
 }
 .input-caption {
 	display: inline-block;
 	vertical-align: middle;
-	font-size: 16px;
-	color: #323232;
-	margin-right: 5px;
-	margin-left: 20px;
+	margin-right: 0.5%;
 	font-weight: normal;
-}
-.shelve {
-	color: #0fc077;
-	vertical-align: middle;
-}
-.kids-capacity {
-	margin-left: 36px;
-}
-.num-box {
-	@extend .input-area;
-}
-#num-span {
-	width: auto;
-}
-#course-address, #course-date {
-	width: 80%;
 }
 .course-times {
-	margin-left: 52px;
+  margin-left: 1.4%;
+}
+.long-input {
+  width: 80%;
 }
 .input-area {
-	display: inline-block;
-	width: 17.2%;
-	height: 30px;
+  display: inline-block;
+  width: 17.2%;
+  height: 30px;
 }
 .controls-row {
-	margin-bottom: 15px;
+  margin-bottom: 1.5%;
 }
 .unedit-box {
-	display: inline-block;
-	vertical-align: middle;
-	font-size: 14px;
-	color: #323232;
-	width: 17.2%;
-	height: 30px;
-	line-height: 30px;
+  display: inline-block;
+  vertical-align: middle;
+  width: 17.2%;
+  height: 30px;
+  line-height: 30px;
 }
 .num-box {
-	@extend .unedit-box;
+  @extend .unedit-box;
+}
+#num-span {
+  width: auto;
 }
 .course-num {
-	vertical-align: middle;
-	font-size: 14px;
-	color: #323232;
-	height: 30px;
-	line-height: 30px;
+  vertical-align: middle;
+  height: 30px;
+  line-height: 30px;
 }
 .edit-box {
-	display: none;
+  display: none;
 }
 #date-span, #address-span {
-	width: 75%;
+  width: 75%;
 }
-
-
 .class-calendar {
-	float: left;
-	font-size: 16px;
-	color: #323232;
-	font-weight: normal;
+  float: left;
+  font-weight: normal;
 }
-
 .show-calendar {
-	float: left;
-	width: 90.6%;
-	border: 1px solid #c8c8c8;
-	margin-left: 10px;
-	border-radius: 4px;
-	font-size: 14px;
+  float: left;
+  width: 90.6%;
+  border: 1px solid #c8c8c8;
+  margin-left: 1%;
+  border-radius: 4px;
+  font-size: 14px;
 }
 h2 {
-	font-size: 18px;
-	padding-top: 5px;
+  font-size: 18px;
+  padding-top: 0.5%;
 }
 
 // edit-calendar
 .calendar-wrapper {
 	width: 72.7%;
-	margin: 20px 0 0 20px;
+	margin: 20px 0 0 0;
 	// border: 1px solid #c8c8c8;
 	border-radius: 6px;
 }
@@ -251,182 +193,59 @@ h2 {
 	float: right;
 }
 
-// undiscover message
-.undiscover {
-	text-align: center;
-	padding: 30px;
+// tab5 user review
+.review-items {
+  padding: 2.4% 0;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #eaebf2;
 }
-.undiscover-icon {
-	display: inline-block;
-	width: 100%;
-	max-width: 39px;
+.avatar-icon {
+  border-radius: 4px;
+  width: 100%;
+  max-width: 60px;
+  height: 4.2588em;
+  object-fit: contain;
 }
-.undiscover-message {
-	font-size: 16px;
-	color: #969696;
-	margin-left: 20px;
+.img-div {
+  width: 6%;
+  height: 4.2588em;
 }
-
-// select-page
-.select-page {
-	text-align: right;
-	margin: 10px 20px 0 0;
-	padding-bottom: 5px;
+.review-div {
+  width: 92%;
 }
-.totalitems {
-	font-size: 12px;
-	color: #969696;
+.head-div, .reviews {
+  margin-bottom: 1%;
 }
-.choice-page {
-	display: inline-block;
-	vertical-align: middle;
-}
-.pagination {
-	display: inline-block;
-	margin: 0;
-	padding: 0;
-	margin-left: 15px;
-}
-// user review
-.user-review-box {
-	border-radius: 6px;
-	border: 1px solid #ddd;
-	margin: 20px 20px 0 20px;
-}
-.user-checkbox {
-	margin: 5px 0;
-	margin-left: 10px;
-}
-.user-review {
-	font-size: 16px;
-	color: #323232;
-	margin: 0 20px;
-	vertical-align: bottom;
+#show-review, #unshow-review {
+  color: #fff;
+  width: 7.65%;
+  outline: none;
+  padding: 0;
+  border-radius: 4px;
 }
 .user-name {
-	font-size: 16px;
-	color: #646464;
-	margin-top: -3px;
-	span {
-		display: inline-block;
-		margin-right: 15px;
-	}
-	img {
-		vertical-align: top;
-	}
+  font-size: 16px;
 }
-.book-description {
-	position: relative;
-}
-.book-description:not(:last-child) {
-	border-bottom: 1px solid #ddd;
-}
-.book-img {
-	display: block;
-	float: left;
-	margin: 0 10px;
-	width: 60px;
-	height: 60px;
-}
-.user-item {
-	margin: 18px 0;
-	p {
-		padding: 1.2px;
-	}
-}
-
-.user-name {
-	font-size: 16px;
-	color: #646464;
-	margin-top: -3px;
-}
-.date {
-	font-size: 12px;
-	color: #969696;
-}
-.user-review-content {
-	font-size: 14px;
-	color: #787878;
-}
-.review-status {
-	position: absolute;
-	top: 39px;
-	right: 20px;
-	color: white;
-	font-size: 14px;
-	color: #323232;
-}
-.open-btn {
-	position: absolute;
-	width: 100px;
-	height: 36px;
-	top: 14px;
-	right: 20px;
-	color: white;
-	background: #f7873d;
-	border: 0;
-}
-
-//tab3
-.table-box {
-	padding: 0;
-	margin: 20px 20px 0 20px;
-}
-#register-table {
-	border-radius: 6px;
-	border: 1px solid #ddd;
-	font-size: 14px;
-	color: #323232;
-	margin-bottom: 0;
-	th {
-		text-align: center;
-		height: 40px;
-		line-height: 40px;
-		padding: 0;
-	}
-	.td-data {
-		font-size: 14px;
-		color: #505050;
-		height:45px;
-		line-height: 45px;
-		text-align: center;
-		padding: 0;
-		.unshelve {
-			color: #969696;
-		}
-		.shelve {
-			color: #f7873d;
-		}
-		a {
-			
-			text-decoration: underline;
-		}
-	}
-	.clicked {
-		background: #fdd3b9;
-	}
-}
-.details {
-	color: #f7873d;
-}
+// tab2
 .details:link {
-	color: #f7873d;
+	color: #e9885d;
 }
 .details:visited {
-	color: #f7873d;
+	color: #e9885d;
 }
 .details:hover {
-	color: #f7873d;
+	color: #e9885d;
 }
 .details:active {
-	color: #f7873d;
+	color: #e9885d;
 }
 .triangle-down {
 	display: inline-block;
 	vertical-align: middle;
 	width: 0;
 	height: 0;
-	border-top: 5px solid #f7873d;
+	border-top: 5px solid #e9885d;
 	border-right: 5px solid transparent;
 	border-left: 5px solid transparent;
 }
@@ -435,22 +254,26 @@ h2 {
 	vertical-align: middle;
 	width: 0;
 	height: 0;
-	border-bottom: 5px solid #f7873d ;
+	border-bottom: 5px solid #e9885d;
 	border-right: 5px solid transparent;
 	border-left: 5px solid transparent;
 }
+.unpay-triangle-down {
+  display: inline-block;
+  vertical-align: middle;
+  width: 0;
+  height: 0;
+  border-top: 5px solid #adadbe;
+  border-right: 5px solid transparent;
+  border-left: 5px solid transparent;
+}
 .status {
-	display: none;
+	// display: none;
 }
 .course-status {
-	margin: 10px 0 5px 10px;
-}
-.item-status, .comments-title {
-	font-size: 16px;
-	color: #323232;
+	margin: 1% 0 0.5% 0;
 }
 .comments {
-	margin-left: 42px;
 	line-height: 150%;
 }
 .comments-title {
@@ -459,9 +282,7 @@ h2 {
 }
 .comments-content, .uncomment {
 	display: inline-block;
-	width: 95%;
-	font-size: 14px;
-	color: #787878;
+	width: 93%;
 } 
 .square {
 	display: inline-block;
@@ -469,7 +290,7 @@ h2 {
 	height: 18px;
 	background: #cfcfcf;
 	border-radius: 2px;
-	margin-right: 5px;
+	margin-right: 0.5%;
 	vertical-align: middle;
 }
 .join-square {
@@ -480,19 +301,18 @@ h2 {
 	@extend .square;
 	background: #d70c19;
 }
-
 .active-btn {
 	background: #f7873d;
 }
-//tab4
+
+//tab3
 .sign-box {
-	margin: 20px 20px 0 20px;
 	border-radius: 6px;
 	border: 1px solid #ddd;
 	display: -ms-flex;
-  	display: -webkit-flex;
-  	display: -moz-flex;
-  	display: -o-flex;
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -o-flex;
 	display: flex;
 }
 .sign-method {
@@ -500,15 +320,19 @@ h2 {
 	        flex: 1;
 	border-right: 1px solid #ddd;
 }
-.form-horizontal {
-	padding: 40px 0;
+.choice-lesson {
+  margin-bottom: 0;
+	padding: 11.74% 0;
+  padding-left: 5%;
 	border-bottom: 1px dashed #ddd;
-	.form-group {
-		margin: 0;
-	}
 }
-.control-label {
-	font-weight: normal;
+.lesson-input {
+  display: inline-block;
+  vertical-align: middle;
+  width: 47%;
+  height: 2.428em;
+  margin: 0 0 0 1%;
+  padding: 0 0 0 2%;
 }
 .mask {
 	visibility: hidden;    //隐藏mask
@@ -527,37 +351,36 @@ h2 {
 	-webkit-justify-content: center;
 	        justify-content: center;
 	.notice {
-		padding: 0 34%;
-		font-size: 16px;
-		color: #323232;
+		padding: 0 30%;
 	}
 }
-
 .method {
 	position: relative;
-	padding: 0 28.5%;
+  text-align: center;
 }
 .caption {
-	padding: 20px 0;
-	font-size: 14px;
-	color: #323232;
+	padding: 5.85% 0;
 }
 #qr-code {
-	margin-bottom: 40px;
+	margin-bottom: 11.7%;
 }
 .code-figure {
 	width: 100%;
-	max-width: 200px;
+	max-width: 160px;
+}
+.mobile-input {
+  width: 47%;
+  margin: 0 auto;
 }
 .sign-btn {
-	width: 100%;
+	width: 47%;
 	height: 34px;
 	padding: 0;
 	line-height: 32px;
 	color: white;
 	background: #10c078;
 	border-radius: 6px;
-	margin: 20px 0;
+	margin: 5.85% 0;
 }
 .sign-btn:hover {
 	color: white;
@@ -580,9 +403,8 @@ h2 {
 	width: 60%;
 	h5 {
 		font-size: 24px;
-		color: #323232;
 		text-align: center;
-		margin-bottom: 40px;
+		margin-bottom: 5%;
 	}
 }
 #sign-table {
@@ -590,7 +412,7 @@ h2 {
 	border-radius: 6px;
 	border: 1px solid #ddd;
 	font-size: 20px;
-	color: #323232;
+	color: #6f6f7e;
 	.sign-data {
 		width: 100px;
 		height:45px;
@@ -604,11 +426,11 @@ h2 {
 	}
 }
 
-//tab5
+//tab4
 .courses-income-box {
-	width: 880px;
+	width: 88%;
 	border: 1px solid #c8c8c8;
-	margin: 40px 0 0 40px;
+  margin-bottom: 3%;
 }
 .income-title {
 	font-size: 16px;
@@ -644,8 +466,8 @@ h2 {
 	border: 0;
 }
 .pie-box {
-	width: 880px;
-	margin: 40px 0 0 40px;
+	width: 88%;
+  margin-bottom: 3%;
 	display: flex;
 	justify-content: space-between;
 	display: -ms-flexbox;
@@ -656,18 +478,18 @@ h2 {
 	-o-justify-content: space-between;;
 }
 .gender-pie, .age-pie {
-	width: 420px;
+	width: 48%;
 	height: 350px;
 	border: 1px solid #c8c8c8;
 }
 .kids-nums {
-	width: 880px;
-	margin: 40px 0 0 40px;
+	width: 88%;
 	border: 1px solid #c8c8c8;
+  margin-bottom: 3%;
 }
 .attend-status {
 	@extend .kids-nums;
-	margin-bottom: 20px;
+  margin-bottom: 0;
 }
 .pie-title {
 	font-size: 16px;

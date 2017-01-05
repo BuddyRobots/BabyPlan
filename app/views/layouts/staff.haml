@@ -11,8 +11,8 @@
   .wrapper
     .layout-left
       %img.logo2{src: asset_path("logo2.png")}
-      .avator-div.f16
-        %img.layout-avator{ src: @current_user.avatar.nil? ?  asset_path("default.png") : @current_user.avatar.path }
+      .avatar-div.f16
+        %img.layout-avatar{ src: @current_user.avatar.nil? ?  asset_path("default.png") : @current_user.avatar.path }
         %p.layout-name= @current_user.name.nil? ? "欢迎您" : @current_user.name
       .main
         .sidebar

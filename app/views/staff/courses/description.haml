@@ -25,7 +25,7 @@
             %a.f16.font-color1{"data-toggle" => "tab", :href => "#tab1"} 模板详情
         .tab-content.bg3
           #tab1.tab-pane.active
-            .desc-div
+            .desc-div.font-color3
               .top-box.clearfix
                 .text-message
                   %form.form-inline
@@ -36,7 +36,7 @@
                     %input.input-area.form-control.date#course-date{:type => "text"}
                   .form-group
                     %label.input-caption.f16 上课中心:
-                    %select.form-control.input-area.select-input
+                    %select.form-control.input-area.select-input.font-color3
                       %option 朝阳儿童中心
                       %option 朝阳儿童中心
                       %option 朝阳儿童中心
@@ -64,15 +64,15 @@
 
               .calendar-wrapper.clearfix
                 .calendar-operation-wrapper
-                  %p.title 课程日历
-                  %p.small-tips （单击日历中的时间进行删除）
-                  .form-inline
+                  %p.title.f18 课程日历
+                  %p.small-tips.f16 （单击日历中的时间进行删除）
+                  .form-inline.f16
                     %label.input-date 上课日期:
                     %input.input-area.form-control#datepicker{:type => "text"}
-                  .form-inline
+                  .form-inline.f16
                     %label.input-date 开始时间:
                     %input.input-area.form-control#start-time{:type => "text"}
-                  .form-inline
+                  .form-inline.f16
                     %label.input-date 结束时间:
                     %input.input-area.form-control#end-time{:type => "text"}
                   .btn#add-event{:type => "button"} 添加单次

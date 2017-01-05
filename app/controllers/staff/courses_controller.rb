@@ -47,22 +47,22 @@ class Staff::CoursesController < Staff::ApplicationController
   end
 
   def show
-    @profile = params[:profile]
-    @course_inst = CourseInst.where(id: params[:id]).first
+    # @profile = params[:profile]
+    # @course_inst = CourseInst.where(id: params[:id]).first
 
-    reviews = @course_inst.reviews
-    if params[:review_type].present?
-      reviews = reviews.where(status: params[:review_type].to_i)
-    end
-    params[:page] = params[:review_page]
-    @reviews = auto_paginate(reviews)
+    # reviews = @course_inst.reviews
+    # if params[:review_type].present?
+    #   reviews = reviews.where(status: params[:review_type].to_i)
+    # end
+    # params[:page] = params[:review_page]
+    # @reviews = auto_paginate(reviews)
 
-    participates = @course_inst.course_participates
-    params[:page] = params[:participate_page]
-    @participates = auto_paginate(participates)
+    # participates = @course_inst.course_participates
+    # params[:page] = params[:participate_page]
+    # @participates = auto_paginate(participates)
 
-    # stat related
-    @income_stat = @course_inst.income_stat
+    # # stat related
+    # @income_stat = @course_inst.income_stat
   end
 
   def stat

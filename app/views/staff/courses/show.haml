@@ -1,273 +1,521 @@
 - content_for :head do
   = javascript_include_tag "pages/staff/courses/show-bundle"
   = stylesheet_link_tag "pages/staff/courses/show-bundle", :media => "all"
-  :javascript
-    window.cid = "#{@course_inst.id.to_s}"
-    window.capacity = "#{@course_inst.capacity}"
-    window.price = "#{@course_inst.price}"
-    window.price_pay = "#{@course_inst.price_pay}"
-    window.length = "#{@course_inst.length}"
-    window.date_in_calendar = "#{@course_inst.date_in_calendar_str}"
-    window.profile = "#{@profile}"
+  / :javascript
+  /   window.cid = "#{@course_inst.id.to_s}"
+  /   window.capacity = "#{@course_inst.capacity}"
+  /   window.price = "#{@course_inst.price}"
+  /   window.price_pay = "#{@course_inst.price_pay}"
+  /   window.length = "#{@course_inst.length}"
+  /   window.date_in_calendar = "#{@course_inst.date_in_calendar_str}"
+  /   window.profile = "#{@profile}"
 
 .content-area
-  .manage-content
-    .btn.finish-btn{:type => "button"} 
-      %img.ticker{src: asset_path("managecenter/ticker.png")}
-      完成
-    .btn.edit-btn{:type => "button"} 
-      %img.edit{src: asset_path("managecenter/edit.png")}
-      编辑
-    - if @course_inst.available == true
-      .btn.unshelve-btn.available{:type => "button"} 
-        %img.end{src: asset_path("managecenter/unshelve.png")}
-        %span 下架
-    - else
-      .btn.unshelve-btn.unavailable{:type => "button"} 
-        %img.end{src: asset_path("managecenter/shelve.png")}
-        %span 上架
-    .tabbable
-      %a{:href => "/staff/courses"}
-        %img.back{src: asset_path("web/tab-back.png")}
-      %ul.nav.nav-tabs
-        %li.active
-          %a#course-message{"data-toggle" => "tab", :href => "#tab1"} 课程信息
-        %li
-          %a#register-message{"data-toggle" => "tab", :href => "#tab2"} 报名信息
-        %li
-          %a#user-review{"data-toggle" => "tab", :href => "#tab3"} 用户评价
-        %li
-          %a#course-sign{"data-toggle" => "tab", :href => "#tab4"} 课程签到
-        %li
-          %a#statistics{"data-toggle" => "tab", :href => "#tab5"} 统计信息
+  .main-top.direction
+    %a{href: "#"}
+      %img.back{src: asset_path("back.png")}
+    %ul.set
+      %li
+        %a.f16{href: staff_accounts_path} 账号设置
+      %li
+        %a.f16.set-left-border{href: signout_sessions_path} 退出登录
+        / %a.f16.set-left-border= link_to "退出登录",  signin_page_sessions_path, class: "类名", method: :delete
+  .main-content.bg2
+    %button.btn.delete-normal.font-color1.delete-btn-position#delete-btn{type: "button"} 删除
+    %button.btn.delete-normal.font-color1.unshelve-btn-position#unshelve-btn{type: "button"} 下架
+    %button.btn.edit-normal.font-color1.create-btn-position#edit-btn{type: "button"} 编辑
+    .table-div
+      .tabbable
+        %ul.nav.nav-tabs
+          %li.active
+            %a.f16.font-color1{"data-toggle" => "tab", :href => "#tab1"} 课程详情
+          %li
+            %a.f16.font-color1{"data-toggle" => "tab", :href => "#tab2"} 报名信息
+          %li
+            %a.f16.font-color1{"data-toggle" => "tab", :href => "#tab3"} 课程签到
+          %li
+            %a.f16.font-color1{"data-toggle" => "tab", :href => "#tab4"} 统计信息
+          %li
+            %a.f16.font-color1{"data-toggle" => "tab", :href => "#tab5"} 家长评价
+        .tab-content.bg3.f14.font-color3
+          #tab1.tab-pane.active
+            .desc-div
+              .top-box.clearfix
+                .text-message 
+                  .form-inline
+                    %label.input-caption 课程名称:
+                    %span#name-span 少儿计算机知识学习
+                  .form-inline
+                    %label.input-caption 上课时间:
+                    %span.unedit-box#date-span 2016/9/30～2016/12/30，每周五16:00~18:00
+                    %span.edit-box
+                      %input.input-area.form-control.long-input#course-date{:type => "text"}
+                  .form-inline
+                    %label.input-caption 上课中心:
+                    %span.unedit-box#address-span 朝阳区安立路儿童中心
+                    %span.edit-box
+                      %input.input-area.form-control.long-input#course-address{:type => "text"}
+                .photo
+                  / %img.unedit-photo{:src => @course_inst.photo.nil? ? asset_path("web/course.png") : @course_inst.photo.path }
+                  / = form_tag("/staff/courses/" + @course_inst.id.to_s + "/upload_photo", method: "post", multipart: true, id: "upload-photo-form", class: "hide") do
+                  /   = file_field_tag "photo_file", { class: "hide", accept: ".jpg,.png" }
+                  = form_tag("/", method: "post", multipart: true, id: "upload-photo-form", class: "hide") do
+                    = file_field_tag "photo_file", { class: "hide", accept: ".jpg,.png" }
+                  %a#upload-photo{href: "javascript:void(0);"}
+                    %img.edit-photo#photo{src: asset_path("photo-course.png")}
 
-      .tab-content
-        #tab1.tab-pane.active
-          .top-box.clearfix
-            .text-message
-              .form-inline
-                %label.input-caption 课程名称:
-                %span#name-span= @course_inst.name
-              .form-inline
-                %label.input-caption 上课时间:
-                %span.unedit-box#date-span= @course_inst.date
+              .controls.controls-row
+                %label.input-caption 开课编号:
+                %span.num-box
+                  %span.course-num SEJSJ-
+                  %span.unedit-box#num-span 2
+                  %span.edit-box
+                    %input.input-area.form-control#course-num{:type => "text"}
+                %label.input-caption.course-speaker 主讲人:
+                %span.unedit-box#speaker-span 数学老师
                 %span.edit-box
-                  %input.input-area.form-control#course-date{:type => "text"}
-              .form-inline
-                %label.input-caption 上课地址:
-                %span.unedit-box#address-span= @course_inst.address
+                  %input.input-area.form-control#course-speaker{:type => "text"}
+                %label.input-caption.kids-capacity 容量:
+                %span.unedit-box#capacity-span 30
                 %span.edit-box
-                  %input.input-area.form-control#course-address{:type => "text"}
-            .photo
-              %img.unedit-photo{:src => @course_inst.photo.nil? ? asset_path("web/course.png") : @course_inst.photo.path }
-              = form_tag("/staff/courses/" + @course_inst.id.to_s + "/upload_photo", method: "post", multipart: true, id: "upload-photo-form", class: "hide") do
-                = file_field_tag "photo_file", { class: "hide", accept: ".jpg,.png" }
-              %a#upload-photo{href: "javascript:void(0);"}
-                %img.edit-photo{src: asset_path("web/photo.png")}
-
-          .controls.controls-row
-            %label.input-caption 开课编号:
-            %span.num-box
-              %span.course-num= @course_inst.course.code + "-" 
-              %span.unedit-box#num-span= @course_inst.inst_code
-              %span.edit-box
-                %input.input-area.form-control#course-num{:type => "text"}
-            %label.input-caption.course-speaker 主讲人:
-            %span.unedit-box#speaker-span= @course_inst.speaker
-            %span.edit-box
-              %input.input-area.form-control#course-speaker{:type => "text"}
-            %label.input-caption.kids-capacity 容量:
-            %span.unedit-box#capacity-span= @course_inst.capacity.to_s + "人"
-            %span.edit-box
-              %input.input-area.form-control#course-capacity{:type => "text"}
-          .controls.controls-row
-            %label.input-caption.course-times 课次:
-            %span.unedit-box#times-span= @course_inst.length.to_s + "次"
-            %span.edit-box
-              %input.input-area.form-control#course-times{:type => "text"}
-            %label.input-caption 市场价:
-            %span.unedit-box#charge-span= @course_inst.price.to_s + "元"
-            %span.edit-box
-              %input.input-area.form-control#course-charge{:type => "text"}
-            %label.input-caption 公益价:
-            %span.unedit-box#public-span= @course_inst.price_pay.to_s + "元"
-            %span.edit-box
-              %input.input-area.form-control#public-charge{:type => "text"}
-          .calendar-wrapper.clearfix
-            %label.class-calendar 课程日历:
-            .show-calendar#calendar
-            .calendar-operation-wrapper
-              %p.title 课程日历
-              %p.small-tips （单击日历中的时间进行删除）
-              .form-inline
-                %label.input-date 上课日期:
-                %input.input-area.form-control#datepicker{:type => "text"}
-              .form-inline
-                %label.input-date 开始时间:
-                %input.input-area.form-control#start-time{:type => "text"}
-              .form-inline
-                %label.input-date 结束时间:
-                %input.input-area.form-control#end-time{:type => "text"}
-              .btn#add-event{:type => "button"} 添加单次
-              .repeat.clearfix
-                .btn.date-btn{:type => "button"} 次日重复
-                .btn.week-btn{:type => "button"} 每周重复
-
-        #tab2.tab-pane
-          - if @participates[:data].blank?
-            .undiscover
-              %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
-              %span.undiscover-message 抱歉！没有学员报名
-          - else
-            .table-box
-              %table.table.table-bordered#register-table
-                %thead
-                  %tr
-                    %th 姓&nbsp名
-                    %th 住&nbsp址
-                    %th 电&nbsp话
-                    %th 报名状态
-                    %th 操&nbsp作
-                %tbody
-                  - @participates[:data].each do |e|
+                  %input.input-area.form-control#course-capacity{:type => "text"}
+              .controls.controls-row
+                %label.input-caption 上课教室:
+                %span.unedit-box#classroom-span 1-103
+                %span.edit-box
+                  %input.input-area.form-control#classroom{:type => "text"}
+                %label.input-caption.course-times 课次:
+                %span.unedit-box#times-span 12
+                %span.edit-box
+                  %input.input-area.form-control#course-times{:type => "text"}
+                %label.input-caption 价格:
+                %span.unedit-box#charge-span 3000
+                %span.edit-box
+                  %input.input-area.form-control#course-charge{:type => "text"}
+              .calendar-wrapper.clearfix
+                %label.class-calendar 课程日历:
+                .show-calendar#calendar
+                .calendar-operation-wrapper
+                  %p.title 课程日历
+                  %p.small-tips （单击日历中的时间进行删除）
+                  .form-inline
+                    %label.input-date 上课日期:
+                    %input.input-area.form-control#datepicker{:type => "text"}
+                  .form-inline
+                    %label.input-date 开始时间:
+                    %input.input-area.form-control#start-time{:type => "text"}
+                  .form-inline
+                    %label.input-date 结束时间:
+                    %input.input-area.form-control#end-time{:type => "text"}
+                  .btn#add-event{:type => "button"} 添加单次
+                  .repeat.clearfix
+                    .btn.date-btn{:type => "button"} 次日重复
+                    .btn.week-btn{:type => "button"} 每周重复
+          #tab2.tab-pane
+            .desc-div
+              .undiscover
+                %img.undiscover-icon{src: asset_path("undiscover.png")}
+              .table-box.border-btm
+                %table.table.table-hover.table-height
+                  %thead.th-bg.font-color2
                     %tr
-                      %td.td-data= e.client.name
-                      %td.td-data= e.client.address
-                      %td.td-data= e.client.mobile
-                      %td.td-data= e.status_str
-                      %td.td-data
-                        - if e.is_success
-                          %a.details{:href => "javascript:void(0);"} 
-                            上课情况
-                            %span.triangle-down
-                    - if e.is_success
-                      %tr.status
-                        %td{:colspan => "5"}
-                          .course-status
-                            %span.item-status 上课状态：
-                            - e.course_inst.length.times do |i|
-                              - if e.signin_info[i].present?
-                                %span.join-square
-                              - else
-                                - if e.course_inst.is_class_pass?(i)
-                                  %span.miss-square
-                                - else
-                                  %span.square
-                          .comments
-                            %span.comments-title 评论：
-                            %span.comments-content= e.review.present? ? e.review.content : "暂未评论"
-
-            .select-page 
-              %span.totalitems= "共#{@participates[:total_page]}页,总计#{@participates[:total_number]}条"
-              %span.choice-page
-                %ul.pagination.pagination-sm
-                  %li
-                    %a{:href => "/staff/courses/" + @course_inst.id.to_s + "?profile=participates&participate_page=#{@participates[:previous_page]}"} «
-                  - ( (@participates[:previous_page] > 2 ? @participates[:previous_page] - 2 : 1) .. (@participates[:next_page] < @participates[:total_page] - 2 ? @participates[:next_page] + 2 : @participates[:total_page]) ).to_a.each do |page|
+                      %th 学生姓名
+                      %th 手机号
+                      %th 家庭住址
+                      %th 报名状态
+                      %th 课&nbsp次
+                  %tbody.font-color3
+                    %tr
+                      %td 王某某
+                      %td 15823241111
+                      %td 北京市东三环南路2号瑞赛商务楼
+                      %td 已付款
+                      %td
+                        %a.details.font-color-brown{href: "javascript:void(0);"} 
+                          上课情况
+                          %span.triangle-down
+                    %tr.status
+                      %td{colspan: "5"}
+                        .course-status
+                          %span.item-status 上课状态：
+                          %span.join-square
+                          %span.miss-square
+                          %span.square
+                        .comments
+                          %span.comments-title 家长评价：
+                          %span.comments-content 暂未评论
+                    %tr
+                      %td 王某某
+                      %td 15823241111
+                      %td 北京市东三环南路2号瑞赛商务楼
+                      %td 未付款
+                      %td
+                        %span.font-color4 上课情况
+                        %span.unpay-triangle-down
+              .select-page
+                %span.totalitems 共2页，总计18条
+                %span.choice-page
+                  %ul.pagination.pagination-sm
                     %li
-                      %a{:href => "/staff/courses/" + @course_inst.id.to_s + "?profile=participates&participate_page=#{page}"}= page
-                  %li
-                    %a{:href => "/staff/courses/" + @course_inst.id.to_s + "?profile=participates&participate_page=#{@participates[:next_page]}"} »
-
-        #tab3.tab-pane
-          / .user-checkbox
-          /   %label.checkbox-inline
-          /     %input#inlineCheckbox1{:type => "checkbox", :value => "option1"} 未公开
-          /   %label.checkbox-inline
-          /     %input#inlineCheckbox2{:type => "checkbox", :value => "option2"} 已公开
-          - if @reviews[:data].blank?
-            .undiscover
-              %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
-              %span.undiscover-message 抱歉！没有学员评价
-          - else
-            .user-review-box
-              - @reviews[:data].each do |r|
-                .book-description
-                  .user-item.clearfix
-                    %img.book-img{:src => r.client.avatar.present? ? r.client.avatar.path : asset_path("web/boy.png")}
-                    %p.user-name
-                      %span= r.client.name
-                      - r.score.times do
-                        %img.star-img{src: asset_path("managecenter/star.png")}
-                    %p.date= r.created_at.strftime("%Y-%m-%d %H:%M")
-                    %p.user-review-content= r.content
-                    - if r.is_private
-                      %button.btn.open-btn.show-review{:type => "button", data: {id: r.id.to_s}} 公开
-                    - else
-                      %button.btn.open-btn.hide-review{:type => "button", data: {id: r.id.to_s}} 隐藏
-            .select-page 
-              %span.totalitems= "共#{@reviews[:total_page]}页,总计#{@reviews[:total_number]}条"
-              %span.choice-page
-                %ul.pagination.pagination-sm
-                  %li
-                    %a{:href => "/staff/courses/" + @course_inst.id.to_s + "?profile=reviews&review_page=#{@reviews[:previous_page]}"} «
-                  - ( (@reviews[:previous_page] > 2 ? @reviews[:previous_page] - 2 : 1) .. (@reviews[:next_page] < @reviews[:total_page] - 2 ? @reviews[:next_page] + 2 : @reviews[:total_page]) ).to_a.each do |page|
+                      %a{:href => "#"} «
                     %li
-                      %a{:href => "/staff/courses/" + @course_inst.id.to_s + "?profile=reviews&review_page=#{page}"}= page
-                  %li
-                    %a{:href => "/staff/courses/" + @course_inst.id.to_s + "?profile=reviews&review_page=#{@reviews[:next_page]}"} »
+                      %a{:href => "#"} 1
+                    %li
+                      %a{:href => "#"} »    
+          #tab3.tab-pane
+            .desc-div
+              .undiscover
+                %img.undiscover-icon{src: asset_path("undiscover.png")}
+              .sign-box.clearfix
+                .sign-method.font-color3
+                  .class-choice
+                    .form-group.choice-lesson
+                      %label.input-caption 课次选择：
+                      %select.form-control.lesson-input.font-color3
+                        %option 第一次
+                        %option 第一次
+                        %option 第一次
+                        %option 第一次
+                        %option 第一次
+                      / = select_tag "class_num", options_for_select((1..@course_inst.length).to_a.map { |e| ["第" + e.to_s + "次课", e-1] }), class: 'form-control'
+                  .method
+                    %p.caption 签到方式一：扫描签到
+                    #qr-code
+                      %img.code-figure{src: asset_path("bigqrcode.png")}
+                    %p.caption 签到方式二：手机号签到
+                    %input#sign-mobile.font-color3.form-control.mobile-input{:type => "text"}
+                    .btn.sign-btn{:type => "button"} 立即签到
+                    .mask
+                      %p.notice 该次课程已结束点击此处补签到
+                .sign-status-box
+                  .sign-status
+                    %h5 签到情况
+          #tab4.tab-pane
+            .desc-div
+              .courses-income-box
+                %p.income-title 课程收入
+                .income-div
+                  .income-items
+                    %p.income-caption 收入统计(元)
+                    %p.income-nums 10000
+                  .income-items
+                    %p.income-caption 个人支付(元)
+                    %p.income-nums 6000
+                  .income-items#goverment
+                    %p.income-caption 政府补贴(元)
+                    %p.income-nums 4000
+              .pie-box
+                .gender-pie
+                  %p.pie-title 性别比例
+                  .figure-box
+                    #gender-statistics
+                .age-pie
+                  %p.pie-title 年龄比例
+                  .figure-box
+                    #age-statistics
+              .kids-nums
+                %p.column-title 报名情况
+                .figure-box
+                  #nums-statistics
+              .attend-status
+                %p.attend-title 出勤情况
+                .figure-box
+                  #attend-statistics
+          #tab5.tab-pane
+            .desc-div
+              .undiscover
+                %img.undiscover-icon{src: asset_path("undiscover.png")}
+              .user-review-box
+                .review-items
+                  .img-div
+                    %img.avatar-icon{src: asset_path("avatar-icon.png")}
+                  .review-div
+                    .head-div.clearfix
+                      %p.user-name.fl.font-color2 王某某
+                      %button.btn.fr.edit-normal.font-color1#show-review{type: "button"} 隐藏评论
+                      / 当显示评论时为finish-normal
+                    %p.reviews 猫是善于攀爬跳跃的动物，它的体内各种器官的平衡功能比其它动物要完善，当它从高处跳下来时，身体失去平衡，神经系统会迅速的指挥骨骼肌以最快的速度运动，将失去平衡的身体调整到正常的位置。
+                    .time-div.font-color4
+                      %span.review-date 2016/10/30
+                      %span.review-time 16:31
+              .select-page
+                %span.totalitems 共2页，总计18条
+                %span.choice-page
+                  %ul.pagination.pagination-sm
+                    %li
+                      %a{:href => "#"} «
+                    %li
+                      %a{:href => "#"} 1
+                    %li
+                      %a{:href => "#"} » 
+
+
+
+
+
+
+
+
+
+
+/ .content-area
+/   .manage-content
+/     .btn.finish-btn{:type => "button"} 
+/       %img.ticker{src: asset_path("managecenter/ticker.png")}
+/       完成
+/     .btn.edit-btn{:type => "button"} 
+/       %img.edit{src: asset_path("managecenter/edit.png")}
+/       编辑
+/     - if @course_inst.available == true
+/       .btn.unshelve-btn.available{:type => "button"} 
+/         %img.end{src: asset_path("managecenter/unshelve.png")}
+/         %span 下架
+/     - else
+/       .btn.unshelve-btn.unavailable{:type => "button"} 
+/         %img.end{src: asset_path("managecenter/shelve.png")}
+/         %span 上架
+/     .tabbable
+/       %a{:href => "/staff/courses"}
+/         %img.back{src: asset_path("web/tab-back.png")}
+/       %ul.nav.nav-tabs
+/         %li.active
+/           %a#course-message{"data-toggle" => "tab", :href => "#tab1"} 课程信息
+/         %li
+/           %a#register-message{"data-toggle" => "tab", :href => "#tab2"} 报名信息
+/         %li
+/           %a#user-review{"data-toggle" => "tab", :href => "#tab3"} 用户评价
+/         %li
+/           %a#course-sign{"data-toggle" => "tab", :href => "#tab4"} 课程签到
+/         %li
+/           %a#statistics{"data-toggle" => "tab", :href => "#tab5"} 统计信息
+
+/       .tab-content
+/         #tab1.tab-pane.active
+/           .top-box.clearfix
+/             .text-message
+/               .form-inline
+/                 %label.input-caption 课程名称:
+/                 %span#name-span= @course_inst.name
+/               .form-inline
+/                 %label.input-caption 上课时间:
+/                 %span.unedit-box#date-span= @course_inst.date
+/                 %span.edit-box
+/                   %input.input-area.form-control#course-date{:type => "text"}
+/               .form-inline
+/                 %label.input-caption 上课地址:
+/                 %span.unedit-box#address-span= @course_inst.address
+/                 %span.edit-box
+/                   %input.input-area.form-control#course-address{:type => "text"}
+/             .photo
+/               %img.unedit-photo{:src => @course_inst.photo.nil? ? asset_path("web/course.png") : @course_inst.photo.path }
+/               = form_tag("/staff/courses/" + @course_inst.id.to_s + "/upload_photo", method: "post", multipart: true, id: "upload-photo-form", class: "hide") do
+/                 = file_field_tag "photo_file", { class: "hide", accept: ".jpg,.png" }
+/               %a#upload-photo{href: "javascript:void(0);"}
+/                 %img.edit-photo{src: asset_path("web/photo.png")}
+
+/           .controls.controls-row
+/             %label.input-caption 开课编号:
+/             %span.num-box
+/               %span.course-num= @course_inst.course.code + "-" 
+/               %span.unedit-box#num-span= @course_inst.inst_code
+/               %span.edit-box
+/                 %input.input-area.form-control#course-num{:type => "text"}
+/             %label.input-caption.course-speaker 主讲人:
+/             %span.unedit-box#speaker-span= @course_inst.speaker
+/             %span.edit-box
+/               %input.input-area.form-control#course-speaker{:type => "text"}
+/             %label.input-caption.kids-capacity 容量:
+/             %span.unedit-box#capacity-span= @course_inst.capacity.to_s + "人"
+/             %span.edit-box
+/               %input.input-area.form-control#course-capacity{:type => "text"}
+/           .controls.controls-row
+/             %label.input-caption.course-times 课次:
+/             %span.unedit-box#times-span= @course_inst.length.to_s + "次"
+/             %span.edit-box
+/               %input.input-area.form-control#course-times{:type => "text"}
+/             %label.input-caption 市场价:
+/             %span.unedit-box#charge-span= @course_inst.price.to_s + "元"
+/             %span.edit-box
+/               %input.input-area.form-control#course-charge{:type => "text"}
+/             %label.input-caption 公益价:
+/             %span.unedit-box#public-span= @course_inst.price_pay.to_s + "元"
+/             %span.edit-box
+/               %input.input-area.form-control#public-charge{:type => "text"}
+/           .calendar-wrapper.clearfix
+/             %label.class-calendar 课程日历:
+/             .show-calendar#calendar
+/             .calendar-operation-wrapper
+/               %p.title 课程日历
+/               %p.small-tips （单击日历中的时间进行删除）
+/               .form-inline
+/                 %label.input-date 上课日期:
+/                 %input.input-area.form-control#datepicker{:type => "text"}
+/               .form-inline
+/                 %label.input-date 开始时间:
+/                 %input.input-area.form-control#start-time{:type => "text"}
+/               .form-inline
+/                 %label.input-date 结束时间:
+/                 %input.input-area.form-control#end-time{:type => "text"}
+/               .btn#add-event{:type => "button"} 添加单次
+/               .repeat.clearfix
+/                 .btn.date-btn{:type => "button"} 次日重复
+/                 .btn.week-btn{:type => "button"} 每周重复
+
+/         #tab2.tab-pane
+/           - if @participates[:data].blank?
+/             .undiscover
+/               %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
+/               %span.undiscover-message 抱歉！没有学员报名
+/           - else
+/             .table-box
+/               %table.table.table-bordered#register-table
+/                 %thead
+/                   %tr
+/                     %th 姓&nbsp名
+/                     %th 住&nbsp址
+/                     %th 电&nbsp话
+/                     %th 报名状态
+/                     %th 操&nbsp作
+/                 %tbody
+/                   - @participates[:data].each do |e|
+/                     %tr
+/                       %td.td-data= e.client.name
+/                       %td.td-data= e.client.address
+/                       %td.td-data= e.client.mobile
+/                       %td.td-data= e.status_str
+/                       %td.td-data
+/                         - if e.is_success
+/                           %a.details{:href => "javascript:void(0);"} 
+/                             上课情况
+/                             %span.triangle-down
+/                     - if e.is_success
+/                       %tr.status
+/                         %td{:colspan => "5"}
+/                           .course-status
+/                             %span.item-status 上课状态：
+/                             - e.course_inst.length.times do |i|
+/                               - if e.signin_info[i].present?
+/                                 %span.join-square
+/                               - else
+/                                 - if e.course_inst.is_class_pass?(i)
+/                                   %span.miss-square
+/                                 - else
+/                                   %span.square
+/                           .comments
+/                             %span.comments-title 评论：
+/                             %span.comments-content= e.review.present? ? e.review.content : "暂未评论"
+
+/             .select-page 
+/               %span.totalitems= "共#{@participates[:total_page]}页,总计#{@participates[:total_number]}条"
+/               %span.choice-page
+/                 %ul.pagination.pagination-sm
+/                   %li
+/                     %a{:href => "/staff/courses/" + @course_inst.id.to_s + "?profile=participates&participate_page=#{@participates[:previous_page]}"} «
+/                   - ( (@participates[:previous_page] > 2 ? @participates[:previous_page] - 2 : 1) .. (@participates[:next_page] < @participates[:total_page] - 2 ? @participates[:next_page] + 2 : @participates[:total_page]) ).to_a.each do |page|
+/                     %li
+/                       %a{:href => "/staff/courses/" + @course_inst.id.to_s + "?profile=participates&participate_page=#{page}"}= page
+/                   %li
+/                     %a{:href => "/staff/courses/" + @course_inst.id.to_s + "?profile=participates&participate_page=#{@participates[:next_page]}"} »
+
+/         #tab3.tab-pane
+/           / .user-checkbox
+/           /   %label.checkbox-inline
+/           /     %input#inlineCheckbox1{:type => "checkbox", :value => "option1"} 未公开
+/           /   %label.checkbox-inline
+/           /     %input#inlineCheckbox2{:type => "checkbox", :value => "option2"} 已公开
+/           - if @reviews[:data].blank?
+/             .undiscover
+/               %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
+/               %span.undiscover-message 抱歉！没有学员评价
+/           - else
+/             .user-review-box
+/               - @reviews[:data].each do |r|
+/                 .book-description
+/                   .user-item.clearfix
+/                     %img.book-img{:src => r.client.avatar.present? ? r.client.avatar.path : asset_path("web/boy.png")}
+/                     %p.user-name
+/                       %span= r.client.name
+/                       - r.score.times do
+/                         %img.star-img{src: asset_path("managecenter/star.png")}
+/                     %p.date= r.created_at.strftime("%Y-%m-%d %H:%M")
+/                     %p.user-review-content= r.content
+/                     - if r.is_private
+/                       %button.btn.open-btn.show-review{:type => "button", data: {id: r.id.to_s}} 公开
+/                     - else
+/                       %button.btn.open-btn.hide-review{:type => "button", data: {id: r.id.to_s}} 隐藏
+/             .select-page 
+/               %span.totalitems= "共#{@reviews[:total_page]}页,总计#{@reviews[:total_number]}条"
+/               %span.choice-page
+/                 %ul.pagination.pagination-sm
+/                   %li
+/                     %a{:href => "/staff/courses/" + @course_inst.id.to_s + "?profile=reviews&review_page=#{@reviews[:previous_page]}"} «
+/                   - ( (@reviews[:previous_page] > 2 ? @reviews[:previous_page] - 2 : 1) .. (@reviews[:next_page] < @reviews[:total_page] - 2 ? @reviews[:next_page] + 2 : @reviews[:total_page]) ).to_a.each do |page|
+/                     %li
+/                       %a{:href => "/staff/courses/" + @course_inst.id.to_s + "?profile=reviews&review_page=#{page}"}= page
+/                   %li
+/                     %a{:href => "/staff/courses/" + @course_inst.id.to_s + "?profile=reviews&review_page=#{@reviews[:next_page]}"} »
           
-        #tab4.tab-pane
-          - if @course_inst.course_participates.where(trade_state: "SUCCESS").blank?
-            .undiscover
-              %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
-              %span.undiscover-message 抱歉！没有学员报名
-          - else
-            .sign-box.clearfix
-              .sign-method
-                .class-choice
-                  %form.form-horizontal
-                    .form-group
-                      %label.col-sm-5.col-md-3.control-label{:for => "class"} 课次选择
-                      .col-sm-6.col-md-6
-                        = select_tag "class_num", options_for_select((1..@course_inst.length).to_a.map { |e| ["第" + e.to_s + "次课", e-1] }), class: 'form-control'
-                .method
-                  %p.caption 签到方式一：扫描签到
-                  #qr-code
-                    %img.code-figure{src: asset_path("web/bigqrcode.png")}
-                  %p.caption 签到方式二：手机号签到
-                  %input#sign-mobile.form-control{:type => "text"}
-                  .btn.sign-btn{:type => "button"} 立即签到
-                  .mask
-                    %p.notice 该次课程已结束点击此处补签到
-              .sign-status-box
-                .sign-status
-                  %h5 签到情况
+/         #tab4.tab-pane
+/           - if @course_inst.course_participates.where(trade_state: "SUCCESS").blank?
+/             .undiscover
+/               %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
+/               %span.undiscover-message 抱歉！没有学员报名
+/           - else
+/             .sign-box.clearfix
+/               .sign-method
+/                 .class-choice
+/                   %form.form-horizontal
+/                     .form-group
+/                       %label.col-sm-5.col-md-3.control-label{:for => "class"} 课次选择
+/                       .col-sm-6.col-md-6
+/                         = select_tag "class_num", options_for_select((1..@course_inst.length).to_a.map { |e| ["第" + e.to_s + "次课", e-1] }), class: 'form-control'
+/                 .method
+/                   %p.caption 签到方式一：扫描签到
+/                   #qr-code
+/                     %img.code-figure{src: asset_path("web/bigqrcode.png")}
+/                   %p.caption 签到方式二：手机号签到
+/                   %input#sign-mobile.form-control{:type => "text"}
+/                   .btn.sign-btn{:type => "button"} 立即签到
+/                   .mask
+/                     %p.notice 该次课程已结束点击此处补签到
+/               .sign-status-box
+/                 .sign-status
+/                   %h5 签到情况
 
-        #tab5.tab-pane
-          .courses-income-box
-            %p.income-title 课程收入
-            .income-div
-              .income-items
-                %p.income-caption 收入统计(元)
-                %p.income-nums= @income_stat[:all]
-              .income-items
-                %p.income-caption 个人支付(元)
-                %p.income-nums= @income_stat[:personal]
-              .income-items#goverment
-                %p.income-caption 政府补贴(元)
-                %p.income-nums= @income_stat[:allowance]
-          .pie-box
-            .gender-pie
-              %p.pie-title 性别比例
-              .figure-box
-                #gender-statistics
-            .age-pie
-              %p.pie-title 年龄比例
-              .figure-box
-                #age-statistics
-          .kids-nums
-            %p.column-title 报名情况
-            .figure-box
-              #nums-statistics
-          .attend-status
-            %p.attend-title 出勤情况
-            .figure-box
-              #attend-statistics
+/         #tab5.tab-pane
+/           .courses-income-box
+/             %p.income-title 课程收入
+/             .income-div
+/               .income-items
+/                 %p.income-caption 收入统计(元)
+/                 %p.income-nums= @income_stat[:all]
+/               .income-items
+/                 %p.income-caption 个人支付(元)
+/                 %p.income-nums= @income_stat[:personal]
+/               .income-items#goverment
+/                 %p.income-caption 政府补贴(元)
+/                 %p.income-nums= @income_stat[:allowance]
+/           .pie-box
+/             .gender-pie
+/               %p.pie-title 性别比例
+/               .figure-box
+/                 #gender-statistics
+/             .age-pie
+/               %p.pie-title 年龄比例
+/               .figure-box
+/                 #age-statistics
+/           .kids-nums
+/             %p.column-title 报名情况
+/             .figure-box
+/               #nums-statistics
+/           .attend-status
+/             %p.attend-title 出勤情况
+/             .figure-box
+/               #attend-statistics
 
 
-#dialog-confirm{:title => "警告"}
-  %p
-    %span.ui-icon.ui-icon-alert{:style => "float:left; margin:12px 12px 20px 0;"}>
-    确定删除？
+/ #dialog-confirm{:title => "警告"}
+/   %p
+/     %span.ui-icon.ui-icon-alert{:style => "float:left; margin:12px 12px 20px 0;"}>
+/     确定删除？
         
