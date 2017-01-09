@@ -36,7 +36,8 @@ a{
 	width:100%;
 	.robot {
 		width:100%;
-		max-width:640px;
+		max-width: 640px;
+		object-fit: contain;
 	}
 	.back {
 		position:absolute;

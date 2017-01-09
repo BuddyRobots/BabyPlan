@@ -103,13 +103,15 @@
 	margin: 15px 0 0 60px;
 }
 .unedit-photo {
-	width: auto;
+	width: 128px;
 	max-width: 128px;
 	height: 88px;
+	object-fit: contain;
 }
 .edit-photo {
 	width: 128px;
 	height: 88px;
+	object-fit: contain;
 }
 #upload-photo {
 	position: absolute;

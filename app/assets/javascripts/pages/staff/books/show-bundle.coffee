@@ -336,12 +336,14 @@ $ ->
       $("#back_file").trigger("click")
 
   $("#cover_file").change (event) ->
+    $("#cover-photo").attr("src", "")
     if event.target.files[0] == undefined
       return
     has_cover = true
     photo = $("#cover-edit-photo")[0]
     photo.src = URL.createObjectURL(event.target.files[0])
   $("#back_file").change (event) ->
+    $("#back-photo").attr("src", "")
     if event.target.files[0] == undefined
       return
     has_back = true
