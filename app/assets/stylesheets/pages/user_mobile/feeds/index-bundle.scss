@@ -146,6 +146,8 @@ a{
 .visit {
 	width:100%;
     max-width: 190px;
+    object-fit: contain;
+    height: 13em;
 }
 .icon {
 	float:left;

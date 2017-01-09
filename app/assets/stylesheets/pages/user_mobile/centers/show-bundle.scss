@@ -239,28 +239,34 @@ a{
 
 
 @media screen and (max-width:640px) {
-	.content-area {
+	.content-area, #refundModal {
 		font-size: 100%;
 	}
 }
 @media screen and (max-width: 560px) {
-    .content-area {
+    .content-area, #refundModal {
         font-size: 85%;
     }
 }
 
 @media screen and (max-width: 500px) {
-    .content-area {
-        font-size: 75%;
+    .content-area, #refundModal {
+        font-size: 67%;
     }
 }
-@media screen and (max-width: 450px) {
-    .content-area {
-        font-size: 65%;
+@media screen and (max-width: 420px) {
+    .content-area, #refundModal {
+        font-size: 63%;
     }
 }
 @media screen and (max-width: 400px) {
-    .content-area {
+    .content-area, #refundModal {
+        font-size: 56%;
+    }
+}
+@media screen and (max-width: 320px) {
+    .content-area, #refundModal {
         font-size: 50%;
     }
 }
+

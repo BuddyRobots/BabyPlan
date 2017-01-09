@@ -34,6 +34,7 @@ a{
 	.crocodile {
 		width:100%;
 		max-width:640px;
+		object-fit: contain;
 	}
 	.back {
 		position:absolute;
@@ -179,40 +180,34 @@ a{
 }
 
 
-
 @media screen and (max-width:640px) {
-	.content-area {
+	.content-area, #refundModal {
 		font-size: 100%;
 	}
 }
 @media screen and (max-width: 560px) {
-    .content-area {
+    .content-area, #refundModal {
         font-size: 85%;
     }
 }
 
 @media screen and (max-width: 500px) {
-    .content-area {
-        font-size: 70%;
-    }
-}
-@media screen and (max-width: 450px) {
-    .content-area {
+    .content-area, #refundModal {
         font-size: 67%;
     }
 }
-@media screen and (max-width: 400px) {
-    .content-area {
-        font-size: 60%;
+@media screen and (max-width: 420px) {
+    .content-area, #refundModal {
+        font-size: 63%;
     }
 }
-@media screen and (max-width: 360px) {
-    .content-area {
-        font-size: 55%;
+@media screen and (max-width: 400px) {
+    .content-area, #refundModal {
+        font-size: 56%;
     }
 }
 @media screen and (max-width: 320px) {
-    .content-area {
-        font-size: 52%;
+    .content-area, #refundModal {
+        font-size: 50%;
     }
 }

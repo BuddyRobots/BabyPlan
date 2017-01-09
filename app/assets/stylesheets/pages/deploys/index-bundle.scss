@@ -9,14 +9,15 @@ pre {
 }
 .btn-div {
 	margin-top: 30px;
-	text-align: center;
 }
-
-#deploy-btn {
+.btn {
 	display: inline-block;
-	width: 30%;
+	width: 33%;
 	color: #fff;
 	background: #10c078;
+}
+#deploy_production, #deploy_staging, #deploy_development {
+	color: #fff;
 	outline: none;
 }
 .tabbable {
