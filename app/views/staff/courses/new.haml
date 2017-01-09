@@ -1,12 +1,10 @@
 - content_for :head do
   = javascript_include_tag "pages/staff/courses/new-bundle"
   = stylesheet_link_tag "pages/staff/courses/new-bundle", :media => "all"
-  / :javascript
-  /   window.cid = "#{@course.id.to_s}"
 
 .content-area
   .main-top.direction
-    %a{href: "#"}
+    %a{href: staff_courses_path}
       %img.back{src: asset_path("back.png")}
     %ul.set
       %li
@@ -31,12 +29,12 @@
                 %label.input-caption.f16 主讲人:
                 %input.input-area.form-control#course-speaker{:type => "text"}
               .controls.controls-row
-                %label.input-caption.f16#author 课程编号:
-                %input.input-area.form-control#course-isbn{:type => "text"}
+                %label.input-caption.f16 课程编号:
+                %input.input-area.form-control#course-code{:type => "text"}
                 %label.input-caption#translator.f16.value-margin 价格:
-                %input.input-area.form-control#course-value{:type => "text"}
+                %input.input-area.form-control#course-price{:type => "text"}
                 %label.input-caption#book-number.f16 课次:
-                %input.input-area.form-control#course-class{:type => "text"}
+                %input.input-area.form-control#course-length{:type => "text"}
               .introduce-div
                 %span.course-introduce.f16 课程介绍:
                 %span.wangedit-area.f14

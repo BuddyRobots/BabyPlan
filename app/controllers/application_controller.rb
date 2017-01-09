@@ -44,6 +44,7 @@ class ApplicationController < ActionController::Base
     params[:per_page].to_i == 0 ? 10 : params[:per_page].to_i
   end
 
+  # kaminari API
   def auto_paginate(value, count = nil)
     retval = {}
     retval[:current_page] = page
@@ -74,6 +75,31 @@ class ApplicationController < ActionController::Base
     retval[:next_page] = (page+1 <= retval[:total_page] ? page+1: retval[:total_page])
     retval
   end
+
+  # def auto_paginate(value, count = nil)
+  #   retval = {}
+  #   retval[:current_page] = page
+  #   retval[:per_page] = per_page
+  #   retval[:previous_page] = (page - 1 > 0 ? page - 1 : 1)
+
+  #   if value.instance_of?(Mongoid::Criteria)
+  #     count ||= value.count
+  #     value = value.page(retval[:current_page]).per(retval[:per_page])
+  #   elsif value.is_a?(Array) && value.count > per_page
+  #     count ||= value.count
+  #     value = value.slice((page - 1) * per_page, per_page)
+  #   end
+  #   if block_given?
+  #     retval[:data] = yield(value)
+  #   else
+  #     retval[:data] = value
+  #   end
+  #   retval[:total_page] = ( (count || value.count) / per_page.to_f ).ceil
+  #   retval[:total_page] = retval[:total_page] == 0 ? 1 : retval[:total_page]
+  #   retval[:total_number] = count || value.count
+  #   retval[:next_page] = (page + 1 <= retval[:total_page] ? page + 1 : retval[:total_page])
+  #   retval
+  # end
 
   def signature
     @jsapi_ticket = Weixin.get_jsapi_ticket

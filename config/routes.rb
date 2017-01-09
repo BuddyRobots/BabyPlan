@@ -129,7 +129,6 @@ Rails.application.routes.draw do
 
     resources :courses do
       collection do
-        get :description
         get :get_id_by_name
         get :next_refund_request
       end
@@ -137,6 +136,7 @@ Rails.application.routes.draw do
         post :set_available
         post :upload_photo
         get :show_template
+        get :description
         get :qrcode
         post :signin_client
         get :signin_info

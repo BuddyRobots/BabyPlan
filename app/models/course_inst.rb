@@ -68,7 +68,6 @@ class CourseInst
       available: self.available,
       speaker: self.speaker,
       price: self.price,
-      price_pay: self.price_pay,
       address: self.address,
       date: self.date
     }

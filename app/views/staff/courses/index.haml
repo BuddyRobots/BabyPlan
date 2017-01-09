@@ -10,7 +10,7 @@
   .main-top.direction
     .user-search-box.f14.bg2
       .input-group
-        %input.input-style#search-input{:type => "text", :placeholder => "输入课程名称、课程编号、主讲人姓名", value: "#{@keyword}"}
+        %input.input-style#search-input{:type => "text", :placeholder => "输入课程名称、主讲人姓名", value: "#{@keyword}"}
         %span.input-group-btn
           %button.btn#search-btn{:type => "button"}
     %ul.set
@@ -32,95 +32,94 @@
         .tab-content.bg3
           #tab1.tab-pane.active
             .desc-div
-              .undiscover.f14
-                %img.undiscover-icon{src: asset_path("undiscover.png")}
-              .table-box.f14
-                %table.table.table-hover.table-height
-                  %thead.th-bg.font-color2
-                    %tr
-                      %th 课程名称
-                      %th 上课时间
-                      %th 上课地址
-                      %th 主讲人
-                      %th 价&nbsp格
-                      %th 操&nbsp作
-                  %tbody.font-color3
-                    %tr
-                      %td 高等数学
-                      %td 2016/12/12-2017/1/12
-                      %td 北京市东三环南路2号瑞赛商务楼
-                      %td 数学老师
-                      %td 2800
-                      %td
-                        %a.font-color-red.unshelve{href: "#"} 下架
-                    %tr
-                      %td 高等数学
-                      %td 2016/12/12-2017/1/12
-                      %td 北京市东三环南路2号瑞赛商务楼
-                      %td 数学老师
-                      %td 2800
-                      %td
-                        %a.font-color-green.shelve{href: "#"} 上架
-                    - 7.times do
+              - if @course_insts[:data].length == 0
+                .undiscover.f14
+                  %img.undiscover-icon{src: asset_path("undiscover.png")}
+              - else
+                .table-box.f14
+                  %table.table.table-hover.table-height
+                    %thead.th-bg.font-color2
+                      %tr
+                        %th 课程名称
+                        %th 上课时间
+                        %th 上课地址
+                        %th 主讲人
+                        %th 价&nbsp格
+                        %th 操&nbsp作
+                    %tbody.font-color3
+                      - @course_insts[:data].each do |ci|
+                        %tr{class: "", "data-id" => ci[:id]}
+                          %td= link_to ci[:name], "/staff/courses/#{ci[:id]}"
+                          %td= ci[:date]
+                          %td= ci[:address]
+                          %td= ci[:speaker]
+                          %td= ci[:price]
+                          %td
+                            - if ci[:available]
+                              %a.set-available.font-color-red.unshelve{href: "#"} 下架
+                            - else
+                              %a.set-available.font-color-green.shelve{href: "#"} 上架
                       %tr
                         %td 高等数学
                         %td 2016/12/12-2017/1/12
                         %td 北京市东三环南路2号瑞赛商务楼
                         %td 数学老师
                         %td 2800
-                        %td.font-color4 已结课
-              .select-page 
-                %span.totalitems 共2页，总计18条
-                %span.choice-page
-                  %ul.pagination.pagination-sm
-                    %li
-                      %a{:href => "#"} «
-                    %li
-                      %a{:href => "#"} 1
-                    %li
-                      %a{:href => "#"} »
+                        %td
+                          %a.font-color-green.shelve{href: "#"} 上架
+                      - 7.times do
+                        %tr
+                          %td 高等数学
+                          %td 2016/12/12-2017/1/12
+                          %td 北京市东三环南路2号瑞赛商务楼
+                          %td 数学老师
+                          %td 2800
+                          %td.font-color4 已结课
+                .select-page 
+                  %span.totalitems= "共#{@course_insts[:total_page]}页，总计#{@course_insts[:total_number]}条"
+                  %span.choice-page
+                    %ul.pagination.pagination-sm
+                      %li
+                        %a{href: "/staff/courses?keyword=#{@keyword}&course_inst_page=#{@course_insts[:previous_page]}"} «
+                      - ( (@course_insts[:previous_page] > 2 ? @course_insts[:previous_page] - 2 : 1) .. (@course_insts[:next_page] < @course_insts[:total_page] - 2 ? @course_insts[:next_page] + 2 : @course_insts[:total_page]) ).to_a.each do |page|
+                        %li
+                          %a{href: "/staff/courses?keyword=#{@keyword}&course_inst_page=#{page}"}= page
+                      %li
+                        %a{href: "/staff/courses?keyword=#{@keyword}&course_inst_page=#{@course_insts[:next_page]}"} »
           #tab2.tab-pane
             .desc-div
-              .undiscover.f14
-                %img.undiscover-icon{src: asset_path("undiscover.png")}
-              .table-box.f14
-                %table.table.table-hover.table-height
-                  %thead.th-bg.font-color2
-                    %tr
-                      %th 课程名称
-                      %th 课程编号
-                      %th 主讲人
-                      %th 价&nbsp格
-                      %th 操&nbsp作
-                  %tbody.font-color3
-                    %tr
-                      %td 高等数学
-                      %td GDSX
-                      %td 数学老师
-                      %td 2800
-                      %td.font-color-green 开设课程
-                    %tr
-                      %td 高等数学
-                      %td GDSX
-                      %td 数学老师
-                      %td 2800
-                      %td.font-color-green 开设课程
-                    %tr
-                      %td 高等数学
-                      %td GDSX
-                      %td 数学老师
-                      %td 2800
-                      %td.font-color-green 开设课程
-              .select-page 
-                %span.totalitems 共2页，总计18条
-                %span.choice-page
-                  %ul.pagination.pagination-sm
-                    %li
-                      %a{:href => "#"} «
-                    %li
-                      %a{:href => "#"} 1
-                    %li
-                      %a{:href => "#"} »
+              - if @courses[:data].length == 0
+                .undiscover.f14
+                  %img.undiscover-icon{src: asset_path("undiscover.png")}
+              - else
+                .table-box.f14
+                  %table.table.table-hover.table-height
+                    %thead.th-bg.font-color2
+                      %tr
+                        %th 课程名称
+                        %th 课程编号
+                        %th 主讲人
+                        %th 价&nbsp格
+                        %th 操&nbsp作
+                    %tbody.font-color3
+                      - @courses[:data].each do |e|
+                        %tr
+                          %td= link_to e[:name], "/staff/courses/" + e[:id] + "/show_template"
+                          %td= e[:code]
+                          %td= e[:speaker]
+                          %td= e[:price]
+                          %td= link_to "开设课程", "/staff/courses/" + e[:id] + "/description", class: "font-color-green" 
+                .select-page 
+                  %span.totalitems= "共#{@courses[:total_page]}页，总计#{@courses[:total_number]}条"
+                  %span.choice-page
+                    %ul.pagination.pagination-sm
+                      %li
+                        %a{href: "/staff/courses?keyword=#{@keyword}&course_page=#{@courses[:previous_page]}&profile=template"} «
+                      - ( (@courses[:previous_page] > 2 ? @courses[:previous_page] - 2 : 1) .. (@courses[:next_page] < @courses[:total_page] - 2 ? @courses[:next_page] + 2 : @courses[:total_page]) ).to_a.each do |page|
+                        %li
+                          %a{href: "/staff/courses?keyword=#{@keyword}&course_page=#{page}&profile=template"}= page
+                      %li
+                        %a{href: "/staff/courses?keyword=#{@keyword}&course_page=#{@courses[:next_page]}&profile=template"} »
             
 
 

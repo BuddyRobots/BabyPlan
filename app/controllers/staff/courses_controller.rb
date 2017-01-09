@@ -6,37 +6,51 @@ class Staff::CoursesController < Staff::ApplicationController
     @active_tab = "course"
   end
 
-  def index
-    # @keyword = params[:keyword]
-    # params[:page] = params[:course_inst_page]
-    # course_insts = @keyword.present? ? current_center.course_insts.where(name: /#{@keyword}/) : current_center.course_insts.all
-    # @course_insts = auto_paginate(course_insts)
-    # @course_insts[:data] = @course_insts[:data].map do |e|
-    #   e.course_inst_info
-    # end
-    # params[:page] = params[:course_page]
-    # courses = @keyword.present? ? Course.is_available.where(name: /#{@keyword}/) : Course.is_available
-    # @courses = auto_paginate(courses)
-    # @courses[:data] = @courses[:data].map do |e|
-    #   e.course_info
-    # end
+  # def index
+  #   @keyword = params[:keyword]
+  #   params[:page] = params[:course_inst_page]
+  #   course_insts = @keyword.present? ? current_center.course_insts.where(name: /#{@keyword}/) : current_center.course_insts.all
+  #   @course_insts = auto_paginate(course_insts)
+  #   @course_insts[:data] = @course_insts[:data].map do |e|
+  #     e.course_inst_info
+  #   end
+  #   params[:page] = params[:course_page]
+  #   courses = @keyword.present? ? Course.is_available.where(name: /#{@keyword}/) : Course.is_available
+  #   @courses = auto_paginate(courses)
+  #   @courses[:data] = @courses[:data].map do |e|
+  #     e.course_info
+  #   end
 
+  #   @profile = params[:profile]
+  # end
+  
+  def index
+    @keyword = params[:keyword]
+    params[:page] = params[:course_inst_page]
+    course_insts = @keyword.present? ? CourseInst.any_of({name: /#{@keyword}/},{speaker: /#{@keyword}/}) : CourseInst.all
+    @course_insts = auto_paginate(course_insts)
+    @course_insts[:data] = @course_insts[:data].map do |e|
+      e.course_inst_info
+    end
+    params[:page] = params[:course_page]
+    courses = @keyword.present? ? Course.any_of({name: /#{@keyword}/},{speaker: /#{@keyword}/}) : Course.all
+    @courses = auto_paginate(courses)
+    @courses[:data] = @courses[:data].map do |e|
+      e.course_info
+    end
     @profile = params[:profile]
   end
-  
+
   def description
   end
 
   def create
-    retval = CourseInst.create_course_inst(current_user, current_center, params[:course])
+    retval = Course.create_course(params[:course])
     render json: retval_wrapper(retval) and return
   end
 
   def new
-    # @course = Course.where(id: params[:course_id]).first
-    # if @course.blank?
-    #   redirect_to action: :index and return
-    # end
+    
   end
 
   def show_template

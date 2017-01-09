@@ -35,10 +35,8 @@ class Course
       length: course_info[:length].to_i,
       desc: course_info[:desc],
       price: course_info[:price],
-      price_pay: course_info[:price_pay],
       speaker: course_info[:speaker],
       code: course_info[:code],
-      available: course_info[:available]
     )
     { course_id: course.id.to_s }
   end

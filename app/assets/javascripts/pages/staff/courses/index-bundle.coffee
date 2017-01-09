@@ -14,9 +14,9 @@ $ ->
     code = event.which
     if code == 13
       search()
-      
-  $(".details").click ->
-    location.href = "/staff/courses/show"
+
+  $("#new-template").click ->
+    location.href = "/staff/courses/new"
 
   $(".set-available").click ->
     current_state = "unavailable"
