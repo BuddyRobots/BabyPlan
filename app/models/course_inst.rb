@@ -31,7 +31,7 @@ class CourseInst
   scope :is_available, ->{ where(available: true) }
 
 
-  def self.create_course_inst(staff, center, course_inst_info)
+  def self.create_course_inst(staff, course_inst_info)
     if course_inst_info["length"].to_i != course_inst_info["date_in_calendar"].length
       return ErrCode::COURSE_DATE_UNMATCH
     end
@@ -55,9 +55,8 @@ class CourseInst
       speaker: course_inst_info[:speaker],
       date_in_calendar: course_inst_info[:date_in_calendar]
     })
-    course_inst.center = center
     course_inst.save
-    Feed.create(course_inst_id: course_inst.id, name: course.name, center_id: center.id, available: course_inst_info[:available])
+    # Feed.create(course_inst_id: course_inst.id, name: course.name, center_id: center.id, available: course_inst_info[:available])
     { course_inst_id: course_inst.id.to_s }
   end
 

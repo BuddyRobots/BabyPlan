@@ -131,12 +131,13 @@ Rails.application.routes.draw do
       collection do
         get :get_id_by_name
         get :next_refund_request
+        post :create_course_inst
       end
       member do
         post :set_available
         post :upload_photo
         get :show_template
-        get :description
+        get :edit
         get :qrcode
         post :signin_client
         get :signin_info

@@ -45,9 +45,9 @@ $ ->
   })
 
 
-  $("#course-code").css("width", $(".num-box").width() - $(".course-num").width() - 6)
+  $("#course-code").css("width", $(".num-box").width() - $(".course-num").width() - 2)
 
-  check_course_input = (code, capacity, price, price_pay, length, date, speaker, address, date_in_calendar) ->
+  check_course_input = (code, capacity, price, length, date, speaker, address, date_in_calendar) ->
     if code == "" || capacity == "" || price == "" || length == "" || date == "" || speaker == "" || address == ""
       $.page_notification("请将信息补充完整")
       return false
@@ -57,9 +57,6 @@ $ ->
     if !$.isNumeric(price) || parseInt(price) < 0
       $.page_notification("请填写正确的市场价")
       return false
-    if !$.isNumeric(price_pay) || parseInt(price_pay) < 0
-      $.page_notification("请填写正确的公益价")
-      return false
     if !$.isNumeric(length) || parseInt(length) <= 0
       $.page_notification("请填写正确的课次")
       return false
@@ -68,13 +65,12 @@ $ ->
       return false
     return true
 
-  $(".end-btn").click ->
+  $("#finish-btn").click ->
     course_id = window.cid
     available = !$("#unshelve").is(":checked")
     code = $("#course-code").val()
     capacity = parseInt($("#course-capacity").val())
     price = $("#course-price").val()
-    price_pay = $("#public-price").val()
     length = parseInt($("#course-length").val())
     date = $("#course-date").val()
     speaker = $("#course-speaker").val()
@@ -89,19 +85,18 @@ $ ->
         date_in_calendar.push(fc_event.start._i + "," + fc_event.end._i)
     )
 
-    ret = check_course_input(code, capacity, price, price_pay, length, date, speaker, address, date_in_calendar)
+    ret = check_course_input(code, capacity, price, length, date, speaker, address, date_in_calendar)
     if ret == false
       return
 
     $.postJSON(
-      '/staff/courses/',
+      '/staff/courses/create_course_inst',
       course: {
         course_id: course_id
         available: available
         code: code
         capacity: capacity
         price: price
-        price_pay: price_pay
         length: length
         date: date
         speaker: speaker
@@ -110,6 +105,7 @@ $ ->
       },
       (data) ->
         if data.success
+          console.log(data.date_in_calendar)
           if has_photo == false
             # the user does not upload photo, skip photo uploading step
             location.href = "/staff/courses/" + data.course_inst_id

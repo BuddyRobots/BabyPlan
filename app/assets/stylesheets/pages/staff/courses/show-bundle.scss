@@ -9,6 +9,9 @@
     }
   }
 }
+.name-bottom {
+	margin: 0 0 2.7% 0 !important;
+}
 .select-page {
   margin-top: 2%;
 }
@@ -33,10 +36,13 @@
   top: 24px;
   z-index: 10;
 }
-#edit-btn, #delete-btn, #unshelve-btn {
+#edit-btn, #delete-btn, #unshelve-btn, #shelve-btn, #finish-btn {
   width: 8.63%;
   color: #fff;
   outline: none;
+}
+#finish-btn {
+  display: none;
 }
 .edit-photo, .unedit-photo {
   width: 100%;
@@ -45,16 +51,17 @@
 }
 .photo {
   position: relative;
-  width: 19.5%;
+  width: 19.2%;
   display: inline-block;
-  margin-left: 7.5%;
+  margin-left: 7%;
 }
 #upload-photo {
   position: absolute;
   top: 0;
   left: 0;
   bottom: 0;
-  // display: none;
+  right: 0;
+  display: none;
 }
 .text-message {
 	width: 60%;
@@ -73,15 +80,21 @@
 	font-weight: normal;
 }
 .course-times {
-  margin-left: 1.4%;
+  margin-left: 4.32%;
 }
-.long-input {
-  width: 80%;
+#course-date, #course-center {
+	width: 80%;
 }
 .input-area {
   display: inline-block;
-  width: 17.2%;
+  width: 19.6%;
   height: 30px;
+}
+.caption-left {
+  margin-left: 3%;
+}
+.kids-capacity, .course-price {
+	margin-left: 8.2%;
 }
 .controls-row {
   margin-bottom: 1.5%;
@@ -89,7 +102,7 @@
 .unedit-box {
   display: inline-block;
   vertical-align: middle;
-  width: 17.2%;
+  width: 19.6%;
   height: 30px;
   line-height: 30px;
 }
@@ -107,7 +120,7 @@
 .edit-box {
   display: none;
 }
-#date-span, #address-span {
+#date-span, #center-span {
   width: 75%;
 }
 .class-calendar {
@@ -116,7 +129,7 @@
 }
 .show-calendar {
   float: left;
-  width: 90.6%;
+  width: 92.1%;
   border: 1px solid #c8c8c8;
   margin-left: 1%;
   border-radius: 4px;
@@ -129,7 +142,7 @@ h2 {
 
 // edit-calendar
 .calendar-wrapper {
-	width: 72.7%;
+	width: 86.5%;
 	margin: 20px 0 0 0;
 	// border: 1px solid #c8c8c8;
 	border-radius: 6px;

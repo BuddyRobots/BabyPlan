@@ -129,7 +129,7 @@ $ ->
       (data) ->
         console.log(data)
         if data.success
-          location.href = "/staff/courses/" + data.course_id + "/description"
+          location.href = "/staff/courses/" + data.course_id + "/edit"
     )
 
 #   $( "#datepicker" ).datepicker({

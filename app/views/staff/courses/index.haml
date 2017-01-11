@@ -108,7 +108,7 @@
                           %td= e[:code]
                           %td= e[:speaker]
                           %td= e[:price]
-                          %td= link_to "开设课程", "/staff/courses/" + e[:id] + "/description", class: "font-color-green" 
+                          %td= link_to "开设课程", "/staff/courses/" + e[:id] + "/edit", class: "font-color-green" 
                 .select-page 
                   %span.totalitems= "共#{@courses[:total_page]}页，总计#{@courses[:total_number]}条"
                   %span.choice-page

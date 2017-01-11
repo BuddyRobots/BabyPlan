@@ -41,7 +41,13 @@ class Staff::CoursesController < Staff::ApplicationController
     @profile = params[:profile]
   end
 
-  def description
+  def edit
+    @course = Course.where(id: params[:id]).first
+  end
+
+  def create_course_inst
+    retval = CourseInst.create_course_inst(current_user, params[:course])
+    render json: retval_wrapper(retval) and return
   end
 
   def create
@@ -54,29 +60,39 @@ class Staff::CoursesController < Staff::ApplicationController
   end
 
   def show_template
-    # @course = Course.where(id: params[:id]).first
-    # if @course.blank?
-    #   redirect_to action: :index and return
-    # end
+    @course = Course.where(id: params[:id]).first
+    if @course.blank?
+      redirect_to action: :index and return
+    end
+    course_insts = CourseInst.where(course_id: params[:id])
+    @course_insts = auto_paginate(course_insts)
+    @course_insts[:data] = @course_insts[:data].map do |e|
+      e.course_inst_info
+    end
+    @profile = params[:profile]
+  end
+
+  def destroy
+    Course.where(id: params[:id]).delete
+    render json: retval_wrapper(nil) and return
   end
 
   def show
-    # @profile = params[:profile]
-    # @course_inst = CourseInst.where(id: params[:id]).first
+    @profile = params[:profile]
+    @course_inst = CourseInst.where(id: params[:id]).first
+    reviews = @course_inst.reviews
+    if params[:review_type].present?
+      reviews = reviews.where(status: params[:review_type].to_i)
+    end
+    params[:page] = params[:review_page]
+    @reviews = auto_paginate(reviews)
 
-    # reviews = @course_inst.reviews
-    # if params[:review_type].present?
-    #   reviews = reviews.where(status: params[:review_type].to_i)
-    # end
-    # params[:page] = params[:review_page]
-    # @reviews = auto_paginate(reviews)
+    participates = @course_inst.course_participates
+    params[:page] = params[:participate_page]
+    @participates = auto_paginate(participates)
 
-    # participates = @course_inst.course_participates
-    # params[:page] = params[:participate_page]
-    # @participates = auto_paginate(participates)
-
-    # # stat related
-    # @income_stat = @course_inst.income_stat
+    # stat related
+    @income_stat = @course_inst.income_stat
   end
 
   def stat
@@ -132,7 +148,7 @@ class Staff::CoursesController < Staff::ApplicationController
 
   def set_available
     @course_inst = CourseInst.where(id: params[:id]).first
-    retval = ErrCode::COURSE_INST_NOT_EXIST if @course.blank?
+    retval = ErrCode::COURSE_INST_NOT_EXIST if @course_inst.blank?
     retval = @course_inst.set_available(params[:available])
     render json: retval_wrapper(retval)
   end

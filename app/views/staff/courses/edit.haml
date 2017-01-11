@@ -1,12 +1,12 @@
 - content_for :head do
-  = javascript_include_tag "pages/staff/courses/description-bundle"
-  = stylesheet_link_tag "pages/staff/courses/description-bundle", :media => "all"
-  / :javascript
-  /   window.cid = "#{@course.id.to_s}"
+  = javascript_include_tag "pages/staff/courses/edit-bundle"
+  = stylesheet_link_tag "pages/staff/courses/edit-bundle", :media => "all"
+  :javascript
+    window.cid = "#{@course.id.to_s}"
 
 .content-area
   .main-top.direction
-    %a{href: "#"}
+    %a{href: "/staff/courses?profile=template"}
       %img.back{src: asset_path("back.png")}
     %ul.set
       %li
@@ -30,7 +30,7 @@
                 .text-message
                   %form.form-inline
                     %label.input-caption.f16 课程名称:
-                    %span.unedit-box.f16#name-span 少儿计算机知识学习
+                    %span.unedit-box.f16#name-span= @course.name
                   .form-group
                     %label.input-caption.f16 上课时间:
                     %input.input-area.form-control.date#course-date{:type => "text"}
@@ -45,18 +45,18 @@
                 .photo
                   = form_tag("/", method: "post", multipart: true, id: "upload-photo-form", class: "hide") do
                     = file_field_tag "photo_file", { class: "hide", accept: ".jpg,.png" }
-                  %a#upload-photo{href: "javascript:void(0);"}
+                  %a.a-div#upload-photo{href: "javascript:void(0);"}
                     %img.edit-photo#photo{src: asset_path("photo-course.png")}
               .controls.controls-row
                 %label.input-caption.f16 开课编号:
                 %span.num-box
-                  %span.course-num.f14 SESJ-
+                  %span.course-num.f14= @course.code + "-"
                   %input.input-area.form-control.code#course-code{:type => "text"}
                 %label.input-caption.f16 课次:
                 %input.input-area.form-control.input-length#course-length{:type => "text"}
               .controls.controls-row
                 %label.input-caption.f16 上课教室:
-                %input.form-control.input-length#course-classroom{:type => "text"}
+                %input.form-control.input-length#course-address{:type => "text"}
                 %label.input-caption.f16 价格:
                 %input.form-control.input-length#course-price{:type => "text"}
                 %label.input-caption.kids-capacity.f16 容量:
