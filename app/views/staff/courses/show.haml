@@ -47,7 +47,7 @@
             %a.f16.font-color1{"data-toggle" => "tab", :href => "#tab5"} 家长评价
         .tab-content.bg3.f14.font-color3
           #tab1.tab-pane.active
-            .desc-div
+            .desc-div.font-color3
               .top-box.clearfix
                 .text-message 
                   .form-inline.name-bottom
@@ -115,8 +115,8 @@
                     %input.input-area.form-control#end-time{:type => "text"}
                   .btn#add-event{:type => "button"} 添加单次
                   .repeat.clearfix
-                    .btn.date-btn{:type => "button"} 次日重复
-                    .btn.week-btn{:type => "button"} 每周重复
+                    %button.btn.date-btn#date-btn{:type => "button"} 次日重复
+                    %button.btn.week-btn#week-btn{:type => "button"} 每周重复
           #tab2.tab-pane
             .desc-div
               .undiscover

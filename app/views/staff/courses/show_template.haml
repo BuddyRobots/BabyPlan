@@ -64,12 +64,12 @@
                     %tbody.font-color3
                       - @course_insts[:data].each do |e|
                         %tr{"data-id" => e[:id]}
-                          %td= e[:inst_code]
+                          %td= e[:code]
                           %td= e[:date]
                           %td= e[:address]
                           %td= e[:speaker]
                           %td= e[:price]
-                          %td= e[:length].to_s
+                          %td= e[:length]
                 .select-page 
                   %span.totalitems= "共#{@course_insts[:total_page]}页，总计#{@course_insts[:total_number]}条"
                   %span.choice-page

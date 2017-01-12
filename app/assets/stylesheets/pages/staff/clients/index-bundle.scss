@@ -1,332 +1,118 @@
 @import "jquery-ui";
 
+
 .modal-body, input, label {
-	margin: 0;
-	padding: 0;
-	max-height: 600px;
+  margin: 0;
+  padding: 0;
+  max-height: 600px;
 }
-
-.content-area {
-	position: absolute;
-	width: 100%;
-	bottom: 0;
-	top: 0;
-	background:#f7fcff;
-	box-shadow: -1px -1px 6px #9c9c9c inset;
-	padding: 20px;
+.direction {
+  -webkit-justify-content: space-between;
+  -moz-justify-content: space-between;
+  -os-justify-content: space-between;
+  -o-justify-content: space-between;
+  justify-content: space-between;
 }
-
-.content-box {
-	position: relative;
-	box-shadow: 0 -1px 6px #9c9c9c inset;
-	background: white;  
-	height: 100%;
-}
-.manage-box {
-	height: 58px;
-	border-bottom: 1px solid #c8c8c8;
-	overflow: hidden;
-}
-.manage-content {
-	overflow: auto;
-	position: absolute;
-	top: 60px;
-	left: 0px;
-	bottom: 0px;
-	right: 0px;
-}
-.user-search-box {
-	position: absolute;
-	width: 200px;
-	height: 34px;
-	left:20px;
-	top: 11.5px;
-	border-top-left-radius: 6px;
-	border-bottom-left-radius: 6px;
-}
-#appendedInputButton {
-	padding: 0;
-	width: 162px;
-	height: 34px;
-}
-#search-btn {
-	width: 34px;
-	height: 34px;
-	border: 1px solid #c8c8c8;
-	background: image-url("managecenter/search.png") no-repeat;
-	background-size: 22px;
-	background-position: 6px 6px;
-	outline: none;
-}
-
-.kidadd-btn {
-	float: right;
-	margin: 11.5px 20px 0 0;
-	width: 100px;
-	height: 34px;
-	padding: 0;
-	line-height: 32px;
-	color: white;
-	background: #f7873d;
-	border-radius: 6px;
-}
-.kidadd-btn:hover {
-	background: #f7873d;
-	color: white;
-}
-.add-edit {
-	vertical-align: middle;
-}
-.table-box {
-	position: relative;
-	padding: 0;
-	margin: 20px 20px auto 20px;
-}
-#user-table {
-	border-radius: 6px;
-	border: 1px solid #c8c8c8;
-	font-size: 14px;
-	color: #323232;
-	margin-bottom: 0;
-	th {
-		text-align: center;
-		height: 40px;
-		line-height: 40px;
-		padding: 0;
-	}
-	td {
-		font-size: 14px;
-		color: #505050;
-		height:45px;
-		line-height: 45px;
-		text-align: center;
-		padding: 0;
-	}
-}
-.undiscover {
-	text-align: center;
-	padding: 30px;
-}
-.undiscover-icon {
-	display: inline-block;
-	width: 100%;
-	max-width: 39px;
-}
-.message {
-	font-size: 16px;
-	color: #969696;
-	margin-left: 20px;
-}
-.select-page {
-	text-align: right;
-	margin: 10px 20px;
-}
-.totalitems {
-	font-size: 12px;
-	color: #969696;
-}
-.choice-page {
-	display: inline-block;
-	vertical-align: middle;
-}
-.pagination {
-	display: inline-block;
-	margin: 0;
-	padding: 0;
-	margin-left: 15px;
+#new-client {
+	width: 10.35%;
+  color: #fff;
+  outline: none;
 }
 
 
 #kidsaddModal {
-	.modal-dialog {
-		position:absolute;
-		left: 50%;
-		top: 50%;
-		margin-left: -203px;
-		margin-top: -275px;
-		width: 406px;
-		height: 550px;
-		border-radius: 6px;	
-	}
+  .modal-dialog {
+    position:absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -203px;
+    margin-top: -275px;
+    width: 406px;
+    height: 550px;
+    border-radius: 6px; 
+  }
+}
+.form-control {
+  color: #6f6f7e;
 }
 .modal-backdrop {
-	background-color: #999;
+  background-color: #999;
 }
 .close {
-	position: absolute;
-	right: -14px;
-	top: -14px;
-	opacity: 0.7;
-	z-index: 10;
+  position: absolute;
+  right: -14px;
+  top: -14px;
+  opacity: 0.7;
+  z-index: 10;
 }
 .close:hover {
-	opacity: 1;
+  opacity: 1;
 }
 .modalheader {
-	height: 48px;
-	line-height: 48px;
-	box-shadow: 0 -1px 6px #9c9c9c; 
+  height: 48px;
+  line-height: 48px;
+  box-shadow: 0 -1px 6px #9c9c9c; 
 }
 .caption {
-	font-size: 16px;
-	color: #323232;
-	margin-left: 20px;
+  font-size: 16px;
+  margin-left: 20px;
 }
 .form-horizontal {
-	width: 78%;
-	margin: 0 auto;
-	padding-top: 20px;
+  width: 78%;
+  margin: 0 auto;
+  padding-top: 20px;
 }
 .form-group {
-	margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 #home-address, #mobile-input {
-	margin-bottom: 0;
+  margin-bottom: 0;
 }
 .notice {
-	font-size: 12px;
-	color: #d70c19;
-	margin-left: 85px;
-	height: 20px;
-	line-height: 20px;
-	visibility: hidden;
+  font-size: 12px;
+  color: #6f6f7e;
+  margin-left: 85px;
+  height: 20px;
+  line-height: 20px;
+  visibility: hidden;
 }
 #mobilecode {
-	width: 85px;
-	height: 34px;
-	line-height: 34px;
-	border: 0;
-	border-radius: 6px;
-	font-size: 12px;
-	color: #323232;
-	outline: none;
+  width: 85px;
+  height: 34px;
+  line-height: 34px;
+  border: 0;
+  border-radius: 6px;
+  font-size: 12px;
+  outline: none;
 }
 .unclicked-box {
-	border: 1px solid #c8c8c8;
+  border: 1px solid #c8c8c8;
 }
 .clicked-box {
-	border: 1px solid #d70c19;
+  border: 1px solid #d70c19;
 }
 .clicked {
-	background: #d4d4d4;
+  background: #d4d4d4;
 }
 .unclicked {
-	background: #fee4d2;
+  background: #fee4d2;
 }
 .add-button {
-	text-align: center;
+  text-align: center;
 }
 #kid-add {
-	width: 80%;
-	height: 40px;
-	border: 0;
-	border-radius: 4px;
-	margin-bottom: 20px;
-	font-size: 16px;
-	color: white;
-	outline: none;
+  width: 80%;
+  height: 40px;
+  border: 0;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  color: white;
+  outline: none;
 }
 .button-disabled {
-	background: #c8c8c8;
+  background: #c8c8c8;
 }
 .button-enabled {
-	background: #ffa265;
+  background: #ffa265;
 }
-
-
-
-// .textbox {
-// 	padding-bottom: 20px;
-// 	.textarea {
-// 		width: 120px;
-// 		float: left;
-// 		text-align: right;
-// 		font-size:16px;
-// 		color:#323232;
-// 		padding-top: 9px;
-// 	}
-// 	.input-box {
-// 		width: 190px;
-// 		height: 36px;
-// 		border-radius: 6px;
-// 		margin-left: 10px;
-// 		border: 1px solid #c8c8c8;
-// 	}
-// 	#locale {
-// 		display: none;
-// 	}
-// 	#kid-mobilecode {
-// 		width: 100px;
-// 		height: 36px;
-// 		border-radius: 6px;
-// 		border: 1px solid #c8c8c8;
-// 		margin-left: 10px;
-// 	}
-// 	.unclicked-box {
-// 		border: 1px solid #c8c8c8;
-// 	}
-// 	.clicked-box {
-// 		border: 1px solid #d70c19;
-// 	}
-// 	.clicked {
-// 		background: #d4d4d4;
-// 	}
-// 	.unclicked {
-// 		background: #fee4d2;
-// 	}
-// 	#mobilecode {
-// 		width: 76px;
-// 		height: 36px;
-// 		line-height: 36px;
-// 		padding: 0;
-// 		border-radius: 6px;
-// 		margin-left: 10px;
-// 		font-size: 12px;
-// 		color: #323232;
-// 		text-align: center;
-// 		text-decoration: none;
-// 	}
-// 	#kid-password {
-// 		margin-bottom: 0;
-// 		padding: 0;
-// 	}
-// 	#kid-confirm-password {
-// 		margin-bottom: 0;
-// 		padding: 0;
-// 	}
-// }
-// #kid-mobile, #kid-name, #kid-gender, #datepicker, #kid-address, #kid-mobile,
-// #kid-parent, #kid-address, #kid-mobilecode, #homeaddress, #mobile {
-// 	padding: 0;
-// 	margin-bottom: 0;
-// }
-// #kid-name-box {
-// 	margin-top: 30px;
-// }
-// #mobile-notice, #verify-code-notice, #password-notice {
-// 	font-size: 12px;
-// 	color: #d70c19;
-// 	// margin-left: 130px;
-// 	// visibility: hidden;
-// }
-// #kid-add {
-// 	display: block;
-// 	margin: 0 auto;
-// 	width: 240px;
-// 	height: 40px;
-// 	border-radius: 6px;
-// 	margin-top: 10px;
-// 	margin-bottom: 30px;
-// 	text-align: center;
-// 	line-height: 40px;
-// 	font-size: 16px;
-// 	color: white;
-// 	text-decoration: none;
-// }
-// #kid-add:link {
-// 	text-decoration: none;
-// }
-// #kid-add:visited {
-// 	color: white;
-// 	text-decoration: none;
-// }

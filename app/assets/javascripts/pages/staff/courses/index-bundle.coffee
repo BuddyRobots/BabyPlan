@@ -20,7 +20,7 @@ $ ->
 
   $(".set-available").click ->
     current_state = "unavailable"
-    if $(this).hasClass("link-available")
+    if $(this).hasClass("font-color-red")
       current_state = "available"
     cid = $(this).closest("tr").attr("data-id")
     link = $(this)
@@ -35,17 +35,13 @@ $ ->
         if data.success
           $.page_notification("操作完成")
           if current_state == "available"
-            link.removeClass("link-available")
-            link.addClass("link-unavailable")
+            link.removeClass("font-color-red")
+            link.addClass("font-color-green")
             link.text("上架")
-            link.closest("tr").removeClass("available")
-            link.closest("tr").addClass("unavailable")
           else
-            link.addClass("link-available")
-            link.removeClass("link-unavailable")
+            link.addClass("font-color-red")
+            link.removeClass("font-color-green")
             link.text("下架")
-            link.closest("tr").addClass("available")
-            link.closest("tr").removeClass("unavailable")
       )
     return false
 

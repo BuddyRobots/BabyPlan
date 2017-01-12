@@ -77,6 +77,12 @@ class Staff::CoursesController < Staff::ApplicationController
     render json: retval_wrapper(nil) and return
   end
 
+  def delete_course_inst
+    CourseInst.where(id: params[:id]).delete
+    render json: retval_wrapper(nil) and return
+  end
+
+
   def show
     @profile = params[:profile]
     @course_inst = CourseInst.where(id: params[:id]).first

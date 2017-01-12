@@ -17,7 +17,7 @@
   display: inline-block;
   width: 20%;
   height: 2.143em;
-  margin: 0 5% 0 1%;
+  margin: 0 6.3% 0 1%;
 }
 .finish-btn-position {
   position: absolute;
@@ -25,13 +25,16 @@
   top: 24px;
   z-index: 10;
 }
+.short-left {
+  margin-left: 0.5%;
+}
 #finish-btn {
   width: 8.63%;
   color: #fff;
   outline: none;
 }
 .controls-row {
-  margin-bottom: 2%;
+  margin-bottom: 1.5%;
 }
 .value-margin {
   margin-left: 1.5%;
@@ -85,17 +88,17 @@
   @extend .input-length;
 }
 .kids-capacity {
-  margin-left: 2.7%;
+  margin-left: 3.9%;
 }
 .form-group {
-  margin: 20px 0;
+  margin: 3.2% 0;
 }
 .a-div {
   display: inline-block;
 }
 .edit-photo {
   width: 100%;
-  height: 138px;
+  height: 13.8em;
   object-fit: contain;
 }
 .photo {
@@ -108,6 +111,7 @@
   width: 87%;
   border: 1px solid #c8c8c8;
   border-radius: 6px;
+  margin-top: 2%;
 }
 .calendar-operation-wrapper {
   width: 35%;
@@ -121,20 +125,21 @@
 }
 .title {
   text-align: center;
-  margin: 20px 0 10px 0;
+  margin: 6.3% 0 3.2% 0;
 }
 .small-tips {
   text-align: center;
-  margin-bottom: 20px;
+  color: #c8c8c8;
+  margin-bottom: 6.3%;
 }
 .input-date {
   display: inline-block;
-  margin-right: 5px;
+  margin-right: 1%;
   vertical-align: middle;
   font-weight: normal;
 }
 #add-event {
-  width: 240px;
+  width: 75%;
   background: #10c078;
   font-size: 16px;
   color: white;
@@ -143,15 +148,19 @@
   color: white;
 }
 .repeat {
-  width: 240px;
-  margin: 10px auto;
+  width: 75%;
+  margin: 3.2% auto;
 }
 .date-btn {
   float: left;
-  width: 110px;
+  width: 46%;
   background: #c8c8c8;
-  font-size: 16px;
+  font-size: 1.6em;
   color: white;
+}
+#date-btn, #week-btn {
+  color: white;
+  outline: none;
 }
 .date-btn:hover {
   color: white;
@@ -168,4 +177,9 @@ h2 {
 .active-btn {
   background: #f7873d;
 }
+.no-margin-right {
+  margin-right: 0;
+}
+
+
 

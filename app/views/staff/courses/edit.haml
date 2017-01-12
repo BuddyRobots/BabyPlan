@@ -29,37 +29,37 @@
               .top-box.clearfix
                 .text-message
                   %form.form-inline
-                    %label.input-caption.f16 课程名称:
+                    %label.input-caption.f14 课程名称:
                     %span.unedit-box.f16#name-span= @course.name
                   .form-group
-                    %label.input-caption.f16 上课时间:
-                    %input.input-area.form-control.date#course-date{:type => "text"}
+                    %label.input-caption.f14 上课时间:
+                    %input.input-area.form-control.date.no-margin-right#course-date{:type => "text"}
                   .form-group
-                    %label.input-caption.f16 上课中心:
+                    %label.input-caption.f14 上课中心:
                     %select.form-control.input-area.select-input.font-color3
                       %option 朝阳儿童中心
                       %option 朝阳儿童中心
                       %option 朝阳儿童中心
-                    %label.input-caption.f16 主讲人:
-                    %input.input-area.form-control.select-input#course-speaker{:type => "text"}
+                    %label.input-caption.f14 主讲人:
+                    %input.input-area.form-control.select-input.no-margin-right#course-speaker{:type => "text"}
                 .photo
                   = form_tag("/", method: "post", multipart: true, id: "upload-photo-form", class: "hide") do
                     = file_field_tag "photo_file", { class: "hide", accept: ".jpg,.png" }
                   %a.a-div#upload-photo{href: "javascript:void(0);"}
                     %img.edit-photo#photo{src: asset_path("photo-course.png")}
               .controls.controls-row
-                %label.input-caption.f16 开课编号:
+                %label.input-caption.f14 开课编号:
                 %span.num-box
                   %span.course-num.f14= @course.code + "-"
                   %input.input-area.form-control.code#course-code{:type => "text"}
-                %label.input-caption.f16 课次:
-                %input.input-area.form-control.input-length#course-length{:type => "text"}
+                %label.input-caption.f14.short-left 课次:
+                %input.input-area.form-control.input-length.no-margin-right#course-length{:type => "text"}
               .controls.controls-row
-                %label.input-caption.f16 上课教室:
+                %label.input-caption.f14 上课教室:
                 %input.form-control.input-length#course-address{:type => "text"}
-                %label.input-caption.f16 价格:
+                %label.input-caption.f14.short-left 价格:
                 %input.form-control.input-length#course-price{:type => "text"}
-                %label.input-caption.kids-capacity.f16 容量:
+                %label.input-caption.kids-capacity.f14 容量:
                 %input.form-control.input-length#course-capacity{:type => "text"}
 
               .calendar-wrapper.clearfix
@@ -68,17 +68,17 @@
                   %p.small-tips.f16 （单击日历中的时间进行删除）
                   .form-inline.f16
                     %label.input-date 上课日期:
-                    %input.input-area.form-control#datepicker{:type => "text"}
+                    %input.input-area.form-control.no-margin-right#datepicker{:type => "text"}
                   .form-inline.f16
                     %label.input-date 开始时间:
-                    %input.input-area.form-control#start-time{:type => "text"}
+                    %input.input-area.form-control.no-margin-right#start-time{:type => "text"}
                   .form-inline.f16
                     %label.input-date 结束时间:
-                    %input.input-area.form-control#end-time{:type => "text"}
+                    %input.input-area.form-control.no-margin-right#end-time{:type => "text"}
                   .btn#add-event{:type => "button"} 添加单次
                   .repeat.clearfix
-                    .btn.date-btn{:type => "button"} 次日重复
-                    .btn.week-btn{:type => "button"} 每周重复
+                    %button.btn.date-btn#date-btn{:type => "button"} 次日重复
+                    %button.btn.week-btn#week-btn{:type => "button"} 每周重复
                 #calendar
 
 

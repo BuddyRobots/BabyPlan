@@ -10,15 +10,35 @@
   color: #fff;
   outline: none;
 }
-
-.shelve:hover {
+.font-color-green:link {
   color: #40ca85;
   text-decoration: underline;
 }
-.unshelve:hover {
-  color: #e9657e;
+.font-color-green:visited {
+  color: #40ca85;
   text-decoration: underline;
 }
 .font-color-green:hover {
   color: #40ca85;
+  text-decoration: underline;
+}
+.font-color-green:active {
+  color: #40ca85;
+  text-decoration: underline;
+}
+.font-color-red:link {
+  color: #e9657e;
+  text-decoration: underline;
+}
+.font-color-red:visited {
+  color: #e9657e;
+  text-decoration: underline;
+}
+.font-color-red:hover {
+  color: #e9657e;
+  text-decoration: underline;
+}
+.font-color-red:active {
+  color: #e9657e;
+  text-decoration: underline;
 }

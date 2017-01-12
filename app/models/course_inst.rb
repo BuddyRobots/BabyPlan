@@ -68,7 +68,11 @@ class CourseInst
       speaker: self.speaker,
       price: self.price,
       address: self.address,
-      date: self.date
+      date: self.date,
+      length: self.length,
+      inst_code: self.inst_code,
+      code: self.code,
+      end_date: self.end_date
     }
   end
 
@@ -115,6 +119,14 @@ class CourseInst
     time = start_time.split('T')[1]
     time = time[0..-4]
     return date + " " + time
+  end
+
+  def end_date
+    last_day = self.date_in_calendar[-1]
+    return nil if last_day.blank?
+    end_time = last_day.split(',')[0]
+    end_date = end_time.split('T')[0]
+    return end_date
   end
 
   def duration

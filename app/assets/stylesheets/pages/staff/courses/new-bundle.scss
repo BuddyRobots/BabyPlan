@@ -18,6 +18,7 @@
   width: 20%;
   height: 2.143em;
   margin: 0 5% 0 1%;
+  color: #6f6f7e;
 }
 .finish-btn-position {
   position: absolute;
@@ -34,7 +35,7 @@
   margin-bottom: 2%;
 }
 .value-margin {
-  margin-left: 1.5%;
+  // margin-left: 1.6%;
 }
 .course-introduce {
   vertical-align: top;
@@ -47,3 +48,12 @@
 #edit-area {
   height: 20em;
 }
+.no-margin-right {
+  margin-right: 0;
+}
+.long-margin-right {
+  margin-right: 6.5%;
+}
+
+
+

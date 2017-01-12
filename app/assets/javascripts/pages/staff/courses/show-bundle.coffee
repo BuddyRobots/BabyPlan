@@ -203,6 +203,17 @@ $ ->
             btn.text("下架")
       )
 
+  $("#delete-btn").click ->
+    $.postJSON(
+      "/staff/courses/" + window.cid + "/delete_course_inst",
+      {},
+      (data) ->
+        console.log(data)
+        if data.success
+          location.href = "/staff/courses"
+      )
+
+
   $("#edit-btn").click ->
     $(".operation").attr("disabled", true)
     $("#delete-btn").attr("disabled", true)

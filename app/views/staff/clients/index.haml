@@ -4,103 +4,171 @@
   :javascript
     window.keyword = "#{@keyword}"
 
+
 .content-area
-  /clients-index
+  .main-top.direction
+    .user-search-box.f14.bg2
+      .input-group
+        %input.input-style#search-input{:type => "text", :placeholder => "输入学生姓名、手机号", value: "#{@keyword}"}
+        %span.input-group-btn
+          %button.btn#search-btn{:type => "button"}
+    %ul.set
+      %li
+        %a.f16{href: staff_accounts_path} 账号设置
+      %li
+        %a.f16.set-left-border{href: signout_sessions_path} 退出登录
+        / %a.f16.set-left-border= link_to "退出登录",  signin_page_sessions_path, class: "类名", method: :delete
+  .main-content.bg2
+    %button.btn.new-normal.font-color1.btn-position#new-client{type: "button", "data-target" => "#kidsaddModal", "data-toggle" => "modal"} 添加儿童
+    .table-div
+      .tabbable
+        %ul.nav.nav-tabs
+          %li.active
+            %a.f16.font-color1{"data-toggle" => "tab", :href => "#tab1"} 所有学生
+        .tab-content.bg3
+          #tab1.tab-pane.active
+            .desc-div
+              .undiscover.f14
+                %img.undiscover-icon{src: asset_path("undiscover.png")}
+              .table-box.f14
+                %table.table.table-hover.table-height
+                  %thead.th-bg.font-color2
+                    %tr
+                      %th 学生姓名
+                      %th 年&nbsp&nbsp龄
+                      %th 性&nbsp&nbsp别
+                      %th 家长姓名
+                      %th 手机号
+                      %th 家庭住址
+                  %tbody.font-color3
+                    %tr
+                      %td
+                      %td
+                      %td
+                      %td
+                      %td
+                      %td
+              .select-page 
+                %span.totalitems 共2页，总计16条
+                %span.choice-page
+                  %ul.pagination.pagination-sm
+                    %li
+                      %a{href: "#"} «
+                    %li
+                      %a{href: "#"} 1
+                    %li
+                      %a{href: "#"} »
 
-  .content-box
-    .manage-box
-      .user-search-box
-        .input-group
-          %input.form-control#search-input{:type => "text", :placeholder => "输入姓名", :value => "#{@keyword}"}
-          %span.input-group-btn
-            %button.btn.btn-default#search-btn{:type => "button"}
-      .btn.kidadd-btn{:type => "button", "data-target" => "#kidsaddModal", "data-toggle" => "modal"} 
-        %img.add-edit{src: asset_path("managecenter/add.png")}
-        添加儿童
-    .manage-content
-      - if @users[:data].length == 0
-        .undiscover
-          %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
-          %span.message 抱歉！暂无查找信息
-      - else
-        .table-box
-          %table.table.table-bordered#user-table
-            %thead
-              %tr
-                %th 姓&nbsp名
-                %th 年&nbsp龄
-                %th 性&nbsp别
-                %th 家&nbsp长
-                %th 手机号
-                %th 家庭住址
-            %tbody
-              - @users[:data].each do |u|
-                %tr
-                  %td= link_to u[:name], "/staff/clients/#{u[:id]}"
-                  %td= u[:age].present? ? u[:age].to_s + " 岁" : ""
-                  %td= u[:gender] == 0 ? "男" : "女"
-                  %td= u[:parent]
-                  %td= u[:mobile]
-                  %td= truncate(u[:address], length: 30)
+            / .select-page 
+            /     %span.totalitems= "共#{@course_insts[:total_page]}页，总计#{@course_insts[:total_number]}条"
+            /     %span.choice-page
+            /       %ul.pagination.pagination-sm
+            /         %li
+            /           %a{href: "/staff/courses?keyword=#{@keyword}&course_inst_page=#{@course_insts[:previous_page]}"} «
+            /         - ( (@course_insts[:previous_page] > 2 ? @course_insts[:previous_page] - 2 : 1) .. (@course_insts[:next_page] < @course_insts[:total_page] - 2 ? @course_insts[:next_page] + 2 : @course_insts[:total_page]) ).to_a.each do |page|
+            /           %li
+            /             %a{href: "/staff/courses?keyword=#{@keyword}&course_inst_page=#{page}"}= page
+            /         %li
+            /           %a{href: "/staff/courses?keyword=#{@keyword}&course_inst_page=#{@course_insts[:next_page]}"} »
 
-        .select-page 
-          %span.totalitems= "共#{@users[:total_page]}页,总计#{@users[:total_number]}条"
-          %span.choice-page
-            %ul.pagination.pagination-sm
-              %li
-                %a{:href => "/staff/clients?keyword=#{@keyword}&page=#{@users[:previous_page]}"} «
-              - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
-                %li
-                  %a{:href => "/staff/clients?keyword=#{@keyword}&page=#{page}"}= page
-              %li
-                %a{:href => "/staff/clients?keyword=#{@keyword}&page=#{@users[:next_page]}"} »
-              
 #kidsaddModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
   .modal-dialog
     .modal-content
       .modalheader
-        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: asset_path("managecenter/close.png")}
-        %p.caption 添加儿童
+        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: asset_path("close.png")}
+        %p.caption.font-color3 添加儿童
       .modal-body
-        .form-horizontal{:role => "form"}
+        .form-horizontal.f14.font-color3{:role => "form"}
           .form-group
-            %label.col-sm-3.control-label{:for => "kid-name"} 姓&nbsp名
+            %label.col-sm-3.control-label.fn{:for => "kid-name"} 姓&nbsp名
             .col-sm-9
               %input.unclicked-box#kid-name.form-control{:type => "text"}
           .form-group
-            %label.col-sm-3.control-label{:for => "kid-gender"} 性&nbsp别
+            %label.col-sm-3.control-label.fn{:for => "kid-gender"} 性&nbsp别
             .col-sm-9
-              = select_tag "kid-gender", options_for_select(User.genders_for_select(false)), class: "unclicked-box form-control"
+              / = select_tag "kid-gender", options_for_select(User.genders_for_select(false)), class: "unclicked-box form-control"
           .form-group
-            %label.col-sm-3.control-label{:for => "datepicker"} 出生日期
+            %label.col-sm-3.control-label.fn{:for => "datepicker"} 出生日期
             .col-sm-9
               %input.unclicked-box#datepicker.form-control{:type => "text"}
           .form-group
-            %label.col-sm-3.control-label{:for => "kid-parent"} 家长姓名
+            %label.col-sm-3.control-label.fn{:for => "kid-parent"} 家长姓名
             .col-sm-9
               %input.unclicked-box#kid-parent.form-control{:type => "text"}
           .form-group#home-address
-            %label.col-sm-3.control-label{:for => "kid-address"} 家庭地址
+            %label.col-sm-3.control-label.fn{:for => "kid-address"} 家庭地址
             .col-sm-9
               %input.unclicked-box#kid-address.form-control{:type => "text"}
           %p.notice#mobile-notice 请核对手机号
           .form-group#mobile-input
-            %label.col-sm-3.control-label{:for => "kid-mobile"} 手机号
+            %label.col-sm-3.control-label.fn{:for => "kid-mobile"} 手机号
             .col-sm-9
               %input.unclicked-box#kid-mobile.form-control{:type => "text"}
           %p.notice#verify-code-notice 验证码输入错误
           .form-group
-            %label.col-sm-3.control-label{:for => "kid-mobilecode"} 验证码
+            %label.col-sm-3.control-label.fn{:for => "kid-mobilecode"} 验证码
             .col-sm-5
               %input.unclicked-box#kid-mobilecode.form-control{:type => "text"}
             .col-sm-4
               %button.unclicked#mobilecode{:href => "javascript:void(0);"} 获取验证码
           .form-group#password-input
-            %label.col-sm-3.control-label{:for => "kid-password"} 密码
+            %label.col-sm-3.control-label.fn{:for => "kid-password"} 密码
             .col-sm-9
               %input.unclicked-box#kid-password.form-control{:type => "password"}
           .add-button
             %button.btn#kid-add.button-disabled{:href => "javascript:void(0);"} 添&nbsp加
+/ .content-area
+/   /clients-index
+
+/   .content-box
+/     .manage-box
+/       .user-search-box
+/         .input-group
+/           %input.form-control#search-input{:type => "text", :placeholder => "输入姓名", :value => "#{@keyword}"}
+/           %span.input-group-btn
+/             %button.btn.btn-default#search-btn{:type => "button"}
+/       .btn.kidadd-btn{:type => "button", "data-target" => "#kidsaddModal", "data-toggle" => "modal"} 
+/         %img.add-edit{src: asset_path("managecenter/add.png")}
+/         添加儿童
+/     .manage-content
+/       - if @users[:data].length == 0
+/         .undiscover
+/           %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
+/           %span.message 抱歉！暂无查找信息
+/       - else
+/         .table-box
+/           %table.table.table-bordered#user-table
+/             %thead
+/               %tr
+/                 %th 姓&nbsp名
+/                 %th 年&nbsp龄
+/                 %th 性&nbsp别
+/                 %th 家&nbsp长
+/                 %th 手机号
+/                 %th 家庭住址
+/             %tbody
+/               - @users[:data].each do |u|
+/                 %tr
+/                   %td= link_to u[:name], "/staff/clients/#{u[:id]}"
+/                   %td= u[:age].present? ? u[:age].to_s + " 岁" : ""
+/                   %td= u[:gender] == 0 ? "男" : "女"
+/                   %td= u[:parent]
+/                   %td= u[:mobile]
+/                   %td= truncate(u[:address], length: 30)
+
+/         .select-page 
+/           %span.totalitems= "共#{@users[:total_page]}页,总计#{@users[:total_number]}条"
+/           %span.choice-page
+/             %ul.pagination.pagination-sm
+/               %li
+/                 %a{:href => "/staff/clients?keyword=#{@keyword}&page=#{@users[:previous_page]}"} «
+/               - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
+/                 %li
+/                   %a{:href => "/staff/clients?keyword=#{@keyword}&page=#{page}"}= page
+/               %li
+/                 %a{:href => "/staff/clients?keyword=#{@keyword}&page=#{@users[:next_page]}"} »
+              
+
 
 
 

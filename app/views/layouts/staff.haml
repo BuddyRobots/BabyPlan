@@ -26,9 +26,9 @@
                 %img.mini-icon{src: asset_path("1class.png")}
                 %span.f18.sidebar-title 课程管理
             %li{class: @active_tab == "client" ? "active-li" : ""}
-              %a{:href => "#"}
+              %a{:href => staff_clients_path}
                 %img.mini-icon{src: asset_path("2kid.png")}
-                %span.f18.sidebar-title 儿童管理
+                %span.f18.sidebar-title 学生管理
             %li{class: @active_tab == "announcement" ? "active-li" : ""}
               %a{:href => "#"}
                 %img.mini-icon{src: asset_path("3announcement.png")}

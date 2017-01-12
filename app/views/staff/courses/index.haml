@@ -5,7 +5,6 @@
     window.keyword = "#{@keyword}"
     window.profile = "#{@profile}"
 
-
 .content-area
   .main-top.direction
     .user-search-box.f14.bg2
@@ -54,27 +53,14 @@
                           %td= ci[:address]
                           %td= ci[:speaker]
                           %td= ci[:price]
-                          %td
-                            - if ci[:available]
-                              %a.set-available.font-color-red.unshelve{href: "#"} 下架
-                            - else
-                              %a.set-available.font-color-green.shelve{href: "#"} 上架
-                      %tr
-                        %td 高等数学
-                        %td 2016/12/12-2017/1/12
-                        %td 北京市东三环南路2号瑞赛商务楼
-                        %td 数学老师
-                        %td 2800
-                        %td
-                          %a.font-color-green.shelve{href: "#"} 上架
-                      - 7.times do
-                        %tr
-                          %td 高等数学
-                          %td 2016/12/12-2017/1/12
-                          %td 北京市东三环南路2号瑞赛商务楼
-                          %td 数学老师
-                          %td 2800
-                          %td.font-color4 已结课
+                          - if Date.parse(ci[:end_date]).past?
+                            %td.font-color4 已结课
+                          -else
+                            %td
+                              - if ci[:available]
+                                %a.set-available.font-color-red{href: "#"} 下架
+                              - else
+                                %a.set-available.font-color-green{href: "#"} 上架
                 .select-page 
                   %span.totalitems= "共#{@course_insts[:total_page]}页，总计#{@course_insts[:total_number]}条"
                   %span.choice-page

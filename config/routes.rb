@@ -134,6 +134,7 @@ Rails.application.routes.draw do
         post :create_course_inst
       end
       member do
+        post :delete_course_inst
         post :set_available
         post :upload_photo
         get :show_template
