@@ -6,78 +6,121 @@
     window.profile = "#{@profile}"
 
 .content-area
-  .content-box
-    .manage-box
-      .user-search-box
-        .input-group
-          %input.form-control#search-input{:type => "text", :placeholder => "输入搜索关键字", :value => "#{@keyword}"}
-          %span.input-group-btn
-            %button.btn.btn-default#search-btn{:type => "button"}
-      .btn.add-btn{:type => "button"} 
-        %img.add-img{src: asset_path("managecenter/add.png")}
-        添加本区公告
-    .manage-content
+  .main-top.direction
+    .user-search-box.f14.bg2
+      .input-group
+        %input.input-style#search-input{:type => "text", :placeholder => "输入关键字", value: "#{@keyword}"}
+        %span.input-group-btn
+          %button.btn#search-btn{:type => "button"}
+    %ul.set
+      %li
+        %a.f16{href: staff_accounts_path} 账号设置
+      %li
+        %a.f16.set-left-border{href: signout_sessions_path} 退出登录
+        / %a.f16.set-left-border= link_to "退出登录",  signin_page_sessions_path, class: "类名", method: :delete
+  .main-content.bg2
+    %button.btn.new-normal.font-color1.btn-position#announce-add{type: "button"} 添加公告
+    .table-div
       .tabbable
         %ul.nav.nav-tabs
           %li.active
-            %a{"data-toggle" => "tab", :href => "#tab1"} 本区公告
-          %li
-            %a{"data-toggle" => "tab", :href => "#tab2"} 全局公告
-
-        .tab-content
+            %a.f16.font-color1{"data-toggle" => "tab", :href => "#tab1"} 所有公告
+        .tab-content.bg3
           #tab1.tab-pane.active
-            - if @local_eles[:data].length == 0
-              .undiscover
-                %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
-                %span.message 抱歉！暂无公告信息
-            - else
-              - @local_eles[:data].each do |e|
-                .introduce
-                  %a{href: "/staff/announcements/" + e.id.to_s}
-                    %img.visit{:src => e.photo.present? ? e.photo.path : asset_path("web/announcement.png"), width: "190", height: "129"}
-                  %p.caption-header
-                    %span.caption= link_to e.title, "/staff/announcements/#{e.id.to_s}"
-                    %span#time-flag= e.created_at.strftime("%Y-%m-%d %H-%M")
-                    %a.undeclared{:href => "javascript:void(0);"}= e.status_str
-                  .desc
-                    = e.plain_text
-              .select-page 
-                %span.totalitems= "共#{@local_eles[:total_page]}页,总计#{@local_eles[:total_number]}条"
-                %span.choice-page
-                  %ul.pagination.pagination-sm
-                    %li
-                      %a{:href => "/staff/announcements?profile=local&keyword=#{@keyword}&local_page=#{@local_eles[:previous_page]}"} «
-                    - ( (@local_eles[:previous_page] > 2 ? @local_eles[:previous_page] - 2 : 1) .. (@local_eles[:next_page] < @local_eles[:total_page] - 2 ? @local_eles[:next_page] + 2 : @local_eles[:total_page]) ).to_a.each do |page|
-                      %li
-                        %a{:href => "/staff/announcements?profile=local&keyword=#{@keyword}&local_page=#{page}"}= page
-                    %li
-                      %a{:href => "/staff/announcements?profile=local&keyword=#{@keyword}&local_page=#{@local_eles[:next_page]}"} »
+            .desc-div
+              / - if @users[:data].length == 0
+              .undiscover.f14
+                %img.undiscover-icon{src: asset_path("undiscover.png")}
+              - 3.times do
+                .announce-items
+                  .img-div
+                    %img.announce-icon{src: asset_path("announce-icon.png")}
+                  .word-div
+                    .head-div.clearfix
+                      %p.user-name.fl.font-color2.f16 王某某
+                      %p.announce-status.fr.f12.font-color-green 公布
+                      / 当显示评论时为finish-normal
+                    %p.desc.f14.font-color3 猫是善于攀爬跳跃的动物，它的体内各种器官的平衡功能比其它动物要完善，当它从高处跳下来时，身体失去平衡，神经系统会迅速的指挥骨骼肌以最快的速度运动，将失去平衡的身体调整到正常的位置。
+                    .time-div.font-color4.f12
+                      %span.review-date 2016/10/30
+                      %span.review-time 16:31
+
+
+
+
+/ .content-area
+/   .content-box
+/     .manage-box
+/       .user-search-box
+/         .input-group
+/           %input.form-control#search-input{:type => "text", :placeholder => "输入搜索关键字", :value => "#{@keyword}"}
+/           %span.input-group-btn
+/             %button.btn.btn-default#search-btn{:type => "button"}
+/       .btn.add-btn{:type => "button"} 
+/         %img.add-img{src: asset_path("managecenter/add.png")}
+/         添加本区公告
+/     .manage-content
+/       .tabbable
+/         %ul.nav.nav-tabs
+/           %li.active
+/             %a{"data-toggle" => "tab", :href => "#tab1"} 本区公告
+/           %li
+/             %a{"data-toggle" => "tab", :href => "#tab2"} 全局公告
+
+/         .tab-content
+/           #tab1.tab-pane.active
+/             - if @local_eles[:data].length == 0
+/               .undiscover
+/                 %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
+/                 %span.message 抱歉！暂无公告信息
+/             - else
+/               - @local_eles[:data].each do |e|
+/                 .introduce
+/                   %a{href: "/staff/announcements/" + e.id.to_s}
+/                     %img.visit{:src => e.photo.present? ? e.photo.path : asset_path("web/announcement.png"), width: "190", height: "129"}
+/                   %p.caption-header
+/                     %span.caption= link_to e.title, "/staff/announcements/#{e.id.to_s}"
+/                     %span#time-flag= e.created_at.strftime("%Y-%m-%d %H-%M")
+/                     %a.undeclared{:href => "javascript:void(0);"}= e.status_str
+/                   .desc
+/                     = e.plain_text
+/               .select-page 
+/                 %span.totalitems= "共#{@local_eles[:total_page]}页,总计#{@local_eles[:total_number]}条"
+/                 %span.choice-page
+/                   %ul.pagination.pagination-sm
+/                     %li
+/                       %a{:href => "/staff/announcements?profile=local&keyword=#{@keyword}&local_page=#{@local_eles[:previous_page]}"} «
+/                     - ( (@local_eles[:previous_page] > 2 ? @local_eles[:previous_page] - 2 : 1) .. (@local_eles[:next_page] < @local_eles[:total_page] - 2 ? @local_eles[:next_page] + 2 : @local_eles[:total_page]) ).to_a.each do |page|
+/                       %li
+/                         %a{:href => "/staff/announcements?profile=local&keyword=#{@keyword}&local_page=#{page}"}= page
+/                     %li
+/                       %a{:href => "/staff/announcements?profile=local&keyword=#{@keyword}&local_page=#{@local_eles[:next_page]}"} »
             
-          #tab2.tab-pane
-            - if @global_eles[:data].length == 0
-              .undiscover
-                %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
-                %span.message 抱歉！暂无公告信息
-            - else
-              - @global_eles[:data].each do |e|
-                .introduce
-                  %a{href: "/staff/announcements/" + e.id.to_s}
-                    %img.visit{:src => e.photo.present? ? e.photo.path : asset_path("web/announcement.png"), width: "190", height: "129"}
-                  %p.caption-header
-                    %span.caption= link_to e.title, "/staff/announcements/#{e.id.to_s}"
-                    %span#time-flag= e.created_at.strftime("%Y-%m-%d %H:%M")
-                    %a.undeclared{:href => "javascript:void(0);"}= e.status_str
-                  .desc
-                    = e.plain_text
-              .select-page 
-                %span.totalitems= "共#{@global_eles[:total_page]}页,总计#{@global_eles[:total_number]}条"
-                %span.choice-page
-                  %ul.pagination.pagination-sm
-                    %li
-                      %a{:href => "/staff/announcements?profile=global&keyword=#{@keyword}&global_page=#{@global_eles[:previous_page]}"} «
-                    - ( (@global_eles[:previous_page] > 2 ? @global_eles[:previous_page] - 2 : 1) .. (@global_eles[:next_page] < @global_eles[:total_page] - 2 ? @global_eles[:next_page] + 2 : @global_eles[:total_page]) ).to_a.each do |page|
-                      %li
-                        %a{:href => "/staff/announcements?profile=global&keyword=#{@keyword}&global_page=#{page}"}= page
-                    %li
-                      %a{:href => "/staff/announcements?profile=global&keyword=#{@keyword}&global_page=#{@global_eles[:next_page]}"} »
+/           #tab2.tab-pane
+/             - if @global_eles[:data].length == 0
+/               .undiscover
+/                 %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
+/                 %span.message 抱歉！暂无公告信息
+/             - else
+/               - @global_eles[:data].each do |e|
+/                 .introduce
+/                   %a{href: "/staff/announcements/" + e.id.to_s}
+/                     %img.visit{:src => e.photo.present? ? e.photo.path : asset_path("web/announcement.png"), width: "190", height: "129"}
+/                   %p.caption-header
+/                     %span.caption= link_to e.title, "/staff/announcements/#{e.id.to_s}"
+/                     %span#time-flag= e.created_at.strftime("%Y-%m-%d %H:%M")
+/                     %a.undeclared{:href => "javascript:void(0);"}= e.status_str
+/                   .desc
+/                     = e.plain_text
+/               .select-page 
+/                 %span.totalitems= "共#{@global_eles[:total_page]}页,总计#{@global_eles[:total_number]}条"
+/                 %span.choice-page
+/                   %ul.pagination.pagination-sm
+/                     %li
+/                       %a{:href => "/staff/announcements?profile=global&keyword=#{@keyword}&global_page=#{@global_eles[:previous_page]}"} «
+/                     - ( (@global_eles[:previous_page] > 2 ? @global_eles[:previous_page] - 2 : 1) .. (@global_eles[:next_page] < @global_eles[:total_page] - 2 ? @global_eles[:next_page] + 2 : @global_eles[:total_page]) ).to_a.each do |page|
+/                       %li
+/                         %a{:href => "/staff/announcements?profile=global&keyword=#{@keyword}&global_page=#{page}"}= page
+/                     %li
+/                       %a{:href => "/staff/announcements?profile=global&keyword=#{@keyword}&global_page=#{@global_eles[:next_page]}"} »
            

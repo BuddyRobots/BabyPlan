@@ -1,177 +1,216 @@
 - content_for :head do
   = javascript_include_tag "pages/staff/clients/show-bundle"
   = stylesheet_link_tag "pages/staff/clients/show-bundle", :media => "all"
-  :javascript
-    window.keyword = "#{@keyword}"
-    window.profile = "#{@profile}"
-    window.uid = "#{@user.id.to_s}"
+  / :javascript
+    
 
 .content-area
-  .manage-content
-    .tabbable
-      %a{:href => "/staff/clients"}
-        %img.back{src: asset_path("web/tab-back.png")}
-      %ul.nav.nav-tabs
-        %li.active
-          %a#kids-message{"data-toggle" => "tab", :href => "#tab1"} 儿童信息
-        %li
-          %a#course-review{"data-toggle" => "tab", :href => "#tab2"} 课程参与
-        %li
-          %a#book-review{"data-toggle" => "tab", :href => "#tab3"} 绘本借阅
-
-      .tab-content
-        #tab1.tab-pane.active.clearfix
-          .photo-div
-            %img.avatar{src: @user.avatar.present? ? @user.avatar.path : asset_path("web/boy.png")}
-          .message-div
-            %form.form-inline{:role => "form"}
-              .form-group
-                %label.caption 姓名:
-                %span.unedit-box#name-span= @user.name
-              .form-group
-                %label.caption 年龄:
-                %span.unedit-box#age-span= @user.birthday.present? ? (Time.now.year - @user.birthday.year).to_s + "岁" : ""
-            %form.form-inline{:role => "form"}
-              .form-group
-                %label.caption 性别:
-                %span.unedit-box#gender-span= @user.gender == 0 ? "男" : "女"
-              .form-group
-                %label.caption 家长:
-                %span.unedit-box#parent-span= @user.parent
-            %form.form-inline{:role => "form"}
-              .form-group
-                %label.caption 联系方式:
-                %span.unedit-box#phone-span= @user.mobile
-              .form-group
-                %label.caption 地址:
-                %span.unedit-box#address-span= @user.address
-          
-        #tab2.tab-pane
-          - if @participates[:data].blank?
-            .undiscover
-              %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
-              %span.undiscover-message 抱歉！暂无课程信息
-          - else
-            .table-box
-              %table.table.table-bordered#register-table
-                %thead
-                  %tr
-                    %th 课程名称
-                    %th 上课时间
-                    %th 上课地址
-                    %th 主讲人
-                    %th 报名状态
-                    %th 操&nbsp作
-                %tbody
-                  - @participates[:data].each do |e|
-                    %tr
-                      %td.td-data= e.course_inst.name || e.course_inst.course.name
-                      %td.td-data= e.course_inst.duration
-                      %td.td-data= e.course_inst.center.address
-                      %td.td-data= e.course_inst.speaker
-                      %td.td-data= e.status_str
-                      %td.td-data 
-                        - if e.is_success
+  .main-top.direction
+    %a#back{href: staff_clients_path}
+      %img.back{src: asset_path("back.png")}
+    %ul.set
+      %li
+        %a.f16{href: staff_accounts_path} 账号设置
+      %li
+        %a.f16.set-left-border{href: signout_sessions_path} 退出登录
+        / %a.f16.set-left-border= link_to "退出登录",  signin_page_sessions_path, class: "类名", method: :delete
+  .main-content.bg2
+    .table-div
+      .tabbable
+        %ul.nav.nav-tabs
+          %li.active
+            %a.f16.font-color1#template-desc{"data-toggle" => "tab", :href => "#tab1"} 购买课程
+         
+        .tab-content.bg3
+          #tab1.tab-pane.active
+            .desc-div
+              - if @participates[:data].length == 1
+                .undiscover.f14
+                  %img.undiscover-icon{src: asset_path("undiscover.png")}
+              - else
+                .table-box.f14
+                  %table.table.table-hover.table-height.border-btm
+                    %thead.th-bg.font-color2
+                      %tr
+                        %th 课程名称
+                        %th 上课时间
+                        %th 上课地址
+                        %th 主讲人
+                        %th 价格
+                        %th 报名状态
+                        %th 操&nbsp作
+                    %tbody.font-color3
+                      %tr
+                        %td aa
+                        %td bb
+                        %td vv
+                        %td dd
+                        %td ddf
+                        %td df
+                        %td  
                           %a.details{:href => "javascript:void(0);"} 
                             上课情况
                             %span.triangle-down
-                        - else
-                          .unreturn-review　上课情况
-                    - if e.is_success
+                          / - else
+                          /   .unreturn-review　上课情况
                       %tr.status
-                        %td{:colspan => "6"}
+                        %td{:colspan => "7"}
                           .course-status
                             %span.item-status 上课状态：
-                            - e.course_inst.length.times do |i|
-                              - if e.signin_info[i].present?
-                                %span.join-square
-                              - else
-                                - if e.course_inst.is_class_pass?(i)
-                                  %span.miss-square
-                                - else
-                                  %span.square
+                            %span.join-square
+                            %span.miss-square
+                            %span.square
                           .comments
-                            %span.comments-title 评论：
-                            %span.comments-content= e.review.present? ? e.review.content : "暂未评论"
-            .select-page 
-              %span.totalitems= "共#{@participates[:total_page]}页,总计#{@participates[:total_number]}条"
-              %span.choice-page
-                %ul.pagination.pagination-sm
-                  %li
-                    %a{:href => "/staff/clients/" + @user.id.to_s + "?profile=courses&course_page=#{@participates[:previous_page]}"} «
-                  - ( (@participates[:previous_page] > 2 ? @participates[:previous_page] - 2 : 1) .. (@participates[:next_page] < @participates[:total_page] - 2 ? @participates[:next_page] + 2 : @participates[:total_page]) ).to_a.each do |page|
-                    %li
-                      %a{:href => "/staff/clients/" + @user.id.to_s + "?profile=courses&course_page=#{page}"}= page
-                  %li
-                    %a{:href => "/staff/clients/" + @user.id.to_s + "?profile=courses&course_page=#{@participates[:next_page]}"} »
-
-        #tab3.tab-pane
-          .deposit-div
-            .desc-div
-              %p.title 押金缴纳
-              .cash-div
-                %p.cash
-                  %span 押金缴纳情况：
-                  %span= @user.deposit_status_str
-                %p.cash
-                  %span 当前借阅本数：
-                  %span= @user.cur_books_num
-                .btn-div
-                  %button.btn#deposit-btn{class: @user.deposit_paid ? "hide" : ""}= "缴纳押金" + (BorrowSetting.first.try(:deposit) || 100).to_s + "元"
-                  %button.btn#deposit-refund{class: !@user.deposit_paid ? "hide" : ""} 退回押金
-            .desc-div
-              %p.title 滞纳金缴纳
-              .cash-div
-                %p.cash
-                  %span 滞纳金总金额：
-                  %span= @user.latefee_amount
-                %p.cash
-                  %span 当前逾期未还：
-                  %span= @user.expired_books_num
-                .btn-div
-                  %button.btn#pay-late-fee{class: @user.latefee_amount <= 0 ? "hide" : ""} 缴纳滞纳金
-                  %button.btn#no-late-fee{class: @user.latefee_amount > 0 ? "hide" : ""} 当前无滞纳金
-          - if @borrows[:data].blank?
-            / .undiscover
-            /   %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
-            /   %span.undiscover-message 抱歉！暂无查找信息
-          - else
-            .table-box#tab3-table
-              %table.table.table-bordered#register-table
-                %thead
-                  %tr
-                    %th 绘本名称
-                    %th 借阅时间
-                    %th 归还时间
-                    %th 操&nbsp作
-                %tbody
-                  - @borrows[:data].each do |b|
-                    %tr
-                      %td.td-data= b.book.name
-                      %td.td-data= Time.at(b.borrow_at).strftime("%Y-%m-%d %H:%M")
-                      %td.td-data{class: b.return_class}= b.return_status_str
-                      %td.td-data 
-                        - if b.review.present?
+                            %span.comments-title 课程评价：
+                            %span.comments-content 暂未评论
+                      %tr
+                        %td aa
+                        %td bb
+                        %td vv
+                        %td dd
+                        %td ddf
+                        %td df
+                        %td  
                           %a.details{:href => "javascript:void(0);"} 
-                            绘本评价
+                            上课情况
                             %span.triangle-down
-                        - else
-                          .unreturn-review　暂未评论
-                    - if b.review.present?
+                          / - else
+                          /   .unreturn-review　上课情况
                       %tr.status
-                        %td#bookborrow-review{:colspan => "4"}
-                          .comments-book
-                            %span.comment-caption 评价：
-                            %span.comments-content= b.review.content
-                           
-            .select-page.tab3-page 
-              %span.totalitems= "共#{@borrows[:total_page]}页,总计#{@borrows[:total_number]}条"
-              %span.choice-page
-                %ul.pagination.pagination-sm
-                  %li
-                    %a{:href => "/staff/clients/" + @user.id.to_s + "?profile=books&borrow_page=#{@borrows[:previous_page]}"} «
-                  - ( (@borrows[:previous_page] > 2 ? @borrows[:previous_page] - 2 : 1) .. (@borrows[:next_page] < @borrows[:total_page] - 2 ? @borrows[:next_page] + 2 : @borrows[:total_page]) ).to_a.each do |page|
-                    %li
-                      %a{:href => "/staff/clients/" + @user.id.to_s + "?profile=books&borrow_page=#{page}"}= page
-                  %li
-                    %a{:href => "/staff/clients/" + @user.id.to_s + "?profile=books&borrow_page=#{@borrows[:next_page]}"} »
+                        %td{:colspan => "7"}
+                          .course-status
+                            %span.item-status 上课状态：
+                            %span.join-square
+                            %span.miss-square
+                            %span.square
+                          .comments
+                            %span.comments-title 课程评价：
+                            %span.comments-content 暂未评论
+                      / - @participates[:data].each do |e|
+                      /   %tr
+                      /     %td= e.course_inst.name || e.course_inst.course.name
+                      /     %td= e.course_inst.duration
+                      /     %td= e.course_inst.center.address
+                      /     %td= e.course_inst.speaker
+                      /     %td= e.course_inst.price
+                      /     %td= e.status_str
+                      /     %td 
+                      /       - if e.is_success
+                      /         %a.details{:href => "javascript:void(0);"} 
+                      /           上课情况
+                      /           %span.triangle-down
+                      /       - else
+                      /         .unreturn-review　上课情况
+                      /   - if e.is_success
+                      /     %tr.status
+                      /       %td{:colspan => "6"}
+                      /         .course-status
+                      /           %span.item-status 上课状态：
+                      /           - e.course_inst.length.times do |i|
+                      /             - if e.signin_info[i].present?
+                      /               %span.join-square
+                      /             - else
+                      /               - if e.course_inst.is_class_pass?(i)
+                      /                 %span.miss-square
+                      /               - else
+                      /                 %span.square
+                      /         .comments
+                      /           %span.comments-title 评论：
+                      /           %span.comments-content= e.review.present? ? e.review.content : "暂未评论"
+                .select-page 
+                  %span.totalitems 共1页，总计10条
+                  %span.choice-page
+                    %ul.pagination.pagination-sm
+                      %li
+                        %a{href: "#"} «
+                      %li
+                        %a{href: "#"} 1
+                      %li
+                        %a{href: "#"} »
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          
+        / #tab2.tab-pane
+        /   - if @participates[:data].blank?
+        /     .undiscover
+        /       %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
+        /       %span.undiscover-message 抱歉！暂无课程信息
+        /   - else
+        /     .table-box
+        /       %table.table.table-bordered#register-table
+        /         %thead
+        /           %tr
+        /             %th 课程名称
+        /             %th 上课时间
+        /             %th 上课地址
+        /             %th 主讲人
+        /             %th 报名状态
+        /             %th 操&nbsp作
+        /         %tbody
+        /           - @participates[:data].each do |e|
+        /             %tr
+        /               %td.td-data= e.course_inst.name || e.course_inst.course.name
+        /               %td.td-data= e.course_inst.duration
+        /               %td.td-data= e.course_inst.center.address
+        /               %td.td-data= e.course_inst.speaker
+        /               %td.td-data= e.status_str
+        /               %td.td-data 
+        /                 - if e.is_success
+        /                   %a.details{:href => "javascript:void(0);"} 
+        /                     上课情况
+        /                     %span.triangle-down
+        /                 - else
+        /                   .unreturn-review　上课情况
+        /             - if e.is_success
+        /               %tr.status
+        /                 %td{:colspan => "6"}
+        /                   .course-status
+        /                     %span.item-status 上课状态：
+        /                     - e.course_inst.length.times do |i|
+        /                       - if e.signin_info[i].present?
+        /                         %span.join-square
+        /                       - else
+        /                         - if e.course_inst.is_class_pass?(i)
+        /                           %span.miss-square
+        /                         - else
+        /                           %span.square
+        /                   .comments
+        /                     %span.comments-title 评论：
+        /                     %span.comments-content= e.review.present? ? e.review.content : "暂未评论"
+        /     .select-page 
+        /       %span.totalitems= "共#{@participates[:total_page]}页,总计#{@participates[:total_number]}条"
+        /       %span.choice-page
+        /         %ul.pagination.pagination-sm
+        /           %li
+        /             %a{:href => "/staff/clients/" + @user.id.to_s + "?profile=courses&course_page=#{@participates[:previous_page]}"} «
+        /           - ( (@participates[:previous_page] > 2 ? @participates[:previous_page] - 2 : 1) .. (@participates[:next_page] < @participates[:total_page] - 2 ? @participates[:next_page] + 2 : @participates[:total_page]) ).to_a.each do |page|
+        /             %li
+        /               %a{:href => "/staff/clients/" + @user.id.to_s + "?profile=courses&course_page=#{page}"}= page
+        /           %li
+        /             %a{:href => "/staff/clients/" + @user.id.to_s + "?profile=courses&course_page=#{@participates[:next_page]}"} »
+
+     

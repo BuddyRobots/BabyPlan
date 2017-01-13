@@ -41,6 +41,7 @@ $ ->
       ), 1000
     return
 
+
   # mobile verify code
   $("#mobilecode").click ->
     mobile = $("#kid-mobile").val()
@@ -148,7 +149,6 @@ $ ->
   search = ->
     value = $("#search-input").val()
     location.href = "/staff/clients?keyword=" + value + "&page=1"
-
   $("#search-btn").click ->
     search()
 

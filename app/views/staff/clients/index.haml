@@ -28,48 +28,41 @@
         .tab-content.bg3
           #tab1.tab-pane.active
             .desc-div
-              .undiscover.f14
-                %img.undiscover-icon{src: asset_path("undiscover.png")}
-              .table-box.f14
-                %table.table.table-hover.table-height
-                  %thead.th-bg.font-color2
-                    %tr
-                      %th 学生姓名
-                      %th 年&nbsp&nbsp龄
-                      %th 性&nbsp&nbsp别
-                      %th 家长姓名
-                      %th 手机号
-                      %th 家庭住址
-                  %tbody.font-color3
-                    %tr
-                      %td
-                      %td
-                      %td
-                      %td
-                      %td
-                      %td
-              .select-page 
-                %span.totalitems 共2页，总计16条
-                %span.choice-page
-                  %ul.pagination.pagination-sm
-                    %li
-                      %a{href: "#"} «
-                    %li
-                      %a{href: "#"} 1
-                    %li
-                      %a{href: "#"} »
+              - if @users[:data].length == 0
+                .undiscover.f14
+                  %img.undiscover-icon{src: asset_path("undiscover.png")}
+              - else
+                .table-box.f14
+                  %table.table.table-hover.table-height
+                    %thead.th-bg.font-color2
+                      %tr
+                        %th 学生姓名
+                        %th 年&nbsp&nbsp龄
+                        %th 性&nbsp&nbsp别
+                        %th 家长姓名
+                        %th 手机号
+                        %th 家庭住址
+                    %tbody.font-color3
+                      - @users[:data].each do |u|
+                        %tr
+                          %td= link_to u[:name], "/staff/clients/#{u[:id]}"
+                          %td= u[:age].present? ? u[:age].to_s + "岁" : ""
+                          %td= u[:gender] == 0 ? "男" : "女"
+                          %td= u[:parent]
+                          %td= u[:mobile]
+                          %td= truncate(u[:address], length: 30)
 
-            / .select-page 
-            /     %span.totalitems= "共#{@course_insts[:total_page]}页，总计#{@course_insts[:total_number]}条"
-            /     %span.choice-page
-            /       %ul.pagination.pagination-sm
-            /         %li
-            /           %a{href: "/staff/courses?keyword=#{@keyword}&course_inst_page=#{@course_insts[:previous_page]}"} «
-            /         - ( (@course_insts[:previous_page] > 2 ? @course_insts[:previous_page] - 2 : 1) .. (@course_insts[:next_page] < @course_insts[:total_page] - 2 ? @course_insts[:next_page] + 2 : @course_insts[:total_page]) ).to_a.each do |page|
-            /           %li
-            /             %a{href: "/staff/courses?keyword=#{@keyword}&course_inst_page=#{page}"}= page
-            /         %li
-            /           %a{href: "/staff/courses?keyword=#{@keyword}&course_inst_page=#{@course_insts[:next_page]}"} »
+                .select-page 
+                  %span.totalitems= "共#{@users[:total_page]}页，总计#{@users[:total_number]}条"
+                  %span.choice-page
+                    %ul.pagination.pagination-sm
+                      %li
+                        %a{href: "/staff/clients?keyword=#{@keyword}&page=#{@users[:previous_page]}"} «
+                      - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
+                        %li
+                          %a{href: "/staff/clients?keyword=#{@keyword}&page=#{page}"}= page
+                      %li
+                        %a{href: "/staff/clients?keyword=#{@keyword}&page=#{@users[:next_page]}"} »
 
 #kidsaddModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
   .modal-dialog
@@ -86,7 +79,7 @@
           .form-group
             %label.col-sm-3.control-label.fn{:for => "kid-gender"} 性&nbsp别
             .col-sm-9
-              / = select_tag "kid-gender", options_for_select(User.genders_for_select(false)), class: "unclicked-box form-control"
+              = select_tag "kid-gender", options_for_select(User.genders_for_select(false)), class: "unclicked-box form-control"
           .form-group
             %label.col-sm-3.control-label.fn{:for => "datepicker"} 出生日期
             .col-sm-9

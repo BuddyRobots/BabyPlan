@@ -1,6 +1,9 @@
 @import "jquery-ui";
 
-
+.ui-datepicker {
+  width: 19.1em;
+  font-size: 1.2em;
+}
 .modal-body, input, label {
   margin: 0;
   padding: 0;

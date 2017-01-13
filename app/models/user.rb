@@ -68,7 +68,7 @@ class User
   has_one :avatar, class_name: "Material", inverse_of: :client
   has_one :avatar, class_name: "Material", inverse_of: :staff
 
-  # scope :client, ->{ where(user_type: CLIENT) }
+  scope :client, ->{ where(user_type: CLIENT) }
   # scope :staff, ->{ any_of({user_type: STAFF}, {user_type: ADMIN}) }
   scope :staff, ->{ where(user_type: STAFF) }
   # scope :only_staff, ->{ where(user_type: STAFF) }
@@ -77,11 +77,15 @@ class User
   #   return self.user_type == ADMIN
   # end
 
-  # def is_client
-  #   return self.user_type == CLIENT
-  # end
+  def is_client
+    return self.user_type == CLIENT
+  end
 
-  def self.create_user(user_type, mobile)
+  def is_staff
+    return self.user_type == User::STAFF
+  end
+
+  def self.create_user(user_type, mobile, created_by_staff = false, center = nil)
     u = User.where(mobile: mobile).first
     if u.present? && user_type != u.user_type
       return ErrCode::OTHER_TYPE_USER_EXIST
@@ -90,6 +94,15 @@ class User
       return ErrCode::USER_EXIST
     elsif u.blank?
       u = User.create(user_type: user_type, mobile: mobile)
+    end
+
+    if user_type == CLIENT && created_by_staff == true
+      u.update_attribute(:created_by_staff, created_by_staff)
+      if center.present? || center.class == Center
+        u.client_centers << center
+      end
+      u.first_signin = false
+      u.save
     end
 
     code = ""
@@ -167,6 +180,49 @@ class User
     nil
   end
 
+  def verify_client(name, password, verify_code)
+    if mobile_verify_code != verify_code
+      return ErrCode::WRONG_VERIFY_CODE
+    end
+    self.update_attributes(name: name, mobile_verified: true, status: NEW, password: Encryption.encrypt_password(password))
+    self.save
+    nil
+  end
+
+  def client_info
+    {
+      id: self.id.to_s,
+      name: self.name,
+      gender: self.gender,
+      age: self.birthday.present? ? Date.today.year - self.birthday.year : nil,
+      parent: self.parent,
+      mobile: self.mobile,
+      address: self.address
+    }
+  end
+
+  def self.genders_for_select(with_default = true)
+    hash = { "男" => 0, "女" => 1 }
+    if with_default
+      hash["请选择"] = -1
+    end
+    hash 
+  end
+
+  def update_profile(profile)
+    self.name = profile[:name]
+    self.gender = profile[:gender].to_i
+    self.parent = profile[:parent]
+    self.address = profile[:address]
+    if profile[:birthday].present?
+      ary = profile[:birthday].split('-').map { |e| e.to_i }
+      birthday = Time.mktime(ary[0], ary[1], ary[2])
+      self.birthday = birthday
+    end
+    self.save
+    nil
+  end
+
 end
 
 
@@ -182,14 +238,14 @@ end
   #     u = User.create(user_type: user_type, mobile: mobile)
   #   end
 
-  #   if user_type == CLIENT && created_by_staff == true
-  #     u.update_attribute(:created_by_staff, created_by_staff)
-  #     if center.present? || center.class == Center
-  #       u.client_centers << center
-  #     end
-  #     u.first_signin = false
-  #     u.save
-  #   end
+    # if user_type == CLIENT && created_by_staff == true
+    #   u.update_attribute(:created_by_staff, created_by_staff)
+    #   if center.present? || center.class == Center
+    #     u.client_centers << center
+    #   end
+    #   u.first_signin = false
+    #   u.save
+    # end
 
   #   # 2. generate random code and save
   #   code = ""
@@ -266,6 +322,7 @@ end
   #   self.save
   #   nil
   # end
+
 
   # def verify_staff(name, center_name, password, verify_code)
   #   if mobile_verify_code != verify_code
@@ -368,9 +425,9 @@ end
 #     return false
 #   end
 
-#   def is_staff
-#     return self.user_type == User::STAFF
-#   end
+  # def is_staff
+  #   return self.user_type == User::STAFF
+  # end
 
 #   def is_admin
 #     return self.user_type == User::ADMIN
@@ -380,17 +437,17 @@ end
 #     return self.user_type == User::ADMIN || self.user_type == User::STAFF
 #   end
 
-#   def client_info
-#     {
-#       id: self.id.to_s,
-#       name: self.name,
-#       gender: self.gender,
-#       age: self.birthday.present? ? Date.today.year - self.birthday.year : nil,
-#       parent: self.parent,
-#       mobile: self.mobile,
-#       address: self.address
-#     }
-#   end
+  # def client_info
+  #   {
+  #     id: self.id.to_s,
+  #     name: self.name,
+  #     gender: self.gender,
+  #     age: self.birthday.present? ? Date.today.year - self.birthday.year : nil,
+  #     parent: self.parent,
+  #     mobile: self.mobile,
+  #     address: self.address
+  #   }
+  # end
 
 #   def staff_info
 #     status_hash = {
@@ -415,27 +472,27 @@ end
 #     end
 #   end
 
-#   def self.genders_for_select(with_default = true)
-#     hash = { "男" => 0, "女" => 1 }
-#     if with_default
-#       hash["请选择"] = -1
-#     end
-#     hash 
-#   end
+  # def self.genders_for_select(with_default = true)
+  #   hash = { "男" => 0, "女" => 1 }
+  #   if with_default
+  #     hash["请选择"] = -1
+  #   end
+  #   hash 
+  # end
 
-#   def update_profile(profile)
-#     self.name = profile["name"]
-#     self.gender = profile["gender"].to_i
-#     self.parent = profile["parent"]
-#     self.address = profile["address"]
-#     if profile["birthday"].present?
-#       ary = profile["birthday"].split('-').map { |e| e.to_i }
-#       birthday = Time.mktime(ary[0], ary[1], ary[2])
-#       self.birthday = birthday
-#     end
-#     self.save
-#     nil
-#   end
+  # def update_profile(profile)
+  #   self.name = profile["name"]
+  #   self.gender = profile["gender"].to_i
+  #   self.parent = profile["parent"]
+  #   self.address = profile["address"]
+  #   if profile["birthday"].present?
+  #     ary = profile["birthday"].split('-').map { |e| e.to_i }
+  #     birthday = Time.mktime(ary[0], ary[1], ary[2])
+  #     self.birthday = birthday
+  #   end
+  #   self.save
+  #   nil
+  # end
 
 #   def get_avatar(server_id)
 #     filename = SecureRandom.uuid.to_s + ".jpg"

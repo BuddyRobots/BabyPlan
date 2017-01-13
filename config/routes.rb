@@ -166,9 +166,9 @@ Rails.application.routes.draw do
     resources :clients do
       member do
         post :verify
-        post :pay_latefee
-        post :pay_deposit
-        post :refund_deposit
+        # post :pay_latefee
+        # post :pay_deposit
+        # post :refund_deposit
       end
     end
 

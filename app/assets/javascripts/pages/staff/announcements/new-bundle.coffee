@@ -19,7 +19,7 @@ $ ->
   editor.create()
 
 # end-btn press-down
-  $(".end-btn").click ->
+  $("#finish-btn").click ->
     title = $("#input-caption").val().trim()
     if title == ""
       $.page_notification "请输入标题"

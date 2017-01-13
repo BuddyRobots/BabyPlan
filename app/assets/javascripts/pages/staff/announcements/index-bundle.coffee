@@ -1,8 +1,6 @@
 $ ->
-  if window.profile == "local"
-    $('.nav-tabs a[href="#tab2"]').tab('show')
 
-  $(".add-btn").click ->
+  $("#announce-add").click ->
     location.href = "/staff/announcements/new"
 
   search = ->
