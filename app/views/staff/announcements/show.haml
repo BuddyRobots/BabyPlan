@@ -1,8 +1,9 @@
 - content_for :head do
   = javascript_include_tag "pages/staff/announcements/show-bundle"
   = stylesheet_link_tag "pages/staff/announcements/show-bundle", :media => "all"
-  / :javascript
-  /   window.aid = "#{@announcement.id.to_s}"
+  :javascript
+    window.aid = "#{@announcement.id.to_s}"
+
 .content-area
   .main-top.direction
     %a{href: staff_announcements_path}
@@ -14,10 +15,10 @@
         %a.f16.set-left-border{href: signout_sessions_path} 退出登录
         / %a.f16.set-left-border= link_to "退出登录",  signin_page_sessions_path, class: "类名", method: :delete
   .main-content.bg2
-    / - if @course_inst.available == true
-    /   %button.btn.delete-normal.font-color1.unshelve-btn-position#unshelve-btn.operation.available{type: "button"} 不公布
-    / - else
-    /   %button.btn.new-normal.font-color1.unshelve-btn-position#shelve-btn.operation.unavailable{type: "button"} 公布
+    - if @announcement.is_published
+      %button.btn.delete-normal.font-color1.unshelve-btn-position#unshelve-btn.operation{type: "button"} 不公布
+    - else
+      %button.btn.new-normal.font-color1.unshelve-btn-position#shelve-btn.operation{type: "button"} 公布
     %button.btn.edit-normal.font-color1.create-btn-position#edit-btn{type: "button"} 编辑
     %button.btn.edit-normal.font-color1.create-btn-position#finish-btn{type: "button"} 完成
 
@@ -26,30 +27,30 @@
         %ul.nav.nav-tabs
           %li.active
             %a.f16.font-color1#course-message{"data-toggle" => "tab", :href => "#tab1"} 所有公告
-        .tab-content.bg3.f14.font-color3
+        .tab-content.bg3
           #tab1.tab-pane.active
-            .desc-div.font-color3
+            .desc-div
               .display-box
                 .display-area
-                  %p.caption-header#show-caption aa
-                  %img.photo{src: asset_path("")}
-                  .display-content
-                    / = @announcement.content.html_safe
+                  %p.caption-header#show-caption.f24.font-color2= @announcement.title
+                  %img.photo{class: @announcement.photo.present? ? "" : "hide", src: @announcement.photo.try(:path)}
+                  .display-content.f16.font-color2
+                    = @announcement.content.html_safe
 
               / 点击edit-btn后display-box隐藏，edit-area显示
-              .edit-area
+              .edit-area.font-color3
                 .form-group
-                  %label.input-name 公告标题:
+                  %label.input-name.f14 公告标题:
                   %input.form-control#input-caption{:type => "text"}
                 .phont-inline
-                  %span 封面配图:
+                  %span.f14 封面配图:
                   = form_tag("/", method: "post", multipart: true, id: "upload-photo-form", class: "hide") do
                     = file_field_tag "photo_file", { class: "hide", accept: ".jpg,.png" }
                   %a#upload-photo{href: "javascript:void(0);"}
-                    %img.edit-photo{src: asset_path("")}
+                    %img.edit-photo{src: asset_path("default-anc.png")}
                 .notice-introduce.clearfix
-                  %span.introduce 公告正文:
-                  .wangedit-area
+                  %span.introduce.f14 公告正文:
+                  .wangedit-area.f16
                     #edit-box
 
 

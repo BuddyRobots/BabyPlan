@@ -3,13 +3,12 @@
   = stylesheet_link_tag "pages/staff/announcements/index-bundle", :media => "all"
   :javascript
     window.keyword = "#{@keyword}"
-    window.profile = "#{@profile}"
 
 .content-area
   .main-top.direction
     .user-search-box.f14.bg2
       .input-group
-        %input.input-style#search-input{:type => "text", :placeholder => "输入关键字", value: "#{@keyword}"}
+        %input.input-style#search-input{:type => "text", :placeholder => "请输入公告标题关键字", value: "#{@keyword}"}
         %span.input-group-btn
           %button.btn#search-btn{:type => "button"}
     %ul.set
@@ -28,22 +27,37 @@
         .tab-content.bg3
           #tab1.tab-pane.active
             .desc-div
-              / - if @users[:data].length == 0
-              .undiscover.f14
-                %img.undiscover-icon{src: asset_path("undiscover.png")}
-              - 3.times do
-                .announce-items
-                  .img-div
-                    %img.announce-icon{src: asset_path("announce-icon.png")}
-                  .word-div
-                    .head-div.clearfix
-                      %p.user-name.fl.font-color2.f16 王某某
-                      %p.announce-status.fr.f12.font-color-green 公布
-                      / 当显示评论时为finish-normal
-                    %p.desc.f14.font-color3 猫是善于攀爬跳跃的动物，它的体内各种器官的平衡功能比其它动物要完善，当它从高处跳下来时，身体失去平衡，神经系统会迅速的指挥骨骼肌以最快的速度运动，将失去平衡的身体调整到正常的位置。
-                    .time-div.font-color4.f12
-                      %span.review-date 2016/10/30
-                      %span.review-time 16:31
+              - if @notices[:data].length == 0
+                .undiscover.f14
+                  %img.undiscover-icon{src: asset_path("undiscover.png")}
+              - else
+                - @notices[:data].each do |e|
+                  .announce-items
+                    %a.img-div{href: "/staff/announcements/" + e.id.to_s }
+                      %img.announce-icon{src: e.photo.present? ? e.photo.path : asset_path("announce-icon.png")}
+                    .word-div
+                      .head-div.clearfix
+                        %p.fl.f16.notice-caption= link_to e.title, "/staff/announcements/#{e.id.to_s}", class: "font-color2"
+                        - if e.is_published
+                          %p.announce-status.fr.f12.font-color-green 已公布
+                        - else
+                          %p.announce-status.fr.f12.font-color-red 未公布
+                        / 当显示评论时为finish-normal
+                      %p.desc.f14.font-color3= e.plain_text
+                      .time-div.font-color4.f12
+                        %span.review-time= e.created_at.strftime("%Y/%m/%d %H:%M")
+                .select-page 
+                  %span.totalitems= "共#{@notices[:total_page]}页，总计#{@notices[:total_number]}条"
+                  %span.choice-page
+                    %ul.pagination.pagination-sm
+                      %li
+                        %a{href: "/staff/announcements?keyword=#{@keyword}&page=#{@notices[:previous_page]}"} «
+                      - ( (@notices[:previous_page] > 2 ? @notices[:previous_page] - 2 : 1) .. (@notices[:next_page] < @notices[:total_page] - 2 ? @notices[:next_page] + 2 : @notices[:total_page]) ).to_a.each do |page|
+                        %li
+                          %a{href: "/staff/announcements?keyword=#{@keyword}&page=#{page}"}= page
+                      %li
+                        %a{href: "/staff/announcements?keyword=#{@keyword}&page=#{@notices[:next_page]}"} »
+            
 
 
 

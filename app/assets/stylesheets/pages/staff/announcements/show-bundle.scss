@@ -27,109 +27,64 @@
 }
 
 .display-box {
-	margin: 0 20px;
 	.display-area {
 		width: 57.15%;
 		margin: 0 auto;
 	}
 }
 .display-content {
-	margin-top: 20px;
-	font-size: 16px;
-	color: #323232;
+	margin-top: 3.37%;
 }
 .caption-header {
-	padding-bottom: 15px;
+	padding-bottom: 2.53%;
+	text-align: center;
 }
 .photo {
 	width: 100%;
-	max-width: 640px;
-	height: 240px;
+	max-width: 64em;
+	height: 24em;
+	object-fit: contain;
 }
-#show-caption {
-	font-size: 24px;
-	color: #323232;
-	text-align: center;
-}
-#publish-status {
-	line-height: 35px;
-}
-#time-flag {
-	font-size: 14px;
-	color: #969696;
-	margin-left: 10px;
-}
-.undeclared {
-	float: right;
-	font-size: 14px;
-	color: #969696;
-}
-.undeclared:link {
-	text-decoration: none;
-	color: #969696;
-}
-.undeclared:hover {
-	text-decoration: none;
-	color: #969696;
-}
-.declared {
-	float: right;
-	font-size: 14px;
-	color: #0fc077;
-}
-.declared:link {
-	text-decoration: none;
-	color: #0fc077;
-}
-.declared:hover {
-	text-decoration: none;
-	color: #0fc077;
-}
+
 .display-img {
 	display: block;
 	margin: 0 auto;
 }
 
 .edit-area {
-	margin: 0 20px 20px 20px;
 	display: none;
 }
 .input-name {
 	font-weight: normal;
 }
 .form-group {
-	margin: 20px 0;
+	margin-bottom: 2%;
 	.form-control {
 		display: inline-block;
-		width: 500px;
-		margin-left: 10px;
+		width: 70%;
+		margin-left: 1%;
 	}
 }
 .introduce {
 	float: left;
 	display: inline-block;
 	vertical-align: top;
-	margin-right: 15px;
+	margin-right: 1.3%;
 }
 .notice-introduce {
-	margin-top: 20px;
-}
-#upload-photo {
-	width: 11.3%;
-	height: 88px;
-	margin-left: 10px;
+	margin-top: 2%;
 }
 .edit-photo {
 	vertical-align: top;
-	width: 100%;
-	max-width: 128px;
-	height: 88px;
+	width: 15.8em;
+	height: 8.8em;
+	object-fit: contain;
+	margin-left: 1%;
 }
 .wangedit-area {
 	float: left;
-	width: 720px;
-	font-size: 16px;
+	width: 70%;
 }
 #edit-box {
-	height: 360px;
+	height: 20em;
 }

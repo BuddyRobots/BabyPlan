@@ -18,25 +18,49 @@ class Announcement
 
   scope :is_available, ->{ where(is_published: true) }
 
-  def self.create_announcement(staff, center, announcement_info, scope)
+  # def self.create_announcement(staff, center, announcement_info, scope)
+  #   html = Nokogiri::HTML(announcement_info[:content])
+  #   info = {
+  #     title: announcement_info[:title],
+  #     content: announcement_info[:content],
+  #     is_published: announcement_info[:is_published],
+  #     plain_text: html.text
+  #     # image_path: html.css("img").blank? ? "" : html.css("img")[0].attr("src")
+  #   }
+  #   announcement = scope == "local" ? center.announcements.create(info) : Announcement.create(info)
+
+  #   feed = Feed.create(announcement_id: announcement.id, name: announcement.title, available: announcement_info[:is_published])
+  #   if scope == "local"
+  #     feed.center = center
+  #     feed.save
+  #   end
+
+  #   { announcement_id: announcement.id.to_s }
+  # end
+
+  def self.create_announcement(staff, announcement_info)
     html = Nokogiri::HTML(announcement_info[:content])
     info = {
       title: announcement_info[:title],
       content: announcement_info[:content],
       is_published: announcement_info[:is_published],
       plain_text: html.text
-      # image_path: html.css("img").blank? ? "" : html.css("img")[0].attr("src")
     }
-    announcement = scope == "local" ? center.announcements.create(info) : Announcement.create(info)
-
-    feed = Feed.create(announcement_id: announcement.id, name: announcement.title, available: announcement_info[:is_published])
-    if scope == "local"
-      feed.center = center
-      feed.save
-    end
-
+    announcement = Announcement.create(info)
     { announcement_id: announcement.id.to_s }
   end
+
+  # def update_announcement(announcement_info)
+  #   html = Nokogiri::HTML(announcement_info[:content])
+  #   info = {
+  #     title: announcement_info[:title],
+  #     content: announcement_info[:content],
+  #     plain_text: html.text
+  #     # image_path: html.css("img").blank? ? "" : html.css("img")[0].attr("src")
+  #   }
+  #   self.update_attributes(info)
+  #   { announcement_id: self.id.to_s }
+  # end
 
   def update_announcement(announcement_info)
     html = Nokogiri::HTML(announcement_info[:content])
@@ -44,21 +68,20 @@ class Announcement
       title: announcement_info[:title],
       content: announcement_info[:content],
       plain_text: html.text
-      # image_path: html.css("img").blank? ? "" : html.css("img")[0].attr("src")
     }
     self.update_attributes(info)
-    { announcement_id: self.id.to_s }
+    {announcement_id: self.id.to_s}
   end
 
   def set_publish(publish)
     self.update_attribute(:is_published, publish == true)
-    self.feed.update_attributes({available: publish == true}) if self.feed.present?
+    # self.feed.update_attributes({available: publish == true}) if self.feed.present?
     nil
   end
 
-  def status_str
-    self.is_published ? "已公布" : "未公布"
-  end
+  # def status_str
+  #   self.is_published ? "已公布" : "未公布"
+  # end
 
   def more_info
     {

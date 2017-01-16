@@ -7,6 +7,11 @@ class Staff::AnnouncementsController < Staff::ApplicationController
   end
 
   def index
+    @keyword = params[:keyword]
+    notices = @keyword.present? ? Announcement.where(title: /#{@keyword}/) : Announcement.all
+    notices = notices.desc(:created_at)
+    @notices = auto_paginate(notices)
+
     # @keyword = params[:keyword]
     # params[:page] = params[:local_page]
     # local_eles = @keyword.present? ? current_center.announcements.where(title: /#{@keyword}/) : current_center.announcements.all
@@ -21,11 +26,16 @@ class Staff::AnnouncementsController < Staff::ApplicationController
   end
 
   def create
-    retval = Announcement.create_announcement(current_user, current_center, params[:announcement], "local")
+    retval = Announcement.create_announcement(current_user, params[:announcement])
     render json: retval_wrapper(retval)
   end
 
   def show
+    @announcement = Announcement.where(id: params[:id]).first
+    if @announcement.nil?
+      redirect_to action: :index and return
+    end
+
     # @announcement = Announcement.where(id: params[:id]).first
     # if @announcement.nil?
     #   redirect_to action: :index and return
@@ -34,7 +44,7 @@ class Staff::AnnouncementsController < Staff::ApplicationController
   end
 
   def set_publish
-    @announcement = current_center.announcements.where(id: params[:id]).first
+    @announcement = Announcement.where(id: params[:id]).first
     if @announcement.nil?
       render json: retval_wrapper(ErrCode::ANNOUNCEMENT_NOT_EXIST) and return
     end
@@ -42,11 +52,20 @@ class Staff::AnnouncementsController < Staff::ApplicationController
     render json: retval_wrapper(nil) and return
   end
 
+  # def set_publish
+  #   @announcement = current_center.announcements.where(id: params[:id]).first
+  #   if @announcement.nil?
+  #     render json: retval_wrapper(ErrCode::ANNOUNCEMENT_NOT_EXIST) and return
+  #   end
+  #   @announcement.set_publish(params[:publish])
+  #   render json: retval_wrapper(nil) and return
+  # end
+
   def new
   end
 
   def update
-    @announcement = current_center.announcements.where(id: params[:id]).first
+    @announcement = Announcement.where(id: params[:id]).first
     if @announcement.nil?
       render json: retval_wrapper(ErrCode::ANNOUNCEMENT_NOT_EXIST) and return
     end
@@ -54,10 +73,34 @@ class Staff::AnnouncementsController < Staff::ApplicationController
     render json: retval_wrapper(retval) and return
   end
 
+  # def update
+  #   @announcement = current_center.announcements.where(id: params[:id]).first
+  #   if @announcement.nil?
+  #     render json: retval_wrapper(ErrCode::ANNOUNCEMENT_NOT_EXIST) and return
+  #   end
+  #   retval = @announcement.update_announcement(params[:announcement])
+  #   render json: retval_wrapper(retval) and return
+  # end
+
+  # def upload_photo
+  #   @announcement = Announcement.where(id: params[:id]).first
+  #   if @announcement.blank?
+  #     redirect_to action: :index and return
+  #   end
+  #   photo = Photo.new
+  #   photo.photo = params[:photo_file]
+  #   photo.store_photo!
+  #   filepath = photo.photo.file.file
+  #   m = Material.create(path: "/uploads/photos/" + filepath.split('/')[-1])
+  #   @announcement.photo = m
+  #   @announcement.save
+  #   redirect_to action: :show, id: @announcement.id.to_s and return
+  # end
+
   def upload_photo
     @announcement = Announcement.where(id: params[:id]).first
     if @announcement.blank?
-      redirect_to action: :index and return
+      redirect_to action: :idnex and return
     end
     photo = Photo.new
     photo.photo = params[:photo_file]

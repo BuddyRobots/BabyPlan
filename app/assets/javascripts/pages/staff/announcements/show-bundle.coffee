@@ -16,9 +16,9 @@ $ ->
   editor.create()
 
   # unshelve-btn press-down
-  $(".unshelve-btn").click ->
+  $(".operation").click ->
     current_state = "unpublished"
-    if $(this).hasClass("published")
+    if $(this).hasClass("delete-normal")
       current_state = "published"
     btn = $(this)
     $.postJSON(
@@ -30,31 +30,26 @@ $ ->
         if data.success
           $.page_notification("操作完成")
           if current_state == "published"
-            btn.removeClass("published")
-            btn.addClass("unpublished")
-            btn.find("span").text("公布")
-            btn.find("img").attr("src", window.shelve_path)
+            btn.removeClass("delete-normal")
+            btn.addClass("new-normal")
+            btn.text("公布")
           else
-            btn.addClass("published")
-            btn.removeClass("unpublished")
-            btn.find("span").text("隐藏")
-            btn.find("img").attr("src", window.unshelve_path)
+            btn.addClass("delete-normal")
+            btn.removeClass("new-normal")
+            btn.text("不公布")
+
       )
 
   # edit-btn press-down
-  $(".edit-btn").click ->
-    $(".edit-btn").toggle()
-    $(".end-btn").toggle()
+  $("#edit-btn").click ->
+    $("#edit-btn").toggle()
+    $("#finish-btn").toggle()
     $(".display-box").toggle()
     $(".edit-area").toggle()
-
-    $(".unshelve-btn").attr("disabled", true)
-    
     $("#input-caption").val($("#show-caption").text())
     $("#edit-box").html($(".display-content").html())
 
-  $(".end-btn").click ->
-
+  $("#finish-btn").click ->
     title = $("#input-caption").val()
     content = editor.$txt.html()
 
