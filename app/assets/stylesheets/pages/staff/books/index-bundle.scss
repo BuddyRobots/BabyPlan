@@ -59,7 +59,7 @@
 	outline: none;
 }
 
-.bookadd-btn, .merge-book {
+.bookadd-btn, .merge-book, .download-code {
 	float: right;
 	margin: 11.5px 20px 0 0;
 	width: 100px;
@@ -68,9 +68,9 @@
 	line-height: 32px;
 	color: white;
 	background: #f7873d;
-	border-radius: 6px;
+	border-radius: 4px;
 }
-.bookadd-btn:hover, .merge-book:hover {
+.bookadd-btn:hover, .merge-book:hover, .download-code:hover {
 	background: #f7873d;
 	color: white;
 }
@@ -78,7 +78,7 @@
 	margin-top: -2px;
 }
 .tabbable {
-	margin: 20px 0 0 0;
+	margin: 20px 0 20px 0;
 	padding: 0 20px;
 }
 .tab-box {

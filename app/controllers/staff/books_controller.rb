@@ -92,6 +92,19 @@ class Staff::BooksController < Staff::ApplicationController
     @books_id_ary = params[:books_id_str].to_s.split(',')
   end
 
+  def code_list
+    qr_exports = current_center.qr_exports
+    @qr_exports = auto_paginate(qr_exports)
+    @qr_exports[:data] = @qr_exports[:data].map do |e|
+      e.message_info
+    end
+  end
+
+  def delete_qr_code
+    retval = QrExport.find(id: params[:id]).first.delete
+    render json: retval_wrapper(retval) and return
+  end
+
   def set_available
     @book = current_center.books.where(id: params[:id]).first
     retval = ErrCode::BOOK_NOT_EXIST if @book.blank?
@@ -161,5 +174,10 @@ class Staff::BooksController < Staff::ApplicationController
       redirect_to action: :index and return
     end
     send_file(@book.generate_compressed_file(params[:amount].to_i), filename: @book.name + ".pdf")
+  end
+
+  def add_to_list
+    retval = QrExport.create_qr(current_center, params[:id], params[:num])
+    render json: retval_wrapper(retval) and return
   end
 end

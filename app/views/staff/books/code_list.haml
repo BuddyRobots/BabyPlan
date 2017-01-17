@@ -1,0 +1,56 @@
+- content_for :head do
+  = javascript_include_tag "pages/staff/books/code_list-bundle"
+  = stylesheet_link_tag "pages/staff/books/code_list-bundle", :media => "all"
+  :javascript
+    window.qid = "#{@qr_exports.id.to_s}"
+
+
+.content-area
+  /books-code_list
+  .content-box
+    .manage-box.clearfix
+      %a#back{:href => "/staff/books"}
+        %img{src: asset_path("web/back.png")}
+      %p.book-merge 二维码下载
+    .manage-content
+      - if @qr_exports[:data].length == 0
+        .undiscover
+          %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
+          %span.undiscover-message 抱歉！暂无二维码信息
+      - else
+        .merge-div
+          .code-amount
+            %p.caption 二维码统计
+            .desc-div
+              %p.desc 共80张二维码，每页可打印42张
+              %button.btn#delete-btn 清空列表
+              %button.btn#download-btn 全部下载
+          .table-box
+            %table.table.table-bordered#code-table
+              %thead
+                %tr
+                  %th 绘本名称
+                  %th 作&nbsp者
+                  %th 导出时间
+                  %th 二维码数量
+                  %th 操&nbsp作
+              %tbody
+                - @qr_exports[:data].each do |q|
+                  %tr
+                    %td= q[:name]
+                    %td= q[:author]
+                    %td= q[:created_at].strftime("%Y.%m.%d")
+                    %td= q[:num]
+                    %td.delete_qr= link_to "删除", "/staff/books/code_list"
+
+          .select-page 
+            %span.totalitems= "共#{@qr_exports[:total_page]}页，总计#{@qr_exports[:total_number]}条"
+            %span.choice-page
+              %ul.pagination.pagination-sm
+                %li
+                  %a{href: "/staff/books/code_list?page=#{@qr_exports[:previous_page]}"} «
+                - ( (@qr_exports[:previous_page] > 2 ? @qr_exports[:previous_page] - 2 : 1) .. (@qr_exports[:next_page] < @qr_exports[:total_page] - 2 ? @qr_exports[:next_page] + 2 : @qr_exports[:total_page]) ).to_a.each do |page|
+                  %li
+                    %a{href: "/staff/books/code_list?page=#{page}"}= page
+                %li
+                  %a{href: "/staff/books/code_list?page=#{@qr_exports[:next_page]}"} »     

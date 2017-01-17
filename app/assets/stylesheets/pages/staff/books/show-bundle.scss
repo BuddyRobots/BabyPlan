@@ -578,13 +578,17 @@
 	text-align: center;
 }
 #confirm-qr-code {
-	width: 88%;
+	width: 38%;
 	height: 40px;
 	border: 0;
 	border-radius: 4px;
 	font-size: 16px;
 	color: white;
 	outline: none;
+}
+#transfer-qr-code {
+	@extend #confirm-qr-code;
+	margin-left: 20px;
 }
 .button-disabled {
 	background: #c8c8c8;

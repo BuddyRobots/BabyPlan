@@ -6,6 +6,9 @@ $ ->
     $("#code-num").val("")
     $("#confirm-qr-code").removeClass("button-enabled")
     $("#confirm-qr-code").addClass("button-disabled")
+    $("#transfer-qr-code").removeClass("button-enabled")
+    $("#transfer-qr-code").addClass("button-disabled")
+    $("#transfer-qr-code").text("导出到表格")
 
   $(".return").click ->
     client_name = $(this).closest('tr').attr('data-clientname')
@@ -304,9 +307,14 @@ $ ->
     if $("#code-num").val().trim() == ""
       $("#confirm-qr-code").addClass("button-disabled")
       $("#confirm-qr-code").removeClass("button-enabled")
+      $("#transfer-qr-code").addClass("button-disabled")
+      $("#transfer-qr-code").removeClass("button-enabled")
     else
       $("#confirm-qr-code").removeClass("button-disabled")
       $("#confirm-qr-code").addClass("button-enabled")
+      $("#transfer-qr-code").removeClass("button-disabled")
+      $("#transfer-qr-code").addClass("button-enabled")
+      $("#transfer-qr-code").text("导出到表格")
 
   $("#code-num").keyup ->
     check_code_input()
@@ -325,6 +333,28 @@ $ ->
         $.page_notification("请正确输入数量", 2000)
     else
       $.page_notification("请正确输入数量", 2000)
+    return false
+
+  $("#transfer-qr-code").click ->
+    $(this).text("已导出")
+    $(this).removeClass("button-enabled")
+    $(this).addClass("button-disabled")
+    num = $("#code-num").val()
+    if !$.isNumeric(num)
+      $.page_notification("请正确输入数量", 2000)
+      return
+    num = parseInt(num)
+    if !num > 0
+      $.page_notification("请正确输入数量", 2000)
+      return
+    $.postJSON(
+      "/staff/books/" + window.bid + "/add_to_list",
+      {
+        num: num
+      },
+      (data) ->
+       
+      )
     return false
 
 # img upload
