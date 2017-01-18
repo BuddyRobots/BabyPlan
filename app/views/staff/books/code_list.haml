@@ -1,8 +1,6 @@
 - content_for :head do
   = javascript_include_tag "pages/staff/books/code_list-bundle"
   = stylesheet_link_tag "pages/staff/books/code_list-bundle", :media => "all"
-  :javascript
-    window.qid = "#{@qr_exports.id.to_s}"
 
 
 .content-area
@@ -22,7 +20,7 @@
           .code-amount
             %p.caption 二维码统计
             .desc-div
-              %p.desc 共80张二维码，每页可打印42张
+              %p.desc="共#{@total[:total]}张二维码，每页可打印42张"
               %button.btn#delete-btn 清空列表
               %button.btn#download-btn 全部下载
           .table-box
@@ -41,7 +39,7 @@
                     %td= q[:author]
                     %td= q[:created_at].strftime("%Y.%m.%d")
                     %td= q[:num]
-                    %td.delete_qr= link_to "删除", "/staff/books/code_list"
+                    %td.delete_qr= link_to "删除", "/staff/books/#{q[:id]}", method: :delete
 
           .select-page 
             %span.totalitems= "共#{@qr_exports[:total_page]}页，总计#{@qr_exports[:total_number]}条"

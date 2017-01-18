@@ -25,4 +25,11 @@ class QrExport
 		}
 	end
 
+	def self.qr_amount(qr_exports)
+		total = qr_exports.map { |e| e.num }.sum()
+		{
+			total: total
+		}
+	end
+
 end

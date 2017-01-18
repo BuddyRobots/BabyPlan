@@ -94,15 +94,21 @@ class Staff::BooksController < Staff::ApplicationController
 
   def code_list
     qr_exports = current_center.qr_exports
+    @total = QrExport.qr_amount(qr_exports)
     @qr_exports = auto_paginate(qr_exports)
     @qr_exports[:data] = @qr_exports[:data].map do |e|
       e.message_info
     end
   end
 
-  def delete_qr_code
-    retval = QrExport.find(id: params[:id]).first.delete
-    render json: retval_wrapper(retval) and return
+  def clear_list
+    current_center.qr_exports.destroy_all
+    render json: retval_wrapper(nil) and return
+  end
+
+  def destroy
+    QrExport.find(id: params[:id]).delete
+    redirect_to action: :code_list and return
   end
 
   def set_available
@@ -175,6 +181,8 @@ class Staff::BooksController < Staff::ApplicationController
     end
     send_file(@book.generate_compressed_file(params[:amount].to_i), filename: @book.name + ".pdf")
   end
+
+
 
   def add_to_list
     retval = QrExport.create_qr(current_center, params[:id], params[:num])

@@ -143,6 +143,7 @@ Rails.application.routes.draw do
         get :merge
         post :auto_merge
         post :mannual_merge
+        post :clear_list
       end
     end
 
