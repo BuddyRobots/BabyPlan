@@ -53,9 +53,21 @@
 .font-color2:active {
   color: #3c3d45;
 }
+// 单行文字溢出的方法
 .notice-caption {
   width: 92%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
+// 多行文字溢出的前端写法，适用webkit浏览器
+// .desc {
+//   display: -webkit-box;
+//   -webkit-box-orient: vertical;
+//   -webkit-line-clamp: 3;
+//   overflow: hidden;
+//   text-overflow: ellipsis;
+// }
 
 
 

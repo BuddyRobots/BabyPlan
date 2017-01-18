@@ -12,6 +12,8 @@
     = stylesheet_link_tag "application", media: "all"
     = javascript_include_tag "application"
     = yield :app_head
+    :javascript
+      window.marker_path = "#{asset_path("dingwei03.png")}"
     = csrf_meta_tags
   %body
     = yield :app_content

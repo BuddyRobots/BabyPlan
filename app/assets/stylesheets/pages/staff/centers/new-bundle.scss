@@ -1,0 +1,50 @@
+@import "jquery-ui";
+
+.direction {
+	-webkit-justify-content: space-between;
+	-moz-justify-content: space-between;
+	-os-justify-content: space-between;
+	-o-justify-content: space-between;
+	justify-content: space-between;
+}
+.input-area {
+  display: inline-block;
+  width: 20%;
+  height: 2.143em;
+  margin: 0 6.3% 0 1%;
+}
+.finish-btn-position {
+  position: absolute;
+  right: 24px;
+  top: 24px;
+  z-index: 10;
+}
+#finish-btn {
+  width: 8.63%;
+  color: #fff;
+  outline: none;
+}
+
+.form-group {
+	margin-bottom: 2%;
+	.form-control {
+		display: inline-block;
+		width: 70%;
+		margin-left: 1%;
+	}
+}
+.map-position {
+  .notice {
+    display: inline-block;
+    margin-left: 5px;
+  }
+}
+#map-container {
+  width: 70%;
+  margin-left: 7%;
+  margin-top: 1%;
+  height: 20em;
+  border: 1px solid #ccc;
+}
+
+

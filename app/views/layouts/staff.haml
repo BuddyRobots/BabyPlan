@@ -17,10 +17,6 @@
       .main
         .sidebar
           %ul
-            / %li{class: @active_tab == "course" ? "active" : ""}
-            /   %a{:href => "/staff/courses"}
-            /     %img.course-icon{src: asset_path("1class.png")}
-            /     %span 课程管理
             %li{class: @active_tab == "course" ? "active-li" : ""}
               %a{:href => staff_courses_path}
                 %img.mini-icon{src: asset_path("1class.png")}
@@ -34,7 +30,7 @@
                 %img.mini-icon{src: asset_path("3announcement.png")}
                 %span.f18.sidebar-title 公告管理
             %li{class: @active_tab == "center" ? "active-li" : ""}
-              %a{:href => "#"}
+              %a{:href => staff_centers_path}
                 %img.mini-icon{src: asset_path("5center.png")}
                 %span.f18.sidebar-title 课程中心
             %li{class: @active_tab == "statistics" ? "active-li" : ""}

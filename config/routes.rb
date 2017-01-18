@@ -114,7 +114,7 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :transfers do
+    resources :centers do
       member do
         get :remove
       end

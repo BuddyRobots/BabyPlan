@@ -1,0 +1,39 @@
+- content_for :head do
+  = javascript_include_tag "http://map.qq.com/api/js?v=2.exp"
+  = javascript_include_tag "pages/staff/centers/new-bundle"
+  = stylesheet_link_tag "pages/staff/centers/new-bundle", :media => "all"
+
+.content-area
+  .main-top.direction
+    %a{href: staff_centers_path}
+      %img.back{src: asset_path("back.png")}
+    %ul.set
+      %li
+        %a.f16{href: staff_accounts_path} 账号设置
+      %li
+        %a.f16.set-left-border{href: signout_sessions_path} 退出登录
+        / %a.f16.set-left-border= link_to "退出登录",  signin_page_sessions_path, class: "类名", method: :delete
+  .main-content.bg2
+    %button.btn.finish-normal.font-color1.finish-btn-position#finish-btn{type: "button"} 完成
+    .table-div
+      .tabbable
+        %ul.nav.nav-tabs
+          %li.active
+            %a.f16.font-color1{"data-toggle" => "tab", :href => "#tab1"} 中心详情
+        .tab-content.bg3
+          #tab1.tab-pane.active
+            .desc-div.font-color3.f14
+              .form-group
+                %label.input-name.fn 中心名称:
+                %input.form-control.font-color3#center-name{:type => "text"}
+              .form-group
+                %label.input-name.fn 详细地址:
+                %input.form-control.font-color3#center-address{:type => "text"}
+              .map-position.clearfix
+                %span.map-address 地图位置:
+                %span.notice 
+                  请在地图上点击定位或
+                %a#auto-locate{:href => "javascript:void(0);"} 自动定位
+                #map-container
+
+      
