@@ -3,11 +3,14 @@ class Staff::CentersController < Staff::ApplicationController
   before_filter :set_active_tab
 
   def set_active_tab
-    @active_tab = "centers"
+    @active_tab = "center"
   end
 
   def index
-   
+    @keyword = params[:keyword]
+    centers = @keyword.present? ? Center.where(title: /#{@keyword}/) : Center.all
+    centers = centers.desc(:created_at)
+    @centers = auto_paginate(centers)
   end
 
   def new
@@ -15,17 +18,20 @@ class Staff::CentersController < Staff::ApplicationController
   end
 
   def show
-    @transfer = Transfer.where(id: params[:id]).first
-    if @transfer.nil?
+    @center = Center.where(id: params[:id]).first
+    if @center.nil?
       redirect_to action: :index and return
     end
-    books_info_detail = @transfer.books_info_detail
-    @books_info_detail = auto_paginate(books_info_detail)
-    if @transfer.in_center_id == @current_center.id
-      @profile = "in"
-    else
-      @profile = "out"
-    end
+  end
+
+  def create
+    retval = Center.create_center(current_user, params[:center])
+    render json: retval_wrapper(retval) and return
+  end
+
+  def destroy
+    Center.where(id: params[:id]).delete
+    render json: retval_wrapper(nil) and return
   end
 
   def remove

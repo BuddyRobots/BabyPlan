@@ -27,37 +27,37 @@
         .tab-content.bg3
           #tab1.tab-pane.active
             .desc-div
-              / - if @users[:data].length == 0
-              /   .undiscover.f14
-              /     %img.undiscover-icon{src: asset_path("undiscover.png")}
-              / - else
-              .table-box.f14
-                %table.table.table-hover.table-height
-                  %thead.th-bg.font-color2
-                    %tr
-                      %th 中心名称
-                      %th 详细地址
-                      %th 正在开课
-                      %th 历史开课
-                  %tbody.font-color3
-                    / - @users[:data].each do |u|
-                    %tr
-                      %td
-                      %td
-                      %td
-                      %td
+              - if @centers[:data].length == 0
+                .undiscover.f14
+                  %img.undiscover-icon{src: asset_path("undiscover.png")}
+              - else
+                .table-box.f14
+                  %table.table.table-hover.table-height
+                    %thead.th-bg.font-color2
+                      %tr
+                        %th 中心名称
+                        %th 详细地址
+                        %th 正在开课
+                        %th 历史开课
+                    %tbody.font-color3
+                      - @centers[:data].each do |c|
+                        %tr
+                          %td= link_to c[:name], "/staff/centers/#{c[:id]}"
+                          %td= c[:address]
+                          %td
+                          %td
 
-              / .select-page 
-              /   %span.totalitems= "共#{@users[:total_page]}页，总计#{@users[:total_number]}条"
-              /   %span.choice-page
-              /     %ul.pagination.pagination-sm
-              /       %li
-              /         %a{href: "/staff/clients?keyword=#{@keyword}&page=#{@users[:previous_page]}"} «
-              /       - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
-              /         %li
-              /           %a{href: "/staff/clients?keyword=#{@keyword}&page=#{page}"}= page
-              /       %li
-              /         %a{href: "/staff/clients?keyword=#{@keyword}&page=#{@users[:next_page]}"} »
+                .select-page 
+                  %span.totalitems= "共#{@centers[:total_page]}页，总计#{@centers[:total_number]}条"
+                  %span.choice-page
+                    %ul.pagination.pagination-sm
+                      %li
+                        %a{href: "/staff/clients?keyword=#{@keyword}&page=#{@centers[:previous_page]}"} «
+                      - ( (@centers[:previous_page] > 2 ? @centers[:previous_page] - 2 : 1) .. (@centers[:next_page] < @centers[:total_page] - 2 ? @centers[:next_page] + 2 : @centers[:total_page]) ).to_a.each do |page|
+                        %li
+                          %a{href: "/staff/clients?keyword=#{@keyword}&page=#{page}"}= page
+                      %li
+                        %a{href: "/staff/clients?keyword=#{@keyword}&page=#{@centers[:next_page]}"} »
 
 
 

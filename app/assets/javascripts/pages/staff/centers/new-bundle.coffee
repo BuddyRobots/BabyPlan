@@ -1,4 +1,3 @@
-#= require wangEditor.min
 
 $ ->
 
@@ -25,31 +24,24 @@ $ ->
       center: center,
       zoom: 12
       })
-
     geocoder = new qq.maps.Geocoder()
-
     qq.maps.event.addListener(
       map,
       'click',
       (d) ->
         window.lat = d.latLng.lat
         window.lng = d.latLng.lng
-       
         p = new qq.maps.LatLng(window.lat, window.lng)
-
         if marker != null
           marker.setVisible(false)
-
         marker = new qq.maps.Marker({
           # 设置Marker的位置坐标
           position: p,
           map: map
           })
-       
         marker.setIcon(icon)
         marker.setTitle("test")
       )
-
   init()
 
   codeAddress = ->
@@ -74,25 +66,21 @@ $ ->
   $("#auto-locate").click ->
     codeAddress()
     
-  $(".end-btn").click ->
+  $("#finish-btn").click ->
     name = $("#center-name").val()
     address = $("#center-address").val()
-    desc = editor.$txt.html()
-    available = !$("#inlineCheckbox1").is(":checked")
-    if name == "" || address == "" || desc == ""
+    if name == "" || address == ""
       $.page_notification("请补全信息")
       return
     if window.lat == null
       $.page_notification("请在地图上确定具体位置")
       return
     $.postJSON(
-      '/admin/centers',
+      '/staff/centers',
       {
         center: {
           name: name
           address: address
-          desc: desc
-          available: available
           lat: window.lat
           lng: window.lng
         }
@@ -105,13 +93,7 @@ $ ->
           else
             $.page_notification "服务器出错，请稍后重试"
           return
-        # the information is updated successfully, next step is to upload the image
-        if has_photo == false
-          # the user does not upload photo, skip photo uploading step
-          location.href = "/admin/centers/" + data.center_id
         else
-          $("#upload-photo-form")[0].action = "/admin/centers/" + data.center_id + "/upload_photo"
-          $("#upload-photo-form").submit()
-
+          location.href = "/staff/centers"
       )
 

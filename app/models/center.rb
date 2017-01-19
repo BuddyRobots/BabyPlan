@@ -14,7 +14,7 @@ class Center
   has_many :course_insts
   has_many :books
   has_many :announcements
-  has_many :staffs, class_name: "User", inverse_of: :staff_center
+  # has_many :staffs, class_name: "User", inverse_of: :staff_center
 
   has_many :out_transfers, class_name: "Transfer", inverse_of: "out_center"
   has_many :in_transfers, class_name: "Transfer", inverse_of: "in_center"
@@ -25,20 +25,34 @@ class Center
 
   has_and_belongs_to_many :clients, class_name: "User", inverse_of: :client_centers
 
+
   scope :is_available, ->{ where(available: true) }
 
-  def self.create_center(center_info)
+  # def self.create_center(center_info)
+  #   if Center.where(name: center_info[:name]).present?
+  #     return ErrCode::CENTER_EXIST
+  #   end
+  #   center = Center.create(
+  #     name: center_info[:name],
+  #     address: center_info[:address],
+  #     desc: center_info[:desc],
+  #     available: center_info[:available],
+  #     lat: center_info[:lat],
+  #     lng: center_info[:lng]
+  #   )
+  #   { center_id: center.id.to_s }
+  # end
+
+  def self.create_center(staff, center_info)
     if Center.where(name: center_info[:name]).present?
       return ErrCode::CENTER_EXIST
     end
     center = Center.create(
       name: center_info[:name],
       address: center_info[:address],
-      desc: center_info[:desc],
-      available: center_info[:available],
       lat: center_info[:lat],
       lng: center_info[:lng]
-    )
+      )
     { center_id: center.id.to_s }
   end
 

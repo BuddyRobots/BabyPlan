@@ -40,6 +40,7 @@ class User
   field :center, type: String
   field :status, type: Integer
 
+
   # for client
   field :gender, type: Integer, default: -1  # 0 for male, 1 for female
   field :birthday, type: Date

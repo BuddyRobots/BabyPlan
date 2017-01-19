@@ -1,57 +1,76 @@
 - content_for :head do
-  = javascript_include_tag "pages/staff/transfers/show-bundle"
-  = stylesheet_link_tag "pages/staff/transfers/show-bundle", :media => "all"
+  = javascript_include_tag "http://map.qq.com/api/js?v=2.exp"
+  = javascript_include_tag "pages/staff/centers/show-bundle"
+  = stylesheet_link_tag "pages/staff/centers/show-bundle", :media => "all"
+  :javascript
+    window.cid = "#{@center.id.to_s}"
+    window.lat = "#{@center.lat.to_s}"
+    window.lng = "#{@center.lng.to_s}"
+
 
 .content-area
-  .content-box
-    .manage-box
-      %a#back{:href => "/staff/transfers?profile=" + @profile.to_s}
-        %img{src: asset_path("web/back.png")}
-      %p.transfer-status 迁移详情
-  .manage-content
-    .desc
-      .controls.controls-row
-        %label.input-caption 迁出地点:
-        %span.unedit-box= @transfer.out_center.name
-        %label.input-caption 迁入地点:
-        %span.unedit-box= @transfer.in_center.name
-        %label.input-caption 迁移状态:
-        %span.unedit-box= @transfer.status_str
-        
-      .controls.controls-row
-        %label.input-caption 迁出时间:
-        %span.unedit-box= @transfer.out_time.present? ? @transfer.out_time.strftime("%Y-%m-%d %H:%M") : ""
-        %label.input-caption 迁入时间:
-        %span.unedit-box= @transfer.in_time.present? ? @transfer.in_time.strftime("%Y-%m-%d %H:%M") : ""
-        %label.input-caption 数量:
-        %span.unedit-box= @transfer.book_insts.count
-    .table-box
-      %table.table.table-bordered#book-table
-        %thead
-          %tr
-            %th 绘本名称
-            %th 数&nbsp量
-            %th 作&nbsp者
-            %th ISBN编码
-            %th 备注
-        %tbody
-          - @books_info_detail[:data].each do |info|
-            %tr
-              %td.td-data= info["name"]
-              %td.td-data= info["count"]
-              %td.td-data= info["author"]
-              %td.td-data= info["isbn"]
-              %td.td-data.red= (@transfer.status == Transfer::ABNORMAL && info["lost_count"] > 0) ? "缺失" + info["lost_count"].to_s + "本" : ""
-
-    .select-page 
-      %span.totalitems= "共#{@books_info_detail[:total_page]}页,总计#{@books_info_detail[:total_number]}条"
-      %span.choice-page
-        %ul.pagination.pagination-sm
-
+  .main-top.direction
+    %a{href: staff_centers_path}
+      %img.back{src: asset_path("back.png")}
+    %ul.set
+      %li
+        %a.f16{href: staff_accounts_path} 账号设置
+      %li
+        %a.f16.set-left-border{href: signout_sessions_path} 退出登录
+        / %a.f16.set-left-border= link_to "退出登录",  signin_page_sessions_path, class: "类名", method: :delete
+  .main-content.bg2
+    %button.btn.delete-normal.font-color1.delete-btn-position#delete-btn{type: "button"} 删除
+    .table-div
+      .tabbable
+        %ul.nav.nav-tabs
+          %li.active
+            %a.f16.font-color1{"data-toggle" => "tab", :href => "#tab1"} 中心详情
           %li
-            %a{:href => "/staff/transfers/#{@transfer.id.to_s}?page=#{@books_info_detail[:previous_page]}"} «
-          - ( (@books_info_detail[:previous_page] > 2 ? @books_info_detail[:previous_page] - 2 : 1) .. (@books_info_detail[:next_page] < @books_info_detail[:total_page] - 2 ? @books_info_detail[:next_page] + 2 : @books_info_detail[:total_page]) ).to_a.each do |page|
-            %li
-              %a{:href => "/staff/transfers/#{@transfer.id.to_s}?page=#{page}"}= page
-          %li
-            %a{:href => "/staff/transfers/#{@transfer.id.to_s}?page=#{@books_info_detail[:next_page]}"} »
+            %a.f16.font-color1#history-course{"data-toggle" => "tab", :href => "#tab2"} 历史开课
+        .tab-content.bg3
+          #tab1.tab-pane.active
+            .desc-div.font-color3.f14
+              .form-group
+                %label.input-name.fn 中心名称:
+                %span.left-margin= @center.name
+              .form-group
+                %label.input-name.fn 详细地址:
+                %span.left-margin= @center.address
+              .map-position
+                %span.map-address 地图位置:
+                .map-div
+                  #map-container
+          #tab2.tab-pane
+            .desc-div
+              .undiscover
+                %img.undiscover-icon{src: asset_path("undiscover.png")}
+              .table-box.f14
+                %table.table.table-hover.table-height
+                  %thead.th-bg.font-color2
+                    %tr
+                      %th 课程名称
+                      %th 上课时间
+                      %th 上课地址
+                      %th 主讲人
+                      %th 价&nbsp&nbsp格
+                  %tbody.font-color3
+                    / - @users[:data].each do |u|
+                    %tr
+                      %td
+                      %td
+                      %td
+                      %td
+                      %td
+
+    / .select-page 
+    /   %span.totalitems= "共#{@books_info_detail[:total_page]}页,总计#{@books_info_detail[:total_number]}条"
+    /   %span.choice-page
+    /     %ul.pagination.pagination-sm
+
+    /       %li
+    /         %a{:href => "/staff/transfers/#{@transfer.id.to_s}?page=#{@books_info_detail[:previous_page]}"} «
+    /       - ( (@books_info_detail[:previous_page] > 2 ? @books_info_detail[:previous_page] - 2 : 1) .. (@books_info_detail[:next_page] < @books_info_detail[:total_page] - 2 ? @books_info_detail[:next_page] + 2 : @books_info_detail[:total_page]) ).to_a.each do |page|
+    /         %li
+    /           %a{:href => "/staff/transfers/#{@transfer.id.to_s}?page=#{page}"}= page
+    /       %li
+    /         %a{:href => "/staff/transfers/#{@transfer.id.to_s}?page=#{@books_info_detail[:next_page]}"} »
