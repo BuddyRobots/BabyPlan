@@ -144,6 +144,7 @@ Rails.application.routes.draw do
         post :auto_merge
         post :mannual_merge
         post :clear_list
+        post :download_all_qr
       end
     end
 

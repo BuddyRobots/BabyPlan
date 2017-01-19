@@ -182,7 +182,11 @@ class Staff::BooksController < Staff::ApplicationController
     send_file(@book.generate_compressed_file(params[:amount].to_i), filename: @book.name + ".pdf")
   end
 
-
+  def download_all_qr
+    retval = current_center.batch_export_qrcode
+    retval = retval.slice(6, retval.length)
+    render json: retval_wrapper({filename:retval}) and return
+  end
 
   def add_to_list
     retval = QrExport.create_qr(current_center, params[:id], params[:num])
