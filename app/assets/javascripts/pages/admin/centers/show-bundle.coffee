@@ -35,7 +35,7 @@ $ ->
   # window.lng = null
 
   init = ->
-    center = new qq.maps.LatLng(39.87601941962116, 116.43310546875)
+    center = new qq.maps.LatLng(window.lat, window.lng)
     map = new qq.maps.Map(document.getElementById("map-container"), {
       center: center,
       zoom: 12
