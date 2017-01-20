@@ -184,8 +184,12 @@ class Staff::BooksController < Staff::ApplicationController
 
   def download_all_qr
     retval = current_center.batch_export_qrcode
-    retval = retval.slice(6, retval.length)
+    # retval = retval.slice(6, retval.length)
     render json: retval_wrapper({filename:retval}) and return
+  end
+
+  def download_qr_list
+    send_file(params[:filename], filename: "图书二维码.pdf")
   end
 
   def add_to_list

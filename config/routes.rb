@@ -145,6 +145,7 @@ Rails.application.routes.draw do
         post :mannual_merge
         post :clear_list
         post :download_all_qr
+        get :download_qr_list
       end
     end
 
