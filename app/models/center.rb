@@ -15,6 +15,8 @@ class Center
   has_many :books
   has_many :announcements
   has_many :staffs, class_name: "User", inverse_of: :staff_center
+  has_many :qr_exports
+
 
   has_many :out_transfers, class_name: "Transfer", inverse_of: "out_center"
   has_many :in_transfers, class_name: "Transfer", inverse_of: "in_center"
@@ -90,6 +92,31 @@ class Center
       end
     end
     nil
+  end
+
+  def batch_export_qrcode
+    folder = "public/qrcodes/"
+    export_info = []
+    self.qr_exports.each do |e|
+      e.num.times do |i|
+        book_inst = e.book.book_insts.create
+        qrcode = RQRCode::QRCode.new(book_inst.id.to_s)
+        png = qrcode.as_png(
+                resize_gte_to: false,
+                resize_exactly_to: false,
+                fill: 'white',
+                color: 'black',
+                size: 300,
+                border_modules: 4,
+                module_px_size: 6,
+                file: folder + book_inst.id.to_s + ".png"
+              )
+
+        png_file = book_inst.id.to_s + ".png"
+        export_info << { book_name: e.book.name, png_file: png_file }
+      end
+    end
+    pdf_filename = QrExport.export_qrcode_pdf(export_info)
   end
 
   def update_info(center_info)
