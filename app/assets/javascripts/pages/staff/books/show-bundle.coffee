@@ -2,7 +2,7 @@
 #= require tag-it.min
 $ ->
 
-  $(".close").click -> 
+  $('#QR-codeModal').on 'hidden.bs.modal', ->
     $("#code-num").val("")
     $("#confirm-qr-code").removeClass("button-enabled")
     $("#confirm-qr-code").addClass("button-disabled")
