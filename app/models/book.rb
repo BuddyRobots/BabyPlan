@@ -23,6 +23,8 @@ class Book
 
   has_one :feed
 
+  has_one :qr_export
+
   belongs_to :center
   has_many :book_insts
   has_many :book_borrows
