@@ -18,7 +18,7 @@ $ ->
         if data.success
           window.open(data.filename)
           $("#download-btn").text("全部下载").attr("disabled", false)
-          $.page_notification("请在新窗口中下载", 2000)
+          $.page_notification("已在新窗口中打开", 2000)
       )
 
   
