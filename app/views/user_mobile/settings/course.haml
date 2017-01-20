@@ -14,7 +14,7 @@
       - @courses_participates.each do |e|
         .details{data: {id: e.course_inst.id.to_s}}
           .left-div
-            %img.visit{:src => e.course_inst.photo.nil? ? asset_path("banner.png") : e.course_inst.photo.path}
+            %img.visit{:src => e.course_inst.photo.nil? ? asset_path("web/course.png") : e.course_inst.photo.path}
           .right-div
             %p.caption 
               = e.course_inst.name || e.course_inst.course.name
