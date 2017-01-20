@@ -457,6 +457,7 @@ $ ->
       $("#photo_file").trigger("click")
 
   $("#photo_file").change (event) ->
+    $("#old-img").attr("src", "")
     if event.target.files[0] == undefined
       return
     has_photo = true

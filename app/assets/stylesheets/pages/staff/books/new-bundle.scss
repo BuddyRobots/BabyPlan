@@ -221,5 +221,6 @@
 }
 .photo {
 	width: 100px;
-	max-height: 200px;
+	height: 100px;
+	object-fit: contain;
 }

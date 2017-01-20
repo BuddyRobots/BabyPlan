@@ -96,6 +96,7 @@
 	width: 100%;
 	max-width: 640px;
 	height: 240px;
+	object-fit: contain;
 }
 #show-caption {
 	font-size: 24px;
@@ -175,6 +176,7 @@
 	width: 100%;
 	max-width: 128px;
 	height: 88px;
+	object-fit: contain;
 }
 .wangedit-area {
 	float: left;
