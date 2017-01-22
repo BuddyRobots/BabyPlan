@@ -94,6 +94,7 @@ input, label, h5 {
 .unedit-photo, .edit-photo {
 	width: 200px;
 	height: 138px;
+	object-fit: contain;
 }
 #upload-photo {
 	position: absolute;

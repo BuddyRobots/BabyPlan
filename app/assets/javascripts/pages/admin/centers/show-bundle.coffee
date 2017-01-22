@@ -35,7 +35,7 @@ $ ->
   # window.lng = null
 
   init = ->
-    center = new qq.maps.LatLng(39.87601941962116, 116.43310546875)
+    center = new qq.maps.LatLng(window.lat, window.lng)
     map = new qq.maps.Map(document.getElementById("map-container"), {
       center: center,
       zoom: 12
@@ -225,6 +225,7 @@ $ ->
       $("#photo_file").trigger("click")
 
   $("#photo_file").change (event) ->
+    $("#old-photo").attr("src", "")
     if event.target.files[0] == undefined
       return
     has_photo = true

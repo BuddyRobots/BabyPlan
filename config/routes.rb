@@ -135,11 +135,17 @@ Rails.application.routes.draw do
         post :back
         post :lost
         get :download_qrcode
+        post :add_to_list
+        post :delete_qr_code
       end
       collection do
+        get :code_list
         get :merge
         post :auto_merge
         post :mannual_merge
+        post :clear_list
+        post :download_all_qr
+        get :download_qr_list
       end
     end
 

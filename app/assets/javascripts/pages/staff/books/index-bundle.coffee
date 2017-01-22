@@ -11,6 +11,9 @@ $ ->
   $(".merge-book").click ->
     location.href = "/staff/books/merge"
 
+  $(".download-code").click ->
+    location.href = "/staff/books/code_list"
+
   $(".return").click ->
     client_name = $(this).closest('tr').attr('data-clientname')
     name = $(this).closest('tr').attr('data-name')

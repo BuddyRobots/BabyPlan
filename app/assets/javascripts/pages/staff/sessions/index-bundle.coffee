@@ -181,7 +181,7 @@ $ ->
           if data.code == WRONG_VERIFY_CODE
             $("#verify-code-notice").text("验证码错误").css("visibility","visible")
           if data.code == USER_NOT_EXIST
-            $("#mobile-notice").text("帐号不存在").css("visibility", "hidden")
+            $("#mobile-notice").text("帐号不存在").css("visibility", "visible")
           if data.code == CENTER_NOT_EXIST
             $.page_notification("儿童中心不存在",3000)
       )

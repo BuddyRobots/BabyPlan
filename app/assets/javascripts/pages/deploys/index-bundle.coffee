@@ -1,18 +1,26 @@
 $ ->
 
-  $("#deploy-btn").click ->
-    address = $("#address").val()
-    $(this).attr("disabled", true)
+  post = (mode, btn) ->
+    # $("#" + btn).attr("disabled", true)
+    btn.attr("disabled", true)
+    deploy_type = mode
     $.postJSON(
       '/deploys',
       {
-        address: address
+        deploy_type: deploy_type
       },
       (data) ->
-        console.log data
         if data.success
-          $("#code_update").text(data.pull_result)
-          $("#bundle_message").html(data.bundle_result)
-          $("#compile_message").text(data.compile_result)
-          $("deploy_btn").attr("enabled",true)
-    )
+          $("#code_update").text(data.stat.pull_result)
+          $("#bundle_message").text(data.stat.bundle_result)
+          # $("#" + btn).attr("disabled", false)
+          btn.attr("disabled", false)
+      )
+  $("#deploy_production").click ->
+    post("production", $("#deploy_production"))
+
+  $("#deploy_staging").click ->
+    post("staging", $("#deploy_staging"))
+
+  $("#deploy_development").click ->
+    post("development", $("#deploy-development"))
