@@ -1,5 +1,8 @@
 $ ->
 
+  if window.profile == "history"
+    $('.nav-tabs a[href="#tab2"]').tab('show')
+
   marker = null
   map = null
   geocoder = null
@@ -43,3 +46,9 @@ $ ->
         if data.success
           location.href = "/staff/centers"
       )
+
+  $("#history-course").click ->
+    $("#delete-btn").hide()
+
+  $("#center-desc").click ->
+    $("#delete-btn").show()

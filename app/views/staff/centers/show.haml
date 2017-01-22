@@ -6,6 +6,7 @@
     window.cid = "#{@center.id.to_s}"
     window.lat = "#{@center.lat.to_s}"
     window.lng = "#{@center.lng.to_s}"
+    window.profile = "#{@profile}"
 
 
 .content-area
@@ -24,7 +25,7 @@
       .tabbable
         %ul.nav.nav-tabs
           %li.active
-            %a.f16.font-color1{"data-toggle" => "tab", :href => "#tab1"} 中心详情
+            %a.f16.font-color1#center-desc{"data-toggle" => "tab", :href => "#tab1"} 中心详情
           %li
             %a.f16.font-color1#history-course{"data-toggle" => "tab", :href => "#tab2"} 历史开课
         .tab-content.bg3
@@ -42,35 +43,37 @@
                   #map-container
           #tab2.tab-pane
             .desc-div
-              .undiscover
-                %img.undiscover-icon{src: asset_path("undiscover.png")}
-              .table-box.f14
-                %table.table.table-hover.table-height
-                  %thead.th-bg.font-color2
-                    %tr
-                      %th 课程名称
-                      %th 上课时间
-                      %th 上课地址
-                      %th 主讲人
-                      %th 价&nbsp&nbsp格
-                  %tbody.font-color3
-                    / - @users[:data].each do |u|
-                    %tr
-                      %td
-                      %td
-                      %td
-                      %td
-                      %td
+              - if @course_insts[:data].length == 0
+                .undiscover
+                  %img.undiscover-icon{src: asset_path("undiscover.png")}
+              - else
+                .table-box.f14
+                  %table.table.table-hover.table-height
+                    %thead.th-bg.font-color2
+                      %tr
+                        %th 课程名称
+                        %th 上课时间
+                        %th 上课地址
+                        %th 主讲人
+                        %th 价&nbsp&nbsp格
+                    %tbody.font-color3
+                      - @course_insts[:data].each do |c|
+                        %tr{class: "", "data-id" => c[:id]}
+                          %td= c[:name]
+                          %td= c[:date]
+                          %td= c[:address]
+                          %td= c[:speaker]
+                          %td= c[:price]
 
-    / .select-page 
-    /   %span.totalitems= "共#{@books_info_detail[:total_page]}页,总计#{@books_info_detail[:total_number]}条"
-    /   %span.choice-page
-    /     %ul.pagination.pagination-sm
+                .select-page 
+                  %span.totalitems= "共#{@course_insts[:total_page]}页,总计#{@course_insts[:total_number]}条"
+                  %span.choice-page
+                    %ul.pagination.pagination-sm
 
-    /       %li
-    /         %a{:href => "/staff/transfers/#{@transfer.id.to_s}?page=#{@books_info_detail[:previous_page]}"} «
-    /       - ( (@books_info_detail[:previous_page] > 2 ? @books_info_detail[:previous_page] - 2 : 1) .. (@books_info_detail[:next_page] < @books_info_detail[:total_page] - 2 ? @books_info_detail[:next_page] + 2 : @books_info_detail[:total_page]) ).to_a.each do |page|
-    /         %li
-    /           %a{:href => "/staff/transfers/#{@transfer.id.to_s}?page=#{page}"}= page
-    /       %li
-    /         %a{:href => "/staff/transfers/#{@transfer.id.to_s}?page=#{@books_info_detail[:next_page]}"} »
+                      %li
+                        %a{:href => "/staff/centers/#{@center.id.to_s}?page=#{@course_insts[:previous_page]}&profile=history"} «
+                      - ( (@course_insts[:previous_page] > 2 ? @course_insts[:previous_page] - 2 : 1) .. (@course_insts[:next_page] < @course_insts[:total_page] - 2 ? @course_insts[:next_page] + 2 : @course_insts[:total_page]) ).to_a.each do |page|
+                        %li
+                          %a{:href => "/staff/centers/#{@center.id.to_s}?page=#{page}&profile=history"}= page
+                      %li
+                        %a{:href => "/staff/centers/#{@center.id.to_s}?page=#{@course_insts[:next_page]}&profile=history"} »

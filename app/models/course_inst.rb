@@ -53,6 +53,7 @@ class CourseInst
       price_pay: course_inst_info[:price_pay],
       date: course_inst_info[:date],
       speaker: course_inst_info[:speaker],
+      center: course_inst_info[:center],
       date_in_calendar: course_inst_info[:date_in_calendar]
     })
     course_inst.save
@@ -127,6 +128,13 @@ class CourseInst
     end_time = last_day.split(',')[0]
     end_date = end_time.split('T')[0]
     return end_date
+  end
+
+  def course_state
+    if self.available && Date.parse(self.end_date).future?
+      state = true
+    end
+    return state
   end
 
   def duration

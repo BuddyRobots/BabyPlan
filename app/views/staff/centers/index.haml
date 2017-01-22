@@ -44,8 +44,8 @@
                         %tr
                           %td= link_to c[:name], "/staff/centers/#{c[:id]}"
                           %td= c[:address]
-                          %td
-                          %td
+                          %td= c.coursing_num
+                          %td= c.course_insts.length
 
                 .select-page 
                   %span.totalitems= "共#{@centers[:total_page]}页，总计#{@centers[:total_number]}条"

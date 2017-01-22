@@ -4,182 +4,71 @@ span, ul, li, label {
 	margin: 0;
 	padding: 0;
 }
-
-$green: #10c078;
-
-.content-area {
-	position: absolute;
-	width: 100%;
-	bottom: 0;
-	top: 0;
-	background:#f7fcff;
-	box-shadow: -1px -1px 6px #9c9c9c inset;
-	padding: 20px;
-}
-.manage-content {
-	overflow: auto;
-	position: absolute;
-	top: 20px;
-	left: 0px;
-	bottom: 0px;
-	right: 0px;
-	box-shadow: 0 -1px 6px #9c9c9c inset;
-	background: white;  
-	margin: 0 20px 20px 20px;
-}
-.tabbable {
-	padding-top: 20px;
-}	
-
-.nav-tabs {
-	padding-left: 20px;
-	li {
-		font-size: 16px;
-		color: #323232;
-	}
-}
-.pie-box {
-	width: 75.9%;
-	margin: 40px 0 0 40px;
-	display: flex;
-	justify-content: space-between;
-	display: -ms-flexbox;
-  	display: -webkit-flex;
-	-webkit-justify-content: space-between;
-	-moz-justify-content: space-between;
-	-ms-justify-content: space-between;
-	-o-justify-content: space-between;
-}
-.gender-pie, .age-pie {
-	width: 48%;
-	height: 350px;
-	border: 1px solid #c8c8c8;
-}
-.kids-nums {
-	width: 75.9%;
-	margin: 40px 0 20px 40px;
-	border: 1px solid #c8c8c8;
-}
-.pie-title {
-	font-size: 16px;
-	color: #464646;
-	height: 44px;
-	line-height: 44px;
-	text-align: center;
-	background: #f6f6f6;
-	border-bottom: 1px solid #c8c8c8;
-}
-.column-title {
-	@extend .pie-title;
-	text-align: left;
-	padding-left: 20px;
-}
-.figure-box {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	display: -ms-flexbox;
-  	display: -webkit-flex;
-	-webkit-align-items: center;
-	-moz-align-items: center;
-	-ms-align-items: center;
-	-o-align-items: center;
-	-webkit-justify-content: center;
-	-moz-justify-content: center;
-	-ms-justify-content: center;
-	-o-justify-content: center;
-}
-#gender-statistics {
-	width: 71.35%;
-	max-width: 300px;
-	height: 300px;
-}
-#age-statistics {
-	width: 83.3%;
-	max-width: 350px;
-	height: 300px;
-}
-#nums-statistics {
-	width: 91%;
-	max-width: 800px;
-	height: 240px;
-}
-.desc {
-	margin: 20px;
-	border: 1px solid #c8c8c8;
-}
 .search {
-	background: #eee;
-	border-bottom: 1px solid #c8c8c8;
-	margin: 0;
+  width: 100%;
 }
 .form-time {
-	width: 100%;
-	padding: 13px 20px;
-	margin: 0;
+  width: 100%;
+  margin: 0;
 }
-#datepicker-1, #datepicker-2, #datepicker-3, #datepicker-4, #datepicker-5, #datepicker-6{
-	width: 14.85%;
+.form-control {
+  display: inline-block;
+  vertical-align: middle;
 }
-.input-caption {
-	font-size: 16px;
-	color: #464646;
-	vertical-align: middle;
+.to {
+  margin: 0 1%;
 }
-.input-area {
-	margin: 0 8px;
-}
-.search-btn {
-	background: $green;
-	margin-left: 12px;
-	height: 32px;
-	color: #fff;
-}
-.search-btn:hover {
-	color: #fff;
+#course-search-btn {
+  width: 5%;
+  color: #fff;
+  outline: none;
+  margin-left: 1%;
 }
 .quick-choice {
-	float: right;
-	margin-right: 20px;
-	color: #969696;
-	width: 14.85%;
+  float: right;
+  width: 14.85%;
+  color: #6f6f7e;
 }
-.statistics-chart {
-	padding: 40px 40px 20px 40px;
+#datepicker-1, #datepicker-2 {
+  width: 14.85%;
+}
+#datepicker-1 {
+  margin-left: 1%;
+}
+.item-div {
 	display: flex;
-	flex-direction: column;
 	justify-content: space-between;
-	display: -ms-flexbox;
-  	display: -webkit-flex;
-	-webkit-flex-direction: column;
-	-moz-flex-direction: column;
-	-ms-flex-direction: column;
-	-o-flex-direction: column;
+	margin-bottom: 2%;
+	-webkit-display: flex;
+	-moz-display: flex;
+	-ms-display: flex;
+	-o-display: flex;
 	-webkit-justify-content: space-between;
 	-moz-justify-content: space-between;
 	-ms-justify-content: space-between;
 	-o-justify-content: space-between;
 }
-.borrow, .collection {
-	display: flex;
-	justify-content: space-between;
-	margin-bottom: 20px;
-	display: -ms-flexbox;
-  	display: -webkit-flex;
-	-webkit-justify-content: space-between;
-	-moz-justify-content: space-between;
-	-ms-justify-content: space-between;
-	-o-justify-content: space-between;
+.income {
+  margin-bottom: 0;
 }
 .left-div {
 	width: 68%;
-	border: 1px solid #c8c8c8;
+}
+.column-title {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background: #f6f6f6;
+}
+.bt0 {
+  margin-bottom: 0;
 }
 .tab-chart-div {
 	display: flex;
 	justify-content: space-between;
-	display: -ms-flexbox;
-  	display: -webkit-flex;
+	-webkit-display: flex;
+	-moz-display: flex;
+	-ms-display: flex;
+	-o-display: flex;
 	-webkit-justify-content: space-between;
 	-moz-justify-content: space-between;
 	-ms-justify-content: space-between;
@@ -190,9 +79,10 @@ $green: #10c078;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	text-align: center;
-	display: -ms-flexbox;
-  	display: -webkit-flex;
+	-webkit-display: flex;
+	-moz-display: flex;
+	-ms-display: flex;
+	-o-display: flex;
 	-webkit-flex-direction: column;
 	-moz-flex-direction: column;
 	-ms-flex-direction: column;
@@ -201,54 +91,25 @@ $green: #10c078;
 	-moz-justify-content: center;
 	-ms-justify-content: center;
 	-o-justify-content: center;
+	text-align: center;
 }
 .total-nums {
-	font-size: 24px;
-	color: #227dda;
-	margin-bottom: 20px;
-}
-.total-category {
-	font-size: 16px;
-	color: #969696;
+	font-size: 2.4em;
+	color: #7777cf;
+	margin-bottom: 2%;
 }
 .chart-div {
 	width: 69%;
 }
-#borrow-statistics {
-	min-width: 35%;
-	height: 240px;
-}
+
 .right-div {
 	width: 30%;
 }
-#review-table {
-	border-radius: 6px;
-	border: 1px solid #c8c8c8;
-	font-size: 14px;
-	color: #323232;
-	margin-bottom: 0;
-	.td-data {
-		font-size: 14px;
-		color: #505050;
-		height:47px;
-		line-height: 47px;
-		text-align: center;
-		padding: 0;
-		border: 1px solid #c8c8c8;
-	}
-}
-.review-title {
-	border: 1px solid #c8c8c8;
-	border-bottom: 0;
-}
-#collect-statistics {
-	min-width: 50%;
-	height: 240px;
-}
 #register-statistics {
 	min-width: 35%;
-	height: 240px;
+	height: 238px;
 }
+
 .chart-column-div {
 	width: 54%;
 }
@@ -257,20 +118,19 @@ $green: #10c078;
 }
 #bonu-statistics {
 	min-width: 15%;
-	height: 240px;
+	height: 238px;
 }
 #income-statistics {
 	min-width: 25%;
-	height: 240px;
+	height: 238px;
 }
 .income-div {
 	width: 20%;
 	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	text-align: center;
-	display: -ms-flexbox;
-  	display: -webkit-flex;
+	-webkit-display: flex;
+	-moz-display: flex;
+	-ms-display: flex;
+	-o-display: flex;
 	-webkit-flex-direction: column;
 	-moz-flex-direction: column;
 	-ms-flex-direction: column;
@@ -279,128 +139,42 @@ $green: #10c078;
 	-moz-justify-content: center;
 	-ms-justify-content: center;
 	-o-justify-content: center;
+	justify-content: center;
+	flex-direction: column;
+	text-align: center;
+}
+.pd {
+  padding-top: 2%;
+  padding-bottom: 1.5%;
 }
 
+// tab2
 .courses-income-box {
-	border: 1px solid #c8c8c8;
-	margin: 40px 40px 20px 40px;
+  margin-bottom: 3%;
 }
-.income-title {
-	font-size: 16px;
-	color: #464646;
-	background: #f6f6f6;
-	height: 44px;
-	line-height: 44px;
-	text-align: center;
-	border-bottom: 1px solid #c8c8c8;
+.amount {
+  background: #f6f6f6;
+  height: 44px;
+  line-height: 44px;
+  text-align: center;
 }
-.income-box {
-	padding: 20px 0;
-	display: flex;
-	display: -ms-flexbox;
-  	display: -webkit-flex;
-}
-.income-items {
-	flex: 1;
-	text-align: center;
-	border-right: 1px dashed #c8c8c8;
-}
-.income-caption {
-	margin: 20px 0 10px 0;
-	font-size: 16px;
-	color: #969696;
-}
-.income-nums {
-	font-size: 24px;
-	color: #227dda;
-	margin: 10px 0;
-}
-#goverment {
-	border: 0;
-}
-.table-box {
-	margin: 20px 40px 0 40px;
-}
-#income-table {
-	border-radius: 6px;
-	border: 1px solid #c8c8c8;
-	font-size: 14px;
-	color: #323232;
-	margin-bottom: 0;
-	th {
-		text-align: center;
-		height: 40px;
-		line-height: 40px;
-		border: 1px solid #c8c8c8;
-		padding: 0;
-	}
-	.td-data {
-		font-size: 14px;
-		color: #505050;
-		height:45px;
-		line-height: 45px;
-		text-align: center;
-		border: 1px solid #c8c8c8;
-		padding: 0;
-		.unshelve {
-			color: #969696;
-		}
-		.shelve {
-			color: #f7873d;
-		}
-		a {
-			
-			text-decoration: underline;
-		}
-	}
-	.income_out {
-		color: #d70c19;
-	}
-	.income_in {
-		color: #10c078;
-	}
-	.clicked {
-		background: #fdd3b9;
-	}
-}
+.amount-div {
+  padding-top: 2%;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
 
-//undiscover
-.undiscover {
-	text-align: center;
-	padding: 30px;
-	margin-top: 100px;
-	margin-bottom: 120px;
 }
-.undiscover-icon {
-	display: inline-block;
-	width: 100%;
-	max-width: 90px;
+.amount-items {
+  flex: 1;
+  text-align: center;
 }
-.no-data-message {
-	font-size: 20px;
-	color: #969696;
-	margin-top: 30px;
+.amount-caption {
+  margin-top: 5%;
+  margin-bottom: 3%;
 }
-//select-page
-.select-page {
-	text-align: right;
-	margin: 10px 40px 10px 0;
-	padding-bottom: 5px;
-}
-.totalitems {
-	font-size: 12px;
-	color: #969696;
-}
-.choice-page {
-	display: inline-block;
-	vertical-align: middle;
-}
-.pagination {
-	display: inline-block;
-	margin: 0;
-	padding: 0;
-	margin-left: 15px;
-}
-.pagination > li > a {
-	border: 1px solid #c8c8c8;
+.amount-nums {
+  font-size: 24px;
+  color: #7777cf;
+  margin: 3% 0;
 }

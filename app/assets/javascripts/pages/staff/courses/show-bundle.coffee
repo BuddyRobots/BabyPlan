@@ -278,7 +278,7 @@ $ ->
         date_in_calendar.push(fc_event.start._i + "," + fc_event.end._i)
     )
 
-    ret = check_course_input(code, capacity, price, price_pay, length, date, speaker, address, date_in_calendar)
+    ret = check_course_input(code, capacity, price, length, date, speaker, address, date_in_calendar)
     if ret == false
       return
 

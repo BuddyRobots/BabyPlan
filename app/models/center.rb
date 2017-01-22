@@ -25,7 +25,6 @@ class Center
 
   has_and_belongs_to_many :clients, class_name: "User", inverse_of: :client_centers
 
-
   scope :is_available, ->{ where(available: true) }
 
   # def self.create_center(center_info)
@@ -82,6 +81,16 @@ class Center
 
   def courses_desc
     self.course_insts.length.to_s + "门"
+  end
+
+  def coursing_num
+    course_num = 0
+    self.course_insts.each do |c|
+      if c.course_state == true
+        course_num += 1
+      end
+    end
+    course_num
   end
 
   def center_info

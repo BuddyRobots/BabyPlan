@@ -22,6 +22,12 @@ class Staff::CentersController < Staff::ApplicationController
     if @center.nil?
       redirect_to action: :index and return
     end
+    course_insts = Center.where(id: params[:id]).first.course_insts
+    @course_insts = auto_paginate(course_insts)
+    @course_insts[:data] = @course_insts[:data].map do |e|
+      e.course_inst_info
+    end
+    @profile = params[:profile]
   end
 
   def create

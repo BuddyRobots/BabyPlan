@@ -78,6 +78,7 @@ $ ->
     date = $("#course-date").val()
     speaker = $("#course-speaker").val()
     address = $("#course-address").val()
+    center = $("#center-choice").val()
 
     fc_events = $('#calendar').fullCalendar('clientEvents')
     date_in_calendar = []
@@ -104,6 +105,7 @@ $ ->
         date: date
         speaker: speaker
         address: address
+        center: center
         date_in_calendar: date_in_calendar
       },
       (data) ->

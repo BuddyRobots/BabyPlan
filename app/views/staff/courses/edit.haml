@@ -22,7 +22,7 @@
       .tabbable
         %ul.nav.nav-tabs
           %li.active
-            %a.f16.font-color1{"data-toggle" => "tab", :href => "#tab1"} 模板详情
+            %a.f16.font-color1{"data-toggle" => "tab", :href => "#tab1"} 课程详情
         .tab-content.bg3
           #tab1.tab-pane.active
             .desc-div.font-color3
@@ -36,10 +36,8 @@
                     %input.input-area.form-control.date.no-margin-right#course-date{:type => "text"}
                   .form-group
                     %label.input-caption.f14 上课中心:
-                    %select.form-control.input-area.select-input.font-color3
-                      %option 朝阳儿童中心
-                      %option 朝阳儿童中心
-                      %option 朝阳儿童中心
+                    = select_tag "center-choice", options_for_select(Center.centers_for_select), class: "form-control input-area select-input font-color3"
+                    
                     %label.input-caption.f14 主讲人:
                     %input.input-area.form-control.select-input.no-margin-right#course-speaker{:type => "text"}
                 .photo

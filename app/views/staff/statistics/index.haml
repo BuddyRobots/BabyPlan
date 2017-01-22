@@ -1,198 +1,343 @@
 - content_for :head do
   = javascript_include_tag "pages/staff/statistics/index-bundle"
   = stylesheet_link_tag "pages/staff/statistics/index-bundle", :media => "all"
-  :javascript
-    window.start_time = "#{@start_time}"
-    window.end_time = "#{@end_time}"
-    window.profile = "#{@profile}"
+  / :javascript
+  /   window.start_time = "#{@start_time}"
+  /   window.end_time = "#{@end_time}"
+  /   window.profile = "#{@profile}"
+
 
 .content-area
-  .manage-content
-    .tabbable
-      %ul.nav.nav-tabs
-        %li.active
-          %a#kids-message{"data-toggle" => "tab", :href => "#tab1"} 儿童统计
-        %li
-          %a#course-review{"data-toggle" => "tab", :href => "#tab2"} 课程统计
-        %li
-          %a#book-review{"data-toggle" => "tab", :href => "#tab3"} 绘本统计
-        / %li
-        /   %a#cash-statistics{"data-toggle" => "tab", :href => "#tab4"} 金额统计
+  .main-top
+    .search.f14.font-color3
+      / %form.form-inline
+      .form-group.form-time
+        %span　查询时段:
+        %input.form-control.font-color3#datepicker-1{:type => "text"}
+        %span.to 至
+        %input.form-control.font-color3#datepicker-2{:type => "text"}
+        %button.btn.new-normal.font-color1#course-search-btn{type: "button"} 查询
+        = select_tag "course-quick-choice", options_for_select(Statistic.duration_for_select, 1.months.to_i), class: "form-control quick-choice"
+          
+  .main-content.bg2
+    .table-div
+      .tabbable
+        %ul.nav.nav-tabs
+          %li.active
+            %a.f16.font-color1{"data-toggle" => "tab", :href => "#tab1"} 课程统计
+          %li
+            %a.f16.font-color1{"data-toggle" => "tab", :href => "#tab2"} 金额统计
 
-      .tab-content
-        #tab1.tab-pane.active
-          / .undiscover
-          /   %img.undiscover-icon{src: asset_path("managecenter/no-data.png")}
-          /   %p.no-data-message 暂无统计数据
-          .pie-box
-            .gender-pie
-              %p.pie-title 性别比例
-              .figure-box
-                #gender-statistics
-            .age-pie
-              %p.pie-title 年龄比例
-              .figure-box
-                #age-statistics
-          .kids-nums
-            %p.column-title 儿童数量
-            .figure-box
-              #nums-statistics
-        #tab2.tab-pane
-          .desc
-            .search
-              %form.form-inline
-                .form-group.form-time
-                  %span.input-caption　查询时段:
-                  %input.input-area.form-control#datepicker-1{:type => "text"}
-                  %span.input-caption 至
-                  %input.input-area.form-control#datepicker-2{:type => "text"}
-                  .btn#course-search-btn.search-btn{:type => "button"} 查询
-                  = select_tag "course-quick-choice", options_for_select(Statistic.duration_for_select, 1.months.to_i), class: "form-control quick-choice"
-            .statistics-chart
-              .borrow
-                .left-div
-                  %p.column-title 报名情况
+        .tab-content.bg3
+          #tab1.tab-pane.active
+            .desc-div.font-color3.pd
+              .item-div
+                .left-div.border-btm
+                  %p.column-title.f16 报名情况
                   .tab-chart-div
                     .total-div
-                      %p#total-signup.total-nums 91234
-                      %p.total-category 人次
+                      %p#total-signup.total-nums 0
+                      %p.f16 人次
                     .chart-div
                       #register-statistics
                 .right-div
-                  %p.column-title.review-title 评价排名
-                  %table.table.table-bordered#review-table
+                  %p.column-title.f16 评价排名
+                  %table.table.table-hover.table-height.f14.bt0
                     %tbody
-                    - @course_rank[:review_rank].each_with_index do |e, i|
-                      %tr
-                        %td.td-data= i + 1
-                        %td.td-data= link_to truncate(e[:name], length: 10), "/staff/courses/#{e[:id]}"
-                        %td.td-data= e[:review_score]
+                      - 5.times do
+                        %tr
+                          %td 1
+                          %td 1
+                          %td 1
+                    / - @course_rank[:review_rank].each_with_index do |e, i|
+                    /   %tr
+                    / - @course_rank[:review_rank].each_with_index do |e, i|
+                    /   %tr
+                    / - @course_rank[:review_rank].each_with_index do |e, i|
+                    /   %tr
+                    /     %td.td-data= i + 1
+                    /     %td.td-data= link_to truncate(e[:name], length: 10), "/admin/courses/#{e[:id]}"
+                    /     %td.td-data= e[:review_score]
 
-              .collection
-                .left-div
-                  %p.column-title 课程收入
+              .item-div.income
+                .left-div.border-btm
+                  %p.column-title.f16 课程收入
                   .tab-chart-div
                     .income-div
-                      %p#total-money.total-nums 91234
-                      %p.total-category 元
+                      %p#total-money.total-nums 0
+                      %p.f16 元
                     .chart-pie-div
                       #bonu-statistics
                     .chart-column-div
                       #income-statistics
                 .right-div
-                  %p.column-title.review-title 报名排名
-                  %table.table.table-bordered#review-table
+                  %p.column-title.f16 报名排名
+                  %table.table.table-hover.table-height.f14.bt0
                     %tbody
-                    - @course_rank[:cp_rank].each_with_index do |e, i|
                       %tr
-                        %td.td-data= i + 1
-                        %td.td-data= link_to truncate(e[:name], length: 10), "/staff/courses/#{e[:id]}"
-                        %td.td-data= e[:cp_num]
-
-        #tab3.tab-pane
-          .desc
-            .search
-              %form.form-inline
-                .form-group.form-time
-                  %span.input-caption　查询时段:
-                  %input.input-area.form-control#datepicker-3{:type => "text"}
-                  %span.input-caption 至
-                  %input.input-area.form-control#datepicker-4{:type => "text"}
-                  .btn#book-search-btn.search-btn{:type => "button"} 查询
-                  = select_tag "book-quick-choice", options_for_select(Statistic.duration_for_select, 1.months.to_i), class: "form-control quick-choice"
-            .statistics-chart
-              .borrow
-                .left-div
-                  %p.column-title 借阅情况
-                  .tab-chart-div
-                    .total-div
-                      %p#total-borrow.total-nums 91234
-                      %p.total-category 人次
-                    .chart-div
-                      #borrow-statistics
-                .right-div
-                  %p.column-title.review-title 评价排名
-                  %table.table.table-bordered#review-table
-                    %tbody
-                    - @book_rank[:review_rank].each_with_index do |e, i|
-                      %tr
-                        %td.td-data= i + 1
-                        %td.td-data= link_to truncate(e[:name], length: 10), "/staff/books/#{e[:id]}"
-                        %td.td-data= e[:review_score]
-
-              .collection
-                .left-div
-                  %p.column-title 馆藏情况
-                  #collect-statistics
-                .right-div
-                  %p.column-title.review-title 借阅排名
-                  %table.table.table-bordered#review-table
-                    %tbody
-                    - @book_rank[:borrow_rank].each_with_index do |e, i|
-                      %tr
-                        %td.td-data= i + 1
-                        %td.td-data= link_to truncate(e[:name], length: 10), "/staff/books/#{e[:id]}"
-                        %td.td-data= e[:borrow_num]
-
-        #tab4.tab-pane
-          .desc
-            .search
-              %form.form-inline
-                .form-group.form-time
-                  %span.input-caption　查询时段:
-                  %input.input-area.form-control#datepicker-5{:type => "text"}
-                  %span.input-caption 至
-                  %input.input-area.form-control#datepicker-6{:type => "text"}
-                  .btn#bill-search-btn.search-btn{:type => "button"} 查询
-            - if @bills[:data].length == 0
-              .undiscover
-                %img.undiscover-icon{src: asset_path("managecenter/no-data.png")}
-                %p.no-data-message 暂无统计数据
-            - else
-              .courses-income-box
-                %p.income-title 金额合计
-                .income-box
-                  .income-items
-                    %p.income-caption 收入合计(元)
-                    %p.income-nums= @stat[:total_amount]
-                  .income-items
-                    %p.income-caption 微信收入(元)
-                    %p.income-nums= @stat[:weixin_amount]
-                  .income-items#goverment
-                    %p.income-caption 现金收入(元)
-                    %p.income-nums= @stat[:offline_amount]
-              .table-box
-                %table.table.table-bordered#income-table
-                  %thead
+                        %td 1
+                        %td 1
+                        %td 1
+                    / - @course_rank[:review_rank].each_with_index do |e, i|
+                    /   %tr
+                    / - @course_rank[:review_rank].each_with_index do |e, i|
+                    /   %tr
+                    / - @course_rank[:review_rank].each_with_index do |e, i|
+                    /   %tr
+                    / - @course_rank[:cp_rank].each_with_index do |e, i|
+                    /   %tr
+                    /     %td.td-data= i + 1
+                    /     %td.td-data= link_to truncate(e[:name], length: 10), "/admin/courses/#{e[:id]}"
+                    /     %td.td-data= e[:cp_num]
+              
+          #tab2.tab-pane
+            .desc-div
+              .courses-income-box.border-btm
+                %p.amount.font-color3.f16 金额合计
+                .amount-div
+                  .amount-items
+                    %p.amount-caption.font-color3.f16 收入统计(元)
+                    %p.amount-nums 10000
+                  .amount-items
+                    %p.amount-caption.font-color3.f16 个人支付(元)
+                    %p.amount-nums 6000
+                  .amount-items#goverment
+                    %p.amount-caption.font-color3.f16 政府补贴(元)
+                    %p.amount-nums 4000
+              .table-box.f14
+                %table.table.table-hover.table-height
+                  %thead.th-bg.font-color2
                     %tr
                       %th 操作日期
                       %th 具体时间
                       %th 学生姓名
-                      %th 款项来源
                       %th 具体项目
-                      %th 收费方式
-                      %th 金&nbsp额
-                  %tbody
-                    - @bills[:data].each do |e|
-                      %tr
-                        %td.td-data= e[:date]
-                        %td.td-data= e[:time]
-                        %td.td-data= e[:name]
-                        %td.td-data= e[:fund_type]
-                        %td.td-data= e[:course_name]
-                        %td.td-data= e[:fund_channel]
-                        %td.td-data{class: e[:amount_class]}= e[:amount_nums]
-              .select-page 
-                %span.totalitems= "共#{@bills[:total_page]}页,总计#{@bills[:total_number]}条"
-                %span.choice-page
-                  %ul.pagination.pagination-sm
-                    %li
-                      %a{:href => "/staff/statistics?start_time=#{@start_time}&end_time=#{@end_time}&page=#{@bills[:previous_page]}&profile=amount"} «
-                    - ( (@bills[:previous_page] > 2 ? @bills[:previous_page] - 2 : 1) .. (@bills[:next_page] < @bills[:total_page] - 2 ? @bills[:next_page] + 2 : @bills[:total_page]) ).to_a.each do |page|
-                      %li
-                        %a{:href => "/staff/statistics?start_time=#{@start_time}&end_time=#{@end_time}&page=#{page}&profile=amount"}= page
-                    %li
-                      %a{:href => "/staff/statistics?start_time=#{@start_time}&end_time=#{@end_time}&page=#{@bills[:next_page]}&profile=amount"} »
+                      %th 缴费方式
+                      %th 金&nbsp&nbsp额
+                  %tbody.font-color3
+                    / - @users[:data].each do |u|
+                    %tr
+                      %td
+                      %td
+                      %td
+                      %td
+                      %td
+                      %td
+
+              / .select-page 
+              /   %span.totalitems= "共#{@books_info_detail[:total_page]}页,总计#{@books_info_detail[:total_number]}条"
+              /   %span.choice-page
+              /     %ul.pagination.pagination-sm
+
+              /       %li
+              /         %a{:href => "/staff/transfers/#{@transfer.id.to_s}?page=#{@books_info_detail[:previous_page]}"} «
+              /       - ( (@books_info_detail[:previous_page] > 2 ? @books_info_detail[:previous_page] - 2 : 1) .. (@books_info_detail[:next_page] < @books_info_detail[:total_page] - 2 ? @books_info_detail[:next_page] + 2 : @books_info_detail[:total_page]) ).to_a.each do |page|
+              /         %li
+              /           %a{:href => "/staff/transfers/#{@transfer.id.to_s}?page=#{page}"}= page
+              /       %li
+              /         %a{:href => "/staff/transfers/#{@transfer.id.to_s}?page=#{@books_info_detail[:next_page]}"} »
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/ .content-area
+/   .manage-content
+/     .tabbable
+/       %ul.nav.nav-tabs
+/         %li.active
+/           %a#kids-message{"data-toggle" => "tab", :href => "#tab1"} 儿童统计
+/         %li
+/           %a#course-review{"data-toggle" => "tab", :href => "#tab2"} 课程统计
+/         %li
+/           %a#book-review{"data-toggle" => "tab", :href => "#tab3"} 绘本统计
+/         / %li
+/         /   %a#cash-statistics{"data-toggle" => "tab", :href => "#tab4"} 金额统计
+
+/       .tab-content
+/         #tab1.tab-pane.active
+/           / .undiscover
+/           /   %img.undiscover-icon{src: asset_path("managecenter/no-data.png")}
+/           /   %p.no-data-message 暂无统计数据
+/           .pie-box
+/             .gender-pie
+/               %p.pie-title 性别比例
+/               .figure-box
+/                 #gender-statistics
+/             .age-pie
+/               %p.pie-title 年龄比例
+/               .figure-box
+/                 #age-statistics
+/           .kids-nums
+/             %p.column-title 儿童数量
+/             .figure-box
+/               #nums-statistics
+/         #tab2.tab-pane
+/           .desc
+/             .search
+/               %form.form-inline
+/                 .form-group.form-time
+/                   %span.input-caption　查询时段:
+/                   %input.input-area.form-control#datepicker-1{:type => "text"}
+/                   %span.input-caption 至
+/                   %input.input-area.form-control#datepicker-2{:type => "text"}
+/                   .btn#course-search-btn.search-btn{:type => "button"} 查询
+/                   = select_tag "course-quick-choice", options_for_select(Statistic.duration_for_select, 1.months.to_i), class: "form-control quick-choice"
+/             .statistics-chart
+/               .borrow
+/                 .left-div
+/                   %p.column-title 报名情况
+/                   .tab-chart-div
+/                     .total-div
+/                       %p#total-signup.total-nums 91234
+/                       %p.total-category 人次
+/                     .chart-div
+/                       #register-statistics
+/                 .right-div
+/                   %p.column-title.review-title 评价排名
+/                   %table.table.table-bordered#review-table
+/                     %tbody
+/                     - @course_rank[:review_rank].each_with_index do |e, i|
+/                       %tr
+/                         %td.td-data= i + 1
+/                         %td.td-data= link_to truncate(e[:name], length: 10), "/staff/courses/#{e[:id]}"
+/                         %td.td-data= e[:review_score]
+
+/               .collection
+/                 .left-div
+/                   %p.column-title 课程收入
+/                   .tab-chart-div
+/                     .income-div
+/                       %p#total-money.total-nums 91234
+/                       %p.total-category 元
+/                     .chart-pie-div
+/                       #bonu-statistics
+/                     .chart-column-div
+/                       #income-statistics
+/                 .right-div
+/                   %p.column-title.review-title 报名排名
+/                   %table.table.table-bordered#review-table
+/                     %tbody
+/                     - @course_rank[:cp_rank].each_with_index do |e, i|
+/                       %tr
+/                         %td.td-data= i + 1
+/                         %td.td-data= link_to truncate(e[:name], length: 10), "/staff/courses/#{e[:id]}"
+/                         %td.td-data= e[:cp_num]
+
+/         #tab3.tab-pane
+/           .desc
+/             .search
+/               %form.form-inline
+/                 .form-group.form-time
+/                   %span.input-caption　查询时段:
+/                   %input.input-area.form-control#datepicker-3{:type => "text"}
+/                   %span.input-caption 至
+/                   %input.input-area.form-control#datepicker-4{:type => "text"}
+/                   .btn#book-search-btn.search-btn{:type => "button"} 查询
+/                   = select_tag "book-quick-choice", options_for_select(Statistic.duration_for_select, 1.months.to_i), class: "form-control quick-choice"
+/             .statistics-chart
+/               .borrow
+/                 .left-div
+/                   %p.column-title 借阅情况
+/                   .tab-chart-div
+/                     .total-div
+/                       %p#total-borrow.total-nums 91234
+/                       %p.total-category 人次
+/                     .chart-div
+/                       #borrow-statistics
+/                 .right-div
+/                   %p.column-title.review-title 评价排名
+/                   %table.table.table-bordered#review-table
+/                     %tbody
+/                     - @book_rank[:review_rank].each_with_index do |e, i|
+/                       %tr
+/                         %td.td-data= i + 1
+/                         %td.td-data= link_to truncate(e[:name], length: 10), "/staff/books/#{e[:id]}"
+/                         %td.td-data= e[:review_score]
+
+/               .collection
+/                 .left-div
+/                   %p.column-title 馆藏情况
+/                   #collect-statistics
+/                 .right-div
+/                   %p.column-title.review-title 借阅排名
+/                   %table.table.table-bordered#review-table
+/                     %tbody
+/                     - @book_rank[:borrow_rank].each_with_index do |e, i|
+/                       %tr
+/                         %td.td-data= i + 1
+/                         %td.td-data= link_to truncate(e[:name], length: 10), "/staff/books/#{e[:id]}"
+/                         %td.td-data= e[:borrow_num]
+
+/         #tab4.tab-pane
+/           .desc
+/             .search
+/               %form.form-inline
+/                 .form-group.form-time
+/                   %span.input-caption　查询时段:
+/                   %input.input-area.form-control#datepicker-5{:type => "text"}
+/                   %span.input-caption 至
+/                   %input.input-area.form-control#datepicker-6{:type => "text"}
+/                   .btn#bill-search-btn.search-btn{:type => "button"} 查询
+/             - if @bills[:data].length == 0
+/               .undiscover
+/                 %img.undiscover-icon{src: asset_path("managecenter/no-data.png")}
+/                 %p.no-data-message 暂无统计数据
+/             - else
+/               .courses-income-box
+/                 %p.income-title 金额合计
+/                 .income-box
+/                   .income-items
+/                     %p.income-caption 收入合计(元)
+/                     %p.income-nums= @stat[:total_amount]
+/                   .income-items
+/                     %p.income-caption 微信收入(元)
+/                     %p.income-nums= @stat[:weixin_amount]
+/                   .income-items#goverment
+/                     %p.income-caption 现金收入(元)
+/                     %p.income-nums= @stat[:offline_amount]
+/               .table-box
+/                 %table.table.table-bordered#income-table
+/                   %thead
+/                     %tr
+/                       %th 操作日期
+/                       %th 具体时间
+/                       %th 学生姓名
+/                       %th 款项来源
+/                       %th 具体项目
+/                       %th 收费方式
+/                       %th 金&nbsp额
+/                   %tbody
+/                     - @bills[:data].each do |e|
+/                       %tr
+/                         %td.td-data= e[:date]
+/                         %td.td-data= e[:time]
+/                         %td.td-data= e[:name]
+/                         %td.td-data= e[:fund_type]
+/                         %td.td-data= e[:course_name]
+/                         %td.td-data= e[:fund_channel]
+/                         %td.td-data{class: e[:amount_class]}= e[:amount_nums]
+/               .select-page 
+/                 %span.totalitems= "共#{@bills[:total_page]}页,总计#{@bills[:total_number]}条"
+/                 %span.choice-page
+/                   %ul.pagination.pagination-sm
+/                     %li
+/                       %a{:href => "/staff/statistics?start_time=#{@start_time}&end_time=#{@end_time}&page=#{@bills[:previous_page]}&profile=amount"} «
+/                     - ( (@bills[:previous_page] > 2 ? @bills[:previous_page] - 2 : 1) .. (@bills[:next_page] < @bills[:total_page] - 2 ? @bills[:next_page] + 2 : @bills[:total_page]) ).to_a.each do |page|
+/                       %li
+/                         %a{:href => "/staff/statistics?start_time=#{@start_time}&end_time=#{@end_time}&page=#{page}&profile=amount"}= page
+/                     %li
+/                       %a{:href => "/staff/statistics?start_time=#{@start_time}&end_time=#{@end_time}&page=#{@bills[:next_page]}&profile=amount"} »
 
                     
 

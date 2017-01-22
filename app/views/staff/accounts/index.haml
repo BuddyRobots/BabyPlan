@@ -33,7 +33,7 @@
                   %span.f20.font-color3= @current_user[:mobile]
                 %p
                   %span.f20.font-color3.name 姓名:
-                  = text_field_tag "user_name", "", class: "form-control", placeholder: "请输入姓名"
+                  = text_field_tag "user_name", "", class: "form-control font-color3", placeholder: "请输入姓名", value: @current_user.name
 
 
 

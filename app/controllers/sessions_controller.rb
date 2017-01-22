@@ -20,6 +20,8 @@ class SessionsController < ApplicationController
         expires: 24.months.from_now,
         domain: :all 
       }
+      user = User.find_by_auth_key(retval[:auth_key])
+      retval[:has_name] = user.name.present?
     end
     render json: retval_wrapper(retval)
   end

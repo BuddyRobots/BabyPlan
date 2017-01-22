@@ -33,8 +33,8 @@
               %a{:href => staff_centers_path}
                 %img.mini-icon{src: asset_path("5center.png")}
                 %span.f18.sidebar-title 课程中心
-            %li{class: @active_tab == "statistics" ? "active-li" : ""}
-              %a{:href => "#"}
+            %li{class: @active_tab == "statistic" ? "active-li" : ""}
+              %a{:href => staff_statistics_path}
                 %img.mini-icon{src: asset_path("4data.png")}
                 %span.f18.sidebar-title 统计数据
     = yield
