@@ -8,10 +8,10 @@ class Admin::AnnouncementsController < Admin::ApplicationController
 
   def index
     @keyword = params[:keyword]
-    local_eles = @keyword.present? ? Announcement.where(:center.ne => nil).where(title: /#{@keyword}/) : Announcement.where(:center.ne => nil)
+    local_eles = @keyword.present? ? Announcement.where(:center.ne => nil).where(title: /#{Regexp.escape(@keyword)}/) : Announcement.where(:center.ne => nil)
     local_eles = local_eles.desc(:created_at)
     @local_eles = auto_paginate(local_eles)
-    global_eles = @keyword.present? ? Announcement.where(center: nil).where(title: /#{@keyword}/) : Announcement.where(center: nil)
+    global_eles = @keyword.present? ? Announcement.where(center: nil).where(title: /#{Regexp.escape(@keyword)}/) : Announcement.where(center: nil)
     global_eles = global_eles.desc(:created_at)
     @global_eles = auto_paginate(global_eles)
 
