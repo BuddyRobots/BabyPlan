@@ -9,7 +9,7 @@ class Staff::BooksController < Staff::ApplicationController
   def index
     @profile = params[:profile]
     @keyword = params[:keyword]
-    books = @keyword.present? ? current_center.books.where(name: /#{@keyword}/) : current_center.books.all
+    books = @keyword.present? ? current_center.books.where(name: /#{Regexp.escape(@keyword)}/) : current_center.books.all
     @books = auto_paginate(books)
     @books[:data] = @books[:data].map do |e|
       e.book_info
