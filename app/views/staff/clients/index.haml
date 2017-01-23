@@ -8,10 +8,8 @@
 .content-area
   .main-top.direction
     .user-search-box.f14.bg2
-      .input-group
-        %input.input-style#search-input{:type => "text", :placeholder => "输入学生姓名、手机号", value: "#{@keyword}"}
-        %span.input-group-btn
-          %button.btn#search-btn{:type => "button"}
+      %input.input-style#search-input.font-color3{:type => "text", :placeholder => "输入学生姓名、手机号", value: "#{@keyword}"}
+      .search#search-btn
     %ul.set
       %li
         %a.f16{href: staff_accounts_path} 账号设置
@@ -110,57 +108,7 @@
               %input.unclicked-box#kid-password.form-control{:type => "password"}
           .add-button
             %button.btn#kid-add.button-disabled{:href => "javascript:void(0);"} 添&nbsp加
-/ .content-area
-/   /clients-index
 
-/   .content-box
-/     .manage-box
-/       .user-search-box
-/         .input-group
-/           %input.form-control#search-input{:type => "text", :placeholder => "输入姓名", :value => "#{@keyword}"}
-/           %span.input-group-btn
-/             %button.btn.btn-default#search-btn{:type => "button"}
-/       .btn.kidadd-btn{:type => "button", "data-target" => "#kidsaddModal", "data-toggle" => "modal"} 
-/         %img.add-edit{src: asset_path("managecenter/add.png")}
-/         添加儿童
-/     .manage-content
-/       - if @users[:data].length == 0
-/         .undiscover
-/           %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
-/           %span.message 抱歉！暂无查找信息
-/       - else
-/         .table-box
-/           %table.table.table-bordered#user-table
-/             %thead
-/               %tr
-/                 %th 姓&nbsp名
-/                 %th 年&nbsp龄
-/                 %th 性&nbsp别
-/                 %th 家&nbsp长
-/                 %th 手机号
-/                 %th 家庭住址
-/             %tbody
-/               - @users[:data].each do |u|
-/                 %tr
-/                   %td= link_to u[:name], "/staff/clients/#{u[:id]}"
-/                   %td= u[:age].present? ? u[:age].to_s + " 岁" : ""
-/                   %td= u[:gender] == 0 ? "男" : "女"
-/                   %td= u[:parent]
-/                   %td= u[:mobile]
-/                   %td= truncate(u[:address], length: 30)
-
-/         .select-page 
-/           %span.totalitems= "共#{@users[:total_page]}页,总计#{@users[:total_number]}条"
-/           %span.choice-page
-/             %ul.pagination.pagination-sm
-/               %li
-/                 %a{:href => "/staff/clients?keyword=#{@keyword}&page=#{@users[:previous_page]}"} «
-/               - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
-/                 %li
-/                   %a{:href => "/staff/clients?keyword=#{@keyword}&page=#{page}"}= page
-/               %li
-/                 %a{:href => "/staff/clients?keyword=#{@keyword}&page=#{@users[:next_page]}"} »
-              
 
 
 

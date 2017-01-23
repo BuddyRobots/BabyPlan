@@ -83,33 +83,3 @@
                         %a{href: "/staff/courses?course_inst_page=#{@course_insts[:next_page]}&profile=template"} »
 
 
-
-/ .content-area
-/   .content-box
-/     .manage-box.clearfix
-/       %a#back{:href => "/staff/courses?profile=template"}
-/         %img{src: asset_path("web/back.png")}
-/       %p.course-add 可开课程
-/       .btn.newcourse-btn{:type => "button"} 
-/         %img.add{src: asset_path("managecenter/add.png")}
-/         开设课程
-
-/     .manage-content
-/       .desc-items
-/         %span.course-name 课程名称:
-/         %span.unedit-box#classname-span= @course.name
-/         %span.course-name#speaker 主讲人:
-/         %span.unedit-box#classspeaker-span= @course.speaker
-/         %span.course-name#nums 课次:
-/         %span.unedit-box#nums-span= @course.length.to_s + "节"
-      
-/       .desc-items
-/         %span.course-name 课程编号:
-/         %span.unedit-box#code-span= @course.code
-/         %span.course-name#charge 市场价:
-/         %span.unedit-box#charge-span= @course.price.to_s + "元"
-/         %span.course-name#public-price 公益价:
-/         %span.unedit-box#public-price-span= @course.price_pay.to_s + "元"
-/       .course-introduce.clearfix
-/         %span.introduce 课程介绍:
-/         %div.introduce-details= @course.desc.to_s.html_safe

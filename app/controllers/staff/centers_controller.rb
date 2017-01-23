@@ -8,7 +8,7 @@ class Staff::CentersController < Staff::ApplicationController
 
   def index
     @keyword = params[:keyword]
-    centers = @keyword.present? ? Center.where(title: /#{@keyword}/) : Center.all
+    centers = @keyword.present? ? Center.any_of({name: /#{@keyword}/},{address: /#{@keyword}/}) : Center.all
     centers = centers.desc(:created_at)
     @centers = auto_paginate(centers)
   end

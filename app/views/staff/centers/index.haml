@@ -7,10 +7,12 @@
 .content-area
   .main-top.direction
     .user-search-box.f14.bg2
-      .input-group
-        %input.input-style#search-input{:type => "text", :placeholder => "输入中心名称、地址", value: "#{@keyword}"}
-        %span.input-group-btn
-          %button.btn#search-btn{:type => "button"}
+      %input.input-style#search-input.font-color3{:type => "text", :placeholder => "输入中心名称、地址", value: "#{@keyword}"}
+      .search#search-btn
+      / .input-group
+      /   %input.input-style#search-input.font-color3{:type => "text", :placeholder => "输入中心名称、地址", value: "#{@keyword}"}
+      /   %span.input-group-btn
+      /     %button.btn#search-btn{:type => "button"}
     %ul.set
       %li
         %a.f16{href: staff_accounts_path} 账号设置

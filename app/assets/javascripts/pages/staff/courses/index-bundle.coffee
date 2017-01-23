@@ -3,17 +3,41 @@ $ ->
   if window.profile == "template"
     $('.nav-tabs a[href="#tab2"]').tab('show')
   # search-btn press
+  text = $("#search-input").val()
+  if text == ""
+    $("#search-btn").addClass("search")
+    $("#search-btn").removeClass("delete")
+  else
+    $("#search-btn").addClass("delete")
+    $("#search-btn").removeClass("search")
+
   search = ->
     value = $("#search-input").val()
     location.href = "/staff/courses?keyword=" + value + "&page=1"
 
+  back = ->
+    location.href = "/staff/courses"
+
   $("#search-btn").click ->
-    search()
+    if $("#search-btn").hasClass("search")
+      search()
+      $("#search-btn").addClass("delete")
+      $("#search-btn").removeClass("search")
+    else
+      back()
+      $("#search-btn").addClass("search")
+      $("#search-btn").removeClass("delete")
+
 
   $("#search-input").keydown (event) ->
     code = event.which
     if code == 13
       search()
+      $("#search-btn").addClass("delete")
+      $("#search-btn").removeClass("search")
+    else
+      $("#search-btn").addClass("search")
+      $("#search-btn").removeClass("delete")
 
   $("#new-template").click ->
     location.href = "/staff/courses/new"

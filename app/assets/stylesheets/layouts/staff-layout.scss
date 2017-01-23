@@ -399,18 +399,43 @@ a:hover {
   padding: 0 20px;
   margin: 2.2% 0;
 }
+// .input-style {
+//   width: 100%;
+//   padding: 3% 0;
+//   border: none;
+//   outline: none;
+//   background: transparent;
+// }
+// #search-btn {
+//   width: 24px;
+//   height: 24px;
+//   background: image-url("search.png") no-repeat;
+//   outline: none;
+// }
 .input-style {
-  width: 100%;
-  padding: 3% 0;
+  width: 332px;
+  height: 40px;
+  line-height: 40px;
   border: none;
   outline: none;
   background: transparent;
+  display: inline-block;
 }
-#search-btn {
+.search {
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
   width: 24px;
   height: 24px;
-  background: image-url("search.png") no-repeat;
-  outline: none;
+  background: image-url("search.png") no-repeat
+}
+.delete {
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  background: image-url("delete.png") no-repeat
 }
 // table right btn
 .btn-position {

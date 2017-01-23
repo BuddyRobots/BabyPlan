@@ -1,4 +1,41 @@
 $ ->
+
+  text = $("#search-input").val()
+  if text == ""
+    $("#search-btn").addClass("search")
+    $("#search-btn").removeClass("delete")
+  else
+    $("#search-btn").addClass("delete")
+    $("#search-btn").removeClass("search")
+
+  search = ->
+    value = $("#search-input").val()
+    location.href = "/staff/clients?keyword=" + value + "&page=1"
+
+  back = ->
+    location.href = "/staff/clients"
+
+  $("#search-btn").click ->
+    if $("#search-btn").hasClass("search")
+      search()
+      $("#search-btn").addClass("delete")
+      $("#search-btn").removeClass("search")
+    else
+      back()
+      $("#search-btn").addClass("search")
+      $("#search-btn").removeClass("delete")
+
+  $("#search-input").keydown (event) ->
+    code = event.which
+    if code == 13
+      search()
+      $("#search-btn").addClass("delete")
+      $("#search-btn").removeClass("search")
+    else
+      $("#search-btn").addClass("search")
+      $("#search-btn").removeClass("delete")
+
+
   # calender set
   $( "#datepicker" ).datepicker({
         changeMonth: true,
@@ -145,16 +182,5 @@ $ ->
     if code == 13
       kidAdd()
 
-# search-btn press
-  search = ->
-    value = $("#search-input").val()
-    location.href = "/staff/clients?keyword=" + value + "&page=1"
-  $("#search-btn").click ->
-    search()
-
-  $("#search-input").keydown (event) ->
-    code = event.which
-    if code == 13
-      search()
 
 
