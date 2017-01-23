@@ -9,7 +9,7 @@ class Staff::ClientsController < Staff::ApplicationController
   # show the index page
   def index
     @keyword = params[:keyword]
-    users = @keyword.present? ? User.client.any_of({name: /#{@keyword}/},{mobile: /#{@keyword}/}) : User.client.all
+    users = @keyword.present? ? User.client.any_of({name: /#{Regexp.escape(@keyword)}/},{mobile: /#{Regexp.escape(@keyword)}/}) : User.client.all
     users = users.where(mobile_verified: true)
     @users = auto_paginate(users)
     @users[:data] = @users[:data].map do |e|

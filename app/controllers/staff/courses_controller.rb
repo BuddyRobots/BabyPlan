@@ -27,13 +27,13 @@ class Staff::CoursesController < Staff::ApplicationController
   def index
     @keyword = params[:keyword]
     params[:page] = params[:course_inst_page]
-    course_insts = @keyword.present? ? CourseInst.any_of({name: /#{@keyword}/},{speaker: /#{@keyword}/}) : CourseInst.all
+    course_insts = @keyword.present? ? CourseInst.any_of({name: /#{Regexp.escape(@keyword)}/},{speaker: /#{Regexp.escape(@keyword)}/}) : CourseInst.all
     @course_insts = auto_paginate(course_insts)
     @course_insts[:data] = @course_insts[:data].map do |e|
       e.course_inst_info
     end
     params[:page] = params[:course_page]
-    courses = @keyword.present? ? Course.any_of({name: /#{@keyword}/},{speaker: /#{@keyword}/}) : Course.all
+    courses = @keyword.present? ? Course.any_of({name: /#{Regexp.escape(@keyword)}/},{speaker: /#{Regexp.escape(@keyword)}/}) : Course.all
     @courses = auto_paginate(courses)
     @courses[:data] = @courses[:data].map do |e|
       e.course_info

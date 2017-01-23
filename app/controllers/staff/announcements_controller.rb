@@ -8,7 +8,7 @@ class Staff::AnnouncementsController < Staff::ApplicationController
 
   def index
     @keyword = params[:keyword]
-    notices = @keyword.present? ? Announcement.where(title: /#{@keyword}/) : Announcement.all
+    notices = @keyword.present? ? Announcement.where(title: /#{Regexp.escape(@keyword)}/) : Announcement.all
     notices = notices.desc(:created_at)
     @notices = auto_paginate(notices)
 

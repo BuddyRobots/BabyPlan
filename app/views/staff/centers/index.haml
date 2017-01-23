@@ -54,12 +54,12 @@
                   %span.choice-page
                     %ul.pagination.pagination-sm
                       %li
-                        %a{href: "/staff/clients?keyword=#{@keyword}&page=#{@centers[:previous_page]}"} «
+                        %a{href: "/staff/centers?keyword=#{@keyword}&page=#{@centers[:previous_page]}"} «
                       - ( (@centers[:previous_page] > 2 ? @centers[:previous_page] - 2 : 1) .. (@centers[:next_page] < @centers[:total_page] - 2 ? @centers[:next_page] + 2 : @centers[:total_page]) ).to_a.each do |page|
                         %li
-                          %a{href: "/staff/clients?keyword=#{@keyword}&page=#{page}"}= page
+                          %a{href: "/staff/centers?keyword=#{@keyword}&page=#{page}"}= page
                       %li
-                        %a{href: "/staff/clients?keyword=#{@keyword}&page=#{@centers[:next_page]}"} »
+                        %a{href: "/staff/centers?keyword=#{@keyword}&page=#{@centers[:next_page]}"} »
 
 
 
