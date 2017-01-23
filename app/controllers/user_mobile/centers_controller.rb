@@ -1,7 +1,7 @@
 class UserMobile::CentersController < UserMobile::ApplicationController
   def index
     @keyword = params[:keyword]
-    @centers = @keyword.blank? ? Center.all : Center.where(name: /#{@keyword}/)
+    @centers = @keyword.blank? ? Center.all : Center.where(name: /#{Regexp.escape(@keyword)}/)
   end
 
   def show
