@@ -8,7 +8,7 @@ class Admin::CoursesController < Admin::ApplicationController
 
   def index
     @keyword = params[:keyword]
-    courses = @keyword.present? ? Course.where(name: /#{@keyword}/) : Course.all
+    courses = @keyword.present? ? Course.where(name: /#{Regexp.escape(@keyword)}/) : Course.all
     @courses = auto_paginate(courses)
     @courses[:data] = @courses[:data].map do |e|
       e.course_info

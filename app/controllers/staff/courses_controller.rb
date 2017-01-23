@@ -9,13 +9,13 @@ class Staff::CoursesController < Staff::ApplicationController
   def index
     @keyword = params[:keyword]
     params[:page] = params[:course_inst_page]
-    course_insts = @keyword.present? ? current_center.course_insts.where(name: /#{@keyword}/) : current_center.course_insts.all
+    course_insts = @keyword.present? ? current_center.course_insts.where(name: /#{Regexp.escape(@keyword)}/) : current_center.course_insts.all
     @course_insts = auto_paginate(course_insts)
     @course_insts[:data] = @course_insts[:data].map do |e|
       e.course_inst_info
     end
     params[:page] = params[:course_page]
-    courses = @keyword.present? ? Course.is_available.where(name: /#{@keyword}/) : Course.is_available
+    courses = @keyword.present? ? Course.is_available.where(name: /#{Regexp.escape(@keyword)}/) : Course.is_available
     @courses = auto_paginate(courses)
     @courses[:data] = @courses[:data].map do |e|
       e.course_info

@@ -8,7 +8,7 @@ class Admin::StaffsController < Admin::ApplicationController
 
   def index
     @keyword = params[:keyword]
-    staffs = @keyword.present? ? User.only_staff.where(name: /#{@keyword}/) : User.only_staff
+    staffs = @keyword.present? ? User.only_staff.where(name: /#{Regexp.escape(@keyword)}/) : User.only_staff
     staffs = staffs.where(mobile_verified: true)
     @staffs = auto_paginate(staffs)
     @staffs[:data] = @staffs[:data].map do |e|

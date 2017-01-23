@@ -12,8 +12,8 @@ class Staff::TransfersController < Staff::ApplicationController
     out_transfers = current_center.out_transfers
     in_transfers = current_center.in_transfers
     if @keyword.present?
-      out_transfers = out_transfers.in(in_center_id: Center.where(name: /#{@keyword}/).map { |e| e.id})
-      in_transfers = in_transfers.in(out_center_id: Center.where(name: /#{@keyword}/).map { |e| e.id})
+      out_transfers = out_transfers.in(in_center_id: Center.where(name: /#{Regexp.escape(@keyword)}/).map { |e| e.id})
+      in_transfers = in_transfers.in(out_center_id: Center.where(name: /#{Regexp.escape(@keyword)}/).map { |e| e.id})
     end
 
     @out_transfers = auto_paginate(out_transfers)
