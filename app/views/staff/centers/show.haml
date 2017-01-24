@@ -65,15 +65,16 @@
                           %td= c[:speaker]
                           %td= c[:price]
 
-                .select-page 
-                  %span.totalitems= "共#{@course_insts[:total_page]}页,总计#{@course_insts[:total_number]}条"
-                  %span.choice-page
-                    %ul.pagination.pagination-sm
+                = render "staff/partials/auto_paginate", locals: { instance: @course_insts, url: "/staff/centers/#{@center.id.to_s}?profile=history", page: 'page'}
+                / .select-page 
+                /   %span.totalitems= "共#{@course_insts[:total_page]}页,总计#{@course_insts[:total_number]}条"
+                /   %span.choice-page
+                /     %ul.pagination.pagination-sm
 
-                      %li
-                        %a{:href => "/staff/centers/#{@center.id.to_s}?page=#{@course_insts[:previous_page]}&profile=history"} «
-                      - ( (@course_insts[:previous_page] > 2 ? @course_insts[:previous_page] - 2 : 1) .. (@course_insts[:next_page] < @course_insts[:total_page] - 2 ? @course_insts[:next_page] + 2 : @course_insts[:total_page]) ).to_a.each do |page|
-                        %li
-                          %a{:href => "/staff/centers/#{@center.id.to_s}?page=#{page}&profile=history"}= page
-                      %li
-                        %a{:href => "/staff/centers/#{@center.id.to_s}?page=#{@course_insts[:next_page]}&profile=history"} »
+                /       %li
+                /         %a{:href => "/staff/centers/#{@center.id.to_s}?page=#{@course_insts[:previous_page]}&profile=history"} «
+                /       - ( (@course_insts[:previous_page] > 2 ? @course_insts[:previous_page] - 2 : 1) .. (@course_insts[:next_page] < @course_insts[:total_page] - 2 ? @course_insts[:next_page] + 2 : @course_insts[:total_page]) ).to_a.each do |page|
+                /         %li
+                /           %a{:href => "/staff/centers/#{@center.id.to_s}?page=#{page}&profile=history"}= page
+                /       %li
+                /         %a{:href => "/staff/centers/#{@center.id.to_s}?page=#{@course_insts[:next_page]}&profile=history"} »

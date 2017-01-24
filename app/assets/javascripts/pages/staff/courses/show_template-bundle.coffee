@@ -1,5 +1,8 @@
 $ ->
 
+  if window.profile == "template"
+    $('.nav-tabs a[href="#tab2"]').tab('show')
+
   $("#create-btn").click ->
     location.href = "/staff/courses/" + window.course_id + "/edit"
   $("#back").click ->

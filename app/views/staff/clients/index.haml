@@ -49,18 +49,18 @@
                           %td= u[:parent]
                           %td= u[:mobile]
                           %td= truncate(u[:address], length: 30)
-
-                .select-page 
-                  %span.totalitems= "共#{@users[:total_page]}页，总计#{@users[:total_number]}条"
-                  %span.choice-page
-                    %ul.pagination.pagination-sm
-                      %li
-                        %a{href: "/staff/clients?keyword=#{@keyword}&page=#{@users[:previous_page]}"} «
-                      - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
-                        %li
-                          %a{href: "/staff/clients?keyword=#{@keyword}&page=#{page}"}= page
-                      %li
-                        %a{href: "/staff/clients?keyword=#{@keyword}&page=#{@users[:next_page]}"} »
+                = render "staff/partials/auto_paginate", locals: { instance: @users, url: "/staff/clients?keyword=#{@keyword}", page: 'page'}
+                / .select-page 
+                /   %span.totalitems= "共#{@users[:total_page]}页，总计#{@users[:total_number]}条"
+                /   %span.choice-page
+                /     %ul.pagination.pagination-sm
+                /       %li
+                /         %a{href: "/staff/clients?keyword=#{@keyword}&page=#{@users[:previous_page]}"} «
+                /       - ( (@users[:previous_page] > 2 ? @users[:previous_page] - 2 : 1) .. (@users[:next_page] < @users[:total_page] - 2 ? @users[:next_page] + 2 : @users[:total_page]) ).to_a.each do |page|
+                /         %li
+                /           %a{href: "/staff/clients?keyword=#{@keyword}&page=#{page}"}= page
+                /       %li
+                /         %a{href: "/staff/clients?keyword=#{@keyword}&page=#{@users[:next_page]}"} »
 
 #kidsaddModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
   .modal-dialog

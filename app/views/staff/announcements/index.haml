@@ -44,16 +44,17 @@
                       %p.desc.f14.font-color3#judge-length= truncate(e.plain_text, length: 170)
                       .time-div.font-color4.f12
                         %span.review-time= e.created_at.strftime("%Y/%m/%d %H:%M")
-                .select-page 
-                  %span.totalitems= "共#{@notices[:total_page]}页，总计#{@notices[:total_number]}条"
-                  %span.choice-page
-                    %ul.pagination.pagination-sm
-                      %li
-                        %a{href: "/staff/announcements?keyword=#{@keyword}&page=#{@notices[:previous_page]}"} «
-                      - ( (@notices[:previous_page] > 2 ? @notices[:previous_page] - 2 : 1) .. (@notices[:next_page] < @notices[:total_page] - 2 ? @notices[:next_page] + 2 : @notices[:total_page]) ).to_a.each do |page|
-                        %li
-                          %a{href: "/staff/announcements?keyword=#{@keyword}&page=#{page}"}= page
-                      %li
-                        %a{href: "/staff/announcements?keyword=#{@keyword}&page=#{@notices[:next_page]}"} »
+                = render "staff/partials/auto_paginate", locals: { instance: @notices, url: "/staff/announcements?keyword=#{@keyword}", page: 'page'}
+                / .select-page 
+                /   %span.totalitems= "共#{@notices[:total_page]}页，总计#{@notices[:total_number]}条"
+                /   %span.choice-page
+                /     %ul.pagination.pagination-sm
+                /       %li
+                /         %a{href: "/staff/announcements?keyword=#{@keyword}&page=#{@notices[:previous_page]}"} «
+                /       - ( (@notices[:previous_page] > 2 ? @notices[:previous_page] - 2 : 1) .. (@notices[:next_page] < @notices[:total_page] - 2 ? @notices[:next_page] + 2 : @notices[:total_page]) ).to_a.each do |page|
+                /         %li
+                /           %a{href: "/staff/announcements?keyword=#{@keyword}&page=#{page}"}= page
+                /       %li
+                /         %a{href: "/staff/announcements?keyword=#{@keyword}&page=#{@notices[:next_page]}"} »
             
            
