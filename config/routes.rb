@@ -97,6 +97,7 @@ Rails.application.routes.draw do
         post :verify
         post :reset_password
         post :upload_photo
+        post :change_status
       end
       collection do
         post :signup

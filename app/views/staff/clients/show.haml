@@ -8,12 +8,8 @@
   .main-top.direction
     %a#back{href: staff_clients_path}
       %img.back{src: asset_path("back.png")}
-    %ul.set
-      %li
-        %a.f16{href: staff_accounts_path} 账号设置
-      %li
-        %a.f16.set-left-border{href: signout_sessions_path} 退出登录
-        / %a.f16.set-left-border= link_to "退出登录",  signin_page_sessions_path, class: "类名", method: :delete
+    = render "staff/partials/account_set"
+    
   .main-content.bg2
     .table-div
       .tabbable

@@ -55,6 +55,11 @@ $ ->
           else
             location.href = "/staff/accounts"
         else
+          console.log data.code
+          if data.code == NO_CENTER 
+            $.page_notification("请通知管理员开通账号", 2000)
+          if data.code == ACCOUNT_LOCKED 
+            $.page_notification("账号已被管理员锁定，无法登录", 2000)
           if data.code == USER_NOT_EXIST
             $("#error_notice").text("帐号不存在").css("visibility","visible")
           if data.code == USER_NOT_VERIFIED

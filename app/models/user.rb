@@ -19,6 +19,7 @@ class User
   field :password_verify_code, type: String
   field :auth_key, type: String
   field :user_type, type: Integer, default: CLIENT
+  field :is_admin, type: Boolean, default: false
 
 
   # field :email, type: String
@@ -37,8 +38,8 @@ class User
   NEW = 1
   NORMAL = 2
   LOCKED = 4
-  field :center, type: String
   field :status, type: Integer
+  field :lock, type: Boolean, default: true 
 
 
   # for client
@@ -72,7 +73,7 @@ class User
   scope :client, ->{ where(user_type: CLIENT) }
   # scope :staff, ->{ any_of({user_type: STAFF}, {user_type: ADMIN}) }
   scope :staff, ->{ where(user_type: STAFF) }
-  # scope :only_staff, ->{ where(user_type: STAFF) }
+  scope :only_staff, ->{ where(user_type: STAFF) }
 
   # def is_admin
   #   return self.user_type == ADMIN
@@ -143,6 +144,8 @@ class User
     return ErrCode::USER_NOT_EXIST if user.nil?
     return ErrCode::USER_NOT_VERIFIED if user.mobile_verified == false
     return ErrCode::WRONG_PASSWORD if Encryption.encrypt_password(password) != user.password
+    return ErrCode::NO_CENTER if user.status == NEW
+    return ErrCode::ACCOUNT_LOCKED if user.status == LOCKED
     auth_key = user.generate_auth_key
     user.update_attribute(:auth_key, auth_key)
     return { auth_key: auth_key}
@@ -222,6 +225,25 @@ class User
     end
     self.save
     nil
+  end
+
+  def staff_info
+    status_hash = {
+      NEW => "新注册账号",
+      LOCKED => "关闭",
+      NORMAL => "正常"
+    }
+    {
+      id: self.id.to_s,
+      name: self.name,
+      mobile: self.mobile,
+      status: status_hash[self.status],
+      lock: self.lock
+    }
+  end
+
+  def self.has_new_staff
+    User.where(user_type: STAFF, status: NEW).present?
   end
 
 end

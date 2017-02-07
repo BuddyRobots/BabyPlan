@@ -380,6 +380,7 @@ a:hover {
 .set {
   list-style: none;
   li {
+    position: relative;
     float: left;
     a {
       color: #6f6f7e;
@@ -389,6 +390,15 @@ a:hover {
     .set-left-border {
       border-left: 1px solid #adadbe;
       padding-right: 0;
+    }
+    .dot {
+      position: absolute;
+      right: 3px;
+      top: 0;
+      width: 6px;
+      height: 6px;
+      background: #e9657e;
+      border-radius: 3px;
     }
   }
 }
