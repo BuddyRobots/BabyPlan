@@ -266,6 +266,7 @@ Rails.application.routes.draw do
         get :signout
         get :sign_up
         post :signup
+        get :signin
         get :forget_password
         post :forget_password_submit_mobile
         post :forget_password_submit_code

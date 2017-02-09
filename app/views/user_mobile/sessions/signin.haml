@@ -1,0 +1,23 @@
+- content_for :head do
+  = javascript_include_tag "pages/user_mobile/sessions/signin-bundle"
+  = stylesheet_link_tag "pages/user_mobile/sessions/signin-bundle", :media => "all"
+
+.wrapper
+  .input-div
+    %img.logo{src: asset_path("wap/logo.png")}
+    .input-group
+      %span.input-group-addon.miniphoto
+      %input.form-box.f14#mobile{placeholder: "请输入您的手机号", type: "text"} 
+    .input-group.no-margin-bottom
+      %span.input-group-addon.password-photo
+      %input.form-box.f14#password{placeholder: "请输入密码", type: "password"} 
+    %p.notice.f12.font-color7#error_notice 手机号或密码错误
+    %a.right.f12.fr#to_forget_password{href: "#"} 忘记密码?
+    %button.btn.click-btn.f16#signin_btn{type: "button"} 立即登录
+    %a.footlink.f12.font-color4#to_signup{href: "#"} 暂无账号？立即注册
+    
+
+
+
+
+
