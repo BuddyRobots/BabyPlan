@@ -49,9 +49,9 @@
           %span.choice-page
             %ul.pagination.pagination-sm
               %li
-                %a{:href => "/staff/courses?keyword=#{@keyword}&page=#{@courses[:previous_page]}"} «
+                %a{:href => "/admin/courses?keyword=#{@keyword}&page=#{@courses[:previous_page]}"} «
               - ( (@courses[:previous_page] > 2 ? @courses[:previous_page] - 2 : 1) .. (@courses[:next_page] < @courses[:total_page] - 2 ? @courses[:next_page] + 2 : @courses[:total_page]) ).to_a.each do |page|
                 %li
-                  %a{:href => "/staff/courses?keyword=#{@keyword}&page=#{page}"}= page
+                  %a{:href => "/admin/courses?keyword=#{@keyword}&page=#{page}"}= page
               %li
-                %a{:href => "/staff/courses?keyword=#{@keyword}&page=#{@courses[:next_page]}"} »
+                %a{:href => "/admin/courses?keyword=#{@keyword}&page=#{@courses[:next_page]}"} »
