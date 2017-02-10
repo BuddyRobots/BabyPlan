@@ -38,6 +38,7 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
     @course_participate.renew
     @course_participate.clear_refund
     if @course.price_pay > 0
+      @course_participate.update_attributes({renew_status: true})
       @open_id = Weixin.get_oauth_open_id(params[:code])
       if @course_participate.prepay_id.blank?
         @course_participate.unifiedorder_interface(@remote_ip, @open_id)
