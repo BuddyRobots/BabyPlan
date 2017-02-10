@@ -36,6 +36,8 @@ class Deposit
   field :trade_state, type: String
   field :trade_state_updated_at, type: Integer
   field :expired_at, type: Integer, default: -1
+  # similar as course participate
+  field :renew_status, type: Boolean
 
   belongs_to :user
 
@@ -112,6 +114,7 @@ class Deposit
   end
 
   def orderquery
+    self.update_attributes({renew_status: false})
     if self.order_id.blank?
       return nil
     end
@@ -147,7 +150,7 @@ class Deposit
       else
         trade_state = doc.search('trade_state').children[0].text
         trade_state_desc = doc.search('trade_state').children[0].text
-        wechat_transaction_id = doc.search('transaction_id').children[0].text
+        wechat_transaction_id = doc.search('transaction_id').children[0].try(:text)
         self.update_attributes({
           trade_state: trade_state,
           trade_state_updated_at: Time.now.to_i,
@@ -155,6 +158,7 @@ class Deposit
           wechat_transaction_id: wechat_transaction_id
         })
         if trade_state == "SUCCESS"
+          self.update_attributes({pay_finished: true})
           Bill.confirm_online_deposit_pay_item(self)
         end
         retval = { success: true, trade_state: trade_state, trade_state_desc: trade_state_desc }
@@ -164,9 +168,13 @@ class Deposit
   end
 
   # status related
+  def need_order_query()
+    return self.renew_status || (self.pay_finished == true && self.trade_state != "SUCCESS")
+  end
+
   def is_expired
     return false if offline_paid == true
-    if self.pay_finished == true && self.trade_state != "SUCCESS"
+    if need_order_query
       self.orderquery()
     end
     self.trade_state != "SUCCESS" && self.expired_at < Time.now.to_i
@@ -174,7 +182,7 @@ class Deposit
 
   def is_paying
     return false if offline_paid == true
-    if self.pay_finished == true && self.trade_state != "SUCCESS"
+    if self.need_order_query
       self.orderquery()
     end
     self.pay_finished == true && self.trade_state != "SUCCESS"
@@ -182,7 +190,7 @@ class Deposit
 
   def is_success
     return true if offline_paid == true
-    if self.pay_finished == true && self.trade_state != "SUCCESS"
+    if self.need_order_query
       self.orderquery()
     end
     self.trade_state == "SUCCESS"
