@@ -224,7 +224,7 @@ Rails.application.routes.draw do
         get :more
       end
     end
-    resources :books do
+    resources :searchs do
       collection do
         get :review
         get :more
@@ -233,7 +233,7 @@ Rails.application.routes.draw do
         post :favorite
       end
     end
-    resources :centers do
+    resources :attends do
       member do
         get :set_follow
       end
@@ -261,6 +261,7 @@ Rails.application.routes.draw do
     resources :sessions do
       member do
         post :verify
+        post :reset_password
       end
       collection do
         get :signout
@@ -268,10 +269,7 @@ Rails.application.routes.draw do
         post :signup
         get :signin
         get :forget_password
-        post :forget_password_submit_mobile
-        post :forget_password_submit_code
-        post :update_password
-        get :set_password
+        post :modify_forget_password
       end
     end
     resources :settings do

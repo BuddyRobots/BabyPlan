@@ -1,30 +1,35 @@
 - content_for :app_head do
   = javascript_include_tag "pages/user_mobile/feeds/index-bundle"
   = stylesheet_link_tag "pages/user_mobile/feeds/index-bundle", :media => "all"
-  :javascript
-    window.keyword="#{@keyword}"
+  
 
-- content_for :app_content do
-  .content-area
-    = render "user_mobile/partials/list_header", list_type: "feeds"
-    = render "user_mobile/partials/no_centers"
-    - if @current_user.client_centers.present?
-      - if @feeds.present?
-        - @feeds.each do |e|
-          .content{data: {path: e.path.to_s}}
-            .left-div
-              %img.visit{:src => e.img_src}
-            .right-div
-              %img.icon{src: asset_path("kidscenter/" + e.feed_icon + ".png")}
-              %p.caption= e.name
-              %p.message= truncate(strip_tags(e.desc).strip(), length: 50)
-              .location-div
-                %img.location{src: asset_path("web/location.png")}
-                %span.center= e.center_str
-        .render-more
-          %p 鍔犺浇鏇村 
-        .load
-          %img.loading{src: asset_path("loading.gif")}
-      - else
-        .unfound
-          %img.unfound-icon{src: asset_path("web/cry.png")}
+.content-div
+  .head-div
+    %img.side_btn{src: asset_path("wap/menu.png")}
+    %span.title 少儿创客
+    %img.search{src: asset_path("wap/search.png")}
+  .main-div
+/ - content_for :app_content do
+/   .content-area
+/     = render "user_mobile/partials/list_header", list_type: "feeds"
+/     = render "user_mobile/partials/no_centers"
+/     - if @current_user.client_centers.present?
+/       - if @feeds.present?
+/         - @feeds.each do |e|
+/           .content{data: {path: e.path.to_s}}
+/             .left-div
+/               %img.visit{:src => e.img_src}
+/             .right-div
+/               %img.icon{src: asset_path("kidscenter/" + e.feed_icon + ".png")}
+/               %p.caption= e.name
+/               %p.message= truncate(strip_tags(e.desc).strip(), length: 50)
+/               .location-div
+/                 %img.location{src: asset_path("web/location.png")}
+/                 %span.center= e.center_str
+/         .render-more
+/           %p 鍔犺浇鏇村 
+/         .load
+/           %img.loading{src: asset_path("loading.gif")}
+/       - else
+/         .unfound
+/           %img.unfound-icon{src: asset_path("web/cry.png")}

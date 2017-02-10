@@ -1,7 +1,9 @@
 - content_for :head do
   = javascript_include_tag "pages/user_mobile/sessions/signin-bundle"
   = stylesheet_link_tag "pages/user_mobile/sessions/signin-bundle", :media => "all"
-
+  :javascript
+    window.code = "#{@code}"
+    
 .wrapper
   .input-div
     %img.logo{src: asset_path("wap/logo.png")}

@@ -37,44 +37,33 @@ class UserMobile::SessionsController < UserMobile::ApplicationController
 
   def verify
     user = User.where(id: params[:id]).first
-    retval = user.nil? ? ErrCode::USER_NOT_EXIST : user.verify_client(params[:name], params[:password], params[:verify_code])
+    retval = user.nil? ? ErrCode::USER_NOT_EXIST : user.verify_user(params[:password], params[:verify_code])
     render json: retval_wrapper(retval)
   end
 
-  # signin
-  def new
+  # signin page
+  def signin
   end
 
-  # forget_password
+  # forget_password page
   def forget_password
   end
 
-  def forget_password_submit_mobile
+  def modify_forget_password
     user = User.client.where(mobile: params[:mobile]).first
     retval = user.nil? ? ErrCode::USER_NOT_EXIST : user.forget_password
     render json: retval_wrapper(retval)
   end
 
-  def forget_password_submit_code
-    user = User.client.where(id: params[:uid]).first
-    retval = user.nil? ? ErrCode::USER_NOT_EXIST : user.verify_password_code(params[:code])
-    render json: retval_wrapper(retval)
-  end
-
-  # set_password
-  def set_password
-    @uid = params[:uid]
-  end
-
-  def update_password
-    user = User.client.where(id: params[:uid]).first
-    retval = user.nil? ? ErrCode::USER_NOT_EXIST : user.set_password(params[:password])
+  def reset_password
+    user = User.client.where(id: params[:id]).first
+    retval = user.nil? ? ErrCode::USER_NOT_EXIST : user.reset_password(params[:password], params[:verify_code])
     render json: retval_wrapper(retval)
   end
 
   def signout
     cookies.delete(:auth_key, :domain => :all)
-    redirect_to new_user_mobile_session_path
+    redirect_to signin_user_mobile_session_path
   end
 end
 

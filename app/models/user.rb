@@ -139,6 +139,15 @@ class User
     nil  
   end
 
+  def verify_user(password, verify_code)
+    if mobile_verify_code != verify_code
+      return ErrCode::WRONG_VERIFY_CODE
+    end
+    self.update_attributes(mobile_verified: true, status: NEW, password: Encryption.encrypt_password(password))
+    self.save
+    nil
+  end
+
   def self.signin_staff(mobile, password)
     user = User.where(mobile: mobile).first
     return ErrCode::USER_NOT_EXIST if user.nil?
@@ -149,6 +158,16 @@ class User
     auth_key = user.generate_auth_key
     user.update_attribute(:auth_key, auth_key)
     return { auth_key: auth_key}
+  end
+  
+  def self.signin_user(mobile, password)
+    user = User.where(mobile: mobile).first
+    return ErrCode::USER_NOT_EXIST if user.nil?
+    return ErrCode::USER_NOT_VERIFIED if user.mobile_verified == false
+    return ErrCode::WRONG_PASSWORD if Encryption.encrypt_password(password) != user.password
+    auth_key = user.generate_auth_key
+    user.update_attribute(:auth_key, auth_key)
+    return { auth_key: auth_key }
   end
 
   def forget_password
@@ -244,6 +263,12 @@ class User
 
   def self.has_new_staff
     User.where(user_type: STAFF, status: NEW).present?
+  end
+
+  def update_first_signin
+    cur_val = self.first_signin
+    self.update_attributes({first_signin: false}) if cur_val
+    cur_val
   end
 
 end
