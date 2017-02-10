@@ -13,6 +13,7 @@ class UserMobile::SettingsController < UserMobile::ApplicationController
       @deposit = @current_user.deposit
       @deposit = @deposit || Deposit.create_new(@current_user)
       @deposit.renew
+      @deposit.update_attributes({renew_status: true})
       if @deposit.prepay_id.blank?
         @deposit.unifiedorder_interface(@remote_ip, @open_id)
       end
