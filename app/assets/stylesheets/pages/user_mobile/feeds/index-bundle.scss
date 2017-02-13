@@ -1,0 +1,135 @@
+.content-div {
+  position: relative;
+  width: 100%;
+  min-height: 100%;
+  overflow: auto;
+}
+.head-div {
+  width: 100%;
+  height: 1.12rem;
+  padding: 0.08rem 0;
+}
+.menu-link {
+  display: inline-block;
+}
+.menu {
+  width: 0.96rem;
+}
+.search {
+  width: 0.96rem;
+  float: right;
+}
+.title {
+  vertical-align: middle;
+  opacity: 0.87;
+}
+.item {
+  padding: 0.24rem;
+  height: 2.08rem;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-felx;
+  display: flex;
+  -webkit-justify-content: sapce-between; 
+  -moz-justify-content: sapce-between;
+  -ms-justify-content: sapce-between;
+  -o-justify-content: sapce-between;
+  justify-content: sapce-between;
+  border-bottom: 1px solid #eaeaea;
+}
+.icon-div {
+  margin-right: 0.24rem;
+}
+.icon {
+  width: 1.6rem;
+}
+.location-icon {
+  display: inline-block;
+  width: 0.32rem;
+  margin-right: 0.08rem;
+}
+.row-div {
+  width: 4.88rem; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.row-div:not(:last-child) {
+  margin-bottom: 0.25rem;
+}
+.item-title {
+  color: #000;
+  opacity: 0.87;
+}
+.item-value {
+  float: right;
+}
+.opacity54 {
+  color: rgba(0, 0, 0, 0.54);
+}
+.opacity87 {
+  color: rgba(0, 0, 0, 0.87);
+}
+
+
+#menuModal {
+  .modal-dialog, .modal-body {
+    padding: 0;
+    margin: 0;
+  }
+  .modal-content, .modal-body, .slide-div {
+    height: 100%;
+  }
+  .modal-dialog {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 84.5%;
+    height: 100%;
+  }
+}
+.head-figure-div {
+  width: 100%;
+  background: image-url("wap/bg2.png") no-repeat;
+  background-size: 100% 100%;
+}
+.head-figure {
+  width: 1.28rem;
+  height: 1.28rem;
+  border-radius: 50%;
+  margin-top: 0.64rem;
+  margin-left: 0.32rem;
+  background: #fff;
+  object-fit: cover;
+}
+.number {
+  margin-top: 0.98rem;
+  margin-left: 0.32rem;
+  padding-bottom: 0.24rem;
+}
+.ul-style {
+  padding: 0.16rem 0.32rem;
+  a {
+    height: 0.96rem;
+    padding: 0.24rem 0;
+    display: inline-block;
+  }
+}
+.mini-icon {
+  width: 0.48rem;
+  height: 0.48rem;
+  margin-right: 0.64rem;
+}
+.sidebar-title {
+  vertical-align: middle;
+}
+.border-bm {
+  border-bottom: 1px solid #eaeaea;
+}
+.modal.fade:not(.in).left .modal-dialog {
+  -webkit-transform: translate3d(-25%, 0, 0);
+  transform: translate3d(-25%, 0, 0);
+}
+

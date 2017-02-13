@@ -1,35 +1,72 @@
-- content_for :app_head do
+
+- content_for :head do
   = javascript_include_tag "pages/user_mobile/feeds/index-bundle"
   = stylesheet_link_tag "pages/user_mobile/feeds/index-bundle", :media => "all"
-  
 
-.content-div
-  .head-div
-    %img.side_btn{src: asset_path("wap/menu.png")}
-    %span.title �ٶ�����
-    %img.search{src: asset_path("wap/search.png")}
-  .main-div
-/ - content_for :app_content do
-/   .content-area
-/     = render "user_mobile/partials/list_header", list_type: "feeds"
-/     = render "user_mobile/partials/no_centers"
-/     - if @current_user.client_centers.present?
-/       - if @feeds.present?
-/         - @feeds.each do |e|
-/           .content{data: {path: e.path.to_s}}
-/             .left-div
-/               %img.visit{:src => e.img_src}
-/             .right-div
-/               %img.icon{src: asset_path("kidscenter/" + e.feed_icon + ".png")}
-/               %p.caption= e.name
-/               %p.message= truncate(strip_tags(e.desc).strip(), length: 50)
-/               .location-div
-/                 %img.location{src: asset_path("web/location.png")}
-/                 %span.center= e.center_str
-/         .render-more
-/           %p 加载更多 
-/         .load
-/           %img.loading{src: asset_path("loading.gif")}
-/       - else
-/         .unfound
-/           %img.unfound-icon{src: asset_path("web/cry.png")}
+- content_for :app_content do
+  .content-div
+    .head-div.bg1.clearfix
+      %a.menu-link#operation{href: "#"}
+        %img.menu{src: asset_path("wap/menu.png")}
+      %span.title.f16.font-color1.fb 少儿创客 
+      %a.search-div#search{href: user_mobile_searchs_path}
+        %img.search{src: asset_path("wap/search.png")}
+    .item-div
+      .item
+        .icon-div
+          %img.icon{src: asset_path("wap/example.png")}
+        .word-div
+          .row-div.clearfix
+            %span.item-title.f14.fb 少儿计算机知识学习
+            %span.item-value.f12 免费
+          .row-div.f12.opacity54
+            %span.rank 主讲人：
+            %span.speaker 邮电大学计算机教授某某
+          .row-div.f12.opacity54
+            %img.location-icon{src: asset_path("wap/location.png")}
+            %span.location 北京市朝阳门外大街吉祥里206号楼门外大街吉祥里206号楼
+
+
+
+#menuModal.modal.fade.left{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
+  .modal-dialog
+    .modal-content
+      .modal-body
+        .slide-div
+          .head-figure-div
+            %img.head-figure{}
+            %p.number.f16.font-color1 131111111111
+          .main-div
+            .sidebar
+              %ul.ul-style.border-bm
+                %li
+                  %a{href: "#"}
+                    %img.mini-icon{src: asset_path("wap/icon1.png")}
+                    %span.f14.sidebar-title.font-color2.opacity87 我的课程
+                %li
+                  %a{href: "#"}
+                    %img.mini-icon{src: asset_path("wap/icon2.png")}
+                    %span.f14.sidebar-title.font-color2.opacity87 我的收藏
+                %li
+                  %a{href: "#"}
+                    %img.mini-icon{src: asset_path("wap/icon3.png")}
+                    %span.f14.sidebar-title.font-color2.opacity87 课程签到
+                %li
+                  %a{href: "#"}
+                    %img.mini-icon{src: asset_path("wap/icon4.png")}
+                    %span.f14.sidebar-title.font-color2.opacity87 中心公告
+              %ul.ul-style
+                %li
+                  %a{href: "#"}
+                    %img.mini-icon{src: asset_path("wap/icon5.png")}
+                    %span.f14.sidebar-title.font-color2.opacity87 我的消息
+                %li
+                  %a{href: "#"}
+                    %img.mini-icon{src: asset_path("wap/icon6.png")}
+                    %span.f14.sidebar-title.font-color2.opacity87 个人资料
+                %li
+                  %a{href: "#"}
+                    %img.mini-icon{src: asset_path("wap/icon7.png")}
+                    %span.f14.sidebar-title.font-color2.opacity87 退出登录
+
+

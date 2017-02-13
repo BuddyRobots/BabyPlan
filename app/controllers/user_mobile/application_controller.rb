@@ -8,9 +8,9 @@ class UserMobile::ApplicationController < ApplicationController
       format.html do
         if current_user.blank? || !current_user.is_client
           session[:user_return_to] = request.fullpath
-          redirect_to signin_user_mobile_session_path(code: ErrCode::REQUIRE_SIGNIN) and return
+          redirect_to signin_user_mobile_sessions_path(code: ErrCode::REQUIRE_SIGNIN) and return
         end
-        redirect_to profile_user_mobile_settings_path + "?first_signin=true" and return if current_user.update_first_signin
+        # redirect_to profile_user_mobile_settings_path + "?first_signin=true" and return if current_user.update_first_signin
       end
       format.json do
         if current_user.blank?

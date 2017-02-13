@@ -1,20 +1,23 @@
-class UserMobile::BooksController < UserMobile::ApplicationController
+class UserMobile::SearchsController < UserMobile::ApplicationController
   # search_book
   def index
-    if @current_user.client_centers.present?
-      @keyword = params[:keyword]
-      @lower = params[:lower]
-      @upper = params[:upper]
-      @books = Book.is_available.any_in(center_id: @current_user.client_centers.is_available.map { |e| e.id.to_s})
-      @books = @books.desc(:created_at)
-      if @keyword.present?
-        @books = @books.where(name: /#{params[:keyword]}/)
-      end
-      if @lower.present? && @upper.present?
-        @books = @books.where(:age_lower_bound.lt => @upper.to_i).where(:age_upper_bound.gt => @lower.to_i)
-      end
-      @books = auto_paginate(@books)[:data]
-    end
+    # if @current_user.client_centers.present?
+    #   @keyword = params[:keyword]
+    #   @lower = params[:lower]
+    #   @upper = params[:upper]
+    #   @books = Book.is_available.any_in(center_id: @current_user.client_centers.is_available.map { |e| e.id.to_s})
+    #   @books = @books.desc(:created_at)
+    #   if @keyword.present?
+    #     @books = @books.where(name: /#{params[:keyword]}/)
+    #   end
+    #   if @lower.present? && @upper.present?
+    #     @books = @books.where(:age_lower_bound.lt => @upper.to_i).where(:age_upper_bound.gt => @lower.to_i)
+    #   end
+    #   @books = auto_paginate(@books)[:data]
+    # end
+  end
+
+  def search_result
   end
 
   def more

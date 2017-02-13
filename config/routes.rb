@@ -228,6 +228,7 @@ Rails.application.routes.draw do
       collection do
         get :review
         get :more
+        get :search_result
       end
       member do
         post :favorite

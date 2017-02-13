@@ -1,0 +1,57 @@
+.content-div {
+  position: relative;
+  width: 100%;
+  min-height: 100%;
+  overflow: auto;
+}
+.head-div {
+  position: relative;
+  width: 100%;
+  height: 1.12rem;
+  padding: 0.08rem 0;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  -o-align-items: center;
+  -webkit-justify-content: space-between;
+  -moz-justify-content: space-between;
+  -ms-justify-content: space-between;
+  -o-justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.search-group {
+  width: 6.24rem;
+}
+.back-link {
+  display: inline-block;
+}
+.back {
+  width: 0.96rem;
+}
+.search {
+  width: 0.78rem;
+  float: right;
+}
+.input-style {
+  padding: 0;
+  margin: 0;
+  width: 5.46rem;
+  height: 0.78rem;
+  background: transparent;
+  outline: none;
+  border: 0;
+  border-bottom: 2px solid #fff;
+}
+.border2 {
+  position: absolute;
+  width: 6rem;
+  left: 0.96rem;
+  bottom: 0.16rem;
+  border: 1px solid #fff;
+}
