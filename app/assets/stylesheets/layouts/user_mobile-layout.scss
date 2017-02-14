@@ -212,6 +212,25 @@ a:hover {
   color: #4a8ce3;
 }
 
+// input style
+input {
+  border: 0;
+  outline: none;
+}
+-webkit-input-placeholder {
+  color: rgba(0, 0, 0, 0.54);
+}
+-moz-input-placeholder {
+  color: rgba(0, 0, 0, 0.54);
+}
+-ms-input-placeholder {
+  color: rgba(0, 0, 0, 0.54);
+}
+-o-input-placeholder {
+  color: rgba(0, 0, 0, 0.54);
+}
+
+
 
 //wap page
 .wrapper {
@@ -239,7 +258,7 @@ a:hover {
   height: 0.96rem;
   width: 100%;
   border: 0;
-  color: #adadbe;
+  color: #fff;
   background: rgba(255,255,255, .1);
   outline: 0;
   background: transparent;
@@ -310,6 +329,20 @@ a:hover {
   text-decoration: underline;
   color: #adadbe;
 }
+.f14-op87 {
+  font-size: 1.4em;
+  color: rgba(0, 0, 0, 0.87);
+}
+.f14-op54 {
+  font-size: 1.4em;
+  color: rgba(0, 0, 0, 0.54);
+}
+.f16-op87 {
+  font-size: 1.6em;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+
 
 
 @media screen and (max-width: 320px) {
