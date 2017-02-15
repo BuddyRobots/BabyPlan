@@ -12,6 +12,7 @@
       .desc-div
         .desc
           %p.items= "绘本名称：" + @book.name
+          %p.items= "出版社：" + @book.publisher
           - if @book.isbn.present?
             %p.items#num= "ISBN号：" + @book.isbn
           %p.items= "当前状态：" + @book_inst.status_str

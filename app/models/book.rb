@@ -8,6 +8,7 @@ class Book
   field :type, type: String
   field :isbn, type: String
   field :author, type: String
+  field :publisher, type: String
   field :translator, type: String
   field :illustrator, type: String
   field :desc, type: String
@@ -44,6 +45,7 @@ class Book
       isbn: book_info[:isbn],
       tags: (book_info[:tags] || []).join(','),
       author: book_info[:author],
+      publisher: book_info[:publisher],
       translator: book_info[:translator],
       illustrator: book_info[:illustrator],
       desc: book_info[:desc],
@@ -64,6 +66,7 @@ class Book
       name: self.name,
       center: self.center.name,
       author: self.author,
+      publisher: self.publisher,
       translator: self.translator,
       illustrator: self.illustrator,
       tags: tags,
@@ -84,6 +87,7 @@ class Book
         isbn: book_info["isbn"],
         tags: (book_info[:tags] || []).join(','),
         author: book_info["author"],
+        publisher: book_info["publisher"],
         translator: book_info["translator"],
         age_lower_bound: book_info["age_lower_bound"],
         age_upper_bound: book_info["age_upper_bound"],
