@@ -6,10 +6,10 @@ class Feed
   field :available, type: Boolean
 
   belongs_to :course_inst
-  belongs_to :book
-  belongs_to :announcement
+  # belongs_to :book
+  # belongs_to :announcement
 
-  belongs_to :center
+  # belongs_to :center
 
   scope :is_available, ->{ where(available: true) }
 

@@ -1,8 +1,6 @@
 - content_for :app_head do
-  = javascript_include_tag "pages/user_mobile/searchs/index-bundle"
-  = stylesheet_link_tag "pages/user_mobile/searchs/index-bundle", :media => "all"
-  :javascript
-    window.keyword="#{@keyword}"
+  = javascript_include_tag "pages/user_mobile/courses/search-bundle"
+  = stylesheet_link_tag "pages/user_mobile/courses/search-bundle", :media => "all"
     
 
 - content_for :app_content do
@@ -12,6 +10,6 @@
         %img.back{src: asset_path("wap/back.png")}
       .search-group
         %input.input-style.f14.font-color1#input-value{type: "text"}
-        %a.search-div{href: search_result_user_mobile_searchs_path}
+        %a.search-div{href: search_result_user_mobile_courses_path}
           %img.search{src: asset_path("wap/mini-search.png")}
  

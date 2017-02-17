@@ -64,7 +64,7 @@ $ ->
           if data.user_return_to != null
             location.href = data.user_return_to
           else
-            location.href = "/user_mobile/feeds"
+            location.href = "/user_mobile/courses/list"
         else
           console.log data.code
           if data.code == USER_NOT_EXIST

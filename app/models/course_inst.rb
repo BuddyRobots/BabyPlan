@@ -73,7 +73,9 @@ class CourseInst
       length: self.length,
       inst_code: self.inst_code,
       code: self.code,
-      end_date: self.end_date
+      end_date: self.end_date,
+      status_str: self.status_str,
+      status_class: self.status_class
     }
   end
 
@@ -100,6 +102,22 @@ class CourseInst
       }
     )
     nil
+  end
+
+  def status_str
+    if self.price == 0
+      return "免费"
+    else
+      return self.price
+    end
+  end
+
+  def status_class
+    if self.price > 0
+      return "red-class"
+    else
+      return "green-class"
+    end
   end
 
   def set_available(available)
@@ -208,9 +226,14 @@ class CourseInst
     {
       ele_name: self.name || self.course.name,
       ele_id: self.id.to_s,
-      ele_photo: self.photo.nil? ? ActionController::Base.helpers.asset_path("banner.png") : self.photo.path,
+      ele_photo: self.photo.nil? ? ActionController::Base.helpers.asset_path("wap/example.png") : self.photo.path,
       ele_content: ActionController::Base.helpers.truncate(ActionController::Base.helpers.strip_tags(self.course.desc).strip(), length: 50),
-      ele_center: self.center.name
+      ele_center: self.center.name,
+      ele_enddate: Date.parse(self.end_date).past?,
+      ele_status_str: self.status_str,
+      ele_status_class: self.status_class,
+      ele_speaker: self.speaker,
+      ele_address: self.address
     }
   end
 

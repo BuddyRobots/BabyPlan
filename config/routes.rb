@@ -244,6 +244,9 @@ Rails.application.routes.draw do
         get :review
         post :notify
         get :more
+        get :list
+        get :search
+        get :search_result
       end
       member do
         get :pay_success

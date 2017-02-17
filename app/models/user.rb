@@ -271,6 +271,14 @@ class User
     cur_val
   end
 
+  def birthday_str
+    if self.birthday.present?
+      return self.birthday.year.to_s + "-" + self.birthday.month.to_s + "-" + self.birthday.day.to_s
+    else
+      ""
+    end
+  end
+
 end
 
 

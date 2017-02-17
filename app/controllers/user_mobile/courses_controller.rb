@@ -14,14 +14,36 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
   end
 
   def more
-    @courses = CourseInst.is_available.any_in(center_id: @current_user.client_centers.is_available.map { |e| e.id.to_s})
-    @courses = @courses.desc(:created_at)
-    if params[:keyword].present?
-      @courses = @courses.where(name: /#{params[:keyword]}/)
+    @course_insts = CourseInst.is_available.all
+    @course_insts = @course_insts.desc(:created_at)
+    @course_insts = auto_paginate(@course_insts)[:data]
+    @course_insts = @course_insts.map { |e| e.more_info }
+    render json: retval_wrapper({more: @course_insts}) and return
+  end
+
+  def list
+    @code = params[:code]
+    if @current_user.present?
+      course_insts = CourseInst.is_available.all
+      course_insts = course_insts.desc(:created_at)
+      @course_insts = auto_paginate(course_insts)
+      @course_insts[:data] = @course_insts[:data].map do |e|
+        e.course_inst_info
+      end
     end
-    @courses = auto_paginate(@courses)[:data]
-    @courses = @courses.map { |e| e.more_info }
-    render json: retval_wrapper({more: @courses}) and return
+  end
+
+  def search
+  end
+
+  def search_result
+    @keyword = params[:keyword]
+    course_insts = @keyword.present? ? CourseInst.any_of({name: /#{Regexp.escape(@keyword)}/},{speaker: /#{Regexp.escape(@keyword)}/}) : CourseInst.is_available.all
+    course_insts = course_insts.desc(:created_at)
+    @course_insts = auto_paginate(course_insts)
+    @course_insts[:data] = @course_insts[:data].map do |e|
+      e.course_inst_info
+    end
   end
 
   def show

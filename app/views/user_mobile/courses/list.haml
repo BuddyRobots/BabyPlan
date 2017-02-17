@@ -1,7 +1,7 @@
 
 - content_for :head do
-  = javascript_include_tag "pages/user_mobile/feeds/index-bundle"
-  = stylesheet_link_tag "pages/user_mobile/feeds/index-bundle", :media => "all"
+  = javascript_include_tag "pages/user_mobile/courses/list-bundle"
+  = stylesheet_link_tag "pages/user_mobile/courses/list-bundle", :media => "all"
 
 - content_for :app_content do
   .content-div
@@ -9,29 +9,35 @@
       %a.menu-link#operation{href: "javascript: void(0)"}
         %img.menu{src: asset_path("wap/menu.png")}
       %span.title.f16.font-color1.fb 少儿创客 
-      %a.search-div#search{href: user_mobile_searchs_path}
+      %a.search-div#search{href: search_user_mobile_courses_path}
         %img.search{src: asset_path("wap/search.png")}
     .item-div
-      - if @feeds[:data].length == 0
+      - if @course_insts[:data].length == 0
         .undiscover
           %img.undiscover-icon{src: asset_path("wap/empty.png")}
       - else
-        - @feeds[:data].each do |e|
-          .item
+        - @course_insts[:data].each do |ci|
+          .item{"data-id" => ci[:id]}
             .icon-div
               %img.icon{src: asset_path("wap/example.png")}
             .word-div
               .row-div.clearfix
-                %span.item-title.f14.fb= e.name
-                / - if e.price == "0"
-                = e.course_inst.status_str
-                %span.item-value.f12= e.price
+                %span.item-title.f14.fb= ci[:name]
+                - if Date.parse(ci[:end_date]).past?
+                  %span.item-value.end-register.f12 截止报名
+                - else
+                  %span.item-value.f12{class: ci[:status_class]}= ci[:status_str]
               .row-div.f12.opacity54
                 %span.rank 主讲人：
-                %span.speaker= e.speaker
+                %span.speaker= ci[:speaker]
               .row-div.f12.opacity54
                 %img.location-icon{src: asset_path("wap/location.png")}
-                %span.location= e.address
+                %span.location= ci[:address]
+
+        .render-more
+          %p 点击加载更多
+        .load-gif
+          %img.loading{src: asset_path("wap/loading.gif")}
 
 
 
@@ -69,13 +75,21 @@
                     %img.mini-icon{src: asset_path("wap/icon5.png")}
                     %span.f14.sidebar-title.font-color2.opacity87 我的消息
                     %span.red-dot
-                %li
-                  %a{href: "#"}
+                %li#profile
+                  %a{href: "javascript: void(0)"}
                     %img.mini-icon{src: asset_path("wap/icon6.png")}
                     %span.f14.sidebar-title.font-color2.opacity87 个人资料
-                %li
-                  %a{href: "#"}
+                %li#exit
+                  %a{href: "javascript: void(0)"}
                     %img.mini-icon{src: asset_path("wap/icon7.png")}
                     %span.f14.sidebar-title.font-color2.opacity87 退出登录
 
-
+#confirmModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
+  .modal-dialog
+    .modal-content
+      .modal-body
+        %p.account 退出账号
+        %p.question　是否确认退出当前账号！
+        .confirm-div
+          %a.line.clicked#logoff 退出
+          %a.clicked{"data-dismiss" => "modal"} 取消

@@ -18,6 +18,16 @@ class UserMobile::SearchsController < UserMobile::ApplicationController
   end
 
   def search_result
+    @keyword = params[:keyword]
+    if @keyword.present?
+      course_insts = CourseInst.where(name: /#{params[:keyword]}/)
+      course_insts = course_insts.desc(:created_at)
+      @course_insts = auto_paginate(course_insts)
+      @course_insts[:data] = @course_insts[:data].map do |e|
+        e.course_inst_info
+      end
+    end
+
   end
 
   def more

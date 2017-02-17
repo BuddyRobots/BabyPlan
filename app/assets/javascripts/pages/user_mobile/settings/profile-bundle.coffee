@@ -34,9 +34,10 @@ $ ->
       (data) ->
         if data.success
           if window.first_signin == "true"
-            window.location.href = "/user_mobile/feeds"
+            location.href = "/user_mobile/courses/list"
           else
-            $.mobile_page_notification("已更新")
+            location.href = "/user_mobile/courses/list"
+            $.mobile_page_notification("已更新", 1000)
         else
           $.mobile_page_notification("服务器出错")
       )

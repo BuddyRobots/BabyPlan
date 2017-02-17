@@ -1,8 +1,9 @@
-#= require "./_templates/book_item"
+
 $ ->
   search = ->
-    keyword = $("#input-value").val()
-    window.location.href = "/user_mobile/searchs/search_result?keyword=" + keyword
+    keyword = $("#input-value").val().trim()
+    if keyword != ""
+      window.location.href = "/user_mobile/courses/search_result?keyword=" + keyword
 
   $(".search").click ->
     search()

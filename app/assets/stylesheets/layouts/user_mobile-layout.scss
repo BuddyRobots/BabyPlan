@@ -341,6 +341,109 @@ input {
   font-size: 1.6em;
   color: rgba(0, 0, 0, 0.87);
 }
+.undiscover-icon {
+  display: block;
+  width: 3.04rem;
+  height: 2.7rem;
+  margin: 0 auto;
+  margin-top: 1rem;
+}
+
+.end-register {
+  color: #e9657e;
+}
+.red-class {
+  color: #e9885d;
+}
+.green-class {
+  color: #40ca85;
+}
+
+// render-more
+.render-more {
+  width: 2.4rem;
+  margin: 0 auto;
+  background: #eee;
+  border-radius: 4px;
+  border: 1px solid #aaa;
+  margin-bottom: 0.2rem;
+  margin-top: 0.2rem;
+  p {
+    font-size: 1.4em;
+    color: #aaa;
+    text-align: center;
+    line-height: 0.64rem;
+  }
+}
+.load-gif {
+  display: none;
+  width: 0.64rem;
+  margin: 0 auto;
+  margin-bottom: 0.2rem;
+}
+.loading {
+  width: 0.64rem;
+}
+
+// confirm exit moadl
+#confirmModal {
+  width: 100%;
+  margin: 0 auto;
+  .modal-body {
+    padding: 0;
+  }
+  .modal-dialog {
+    width: 84.375%;
+    margin: 0 auto;
+    background: #fff;
+    text-align: center;
+    margin-top: 50%;
+    border-radius: 8px;
+  }
+  .modal-backdrop {
+    background-color: #999;
+  }
+  .exit-div {
+    width: 84.375%;
+    margin: 0 auto;
+    background: #fff;
+    text-align: center;
+    margin-top: 40%;
+    border-radius: 8px;
+  }
+  .account {
+    font-size: 1.6em;
+    color: #333;
+    padding: 7% 0 3% 0;
+  }
+  .question {
+    font-size: 1.4em;
+    color: #666;
+    margin-bottom: 3.5%;
+  }
+  .confirm-div {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    display: -webkit-flex;
+    -webkit-justify-content: space-between;
+    border-top: 1px solid #aaa;
+    a {
+      display: inline-block;
+      width: 50%;
+      font-size: 1.4em;
+      color: #666;
+      padding: 4% 0;
+      text-decoration: none;
+    }
+    .line {
+      border-right: 1px solid #aaa;
+    }
+    .clicked {
+      color: #227dda;
+    }
+  }
+}
 
 
 

@@ -1,16 +1,26 @@
 class UserMobile::FeedsController < UserMobile::ApplicationController
+
   def index
-   #  @keyword = params[:keyword]
-  	# @code = params[:code]
-   #  if @current_user.client_centers.present?
-   #    @feeds = Feed.is_available.any_in(center_id: @current_user.client_centers.is_available.map { |e| e.id.to_s} + [nil])
-   #    @feeds = @feeds.desc(:created_at)
-   #    if params[:keyword].present?
-   #      @feeds = @feeds.where(name: /#{params[:keyword]}/)
-   #    end
-   #    @feeds = auto_paginate(@feeds)[:data]
-   #  end
+    @code = params[:code]
+    if @current_user.present?
+      @feeds = CourseInst.is_available.all
+      @feeds = @feeds.desc(:created_at)
+      @feeds = auto_paginate(@feeds)
+    end
   end
+
+  # def index
+  #   @keyword = params[:keyword]
+  # 	@code = params[:code]
+  #   if @current_user.client_centers.present?
+  #     @feeds = Feed.is_available.any_in(center_id: @current_user.client_centers.is_available.map { |e| e.id.to_s} + [nil])
+  #     @feeds = @feeds.desc(:created_at)
+  #     if params[:keyword].present?
+  #       @feeds = @feeds.where(name: /#{params[:keyword]}/)
+  #     end
+  #     @feeds = auto_paginate(@feeds)[:data]
+  #   end
+  # end
 
   def more
     @feeds = Feed.is_available.any_in(center_id: @current_user.client_centers.is_available.map { |e| e.id.to_s} + [nil])

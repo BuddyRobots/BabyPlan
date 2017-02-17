@@ -1,17 +1,17 @@
 - content_for :app_head do
   = javascript_include_tag "pages/user_mobile/settings/profile-bundle"
   = stylesheet_link_tag "pages/user_mobile/settings/profile-bundle", :media => "all"
-  / :javascript
-  /   window.birthday_str="#{@current_user.birthday_str}"
-  /   window.first_signin="#{@first_signin}"
+  :javascript
+    window.birthday_str="#{@current_user.birthday_str}"
+    window.first_signin="#{@first_signin}"
 
 - content_for :app_content do
   .content-div
     .head-div.bg1
-      %a.back-link#back{href: user_mobile_feeds_path}
+      %a.back-link#back{href: list_user_mobile_courses_path}
         %img.back{src: asset_path("wap/back.png")}
       %span.title.f16.font-color1.fb 个人资料 
-      %a.confirm-div#confirm{href: user_mobile_searchs_path}
+      %a.confirm-div#confirm{href: "javascript:void(0)"}
         %img.confirm{src: asset_path("wap/confirm.png")}
     .item-div.f14-op87
       .avatar-box
@@ -22,37 +22,20 @@
           / %img.avatar-icon{:src => @current_user.avatar.present? ? @current_user.avatar.path : asset_path("web/avatar.png")}
       .item-box
         %span.item 手机号
-        %input.input-div#mobile
+        %input.input-div#mobile{value: @current_user.mobile}
       .item-box
         %span.item 学生姓名
-        %input.input-div#name{placeholder: "请填写"}
+        %input.input-div#name{placeholder: "请填写", value: @current_user.name}
       .item-box
         %span.item 学生性别
-        / = select_tag "gender", options_for_select(User.genders_for_select, @current_user.gender), class: "input-div"
+        = select_tag "gender", options_for_select(User.genders_for_select, @current_user.gender), class: "input-div"
       .item-box
         %span.item 出生年月
-        %input.input-div#datepicker
+        %input.input-div#datepicker{value: @current_user.birthday_str}
       .item-box
         %span.item 家长姓名
-        %input.input-div#parent{placeholder: "请填写(非必填)"}
+        %input.input-div#parent{placeholder: "请填写(非必填)", value: @current_user.parent}
       .item-box
         %span.item#address-span 家庭住址
-        %input.input-div#address{placeholder: "请填写(非必填)"}
-    / .item-div
-    /   .item-box
-    /     %span.item 儿童姓名：
-    /     %input.input-div#name{value: @current_user.name}
-    /   .item-box
-    /     %span.item 出生日期：
-    /     %input.input-div#datepicker{value: @current_user.birthday_str}
-    /   .item-box
-    /     %span.item 性别：
-    /     = select_tag "gender", options_for_select(User.genders_for_select, @current_user.gender), class: "input-div"
-    /   .item-box
-    /     %span.item 家长姓名：
-    /     %input.input-div#parent{value: @current_user.parent}
-    /   .item-box
-    /     %span.item#address-span 详细地址：
-    /     %textarea#address{value: @current_user.address, rows: "3"}= @current_user.address
-    / .btn-div
-    /   %button.btn#confirm 确定
+        %input.input-div#address{placeholder: "请填写(非必填)", value: @current_user.address}
+    
