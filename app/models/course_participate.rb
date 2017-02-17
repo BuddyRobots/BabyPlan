@@ -53,6 +53,19 @@ class CourseParticipate
   field :refund_approved, type: Boolean, default: false
   field :refund_finished, type: Boolean, default: false
   field :refund_status, type: String
+  # it has occurred that the client has paid but the pay_finished is not updated as true.
+  # the reason might be that there is something wrong with js (or browser), and the request of updating pay_finished is not received by the server
+  # to fix this, we append a new field "renew_status", and use it as follow:
+  # 1. when the client clicks "go to pay" on the user_mobile::course#show page, it links to the wechat to authorize
+  #    and then redirect to user_mobile::course#new action, in which the unifiedorder_interface is called. in the
+  #    new action we update the renew_status to true
+  # 2. each time when we check whether need to order the wechat query, previously the condition is:
+  #    'self.pay_finished == true && self.trade_state != "SUCCESS"', and we change it to:
+  #    '(self.pay_finished == true && self.trade_state != "SUCCESS") || self.renew_status == true'.
+  #    each time the order is queried, we update the renew_status to false (in the orderquery method)
+  # the above process promises that each time the client go to the pay page, next time when the paying status is
+  # needed, it is queried and updated from wechat
+  field :renew_status, type: Boolean
 
   belongs_to :course_inst
   belongs_to :course
@@ -61,7 +74,7 @@ class CourseParticipate
   scope :paid, ->{ where(trade_state: "SUCCESS") }
 
   def status_str
-    if self.pay_finished == true && self.trade_state != "SUCCESS"
+    if self.need_order_query
       self.orderquery()
     end
     if pay_finished != true
@@ -102,6 +115,7 @@ class CourseParticipate
   end
 
   def orderquery
+    self.update_attributes({renew_status: false})
     if self.order_id.blank?
       return nil
     end
@@ -137,7 +151,7 @@ class CourseParticipate
       else
         trade_state = doc.search('trade_state').children[0].text
         trade_state_desc = doc.search('trade_state').children[0].text
-        wechat_transaction_id = doc.search('transaction_id').children[0].text
+        wechat_transaction_id = doc.search('transaction_id').children[0].try(:text)
         self.update_attributes({
           trade_state: trade_state,
           trade_state_updated_at: Time.now.to_i,
@@ -145,6 +159,7 @@ class CourseParticipate
           wechat_transaction_id: wechat_transaction_id
         })
         if trade_state == "SUCCESS"
+          self.update_attributes({pay_finished: true})
           Bill.confirm_course_participate_item(self)
         end
         retval = { success: true, trade_state: trade_state, trade_state_desc: trade_state_desc }
@@ -227,11 +242,16 @@ class CourseParticipate
   end
 
   # status related
+  def need_order_query()
+    return self.renew_status || (self.pay_finished == true && self.trade_state != "SUCCESS")
+  end
+
   def is_expired
     if self.price_pay == 0
       return false
     end
-    if self.pay_finished == true && self.trade_state != "SUCCESS"
+    # if self.pay_finished == true && self.trade_state != "SUCCESS"
+    if self.need_order_query
       self.orderquery()
     end
     self.trade_state != "SUCCESS" && self.expired_at < Time.now.to_i
@@ -241,7 +261,8 @@ class CourseParticipate
     if self.price_pay == 0
       return false
     end
-    if self.pay_finished == true && self.trade_state != "SUCCESS"
+    # if self.pay_finished == true && self.trade_state != "SUCCESS"
+    if self.need_order_query
       self.orderquery()
     end
     self.pay_finished == true && self.trade_state != "SUCCESS"
@@ -251,7 +272,7 @@ class CourseParticipate
     if self.price_pay == 0
       return self.pay_finished
     end
-    if self.pay_finished == true && self.trade_state != "SUCCESS"
+    if need_order_query
       self.orderquery()
     end
     self.trade_state == "SUCCESS"

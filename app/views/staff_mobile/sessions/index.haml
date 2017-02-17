@@ -4,16 +4,15 @@
 
 - content_for :app_content do
   .main-div
-    .logo-div
+    .input-div
       %img.logo{src: asset_path("user_logo.png")}
-    .sign-in-div
-      .input-div
-        .input-group#user-input
-          .input-group-addon
-            %img#user-bg{src: asset_path("manager/user.png")}
-          %input.form-control#mobile{:type => "text"}
-        .input-group#key-input
-          .input-group-addon
-            %img#user-bg{src: asset_path("manager/key.png")}
-          %input.form-control#password{:type => "password"}
-        %button.btn#sign-in-btn{:type => "button"} 登录
+      .input-group#user-input
+        %span.input-group-addon.userphoto
+        %input.form-box#mobile{:type => "text"}
+      .input-group#key-input
+        %span.input-group-addon.keyphoto
+        %input.form-box#password{:type => "password"}
+      %button.btn.click-btn#sign-in-btn{:type => "button"} 登&nbsp&nbsp录
+
+
+
