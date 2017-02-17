@@ -86,6 +86,9 @@
 #author, #translator {
 	margin-left: 32px;
 }
+#book-number, #total {
+	margin-left: 16px;
+}
 .input-area {
 	display: inline-block;
 	width: 238px;
@@ -98,7 +101,7 @@
 #type-tag {
 	display: inline-block;
 	vertical-align: middle;
-	width: 79.6%;
+	width: 81.1%;
 	border: 1px solid #ccc;
 	margin-left: 10px;
 }
@@ -114,7 +117,7 @@
 }
 .wangedit-area {
 	display: inline-block;
-	width: 76%;
+	width: 77.5%;
 	font-size: 16px;
 }
 #edit-area {

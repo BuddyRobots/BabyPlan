@@ -25,6 +25,8 @@
               %span.unedit-box#name-span= @book.name
               %label.input-caption#center-address 儿童中心:
               %span.unedit-box#address-span= @book.center.name
+              %label.input-caption 数量:
+              %span.unedit-box#stock-span= @book.stock.to_s + "本"
               - if @book.available
                 %label#available-status.shelve 在架上
               - else
@@ -32,8 +34,8 @@
             .controls.controls-row
               %label.input-caption 标签:
               %span.unedit-box#type-span= @book.tags
-              %label.input-caption 数量:
-              %span.unedit-box#stock-span= @book.stock.to_s + "本"
+              %label.input-caption#publisher 出版社:
+              %span.unedit-box#publisher-span= @book.publisher
               %label.input-caption#book-number 书号:
               %span.unedit-box#isbn-span= @book.isbn
             .controls.controls-row

@@ -50,6 +50,10 @@
             %span.unedit-box#author-span= @book.author
             %span.edit-box
               %input.input-area.form-control#author-input{:type => "text"}
+            %label.input-caption#publisher 出版社:
+            %span.unedit-box#publisher-span= @book.publisher
+            %span.edit-box
+              %input.input-area.form-control#publisher-input{:type => "text"}
           .controls.controls-row
             %label.input-caption#illustrator-label 插画作者:
             %span.unedit-box#illustrator-span= @book.illustrator
@@ -72,7 +76,7 @@
             %span.unedit-box#age-upper-bound-span= @book.age_upper_bound.blank? ? "未填写" : @book.age_upper_bound.to_s + "岁"
             %span.edit-box
               %input.input-area.form-control#age-upper-bound-input{:type => "text"}  
-            %label.input-caption 数量:
+            %label.input-caption#total 数量:
             %span.unedit-box#stock-span= @book.stock.to_s + "本"
             %span.edit-box
               %input.input-area.form-control#stock-input{:type => "text"}

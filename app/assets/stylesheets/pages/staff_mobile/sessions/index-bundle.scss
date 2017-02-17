@@ -1,21 +1,27 @@
 html {
-	font-size: 16px;
 	height: 100%;
 }
 body {
 	font-family:"Microsoft YaHei";
-	font-size: 62.5%;
+	font-size: 10px;
 	height: 100%;
+}
+html, body {
+  -webkit-user-select: none;   /* 禁止选中文本（如无文本选中需求，此为必选项） */
+  user-select: none;
+}
+a{
+  border:none;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-tap-highlight-color: transparent;
+  outline:none；
 }
 body, p, img, div, ul, li, a, h3 {
 	margin:0;
 	padding:0;
 }
-a{
-	border:none;
-	-webkit-tap-highlight-color: rgba(0,0,0,0);
-	-webkit-tap-highlight-color:transparent;
-	outline:none；
+a, button, input, optgroup, select, textarea {
+    -webkit-tap-highlight-color: rgba(0,0,0,0); /*去掉a、input和button点击时的蓝色外边框和灰色半透明背景*/
 }
 .clearfix:before, .clearfix:after {
 	display: table;
@@ -28,93 +34,93 @@ a{
 	*zoom: 1;
 }
 
+.mobile_notification {
+  visibility: hidden;
+  z-index: 10000;
+  position: fixed;
+  width: 46.875%;
+  top: 50%;
+  left: 47%;
+  margin-top: -9.9%;
+  background: rgb(28, 27, 33);
+  background: rgba(28, 27, 33,0.75);
+  border-radius: 10px;
+  font-size: 1.4em;
+  color: #fff;
+  text-align: center;
+  padding: 5.16% 3%;
+}
+
+
 .main-div {
 	position: relative;
 	width: 100%;
-	max-width: 640px;
-	margin: 0 auto;
-	height: 100%;
-	background: #f0f0f0;
-}
-.logo-div {
-	text-align: center;
-}
-.logo {
-	width: 34.375%;
-	max-width: 220px;
-	padding: 12.5% 0 20% 0;
-}
-.sign-in-div {
-	position: absolute;
-	background: image-url("manager/bg_login.jpg") no-repeat;
-	background-size: 100%;
-	top: 44%;
-	left: 0;
-	bottom: 0;
-	right: 0;
+	min-height: 100%;
+	background: image-url("manager/bg_login.png") no-repeat;
+	background-size: 100% 100%;
 }
 .input-div {
-	position: relative;
-	width: 68.75%;
+	margin: 0 auto;
+	width: 4.4rem;
+}
+.logo {
+	display: block;
+	width: 2.4rem;
+	height: 4.3rem;
+	padding: 0.8rem 0;
 	margin: 0 auto;
 }
-.input-group-addon {
-	padding: 0;
-	width: 16.36%;
-	max-width: 72px;
-	background: #fff;
+.input-group {
+	border: 1px solid #aaa;
+	border-radius: 4px;
+	height: 0.72rem;
+}
+.userphoto {
+  background: image-url("manager/user.png") no-repeat;
+  background-size: 100% 100%;
+  width: 0.72rem;
+  height: 0.72rem;
+  border: 0;
+}
+.keyphoto {
+  background: image-url("manager/key.png") no-repeat;
+  background-size: 100% 100%;
+  width: 0.72rem;
+  height: 0.72rem;
+  border: 0;
 }
 #user-input {
-	position: absolute;
-	margin-bottom: 4.55%;
-	margin-top: -11.38%;
+	margin-bottom: 0.4rem;
 }
-#key-input {
-	position: absolute;
-	margin-top: 11.38%;
-	margin-bottom: 15%;
-}
-#user-bg {
-	width: 100%;
-	max-width: 72px;
-}
-.form-control {
-	padding: 9.5%;
-	font-size: 3em;
-	border-radius: 8px;
-}
-#sign-in-btn {
-	width: 100%;
-	font-size: 3.2em;
-	color: #fff;
-	padding: 4.66% 0;
-	background: #227dda;
-	border-radius: 8px;
-	margin-top: 47%;
+.form-box {
+	width: 3.68rem;
+	padding: 0;
+	font-size: 1.4em;
+	height: 0.72rem;
+	border: 0;
+	border-radius: 0 4px 4px 0;
 	outline: none;
 }
-
-
-
-@media screen and (max-width:640px) {
-	.main-div {
-		font-size: 100%;
-	}
-}
-@media screen and (max-width: 560px) {
-    .main-div {
-        font-size: 85%;
-    }
+.click-btn {
+	width: 4.4rem;
+	font-size: 1.6em;
+	color: #fff;
+	height: 0.88rem;
+	padding: 0;
+	background: #227dda;
+	border-radius: 4px;
+	outline: none;
+	margin-top: 0.8rem;
 }
 
-@media screen and (max-width: 500px) {
-    .main-div {
-        font-size: 60%;
-    }
-}
-@media screen and (max-width: 400px) {
-    .main-div {
-        font-size: 50%;
-    }
-}
 
+@media screen and (max-width: 320px) {
+  body {
+    font-size: 10px;
+  }
+}
+@media screen and (min-width:414px) and (max-width:639px) { 
+  body {
+    font-size: 12px;
+  }
+}

@@ -78,6 +78,7 @@ $ ->
     age_lower_bound = $("#age-lower-bound").val().trim()
     age_upper_bound = $("#age-upper-bound").val().trim()
     author = $("#book-author").val().trim()
+    publisher = $("#book-publisher").val().trim()
     translator = $("#book-translator").val().trim()
     illustrator = $("#book-illustrator").val().trim()
     available = !$("#inlineCheckbox1").is(":checked")
@@ -105,6 +106,7 @@ $ ->
           tags: tags
           isbn: isbn
           author: author
+          publisher: publisher
           translator: translator
           illustrator: illustrator
           desc: desc

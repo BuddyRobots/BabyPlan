@@ -135,6 +135,7 @@ $ ->
     $("#age-upper-bound-input").val(window.age_upper_bound)
     $("#isbn-input").val($("#isbn-span").text())
     $("#author-input").val($("#author-span").text())
+    $("#publisher-input").val($("#publisher-span").text())
     $("#translator-input").val($("#translator-span").text())
     $("#illustrator-input").val($("#illustrator-span").text())
 
@@ -182,6 +183,7 @@ $ ->
     tags = $("#type-tag").tagit("assignedTags")
     isbn = $("#isbn-input").val()
     author = $("#author-input").val()
+    publisher = $("#publisher-input").val()
     translator = $("#translator-input").val()
     illustrator = $("#illustrator-input").val()
     desc = editor.$txt.html()
@@ -208,6 +210,7 @@ $ ->
           stock: parseInt(stock)
           isbn: isbn
           author: author
+          publisher: publisher
           translator: translator
           illustrator: illustrator
           age_lower_bound: parseInt(age_lower_bound)
@@ -243,6 +246,7 @@ $ ->
             $("#age-upper-bound-span").text(age_upper_bound + "岁")
           $("#isbn-span").text(isbn)
           $("#author-span").text(author)
+          $("#publisher-span").text(publisher)
           $("#translator-span").text(translator)
           $("#illustrator-span").text(illustrator)
 

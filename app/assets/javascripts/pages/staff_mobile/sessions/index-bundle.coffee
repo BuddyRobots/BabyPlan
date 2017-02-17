@@ -1,4 +1,14 @@
 $ ->
+  document.documentElement.style.fontSize = document.documentElement.clientWidth / 6.4 + 'px';
+
+  # viewHeight为可视区域高度
+  viewHeight = window.innerHeight     
+  $("input").focus( ->
+    $(".main-div").css("height", viewHeight)
+  ).blur(->
+    $(".main-div").css("height", "100%")
+  )
+
   sign_in = ->
     mobile = $("#mobile").val()
     password = $("#password").val()
