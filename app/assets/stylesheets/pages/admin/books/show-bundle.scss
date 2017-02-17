@@ -72,7 +72,13 @@
 	margin-left: 0;
 }
 #address-span {
-	margin-right: 55px;
+	margin-right: 42px;
+}
+#stock-span {
+	width: 180px;
+}
+#publisher {
+	margin-left: 4.5px;
 }
 #illustrator-label {
 	@extend .input-caption;
