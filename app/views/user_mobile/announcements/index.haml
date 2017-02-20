@@ -1,31 +1,31 @@
 - content_for :app_head do
   = javascript_include_tag "pages/user_mobile/announcements/index-bundle"
   = stylesheet_link_tag "pages/user_mobile/announcements/index-bundle", :media => "all"
-  :javascript
-    window.keyword="#{@keyword}"
 
 - content_for :app_content do
-  .content-area
-    = render "user_mobile/partials/list_header", list_type: "announcements"
-    = render "user_mobile/partials/no_centers"
-    - if @current_user.client_centers.present?
-      - if @announcements.present?
-        - @announcements.each do |e|
-          .content{data: {id: e.id.to_s}}
-            .left-div
-              %img.visit{:src => e.photo.nil? ? asset_path("web/announcement.png") : e.photo.path}
-            .right-div
-              %img.icon{src: asset_path("kidscenter/gao.png")}
-              %p.caption= e.title
-              %p.message= truncate(strip_tags(e.content).strip(), length: 50)
-              .location-div
-                %img.location{src: asset_path("web/location.png")}
-                %span.center= e.center.present? ? e.center.name : "所有儿童中心"
-        .render-more
-          %p 加载更多 
-        .load
-          %img.loading{src: asset_path("loading.gif")}
+  .content-div
+    .head-div.bg1
+      %a.back-link#back{href: list_user_mobile_courses_path}
+        %img.back{src: asset_path("wap/back.png")}
+      %span.title.f16.font-color1.fb 中心公告
+
+    .item-div
+      - if !@announcements.present?
+        .undiscover
+          %img.undiscover-icon{src: asset_path("wap/empty.png")}
       - else
-        .unfound
-          %img.unfound-icon{src: asset_path("web/cry.png")}
- 
+        - @announcements.each do |a|
+          .item{data: {id: a.id.to_s}}
+            .icon-div
+              %img.icon{src: a.photo.nil? ? asset_path("wap/news.png") : a.photo.path }
+            .word-div
+              .row-div.f14-op87.font-color2
+                %span.item-title= a[:title]
+              .row-div.f12-op56.font-color2
+                %span.time= a.created_at.strftime("%Y/%m/%d  %H:%M")
+
+        .render-more
+          %p 点击加载更多
+        .load-gif
+          %img.loading{src: asset_path("wap/loading.gif")}
+

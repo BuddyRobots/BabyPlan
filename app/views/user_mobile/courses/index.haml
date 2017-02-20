@@ -5,27 +5,32 @@
     window.keyword="#{@keyword}"
 
 - content_for :app_content do
-  .content-area
-    = render "user_mobile/partials/list_header", list_type: "courses"
-    = render "user_mobile/partials/no_centers"
-    - if @current_user.client_centers.present?
-      - if @courses.present?
-        - @courses.each do |e|
-          .content{data: {id: e.id.to_s}}
-            .left-div
-              %img.visit{:src => e.photo.nil? ? asset_path("web/course.png") : e.photo.path}
-            .right-div
-              %img.icon{src: asset_path("kidscenter/ke.png")}
-              %p.caption= e.name || e.course.name
-              %p.message= truncate(strip_tags(e.course.desc).strip(), length: 50)
-              .location-div
-                %img.location{src: asset_path("web/location.png")}
-                %span.center= e.center.name
-        .render-more
-          %p 鍔犺浇鏇村
-        .load
-          %img.loading{src: asset_path("loading.gif")}
+  .content-div
+    .head-div.bg1
+      %a.back-link#back{href: list_user_mobile_courses_path}
+        %img.back{src: asset_path("wap/back.png")}
+      %span.title.f16.font-color1.fb 我的课程
+
+    .item-div
+      - if @favorites.blank?
+        .undiscover
+          %img.undiscover-icon{src: asset_path("wap/empty.png")}
       - else
-        .unfound
-          %img.unfound-icon{src: asset_path("web/cry.png")}
+        - @favorites.each do |f|
+          .item{data: {url: f.ele_url} }
+            .icon-div
+              %img.icon{src: f.img_src}
+            .word-div
+              .row-div.clearfix
+                %span.item-title.f14.fb= f.name
+                - if Date.parse(f.end_date).past?
+                  %span.item-value.end-register.f12 截止报名
+                - else
+                  %span.item-value.f12{class: f.status_class}= f.status_str
+              .row-div.f12.opacity54
+                %span.rank 主讲人：
+                %span.speaker= f.speaker
+              .row-div.f12.opacity54
+                %img.location-icon{src: asset_path("wap/location.png")}
+                %span.location= f.address
  

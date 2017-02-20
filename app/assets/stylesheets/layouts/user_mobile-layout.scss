@@ -21,7 +21,7 @@ a{
 //   -webkit-touch-callout: none; 禁止长按链接与图片弹出菜单
 // }
 a, button, input, optgroup, select, textarea {
-    -webkit-tap-highlight-color: rgba(0,0,0,0); /*去掉a、input和button点击时的蓝色外边框和灰色半透明背景*/
+  -webkit-tap-highlight-color: rgba(0,0,0,0); /*去掉a、input和button点击时的蓝色外边框和灰色半透明背景*/
 }
 
 /*css reset*/
@@ -329,6 +329,10 @@ input {
   text-decoration: underline;
   color: #adadbe;
 }
+.f12-op56 {
+  font-size: 1.2em;
+  color: rgba(0, 0, 0, 0.56);
+}
 .f14-op87 {
   font-size: 1.4em;
   color: rgba(0, 0, 0, 0.87);
@@ -339,6 +343,10 @@ input {
 }
 .f16-op87 {
   font-size: 1.6em;
+  color: rgba(0, 0, 0, 0.87);
+}
+.f20-op87 {
+  font-size: 2em;
   color: rgba(0, 0, 0, 0.87);
 }
 .undiscover-icon {

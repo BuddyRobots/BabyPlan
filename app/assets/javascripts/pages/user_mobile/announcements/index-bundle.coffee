@@ -2,21 +2,17 @@
 $ ->
   page = 2
 
-  $('.content-area').on 'click', '.content', ->
+  $('.content-div').on 'click', '.item', ->
     aid = $(this).attr("data-id")
     location.href = "/user_mobile/announcements/" + aid + "?back=announcements"
-
-  $("#search-btn").click ->
-    keyword = $("#input-box").val()
-    window.location.href = "/user_mobile/announcements?keyword=" + keyword
 
 
   $(".render-more").click ->
     render_more = $(this)
     render_more.hide()
-    $(".load").show()
-    $.getJSON "/user_mobile/announcements/more?keyword=" + window.keyword + "&page=" + page, (data) ->
-      $(".load").hide()
+    $(".load-gif").show()
+    $.getJSON "/user_mobile/announcements/more?page=" + page, (data) ->
+      $(".load-gif").hide()
       render_more.show()
       if data.success
         console.log data.more

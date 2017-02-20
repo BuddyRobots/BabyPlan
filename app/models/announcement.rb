@@ -2,10 +2,12 @@ class Announcement
   include Mongoid::Document
   include Mongoid::Timestamps
   
+  
   field :title, type: String
   field :content, type: String
   field :is_published, type: Boolean
   field :plain_text, type: String
+  field :unread, type: Boolean
   # field :image_path, type: String
 
   belongs_to :center
@@ -44,12 +46,16 @@ class Announcement
       title: announcement_info[:title],
       content: announcement_info[:content],
       is_published: announcement_info[:is_published],
-      plain_text: html.text
+      plain_text: html.text,
+      unread: true
     }
     announcement = Announcement.create(info)
     { announcement_id: announcement.id.to_s }
   end
 
+  def self.new_announcement
+    Announcement.is_available.where(unread: true).present?
+  end
   # def update_announcement(announcement_info)
   #   html = Nokogiri::HTML(announcement_info[:content])
   #   info = {
@@ -87,9 +93,8 @@ class Announcement
     {
       ele_name: self.title,
       ele_id: self.id.to_s,
-      ele_photo: self.photo.nil? ? ActionController::Base.helpers.asset_path("banner.png") : self.photo.path,
-      ele_content: ActionController::Base.helpers.truncate(ActionController::Base.helpers.strip_tags(self.content).strip(), length: 50),
-      ele_center: self.center.present? ? self.center.name : "所有儿童中心"
+      ele_photo: self.photo.nil? ? ActionController::Base.helpers.asset_path("wap/news.png") : self.photo.path,
+      ele_time: self.created_at.strftime("%Y/%m/%d  %H:%M")
     }
   end
 end

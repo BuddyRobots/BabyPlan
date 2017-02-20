@@ -19,7 +19,7 @@
         - @course_insts[:data].each do |ci|
           .item{"data-id" => ci[:id]}
             .icon-div
-              %img.icon{src: asset_path("wap/example.png")}
+              %img.icon{src: ci[:photo].nil? ? asset_path("wap/example.png") : ci[:photo].path}
             .word-div
               .row-div.clearfix
                 %span.item-title.f14.fb= ci[:name]
@@ -48,33 +48,35 @@
         .slide-div
           .head-figure-div
             %img.head-figure{}
-            %p.number.f16.font-color1 131111111111
+            %p.number.f16.font-color1= @current_user.mobile
           .main-div
             .sidebar
               %ul.ul-style.border-bm
-                %li
-                  %a{href: "#"}
+                %li#course
+                  %a{href: "javascript: void(0)"}
                     %img.mini-icon{src: asset_path("wap/icon1.png")}
                     %span.f14.sidebar-title.font-color2.opacity87 我的课程
-                %li
-                  %a{href: "#"}
+                %li#favorite
+                  %a{href: "javascript: void(0)"}
                     %img.mini-icon{src: asset_path("wap/icon2.png")}
                     %span.f14.sidebar-title.font-color2.opacity87 我的收藏
-                %li
-                  %a{href: "#"}
+                %li#course-sign
+                  %a{href: "javascript: void(0)"}
                     %img.mini-icon{src: asset_path("wap/icon3.png")}
                     %span.f14.sidebar-title.font-color2.opacity87 课程签到
-                %li
-                  %a{href: "#"}
+                %li#announcement
+                  %a{href: "javascript: void(0)"}
                     %img.mini-icon{src: asset_path("wap/icon4.png")}
                     %span.f14.sidebar-title.font-color2.opacity87 中心公告
-                    %span.red-dot
+                    - if Announcement.new_announcement
+                      %span.red-dot
               %ul.ul-style
-                %li
-                  %a{href: "#"}
+                %li#message
+                  %a{href: "javascript: void(0)"}
                     %img.mini-icon{src: asset_path("wap/icon5.png")}
                     %span.f14.sidebar-title.font-color2.opacity87 我的消息
-                    %span.red-dot
+                    - if Message.unread
+                      %span.red-dot
                 %li#profile
                   %a{href: "javascript: void(0)"}
                     %img.mini-icon{src: asset_path("wap/icon6.png")}

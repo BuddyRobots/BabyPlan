@@ -3,18 +3,17 @@
   = stylesheet_link_tag "pages/user_mobile/announcements/show-bundle", :media => "all"
 
 - content_for :app_content do
-  .content-area
-    .header-div
-      %p.caption= @announcement.title
-      %p.date
-        = @announcement.created_at.strftime("%Y-%m-%d")
-        %span.haidian= @announcement.center.present? ? @announcement.center.name : "所有儿童中心"
-    .photo
-      %img.notice-1{:src => @announcement.photo.present? ? @announcement.photo.path : asset_path("web/announcement.png")}
-    .content
-      = @announcement.content.html_safe
-    %a.last_page{:href => "/user_mobile/announcements"}
-      %img.back{src: asset_path("noticedescription/back.png")}
+  .content-div
+    .head-div.bg1
+      %a.back-link#back{href: user_mobile_announcements_path}
+        %img.back{src: asset_path("wap/back.png")}
+      %span.title.f16.font-color1.fb 公告详情
+    .main-div.font-color2
+      %p.caption.f20-op87= @announcement.title
+      %p.date.f12-op56= @announcement.created_at.strftime("%Y/%m/%d  %H:%M")
+      .photo
+        %img.announce-icon{src: @announcement.photo.present? ? @announcement.photo.path : asset_path("wap/news.png")}
+      .announce-content.f14-op87
+        = @announcement.content.html_safe
 
-      
-
+    

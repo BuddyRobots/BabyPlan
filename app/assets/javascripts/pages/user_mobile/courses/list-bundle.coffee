@@ -12,6 +12,15 @@ $ ->
   $("#profile").click ->
     location.href = "/user_mobile/settings/profile"
 
+  $("#message").click ->
+    location.href = "/user_mobile/settings/message"
+
+  $("#favorite").click ->
+    location.href = "/user_mobile/settings/favorite"
+
+  $("#announcement").click ->
+    location.href = "/user_mobile/announcements"
+    
   $(".content-div").on "click", ".item", ->
     cid = $(".item").attr("data-id")
     location.href = "/user_mobile/courses/" + cid

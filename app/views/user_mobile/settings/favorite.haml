@@ -3,66 +3,32 @@
   = stylesheet_link_tag "pages/user_mobile/settings/favorite-bundle", :media => "all"
 
 - content_for :app_content do
-  .content-area
-    .header
-      .cloud
-        %p 我的收藏
-      %a{:href => user_mobile_settings_path}
-        %img.back{src: asset_path("mybook/back.png")}
-    - if @favorites.blank?
-      .undiscover
-        %img.icon{src: asset_path("web/cry.png")}
-    - else
-      - @favorites.each do |f|
-        .line-wrapper
-          .line-scroll-wrapper
-            .line-normal-wrapper{data: {url: f.ele_url} }
-              .details
-                .left-div
-                  %img.visit{:src => f.img_src}
-                .right-div
-                  %img.mini-icon{src: asset_path("kidscenter/" + f.fav_icon + ".png")}
-                  %p.caption= f.name
-                  %p.article= truncate(strip_tags(f.desc).strip(), length: 50)
-                  .location-div
-                    %img.location{src: asset_path("web/location.png")}
-                    %span.center= f.center_str
-            .line-btn-delete
-              %img.delete-icon{src: asset_path("lajitong.png"), data: {id: f.id.to_s}}
-    / .line-wrapper
-    /   .line-scroll-wrapper.clearfix
-    /     .line-normal-wrapper
-    /       .details
-    /         .left-div
-    /           %img.visit{:src => "/assets/mybook/diary.png"}
-    /         .right-div
-    /           %img.mini-icon{:src => "/assets/kidscenter/hui.png"}
-    /           %p.caption 蚯蚓的日记
-    /           %p.article 简介：这是一本极为有趣的图画书，以日记书写的方式…
-    /           .location-div
-    /             %img.location{:src => "/assets/web/location.png"}
-    /             %span.center 什刹海街道西四北社区儿童中心
-    /     .line-btn-delete
-    /       %img.delete-icon{:src => "/assets/lajitong.png"}
-    / .line-wrapper
-    /   .line-scroll-wrapper.clearfix
-    /     .line-normal-wrapper
-    /       .details
-    /         .left-div
-    /           %img.visit{:src => "/assets/mybook/diary.png"}
-    /         .right-div
-    /           %p.caption 蚯蚓的日记
-    /           %p.article 简介：这是一本极为有趣的图画书，以日记书写的方式…
-    /           .location-div
-    /             %img.location{:src => "/assets/web/location.png"}
-    /             %span.center 西城区新街口街道社区儿童中心
-    /     .line-btn-delete
-    /       %img.delete-icon{:src => "/assets/lajitong.png"}
+  .content-div
+    .head-div.bg1
+      %a.back-link#back{href: list_user_mobile_courses_path}
+        %img.back{src: asset_path("wap/back.png")}
+      %span.title.f16.font-color1.fb 我的收藏
 
-    
-    
-    
-    
+    .item-div
+      - if @favorites.blank?
+        .undiscover
+          %img.undiscover-icon{src: asset_path("wap/empty.png")}
+      - else
+        - @favorites.each do |f|
+          .item{data: {url: f.ele_url} }
+            .icon-div
+              %img.icon{src: f.img_src}
+            .word-div
+              .row-div.clearfix
+                %span.item-title.f14.fb= f.name
+                - if Date.parse(f.end_date).past?
+                  %span.item-value.end-register.f12 截止报名
+                - else
+                  %span.item-value.f12{class: f.status_class}= f.status_str
+              .row-div.f12.opacity54
+                %span.rank 主讲人：
+                %span.speaker= f.speaker
+              .row-div.f12.opacity54
+                %img.location-icon{src: asset_path("wap/location.png")}
+                %span.location= f.address
 
-
-  
