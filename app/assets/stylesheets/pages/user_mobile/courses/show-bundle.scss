@@ -1,393 +1,146 @@
-
-html {
-	font-size: 16px;
-}
-body {
-	font-family:"Microsoft YaHei";
-	font-size: 62.5%;
-}
-body, p, img, div, ul, li, a, h1, h2, h3, h4, h5, span, br {
-	margin:0;
-	padding:0;
-}
-a{
-	border:none;
-	-webkit-tap-highlight-color: rgba(0,0,0,0);
-	-webkit-tap-highlight-color:transparent;
-	outline:none；
+.content-div {
+  position: relative;
+  padding-bottom: 0.96rem;
 }
 
-.content-area{
-	position: relative;
-	width:100%;
-	max-width:640px;
-	margin:0 auto;
-	padding-bottom: 13%;
-	background: linear-gradient(
-    45deg, 
-    #fef29c 45%, 
-    #fcc204 45%, #fcc204 50%, 
-    #fef29c 50%, #fef29c 95%, 
-    #fcc204 95%, #fcc204);
-    background-size: 10px 10px;
-}
-.header {
-	position:relative;
-	width:100%;
-	.robot {
-		width:100%;
-		max-width:640px;
-	}
-	.back {
-		position:absolute;
-		top:6.77%;
-		left:2.35%;
-		width:9.375%;
-		max-width: 60px;
-	}
-}
-
-.boxtitle {
-	position:relative;
-	width:100%;
-	text-align:center;
-	padding-bottom:2.3em;
-	.bookcloud {
-		background: image-url("robotclass/bookcloud.png") no-repeat;
-		background-size:100%;
-		background-position:center;
-		width:69.4375%;
-		max-width:438px;
-		padding:5.6% 0;
-		margin:0 auto;
-		p {
-			font-size: 3.6em;
-			color:#d70c19;
-		}
-	}
-}
-.right-float {
-	padding-right: 3.2%;
-	display: flex;
-	justify-content: flex-end;
-	align-items: center;
-	padding-top: 1%;
-	display: -webkit-flex;
-	-webkit-justify-content: flex-end;
-	-webkit-align-items: center;
-}
-.a-div {
-	width: 7.5%;
-	max-width: 40px;
-	margin-right: 2%;
-}
-.smallheart {
+.course-img {
 	width: 100%;
-	max-width:40px;
+	height: 4.4rem;
 }
-.dialog {
-	@extend .smallheart;
+.course-icon {
+	width: 0.96rem;
+	height: 0.96rem;
 }
-.num {
-	font-size: 1.8em;
-	color:#666;
+.back-icon {
+	position: absolute;
+	top: 0;
+	left: 0;
 }
-.content {
-	width:95.3125%;
-	margin:0 auto;
-	border-radius: 10px;
-	margin-bottom: 4.7%;
-	#map-container {
-		height: 41.5em;
-		width: 100%;
-	}
+.comment-icon {
+	position: absolute;
+	top: 0;
+	right: 0;
 }
-.course-desc {
-	width:95.3125%;
-	margin:0 auto;
-	background:white;
-	border-radius: 10px;
-	margin-bottom: 3.14%;
-	padding: 2.35%;
-	p {
-		font-size:2.6em;
-		color:#3e3e3e;
-		line-height:150%;
-		padding-top: 2%;
-	}
-	h1 {
-		font-size: 3.6em;
-	}
-	h2 {
-		font-size: 3em;
-	}
-	h3 {
-		font-size: 2.4em;
-	}
-	h4 {
-		font-size: 1.8em;
-	}
-	h5 {
-		font-size: 1.4em;
-	}
+.like-icon {
+	position: absolute;
+	top: 0;
+	right: 0.96rem;
 }
-.assign-div {
-	position:relative;
-	width:95.3125%;
-	margin:0 auto;
-	background:white;
-	border-radius: 10px;
-	margin-bottom:3.14%;
-	.center {
-		padding-top: 1.8%;
-		padding-bottom: 0.5%;
-		border-bottom: 1px dashed #aaa;
-	}
-	#course-detail {
-		font-size: 3em;
-		padding-left:2.46%;
-		color:#3e3e3e;
-	}
-	#applied {
-		font-size: 2em;
-		color: #aaa;
-		float: right;
-		margin-right: 6.56%;
-		padding-top: 1.5%;
-	}
-	#refund {
-		font-size: 2em;
-		color: #666;
-		float: right;
-		padding-top: 1.5%;
-		margin-right: 3.28%;
-	}
-	#refund:hover {
-		cursor: pointer;
-	}
-	.item-box {
-		padding: 3.28% 2.63% 1.5% 2.63%;
-	}
-	.residual {
-		color: #d70c19;
-	}
-	#public_price {
-		color: #d70c19;
-	}
-	#market_price {
-		font-size: 83.3%;
-		color: #969696;
-		text-decoration: line-through;
-	}
-	.item {
-		margin-bottom: 2%;
-		display: flex;
-		justify-content: space-between;
-		font-size: 2.4em;
-		color: #3e3e3e;
-		display: -webkit-flex;
-		-webkit-justify-content: space-between;
-	}
-	.left-div, .right-div {
-		width: 50%;
-	}
-	.item-div {
-		font-size: 2.4em;
-		color: #3e3e3e;
-		margin-bottom: 2%;
-	}
-	.class_time {
-		width: 22%;
-		float: left;
-	}
-	.desc_time {
-		width: 78%;
-		float: right;
-	}
+.course-div {
+  padding: 0.48rem 0.32rem;
 }
-#course-address {
-	width: 78%;
-	display: inline-block;
+.course-name {
+  width: 6.56rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-bottom: 0.36rem;
 }
-.address-label {
-	display: inline-block;
-	vertical-align: top;
+.date-icon, .location-icon {
+  width: 0.32rem;
+  height: 0.32rem;
 }
-// 不需要时恢复隐藏属性
-#sign-desc {
-	// display: none;
+.desc-div {
+  margin-bottom: 0.24rem;
 }
-// 不需要剩余名额时恢复隐藏属性
-#residual_num {
-	// display: none;
+.flex-div {
+  margin-top: 0.36rem;
+  padding: 0.36rem 0;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-felx;
+  display: flex;
+  -webkit-justify-content: sapce-between; 
+  -moz-justify-content: sapce-between;
+  -ms-justify-content: sapce-between;
+  -o-justify-content: sapce-between;
+  justify-content: sapce-between;
+  border-top: 1px solid #eaeaea;
+  border-bottom: 1px solid #eaeaea;
 }
-.item-box {
-	padding: 3.28% 2.63% 1.5% 2.63%;
+.box {
+  flex: 1;
+  text-align: center;
 }
-.title {
-	font-size: 3em;
-	padding-left:2.46%;
-	padding-top:3.28%;
-	padding-bottom: 1.45%;
-	color:#3e3e3e;
-	border-bottom: 1px dashed #aaa;
+.mb24 {
+  margin-bottom: 0.24rem;
 }
-.sign_in-div {
-	padding: 3.28% 2.45% 3.28% 2.45%;
-	display: flex;
-	flex-wrap: wrap;
-	display: -webkit-flex;
-	-webkit-flex-wrap: wrap;
+.no-pt {
+  padding-top: 0;
 }
-.sign_in-box {
-	width: 12.2%;
-	padding: 2.3%;
-	margin: 0.15%;
-	text-align: center;
-	font-size: 3.2em;
-	color: #fff;
-	background: #80e9be;
+
+.sign-in-div {
+  margin-top: 0.36rem;
+  display: flex;
+  flex-wrap: wrap;
+  display: -webkit-flex;
+  -webkit-flex-wrap: wrap;
+}
+.sign-in-box {
+  width: 12.2%;
+  padding: 2.3%;
+  margin: 0.15%;
+  text-align: center;
+  font-size: 1.6em;
+  color: #fff;
+  background: #80e9be;
 }
 .absence {
-	@extend .sign_in-box;
-	background: #f8acac;
+  @extend .sign-in-box;
+  background: #e97e93;
 }
 .future {
-	@extend .sign_in-box;
-	background: #cfcfcf;
+  @extend .sign-in-box;
+  background: #eaebf2;
 }
-.map-jpg {
-	width: 100%;
-	max-width: 612px;
+.map-div {
+  margin-top: 0.48rem;
+  #map-container {
+    height: 3.2rem;
+    width: 100%;
+  }
 }
-.click-btn {
-	position: fixed;
-	bottom: 0;
-	font-size: 3.6em;
-	color: #fff;
-	padding: 3%;
-	background: #d70c19;
-	width: 100%;
-	max-width: 640px;
-	border-radius: 0;
+.speaker-div {
+  margin-bottom: 0.1rem;
 }
-.click-btn:link {
-	color: #fff;
+.btn-style {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0.96rem;
+  line-height: 0.96rem;
+  border-radius: 0;
+  padding: 0;
 }
-.click-btn:visited {
-	color: #fff;
+.btn-style:link {
+  color: #fff;
 }
-.click-btn:hover {
-	color: #fff;
+.btn-style:visited {
+  color: #fff;
 }
-.click-btn:active {
-	color: #fff;
+.btn-style:hover {
+  color: #fff;
 }
-.unclick-btn {
-	position: fixed;
-	bottom: 0;
-	font-size: 3.6em;
-	color: #fff;
-	padding: 3%;
-	background: #aaa;
-	width: 100%;
-	max-width: 640px;
-	border-radius: 0;
+.btn-style:active {
+  color: #fff;
 }
-.unclick-btn:link {
-	color: #fff;
+.refund {
+  display: inline-block;
+  width: 100%;
+  margin-top: 0.4rem;
 }
-.unclick-btn:visited {
-	color: #fff;
+.refund:link {
+  color: #4a8ce3;
 }
-.unclick-btn:hover {
-	color: #fff;
+.refund:visited {
+  color: #4a8ce3;
 }
-.unclick-btn:active {
-	color: #fff;
+.refund:hover {
+  color: #4a8ce3;
 }
-
-#refundModal {
-	width: 100%;
-	max-width: 640px;
-	margin: 0 auto;
-	.modal-body {
-		padding: 0;
-	}
-	.modal-dialog {
-		width: 84.375%;
-		margin: 0 auto;
-		background: #fff;
-		text-align: center;
-		margin-top: 40%;
-		border-radius: 8px;
-	}
-}
-.modal-backdrop {
-	background-color: #999;
-}
-.account {
-	font-size: 3.4em;
-	color: #333;
-	padding: 7% 0 3% 0;
-}
-.question {
-	font-size: 2.6em;
-	color: #666;
-	margin-bottom: 3.5%;
-}
-.confirm-div {
-	width: 100%;
-	display: flex;
-	justify-content: space-between;
-	display: -webkit-flex;
-	-webkit-justify-content: space-between;
-	border-top: 1px solid #aaa;
-	a {
-		display: inline-block;
-		width: 50%;
-		font-size: 3.2em;
-		color: #666;
-		padding: 4% 0;
-		text-decoration: none;
-	}
-	.line {
-		border-right: 1px solid #aaa;
-	}
-	.clicked {
-		color: #227dda;
-	}
+.refund:active {
+  color: #4a8ce3;
 }
 
-
-@media screen and (max-width:640px) {
-	.content-area, #refundModal {
-		font-size: 100%;
-	}
-}
-@media screen and (max-width: 560px) {
-    .content-area, #refundModal {
-        font-size: 85%;
-    }
-}
-
-@media screen and (max-width: 500px) {
-    .content-area, #refundModal {
-        font-size: 67%;
-    }
-}
-@media screen and (max-width: 420px) {
-    .content-area, #refundModal {
-        font-size: 63%;
-    }
-}
-@media screen and (max-width: 400px) {
-    .content-area, #refundModal {
-        font-size: 56%;
-    }
-}
-@media screen and (max-width: 320px) {
-    .content-area, #refundModal {
-        font-size: 50%;
-    }
-}

@@ -44,4 +44,5 @@ class Review
     self.update_attributes({status: PRIVATE})
     nil
   end
+
 end

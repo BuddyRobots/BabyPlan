@@ -22,11 +22,11 @@
               %img.icon{src: ci[:photo].nil? ? asset_path("wap/example.png") : ci[:photo].path}
             .word-div
               .row-div.clearfix
-                %span.item-title.f14.fb= ci[:name]
+                %span.item-title.f14= ci[:name]
                 - if Date.parse(ci[:end_date]).past?
                   %span.item-value.end-register.f12 截止报名
                 - else
-                  %span.item-value.f12{class: ci[:status_class]}= ci[:status_str]
+                  %span.item-value.f12{class: ci[:status_class]}= "￥" + ci[:status_str].to_s
               .row-div.f12.opacity54
                 %span.rank 主讲人：
                 %span.speaker= ci[:speaker]

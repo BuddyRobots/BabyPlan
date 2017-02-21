@@ -21,6 +21,7 @@ class UserMobile::SessionsController < UserMobile::ApplicationController
     end
     if retval.class == Hash
       retval[:user_return_to] = session[:user_return_to]
+      session.delete(:user_return_to)
     end
     render json: retval_wrapper(retval)
   end

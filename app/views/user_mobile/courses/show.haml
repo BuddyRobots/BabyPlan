@@ -3,129 +3,168 @@
   = javascript_include_tag "pages/user_mobile/courses/show-bundle"
   = stylesheet_link_tag "pages/user_mobile/courses/show-bundle", :media => "all"
   :javascript
-    window.course_inst_id = "#{@course.id.to_s}"
+    window.course_inst_id = "#{@course_inst.id.to_s}"
     window.course_participate_id = "#{@course_participate.try(:id).to_s}"
-    window.lat = "#{@course.center.lat}"
-    window.lng = "#{@course.center.lng}"
+    window.lat = "#{@course_inst.center.lat}"
+    window.lng = "#{@course_inst.center.lng}"
 
-
-- content_for :app_content do
-  .content-area
-    .header
-      %img.robot{:src => @course.photo.present? ? @course.photo.path : asset_path("web/course.png")}
-      / %a{:href => @back == "setting" ? "/user_mobile/settings/course" : "/user_mobile/courses"}
-      %a{:href => course_back_url(@back)}
-        %img.back.last_page{src: asset_path("robotclass/back.png")}
-    .right-float
-      %a.a-div#concern{:href => "javascript:void(0);"}
-        - if @current_user.favorite_on(@course)
-          %img.smallheart{src: asset_path("concern.png"), data: {fav: "false"}}
-        - else
-          %img.smallheart{src: asset_path("cancel-concern.png"), data: {fav: "true"}}
-      %a.a-div{:href => user_mobile_reviews_path + "?back=" + @back.to_s + "&review_type=course&course_id=" + @course.id.to_s}
-        %img.dialog{src: asset_path("pinglun.png")}
-      %p.num= @course.reviews.public_and_mine(@current_user).length
-    .boxtitle
-      .bookcloud
-        %p= @course.name || @course.course.name
-
-    .course-desc
-      = @course.course.desc.html_safe
-    - if @course_participate.present? && @course_participate.is_success
-      .course-desc
-        #sign-desc
-          %p.title 签到情况
-          .sign_in-div
-            - @course.length.times do |i|
-              - if @course_participate.signin_info[i].present?
-                .sign_in-box= i + 1
+.content-div
+  %img.course-img{src: @course_inst.photo.present? ? @course_inst.photo.path : asset_path("wap/course.png")}
+  %a{href: list_user_mobile_courses_path}
+    %img.course-icon.back-icon{src: asset_path("wap/back2.png")}
+  %img.course-icon.like-icon{src: asset_path("wap/like_normal.png")}
+  %img.course-icon.comment-icon{src: asset_path("wap/comment_disabled.png")}
+  .course-div
+    %p.f20-op87.font-color2.course-name= @course_inst.name
+    .desc-div
+      %img.date-icon{src: asset_path("wap/date.png")}
+      %span.f12-op56.font-color2= @course_inst.date
+    .desc-div
+      %img.location-icon{src: asset_path("wap/location.png")}
+      %span.f12-op56.font-color2= @course_inst.center.address
+    .flex-div.font-color2
+      .box
+        %p.mb24.f12-op56 价格
+        %p.f14-op87= @course_inst.price.to_s + "元"
+      .box
+        %p.mb24.f12-op56 课次
+        %p.f14-op87= @course_inst.length.to_s + "次"
+      .box
+        %p.mb24.f12-op56 剩余名额
+        %p.f14-op87= "#{@course_inst.effective_signup_num}/#{@course_inst.capacity}" + "人"
+      .box
+        %p.mb24.f12-op56 评分
+        %p.f14-op87= @course_inst.reviews.present? ? "#{@course_inst.reviews.score.sum()}/#{@course_inst.reviews.length}" + "分" : "--"
+  - if @course_participate.present? && @course_participate.is_success      
+    .course-div.no-pt
+      .sign-desc
+        %p.f20-op87.font-color2.tc 课程签到
+        .sign-in-div
+          - @course_inst.length.times do |i|
+            - if @course_participate.signin_info[i].present?
+              .sign-in-box= i + 1
+            - else
+              - if @course_inst.is_class_pass?(i)
+                .absence= i + 1
               - else
-                - if @course.is_class_pass?(i)
-                  .absence= i + 1
-                - else
-                  .future= i + 1
-    .assign-div
-      .center.clearfix 
-        %span#course-detail 课程详情
-        - if @course_participate.present? && @course_participate.refund_allowed
-          - if @course.price_pay == 0
-            %span#refund 申请退出
-          - else
-            %span#refund 申请退款
-        - elsif @course_participate.present?
-          %span#applied= @refund_status_str
-      .item-box
-        .item
-          .left-div#residual_num
-            %span 剩余名额：
-            %span.residual= @course.capacity - @course.effective_signup_num
-            %span= "/#{@course.capacity}"
-          .right-div
-            %span 主讲人：
-            %span= @course.speaker
-        .item
-          .left-div
-            %span 课程次数：
-            %span= "#{@course.length}课时"
-          .right-div
-            %span 公益价：
-            %span#public_price= @course.price_pay
-            %span#market_price= @course.price
-        .item-div.clearfix
-          %span.class_time 上课时间：
-          %span.desc_time= @course.date
-        .item-div
-          %span.address-label 上课地点：
-          %span#course-address= @course.address
-    .content
-      #map-container
-    - if @course_participate.nil? || @course_participate.prepay_id.blank?
-      - if @course.status == CourseInst::OVER
-        %button.btn.unclick-btn{:type => "button"} 已结束
-      - elsif @course.capacity <= @course.effective_signup_num
-        %button.btn.unclick-btn{:type => "button"} 无剩余容量
-      - else
-        - if @course.price_pay > 0
-          %a.btn.click-btn{href: "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxfe4fd89f6f5f9f57&redirect_uri=#{CGI::escape('http://babyplan.bjfpa.org.cn/user_mobile/courses/new/')}&response_type=code&scope=snsapi_base&state=#{@course.id.to_s}#wechat_redirect", :type => "button"} 我要报名
-        - else
-          %a.btn.click-btn{href: "/user_mobile/courses/new/?state=#{@course.id.to_s}"} 我要报名
-    - elsif @course_participate.is_expired
-      - if @course.status == CourseInst::OVER
-        %button.btn.unclick-btn{:type => "button"} 已结束
-      - elsif @course.capacity <= @course.effective_signup_num
-        %button.btn.unclick-btn{:type => "button"} 无剩余容量
-      - else
-        %a.btn.click-btn{href: "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxfe4fd89f6f5f9f57&redirect_uri=#{CGI::escape('http://babyplan.bjfpa.org.cn/user_mobile/courses/new/')}&response_type=code&scope=snsapi_base&state=#{@course.id.to_s}#wechat_redirect", :type => "button"} 去付款
-    - elsif @course_participate.is_success
-      -if @course.status == CourseInst::NOT_BEGIN
-        %button.btn.unclick-btn{:type => "button"} 已报名
-      -if @course.status == CourseInst::ONGOING
-        %button.btn.unclick-btn{:type => "button"} 正在上课
-      -if @course.status == CourseInst::OVER
-        - if @current_user.review_on(@course)
-          %button.btn.unclick-btn{:type => "button"} 已结束
-        - else
-          %button.btn.click-btn{:type => "button"} 立即评价
-    - elsif @course_participate.is_paying
-      %button.btn.unclick-btn{:type => "button"} 支付进行中
-    - else
-      - if @course.status == CourseInst::OVER
-        %button.btn.unclick-btn{:type => "button"} 已结束
-      - elsif @course.capacity <= @course.effective_signup_num
-        %button.btn.unclick-btn{:type => "button"} 无剩余容量
-      - else
-        %a.btn.click-btn{href: new_user_mobile_course_path + "/?state=" + @course.id.to_s, :type => "button"} 去付款
+                .future= i + 1
+      .map-div
+        %p.f20-op87.font-color2.tc.mb24 上课地址
+        #map-container
+
+  .course-div.font-color2.no-pt
+    %p.f20-op87.tc.mb24 课程详情
+    .speaker-div.tc.f14-op87
+      %span 主讲人:
+      %span= @course_inst.speaker
+    .course-desc.f14-op87
+      = @course_inst.course.desc.html_safe
+    - if @course_inst.price_pay.present?
+      %a.refund.tc.font-color8.f14{href: "#"} 申请退款
+    %a.btn.btn-style.bg1.f16.font-color1{type: "button"} 立即报名
+    %a.btn.btn-style.bg1.f16.font-color1{type: "button"} 立即支付
+    %button.btn.btn-style.bg2.f16.font-color1{type: "button"} 报名成功
+    %button.btn.btn-style.bg2.f16.font-color1{type: "button"} 已无名额
+    %button.btn.btn-style.bg2.f16.font-color1{type: "button"} 已结课
+    %a.btn.btn-style.bg1.f16.font-color1{type: "button"} 立即评价
 
 
-#refundModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
-  .modal-dialog
-    .modal-content
-      .modal-body
-        - if @course.price_pay == 0
-          %p.account 申请退出
-        - else
-          %p.account 申请退款
-        %p.question　是否确认退出当前课程！
-        .confirm-div
-          %a.line.clicked#confirm-refund 确认
-          %a{"data-dismiss" => "modal"} 取消
+
+/     - if @course_participate.present? && @course_participate.is_success
+/       .course-desc
+/         #sign-desc
+/           %p.title 签到情况
+/           .sign_in-div
+/             - @course.length.times do |i|
+/               - if @course_participate.signin_info[i].present?
+/                 .sign_in-box= i + 1
+/               - else
+/                 - if @course.is_class_pass?(i)
+/                   .absence= i + 1
+/                 - else
+/                   .future= i + 1
+/     .assign-div
+/       .center.clearfix 
+/         %span#course-detail 课程详情
+/         - if @course_participate.present? && @course_participate.refund_allowed
+/           - if @course.price_pay == 0
+/             %span#refund 申请退出
+/           - else
+/             %span#refund 申请退款
+/         - elsif @course_participate.present?
+/           %span#applied= @refund_status_str
+/       .item-box
+/         .item
+/           .left-div#residual_num
+/             %span 剩余名额：
+/             %span.residual= @course.capacity - @course.effective_signup_num
+/             %span= "/#{@course.capacity}"
+/           .right-div
+/             %span 主讲人：
+/             %span= @course.speaker
+/         .item
+/           .left-div
+/             %span 课程次数：
+/             %span= "#{@course.length}课时"
+/           .right-div
+/             %span 公益价：
+/             %span#public_price= @course.price_pay
+/             %span#market_price= @course.price
+/         .item-div.clearfix
+/           %span.class_time 上课时间：
+/           %span.desc_time= @course.date
+/         .item-div
+/           %span.address-label 上课地点：
+/           %span#course-address= @course.address
+/     .content
+/       #map-container
+/     - if @course_participate.nil? || @course_participate.prepay_id.blank?
+/       - if @course.status == CourseInst::OVER
+/         %button.btn.unclick-btn{:type => "button"} 已结束
+/       - elsif @course.capacity <= @course.effective_signup_num
+/         %button.btn.unclick-btn{:type => "button"} 无剩余容量
+/       - else
+/         - if @course.price_pay > 0
+/           %a.btn.click-btn{href: "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxfe4fd89f6f5f9f57&redirect_uri=#{CGI::escape('http://babyplan.bjfpa.org.cn/user_mobile/courses/new/')}&response_type=code&scope=snsapi_base&state=#{@course.id.to_s}#wechat_redirect", :type => "button"} 我要报名
+/         - else
+/           %a.btn.click-btn{href: "/user_mobile/courses/new/?state=#{@course.id.to_s}"} 我要报名
+/     - elsif @course_participate.is_expired
+/       - if @course.status == CourseInst::OVER
+/         %button.btn.unclick-btn{:type => "button"} 已结束
+/       - elsif @course.capacity <= @course.effective_signup_num
+/         %button.btn.unclick-btn{:type => "button"} 无剩余容量
+/       - else
+/         %a.btn.click-btn{href: "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxfe4fd89f6f5f9f57&redirect_uri=#{CGI::escape('http://babyplan.bjfpa.org.cn/user_mobile/courses/new/')}&response_type=code&scope=snsapi_base&state=#{@course.id.to_s}#wechat_redirect", :type => "button"} 去付款
+/     - elsif @course_participate.is_success
+/       -if @course.status == CourseInst::NOT_BEGIN
+/         %button.btn.unclick-btn{:type => "button"} 已报名
+/       -if @course.status == CourseInst::ONGOING
+/         %button.btn.unclick-btn{:type => "button"} 正在上课
+/       -if @course.status == CourseInst::OVER
+/         - if @current_user.review_on(@course)
+/           %button.btn.unclick-btn{:type => "button"} 已结束
+/         - else
+/           %button.btn.click-btn{:type => "button"} 立即评价
+/     - elsif @course_participate.is_paying
+/       %button.btn.unclick-btn{:type => "button"} 支付进行中
+/     - else
+/       - if @course.status == CourseInst::OVER
+/         %button.btn.unclick-btn{:type => "button"} 已结束
+/       - elsif @course.capacity <= @course.effective_signup_num
+/         %button.btn.unclick-btn{:type => "button"} 无剩余容量
+/       - else
+/         %a.btn.click-btn{href: new_user_mobile_course_path + "/?state=" + @course.id.to_s, :type => "button"} 去付款
+
+
+/ #refundModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
+/   .modal-dialog
+/     .modal-content
+/       .modal-body
+/         - if @course.price_pay == 0
+/           %p.account 申请退出
+/         - else
+/           %p.account 申请退款
+/         %p.question　是否确认退出当前课程！
+/         .confirm-div
+/           %a.line.clicked#confirm-refund 确认
+/           %a{"data-dismiss" => "modal"} 取消

@@ -47,9 +47,8 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
   end
 
   def show
-    @back = params[:back]
-    @course = CourseInst.where(id: params[:id]).first
-    @course_participate = @current_user.course_participates.where(course_inst_id: @course.id).first
+    @course_inst = CourseInst.where(id: params[:id]).first
+    @course_participate = @current_user.course_participates.where(course_inst_id: @course_inst.id).first
     @refund_status_str = @course_participate.try(:refund_status_str).to_s
   end
 
