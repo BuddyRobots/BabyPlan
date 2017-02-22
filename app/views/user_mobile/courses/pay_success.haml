@@ -3,18 +3,13 @@
   = stylesheet_link_tag "pages/user_mobile/courses/pay_success-bundle", :media => "all"
 
 - content_for :app_content do
-  .content-area
-    .desc-div
-      .success-div
-        .item
-          %img.icon{src: asset_path("web/finish.png")}
-          %span.success 支付已完成
-        .item
-          %span 课程：
-          %span= @course.name || @course.course.name
-        .item
-          %span 将于
-          %span.time= @course.start_time
-          %span 开始上课，请提前到达～
-    .btn-div
-      %a.btn#desc{href: "/user_mobile/courses/" + @course.id.to_s} 查看详情
+  .content-div.tc.font-color2
+    %img.icon{src: asset_path("wap/success.png")}
+    %p.f16-op87.mb24 支付完成!
+    .desc-div.mb16
+      %span.f14-op54 课程:
+      %span.f14-op54 少儿计算机知识学习
+    %p.f14-op54.mb60 将于2017/02/25 14:00准时开课，界时请提前到达～
+    %a.btn.btn-style.f16.bg1.font-color1#desc{type: "button"} 查看详情
+
+

@@ -8,6 +8,7 @@ class Review
   field :score, type: Integer
   field :content, type: String
   field :status, type: Integer, default: PRIVATE
+  field :reviewed, type: Boolean, default: false
 
   belongs_to :course_inst
   belongs_to :book
@@ -28,7 +29,7 @@ class Review
   def self.public_and_mine(client)
     r1 = self.where(status: PUBLIC)
     r2 = self.where(client_id: client.id)
-    r1.concat(r2).uniq
+    r1.merge(r2)
   end
 
   def is_private

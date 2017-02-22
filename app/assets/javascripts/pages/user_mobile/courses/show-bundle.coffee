@@ -1,6 +1,6 @@
 $ ->
   
-  $(".smallheart").click ->
+  $(".like-icon").click ->
     fav = $(this).attr("data-fav")
     $.postJSON(
       '/user_mobile/courses/' + window.course_inst_id + '/favorite',
@@ -11,11 +11,11 @@ $ ->
         console.log data
         if data.success
           if fav == "true"
-            $(".smallheart").attr("src", window.concern_path)
-            $(".smallheart").attr("data-fav", "false")
+            $(".like-icon").attr("src", window.like_path)
+            $(".like-icon").attr("data-fav", "false")
           else
-            $(".smallheart").attr("src", window.unconcern_path)
-            $(".smallheart").attr("data-fav", "true")
+            $(".like-icon").attr("src", window.unlike_path)
+            $(".like-icon").attr("data-fav", "true")
         else
           $.mobile_page_notification "服务器出错，请稍后重试"
       )
@@ -54,8 +54,8 @@ $ ->
     marker.setVisible(true)
   init()
 
-  $("#refund").click ->
-    $("#refundModal").modal("show")
+  $(".refund").click ->
+    $("#confirmModal").modal("show")
 
   $("#confirm-refund").click ->
     $.postJSON(
@@ -64,7 +64,7 @@ $ ->
       (data) ->
         if data.success
           $.mobile_page_notification("申请已提交，工作人员将在5个工作日内审核")
-          $("#refundModal").modal('hide')
+          $("#confirmModal").modal('hide')
         else
           if data.code == REFUND_REQUESTED
             $.mobile_page_notification("退款申请已提交")

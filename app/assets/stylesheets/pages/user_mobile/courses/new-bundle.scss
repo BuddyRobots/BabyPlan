@@ -1,171 +1,77 @@
-html {
-	font-size: 16px;
-	height: 100%;
+.content-div {
+  position: relative;
+  width: 100%;
+  min-height: 100%;
+  overflow: auto;
 }
-body {
-	font-family:"Microsoft YaHei";
-	font-size: 62.5%;
-	height: 100%;
+.head-div {
+  width: 100%;
+  height: 1.12rem;
+  padding: 0.08rem 0;
 }
-body, p, img, div, ul, li, a, h3, span, input {
-	margin: 0;
-	padding: 0;
+.back-link {
+  display: inline-block;
 }
-a{
-	border: none;
-	-webkit-tap-highlight-color: rgba(0,0,0,0);
-	-webkit-tap-highlight-color: transparent;
-	outline: none；
-}
-
-.content-area{
-	position: relative;
-	width:100%;
-	max-width:640px;
-	height: 100%;
-	-webkit-overflow-scrolling: touch;
-	overflow: auto;
-	margin:0 auto;
-	background: linear-gradient(
-    45deg, 
-    #fef29c 45%, 
-    #fcc204 45%, #fcc204 50%, 
-    #fef29c 50%, #fef29c 95%, 
-    #fcc204 95%, #fcc204);
-    background-size: 10px 10px;
-    padding-bottom: 2%;
-}
-.header {
-	position:relative;
-	width:100%;
-	text-align:center;
-	padding-top:3.13%;
-	padding-bottom:6.25%;
-	.back {
-		position:absolute;
-		top:15.9%;
-		left:2.345%;
-		width:9.375%;
-		max-width:60px;
-	}
-	.cloud {
-		width:40.46875%;
-		max-width:259px;
-		padding:4.8% 0;
-		margin:0 auto;
-		background: image-url('mybook/cloud.png') no-repeat;
-		background-size:100%;
-		text-align:center;
-		p {
-			font-size: 3.6em;
-			color:#3e3e3e;
-		}
-	}
-}
-.item-div {
-	width:95.3125%;
-	margin:0 auto;
-	background:white;
-	border-radius: 8px;
-}
-.item {
-	padding: 3.28% 2.63%;
-	border-bottom: 1px solid #eee;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	display: -webkit-flex;
-	-webkit-align-items: center;
-	-webkit-justify-content: space-between;
-}
-.icon-div {
-	width: 33%;
-}
-.icon {
-	width: 100%;
-	max-width: 190px;
+.back {
+  width: 0.96rem;
 }
 .title {
-	width: 65%;
-	font-size: 2.8em;
-	color: #3e3e3e;
+  vertical-align: middle;
+  opacity: 0.87;
 }
-.details {
-	padding: 2.28% 2.63%;
-	border-bottom: 1px solid #eee;
+.item-div {
+  padding: 0 0.24rem;
 }
-.span-div {
-	display: flex;
-	justify-content: space-between;
-	font-size: 2.4em;
-	color: #666;
-	padding: 1% 0;
-	display: -webkit-flex;
-	-webkit-justify-content: space-between;
+.item {
+  padding: 0.24rem;
+  height: 2.08rem;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-felx;
+  display: flex;
+  -webkit-justify-content: sapce-between; 
+  -moz-justify-content: sapce-between;
+  -ms-justify-content: sapce-between;
+  -o-justify-content: sapce-between;
+  justify-content: sapce-between;
+  border-bottom: 1px solid #eaeaea;
 }
-.left {
-	width: 23%;
+.icon-div {
+  margin-right: 0.24rem;
 }
-.right {
-	width: 77%;
+.icon {
+  width: 1.6rem;
+  height: 1.6rem;
 }
-.price-div {
-	padding: 2.28% 2.63%;
+.course-name {
+  line-height: 1.6rem;
 }
-.price {
-	font-size: 2.4em;
-	color: #666;
-	padding: 1% 0;
+.mt {
+  margin-top: 0.24rem;
 }
-.float-left {
-	float: left;
+.mb {
+  margin-bottom: 0.24rem;
 }
-.float-right {
-	float: right;
+.mt120 {
+  margin-top: 1.2rem;
 }
-#public-price {
-	color: #c70d19;
+.date-icon, .location-icon {
+  width: 0.32rem;
+  height: 0.32rem;
+  margin: 0.12rem;
 }
-#wechat-pay, #free-course-signup {
-	position: absolute;
-	bottom: 0;
-	width: 100%;
-	padding: 3.67%;
-	background: #c70d19;
-	color: #fff;
-	font-size: 3.6em;
-	border-radius: 0;
+.map-div {
+  #map-container {
+    height: 3.2rem;
+    width: 100%;
+  }
 }
-
-
-@media screen and (max-width:640px) {
-	.content-area {
-		font-size: 100%;
-	}
-}
-@media screen and (max-width: 560px) {
-    .content-area {
-        font-size: 85%;
-    }
-}
-
-@media screen and (max-width: 500px) {
-    .content-area {
-        font-size: 75%;
-    }
-}
-@media screen and (max-width: 450px) {
-    .content-area {
-        font-size: 70%;
-    }
-}
-@media screen and (max-width: 400px) {
-    .content-area {
-        font-size: 60%;
-    }
-}
-@media screen and (max-width: 320px) {
-    .content-area {
-        font-size: 55%;
-    }
+#wechat-pay {
+  width: 6.72rem;
+  margin: 0.24rem;
+  height: 0.72rem;
+  border-radius: 2px;
+  border: 0;
+  outline: none;
 }

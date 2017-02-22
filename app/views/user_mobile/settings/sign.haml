@@ -3,31 +3,46 @@
   = stylesheet_link_tag "pages/user_mobile/settings/sign-bundle", :media => "all"
 
 - content_for :app_content do
-  .content-area
-    .desc-div
-      - if @success == true
-        .success-div
-          .item
-            %img.icon{src: asset_path("web/finish.png")}
-            %span.success 签到成功
-          .item
-            %span 课程：
-            %span= @course.name || @course.course.name
-          .item
-            %span 上课中心:
-            %span= @course.center.name
-          .item= "第" + (@class_num.to_i + 1).to_s + "次课签到成功"
-      - else
-        .fail-div
-          %p.fail 签到失败
-          - if @err = "course_inst_not_exist"
-            %p.notice 课程不存在！
-          - else
-            %p.notice 您未报这门课程！
-    .btn-div
-      - if @success == true
-        %a.btn#desc{href: "/user_mobile/courses/" + @course.id.to_s} 查看详情
-      - else
-        / 失败时显示为返回,需要删掉一条
-        %a.btn#desc{href: "/user_mobile/settings"} 返回
+  .content-div.tc.font-color2
+    %img.icon{src: asset_path("wap/success.png")}
+    %p.f16-op87.mb24 签到成功!
+    .desc-div.mb16
+      %span.f14-op54 课程:
+      %span.f14-op54 少儿计算机知识学习
+    %p.f14-op54.mb60 第三次课签到成功~
+    %a.btn.btn-style.f16.bg1.font-color1#back{type: "button"} 回到首页
+    %img.icon{src: asset_path("wap/fail.png")}
+    %p.f14-op54.mb60 您尚未报名该课程!
+    %p.f14-op54.mb60 这不是课程二维码!
+    %p.f14-op54.mb60 您已签到该次课程!
+    %a.btn.btn-style.f16.bg1.font-color1#back{type: "button"} 回到首页
+    
+
+  / .content-area
+  /   .desc-div
+  /     - if @success == true
+  /       .success-div
+  /         .item
+  /           %img.icon{src: asset_path("web/finish.png")}
+  /           %span.success 签到成功
+  /         .item
+  /           %span 课程：
+  /           %span= @course.name || @course.course.name
+  /         .item
+  /           %span 上课中心:
+  /           %span= @course.center.name
+  /         .item= "第" + (@class_num.to_i + 1).to_s + "次课签到成功"
+  /     - else
+  /       .fail-div
+  /         %p.fail 签到失败
+  /         - if @err = "course_inst_not_exist"
+  /           %p.notice 课程不存在！
+  /         - else
+  /           %p.notice 您未报这门课程！
+  /   .btn-div
+  /     - if @success == true
+  /       %a.btn#desc{href: "/user_mobile/courses/" + @course.id.to_s} 查看详情
+  /     - else
+  /       / 失败时显示为返回,需要删掉一条
+  /       %a.btn#desc{href: "/user_mobile/settings"} 返回
 

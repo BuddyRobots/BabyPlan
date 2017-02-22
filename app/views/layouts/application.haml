@@ -14,6 +14,8 @@
     = yield :app_head
     :javascript
       window.marker_path = "#{asset_path("dingwei03.png")}"
+      window.like_path = "#{asset_path("wap/like_selected.png")}"
+      window.unlike_path = "#{asset_path("wap/like_normal.png")}"
     = csrf_meta_tags
   %body
     = yield :app_content

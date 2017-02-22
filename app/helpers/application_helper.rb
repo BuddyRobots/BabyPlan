@@ -5,7 +5,7 @@ module ApplicationHelper
     elsif back == "favorite"
       return "/user_mobile/settings/favorite"
     else
-      return "/user_mobile/courses"
+      return "/user_mobile/courses/list"
     end
   end
 

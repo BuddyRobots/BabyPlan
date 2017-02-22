@@ -1,57 +1,146 @@
 - content_for :app_head do
   = javascript_include_tag "pages/user_mobile/reviews/index-bundle"
   = stylesheet_link_tag "pages/user_mobile/reviews/index-bundle", :media => "all"
-  :javascript
-    window.review_type="#{@review_type}"
-    window.book_id="#{@book.try(:id).to_s}"
-    window.course_id="#{@course.try(:id).to_s}"
+  / :javascript
+  /   window.review_type="#{@review_type}"
+  /   window.book_id="#{@book.try(:id).to_s}"
+  /   window.course_id="#{@course.try(:id).to_s}"
 
 - content_for :app_content do
-  .content-area
-    .header
-      .cloud
-        %p.caption 历史评价
-      - if @review_type == "book"
-        %a{:href => "/user_mobile/books/" + @book.id.to_s + "?back=" + @back}
-          %img.back{src: asset_path("evaluate/back.png")}
-      - else
-        %a{:href => "/user_mobile/courses/" + @course.id.to_s + "?back=" + @back}
-          %img.back{src: asset_path("evaluate/back.png")}
-    - if @reviews.present?
-      - @reviews.each do |r|
-        %article.clearfix
-          .left-div
-            %img.headfigure{:src => r[:avatar_path].present? ? r[:avatar_path] : asset_path("web/boy.png")}
-          .right-div
-            %span.username= r[:user_name]
-            %span.time= time_ago_in_words(r[:created_at])
-            .review-score
-              %span.score 课程评分
-              - r[:score].times do
-                %img.star{src: asset_path("web/yellowstar2.png")}
-              - (5 - r[:score]).times do
-                %img.star{src: asset_path("web/greystar2.png")}
-            %p.message= r[:content]
-    - else
-      .unfound
-        %img.unfound-icon{src: asset_path("web/cry.png")}
-    .mask
-      .empty-div
-      .text-div
-        %textarea#text
-        .review-div.clearfix
-          %span.me 我的评价：
-          %p.star-div
-            %input{:checked => "checked", :name => "a", :type => "radio", :value => "0"}
-            %input{:name => "a", :type => "radio", :value => "1"}
-            %input{:name => "a", :type => "radio", :value => "2"}
-            %input{:name => "a", :type => "radio", :value => "3"}
-            %input{:name => "a", :type => "radio", :value => "4"}
-            %input{:name => "a", :type => "radio", :value => "5"}
-          %button.btn#submit 提交
-    - if @current_user.review_on(@course || @book)
-      %button.btn#review_end{:type => "button"} 已评价
-    - elsif @current_user.can_review_on(@course || @book)
-      %button.btn#review{:type => "button"} 立即评价
+  .content-div
+    .head-div.bg1
+      %a.back-link#back{href: "#" }
+        %img.back{src: asset_path("wap/back.png")}
+      %span.title.f16.font-color1.fb 课程评价
+      %span.title.f16.font-color1.fb (999)
+
+    .item-div
+      .undiscover
+        %img.undiscover-icon{src: asset_path("wap/empty.png")}
+      .item
+        .icon-div
+          %img.icon{src: asset_path("wap/news.png")}
+        .word-div
+          .row-div.clearfix.font-color2
+            %span.item-title.f14-op87 小学生
+            %span.item-value.f12-op56 5分钟前
+          .row-div.font-color2
+            %span.f14-op54.course-review 课程评分
+            - 3.times do
+              %img.star{src: asset_path("wap/star1.png")}
+            - 2.times do
+              %img.star{src: asset_path("wap/star2.png")}
+          .row-div.font-color2
+            %p.f14-op87 老师上课超有趣，学着也不是很难，很容易理解，嗖嗖的就学会了，so easy！
+      .item
+        .icon-div
+          %img.icon{src: asset_path("wap/news.png")}
+        .word-div
+          .row-div.clearfix.font-color2
+            %span.item-title.f14-op87 小学生
+            %span.item-value.f12-op56 5分钟前
+          .row-div.font-color2
+            %span.f14-op54.course-review 课程评分
+            - 3.times do
+              %img.star{src: asset_path("wap/star1.png")}
+            - 2.times do
+              %img.star{src: asset_path("wap/star2.png")}
+          .row-div.font-color2
+            %p.f14-op87 老师上课超有趣，学着也不是很难，很容易理解，嗖嗖的就学会了，so easy！
+      .item
+        .icon-div
+          %img.icon{src: asset_path("wap/news.png")}
+        .word-div
+          .row-div.clearfix.font-color2
+            %span.item-title.f14-op87 小学生
+            %span.item-value.f12-op56 5分钟前
+          .row-div.font-color2
+            %span.f14-op54.course-review 课程评分
+            - 3.times do
+              %img.star{src: asset_path("wap/star1.png")}
+            - 2.times do
+              %img.star{src: asset_path("wap/star2.png")}
+          .row-div.font-color2
+            %p.f14-op87 老师上课超有趣，学着也不是很难，很容易理解，嗖嗖的就学会了，so easy！
+      .item
+        .icon-div
+          %img.icon{src: asset_path("wap/news.png")}
+        .word-div
+          .row-div.clearfix.font-color2
+            %span.item-title.f14-op87 小学生
+            %span.item-value.f12-op56 5分钟前
+          .row-div.font-color2
+            %span.f14-op54.course-review 课程评分
+            - 3.times do
+              %img.star{src: asset_path("wap/star1.png")}
+            - 2.times do
+              %img.star{src: asset_path("wap/star2.png")}
+          .row-div.font-color2
+            %p.f14-op87 老师上课超有趣，学着也不是很难，很容易理解，嗖嗖的就学会了，so easy！  
+      .render-more
+        %p 点击加载更多
+      .load-gif
+        %img.loading{src: asset_path("wap/loading.gif")}
+      .footer
+        .text-div
+          %textarea#text.f14-op87.font-color2
+          .review-div.clearfix
+            %span.f14-op87.font-color2.me 我的评价：
+            %p.star-div
+              %input{:checked => "checked", :name => "a", :type => "radio", :value => "0"}
+              %input{:name => "a", :type => "radio", :value => "1"}
+              %input{:name => "a", :type => "radio", :value => "2"}
+              %input{:name => "a", :type => "radio", :value => "3"}
+              %input{:name => "a", :type => "radio", :value => "4"}
+              %input{:name => "a", :type => "radio", :value => "5"}
+            %button.btn.f16-op87.bg1#submit 提交
+           
+
+  / .content-area
+  /   .header
+  /     .cloud
+  /       %p.caption 历史评价
+  /     - if @review_type == "book"
+  /       %a{:href => "/user_mobile/books/" + @book.id.to_s + "?back=" + @back}
+  /         %img.back{src: asset_path("evaluate/back.png")}
+  /     - else
+  /       %a{:href => "/user_mobile/courses/" + @course.id.to_s + "?back=" + @back}
+  /         %img.back{src: asset_path("evaluate/back.png")}
+  /   - if @reviews.present?
+  /     - @reviews.each do |r|
+  /       %article.clearfix
+  /         .left-div
+  /           %img.headfigure{:src => r[:avatar_path].present? ? r[:avatar_path] : asset_path("web/boy.png")}
+  /         .right-div
+  /           %span.username= r[:user_name]
+  /           %span.time= time_ago_in_words(r[:created_at])
+  /           .review-score
+  /             %span.score 课程评分
+  /             - r[:score].times do
+  /               %img.star{src: asset_path("web/yellowstar2.png")}
+  /             - (5 - r[:score]).times do
+  /               %img.star{src: asset_path("web/greystar2.png")}
+  /           %p.message= r[:content]
+  /   - else
+  /     .unfound
+  /       %img.unfound-icon{src: asset_path("web/cry.png")}
+  /   .mask
+  /     .empty-div
+  /     .text-div
+  /       %textarea#text
+  /       .review-div.clearfix
+  /         %span.me 我的评价：
+  /         %p.star-div
+  /           %input{:checked => "checked", :name => "a", :type => "radio", :value => "0"}
+  /           %input{:name => "a", :type => "radio", :value => "1"}
+  /           %input{:name => "a", :type => "radio", :value => "2"}
+  /           %input{:name => "a", :type => "radio", :value => "3"}
+  /           %input{:name => "a", :type => "radio", :value => "4"}
+  /           %input{:name => "a", :type => "radio", :value => "5"}
+  /         %button.btn#submit 提交
+  /   - if @current_user.review_on(@course || @book)
+  /     %button.btn#review_end{:type => "button"} 已评价
+  /   - elsif @current_user.can_review_on(@course || @book)
+  /     %button.btn#review{:type => "button"} 立即评价
 
 

@@ -1,110 +1,39 @@
-html {
-	font-size: 16px;
-	height: 100%;
-}
-body {
-	font-family:"Microsoft YaHei";
-	font-size: 62.5%;
-	height: 100%;
-}
-body, p, img, div, ul, li, a, h3, span, input {
-	margin:0;
-	padding:0;
-}
-a{
-	border:none;
-	-webkit-tap-highlight-color: rgba(0,0,0,0);
-	-webkit-tap-highlight-color:transparent;
-	outline:none；
-}
-
-.content-area{
+.content-div {
 	position: relative;
-	width:100%;
-	max-width:640px;
-	height: 100%;
-	-webkit-overflow-scrolling: touch;
-	overflow: auto;
-	margin:0 auto;
-	background: linear-gradient(
-    45deg, 
-    #fef29c 45%, 
-    #fcc204 45%, #fcc204 50%, 
-    #fef29c 50%, #fef29c 95%, 
-    #fcc204 95%, #fcc204);
-    background-size: 10px 10px;
-}
-.desc-div {
-	width: 95.3125%;
-	margin: 3.125% auto;
-	background: #fff;
-	padding: 12.5% 0 9.375% 0;
-	border-radius: 8px;
-	font-size: 2.4em;
-	color: #666;
-}
-.success-div {
-	text-align: center;
 }
 .icon {
-	width: 10.7%;
-	max-width: 48px;
+  margin-top: 0.64rem;
+  margin-bottom: 0.48rem;
+  width: 1.6rem;
+  height: 1.6rem;
 }
-.item {
-	margin-bottom: 3.3%;
+.mb24 {
+  margin-bottom: 0.24rem;
 }
-.success {
-	display: inline-block;
-	font-size: 1.333em;
-	color: #323232;
-	margin-left: 3.25%;
-	vertical-align: middle;
+.mb16 {
+  margin-bottom: 0.16rem;
 }
-.btn-div {
-	width: 84.375%;
-	margin: 0 auto;
+.mb60 {
+  margin-bottom: 0.6rem;
 }
-#desc {
-	width: 100%;
-	font-size: 3.2em;
-	color: #fff;
-	padding: 3.8% 0;
-	background: #c70d19;
+.btn-style {
+  width: 6.72rem;
+  height: 0.72rem;
+  border-radius: 2px;
+  border: 0;
+  outline: none;
+  line-height: 0.72rem;
+  padding: 0;
 }
-
-
-
-
-
-
-@media screen and (max-width:640px) {
-	.content-area {
-		font-size: 100%;
-	}
+.btn-style:link {
+  color: #fff;
 }
-@media screen and (max-width: 560px) {
-    .content-area {
-        font-size: 85%;
-    }
+.btn-style:visited {
+  color: #fff;
 }
-
-@media screen and (max-width: 500px) {
-    .content-area {
-        font-size: 75%;
-    }
+.btn-style:hover {
+  color: #fff;
 }
-@media screen and (max-width: 450px) {
-    .content-area {
-        font-size: 70%;
-    }
-}
-@media screen and (max-width: 400px) {
-    .content-area {
-        font-size: 60%;
-    }
-}
-@media screen and (max-width: 320px) {
-    .content-area {
-        font-size: 55%;
-    }
+.btn-style:active {
+  color: #fff;
 }

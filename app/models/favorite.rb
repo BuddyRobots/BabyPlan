@@ -46,7 +46,7 @@ class Favorite
 
   def img_src
     if self.course_inst.present?
-      self.course_inst.photo.nil? ? ActionController::Base.helpers.asset_path("banner.png") : self.course_inst.photo.path
+      self.course_inst.photo.nil? ? ActionController::Base.helpers.asset_path("wap/example.png") : self.course_inst.photo.path
     end
   end
 

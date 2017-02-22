@@ -279,6 +279,14 @@ class User
     end
   end
 
+  def favorite_on(ele)
+    if (ele.class == CourseInst)
+      fav = self.favorites.where(course_inst: ele).first
+      return fav.present? && fav.enabled
+    end
+    return false
+  end
+
 end
 
 

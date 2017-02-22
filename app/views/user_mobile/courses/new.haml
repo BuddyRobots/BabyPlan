@@ -1,51 +1,49 @@
 - content_for :app_head do
+  = javascript_include_tag "http://map.qq.com/api/js?v=2.exp"
   = javascript_include_tag "pages/user_mobile/courses/new-bundle"
   = stylesheet_link_tag "pages/user_mobile/courses/new-bundle", :media => "all"
-  :javascript
-    window.course_participate_id="#{@course_participate.id.to_s}"
-    window.course_id="#{@course.id.to_s}"
+  / :javascript
+  /   window.course_participate_id="#{@course_participate.id.to_s}"
+  /   window.course_id="#{@course.id.to_s}"
 
 - content_for :app_content do
-  - if @course.price_pay > 0
-    .hide
-      %span#appId= @pay_info["appId"]
-      %span#timeStamp= @pay_info["timeStamp"]
-      %span#nonceStr= @pay_info["nonceStr"]
-      %span#package= @pay_info["package"]
-      %span#signType= @pay_info["signType"]
-      %span#paySign= @pay_info["sign"]
-  .content-area
-    .header
-      .cloud
-        %p 购买课程
-      %a{:href => user_mobile_course_path(@course)}
-        %img.back{src: asset_path("mybook/back.png")}
+  / - if @course.price_pay > 0
+  /   .hide
+  /     %span#appId= @pay_info["appId"]
+  /     %span#timeStamp= @pay_info["timeStamp"]
+  /     %span#nonceStr= @pay_info["nonceStr"]
+  /     %span#package= @pay_info["package"]
+  /     %span#signType= @pay_info["signType"]
+  /     %span#paySign= @pay_info["sign"]
+  .content-div
+    .head-div.bg1
+      %a.back-link#back{href: list_user_mobile_courses_path}
+        %img.back{src: asset_path("wap/back.png")}
+      %span.title.f16.font-color1.fb 订单确认
     .item-div
       .item
         .icon-div
-          %img.icon{:src => @course.photo.present? ? @course.photo.path : asset_path("robotclass/robot.jpg")}
-        .title= @course.name
-      .details
-        .span-div
-          %span.left 上课中心：
-          %span.right= @course.center.name
-        .span-div
-          %span.left 详细地址：
-          %span.right= @course.address
-        .span-div
-          %span.left 上课时间：
-          %span.right= @course.date
-      .price-div
-        .price.clearfix
-          %span.float-left 市场价：
-          %span.float-right= @course.price
-        .price.clearfix
-          %span.float-left 政府补贴：
-          %span.float-right= "-" + (@course.price - @course.price_pay).to_s
-        .price.clearfix
-          %span.float-left 公益价：
-          %span.float-right#public-price= @course.price_pay
-    - if @course.price_pay > 0
-      %a.btn#wechat-pay{:href => "javascript:void(0);", :type => "button"}　微信支付
-    - else
-      %a.btn#free-course-signup{:href => "javascript:void(0);", :type => "button"}　确认参加
+          %img.icon{src: asset_path("wap/example.png")}
+        .word-div
+          %p.f16-op87.font-color2.course-name 少儿计算机知识
+      .desc-div.mt
+        %img.date-icon{src: asset_path("wap/date.png")}
+        %span.f12-op56.font-color2 每周下午
+      .desc-div.mb
+        %img.location-icon{src: asset_path("wap/location.png")}
+        %span.f12-op56.font-color2 北京市
+      .map-div
+        #map-container
+    %p.f14.font-color6.tc.mt120 12次课，共2000元
+    %button.btn.bg4.font-color1.f16#wechat-pay{type: "button"} 微信支付
+
+
+
+
+
+
+
+    / - if @course.price_pay > 0
+    /   %a.btn#wechat-pay{:href => "javascript:void(0);", :type => "button"}　微信支付
+    / - else
+    /   %a.btn#free-course-signup{:href => "javascript:void(0);", :type => "button"}　确认参加

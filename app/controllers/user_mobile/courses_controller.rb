@@ -47,24 +47,25 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
   end
 
   def show
+    @back = params[:back]
     @course_inst = CourseInst.where(id: params[:id]).first
     @course_participate = @current_user.course_participates.where(course_inst_id: @course_inst.id).first
     @refund_status_str = @course_participate.try(:refund_status_str).to_s
   end
 
   def new
-    @course = CourseInst.where(id: params[:state]).first
-    @course_participate = @current_user.course_participates.where(course_inst_id: @course.id).first
-    @course_participate = @course_participate || CourseParticipate.create_new(current_user, @course)
-    @course_participate.renew
-    @course_participate.clear_refund
-    if @course.price_pay > 0
-      @open_id = Weixin.get_oauth_open_id(params[:code])
-      if @course_participate.prepay_id.blank?
-        @course_participate.unifiedorder_interface(@remote_ip, @open_id)
-      end
-      @pay_info = @course_participate.get_pay_info
-    end
+    # @course = CourseInst.where(id: params[:state]).first
+    # @course_participate = @current_user.course_participates.where(course_inst_id: @course.id).first
+    # @course_participate = @course_participate || CourseParticipate.create_new(current_user, @course)
+    # @course_participate.renew
+    # @course_participate.clear_refund
+    # if @course.price_pay > 0
+    #   @open_id = Weixin.get_oauth_open_id(params[:code])
+    #   if @course_participate.prepay_id.blank?
+    #     @course_participate.unifiedorder_interface(@remote_ip, @open_id)
+    #   end
+    #   @pay_info = @course_participate.get_pay_info
+    # end
   end
 
   def notify
@@ -127,7 +128,7 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
   end
 
   def pay_success
-    @course = CourseInst.where(id: params[:id]).first
+    # @course = CourseInst.where(id: params[:id]).first
   end
 
   def request_refund
