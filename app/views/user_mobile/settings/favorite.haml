@@ -3,12 +3,11 @@
   = stylesheet_link_tag "pages/user_mobile/settings/favorite-bundle", :media => "all"
 
 - content_for :app_content do
+  .head-div.bg1
+    %a.back-link#back{href: list_user_mobile_courses_path}
+      %img.back{src: asset_path("wap/back.png")}
+    %span.title.f16.font-color1.fb 我的收藏
   .content-div
-    .head-div.bg1
-      %a.back-link#back{href: list_user_mobile_courses_path}
-        %img.back{src: asset_path("wap/back.png")}
-      %span.title.f16.font-color1.fb 我的收藏
-
     .item-div
       - if @favorites.blank?
         .undiscover

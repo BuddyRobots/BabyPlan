@@ -4,13 +4,13 @@
   = stylesheet_link_tag "pages/user_mobile/courses/list-bundle", :media => "all"
 
 - content_for :app_content do
+  .head-div.bg1.clearfix
+    %a.menu-link#operation{href: "javascript: void(0)"}
+      %img.menu{src: asset_path("wap/menu.png")}
+    %span.title.f16.font-color1.fb 少儿创客 
+    %a.search-div#search{href: search_user_mobile_courses_path}
+      %img.search{src: asset_path("wap/search.png")}
   .content-div
-    .head-div.bg1.clearfix
-      %a.menu-link#operation{href: "javascript: void(0)"}
-        %img.menu{src: asset_path("wap/menu.png")}
-      %span.title.f16.font-color1.fb 少儿创客 
-      %a.search-div#search{href: search_user_mobile_courses_path}
-        %img.search{src: asset_path("wap/search.png")}
     .item-div
       - if @course_insts[:data].length == 0
         .undiscover

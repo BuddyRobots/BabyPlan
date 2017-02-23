@@ -4,12 +4,11 @@
 
 
 - content_for :app_content do
+  .head-div.bg1
+    %a.back-link#back{href: list_user_mobile_courses_path}
+      %img.back{src: asset_path("wap/back.png")}
+    %span.title.f16.font-color1.fb 我的消息 
   .content-div
-    .head-div.bg1
-      %a.back-link#back{href: list_user_mobile_courses_path}
-        %img.back{src: asset_path("wap/back.png")}
-      %span.title.f16.font-color1.fb 我的消息 
-
     .item-div
       - if @messages.blank?
         .undiscover

@@ -1,5 +1,6 @@
 
 $ ->
+ 
   if parseInt(window.code) == REQUIRE_SIGNIN
     $.mobile_page_notification("请登录", 1000)
   if parseInt(window.code) == USER_EXIST

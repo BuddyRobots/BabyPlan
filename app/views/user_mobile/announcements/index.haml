@@ -3,12 +3,11 @@
   = stylesheet_link_tag "pages/user_mobile/announcements/index-bundle", :media => "all"
 
 - content_for :app_content do
+  .head-div.bg1
+    %a.back-link#back{href: list_user_mobile_courses_path}
+      %img.back{src: asset_path("wap/back.png")}
+    %span.title.f16.font-color1.fb 中心公告
   .content-div
-    .head-div.bg1
-      %a.back-link#back{href: list_user_mobile_courses_path}
-        %img.back{src: asset_path("wap/back.png")}
-      %span.title.f16.font-color1.fb 中心公告
-
     .item-div
       - if !@announcements.present?
         .undiscover

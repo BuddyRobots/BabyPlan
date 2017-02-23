@@ -16,8 +16,12 @@
     %img.course-icon.like-icon{src: asset_path("wap/like_selected.png"), data: {fav: "false"}}
   - else
     %img.course-icon.like-icon{src: asset_path("wap/like_normal.png"), data: {fav: "true"}}
-  
-  %img.course-icon.comment-icon{src: asset_path("wap/comment_disabled.png")}
+  - if @current_user.reviews.present?
+    %a.comment-icon.have-comment{:href => user_mobile_reviews_path + "?back=" + @back.to_s + "&course_inst_id=" + @course_inst.id.to_s}
+      %p.reviews-num.f12-op54= @course_inst.reviews.public_and_mine(@current_user).reviews_num
+  - else
+    %a.comment-icon.no-comment{:href => user_mobile_reviews_path + "?back=" + @back.to_s + "&course_inst_id=" + @course_inst.id.to_s}
+
   .course-div
     %p.f20-op87.font-color2.course-name= @course_inst.name
     .desc-div

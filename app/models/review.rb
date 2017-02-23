@@ -8,7 +8,6 @@ class Review
   field :score, type: Integer
   field :content, type: String
   field :status, type: Integer, default: PRIVATE
-  field :reviewed, type: Boolean, default: false
 
   belongs_to :course_inst
   belongs_to :book
@@ -30,6 +29,14 @@ class Review
     r1 = self.where(status: PUBLIC)
     r2 = self.where(client_id: client.id)
     r1.merge(r2)
+  end
+
+  def reviews_num
+    if self.length > 99
+      num = "99+"
+    else
+      num = self.length.to_s
+    end
   end
 
   def is_private

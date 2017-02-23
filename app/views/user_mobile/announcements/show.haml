@@ -3,11 +3,11 @@
   = stylesheet_link_tag "pages/user_mobile/announcements/show-bundle", :media => "all"
 
 - content_for :app_content do
+  .head-div.bg1
+    %a.back-link#back{href: user_mobile_announcements_path}
+      %img.back{src: asset_path("wap/back.png")}
+    %span.title.f16.font-color1.fb 公告详情
   .content-div
-    .head-div.bg1
-      %a.back-link#back{href: user_mobile_announcements_path}
-        %img.back{src: asset_path("wap/back.png")}
-      %span.title.f16.font-color1.fb 公告详情
     .main-div.font-color2
       %p.caption.f20-op87= @announcement.title
       %p.date.f12-op56= @announcement.created_at.strftime("%Y/%m/%d  %H:%M")

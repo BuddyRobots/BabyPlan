@@ -20,6 +20,7 @@
 	position: absolute;
 	top: 0;
 	right: 0;
+  height: 0.96rem;
 }
 .like-icon {
 	position: absolute;
@@ -28,6 +29,23 @@
 }
 .course-div {
   padding: 0.48rem 0.32rem;
+}
+.have-comment {
+  background: image-url("wap/comment_normal.png") no-repeat;
+  background-size: 100% 100%;
+  width: 0.96rem;
+  border: 0;
+}
+.no-comment {
+  background: image-url("wap/comment_disabled.png") no-repeat;
+  background-size: 100% 100%;
+  width: 0.96rem;
+  border: 0;
+}
+.reviews-num {
+  height: 0.96rem;
+  line-height: 0.96rem;
+  text-align: center;
 }
 .course-name {
   width: 6.56rem;

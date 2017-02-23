@@ -1,13 +1,17 @@
 .content-div {
-  position: relative;
+  position: absolute;
   width: 100%;
-  min-height: 100%;
-  overflow: auto;
+  overflow: scroll;
+  top: 1.12rem;
 }
 .head-div {
-  width: 100%;
+  position: fixed;
   height: 1.12rem;
   padding: 0.08rem 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
 }
 .menu-link {
   display: inline-block;

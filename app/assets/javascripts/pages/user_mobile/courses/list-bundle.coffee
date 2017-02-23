@@ -23,7 +23,7 @@ $ ->
     
   $(".content-div").on "click", ".item", ->
     cid = $(this).attr("data-id")
-    location.href = "/user_mobile/courses/" + cid
+    location.href = "/user_mobile/courses/" + cid + "?back=list"
 
     
   page = 2
