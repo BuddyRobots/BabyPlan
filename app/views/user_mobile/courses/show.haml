@@ -105,7 +105,7 @@
         - if @current_user.review_on(@course)
           %button.btn.unclick-btn{:type => "button"} 已结束
         - else
-          %button.btn.click-btn{:type => "button"} 立即评价
+          %a.btn.click-btn{href: user_mobile_reviews_path + "?back=" + @back.to_s + "&review_type=course&course_id=" + @course.id.to_s} 立即评价
     - elsif @course_participate.is_paying
       %button.btn.unclick-btn{:type => "button"} 支付进行中
     - else
