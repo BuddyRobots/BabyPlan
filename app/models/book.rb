@@ -143,7 +143,7 @@ class Book
       book_inst.id.to_s + ".png"
     end
 
-    pdf_filename = Book.export_qrcode_pdf(self.name, folder, png_files)
+    pdf_filename = Book.export_qrcode_pdf(self.name, self.publisher, folder, png_files)
 
     # zipfile_name = folder + SecureRandom.uuid.to_s + ".zip"
 
@@ -157,7 +157,7 @@ class Book
   end
 
 
-  def self.export_qrcode_pdf(book_name, folder, png_files)
+  def self.export_qrcode_pdf(book_name, book_press, folder, png_files)
     start_point = [-20, 750]
     hor_interval = 100
     ver_interval = 110
@@ -181,6 +181,7 @@ class Book
         bounding_box([start_x, start_y], width: 70, height: 90) do
           font("public/simsun/simsun.ttf") do
             text ActionController::Base.helpers.truncate(book_name, length: 23), size: 6
+            text ActionController::Base.helpers.truncate(book_press, length: 23), size: 6
           end
           image folder + png_file, position: :center, width: 70, height: 70
         end
