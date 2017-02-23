@@ -58,7 +58,7 @@
         .item
           .left-div#residual_num
             %span 剩余名额：
-            %span.residual= @course.capacity - @course.effective_signup_num
+            %span.residual= [@course.capacity - @course.effective_signup_num, 0].max
             %span= "/#{@course.capacity}"
           .right-div
             %span 主讲人：
