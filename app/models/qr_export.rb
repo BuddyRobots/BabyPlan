@@ -56,7 +56,7 @@ class QrExport
         start_x = start_point[0] + hor_interval * hor_idx
         bounding_box([start_x, start_y], width: 70, height: 90) do
           font("public/simsun/simsun.ttf") do
-            text ActionController::Base.helpers.truncate(info[:book_name], length: 8), size: 6
+            text ActionController::Base.helpers.truncate(info[:book_name], length: 16), size: 6
           end
           image folder + info[:png_file], position: :center, width: 70, height: 70
         end
