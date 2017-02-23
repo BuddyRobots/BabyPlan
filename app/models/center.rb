@@ -113,7 +113,7 @@ class Center
               )
 
         png_file = book_inst.id.to_s + ".png"
-        export_info << { book_name: e.book.name, png_file: png_file }
+        export_info << { book_name: e.book.name, press: e.book.publisher, png_file: png_file }
       end
     end
     pdf_filename = QrExport.export_qrcode_pdf(export_info)
