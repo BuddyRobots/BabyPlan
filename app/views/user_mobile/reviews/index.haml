@@ -52,51 +52,6 @@
           %button.btn.f16-op87.bg1#submit 提交
              
 
-  / .content-area
-  /   .header
-  /     .cloud
-  /       %p.caption 历史评价
-  /     - if @review_type == "book"
-  /       %a{:href => "/user_mobile/books/" + @book.id.to_s + "?back=" + @back}
-  /         %img.back{src: asset_path("evaluate/back.png")}
-  /     - else
-  /       %a{:href => "/user_mobile/courses/" + @course.id.to_s + "?back=" + @back}
-  /         %img.back{src: asset_path("evaluate/back.png")}
-  /   - if @reviews.present?
-  /     - @reviews.each do |r|
-  /       %article.clearfix
-  /         .left-div
-  /           %img.headfigure{:src => r[:avatar_path].present? ? r[:avatar_path] : asset_path("web/boy.png")}
-  /         .right-div
-  /           %span.username= r[:user_name]
-  /           %span.time= time_ago_in_words(r[:created_at])
-  /           .review-score
-  /             %span.score 课程评分
-  /             - r[:score].times do
-  /               %img.star{src: asset_path("web/yellowstar2.png")}
-  /             - (5 - r[:score]).times do
-  /               %img.star{src: asset_path("web/greystar2.png")}
-  /           %p.message= r[:content]
-  /   - else
-  /     .unfound
-  /       %img.unfound-icon{src: asset_path("web/cry.png")}
-  /   .mask
-  /     .empty-div
-  /     .text-div
-  /       %textarea#text
-  /       .review-div.clearfix
-  /         %span.me 我的评价：
-  /         %p.star-div
-  /           %input{:checked => "checked", :name => "a", :type => "radio", :value => "0"}
-  /           %input{:name => "a", :type => "radio", :value => "1"}
-  /           %input{:name => "a", :type => "radio", :value => "2"}
-  /           %input{:name => "a", :type => "radio", :value => "3"}
-  /           %input{:name => "a", :type => "radio", :value => "4"}
-  /           %input{:name => "a", :type => "radio", :value => "5"}
-  /         %button.btn#submit 提交
-  /   - if @current_user.review_on(@course || @book)
-  /     %button.btn#review_end{:type => "button"} 已评价
-  /   - elsif @current_user.can_review_on(@course || @book)
-  /     %button.btn#review{:type => "button"} 立即评价
+  
 
 

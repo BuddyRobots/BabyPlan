@@ -461,4 +461,30 @@ class CourseParticipate
       expired_at: -1
     })
   end
+
+  def course_participate_info
+    {
+      id: self.course_inst.id.to_s,
+      name: self.course_inst.name || self.course.name,
+      speaker: self.course_inst.speaker,
+      address: self.course_inst.address,
+      end_date: self.course_inst.end_date,
+      status_str: self.course_inst.status_str,
+      status_class: self.course_inst.status_class,
+      photo: self.course_inst.photo
+    }
+  end
+
+  def more_info
+    {
+      ele_name: self.course_inst.name || self.course.name,
+      ele_id: self.course_inst.id.to_s,
+      ele_photo: self.course_inst.photo.nil? ? ActionController::Base.helpers.asset_path("wap/example.png") : self.course_inst.photo.path,
+      ele_enddate: Date.parse(self.course_inst.end_date).past?,
+      ele_status_str: self.course_inst.status_str,
+      ele_status_class: self.course_inst.status_class,
+      ele_speaker: self.course_inst.speaker,
+      ele_address: self.course_inst.address
+    }
+  end
 end

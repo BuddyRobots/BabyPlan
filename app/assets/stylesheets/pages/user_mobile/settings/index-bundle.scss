@@ -101,13 +101,22 @@ a{
 	background-size: 100%;
 }
 .collect {
+	display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+	-webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  -o-align-items: center;
+	-webkit-justify-content: space-around;
+  -moz-justify-content: space-around;
+  -ms-justify-content: space-around;
+  -o-justify-content: space-around;
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
 	padding: 7.5% 0;
-	display: -webkit-flex;
-	-webkit-align-items: center;
-	-webkit-justify-content: space-around;
 }
 .icon-div {
 	width: 11.15%;

@@ -1,0 +1,54 @@
+<div class="item">
+  <div class="icon-div">
+    <img class="icon" src={{ele_photo}}>
+  </div>
+  <div class="word-div">
+    <div class="row-div clearfix font-color2">
+      <span class="item-title f14-op87">{{ele_name}}</span>
+      <span class="item-value f12-op56">{{ele_created_at}}</span>
+    </div>
+    <div class="row-div font-color2">
+      <span class="f14-op54 course-review">课程评分</span>
+      {{#ifCond ele_score "5"}}
+        <img class="star" src={{ele_star1}}>
+        <img class="star" src={{ele_star1}}>
+        <img class="star" src={{ele_star1}}>
+        <img class="star" src={{ele_star1}}>
+        <img class="star" src={{ele_star1}}>
+      {{/ifCond}}
+      {{#ifCond ele_score "4"}}
+        <img class="star" src={{ele_star1}}>
+        <img class="star" src={{ele_star1}}>
+        <img class="star" src={{ele_star1}}>
+        <img class="star" src={{ele_star1}}>
+        <img class="star" src={{ele_star2k}}>
+      {{/ifCond}}
+      {{#ifCond ele_score "3"}}
+        <img class="star" src={{ele_star1}}>
+        <img class="star" src={{ele_star1}}>
+        <img class="star" src={{ele_star1}}>
+        <img class="star" src={{ele_star2}}>
+        <img class="star" src={{ele_star2k}}>
+      {{/ifCond}}
+      {{#ifCond ele_score "2"}}
+        <img class="star" src={{ele_star1}}>
+        <img class="star" src={{ele_star1}}>
+        <img class="star" src={{ele_star2}}>
+        <img class="star" src={{ele_star2}}>
+        <img class="star" src={{ele_star2k}}>
+      {{/ifCond}}
+      {{#ifCond ele_score "1"}}
+        <img class="star" src={{ele_star1}}>
+        <img class="star" src={{ele_star2}}>
+        <img class="star" src={{ele_star2}}>
+        <img class="star" src={{ele_star2}}>
+        <img class="star" src={{ele_star2k}}>
+      {{/ifCond}}
+    </div>
+    <div class="row-div font-color2">
+      <p class="f14-op87">{{ele_content}}</p>
+    </div>
+  </div>
+</div>
+
+

@@ -1,0 +1,23 @@
+<div class="item" data-id={{ele_id}}>
+  <div class="icon-div">
+    <img class="icon" src={{ele_photo}}>
+  </div>
+  <div class="word-div">
+    <div class="row-div clearfix">
+      <span class="item-title f14">{{ele_name}}</span>
+      {{#ifCond ele_enddate true}}
+        <span class="item-value end-register f12">截止报名</span>
+      {{else}}
+        <span class="item-value {{ele_status_class}}">{{ele_status_str}}</span>
+      {{/ifCond}}
+    </div>
+    <div class="row-div f12 opacity54">
+      <span class="rank">主讲人：</span>
+      <span class="speaker">{{ele_speaker}}</span>
+    </div>
+    <div class="row-div f12 opacity54">
+      <img class="location-icon" src="<%= asset_path("wap/location.png") %>" >
+      <span class="location">{{ele_address}}</span>
+    </div>
+  </div>
+</div>

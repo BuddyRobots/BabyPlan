@@ -35,6 +35,17 @@ class UserMobile::SettingsController < UserMobile::ApplicationController
 
   def course
     @courses_participates = @current_user.course_participates.desc(:created_at)
+    @courses_participates = auto_paginate(@courses_participates)
+    @courses_participates[:data] = @courses_participates[:data].map do |e|
+      e.course_participate_info
+    end
+  end
+
+  def more
+    @courses_participates = @current_user.course_participates.desc(:created_at)
+    @courses_participates = auto_paginate(@courses_participates)[:data]
+    @courses_participates = @courses_participates.map {|e| e.more_info}
+    render json: retval_wrapper(more: @courses_participates) and return
   end
 
   def favorite
@@ -73,10 +84,10 @@ class UserMobile::SettingsController < UserMobile::ApplicationController
   end
 
   def sign
-    # @err = params[:err]
-    # @success = params[:success].to_s == "true"
-    # @course = CourseInst.where(id: params[:course_id]).first
-    # @class_num = params[:class_num]
+    @err = params[:err]
+    @success = params[:success].to_s == "true"
+    @course = CourseInst.where(id: params[:course_id]).first
+    @class_num = params[:class_num]
   end
 
   def upload_avatar

@@ -53,4 +53,16 @@ class Review
     nil
   end
 
+  def more_info
+    {
+      ele_name: self.client.name,
+      ele_photo: self.client.avatar.nil? ? ActionController::Base.helpers.asset_path("wap/example.png") : self.client.avatar.path,
+      ele_content: ActionController::Base.helpers.truncate(self.content.strip, length: 50),
+      ele_score: self.score.to_s,
+      ele_created_at: self.created_at,
+      ele_star1: ActionController::Base.helpers.asset_path("wap/star1.png"),
+      ele_star2: ActionController::Base.helpers.asset_path("wap/star2.png")
+    }
+  end
+
 end

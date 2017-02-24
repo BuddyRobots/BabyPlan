@@ -18,6 +18,9 @@ $ ->
   $("#favorite").click ->
     location.href = "/user_mobile/settings/favorite"
 
+  $("#course").click ->
+    location.href = "/user_mobile/settings/course"
+
   $("#announcement").click ->
     location.href = "/user_mobile/announcements"
     

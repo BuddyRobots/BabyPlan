@@ -4,32 +4,35 @@
 
 
 - content_for :app_content do
+  .head-div.bg1
+    %a.back-link#back{href: list_user_mobile_courses_path}
+      %img.back{src: asset_path("wap/back.png")}
+    %span.title.f16.font-color1.fb 我的课程
   .content-div
-    .head-div.bg1
-      %a.back-link#back{href: list_user_mobile_courses_path}
-        %img.back{src: asset_path("wap/back.png")}
-      %span.title.f16.font-color1.fb 我的课程
-
     .item-div
-      - if @course_insts[:data].length == 0
+      - if @courses_participates[:data].blank?
         .undiscover
           %img.undiscover-icon{src: asset_path("wap/empty.png")}
       - else
-        - @course_insts[:data].each do |ci|
-          .item{"data-id" => ci[:id]}
+        - @courses_participates[:data].each do |cp|
+          .item{data: {id: cp[:id]}}
             .icon-div
-              %img.icon{src: ci[:photo].nil? ? asset_path("wap/example.png") : ci[:photo].path}
+              %img.icon{src: cp[:photo].nil? ? asset_path("wap/example.png") : cp[:photo].path}
             .word-div
               .row-div.clearfix
-                %span.item-title.f14= ci[:name]
-                - if Date.parse(ci[:end_date]).past?
+                %span.item-title.f14= cp[:name]
+                - if Date.parse(cp[:end_date]).past?
                   %span.item-value.end-register.f12 截止报名
                 - else
-                  %span.item-value.f12{class: ci[:status_class]}= "￥" + ci[:status_str].to_s
+                  %span.item-value.f12{class: cp[:status_class]}= "￥" + cp[:status_str].to_s
               .row-div.f12.opacity54
                 %span.rank 主讲人：
-                %span.speaker= ci[:speaker]
+                %span.speaker= cp[:speaker]
               .row-div.f12.opacity54
                 %img.location-icon{src: asset_path("wap/location.png")}
-                %span.location= ci[:address]
+                %span.location= cp[:address]
+        .render-more
+          %p 点击加载更多
+        .load-gif
+          %img.loading{src: asset_path("wap/loading.gif")}
 
