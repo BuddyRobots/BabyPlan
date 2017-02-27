@@ -1,3 +1,4 @@
+#= require "./_templates/course_item"
 $ ->
   $(".details").click ->
     cid = $(this).attr("data-id")
