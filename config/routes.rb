@@ -287,6 +287,7 @@ Rails.application.routes.draw do
         get :reset_password
         get :sign
         get :profile
+        get :more
         post :update_password
         post :update_profile
         post :upload_avatar
