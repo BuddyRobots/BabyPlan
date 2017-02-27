@@ -137,6 +137,31 @@ a{
 	width: 65%;
 }
 
+.render-more {
+	width: 37.5%;
+	margin: 0 auto;
+	background: #eee;
+	border-radius: 8px;
+	border: 1px solid #aaa;
+	margin-bottom: 3%;
+	p {
+		font-size: 2.4em;
+		color: #aaa;
+		text-align: center;
+		padding: 6.31% 0;
+	}
+}
+.load {
+	display: none;
+	width: 10%;
+	margin: 0 auto;
+	margin-bottom: 3%;
+}
+.loading {
+	width: 100%;
+	max-width: 64px;
+}
+
 
 
 
