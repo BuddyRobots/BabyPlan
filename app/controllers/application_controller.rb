@@ -23,12 +23,24 @@ class ApplicationController < ActionController::Base
     @current_user = auth_key.blank? ? nil : User.find_by_auth_key(auth_key)
     if !current_user.nil?
       # If current user is not empty, set cookie
-      cookies[:auth_key] = {
-        :value => auth_key,
-        :expires => 24.months.from_now,
-        :domain => :all
-      }
-      return true
+      if current_user.is_client
+        logger.info "AAAAAAAAAA"
+        cookies[:auth_key] = {
+          :value => auth_key,
+          :expires => 24.months.from_now,
+          :domain => :all
+        }
+        return true
+      else
+        logger.info "AAAAAAAAAA"
+        logger.info "AAAAAAAAAA"
+        cookies[:auth_key] = {
+          :value => auth_key,
+          :expires => 3.minutes.from_now,
+          :domain => :all
+        }
+        return true
+      end
     else
       # If current user is empty, delete cookie
       cookies.delete(:auth_key, :domain => :all)
