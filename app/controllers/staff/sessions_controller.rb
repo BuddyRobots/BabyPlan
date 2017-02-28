@@ -11,7 +11,7 @@ class Staff::SessionsController < Staff::ApplicationController
     if retval.class == Hash && retval[:auth_key].present?
       cookies[:auth_key] = {
         :value => retval[:auth_key],
-        :expires => 24.months.from_now,
+        :expires => 3.minutes.from_now,
         :domain => :all
       }
     end
