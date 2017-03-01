@@ -3,6 +3,8 @@ class WelcomeController < ApplicationController
   end
 
   def test
+    logger.info "AAAAAAAAAAAAAAAAAA"
+    render text: params[:echostr] and return
   end
 
   def test_image_uploader

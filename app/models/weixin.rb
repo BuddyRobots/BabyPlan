@@ -7,8 +7,8 @@ class Weixin
   base_uri "https://api.weixin.qq.com"
   format  :json
 
-  APPID = "wx69353371388b899b"
-  SECRET = "ac87a676aed464f1069f1b71e158ef68"
+  APPID = "wx0bad9193f1246547"
+  SECRET = "68b29adfa28e31c6107d7a627373e74f"
 
   def self.get_access_token
     @@redis ||= Redis.new

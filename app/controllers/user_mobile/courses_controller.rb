@@ -68,6 +68,21 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
     # end
   end
 
+  def new
+    @course = CourseInst.where(id: params[:state]).first
+    @course_participate = @current_user.course_participate.where(course_inst_id: @course.id).first
+    @course_participate = @course_participate || CourseParticipate.create_new(current_user, @course)
+    @course_participate.renew
+    @course_participate.clear_refund
+    if @course.price_pay > 0
+      @open_id = Weixin.get_oauth_open_id(params[:code])
+      if @course_participate.prepay_id.blank?
+        @coures_participate.unifiedorder_interface(@remote_ip, @open_id)
+      end
+      @pay_info = @course_participate.get_pay_info
+    end
+  end
+
   def notify
     # get out_trade_no, which is the order_id in CourseParticipate
     # ci = CourseParticipate.where(order_id: out_trade_no).first
