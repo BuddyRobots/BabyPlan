@@ -10,27 +10,30 @@
         %p 我的课程
       %a{:href => user_mobile_settings_path}
         %img.back{src: asset_path("mycourse/back.png")}
-    - if @courses_participates.present?
-      - @courses_participates[:data].each do |e|
-        .details{data: {id: e[:id]}}
-          .left-div
-            %img.visit{:src => e[:photo].nil? ? asset_path("web/course.png") : e[:photo].path}
-          .right-div
-            %p.caption 
-              = e[:name]
-              / %span#unpaid= e.status_str
-            %p.article= truncate(strip_tags(e[:content]).strip(), length: 50)
-            .location-div
-              %img.location{src: asset_path("web/location.png")}
-              %span.center= e[:center]
-    
-      .render-more
-        %p 点击加载更多 
-      .load
-        %img.loading{src: asset_path("loading.gif")}
-    - else
-      .undiscover
-        %img.icon{src: asset_path("web/cry.png")}
+    .item
+      .item-div
+        - if @courses_participates[:data].blank?
+          .undiscover
+            %img.icon{src: asset_path("web/cry.png")}
+        - else
+          - @courses_participates[:data].each do |e|
+            .details{data: {id: e[:id]}}
+              .left-div
+                %img.visit{:src => e[:photo].nil? ? asset_path("web/course.png") : e[:photo].path}
+              .right-div
+                %p.caption 
+                  = e[:name]
+                  / %span#unpaid= e.status_str
+                %p.article= truncate(strip_tags(e[:content]).strip(), length: 50)
+                .location-div
+                  %img.location{src: asset_path("web/location.png")}
+                  %span.center= e[:center]
+        
+          .render-more
+            %p 点击加载更多 
+          .load
+            %img.loading{src: asset_path("loading.gif")}
+        
 
 
     
