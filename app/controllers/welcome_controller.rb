@@ -4,7 +4,8 @@ class WelcomeController < ApplicationController
 
   def test
     logger.info "AAAAAAAAAAAAAAAAAA"
-    render text: params[:echostr] and return
+    # 返回验证微信的token   echostr来自微信返回的参数
+    render text: params[:echostr] and return  
   end
 
   def test_image_uploader
