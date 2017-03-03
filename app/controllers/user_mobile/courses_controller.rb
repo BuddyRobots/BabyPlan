@@ -53,7 +53,7 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
     @refund_status_str = @course_participate.try(:refund_status_str).to_s
   end
 
-  def new
+  # def new
     # @course = CourseInst.where(id: params[:state]).first
     # @course_participate = @current_user.course_participates.where(course_inst_id: @course.id).first
     # @course_participate = @course_participate || CourseParticipate.create_new(current_user, @course)
@@ -66,7 +66,7 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
     #   end
     #   @pay_info = @course_participate.get_pay_info
     # end
-  end
+  # end
 
   def new
     @course = CourseInst.where(id: params[:state]).first
