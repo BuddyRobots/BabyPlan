@@ -19,7 +19,6 @@ class User
   field :password_verify_code, type: String
   field :auth_key, type: String
   field :user_type, type: Integer, default: CLIENT
-  field :is_admin, type: Boolean, default: false
 
 
   # field :email, type: String
@@ -75,9 +74,9 @@ class User
   scope :staff, ->{ where(user_type: STAFF) }
   scope :only_staff, ->{ where(user_type: STAFF) }
 
-  # def is_admin
-  #   return self.user_type == ADMIN
-  # end
+  def is_admin
+    return self.user_type == ADMIN
+  end
 
   def is_client
     return self.user_type == CLIENT
