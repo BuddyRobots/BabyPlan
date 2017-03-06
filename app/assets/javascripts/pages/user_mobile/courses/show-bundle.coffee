@@ -13,9 +13,11 @@ $ ->
           if fav == "true"
             $(".like-icon").attr("src", window.like_path)
             $(".like-icon").attr("data-fav", "false")
+            $.mobile_page_notification("成功收藏该课程", 1000)
           else
             $(".like-icon").attr("src", window.unlike_path)
             $(".like-icon").attr("data-fav", "true")
+            $.mobile_page_notification("收藏已取消", 1000)
         else
           $.mobile_page_notification "服务器出错，请稍后重试"
       )
