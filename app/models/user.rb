@@ -110,8 +110,8 @@ class User
     if Rails.env.production?
       6.times { code = code + rand(10).to_s }
     else
-      code = "111111"
-      # 6.times { code = code + rand(10).to_s }
+      # code = "111111"
+      6.times { code = code + rand(10).to_s }
     end
     u.update_attribute(:mobile_verify_code, code)
     ret = Sms.send(mobile, code)
