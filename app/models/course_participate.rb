@@ -3,7 +3,6 @@ class CourseParticipate
 
   include HTTParty
   # pkcs12 File.read('public/cert/applient_cert.p12'), "1388434302"
-  pkcs12 File.read('public/cert/apiclient_cert.p12'), "1388434302"
   base_uri "https://api.mch.weixin.qq.com"
   format  :xml
 
