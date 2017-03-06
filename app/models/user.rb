@@ -75,11 +75,11 @@ class User
   scope :only_staff, ->{ where(user_type: STAFF) }
 
   def is_admin
-    return self.user_type == ADMIN
+    return self.user_type == User::ADMIN
   end
 
   def is_client
-    return self.user_type == CLIENT
+    return self.user_type == User::CLIENT
   end
 
   def is_staff
@@ -110,7 +110,8 @@ class User
     if Rails.env.production?
       6.times { code = code + rand(10).to_s }
     else
-      6.times { code = code + rand(10).to_s }
+      code = "111111"
+      # 6.times { code = code + rand(10).to_s }
     end
     u.update_attribute(:mobile_verify_code, code)
     ret = Sms.send(mobile, code)
@@ -149,10 +150,12 @@ class User
 
   def self.signin_staff(mobile, password)
     user = User.where(mobile: mobile).first
-    return ErrCode::USER_NOT_EXIST if user.nil?
+    return ErrCode::USER_NOT_EXIST if user.nil? || user.user_type == 1
     return ErrCode::USER_NOT_VERIFIED if user.mobile_verified == false
     return ErrCode::WRONG_PASSWORD if Encryption.encrypt_password(password) != user.password
-    return ErrCode::NO_CENTER if user.status == NEW
+    if user.user_type == 2
+      return ErrCode::NO_CENTER if user.status == NEW
+    end
     return ErrCode::ACCOUNT_LOCKED if user.status == LOCKED
     auth_key = user.generate_auth_key
     user.update_attribute(:auth_key, auth_key)
@@ -161,7 +164,7 @@ class User
   
   def self.signin_user(mobile, password)
     user = User.where(mobile: mobile).first
-    return ErrCode::USER_NOT_EXIST if user.nil?
+    return ErrCode::USER_NOT_EXIST if user.nil? || user.is_client == false
     return ErrCode::USER_NOT_VERIFIED if user.mobile_verified == false
     return ErrCode::WRONG_PASSWORD if Encryption.encrypt_password(password) != user.password
     auth_key = user.generate_auth_key

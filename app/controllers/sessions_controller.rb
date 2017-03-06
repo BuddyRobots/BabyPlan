@@ -22,6 +22,7 @@ class SessionsController < ApplicationController
       }
       user = User.find_by_auth_key(retval[:auth_key])
       retval[:has_name] = user.name.present?
+      retval[:user_type] = user.user_type
     end
     render json: retval_wrapper(retval)
   end

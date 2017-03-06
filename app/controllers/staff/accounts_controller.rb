@@ -3,7 +3,7 @@ class Staff::AccountsController < Staff::ApplicationController
 
   # show the index page
   def index
-    staffs = User.only_staff.where(is_admin: false)
+    staffs = User.only_staff
     @staffs = auto_paginate(staffs)
     @staffs[:data] = @staffs[:data].map do |e|
       e.staff_info

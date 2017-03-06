@@ -50,10 +50,13 @@ $ ->
       },
       (data) ->
         if data.success
-          if data.has_name
-            location.href = "/staff/courses"
-          else
+          if data.user_type == 4
             location.href = "/staff/accounts"
+          else
+            if data.has_name
+              location.href = "/staff/courses"
+            else
+              location.href = "/staff/accounts"
         else
           console.log data.code
           if data.code == NO_CENTER 
