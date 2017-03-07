@@ -139,4 +139,36 @@ class Weixin
     return response.body
   end
 
+  def self.send_kaike_msg(cp)
+    user = cp.client.name,
+    desc = cp.course_inst.name + ",上课地址为:" + cp.course_inst.address + ",",
+    date = cp.course_inst.start_date
+    body = {
+      "touser": cp.client.user_openid,
+      "template_id": "OCNHKZfEjK0FTayFeGZTfWTzeElKtqNQ7m09HuebKk4",
+      "data": {
+        "userName": {
+          "value": user,
+          "color": "#173177"
+        },
+        "courseName": {
+          "value": desc,
+          "color": "#173177"
+        },
+        "date": {
+          "value": date,
+          "color": "#173177"
+        }
+      }
+    }
+    
+    url = "/cgi-bin/message/template/send?access_token=#{Weixin.get_access_token}"
+    response = Weixin.post(url, :body => body.to_json)
+    if response.body["errcode"] == 0
+      return true
+    else
+      return false
+    end   
+  end
+
 end
