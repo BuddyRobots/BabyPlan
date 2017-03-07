@@ -1,0 +1,13 @@
+- content_for :head do
+  = javascript_include_tag "pages/user_mobile/settings/openid-bundle"
+  = stylesheet_link_tag "pages/user_mobile/settings/openid-bundle", :media => "all"
+
+    
+.wrapper
+  %a.footlink.f16.font-color4#get_openid{href: "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx0bad9193f1246547&redirect_uri=#{CGI::escape('http://maker.buddyrobots.com/user_mobile/settings/get_openid/')}&response_type=code&scope=snsapi_base&state=#{@state}#wechat_redirect"} 获取openid
+    
+
+
+
+
+

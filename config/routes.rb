@@ -288,6 +288,8 @@ Rails.application.routes.draw do
         get :sign
         get :profile
         get :more
+        get :openid
+        get :get_openid
         post :update_password
         post :update_profile
         post :upload_avatar

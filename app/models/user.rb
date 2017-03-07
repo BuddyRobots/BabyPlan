@@ -19,6 +19,7 @@ class User
   field :password_verify_code, type: String
   field :auth_key, type: String
   field :user_type, type: Integer, default: CLIENT
+  field :user_openid, type: String
 
 
   # field :email, type: String
