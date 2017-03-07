@@ -1,5 +1,5 @@
 class UserMobile::SessionsController < UserMobile::ApplicationController
-  skip_before_filter :require_sign_in, :first_sign_in
+  skip_before_filter :require_sign_in, :first_sign_in, :bind_openid
 
   # frontpage
 	def index
