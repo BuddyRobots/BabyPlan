@@ -26,7 +26,8 @@ class UserMobile::ApplicationController < ApplicationController
   end
 
   def bind_openid
-    if request.fullpath != "/user_mobile/settings/profile" && current_user.user_openid.blank?
+    url = request.fullpath.split('?')[0]
+    if url != "/user_mobile/settings/get_openid" && url != "/user_mobile/settings/profile" && current_user.user_openid.blank?
       @state = request.fullpath
       render template: "/user_mobile/settings/openid"
     end
