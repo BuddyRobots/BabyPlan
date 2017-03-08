@@ -2,14 +2,14 @@ require 'httparty'
 class CourseParticipate
 
   include HTTParty
-  # pkcs12 File.read('public/cert/applient_cert.p12'), "1388434302"
+  pkcs12 File.read('public/cert/apiclient_cert.p12'), "1445887202"
   base_uri "https://api.mch.weixin.qq.com"
   format  :xml
 
   APPID = "wx0bad9193f1246547"
   SECRET = "68b29adfa28e31c6107d7a627373e74f"
-  APIKEY = "1juOmajJrHO3f2NFA0a8dIYy2qAamtnK"
-  MCH_ID = "1388434302"
+  MCH_ID = "1445887202"
+  APIKEY = "bBdnzYarb9DQntl42QWxtC502K6r4l1G"
   NOTIFY_URL = "http://babyplan.bjfpa.org.cn/user_mobile/courses/notify"
 
   include Mongoid::Document
