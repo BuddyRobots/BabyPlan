@@ -35,6 +35,10 @@
                   %td= u[:status]
         .select-page 
           %span.totalitems= "共#{@staffs[:total_page]}页,总计#{@staffs[:total_number]}条"
+          %span.f12 第
+          %input
+          %span.f12 页
+          %span.f12 跳转
           %span.choice-page
             %ul.pagination.pagination-sm
               %li

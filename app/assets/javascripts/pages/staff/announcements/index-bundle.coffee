@@ -1,5 +1,5 @@
 $ ->
-  if window.profile == "local"
+  if window.profile == "global"
     $('.nav-tabs a[href="#tab2"]').tab('show')
 
   $(".add-btn").click ->

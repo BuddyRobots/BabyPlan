@@ -10,7 +10,7 @@
   .content-area
     = render "user_mobile/partials/list_header", list_type: "books"
     = render "user_mobile/partials/no_centers"
-    - if @current_user.client_centers.present?
+    - if User.see_feeds(@current_user)
       .dl-div
         %dt 儿童年龄：
         %dd 
@@ -37,10 +37,11 @@
               .location-div
                 %img.location{src: asset_path("web/location.png")}
                 %span.center= e.center.name
-        .render-more
-          %p 加载更多
-        .load
-          %img.loading{src: asset_path("loading.gif")}
+        - if @current_user.try(:is_client)
+          .render-more
+            %p 加载更多
+          .load
+            %img.loading{src: asset_path("loading.gif")}
       - else
         .unfound
           %img.unfound-icon{src: asset_path("web/cry.png")}

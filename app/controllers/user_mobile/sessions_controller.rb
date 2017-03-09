@@ -21,6 +21,7 @@ class UserMobile::SessionsController < UserMobile::ApplicationController
     end
     if retval.class == Hash
       retval[:user_return_to] = session[:user_return_to]
+      session.delete(:user_return_to)
     end
     render json: retval_wrapper(retval)
   end
@@ -75,6 +76,34 @@ class UserMobile::SessionsController < UserMobile::ApplicationController
   def signout
     cookies.delete(:auth_key, :domain => :all)
     redirect_to new_user_mobile_session_path
+  end
+
+  def feeds
+    @feeds = Feed.is_available
+    @feeds = @feeds.desc(:created_at)
+    @feeds = auto_paginate(@feeds)[:data]
+    render "user_mobile/feeds/index"
+  end
+
+  def announcements
+    @announcements = Announcement.is_available
+    @announcements = @announcements.desc(:created_at)
+    @announcements = auto_paginate(@announcements)[:data]
+    render "user_mobile/announcements/index"
+  end
+
+  def courses
+    @courses = CourseInst.is_available
+    @courses = @courses.desc(:created_at)
+    @courses = auto_paginate(@courses)[:data]
+    render "user_mobile/courses/index"
+  end
+
+  def books
+    @books = Book.is_available
+    @books = @books.desc(:created_at)
+    @books = auto_paginate(@books)[:data]
+    render "user_mobile/books/index"
   end
 end
 

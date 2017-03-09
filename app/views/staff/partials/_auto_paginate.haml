@@ -1,0 +1,13 @@
+
+
+.select-page 
+  %span.totalitems= "共#{locals[:instance][:total_page]}页，总计#{locals[:instance][:total_number]}条"
+  %span.choice-page
+    %ul.pagination.pagination-sm
+      %li
+        %a{href: "#{locals[:url]}#{locals[:page]}=#{locals[:instance][:previous_page]}"} «
+      - ( (locals[:instance][:previous_page] > 2 ? locals[:instance][:previous_page] - 2 : 1) .. (locals[:instance][:next_page] < locals[:instance][:total_page] - 2 ? locals[:instance][:next_page] + 2 : locals[:instance][:total_page]) ).to_a.each do |page|
+        %li
+          %a{href: "#{locals[:url]}#{locals[:page]}=#{page}"}= page
+      %li
+        %a{href: "#{locals[:url]}#{locals[:page]}=#{locals[:instance][:next_page]}"} »

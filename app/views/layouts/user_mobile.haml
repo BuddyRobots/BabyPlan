@@ -4,6 +4,7 @@
   = yield :head
   :javascript
     window.code = "#{@code}"
+    window.current_user_id = "#{@current_user.try(:client_id).to_s}"
 
 - content_for :app_content do
   = yield

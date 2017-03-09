@@ -70,6 +70,17 @@ class User
     return self.user_type == CLIENT
   end
 
+  def client_id
+    self.is_client ? self.id.to_s : ""
+  end
+
+  def self.see_feeds(user)
+    return true if user.blank?
+    return true if !user.is_client
+    return true if user.client_centers.present?
+    return false
+  end
+
   def self.create_user(user_type, mobile, created_by_staff = false, center = nil)
     # 1. check whether user exists?
     u = User.where(mobile: mobile).first
