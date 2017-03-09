@@ -14,7 +14,7 @@ class Admin::SessionsController < Admin::ApplicationController
     if retval.class == Hash && retval[:auth_key].present?
       cookies[:auth_key] = {
         :value => retval[:auth_key],
-        :expires => Rails.env == "production" ? 3.minutes.from_now : 24.months.from_now,
+        :expires => Rails.env == "production" ? 5.minutes.from_now : 24.months.from_now,
         :domain => :all
       }
     end
