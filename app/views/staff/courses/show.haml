@@ -156,18 +156,8 @@
                           .comments
                             %span.comments-title 评论：
                             %span.comments-content= e.review.present? ? e.review.content : "暂未评论"
-
-            .select-page 
-              %span.totalitems= "共#{@participates[:total_page]}页,总计#{@participates[:total_number]}条"
-              %span.choice-page
-                %ul.pagination.pagination-sm
-                  %li
-                    %a{:href => "/staff/courses/" + @course_inst.id.to_s + "?profile=participates&participate_page=#{@participates[:previous_page]}"} «
-                  - ( (@participates[:previous_page] > 2 ? @participates[:previous_page] - 2 : 1) .. (@participates[:next_page] < @participates[:total_page] - 2 ? @participates[:next_page] + 2 : @participates[:total_page]) ).to_a.each do |page|
-                    %li
-                      %a{:href => "/staff/courses/" + @course_inst.id.to_s + "?profile=participates&participate_page=#{page}"}= page
-                  %li
-                    %a{:href => "/staff/courses/" + @course_inst.id.to_s + "?profile=participates&participate_page=#{@participates[:next_page]}"} »
+            = render "staff/partials/auto_paginate", locals: { instance: @participates, url: "/staff/courses/" + @course_inst.id.to_s + "?profile=participates&", page: 'participate_page'}
+            
 
         #tab3.tab-pane
           / .user-checkbox
@@ -195,17 +185,8 @@
                       %button.btn.open-btn.show-review{:type => "button", data: {id: r.id.to_s}} 公开
                     - else
                       %button.btn.open-btn.hide-review{:type => "button", data: {id: r.id.to_s}} 隐藏
-            .select-page 
-              %span.totalitems= "共#{@reviews[:total_page]}页,总计#{@reviews[:total_number]}条"
-              %span.choice-page
-                %ul.pagination.pagination-sm
-                  %li
-                    %a{:href => "/staff/courses/" + @course_inst.id.to_s + "?profile=reviews&review_page=#{@reviews[:previous_page]}"} «
-                  - ( (@reviews[:previous_page] > 2 ? @reviews[:previous_page] - 2 : 1) .. (@reviews[:next_page] < @reviews[:total_page] - 2 ? @reviews[:next_page] + 2 : @reviews[:total_page]) ).to_a.each do |page|
-                    %li
-                      %a{:href => "/staff/courses/" + @course_inst.id.to_s + "?profile=reviews&review_page=#{page}"}= page
-                  %li
-                    %a{:href => "/staff/courses/" + @course_inst.id.to_s + "?profile=reviews&review_page=#{@reviews[:next_page]}"} »
+            = render "staff/partials/auto_paginate", locals: { instance: @reviews, url: "/staff/courses/" + @course_inst.id.to_s + "?profile=reviews&", page: 'review_page'}
+          
           
         #tab4.tab-pane
           - if @course_inst.course_participates.where(trade_state: "SUCCESS").blank?

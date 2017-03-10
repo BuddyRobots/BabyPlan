@@ -54,17 +54,7 @@
                           %td= e[:stock]
                           %td= e[:author]
                           %td= e[:isbn]
-                .select-page 
-                  %span.totalitems= "共#{@books[:total_page]}页,总计#{@books[:total_number]}条"
-                  %span.choice-page
-                    %ul.pagination.pagination-sm
-                      %li
-                        %a{:href => "/admin/books?transfer_keyword=#{@transfer_keyword}&book_keyword=#{@book_keyword}&page=#{@books[:previous_page]}"} «
-                      - ( (@books[:previous_page] > 2 ? @books[:previous_page] - 2 : 1) .. (@books[:next_page] < @books[:total_page] - 2 ? @books[:next_page] + 2 : @books[:total_page]) ).to_a.each do |page|
-                        %li
-                          %a{:href => "/admin/books?transfer_keyword=#{@transfer_keyword}&book_keyword=#{@book_keyword}&page=#{page}"}= page
-                      %li
-                        %a{:href => "/admin/books?transfer_keyword=#{@transfer_keyword}&book_keyword=#{@book_keyword}&page=#{@books[:next_page]}"} »
+                = render "admin/partials/auto_paginate", locals: { instance: @books, url: "/admin/books?transfer_keyword=#{@transfer_keyword}&book_keyword=#{@book_keyword}&", page: 'page'}
           #tab2.tab-pane  
             .book-migrate
               - if @transfers[:data].blank?
@@ -92,17 +82,7 @@
                           %td{class: e[:status_class]}= e[:status_str]
                           %td
                             = link_to "详情", "/admin/books/#{e[:id]}/show_transfer"
-                .select-page 
-                  %span.totalitems= "共#{@transfers[:total_page]}页,总计#{@transfers[:total_number]}条"
-                  %span.choice-page
-                    %ul.pagination.pagination-sm
-                      %li
-                        %a{:href => "/admin/books?profile=transfers&book_keyword=#{@book_keyword}&transfer_keyword=#{@transfer_keyword}&page=#{@transfers[:previous_page]}"} «
-                      - ( (@transfers[:previous_page] > 2 ? @transfers[:previous_page] - 2 : 1) .. (@transfers[:next_page] < @transfers[:total_page] - 2 ? @transfers[:next_page] + 2 : @transfers[:total_page]) ).to_a.each do |page|
-                        %li
-                          %a{:href => "/admin/books?profile=transfers&book_keyword=#{@book_keyword}&transfer_keyword=#{@transfer_keyword}&page=#{page}"}= page
-                      %li
-                        %a{:href => "/admin/books?profile=transfers&book_keyword=#{@book_keyword}&transfer_keyword=#{@transfer_keyword}&page=#{@transfers[:next_page]}"} »
+                = render "admin/partials/auto_paginate", locals: { instance: @transfers, url: "/admin/books?profile=transfers&book_keyword=#{@book_keyword}&transfer_keyword=#{@transfer_keyword}&", page: 'page'}
 
 #borrowModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
   .modal-dialog

@@ -95,19 +95,8 @@
                       %td= ci[:address]
                       %td= ci[:speaker]
                       %td= ci[:price]
-
-            .select-page 
-              %span.totalitems= "共#{@course_insts[:total_page]}页,总计#{@course_insts[:total_number]}条"
-              %span.choice-page
-                %ul.pagination.pagination-sm
-                  %li
-                    %a{:href => "/admin/centers/" + @center.id.to_s + "?profile=courses&course_inst_page=#{@course_insts[:previous_page]}"} «
-                  - ( (@course_insts[:previous_page] > 2 ? @course_insts[:previous_page] - 2 : 1) .. (@course_insts[:next_page] < @course_insts[:total_page] - 2 ? @course_insts[:next_page] + 2 : @course_insts[:total_page]) ).to_a.each do |page|
-                    %li
-                      %a{:href => "/admin/centers/" + @center.id.to_s + "?profile=courses&course_inst_page=#{page}"}= page
-                  %li
-                    %a{:href => "/admin/centers/" + @center.id.to_s + "?profile=courses&course_inst_page=#{@course_insts[:next_page]}"} »
-
+            = render "admin/partials/auto_paginate", locals: { instance: @course_insts, url: "/admin/centers/" + @center.id.to_s + "?profile=courses&", page: 'course_inst_page'}
+            
         #tab3.tab-pane
           - if @books[:data].blank?
             .undiscover
@@ -133,14 +122,5 @@
                       %td= b[:available_stock].to_s + "本"
                       %td= b[:author]
                       %td= b[:isbn]
-            .select-page 
-              %span.totalitems= "共#{@books[:total_page]}页,总计#{@books[:total_number]}条"
-              %span.choice-page
-                %ul.pagination.pagination-sm
-                  %li
-                    %a{:href => "/admin/centers/" + @center.id.to_s + "?profile=books&book_page=#{@books[:previous_page]}"} «
-                  - ( (@books[:previous_page] > 2 ? @books[:previous_page] - 2 : 1) .. (@books[:next_page] < @books[:total_page] - 2 ? @books[:next_page] + 2 : @books[:total_page]) ).to_a.each do |page|
-                    %li
-                      %a{:href => "/admin/centers/" + @center.id.to_s + "?profile=books&book_page=#{page}"}= page
-                  %li
-                    %a{:href => "/admin/centers/" + @center.id.to_s + "?profile=books&book_page=#{@books[:next_page]}"} »
+            = render "admin/partials/auto_paginate", locals: { instance: @books, url: "/admin/centers/" + @center.id.to_s + "?profile=books&", page: 'book_page'}
+          

@@ -33,18 +33,5 @@
                   %td= u[:center]
                   %td= u[:mobile]
                   %td= u[:status]
-        .select-page 
-          %span.totalitems= "共#{@staffs[:total_page]}页,总计#{@staffs[:total_number]}条"
-          %span.f12 第
-          %input
-          %span.f12 页
-          %span.f12 跳转
-          %span.choice-page
-            %ul.pagination.pagination-sm
-              %li
-                %a{:href => "/admin/staffs?keyword=#{@keyword}&page=#{@staffs[:previous_page]}"} «
-              - ( (@staffs[:previous_page] > 2 ? @staffs[:previous_page] - 2 : 1) .. (@staffs[:next_page] < @staffs[:total_page] - 2 ? @staffs[:next_page] + 2 : @staffs[:total_page]) ).to_a.each do |page|
-                %li
-                  %a{:href => "/admin/staffs?keyword=#{@keyword}&page=#{page}"}= page
-              %li
-                %a{:href => "/admin/staffs?keyword=#{@keyword}&page=#{@staffs[:next_page]}"} »
+        = render "admin/partials/auto_paginate", locals: { instance: @staffs, url: "/admin/staffs?keyword=#{@keyword}&", page: 'page'}
+      

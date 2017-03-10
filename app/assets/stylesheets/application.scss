@@ -25,3 +25,46 @@
 .ui-datepicker .ui-datepicker-title select {
 	vertical-align: middle;
 }
+
+.select-page {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	margin: 10px 20px;
+}
+.totalitems {
+	font-size: 12px;
+	color: #969696;
+	margin-right: 25px;
+}
+.choice-page {
+	display: inline-block;
+	vertical-align: middle;
+}
+.pagination {
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+	padding-top: 4px;
+	margin-left: 25px;
+}
+.auto-f12 {
+	font-size: 12px;
+	color: #666;
+}
+.auto-page-box {
+	display: inline-block;
+	width: 50px;
+	height: 28px;
+	margin-left: 3px;
+	margin-right: 3px;
+}
+#auto-jump {
+	margin-left: 10px;
+	height: 28px;
+	padding-top: 0;
+	padding-bottom: 0;
+	font-size: 12px;
+	color: #666;
+	outline: none;
+}

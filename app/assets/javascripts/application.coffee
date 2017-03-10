@@ -49,3 +49,18 @@ $ ->
           jsApiList: api_list # 必填，需要使用的JS接口列表，所有JS接口列表见附录2
       else
         $.page_notification "服务器出错"
+
+  $(".page-jump").click ->
+    link = $(this).attr("data-link")
+    page_name = $(this).attr("data-page-name")
+    total_page = $(this).attr("data-total-page")
+    page = $(this).siblings(".auto-page-box").val()
+    if $.isNumeric(page)
+      page = parseInt(page)
+      if page <= 0
+        $.page_notification("请输入正确的页码", 1000)
+      else
+        if page >= total_page
+          location.href = link + page_name + "=" + total_page
+        if page < total_page
+          location.href = link + page_name + "=" + page

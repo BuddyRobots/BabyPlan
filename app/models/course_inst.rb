@@ -130,6 +130,14 @@ class CourseInst
     return start_date + "-" + end_date
   end
 
+  def start_date
+    first_day = self.date_in_calendar[0]
+    return nil if first_day.blank?
+    start_time = first_day.split(',')[0]
+    start_date = start_time.split('T')[0]
+    return start_date
+  end
+
   def signin_info(class_num)
     retval = [ ]
     cur_group = [ ]
