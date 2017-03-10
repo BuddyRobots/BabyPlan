@@ -83,7 +83,7 @@
         %a.btn.btn-style.bg1.f16.font-color1{href: "#"} 去付款
     - elsif @course_participate.is_success
       - if Date.parse(@course_inst.start_date).future?
-        - if (Date.parse(@course_inst.start_date) - Date.parse(3.day)).future?
+        - if (Date.parse(@course_inst.start_date).to_time - 3.days).future?
           %a.refund.tc.font-color8.f14{href: "#"} 申请退款
         %button.btn.btn-style.bg2.f16.font-color1{type: "button"} 已报名
       - if Date.parse(@course_inst.end_date).past?
