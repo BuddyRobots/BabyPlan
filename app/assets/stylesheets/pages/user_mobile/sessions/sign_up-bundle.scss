@@ -100,7 +100,17 @@ a{
 	text-decoration: none;
 	color: #3e3e3e;
 }
-
+.agreement-div {
+	position: absolute;
+	bottom: 4.25%;
+	width: 100%;
+	font-size: 2em;
+	color: #666;
+	text-align: center;
+}
+.user-agreement {
+	text-decoration: underline;
+}
 
 @media screen and (max-width:640px) {
 	.content-area {

@@ -57,6 +57,9 @@ Rails.application.routes.draw do
         post :upload_photo
       end
     end
+    resources :agreements do
+    end
+
     resources :courses do
       member do
         post :set_available

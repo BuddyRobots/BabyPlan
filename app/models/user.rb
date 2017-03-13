@@ -176,11 +176,11 @@ class User
     Encryption.encrypt_auth_key(info)
   end
 
-  def verify_client(name, password, verify_code)
+  def verify_client(password, verify_code)
     if mobile_verify_code != verify_code
       return ErrCode::WRONG_VERIFY_CODE
     end
-    self.update_attributes(name: name, mobile_verified: true, status: NEW, password: Encryption.encrypt_password(password))
+    self.update_attributes(mobile_verified: true, status: NEW, password: Encryption.encrypt_password(password))
     self.save
     nil
   end

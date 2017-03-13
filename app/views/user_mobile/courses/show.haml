@@ -51,7 +51,7 @@
           - if @course.price_pay == 0
             %span#refund 申请退出
           - else
-            - if Date.parse(@course.start_date).prev_day.future?
+            - if Date.parse(@course.start_date).prev_day.at_beginning_of_day.future?
               %span#refund 申请退款
         - elsif @course_participate.present?
           %span#applied= @refund_status_str

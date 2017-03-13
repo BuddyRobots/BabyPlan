@@ -112,63 +112,70 @@ $ ->
           $.page_notification("服务器出错")
       )
 
-  show_refund_modal = (begin) ->
-    # $("#importantModal").modal("hide")
-    $.getJSON "/staff/courses/next_refund_request/", (data) ->
-      if data.success
-        $('#importantModal #refund-course-name').attr("href", "/staff/courses/" + data.course_id)
-        $('#importantModal #refund-course-name').text(data.course_name)
-        $('#importantModal #refund-client-name').attr("href", "/staff/clients/" + data.course_id)
-        $('#importantModal #refund-client-name').text(data.client_name)
-        $('#importantModal #reason').val("")
-        $('#importantModal').attr("data-id", data.id)
-        $("#importantModal").modal("show")
-        if begin == false
-          $.page_notification("操作完成，显示下一条")
-      else
-        if data.code == BLANK_DATA
-          $.page_notification("所有退款申请处理完毕")
-          $("#importantModal").modal("hide")
-          $("#important-item").hide()
-        else
-          $.page_notification("服务器出错")
 
-  $("#important-modal").click ->
-    show_refund_modal(true)
 
-  $(".close").click ->
-    $("#importantModal #reason").val("")
 
-  $("#reject").click ->
-    cp_id = $("#importantModal").attr("data-id")
-    feedback = $("#importantModal input").val()
-    if feedback == ""
-      $.page_notification("需要给出拒绝理由")
-      return
-    $.postJSON(
-      '/staff/courses/' + cp_id + '/reject_refund',
-      {
-        feedback: feedback
-      },
-      (data) ->
-        if data.success
-          show_refund_modal(false)
-        else
-          $.page_notification("服务器出错")
-      )
+  # 与退款有关的代码
+  # show_refund_modal = (begin) ->
+  #   # $("#importantModal").modal("hide")
+  #   $.getJSON "/staff/courses/next_refund_request/", (data) ->
+  #     if data.success
+  #       $('#importantModal #refund-course-name').attr("href", "/staff/courses/" + data.course_id)
+  #       $('#importantModal #refund-course-name').text(data.course_name)
+  #       $('#importantModal #refund-client-name').attr("href", "/staff/clients/" + data.course_id)
+  #       $('#importantModal #refund-client-name').text(data.client_name)
+  #       $('#importantModal #reason').val("")
+  #       $('#importantModal').attr("data-id", data.id)
+  #       $("#importantModal").modal("show")
+  #       if begin == false
+  #         $.page_notification("操作完成，显示下一条")
+  #     else
+  #       if data.code == BLANK_DATA
+  #         $.page_notification("所有退款申请处理完毕")
+  #         $("#importantModal").modal("hide")
+  #         $("#important-item").hide()
+  #       else
+  #         $.page_notification("服务器出错")
 
-  $("#agree-refund").click ->
-    cp_id = $("#importantModal").attr("data-id")
-    feedback = $("#importantModal input").val()
-    $.postJSON(
-      '/staff/courses/' + cp_id + '/approve_refund',
-      {
-        feedback: feedback
-      },
-      (data) ->
-        if data.success
-          show_refund_modal(false)
-        else
-          $.page_notification("服务器出错")
-      )
+
+
+
+  # $("#important-modal").click ->
+  #   show_refund_modal(true)
+
+  # $(".close").click ->
+  #   $("#importantModal #reason").val("")
+
+  # $("#reject").click ->
+  #   cp_id = $("#importantModal").attr("data-id")
+  #   feedback = $("#importantModal input").val()
+  #   if feedback == ""
+  #     $.page_notification("需要给出拒绝理由")
+  #     return
+  #   $.postJSON(
+  #     '/staff/courses/' + cp_id + '/reject_refund',
+  #     {
+  #       feedback: feedback
+  #     },
+  #     (data) ->
+  #       if data.success
+  #         show_refund_modal(false)
+  #       else
+  #         $.page_notification("服务器出错")
+  #     )
+  # 同意退款
+  # $("#agree-refund").click ->
+  #   cp_id = $("#importantModal").attr("data-id")
+  #   feedback = $("#importantModal input").val()
+  #   $.postJSON(
+  #     '/staff/courses/' + cp_id + '/approve_refund',
+  #     {
+  #       feedback: feedback
+  #     },
+  #     (data) ->
+  #       if data.success
+  #         show_refund_modal(false)
+  #       else
+  #         $.page_notification("服务器出错")
+  #     )
 

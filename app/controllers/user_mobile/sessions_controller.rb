@@ -38,7 +38,7 @@ class UserMobile::SessionsController < UserMobile::ApplicationController
 
   def verify
     user = User.where(id: params[:id]).first
-    retval = user.nil? ? ErrCode::USER_NOT_EXIST : user.verify_client(params[:name], params[:password], params[:verify_code])
+    retval = user.nil? ? ErrCode::USER_NOT_EXIST : user.verify_client(params[:password], params[:verify_code])
     render json: retval_wrapper(retval)
   end
 

@@ -40,3 +40,7 @@ $ ->
         else
           $.mobile_page_notification("服务器出错")
       )
+
+  $("#choice").click ->
+    if $(this).attr("checked", "checked")
+      $("#num1, #num2, #num3").toggle()
