@@ -227,6 +227,7 @@ Rails.application.routes.draw do
       collection do
         get :review
         post :notify
+        get :notify
         get :more
       end
       member do
