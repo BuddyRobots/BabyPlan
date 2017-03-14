@@ -15,8 +15,9 @@
             .left-div
               %img.visit{:src => e.photo.nil? ? asset_path("web/course.png") : e.photo.path}
             .right-div
-              %img.icon{src: asset_path("kidscenter/ke.png")}
-              %p.caption= e.name || e.course.name
+              / %img.icon{src: asset_path("kidscenter/ke.png")}
+              %span.caption= e.name || e.course.name
+              %span.redribbon
               .location-div
                 %span.age 适合年龄: 
                 %span.age= e.min_age.present? ? e.min_age.to_s + "~" + e.max_age.to_s + "岁" : "无"

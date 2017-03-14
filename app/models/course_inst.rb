@@ -17,6 +17,7 @@ class CourseInst
   field :date_in_calendar, type: Array, default: [ ]
   field :min_age, type: Integer
   field :max_age, type: Integer
+  field :school, type: String
 
   has_one :photo, class_name: "Material", inverse_of: :course_inst_photo
   has_one :feed
@@ -57,7 +58,8 @@ class CourseInst
       speaker: course_inst_info[:speaker],
       date_in_calendar: course_inst_info[:date_in_calendar],
       min_age: course_inst_info[:min_age],
-      max_age: course_inst_info[:max_age]
+      max_age: course_inst_info[:max_age],
+      school: course_inst_info[:school]
     })
     course_inst.center = center
     course_inst.save
@@ -99,7 +101,8 @@ class CourseInst
         address: course_inst_info["address"],
         date_in_calendar: course_inst_info["date_in_calendar"],
         min_age: course_inst_info["min_age"],
-        max_age: course_inst_info["max_age"]
+        max_age: course_inst_info["max_age"],
+        school: course_inst_info["school"]
       }
     )
     nil

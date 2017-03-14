@@ -56,8 +56,8 @@
         %input.input-area.form-control#min-age{:type => "text", value: @course.min_age}
         %label.input-caption.margin-l 最大适龄:
         %input.input-area.form-control#max-age{:type => "text", value: @course.max_age}
-        / %label.input-caption.margin-l 开课单位:
-        / %input.input-area.form-control{:type => "text", value: @course.price_pay}
+        %label.input-caption.margin-l 开课单位:
+        %input.input-area.form-control#school{:type => "text", value: @course.school}
       
       .calendar-wrapper.clearfix
         .calendar-operation-wrapper

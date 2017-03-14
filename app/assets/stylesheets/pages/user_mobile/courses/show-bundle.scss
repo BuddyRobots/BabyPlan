@@ -110,27 +110,31 @@ a{
 	border-radius: 10px;
 	margin-bottom: 3.14%;
 	padding: 2.35%;
-	p {
-		font-size:2.6em;
-		color:#3e3e3e;
-		line-height:150%;
-		padding-top: 2%;
-	}
-	h1 {
-		font-size: 3.6em;
-	}
-	h2 {
-		font-size: 3em;
-	}
-	h3 {
-		font-size: 2.4em;
-	}
-	h4 {
-		font-size: 1.8em;
-	}
-	h5 {
-		font-size: 1.4em;
-	}
+}
+.item {
+	margin-bottom: 2%;
+	display: flex;
+	justify-content: space-between;
+	font-size: 2.4em;
+	color: #3e3e3e;
+	display: -webkit-flex;
+	-webkit-justify-content: space-between;
+}
+.left-div, .right-div {
+	width: 50%;
+}
+.item-div {
+	font-size: 2.4em;
+	color: #3e3e3e;
+	margin-bottom: 2%;
+}
+.class_time {
+	width: 22%;
+	float: left;
+}
+.desc_time {
+	width: 78%;
+	float: right;
 }
 .assign-div {
 	position:relative;
@@ -166,46 +170,8 @@ a{
 	#refund:hover {
 		cursor: pointer;
 	}
-	.item-box {
-		padding: 3.28% 2.63% 1.5% 2.63%;
-	}
-	.residual {
-		color: #d70c19;
-	}
-	#public_price {
-		color: #d70c19;
-	}
-	#market_price {
-		font-size: 83.3%;
-		color: #969696;
-		text-decoration: line-through;
-	}
-	.item {
-		margin-bottom: 2%;
-		display: flex;
-		justify-content: space-between;
-		font-size: 2.4em;
-		color: #3e3e3e;
-		display: -webkit-flex;
-		-webkit-justify-content: space-between;
-	}
-	.left-div, .right-div {
-		width: 50%;
-	}
-	.item-div {
-		font-size: 2.4em;
-		color: #3e3e3e;
-		margin-bottom: 2%;
-	}
-	.class_time {
-		width: 22%;
-		float: left;
-	}
-	.desc_time {
-		width: 78%;
-		float: right;
-	}
 }
+
 #course-address {
 	width: 78%;
 	display: inline-block;
@@ -224,6 +190,38 @@ a{
 }
 .item-box {
 	padding: 3.28% 2.63% 1.5% 2.63%;
+	p {
+		font-size:2.6em;
+		color:#3e3e3e;
+		line-height:150%;
+		padding-top: 2%;
+	}
+	h1 {
+		font-size: 3.6em;
+	}
+	h2 {
+		font-size: 3em;
+	}
+	h3 {
+		font-size: 2.4em;
+	}
+	h4 {
+		font-size: 1.8em;
+	}
+	h5 {
+		font-size: 1.4em;
+	}
+}
+.residual {
+	color: #d70c19;
+}
+#public_price {
+	color: #d70c19;
+}
+#market_price {
+	font-size: 83.3%;
+	color: #969696;
+	text-decoration: line-through;
 }
 .title {
 	font-size: 3em;

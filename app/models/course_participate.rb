@@ -278,9 +278,9 @@ class CourseParticipate
     self.trade_state == "SUCCESS"
   end
 
-  # def refund_allowed
-  #   return self.is_success && self.course_inst.status == CourseInst::NOT_BEGIN && self.refund_requested == false
-  # end
+  def refund_allowed
+    return self.is_success && Date.parse(self.course_inst.start_date).prev_day.at_beginning_of_day.future? && self.refund_requested == false
+  end
 
   # def request_refund
   #   if self.refund_allowed

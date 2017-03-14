@@ -10,6 +10,7 @@ class Staff::CoursesController < Staff::ApplicationController
     @keyword = params[:keyword]
     params[:page] = params[:course_inst_page]
     course_insts = @keyword.present? ? current_center.course_insts.where(name: /#{Regexp.escape(@keyword)}/) : current_center.course_insts.all
+    course_insts = course_insts.desc(:created_at)
     @course_insts = auto_paginate(course_insts)
     @course_insts[:data] = @course_insts[:data].map do |e|
       e.course_inst_info

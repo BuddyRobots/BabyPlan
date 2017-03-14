@@ -166,9 +166,9 @@ a{
 	padding-right: 2.67%;
 }
 .caption {
-	padding-top: 1%;
 	font-size:2.8em;
 	color:#7d7d7d;
+  vertical-align: middle;
 }
 .center {
 	display: inline-block;
@@ -233,6 +233,16 @@ a{
 }
 .margin-b {
 	margin-bottom: 0;
+}
+.redribbon {
+  display: inline-block;
+  vertical-align: middle;
+  width: 10%;
+  padding: 4%;
+  margin-left: 2%;
+  background: image-url("web/redribbon.png") no-repeat;
+  background-size:100%;
+  background-position:center;
 }
 
 @media screen and (max-width:640px) {
