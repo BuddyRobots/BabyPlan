@@ -37,6 +37,7 @@ class User
   field :address, type: String
   field :created_by_staff, type: Boolean, default: false
   field :first_signin, type: Boolean, default: true
+  field :is_pregnant, type: Boolean
 
   # relationships specific for clients
   # belongs_to :client_center
@@ -346,6 +347,7 @@ class User
     self.gender = profile["gender"].to_i
     self.parent = profile["parent"]
     self.address = profile["address"]
+    self.is_pregnant = profile["is_pregnant"]
     if profile["birthday"].present?
       ary = profile["birthday"].split('-').map { |e| e.to_i }
       birthday = Time.mktime(ary[0], ary[1], ary[2])

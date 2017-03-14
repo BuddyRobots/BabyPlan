@@ -14,22 +14,23 @@
         %img.back{src: asset_path("mybook/back.png")}
 
     .item-div
-      .item-box#num1
-        %span.item 儿童姓名：
-        %input.input-div#name{value: @current_user.name}
-      .item-box#num2
-        %span.item 出生日期：
-        %input.input-div#datepicker{value: @current_user.birthday_str}
-      .item-box#num3
-        %span.item 性别：
-        = select_tag "gender", options_for_select(User.genders_for_select, @current_user.gender), class: "input-div"
+      - if !@current_user.is_pregnant
+        .item-box#num1
+          %span.item 儿童姓名：
+          %input.input-div#name{value: @current_user.name}
+        .item-box#num2
+          %span.item 出生日期：
+          %input.input-div#datepicker{value: @current_user.birthday_str}
+        .item-box#num3
+          %span.item 性别：
+          = select_tag "gender", options_for_select(User.genders_for_select, @current_user.gender), class: "input-div"
       .item-box
         %span.item 家长姓名：
         %input.input-div#parent{value: @current_user.parent}
       .item-box
         %span.item#address-span 详细地址：
         %textarea#address{value: @current_user.address, rows: "3"}= @current_user.address
-    .check_box.pre_bm
+    .check_box.pregnant
       %label.no-bold
         %input#choice{type: "checkbox"} 我是准爸爸或准妈妈
     .btn-div

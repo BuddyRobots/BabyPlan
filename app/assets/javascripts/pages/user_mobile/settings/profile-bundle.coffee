@@ -18,6 +18,7 @@ $ ->
     gender = $("#gender").val()
     parent = $("#parent").val()
     address = $("#address").val()
+    is_pregnant = $("#choice").is(":checked")
 
     $.postJSON(
       '/user_mobile/settings/update_profile/',
@@ -29,6 +30,7 @@ $ ->
             gender: gender
             parent: parent
             address: address
+            is_pregnant: is_pregnant
           }
       },
       (data) ->
@@ -43,4 +45,4 @@ $ ->
 
   $("#choice").click ->
     if $(this).attr("checked", "checked")
-      $("#num1, #num2, #num3").toggle()
+      $("#num1, #num2, #num3").toggle(400)
