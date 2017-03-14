@@ -48,17 +48,8 @@
                       %a.set-available.link-available{:href => "javascript:void(0);"} 关闭
                     - else
                       %a.set-available.link-unavailable{:href => "javascript:void(0);"} 开放
-          .select-page 
-            %span.totalitems= "共#{@centers[:total_page]}页,总计#{@centers[:total_number]}条"
-            %span.choice-page
-              %ul.pagination.pagination-sm
-                %li
-                  %a{:href => "/admin/centers?keyword=#{@keyword}&page=#{@centers[:previous_page]}"} «
-                - ( (@centers[:previous_page] > 2 ? @centers[:previous_page] - 2 : 1) .. (@centers[:next_page] < @centers[:total_page] - 2 ? @centers[:next_page] + 2 : @centers[:total_page]) ).to_a.each do |page|
-                  %li
-                    %a{:href => "/admin/centers?keyword=#{@keyword}&page=#{page}"}= page
-                %li
-                  %a{:href => "/admin/centers?keyword=#{@keyword}&page=#{@centers[:next_page]}"} »
+          = render "admin/partials/auto_paginate", locals: { instance: @centers, url: "/admin/centers?keyword=#{@keyword}&", page: 'page'}
+          
 
 #closeModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
   .modal-dialog

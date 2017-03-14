@@ -50,17 +50,7 @@
                             %a.details{:href => "/staff/transfers/#{e[:id]}"} 详情
                             - if e[:count] == 0 && e[:status] == Transfer::PREPARE
                               %a.details{:href => "/staff/transfers/#{e[:id]}/remove"} 删除
-                .select-page 
-                  %span.totalitems= "共#{@out_transfers[:total_page]}页,总计#{@out_transfers[:total_number]}条"
-                  %span.choice-page
-                    %ul.pagination.pagination-sm
-                      %li
-                        %a{:href => "/staff/transfers?keyword=#{@keyword}&page=#{@out_transfers[:previous_page]}"} «
-                      - ( (@out_transfers[:previous_page] > 2 ? @out_transfers[:previous_page] - 2 : 1) .. (@out_transfers[:next_page] < @out_transfers[:total_page] - 2 ? @out_transfers[:next_page] + 2 : @out_transfers[:total_page]) ).to_a.each do |page|
-                        %li
-                          %a{:href => "/staff/transfers?keyword=#{@keyword}&page=#{page}"}= page
-                      %li
-                        %a{:href => "/staff/transfers?keyword=#{@keyword}&page=#{@out_transfers[:next_page]}"} »
+                = render "staff/partials/auto_paginate", locals: { instance: @out_transfers, url: "/staff/transfers?keyword=#{@keyword}&", page: 'page'}
           #tab2.tab-pane  
             .movein-box
               - if @in_transfers[:data].blank?
@@ -86,14 +76,5 @@
                           %td#status{class: e[:status_class]}= e[:status_str]
                           %td
                             %a.details{:href => "/staff/transfers/#{e[:id]}"} 详情
-                .select-page 
-                  %span.totalitems= "共#{@in_transfers[:total_page]}页,总计#{@in_transfers[:total_number]}条"
-                  %span.choice-page
-                    %ul.pagination.pagination-sm
-                      %li
-                        %a{:href => "/staff/transfers?profile=in&keyword=#{@keyword}&page=#{@in_transfers[:previous_page]}"} «
-                      - ( (@in_transfers[:previous_page] > 2 ? @in_transfers[:previous_page] - 2 : 1) .. (@in_transfers[:next_page] < @in_transfers[:total_page] - 2 ? @in_transfers[:next_page] + 2 : @in_transfers[:total_page]) ).to_a.each do |page|
-                        %li
-                          %a{:href => "/staff/transfers?profile=in&keyword=#{@keyword}&page=#{page}"}= page
-                      %li
-                        %a{:href => "/staff/transfers?profile=in&keyword=#{@keyword}&page=#{@in_transfers[:next_page]}"} »
+                = render "staff/partials/auto_paginate", locals: { instance: @in_transfers, url: "/staff/transfers?profile=in&keyword=#{@keyword}&", page: 'page'}
+                

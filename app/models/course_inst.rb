@@ -15,6 +15,8 @@ class CourseInst
   field :speaker, type: String
   field :date, type: String
   field :date_in_calendar, type: Array, default: [ ]
+  field :min_age, type: Integer
+  field :max_age, type: Integer
 
   has_one :photo, class_name: "Material", inverse_of: :course_inst_photo
   has_one :feed
@@ -53,7 +55,9 @@ class CourseInst
       price_pay: course_inst_info[:price_pay],
       date: course_inst_info[:date],
       speaker: course_inst_info[:speaker],
-      date_in_calendar: course_inst_info[:date_in_calendar]
+      date_in_calendar: course_inst_info[:date_in_calendar],
+      min_age: course_inst_info[:min_age],
+      max_age: course_inst_info[:max_age]
     })
     course_inst.center = center
     course_inst.save
@@ -93,7 +97,9 @@ class CourseInst
         date: course_inst_info["date"],
         speaker: course_inst_info["speaker"],
         address: course_inst_info["address"],
-        date_in_calendar: course_inst_info["date_in_calendar"]
+        date_in_calendar: course_inst_info["date_in_calendar"],
+        min_age: course_inst_info["min_age"],
+        max_age: course_inst_info["max_age"]
       }
     )
     nil
@@ -128,6 +134,14 @@ class CourseInst
     end_time = last_day.split(',')[0]
     end_date = end_time.split('T')[0]
     return start_date + "-" + end_date
+  end
+
+  def start_date
+    first_day = self.date_in_calendar[0]
+    return nil if first_day.blank?
+    start_time = first_day.split(',')[0]
+    start_date = start_time.split('T')[0]
+    return start_date
   end
 
   def signin_info(class_num)

@@ -36,7 +36,7 @@ class ApplicationController < ActionController::Base
         logger.info "AAAAAAAAAA"
         cookies[:auth_key] = {
           :value => auth_key,
-          :expires => 3.minutes.from_now,
+          :expires => Rails.env == "production" ? 5.minutes.from_now : 24.months.from_now,
           :domain => :all
         }
         return true

@@ -22,7 +22,7 @@
           %li.active
             %a{"data-toggle" => "tab", :href => "#tab1"} 本区开课
           %li
-            %a{"data-toggle" => "tab", :href => "#tab2"} 可开课程
+            %a#open_course{"data-toggle" => "tab", :href => "#tab2"} 可开课程
 
         .tab-content
           #tab1.tab-pane.active
@@ -55,17 +55,8 @@
                               %a.set-available.link-available{:href => "javascript:void(0);"} 下架
                             - else
                               %a.set-available.link-unavailable{:href => "javascript:void(0);"} 上架
-                .select-page 
-                  %span.totalitems= "共#{@course_insts[:total_page]}页,总计#{@course_insts[:total_number]}条"
-                  %span.choice-page
-                    %ul.pagination.pagination-sm
-                      %li
-                        %a{:href => "/staff/courses?keyword=#{@keyword}&course_inst_page=#{@course_insts[:previous_page]}"} «
-                      - ( (@course_insts[:previous_page] > 2 ? @course_insts[:previous_page] - 2 : 1) .. (@course_insts[:next_page] < @course_insts[:total_page] - 2 ? @course_insts[:next_page] + 2 : @course_insts[:total_page]) ).to_a.each do |page|
-                        %li
-                          %a{:href => "/staff/courses?keyword=#{@keyword}&course_inst_page=#{page}"}= page
-                      %li
-                        %a{:href => "/staff/courses?keyword=#{@keyword}&course_inst_page=#{@course_insts[:next_page]}"} »
+                = render "staff/partials/auto_paginate", locals: { instance: @course_insts, url: "/staff/courses?keyword=#{@keyword}&", page: 'course_inst_page'}
+
           #tab2.tab-pane
             .open-course
               - if @courses[:data].length == 0
@@ -93,18 +84,7 @@
                           %td= e[:price]
                           %td#open
                             = link_to "开设课程", "/staff/courses/new?course_id=" + e[:id], class: "prepare"
-                      
-                .select-page 
-                  %span.totalitems= "共#{@courses[:total_page]}页,总计#{@courses[:total_number]}条"
-                  %span.choice-page
-                    %ul.pagination.pagination-sm
-                      %li
-                        %a{:href => "/staff/courses?keyword=#{@keyword}&course_page=#{@courses[:previous_page]}&profile=template"} «
-                      - ( (@courses[:previous_page] > 2 ? @courses[:previous_page] - 2 : 1) .. (@courses[:next_page] < @courses[:total_page] - 2 ? @courses[:next_page] + 2 : @courses[:total_page]) ).to_a.each do |page|
-                        %li
-                          %a{:href => "/staff/courses?keyword=#{@keyword}&course_page=#{page}&profile=template"}= page
-                      %li
-                        %a{:href => "/staff/courses?keyword=#{@keyword}&course_page=#{@courses[:next_page]}&profile=template"} »
+                = render "staff/partials/auto_paginate", locals: { instance: @courses, url: "/staff/courses?keyword=#{@keyword}&profile=template&", page: 'course_page'}    
         
 
 

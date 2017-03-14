@@ -164,31 +164,33 @@ class Staff::CoursesController < Staff::ApplicationController
     render json: retval_wrapper(retval) and return
   end
 
-  def next_refund_request
-    cp = CourseParticipate.waiting_for_refund(@current_center)
-    if cp.present?
-      retval = {
-        id: cp.id.to_s,
-        course_name: cp.course_inst.name || cp.course_inst.course.name,
-        course_id: cp.course_inst.id.to_s,
-        client_name: cp.client.name,
-        client_id: cp.client.id.to_s
-      }
-      render json: retval_wrapper(retval) and return
-    else
-      render json: retval_wrapper(ErrCode::BLANK_DATA) and return
-    end
-  end
 
-  def reject_refund
-    @course_participate = CourseParticipate.where(id: params[:id]).first
-    retval = @course_participate.reject_refund(params[:feedback])
-    render json: retval_wrapper(retval) and return
-  end
+  # 与退款有关
+  # def next_refund_request
+  #   cp = CourseParticipate.waiting_for_refund(@current_center)
+  #   if cp.present?
+  #     retval = {
+  #       id: cp.id.to_s,
+  #       course_name: cp.course_inst.name || cp.course_inst.course.name,
+  #       course_id: cp.course_inst.id.to_s,
+  #       client_name: cp.client.name,
+  #       client_id: cp.client.id.to_s
+  #     }
+  #     render json: retval_wrapper(retval) and return
+  #   else
+  #     render json: retval_wrapper(ErrCode::BLANK_DATA) and return
+  #   end
+  # end
 
-  def approve_refund
-    @course_participate = CourseParticipate.where(id: params[:id]).first
-    retval = @course_participate.approve_refund(params[:feedback])
-    render json: retval_wrapper(retval) and return
-  end
+  # def reject_refund
+  #   @course_participate = CourseParticipate.where(id: params[:id]).first
+  #   retval = @course_participate.reject_refund(params[:feedback])
+  #   render json: retval_wrapper(retval) and return
+  # end
+
+  # def approve_refund
+  #   @course_participate = CourseParticipate.where(id: params[:id]).first
+  #   retval = @course_participate.approve_refund(params[:feedback])
+  #   render json: retval_wrapper(retval) and return
+  # end
 end

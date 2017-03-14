@@ -44,14 +44,5 @@
                       %a.set-available.link-available{:href => "javascript:void(0);"} 下架
                     - else
                       %a.set-available.link-unavailable{:href => "javascript:void(0);"} 上架
-        .select-page 
-          %span.totalitems= "共#{@courses[:total_page]}页,总计#{@courses[:total_number]}条"
-          %span.choice-page
-            %ul.pagination.pagination-sm
-              %li
-                %a{:href => "/admin/courses?keyword=#{@keyword}&page=#{@courses[:previous_page]}"} «
-              - ( (@courses[:previous_page] > 2 ? @courses[:previous_page] - 2 : 1) .. (@courses[:next_page] < @courses[:total_page] - 2 ? @courses[:next_page] + 2 : @courses[:total_page]) ).to_a.each do |page|
-                %li
-                  %a{:href => "/admin/courses?keyword=#{@keyword}&page=#{page}"}= page
-              %li
-                %a{:href => "/admin/courses?keyword=#{@keyword}&page=#{@courses[:next_page]}"} »
+        = render "admin/partials/auto_paginate", locals: { instance: @courses, url: "/admin/courses?keyword=#{@keyword}&", page: 'page'}
+        

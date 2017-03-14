@@ -63,12 +63,10 @@ $ ->
       { },
       (data) ->
         if data.success
-          $.mobile_page_notification("申请已提交，工作人员将在5个工作日内审核")
+          $.mobile_page_notification("退款成功")
           $("#refundModal").modal('hide')
         else
-          if data.code == REFUND_REQUESTED
-            $.mobile_page_notification("退款申请已提交")
-          else
-            $.mobile_page_notification("该课程不允许退款")
-          $("#refundModal").modal('hide')
+          if data.code == REFUND_TIME_FAIL
+            $.mobile_page_notification("该课程距开课只有一天时间，已经不能退款！")
+          
       )

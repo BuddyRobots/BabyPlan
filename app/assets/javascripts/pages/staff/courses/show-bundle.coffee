@@ -225,6 +225,8 @@ $ ->
     $("#course-date").val($("#date-span").text())
     $("#course-speaker").val($("#speaker-span").text())
     $("#course-address").val($("#address-span").text())
+    $("#min-age").val($("#min-age-span").text())
+    $("#max-age").val($("#max-age-span").text())
 
     $("#course-num").css("width", $(".num-box").width() - $(".course-num").width()-5)
 
@@ -267,6 +269,8 @@ $ ->
     date = $("#course-date").val()
     speaker = $("#course-speaker").val()
     address = $("#course-address").val()
+    min_age = $("#min-age").val()
+    max_age = $("#max-age").val()
 
     fc_events = $('#calendar').fullCalendar('clientEvents')
     date_in_calendar = []
@@ -294,6 +298,8 @@ $ ->
           speaker: speaker
           address: address
           date_in_calendar: date_in_calendar
+          min_age: min_age
+          max_age: max_age
         }
       },
       (data) ->
@@ -319,6 +325,8 @@ $ ->
           $("#date-span").text(date)
           $("#speaker-span").text(speaker)
           $("#address-span").text(address)
+          $("#min-age-span").text(min_age)
+          $("#max-age-span").text(max_age)
 
           disable_repeat()
           $(".class-calendar").toggle()

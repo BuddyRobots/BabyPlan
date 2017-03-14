@@ -1,0 +1,33 @@
+- content_for :head do
+  = javascript_include_tag "pages/admin/agreements/index-bundle"
+  = stylesheet_link_tag "pages/admin/agreements/index-bundle", :media => "all"
+  :javascript
+    window.aid = "#{@agreement.id.to_s}"
+
+.content-area
+  .content-box
+    .manage-box.clearfix
+      %p.user-agreement 用户须知
+      .btn.end-btn{:type => "button"} 
+        %img.end-img{src: asset_path("managecenter/ticker.png")} 完成
+      .btn.edit-btn{:type => "button"} 
+        %img.edit-img{src: asset_path("managecenter/edit.png")} 编辑
+    .manage-content
+      .display-box
+        .display-area
+          %p.title= @agreement.title.present? ? @agreement.title : xxxxxx儿童中心用户须知
+          .display-content= @agreement.content.html_safe
+
+
+      / 点击edit-btn后display-box隐藏，edit-area显示
+      .edit-area
+        .form-group
+          %label.input-name 须知标题:
+          %input.form-control#input-caption{:type => "text"}
+         
+        .notice-introduce.clearfix
+          %span.introduce 须知正文:
+          .wangedit-area
+            #edit-box
+
+
