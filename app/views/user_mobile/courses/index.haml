@@ -17,7 +17,7 @@
             .right-div
               / %img.icon{src: asset_path("kidscenter/ke.png")}
               %span.caption= e.name || e.course.name
-              %span.redribbon
+              %span{class: e.status_class}
               .location-div
                 %span.age 适合年龄: 
                 %span.age= e.min_age.present? ? e.min_age.to_s + "~" + e.max_age.to_s + "岁" : "无"

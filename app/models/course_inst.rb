@@ -212,7 +212,8 @@ class CourseInst
       ele_center: self.center.name,
       ele_age: self.min_age.present? ? self.min_age.to_s + "~" + self.max_age.to_s + "岁" : "无",
       ele_price: self.price.to_s + "元",
-      ele_date:  ActionController::Base.helpers.truncate(self.date.strip(), length: 25)
+      ele_date:  ActionController::Base.helpers.truncate(self.date.strip(), length: 25),
+      ele_status: self.status_class
     }
   end
 
@@ -287,5 +288,15 @@ class CourseInst
       signin: signin,
       signup_start_str: signup_time_ary.present? ? Time.at(signup_time_ary[0]).strftime('%Y-%m-%d') : nil
     }
+  end
+
+  def status_class
+    if self.capacity == self.effective_signup_num
+      return "greyribbon"
+    elsif self.capacity - self.effective_signup_num <= 5 && self.capacity - self.effective_signup_num > 0
+      return "redribbon"
+    else
+      return "greenribbon"
+    end
   end
 end

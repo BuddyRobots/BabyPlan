@@ -238,9 +238,21 @@ a{
   display: inline-block;
   vertical-align: middle;
   width: 10%;
-  padding: 4%;
+  padding: 6%;
   margin-left: 2%;
   background: image-url("web/redribbon.png") no-repeat;
+  background-size:100%;
+  background-position:center;
+}
+.greenribbon {
+  @extend .redribbon;
+  background: image-url("web/greenribbon.png") no-repeat;
+  background-size:100%;
+  background-position:center;
+}
+.greyribbon {
+  @extend .redribbon;
+  background: image-url("web/greyribbon") no-repeat;
   background-size:100%;
   background-position:center;
 }
