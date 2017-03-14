@@ -189,7 +189,7 @@ h2 {
 // edit-calendar
 .calendar-wrapper {
 	width: 72.7%;
-	margin: 20px 0 0 20px;
+	margin: 20px 0 20px 20px;
 	// border: 1px solid #c8c8c8;
 	border-radius: 6px;
 }
@@ -699,4 +699,12 @@ h2 {
 #attend-statistics {
 	width:800px;
 	height: 220px;
+}
+
+
+
+
+
+.margin-l {
+	margin-left: 4px;
 }
