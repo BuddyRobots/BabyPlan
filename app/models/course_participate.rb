@@ -96,7 +96,7 @@ class CourseParticipate
     cp.client = client
     cp.course = course_inst.course
     cp.save
-    expired_at = Time.now + 1.days
+    expired_at = Time.now + 4.hours
     cp.update_attributes({expired_at: expired_at.to_i})
     cp
     # return cp.unifiedorder_interface(remote_ip, openid)
@@ -106,7 +106,7 @@ class CourseParticipate
     if (self.is_expired || self.price_pay != self.course_inst.price_pay) && self.course_inst.price_pay > 0
       self.update_attributes(
         {
-          expired_at: (Time.now + 1.days).to_i,
+          expired_at: (Time.now + 4.hours).to_i,
           order_id: Util.random_str(32),
           price_pay: self.course_inst.price_pay,
           prepay_id: ""

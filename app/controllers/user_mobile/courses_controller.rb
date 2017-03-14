@@ -52,7 +52,10 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
     # ci = CourseParticipate.where(order_id: out_trade_no).first
     # get result_code, err_code and err_code_des
     # ci.update_order(result_code, err_code, err_code_des)
-    render :xml => {return_code: "SUCCESS"} and return
+    logger.info "AAAAAAAAAAAAAAAAA"
+    logger.info request.inspect
+    logger.info "AAAAAAAAAAAAAAAAA"
+    render :xml => {return_code: "SUCCESS"}.to_xml(dasherize: false, root: "xml") and return
   end
 
   def pay_finished
