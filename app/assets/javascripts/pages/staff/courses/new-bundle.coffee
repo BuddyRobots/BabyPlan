@@ -75,6 +75,8 @@ $ ->
     date = $("#course-date").val()
     speaker = $("#course-speaker").val()
     address = $("#course-address").val()
+    min_age = $("#min-age").val()
+    max_age = $("#max-age").val()
 
     fc_events = $('#calendar').fullCalendar('clientEvents')
     date_in_calendar = []
@@ -103,6 +105,8 @@ $ ->
         speaker: speaker
         address: address
         date_in_calendar: date_in_calendar
+        min_age: min_age
+        max_age: max_age
       },
       (data) ->
         if data.success

@@ -51,6 +51,13 @@
         %input.input-area.form-control#course-price{:type => "text", value: @course.price}
         %label.input-caption 公益价:
         %input.input-area.form-control#public-price{:type => "text", value: @course.price_pay}
+      .controls.controls-row
+        %label.input-caption 最小适龄:
+        %input.input-area.form-control#min-age{:type => "text", value: @course.min_age}
+        %label.input-caption.margin-l 最大适龄:
+        %input.input-area.form-control#max-age{:type => "text", value: @course.max_age}
+        / %label.input-caption.margin-l 开课单位:
+        / %input.input-area.form-control{:type => "text", value: @course.price_pay}
       
       .calendar-wrapper.clearfix
         .calendar-operation-wrapper
