@@ -55,7 +55,7 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
     logger.info "AAAAAAAAAAAAAAAAA"
     logger.info request.inspect
     logger.info "AAAAAAAAAAAAAAAAA"
-    render :xml => {return_code: "SUCCESS"} and return
+    render :xml => {return_code: "SUCCESS"}.to_xml(dasherize: false, root: "xml") and return
   end
 
   def pay_finished
