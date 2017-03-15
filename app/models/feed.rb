@@ -85,7 +85,11 @@ class Feed
       ele_photo: self.img_src,
       ele_content: ActionController::Base.helpers.truncate(ActionController::Base.helpers.strip_tags(self.desc).strip(), length: 50),
       ele_icon: self.feed_icon,
-      ele_center: self.center_str
+      ele_center: self.center_str,
+      ele_course: self.course_inst.present?,
+      ele_age: self.course_inst.present? ? self.course_inst.min_age.present? ? self.course_inst.min_age.to_s + "~" + self.course_inst.max_age.to_s + "岁" : "无" : "",
+      ele_price: self.course_inst.present? ? self.course_inst.price_pay.to_s + "元" : "",
+      ele_date: self.course_inst.present? ? ActionController::Base.helpers.truncate(self.course_inst.date.strip(), length: 25) : ""
     }
   end
 end

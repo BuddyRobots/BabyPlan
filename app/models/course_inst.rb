@@ -208,7 +208,7 @@ class CourseInst
       ele_content: ActionController::Base.helpers.truncate(ActionController::Base.helpers.strip_tags(self.course.desc).strip(), length: 50),
       ele_center: self.center.name,
       ele_age: self.min_age.present? ? self.min_age.to_s + "~" + self.max_age.to_s + "岁" : "无",
-      ele_price: self.price.to_s + "元",
+      ele_price: self.price_pay.to_s + "元",
       ele_date:  ActionController::Base.helpers.truncate(self.date.strip(), length: 25)
     }
   end
