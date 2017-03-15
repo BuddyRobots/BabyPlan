@@ -225,8 +225,8 @@ $ ->
     $("#course-date").val($("#date-span").text())
     $("#course-speaker").val($("#speaker-span").text())
     $("#course-address").val($("#address-span").text())
-    $("#min-age").val($("#min-age-span").text())
-    $("#max-age").val($("#max-age-span").text())
+    $("#min-age").val(window.min_age)
+    $("#max-age").val(window.max_age)
     $("#course-school").val($("#school-span").text())
 
     $("#course-num").css("width", $(".num-box").width() - $(".course-num").width()-5)
@@ -328,8 +328,10 @@ $ ->
           $("#date-span").text(date)
           $("#speaker-span").text(speaker)
           $("#address-span").text(address)
-          $("#min-age-span").text(min_age)
-          $("#max-age-span").text(max_age)
+          window.min_age = min_age
+          window.max_age = max_age
+          $("#min-age-span").text(min_age + "岁")
+          $("#max-age-span").text(max_age + "岁")
           $("#school-span").text(school)
 
           disable_repeat()

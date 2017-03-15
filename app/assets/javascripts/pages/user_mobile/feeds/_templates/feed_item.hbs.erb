@@ -3,10 +3,31 @@
     <img class="visit" src={{ele_photo}}>
   </div>
   <div class="right-div">
-    <img class="icon" src="<%= asset_path('kidscenter/{{ele_icon}}.png') %>">
+    {{#ifCond ele_icon "ke"}}
+      <img class="icon" src="<%= asset_path('kidscenter/ke.png') %>">
+    {{/ifCond}}
+    {{#ifCond ele_icon "hui"}}
+      <img class="icon" src="<%= asset_path('kidscenter/hui.png') %>">
+    {{/ifCond}}
+    {{#ifCond ele_icon "gao"}}
+      <img class="icon" src="<%= asset_path('kidscenter/gao.png') %>">
+    {{/ifCond}}
     <p class="caption">{{ele_name}}</p>
-    <p class="message">{{ele_content}}</p>
-    <div class="location-div">
+    {{#ifCond ele_course true}}
+      <div class="location-div">
+        <span class="age">适合年龄:</span>
+        <span class="age">{{ele_age}}</span>
+        <span class="age price">价格:</span>
+        <span class="age">{{ele_price}}</span>
+      </div>
+      <div class="location-div">
+        <img class="time" src="<%= asset_path('web/time.png') %>">
+        <span class="date">{{ele_date}}</span>
+      </div>
+    {{else}}
+      <p class="message">{{ele_content}}</p>
+    {{/ifCond}}
+    <div class="location-div margin-b">
       <img class="location" src="<%= asset_path('web/location.png') %>">
       <span class="center">{{ele_center}}</span>
     </div>
