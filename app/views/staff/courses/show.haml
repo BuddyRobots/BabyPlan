@@ -9,6 +9,8 @@
     window.length = "#{@course_inst.length}"
     window.date_in_calendar = "#{@course_inst.date_in_calendar_str}"
     window.profile = "#{@profile}"
+    window.min_age = "#{@course_inst.min_age}"
+    window.max_age = "#{@course_inst.max_age}"
 
 .content-area
   .manage-content
@@ -95,11 +97,11 @@
               %input.input-area.form-control#public-charge{:type => "text"}
           .controls.controls-row
             %label.input-caption 最小适龄:
-            %span.unedit-box#min-age-span= @course_inst.min_age
+            %span.unedit-box#min-age-span= @course_inst.min_age.to_s + "岁"
             %span.edit-box
               %input.input-area.form-control#min-age{:type => "text"}
             %label.input-caption.margin-l 最大适龄:
-            %span.unedit-box#max-age-span= @course_inst.max_age
+            %span.unedit-box#max-age-span= @course_inst.max_age.to_s + "岁"
             %span.edit-box
               %input.input-area.form-control#max-age{:type => "text"}
             / %label.input-caption.margin-l 授课单位:
