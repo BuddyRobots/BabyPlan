@@ -330,11 +330,15 @@ $ ->
           $("#address-span").text(address)
           window.min_age = min_age
           window.max_age = max_age
-
-          $("#min-age-span").text(min_age + "岁")
-          $("#max-age-span").text(max_age + "岁")
           if min_age == ""
             $("#min-age-span").text("无")
+          else
+            $("#min-age-span").text(min_age + "岁")
+          if max_age == ""
+            $("#max-age-span").text("无")
+          else
+            $("#max-age-span").text(max_age + "岁")
+
           disable_repeat()
           $(".class-calendar").toggle()
           $(".calendar-operation-wrapper").toggle()
