@@ -97,17 +97,7 @@
                       %td= ci.price.to_s + "元"
                       %td= ci.date
             / 分页
-            .select-page 
-              %span.totalitems= "共#{@course_insts[:total_page]}页,总计#{@course_insts[:total_number]}条"
-              %span.choice-page
-                %ul.pagination.pagination-sm
-                  %li
-                    %a{:href => "/admin/courses/#{@course.id.to_s}?profile=area&page=#{@course_insts[:previous_page]}"} «
-                  - ( (@course_insts[:previous_page] > 2 ? @course_insts[:previous_page] - 2 : 1) .. (@course_insts[:next_page] < @course_insts[:total_page] - 2 ? @course_insts[:next_page] + 2 : @course_insts[:total_page]) ).to_a.each do |page|
-                    %li
-                      %a{:href => "/admin/courses/#{@course.id.to_s}?profile=area&page=#{page}"}= page
-                  %li
-                    %a{:href => "/admin/courses/#{@course.id.to_s}?profile=area&page=#{@course_insts[:next_page]}"} »
+            = render "admin/partials/auto_paginate", locals: { instance: @course_insts, url: "/admin/courses/#{@course.id.to_s}?profile=area&", page: 'page'}
 
             %p.class-calendar 点击表格中记录显示具体课程日历
             #calendar

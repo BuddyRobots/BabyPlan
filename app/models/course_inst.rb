@@ -15,6 +15,8 @@ class CourseInst
   field :speaker, type: String
   field :date, type: String
   field :date_in_calendar, type: Array, default: [ ]
+  field :min_age, type: Integer
+  field :max_age, type: Integer
 
   has_one :photo, class_name: "Material", inverse_of: :course_inst_photo
   has_one :feed
@@ -53,7 +55,9 @@ class CourseInst
       price_pay: course_inst_info[:price_pay],
       date: course_inst_info[:date],
       speaker: course_inst_info[:speaker],
-      date_in_calendar: course_inst_info[:date_in_calendar]
+      date_in_calendar: course_inst_info[:date_in_calendar],
+      min_age: course_inst_info[:min_age],
+      max_age: course_inst_info[:max_age]
     })
     course_inst.center = center
     course_inst.save
@@ -93,7 +97,9 @@ class CourseInst
         date: course_inst_info["date"],
         speaker: course_inst_info["speaker"],
         address: course_inst_info["address"],
-        date_in_calendar: course_inst_info["date_in_calendar"]
+        date_in_calendar: course_inst_info["date_in_calendar"],
+        min_age: course_inst_info["min_age"],
+        max_age: course_inst_info["max_age"]
       }
     )
     nil
@@ -128,6 +134,14 @@ class CourseInst
     end_time = last_day.split(',')[0]
     end_date = end_time.split('T')[0]
     return start_date + "-" + end_date
+  end
+
+  def start_date
+    first_day = self.date_in_calendar[0]
+    return nil if first_day.blank?
+    start_time = first_day.split(',')[0]
+    start_date = start_time.split('T')[0]
+    return start_date
   end
 
   def signin_info(class_num)
@@ -192,8 +206,19 @@ class CourseInst
       ele_id: self.id.to_s,
       ele_photo: self.photo.nil? ? ActionController::Base.helpers.asset_path("banner.png") : self.photo.path,
       ele_content: ActionController::Base.helpers.truncate(ActionController::Base.helpers.strip_tags(self.course.desc).strip(), length: 50),
-      ele_center: self.center.name
+      ele_center: self.center.name,
+      ele_age: self.min_age.present? ? self.min_age.to_s + "~" + self.max_age.to_s + "岁" : "无",
+      ele_price: self.judge_price,
+      ele_date:  ActionController::Base.helpers.truncate(self.date.strip(), length: 25)
     }
+  end
+
+  def judge_price
+    if self.price_pay.to_i == 0
+      return "免费"
+    else
+      return self.price_pay.to_s + "元"
+    end
   end
 
   def effective_signup_num

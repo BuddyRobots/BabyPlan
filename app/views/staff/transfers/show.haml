@@ -42,16 +42,4 @@
               %td.td-data= info["author"]
               %td.td-data= info["isbn"]
               %td.td-data.red= (@transfer.status == Transfer::ABNORMAL && info["lost_count"] > 0) ? "缺失" + info["lost_count"].to_s + "本" : ""
-
-    .select-page 
-      %span.totalitems= "共#{@books_info_detail[:total_page]}页,总计#{@books_info_detail[:total_number]}条"
-      %span.choice-page
-        %ul.pagination.pagination-sm
-
-          %li
-            %a{:href => "/staff/transfers/#{@transfer.id.to_s}?page=#{@books_info_detail[:previous_page]}"} «
-          - ( (@books_info_detail[:previous_page] > 2 ? @books_info_detail[:previous_page] - 2 : 1) .. (@books_info_detail[:next_page] < @books_info_detail[:total_page] - 2 ? @books_info_detail[:next_page] + 2 : @books_info_detail[:total_page]) ).to_a.each do |page|
-            %li
-              %a{:href => "/staff/transfers/#{@transfer.id.to_s}?page=#{page}"}= page
-          %li
-            %a{:href => "/staff/transfers/#{@transfer.id.to_s}?page=#{@books_info_detail[:next_page]}"} »
+    = render "staff/partials/auto_paginate", locals: { instance: @books_info_detail, url: "/staff/transfers/#{@transfer.id.to_s}?", page: 'page'}

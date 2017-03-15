@@ -4,6 +4,7 @@
   :javascript
     window.keyword = "#{@keyword}"
     window.profile = "#{@profile}"
+   
 .content-area
   /books-index
   .content-box
@@ -60,17 +61,8 @@
                               %a.set-available.link-available{:href => "javascript:void(0);"} 下架
                             - else
                               %a.set-available.link-unavailable{:href => "javascript:void(0);"} 上架
-                .select-page 
-                  %span.totalitems= "共#{@books[:total_page]}页,总计#{@books[:total_number]}条"
-                  %span.choice-page
-                    %ul.pagination.pagination-sm
-                      %li
-                        %a{:href => "/staff/books?keyword=#{@keyword}&page=#{@books[:previous_page]}"} «
-                      - ( (@books[:previous_page] > 2 ? @books[:previous_page] - 2 : 1) .. (@books[:next_page] < @books[:total_page] - 2 ? @books[:next_page] + 2 : @books[:total_page]) ).to_a.each do |page|
-                        %li
-                          %a{:href => "/staff/books?keyword=#{@keyword}&page=#{page}"}= page
-                      %li
-                        %a{:href => "/staff/books?keyword=#{@keyword}&page=#{@books[:next_page]}"} »
+                = render "staff/partials/auto_paginate", locals: { instance: @books, url: "/staff/books?keyword=#{@keyword}&", page: 'page'}
+                
           #tab2.tab-pane
             .tab-box
               - if @borrows[:data].blank?
@@ -100,17 +92,8 @@
                             %a.return{href: "javascript:void(0);"} 归还
                           %td
                             %a.lost{href: "javascript:void(0);"} 丢失
-                .select-page 
-                  %span.totalitems= "共#{@borrows[:total_page]}页,总计#{@borrows[:total_number]}条"
-                  %span.choice-page
-                    %ul.pagination.pagination-sm
-                      %li
-                        %a{:href => "/staff/books?keyword=#{@keyword}&profile=borrows&borrow_page=#{@borrows[:previous_page]}"} «
-                      - ( (@borrows[:previous_page] > 2 ? @borrows[:previous_page] - 2 : 1) .. (@borrows[:next_page] < @borrows[:total_page] - 2 ? @borrows[:next_page] + 2 : @borrows[:total_page]) ).to_a.each do |page|
-                        %li
-                          %a{:href => "/staff/books?keyword=#{@keyword}&profile=borrows&borrow_page=#{page}"}= page
-                      %li
-                        %a{:href => "/staff/books?keyword=#{@keyword}&profile=borrows&borrow_page=#{@borrows[:next_page]}"} »
+                = render "staff/partials/auto_paginate", locals: { instance: @borrows, url: "/staff/books?keyword=#{@keyword}&profile=borrows&", page: 'borrow_page'}
+                
 
 #shelveModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
   .modal-dialog

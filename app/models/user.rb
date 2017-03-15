@@ -37,6 +37,7 @@ class User
   field :address, type: String
   field :created_by_staff, type: Boolean, default: false
   field :first_signin, type: Boolean, default: true
+  field :is_pregnant, type: Boolean
 
   # relationships specific for clients
   # belongs_to :client_center
@@ -68,6 +69,17 @@ class User
 
   def is_client
     return self.user_type == CLIENT
+  end
+
+  def client_id
+    self.is_client ? self.id.to_s : ""
+  end
+
+  def self.see_feeds(user)
+    return true if user.blank?
+    return true if !user.is_client
+    return true if user.client_centers.present?
+    return false
   end
 
   def self.create_user(user_type, mobile, created_by_staff = false, center = nil)
@@ -165,11 +177,11 @@ class User
     Encryption.encrypt_auth_key(info)
   end
 
-  def verify_client(name, password, verify_code)
+  def verify_client(password, verify_code)
     if mobile_verify_code != verify_code
       return ErrCode::WRONG_VERIFY_CODE
     end
-    self.update_attributes(name: name, mobile_verified: true, status: NEW, password: Encryption.encrypt_password(password))
+    self.update_attributes(mobile_verified: true, status: NEW, password: Encryption.encrypt_password(password))
     self.save
     nil
   end
@@ -335,6 +347,7 @@ class User
     self.gender = profile["gender"].to_i
     self.parent = profile["parent"]
     self.address = profile["address"]
+    self.is_pregnant = profile["is_pregnant"]
     if profile["birthday"].present?
       ary = profile["birthday"].split('-').map { |e| e.to_i }
       birthday = Time.mktime(ary[0], ary[1], ary[2])

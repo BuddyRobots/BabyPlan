@@ -44,17 +44,8 @@
                 / %a.desc-click{:href => "/admin/announcements/" + e.id.to_s} 
                 /   详情
                 /   %img.desc-img{:src => "/assets/managecenter/double-right.png"}
-              .select-page 
-                %span.totalitems= "共#{@global_eles[:total_page]}页,总计#{@global_eles[:total_number]}条"
-                %span.choice-page
-                  %ul.pagination.pagination-sm
-                    %li
-                      %a{:href => "/admin/announcements?profile=global&keyword=#{@keyword}&page=#{@global_eles[:previous_page]}"} «
-                    - ( (@global_eles[:previous_page] > 2 ? @global_eles[:previous_page] - 2 : 1) .. (@global_eles[:next_page] < @global_eles[:total_page] - 2 ? @global_eles[:next_page] + 2 : @global_eles[:total_page]) ).to_a.each do |page|
-                      %li
-                        %a{:href => "/admin/announcements?profile=global&keyword=#{@keyword}&page=#{page}"}= page
-                    %li
-                      %a{:href => "/admin/announcements?profile=global&keyword=#{@keyword}&page=#{@global_eles[:next_page]}"} »
+              = render "admin/partials/auto_paginate", locals: { instance: @global_eles, url: "/admin/announcements?profile=global&keyword=#{@keyword}&", page: 'page'}
+             
           #tab2.tab-pane
             - if @local_eles[:data].length == 0
               .undiscover
@@ -72,15 +63,5 @@
                     %a.undeclared{:href => "javascript:void(0);"}= e.status_str
                   .desc
                     = e.plain_text
-              .select-page 
-                %span.totalitems= "共#{@local_eles[:total_page]}页,总计#{@local_eles[:total_number]}条"
-                %span.choice-page
-                  %ul.pagination.pagination-sm
-                    %li
-                      %a{:href => "/admin/announcements?profile=local&keyword=#{@keyword}&page=#{@local_eles[:previous_page]}"} «
-                    - ( (@local_eles[:previous_page] > 2 ? @local_eles[:previous_page] - 2 : 1) .. (@local_eles[:next_page] < @local_eles[:total_page] - 2 ? @local_eles[:next_page] + 2 : @local_eles[:total_page]) ).to_a.each do |page|
-                      %li
-                        %a{:href => "/admin/announcements?profile=local&keyword=#{@keyword}&page=#{page}"}= page
-                    %li
-                      %a{:href => "/admin/announcements?profile=local&keyword=#{@keyword}&page=#{@local_eles[:next_page]}"} »
+              = render "admin/partials/auto_paginate", locals: { instance: @local_eles, url: "/admin/announcements?profile=local&keyword=#{@keyword}&", page: 'page'}
                    

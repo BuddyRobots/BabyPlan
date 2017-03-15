@@ -2,7 +2,6 @@
   = javascript_include_tag "pages/staff/books/code_list-bundle"
   = stylesheet_link_tag "pages/staff/books/code_list-bundle", :media => "all"
 
-
 .content-area
   /books-code_list
   .content-box
@@ -40,15 +39,4 @@
                     %td= q[:created_at].strftime("%Y.%m.%d")
                     %td= q[:num]
                     %td.delete_qr= link_to "删除", "/staff/books/#{q[:id]}", method: :delete
-
-          .select-page 
-            %span.totalitems= "共#{@qr_exports[:total_page]}页，总计#{@qr_exports[:total_number]}条"
-            %span.choice-page
-              %ul.pagination.pagination-sm
-                %li
-                  %a{href: "/staff/books/code_list?page=#{@qr_exports[:previous_page]}"} «
-                - ( (@qr_exports[:previous_page] > 2 ? @qr_exports[:previous_page] - 2 : 1) .. (@qr_exports[:next_page] < @qr_exports[:total_page] - 2 ? @qr_exports[:next_page] + 2 : @qr_exports[:total_page]) ).to_a.each do |page|
-                  %li
-                    %a{href: "/staff/books/code_list?page=#{page}"}= page
-                %li
-                  %a{href: "/staff/books/code_list?page=#{@qr_exports[:next_page]}"} »     
+          = render "staff/partials/auto_paginate", locals: { instance: @qr_exports, url: "/staff/books/code_list?", page: 'page'}
