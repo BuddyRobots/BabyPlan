@@ -34,13 +34,19 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
   def new
     @course = CourseInst.where(id: params[:state]).first
     @course_participate = @current_user.course_participates.where(course_inst_id: @course.id).first
+
+    # if the order is expired, redirect to the show page
+    if @course_participate.present? && @course_participate.is_expred
+      redirect_to action: :show, id: params[:state] and return
+    end
+
     @course_participate = @course_participate || CourseParticipate.create_new(current_user, @course)
-    @course_participate.renew
     @course_participate.clear_refund
     if @course.price_pay > 0
       @course_participate.update_attributes({renew_status: true})
-      @open_id = Weixin.get_oauth_open_id(params[:code])
       if @course_participate.prepay_id.blank?
+        @open_id = Weixin.get_oauth_open_id(params[:code])
+        @course_participate.renew
         @course_participate.unifiedorder_interface(@remote_ip, @open_id)
       end
       @pay_info = @course_participate.get_pay_info
@@ -117,5 +123,11 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
     @course_participate = CourseParticipate.where(id: params[:id]).first
     retval = @course_participate.approve_refund
     render json: retval_wrapper(retval) and return
+  end
+
+  # judge whether a course_participate is expired
+  def is_expired
+    cp = CourseParticipate.where(id: params[:id]).first
+    render json: retval_wrapper({is_expired: cp.is_expired}) and return
   end
 end
