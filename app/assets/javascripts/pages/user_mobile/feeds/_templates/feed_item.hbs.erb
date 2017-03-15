@@ -3,7 +3,15 @@
     <img class="visit" src={{ele_photo}}>
   </div>
   <div class="right-div">
-    <img class="icon" src="<%= asset_path('kidscenter/{{ele_icon}}.png') %>">
+    {{#ifCond ele_icon "ke"}}
+      <img class="icon" src="<%= asset_path('kidscenter/ke.png') %>">
+    {{/ifCond}}
+    {{#ifCond ele_icon "hui"}}
+      <img class="icon" src="<%= asset_path('kidscenter/hui.png') %>">
+    {{/ifCond}}
+    {{#ifCond ele_icon "gao"}}
+      <img class="icon" src="<%= asset_path('kidscenter/gao.png') %>">
+    {{/ifCond}}
     <p class="caption">{{ele_name}}</p>
     {{#ifCond ele_course true}}
       <div class="location-div">
