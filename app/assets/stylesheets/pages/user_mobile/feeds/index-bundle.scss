@@ -208,6 +208,34 @@ a{
 }
 
 
+.location-div {
+  margin-bottom: 3%;
+  margin-top: 2%;
+}
+.age {
+	font-size: 2.4em;
+	color: #666;
+}
+.price {
+  margin-left: 15%;
+}
+.date {
+  font-size: 2.4em;
+  color: #aaa;
+}
+.time {
+	width: 6.4%;
+	max-width: 24px;
+  vertical-align: top;
+}
+.margin-b {
+	margin-bottom: 0;
+}
+
+
+
+
+
 @media screen and (max-width:640px) {
 	.content-area {
 		font-size: 100%;
