@@ -33,3 +33,14 @@ $ ->
           )
       else
         $.mobile_page_notification "服务器出错"
+
+  $("#choice-price").change ->
+    $("#choice-price option:selected").each ->
+      keyword = $(this).text()
+      
+      keyword = keyword.split("~")
+      console.log(keyword)
+      lower = keyword[0]
+      upper = keyword[1]
+      console.log(lower)
+      location.href = "/user_mobile/courses?keyword=" + keyword

@@ -227,7 +227,7 @@ class CourseInst
 
   def effective_signup_num
     # self.course_participates.where(trade_state: "SUCCESS").length
-    self.course_participates.select { |e| e.is_expred == false } .length
+    self.course_participates.select { |e| e.is_expired == false } .length
   end
 
   def income_stat
@@ -308,4 +308,12 @@ class CourseInst
       return "greenribbon"
     end
   end
+
+ def self.price_for_select(with_default = true)
+   hash = { "免费" => 0, "0~20元" => 1, "20~40元" => 2, "40元以上" => 3 }
+   if with_default
+     hash["选择价格区间"] = -1
+   end
+   hash 
+ end
 end

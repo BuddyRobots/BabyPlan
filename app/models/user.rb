@@ -476,4 +476,12 @@ class User
     deposit.refund(center)
     nil
   end
+
+  def self.age_for_select(with_default = true)
+    hash = { "0~1岁" => 0, "1~2岁" => 1, "2~3岁" => 2, "3岁以上" => 3 }
+    if with_default
+      hash["选择年龄区间"] = -1
+    end
+    hash 
+  end
 end

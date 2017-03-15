@@ -7,7 +7,7 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
       @courses = CourseInst.is_available.any_in(center_id: @current_user.client_centers.is_available.map { |e| e.id.to_s})
       @courses = @courses.desc(:created_at)
       if params[:keyword].present?
-        @courses = @courses.where(name: /#{params[:keyword]}/)
+        @courses = @courses.any_of({name: /#{params[:keyword]}/}, {price_pay: /#{params[:keyword]}/})
       end
       @courses = auto_paginate(@courses)[:data]
     end

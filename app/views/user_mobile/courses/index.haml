@@ -10,17 +10,10 @@
     = render "user_mobile/partials/no_centers"
     .choice-div
       .choice-item.border-right
-        %select.no-padding
-          %option 选择价格区间
-          - 3.times do
-            %option 1
+        = select_tag "choice-price", options_for_select(CourseInst.price_for_select, "-1"), class: "no-padding"
         .triangle
-
       .choice-item
-        %select.no-padding
-          %option 选择年龄区间
-          - 3.times do
-            %option 1
+        = select_tag "choice-age", options_for_select(User.age_for_select, "-1"), class: "no-padding"
         .triangle
     - if User.see_feeds(@current_user)
       - if @courses.present?
