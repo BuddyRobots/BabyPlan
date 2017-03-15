@@ -37,13 +37,7 @@
           %span.right= @course.date
       .price-div
         .price.clearfix
-          %span.float-left 市场价：
-          %span.float-right= @course.price
-        .price.clearfix
-          %span.float-left 政府补贴：
-          %span.float-right= "-" + (@course.price - @course.price_pay).to_s
-        .price.clearfix
-          %span.float-left 公益价：
+          %span.float-left 课程价格：
           %span.float-right#public-price= @course.price_pay
     - if @course.price_pay > 0
       %a.btn#wechat-pay{:href => "javascript:void(0);", :type => "button"}　微信支付

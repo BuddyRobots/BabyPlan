@@ -96,7 +96,7 @@ class CourseParticipate
     cp.client = client
     cp.course = course_inst.course
     cp.save
-    expired_at = Time.now + 1.days
+    expired_at = Time.now + 4.hours
     cp.update_attributes({expired_at: expired_at.to_i})
     cp
     # return cp.unifiedorder_interface(remote_ip, openid)
@@ -106,7 +106,7 @@ class CourseParticipate
     if (self.is_expired || self.price_pay != self.course_inst.price_pay) && self.course_inst.price_pay > 0
       self.update_attributes(
         {
-          expired_at: (Time.now + 1.days).to_i,
+          expired_at: (Time.now + 4.hours).to_i,
           order_id: Util.random_str(32),
           price_pay: self.course_inst.price_pay,
           prepay_id: ""
@@ -278,48 +278,61 @@ class CourseParticipate
     self.trade_state == "SUCCESS"
   end
 
-  def refund_allowed
-    return self.is_success && self.course_inst.status == CourseInst::NOT_BEGIN && self.refund_requested == false
-  end
+  # def refund_allowed
+  #   return self.is_success && self.course_inst.status == CourseInst::NOT_BEGIN && self.refund_requested == false
+  # end
 
-  def request_refund
-    if self.refund_allowed
-      self.update_attributes({refund_requested: true})
-      nil
-    elsif self.refund_requested == true
-      ErrCode::REFUND_REQUESTED
-    else
-      ErrCode::REFUND_NOT_ALLOWED
-    end
-  end
+  # def request_refund
+  #   if self.refund_allowed
+  #     self.update_attributes({refund_requested: true})
+  #     nil
+  #   elsif self.refund_requested == true
+  #     ErrCode::REFUND_REQUESTED
+  #   else
+  #     ErrCode::REFUND_NOT_ALLOWED
+  #   end
+  # end
 
   def review
     self.course_inst.reviews.where(client_id: self.client.id).first
   end
 
-  def self.waiting_for_refund(center)
-    course_insts = center.course_insts
-    CourseParticipate.any_in(course_inst_id: course_insts.map { |e| e.id.to_s}).where(refund_requested: true, refund_request_handled: false).first
-  end
+  # def self.waiting_for_refund(center)
+  #   course_insts = center.course_insts
+  #   CourseParticipate.any_in(course_inst_id: course_insts.map { |e| e.id.to_s}).where(refund_requested: true, refund_request_handled: false).first
+  # end
 
-  def reject_refund(feedback)
-    self.update_attributes({
-      refund_request_handled: true,
-      refund_approved: false,
-      refund_feedback: feedback
-    })
-    Message.create_refund_reject_message(self)
-    nil
-  end
+  # def reject_refund(feedback)
+  #   self.update_attributes({
+  #     refund_request_handled: true,
+  #     refund_approved: false,
+  #     refund_feedback: feedback
+  #   })
+  #   Message.create_refund_reject_message(self)
+  #   nil
+  # end
 
-  def approve_refund(feedback)
-    self.refund
-    self.update_attributes({
-      refund_request_handled: true,
-      refund_approved: true,
-      refund_feedback: feedback
-    })
-    nil
+  # def approve_refund(feedback)
+  #   self.refund
+  #   self.update_attributes({
+  #     refund_request_handled: true,
+  #     refund_approved: true,
+  #     refund_feedback: feedback
+  #   })
+  #   nil
+  # end
+
+  def approve_refund
+    if Date.parse(self.course_inst.start_date).prev_day.at_beginning_of_day.future?
+      self.refund
+      self.update_attributes({
+        refund_request_handled: true,
+        refund_approved: true
+        })
+      nil
+    else
+      retval = ErrCode::REFUND_TIME_FAIL
+    end
   end
 
   def refund

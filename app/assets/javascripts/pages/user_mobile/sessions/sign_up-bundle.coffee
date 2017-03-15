@@ -48,11 +48,10 @@ $ ->
     if uid == ""
       $.mobile_page_notification("请输入手机号获取验证码", 1000)
       return
-    name = $("#name").val()
     password = $("#password").val()
     verify_code = $("#code").val()
     password_confirm = $("#password-confirm").val()
-    if name == "" || password == "" || verify_code == "" || password_confirm == ""
+    if password == "" || verify_code == "" || password_confirm == ""
       $.mobile_page_notification("请补全信息", 1000)
       return
     if password != password_confirm
@@ -62,7 +61,6 @@ $ ->
     $.postJSON(
       '/user_mobile/sessions/' + uid + '/verify',
       {
-        name: name
         password: password
         verify_code: verify_code
       },

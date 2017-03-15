@@ -22,7 +22,7 @@ a{
 	position: relative;
 	width:100%;
 	max-width:640px;
-	height: 100%;
+	min-height: 100%;
 	-webkit-overflow-scrolling: touch;
 	overflow: auto;
 	margin:0 auto;
@@ -33,6 +33,7 @@ a{
     #fef29c 50%, #fef29c 95%, 
     #fcc204 95%, #fcc204);
     background-size: 10px 10px;
+    padding-bottom: 15%; 
 }
 .header {
 	position:relative;
@@ -91,10 +92,10 @@ a{
 		width: 70%;
 	}
 	a {
-		width: 5.334em;
-		height: 5.334em;
+		width: 5.33333em;
+		height: 5.33333em;
+		max-width: 160px;
 		border-radius: 50%;
-		overflow: hidden;
 	}
 }
 .item {
@@ -107,8 +108,8 @@ a{
 	float: right;
 }
 .avatar-icon {
-	width: 5.334em;
-	height: 5.334em;
+	width: 5.33333em;
+	height: 5.33333em;
 	max-width: 160px;
 	border-radius: 50%;
 	object-fit: cover;

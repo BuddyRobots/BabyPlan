@@ -1,0 +1,17 @@
+
+
+.select-page{:class => locals[:myclass]}
+  %span.totalitems= "共#{locals[:instance][:total_page]}页，总计#{locals[:instance][:total_number]}条"
+  %span.auto-f12 第
+  %input.auto-page-box.form-control#page
+  %span.auto-f12 页
+  %button.btn.btn-default#auto-jump.page-jump{data: {link:locals[:url], page_name:locals[:page], total_page:locals[:instance][:total_page]}} 跳转
+  %span.choice-page
+    %ul.pagination.pagination-sm
+      %li
+        %a{href: "#{locals[:url]}#{locals[:page]}=#{locals[:instance][:previous_page]}"} «
+      - ( (locals[:instance][:previous_page] > 2 ? locals[:instance][:previous_page] - 2 : 1) .. (locals[:instance][:next_page] < locals[:instance][:total_page] - 2 ? locals[:instance][:next_page] + 2 : locals[:instance][:total_page]) ).to_a.each do |page|
+        %li
+          %a{href: "#{locals[:url]}#{locals[:page]}=#{page}"}= page
+      %li
+        %a{href: "#{locals[:url]}#{locals[:page]}=#{locals[:instance][:next_page]}"} »

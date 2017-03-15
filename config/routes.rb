@@ -57,6 +57,9 @@ Rails.application.routes.draw do
         post :upload_photo
       end
     end
+    resources :agreements do
+    end
+
     resources :courses do
       member do
         post :set_available
@@ -227,6 +230,7 @@ Rails.application.routes.draw do
       collection do
         get :review
         post :notify
+        get :notify
         get :more
       end
       member do
@@ -248,6 +252,10 @@ Rails.application.routes.draw do
         post :verify
       end
       collection do
+        get :feeds
+        get :announcements
+        get :courses
+        get :books
         get :signout
         get :sign_up
         post :signup

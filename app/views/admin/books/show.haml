@@ -78,17 +78,8 @@
                       %span.review-status#unopen 未公开
                     - else
                       %span.review-status#open 已公开
-            .select-page 
-              %span.totalitems= "共#{@reviews[:total_page]}页,总计#{@reviews[:total_number]}条"
-              %span.choice-page
-                %ul.pagination.pagination-sm
-                  %li
-                    %a{:href => "/admin/books/" + @book.id.to_s + "?profile=reviews&review_page=#{@reviews[:previous_page]}"} «
-                  - ( (@reviews[:previous_page] > 2 ? @reviews[:previous_page] - 2 : 1) .. (@reviews[:next_page] < @reviews[:total_page] - 2 ? @reviews[:next_page] + 2 : @reviews[:total_page]) ).to_a.each do |page|
-                    %li
-                      %a{:href => "/admin/books/" + @book.id.to_s + "?profile=reviews&review_page=#{page}"}= page
-                  %li
-                    %a{:href => "/admin/books/" + @book.id.to_s + "?profile=reviews&review_page=#{@reviews[:next_page]}"} »
+            = render "admin/partials/auto_paginate", locals: { instance: @reviews, url: "/admin/books/" + @book.id.to_s + "?profile=reviews&", page: 'review_page'}
+          
 
         #tab3.tab-pane
           - if @borrows[:data].blank?
@@ -123,17 +114,5 @@
                           .comments-book
                             %span 评价：
                             %span.comments-content= b.review.content
-            .select-page 
-              %span.totalitems= "共#{@borrows[:total_page]}页,总计#{@borrows[:total_number]}条"
-              %span.choice-page
-                %ul.pagination.pagination-sm
-                  %li
-                    %a{:href => "/admin/books/" + @book.id.to_s + "?profile=borrows&borrow_page=#{@borrows[:previous_page]}"} «
-                  - ( (@borrows[:previous_page] > 2 ? @borrows[:previous_page] - 2 : 1) .. (@borrows[:next_page] < @borrows[:total_page] - 2 ? @borrows[:next_page] + 2 : @borrows[:total_page]) ).to_a.each do |page|
-                    %li
-                      %a{:href => "/admin/books/" + @book.id.to_s + "?profile=borrows&borrow_page=#{page}"}= page
-                  %li
-                    %a{:href => "/admin/books/" + @book.id.to_s + "?profile=borrows&borrow_page=#{@borrows[:next_page]}"} »
-
-       
-
+            = render "admin/partials/auto_paginate", locals: { instance: @borrows, url: "/admin/books/" + @book.id.to_s + "?profile=borrows&", page: 'borrow_page'}
+      

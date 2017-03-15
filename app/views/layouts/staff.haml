@@ -26,10 +26,10 @@
               %ul.dropdown-menu
                 %li 
                   %a.modify_password{:href => "javascript:void(0);"} 修改密码
-          - if CourseParticipate.waiting_for_refund(@current_center).present?
-            %li.manage#important-item
-              %a#important-modal{:href => "javascript:void(0);"}
-                %img.important-icon{src: asset_path("managecenter/important.png")}
+          / - if CourseParticipate.waiting_for_refund(@current_center).present?
+          /   %li.manage#important-item
+          /     %a#important-modal{:href => "javascript:void(0);"}
+          /       %img.important-icon{src: asset_path("managecenter/important.png")}
           %li.manage
             %a{:href => signout_staff_sessions_path}
               %img.turnoff-icon{src: asset_path("managecenter/turnoff.png")}

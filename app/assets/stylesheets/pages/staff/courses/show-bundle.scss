@@ -189,7 +189,7 @@ h2 {
 // edit-calendar
 .calendar-wrapper {
 	width: 72.7%;
-	margin: 20px 0 0 20px;
+	margin: 20px 0 20px 20px;
 	// border: 1px solid #c8c8c8;
 	border-radius: 6px;
 }
@@ -270,23 +270,7 @@ h2 {
 
 // select-page
 .select-page {
-	text-align: right;
-	margin: 10px 20px 0 0;
 	padding-bottom: 5px;
-}
-.totalitems {
-	font-size: 12px;
-	color: #969696;
-}
-.choice-page {
-	display: inline-block;
-	vertical-align: middle;
-}
-.pagination {
-	display: inline-block;
-	margin: 0;
-	padding: 0;
-	margin-left: 15px;
 }
 // user review
 .user-review-box {
@@ -715,4 +699,12 @@ h2 {
 #attend-statistics {
 	width:800px;
 	height: 220px;
+}
+
+
+
+
+
+.margin-l {
+	margin-left: 4px;
 }
