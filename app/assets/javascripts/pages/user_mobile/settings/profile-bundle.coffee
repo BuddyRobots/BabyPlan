@@ -2,6 +2,9 @@ $ ->
   if window.first_signin == "true"
     $.mobile_page_notification("请先完善个人资料")
 
+  if $("#choice").is(":checked")
+    $("#num1, #num2, #num3").hide()
+
   $( "#datepicker" ).datepicker({
     changeMonth: true,
     changeYear: true,

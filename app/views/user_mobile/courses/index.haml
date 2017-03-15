@@ -8,6 +8,20 @@
   .content-area
     = render "user_mobile/partials/list_header", list_type: "courses"
     = render "user_mobile/partials/no_centers"
+    .choice-div
+      .choice-item.border-right
+        %select.no-padding
+          %option 选择价格区间
+          - 3.times do
+            %option 1
+        .triangle
+
+      .choice-item
+        %select.no-padding
+          %option 选择年龄区间
+          - 3.times do
+            %option 1
+        .triangle
     - if User.see_feeds(@current_user)
       - if @courses.present?
         - @courses.each do |e|
@@ -22,7 +36,7 @@
                 %span.age 适合年龄: 
                 %span.age= e.min_age.present? ? e.min_age.to_s + "~" + e.max_age.to_s + "岁" : "无"
                 %span.age.price 价格:
-                %span.age= e.price.to_s + "元"
+                %span.age= e.price_pay.to_s + "元"
               .location-div
                 %img.time{src: asset_path("web/time.png")}
                 %span.date= truncate(e.date.strip(), length: 25)

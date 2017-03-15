@@ -84,28 +84,6 @@
           %span#applied= @refund_status_str
       .item-box
         = @course.course.desc.html_safe
-        / .item
-        /   .left-div#residual_num
-        /     %span 剩余名额：
-        /     %span.residual= [@course.capacity - @course.effective_signup_num, 0].max
-        /     %span= "/#{@course.capacity}"
-        /   .right-div
-        /     %span 主讲人：
-        /     %span= @course.speaker
-        / .item
-        /   .left-div
-        /     %span 课程次数：
-        /     %span= "#{@course.length}课时"
-        /   .right-div
-        /     %span 公益价：
-        /     %span#public_price= @course.price_pay
-        /     %span#market_price= @course.price
-        / .item-div.clearfix
-        /   %span.class_time 上课时间：
-        /   %span.desc_time= @course.date
-        / .item-div
-        /   %span.address-label 上课地点：
-        /   %span#course-address= @course.address
     .content
       #map-container
     - if @course_participate.nil? || @course_participate.prepay_id.blank?
