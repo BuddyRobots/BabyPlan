@@ -67,6 +67,10 @@ class CourseParticipate
   # needed, it is queried and updated from wechat
   field :renew_status, type: Boolean
 
+  field :closed_at, type: Integer
+  field :close_result, type: Boolean
+  field :close_err_code, type: String
+
   belongs_to :course_inst
   belongs_to :course
   belongs_to :client, class_name: "User", inverse_of: :course_participates
@@ -96,8 +100,8 @@ class CourseParticipate
     cp.client = client
     cp.course = course_inst.course
     cp.save
-    expired_at = Time.now + 4.hours
-    cp.update_attributes({expired_at: expired_at.to_i})
+    cp.update_attributes({expired_at: (Time.now + 10.minutes).to_i})
+    CourseOrderExpiredWorker.perform_in((600 + 10).seconds, cp)
     cp
     # return cp.unifiedorder_interface(remote_ip, openid)
   end
@@ -106,11 +110,12 @@ class CourseParticipate
     if (self.is_expired || self.price_pay != self.course_inst.price_pay) && self.course_inst.price_pay > 0
       self.update_attributes(
         {
-          expired_at: (Time.now + 4.hours).to_i,
+          expired_at: (Time.now + 10.minutes).to_i,
           order_id: Util.random_str(32),
           price_pay: self.course_inst.price_pay,
           prepay_id: ""
         })
+      CourseOrderExpiredWorker.perform_in((600 + 10).seconds, self)
     end
   end
 
@@ -168,6 +173,45 @@ class CourseParticipate
     end
   end
 
+  def closeorder_interface
+    nonce_str = Util.random_str(32)
+    data = {
+      "appid" => APPID,
+      "mch_id" => MCH_ID,
+      "nonce_str" => nonce_str,
+      "out_trade_no" => self.order_id
+    }
+    signature = Util.sign(data, APIKEY)
+    data["sign"] = signature
+
+    response = CourseParticipate.post("/pay/closeorder",
+      body: Util.hash_to_xml(data))
+
+    doc = Nokogiri::XML(response.body)
+    success = doc.search('return_code').children[0].text
+    if success != "SUCCESS"
+      self.update_attributes({
+        closed_at: Time.now.to_i,
+        close_result: false
+      })
+    else
+      result_code = doc.search('result_code').children[0].text
+      if result_code == "SUCCESS"
+        self.update_attributes({
+          closed_at: Time.now.to_i,
+          close_result: true
+        })
+      else
+        err_code = doc.search('err_code').children[0].text
+        self.update_attributes({
+          closed_at: Time.now.to_i,
+          close_result: false,
+          close_err_code: err_code
+        })
+      end
+    end
+  end
+
   def unifiedorder_interface(remote_ip, openid)
     nonce_str = Util.random_str(32)
     data = {
@@ -182,7 +226,7 @@ class CourseParticipate
       "notify_url" => NOTIFY_URL,
       "trade_type" => "JSAPI",
       "openid" => openid,
-      "time_expire" => Time.at(self.expired_at + 600).strftime("%Y%m%d%H%M%S")
+      "time_expire" => Time.at(self.expired_at + 24.hours.to_i).strftime("%Y%m%d%H%M%S")
     }
     signature = Util.sign(data, APIKEY)
     data["sign"] = signature

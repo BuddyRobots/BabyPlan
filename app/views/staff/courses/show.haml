@@ -97,17 +97,17 @@
               %input.input-area.form-control#public-charge{:type => "text"}
           .controls.controls-row
             %label.input-caption 最小适龄:
-            %span.unedit-box#min-age-span= @course_inst.min_age.present? ? @course_inst.min_age.to_s + "岁" : "无"
+            %span.unedit-box#min-age-span= @course_inst.min_age.blank? ? "无" : @course_inst.min_age.to_s + "岁"
             %span.edit-box
               %input.input-area.form-control#min-age{:type => "text"}
             %label.input-caption.margin-l 最大适龄:
-            %span.unedit-box#max-age-span= @course_inst.max_age.present? ? @course_inst.max_age.to_s + "岁": "无"
+            %span.unedit-box#max-age-span= @course_inst.max_age.blank? ? "无" : @course_inst.max_age.to_s + "岁"
             %span.edit-box
               %input.input-area.form-control#max-age{:type => "text"}
-            %label.input-caption.margin-l 授课单位:
-            %span.unedit-box#school-span= @course_inst.school
-            %span.edit-box
-              %input.input-area.form-control#course-school{:type => "text"}
+            / %label.input-caption.margin-l 授课单位:
+            / %span.unedit-box#school-span= @course_inst.school
+            / %span.edit-box
+            /   %input.input-area.form-control#course-school{:type => "text"}
           .calendar-wrapper.clearfix
             %label.class-calendar 课程日历:
             .show-calendar#calendar
