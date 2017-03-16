@@ -321,7 +321,7 @@ class CourseParticipate
   end
 
   def refund_allowed
-    return self.is_success && Date.parse(self.course_inst.start_date).prev_day.at_beginning_of_day.future?
+    return self.is_success && Date.parse(self.course_inst.start_date).prev_day.at_beginning_of_day.future? && self.refund_finished == false
   end
 
   def review
@@ -388,6 +388,7 @@ class CourseParticipate
           wechat_refund_fee: wechat_refund_fee,
           refund_finished: true
         })
+        self.clear_pay
         Bill.create_course_refund_item(self)
         retval = { success: true, wechat_refund_id: wechat_refund_id, wechat_refund_channel: wechat_refund_channel }
         return retval
@@ -436,7 +437,6 @@ class CourseParticipate
         retval = { success: true, refund_status: refund_status }
         if refund_status == "SUCCESS"
           Bill.confirm_course_refund_item(self)
-          self.clear_pay
         end
         return retval
       end
