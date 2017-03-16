@@ -4,6 +4,7 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
   def index
     @keyword = params[:keyword]
     @price = params[:price].to_i
+    @age = params[:age].to_i
     if @current_user.client_centers.present?
       @courses = CourseInst.is_available.any_in(center_id: @current_user.client_centers.is_available.map { |e| e.id.to_s})
       @courses = @courses.desc(:created_at)
@@ -19,6 +20,12 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
           @courses = @courses.where(:price_pay.gt => internal[0]) if internal[0].present?
           @courses = @courses.where(:price_pay.lt => internal[1]) if internal[1].present?
         end
+      end
+      if params[:age].present?
+        internals = [[nil, nil], [0, 1], [1, 2], [2, 3], [3, nil]]
+        internal = internals[params[:age].to_i]
+        @courses = @courses.where(:min_age => internal[0]) if internal[0].present?
+        @courses = @courses.where(:max_age => internal[1]) if internal[1].present?
       end
       @courses = auto_paginate(@courses)[:data]
     end
@@ -39,6 +46,12 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
         @courses = @courses.where(:price_pay.gt => internal[0]) if internal[0].present?
         @courses = @courses.where(:price_pay.lt => internal[1]) if internal[1].present?
       end
+    end
+    if params[:age].present?
+      internals = [[nil, nil], [0, 1], [1, 2], [2, 3], [3, nil]]
+      internal = internals[params[:age].to_i]
+      @courses = @courses.where(:min_age => internal[0]) if internal[0].present?
+      @courses = @courses.where(:max_age => internal[1]) if internal[1].present?
     end
     @courses = auto_paginate(@courses)[:data]
     @courses = @courses.map { |e| e.more_info }
