@@ -83,12 +83,12 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
       redirect_to action: :show, id: params[:state] and return
     end
 
+    @course_participate = @course_participate || CourseParticipate.create_new(current_user, @course)
+
     # for those refund and sign up again, or those click re-signup after expired
-    if !(@course_participate.present? && params[:direct_pay] == "true")
+    if params[:direct_pay] != "true"
       @course_participate.renew
     end
-
-    @course_participate = @course_participate || CourseParticipate.create_new(current_user, @course)
     @course_participate.clear_refund
     if @course.price_pay > 0
       @course_participate.update_attributes({renew_status: true})
