@@ -29,7 +29,6 @@ class CourseParticipate
   field :trade_state_desc, type: String
 
   # refund related
-  field :refund_feedback, type: String, default: ""
   field :refund_result_code, type: String
   field :refund_err_code, type: String
   field :refund_err_code_des, type: String
@@ -48,9 +47,6 @@ class CourseParticipate
   field :trade_state, type: String
   field :trade_state_updated_at, type: Integer
   field :expired_at, type: Integer, default: -1
-  field :refund_requested, type: Boolean, default: false
-  field :refund_request_handled, type: Boolean, default: false
-  field :refund_approved, type: Boolean, default: false
   field :refund_finished, type: Boolean, default: false
   field :refund_status, type: String
   # it has occurred that the client has paid but the pay_finished is not updated as true.
@@ -81,6 +77,9 @@ class CourseParticipate
     if self.need_order_query
       self.orderquery()
     end
+    if is_expired
+      return "过期未付款"
+    end
     if pay_finished != true
       return "未付款"
     end
@@ -101,7 +100,7 @@ class CourseParticipate
     cp.course = course_inst.course
     cp.save
     cp.update_attributes({expired_at: (Time.now + 10.minutes).to_i})
-    CourseOrderExpiredWorker.perform_in((600 + 10).seconds, cp)
+    CourseOrderExpiredWorker.perform_in((600 + 10).seconds, cp.id.to_s)
     cp
     # return cp.unifiedorder_interface(remote_ip, openid)
   end
@@ -115,7 +114,7 @@ class CourseParticipate
           price_pay: self.course_inst.price_pay,
           prepay_id: ""
         })
-      CourseOrderExpiredWorker.perform_in((600 + 10).seconds, self)
+      CourseOrderExpiredWorker.perform_in((600 + 10).seconds, self.id.to_s)
     end
   end
 
@@ -220,13 +219,12 @@ class CourseParticipate
       "nonce_str" => nonce_str,
       "body" => self.course_inst.course.name,
       "out_trade_no" => self.order_id,
-      # "total_fee" => (self.price_pay * 100).round.to_s,
-      "total_fee" => 1.to_s,
+      "total_fee" => Rails.env == "production" ? (self.price_pay * 100).round.to_s : 1.to_s,
       "spbill_create_ip" => remote_ip,
       "notify_url" => NOTIFY_URL,
       "trade_type" => "JSAPI",
       "openid" => openid,
-      "time_expire" => Time.at(self.expired_at + 24.hours.to_i).strftime("%Y%m%d%H%M%S")
+      "time_expire" => Time.at(self.expired_at).strftime("%Y%m%d%H%M%S")
     }
     signature = Util.sign(data, APIKEY)
     data["sign"] = signature
@@ -290,11 +288,17 @@ class CourseParticipate
     return self.renew_status || (self.pay_finished == true && self.trade_state != "SUCCESS")
   end
 
+  def is_effective
+    if self.need_order_query
+      self.orderquery()
+    end
+    self.trade_state == "SUCCESS" || (self.expired_at > Time.now.to_i && self.expired_at != -1)
+  end
+
   def is_expired
-    if self.price_pay == 0
+    if self.price_pay == 0 || self.expired_at == -1
       return false
     end
-    # if self.pay_finished == true && self.trade_state != "SUCCESS"
     if self.need_order_query
       self.orderquery()
     end
@@ -323,63 +327,19 @@ class CourseParticipate
   end
 
   def refund_allowed
-    return self.is_success && Date.parse(self.course_inst.start_date).prev_day.at_beginning_of_day.future? && self.refund_requested == false
+    return self.is_success && Date.parse(self.course_inst.start_date).prev_day.at_beginning_of_day.future? && self.refund_finished == false
   end
-
-  # def request_refund
-  #   if self.refund_allowed
-  #     self.update_attributes({refund_requested: true})
-  #     nil
-  #   elsif self.refund_requested == true
-  #     ErrCode::REFUND_REQUESTED
-  #   else
-  #     ErrCode::REFUND_NOT_ALLOWED
-  #   end
-  # end
 
   def review
     self.course_inst.reviews.where(client_id: self.client.id).first
   end
 
-  # def self.waiting_for_refund(center)
-  #   course_insts = center.course_insts
-  #   CourseParticipate.any_in(course_inst_id: course_insts.map { |e| e.id.to_s}).where(refund_requested: true, refund_request_handled: false).first
-  # end
-
-  # def reject_refund(feedback)
-  #   self.update_attributes({
-  #     refund_request_handled: true,
-  #     refund_approved: false,
-  #     refund_feedback: feedback
-  #   })
-  #   Message.create_refund_reject_message(self)
-  #   nil
-  # end
-
-  # def approve_refund(feedback)
-  #   self.refund
-  #   self.update_attributes({
-  #     refund_request_handled: true,
-  #     refund_approved: true,
-  #     refund_feedback: feedback
-  #   })
-  #   nil
-  # end
-
-  def approve_refund
-    if Date.parse(self.course_inst.start_date).prev_day.at_beginning_of_day.future?
-      self.refund
-      self.update_attributes({
-        refund_request_handled: true,
-        refund_approved: true
-        })
-      nil
-    else
-      retval = ErrCode::REFUND_TIME_FAIL
-    end
-  end
-
   def refund
+    if !Date.parse(self.course_inst.start_date).prev_day.at_beginning_of_day.future?
+      # refund now allowed
+      return ErrCode::REFUND_TIME_FAIL
+    end
+
     if self.price_pay == 0
       self.update_attributes({
         refund_status: "SUCCESS",
@@ -398,9 +358,8 @@ class CourseParticipate
       "op_user_id" => MCH_ID,
       "out_trade_no" => self.order_id,
       "out_refund_no" => self.order_id,
-      "total_fee" => (self.price_pay * 100).round.to_s,
-      # "total_fee" => 1.to_s,
-      "refund_fee" => (self.price_pay * 100).round.to_s,
+      "total_fee" => Rails.env == "production" ? (self.price_pay * 100).round.to_s : 1.to_s,
+      "refund_fee" => Rails.env == "production" ? (self.price_pay * 100).round.to_s : 1.to_s,
       "nonce_str" => nonce_str,
       "sign_type" => "MD5"
     }
@@ -435,6 +394,7 @@ class CourseParticipate
           wechat_refund_fee: wechat_refund_fee,
           refund_finished: true
         })
+        self.clear_pay
         Bill.create_course_refund_item(self)
         retval = { success: true, wechat_refund_id: wechat_refund_id, wechat_refund_channel: wechat_refund_channel }
         return retval
@@ -483,7 +443,6 @@ class CourseParticipate
         retval = { success: true, refund_status: refund_status }
         if refund_status == "SUCCESS"
           Bill.confirm_course_refund_item(self)
-          self.clear_pay
         end
         return retval
       end
@@ -494,14 +453,8 @@ class CourseParticipate
     if self.refund_finished == true && !%w[SUCCESS, FAIL, CHANGE].include?(self.refund_status)
       self.refundquery
     end
-    if self.refund_requested == false
+    if self.refund_finished == false
       ""
-    elsif self.refund_request_handled == false
-      "已申请退款"
-    elsif self.refund_approved == false
-      "退款申请被拒绝"
-    elsif self.refund_finished == false
-      "退款失败"
     elsif self.refund_status == "PROCESSING"
       "退款处理中"
     elsif self.refund_status == 'FAIL' || self.refund_status == 'CHANGE'
@@ -514,11 +467,7 @@ class CourseParticipate
   end
 
   def clear_refund
-    return if self.refund_requested = false
     self.update_attributes({
-      refund_requested: false,
-      refund_request_handled: false,
-      refund_approved: false,
       refund_finished: false,
       refund_status: ""
     })

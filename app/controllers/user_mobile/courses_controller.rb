@@ -66,13 +66,28 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
   end
 
   def new
-    @course = CourseInst.where(id: params[:state]).first
+
+
+
+    info_ary = params[:state].split(',')
+    ci_id = info_ary[0]
+    renew = info_ary[1] == "renew"
+    @course = CourseInst.where(id: ci_id).first
+
+    # check whether capacity is full
+    if @course.capacity <= @course.effective_signup_num
+      redirect_to action: :show, id: params[:state] and return
+    end
+
     @course_participate = @current_user.course_participates.where(course_inst_id: @course.id).first
 
     # if the order is expired, redirect to the show page
-    if @course_participate.present? && @course_participate.is_expred
+    if @course_participate.present? && @course_participate.is_expired && renew == false
       redirect_to action: :show, id: params[:state] and return
     end
+
+    # for those refund and sign up again, or those click re-signup after expired
+    @course_participate.renew
 
     @course_participate = @course_participate || CourseParticipate.create_new(current_user, @course)
     @course_participate.clear_refund
@@ -80,7 +95,6 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
       @course_participate.update_attributes({renew_status: true})
       if @course_participate.prepay_id.blank?
         @open_id = Weixin.get_oauth_open_id(params[:code])
-        @course_participate.renew
         @course_participate.unifiedorder_interface(@remote_ip, @open_id)
       end
       @pay_info = @course_participate.get_pay_info
@@ -155,7 +169,7 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
 
   def request_refund
     @course_participate = CourseParticipate.where(id: params[:id]).first
-    retval = @course_participate.approve_refund
+    retval = @course_participate.refund
     render json: retval_wrapper(retval) and return
   end
 

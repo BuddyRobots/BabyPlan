@@ -32,7 +32,7 @@ $ ->
   $("#wechat-pay").click ->
     # should first send request to server to check whether the order is expired, and if expired, redirect to show page
     $.postJSON(
-      '/user_mobile/courses/' + window.course_participate_id + '/change_password',
+      '/user_mobile/courses/' + window.course_participate_id + '/is_expired',
       { },
       (data) ->
         if data.success
