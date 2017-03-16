@@ -289,7 +289,7 @@ class CourseParticipate
   end
 
   def is_expired
-    if self.price_pay == 0
+    if self.price_pay == 0 || self.expired_at == -1
       return false
     end
     # if self.pay_finished == true && self.trade_state != "SUCCESS"
