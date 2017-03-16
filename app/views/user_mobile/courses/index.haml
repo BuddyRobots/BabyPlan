@@ -27,11 +27,13 @@
               / %img.icon{src: asset_path("kidscenter/ke.png")}
               %span.caption= e.name || e.course.name
               %span{class: e.status_class}
-              .location-div
-                %span.age 适合年龄: 
-                %span.age= e.min_age.present? ? e.min_age.to_s + "~" + e.max_age.to_s + "岁" : "无"
-                %span.age.price 价格:
-                %span.age= e.judge_price
+              .location-div.flex-div
+                .age-div
+                  %span.age 适龄: 
+                  %span.age= e.min_age.present? ? e.min_age.to_s + "~" + e.max_age.to_s + "岁" : "无"
+                .price-div
+                  %span.age.price 价格:
+                  %span.age= e.judge_price
               .location-div
                 %img.time{src: asset_path("web/time.png")}
                 %span.date= truncate(e.date.strip(), length: 25)

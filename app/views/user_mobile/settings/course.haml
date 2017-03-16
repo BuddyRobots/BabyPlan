@@ -21,11 +21,20 @@
               .left-div
                 %img.visit{:src => e[:photo].nil? ? asset_path("web/course.png") : e[:photo].path}
               .right-div
-                %p.caption 
-                  = e[:name]
-                  / %span#unpaid= e.status_str
-                %p.article= truncate(strip_tags(e[:content]).strip(), length: 50)
+                %span.caption= e[:name]
+                %span{class: e[:status_class]}
+                .location-div.flex-div
+                  .age-div
+                    %span.age 适龄: 
+                    %span.age= e[:min_age].present? ? e[:min_age].to_s + "~" + e[:max_age].to_s + "岁" : "无"
+                  .price-div
+                    %span.age.price 价格:
+                    %span.age= e[:judge_price]
                 .location-div
+                  %img.time{src: asset_path("web/time.png")}
+                  %span.date= truncate(e[:date].strip(), length: 25)
+                / %p.article= truncate(strip_tags(e[:content]).strip(), length: 50)
+                .location-div.margin-b
                   %img.location{src: asset_path("web/location.png")}
                   %span.center= e[:center]
         
@@ -34,6 +43,5 @@
           .load
             %img.loading{src: asset_path("loading.gif")}
         
-
 
     

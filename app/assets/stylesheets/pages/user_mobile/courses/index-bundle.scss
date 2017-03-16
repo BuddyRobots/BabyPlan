@@ -166,7 +166,7 @@ a{
 	padding-right: 2.67%;
 }
 .caption {
-	font-size:2.8em;
+	font-size:3.2em;
 	color:#7d7d7d;
   vertical-align: middle;
 }
@@ -220,7 +220,7 @@ a{
 	color: #666;
 }
 .price {
-  margin-left: 15%;
+  margin-left: 0;
 }
 .date {
   font-size: 2.4em;
@@ -256,6 +256,7 @@ a{
   background-size:100%;
   background-position:center;
 }
+
 .choice-div {
   @extend .content;
 }
@@ -297,17 +298,31 @@ a{
   border-color: #fff transparent;
 }
 .triangle:before {
-    position: absolute;
-    right: 2.8em;
-    top: 7px;
-    width: 0;
-    height: 0;
-    content: "";
-    border-width: 6px 6px 0 6px;
-    border-style: solid;
-    border-color: #aaa transparent;
+  position: absolute;
+  right: 2.8em;
+  top: 7px;
+  width: 0;
+  height: 0;
+  content: "";
+  border-width: 6px 6px 0 6px;
+  border-style: solid;
+  border-color: #aaa transparent;
 }
 
+.flex-div {
+  display: -webkit-flex;
+  -webkit-justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
+}
+.age-div {
+  width: 50%;
+  text-align: left;
+}
+.price-div {
+  width: 50%;
+  text-align: right;
+}
 
 
 

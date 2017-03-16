@@ -1,11 +1,28 @@
+
 <div class="details" data-id={{ele_id}}>
   <div class="left-div">
     <img class="visit" src={{ele_photo}}>
   </div>
   <div class="right-div">
-    <p class="caption">{{ele_name}}</p>
-    <p class="article">{{ele_content}}</p>
+   
+    <span class="caption">{{ele_name}}</span>
+    <span class= {{ele_status}}></span>
+    <div class="location-div flex-div">
+      <div class="age-div">
+        <span class="age">适龄:</span>
+        <span class="age">{{ele_age}}</span>
+      </div>
+      <div class="price-div">
+        <span class="age price">价格:</span>
+        <span class="age">{{ele_price}}</span>
+      </div>
+    </div>
     <div class="location-div">
+      <img class="time" src="<%= asset_path('web/time.png') %>">
+      <span class="date">{{ele_date}}</span>
+    </div>
+    <!-- <p class="article">{{ele_content}}</p> -->
+    <div class="location-div margin-b">
       <img class="location" src="<%= asset_path('web/location.png') %>">
       <span class="center">{{ele_center}}</span>
     </div>
