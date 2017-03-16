@@ -66,20 +66,28 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
   end
 
   def new
+
+
+
     info_ary = params[:state].split(',')
     ci_id = info_ary[0]
     renew = info_ary[1] == "renew"
     @course = CourseInst.where(id: ci_id).first
+
+    # check whether capacity is full
+    if @course.capacity <= @course.effective_signup_num
+      redirect_to action: :show, id: params[:state] and return
+    end
+
     @course_participate = @current_user.course_participates.where(course_inst_id: @course.id).first
 
     # if the order is expired, redirect to the show page
-    if @course_participate.present? && @course_participate.is_expired
-      if renew == true
-        @course_participate.renew
-      else
-        redirect_to action: :show, id: params[:state] and return
-      end
+    if @course_participate.present? && @course_participate.is_expired && renew == false
+      redirect_to action: :show, id: params[:state] and return
     end
+
+    # for those refund and sign up again, or those click re-signup after expired
+    @course_participate.renew
 
     @course_participate = @course_participate || CourseParticipate.create_new(current_user, @course)
     @course_participate.clear_refund
