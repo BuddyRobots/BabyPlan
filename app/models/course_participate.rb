@@ -106,16 +106,18 @@ class CourseParticipate
   end
 
   def renew
+    # if self.course_inst.price_pay > 0
+    self.update_attributes(
+      {
+        expired_at: (Time.now + 10.minutes).to_i,
+        order_id: Util.random_str(32),
+        price_pay: self.course_inst.price_pay,
+        prepay_id: self.course_inst.price_pay == 0 ? "free" : ""
+      })
     if self.course_inst.price_pay > 0
-      self.update_attributes(
-        {
-          expired_at: (Time.now + 10.minutes).to_i,
-          order_id: Util.random_str(32),
-          price_pay: self.course_inst.price_pay,
-          prepay_id: ""
-        })
       CourseOrderExpiredWorker.perform_in((600 + 10).seconds, self.id.to_s)
     end
+    # end
   end
 
   def orderquery
