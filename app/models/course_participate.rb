@@ -546,7 +546,12 @@ class CourseParticipate
       name: self.course_inst.name || self.course.name,
       content: self.course.desc,
       center: self.course_inst.center.name,
-      photo: self.course_inst.photo
+      photo: self.course_inst.photo,
+      min_age: self.course_inst.min_age,
+      max_age: self.course_inst.max_age,
+      judge_price: self.course_inst.judge_price,
+      date: self.course_inst.date,
+      status_class: self.course_inst.status_class
     }
   end
 
@@ -556,7 +561,11 @@ class CourseParticipate
       ele_id: self.course_inst.id.to_s,
       ele_photo: self.course_inst.photo.nil? ? ActionController::Base.helpers.asset_path("banner.png") : self.course_inst.photo.path,
       ele_content: ActionController::Base.helpers.truncate(ActionController::Base.helpers.strip_tags(self.course.desc).strip(), length: 50),
-      ele_center: self.course_inst.center.name
+      ele_center: self.course_inst.center.name,
+      ele_age: self.course_inst.min_age.present? ? self.course_inst.min_age.to_s + "~" + self.course_inst.max_age.to_s + "岁" : "无",
+      ele_price: self.course_inst.judge_price,
+      ele_date:  ActionController::Base.helpers.truncate(self.course_inst.date.strip(), length: 25),
+      ele_status: self.course_inst.status_class
     }
   end
 end
