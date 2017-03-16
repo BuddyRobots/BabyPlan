@@ -292,7 +292,7 @@ class CourseParticipate
     if self.need_order_query
       self.orderquery()
     end
-    self.trade_state == "SUCCESS" || (self.expired_at < Time.now.to_i && self.expired_at != -1)
+    self.trade_state == "SUCCESS" || (self.expired_at > Time.now.to_i && self.expired_at != -1)
   end
 
   def is_expired
