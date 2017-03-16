@@ -229,7 +229,7 @@ class CourseParticipate
       "notify_url" => NOTIFY_URL,
       "trade_type" => "JSAPI",
       "openid" => openid,
-      "time_expire" => Time.at(self.expired_at + 24.hours.to_i).strftime("%Y%m%d%H%M%S")
+      "time_expire" => Time.at(self.expired_at).strftime("%Y%m%d%H%M%S")
     }
     signature = Util.sign(data, APIKEY)
     data["sign"] = signature
