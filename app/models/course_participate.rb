@@ -104,7 +104,7 @@ class CourseParticipate
     cp.course = course_inst.course
     cp.save
     cp.update_attributes({expired_at: (Time.now + 10.minutes).to_i})
-    CourseOrderExpiredWorker.perform_in((600 + 10).seconds, cp)
+    CourseOrderExpiredWorker.perform_in((600 + 10).seconds, cp.id.to_s)
     cp
     # return cp.unifiedorder_interface(remote_ip, openid)
   end
@@ -118,7 +118,7 @@ class CourseParticipate
           price_pay: self.course_inst.price_pay,
           prepay_id: ""
         })
-      CourseOrderExpiredWorker.perform_in((600 + 10).seconds, self)
+      CourseOrderExpiredWorker.perform_in((600 + 10).seconds, self.id.to_s)
     end
   end
 
