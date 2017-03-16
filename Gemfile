@@ -17,6 +17,7 @@ gem 'rufus-scheduler'
 gem 'js_assets'
 gem 'prawn'
 gem 'sidekiq', '~> 4.0.0'
+gem 'sinatra'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
