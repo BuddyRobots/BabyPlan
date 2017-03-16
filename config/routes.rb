@@ -128,8 +128,6 @@ Rails.application.routes.draw do
         post :signin_client
         get :signin_info
         get :stat
-        post :reject_refund
-        post :approve_refund
       end
     end
 

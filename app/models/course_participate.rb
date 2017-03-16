@@ -29,7 +29,6 @@ class CourseParticipate
   field :trade_state_desc, type: String
 
   # refund related
-  field :refund_feedback, type: String, default: ""
   field :refund_result_code, type: String
   field :refund_err_code, type: String
   field :refund_err_code_des, type: String
@@ -49,8 +48,6 @@ class CourseParticipate
   field :trade_state_updated_at, type: Integer
   field :expired_at, type: Integer, default: -1
   field :refund_requested, type: Boolean, default: false
-  field :refund_request_handled, type: Boolean, default: false
-  field :refund_approved, type: Boolean, default: false
   field :refund_finished, type: Boolean, default: false
   field :refund_status, type: String
   # it has occurred that the client has paid but the pay_finished is not updated as true.
@@ -223,8 +220,7 @@ class CourseParticipate
       "nonce_str" => nonce_str,
       "body" => self.course_inst.course.name,
       "out_trade_no" => self.order_id,
-      # "total_fee" => (self.price_pay * 100).round.to_s,
-      "total_fee" => 1.to_s,
+      "total_fee" => Rails.env == "production" ? (self.price_pay * 100).round.to_s : 1.to_s,
       "spbill_create_ip" => remote_ip,
       "notify_url" => NOTIFY_URL,
       "trade_type" => "JSAPI",
@@ -326,63 +322,19 @@ class CourseParticipate
   end
 
   def refund_allowed
-    return self.is_success && Date.parse(self.course_inst.start_date).prev_day.at_beginning_of_day.future? && self.refund_requested == false
+    return self.is_success && Date.parse(self.course_inst.start_date).prev_day.at_beginning_of_day.future?
   end
-
-  # def request_refund
-  #   if self.refund_allowed
-  #     self.update_attributes({refund_requested: true})
-  #     nil
-  #   elsif self.refund_requested == true
-  #     ErrCode::REFUND_REQUESTED
-  #   else
-  #     ErrCode::REFUND_NOT_ALLOWED
-  #   end
-  # end
 
   def review
     self.course_inst.reviews.where(client_id: self.client.id).first
   end
 
-  # def self.waiting_for_refund(center)
-  #   course_insts = center.course_insts
-  #   CourseParticipate.any_in(course_inst_id: course_insts.map { |e| e.id.to_s}).where(refund_requested: true, refund_request_handled: false).first
-  # end
-
-  # def reject_refund(feedback)
-  #   self.update_attributes({
-  #     refund_request_handled: true,
-  #     refund_approved: false,
-  #     refund_feedback: feedback
-  #   })
-  #   Message.create_refund_reject_message(self)
-  #   nil
-  # end
-
-  # def approve_refund(feedback)
-  #   self.refund
-  #   self.update_attributes({
-  #     refund_request_handled: true,
-  #     refund_approved: true,
-  #     refund_feedback: feedback
-  #   })
-  #   nil
-  # end
-
-  def approve_refund
-    if Date.parse(self.course_inst.start_date).prev_day.at_beginning_of_day.future?
-      self.refund
-      self.update_attributes({
-        refund_request_handled: true,
-        refund_approved: true
-        })
-      nil
-    else
-      retval = ErrCode::REFUND_TIME_FAIL
-    end
-  end
-
   def refund
+    if !Date.parse(self.course_inst.start_date).prev_day.at_beginning_of_day.future?
+      # refund now allowed
+      return ErrCode::REFUND_TIME_FAIL
+    end
+
     if self.price_pay == 0
       self.update_attributes({
         refund_status: "SUCCESS",
@@ -401,9 +353,8 @@ class CourseParticipate
       "op_user_id" => MCH_ID,
       "out_trade_no" => self.order_id,
       "out_refund_no" => self.order_id,
-      "total_fee" => (self.price_pay * 100).round.to_s,
-      # "total_fee" => 1.to_s,
-      "refund_fee" => (self.price_pay * 100).round.to_s,
+      "total_fee" => Rails.env == "production" ? (self.price_pay * 100).round.to_s : 1.to_s,
+      "refund_fee" => Rails.env == "production" ? (self.price_pay * 100).round.to_s : 1.to_s,
       "nonce_str" => nonce_str,
       "sign_type" => "MD5"
     }
