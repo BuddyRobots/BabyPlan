@@ -1,5 +1,7 @@
-Rails.application.routes.draw do
+require 'sidekiq/web'
 
+Rails.application.routes.draw do
+  mount Sidekiq::Web => '/sidekiq'
   mount RuCaptcha::Engine => "/rucaptcha"
 
   match "/weixin_js_signature" => 'application#signature', :via => :get
