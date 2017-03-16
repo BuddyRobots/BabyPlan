@@ -44,10 +44,19 @@ $ ->
     # pay()
 
   $("#free-course-signup").click ->
+    # should first send request to server to check whether the order is expired, and if expired, redirect to show page
     $.postJSON(
-      '/user_mobile/courses/' + window.course_participate_id + '/pay_finished',
+      '/user_mobile/courses/' + window.course_participate_id + '/is_expired',
       { },
       (data) ->
-        # redirect to the result page
-        location.href = "/user_mobile/courses/" + window.course_id + '/pay_success'
-      )
+        if data.success
+          if data.is_expired
+            window.location.href = '/user_mobile/courses/' + window.course_id
+          else
+            $.postJSON(
+              '/user_mobile/courses/' + window.course_participate_id + '/pay_finished',
+              { },
+              (data) ->
+                location.href = "/user_mobile/courses/" + window.course_id + '/pay_success'
+              )
+    )
