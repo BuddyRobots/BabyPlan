@@ -288,11 +288,17 @@ class CourseParticipate
     return self.renew_status || (self.pay_finished == true && self.trade_state != "SUCCESS")
   end
 
+  def is_effective
+    if self.need_order_query
+      self.orderquery()
+    end
+    self.trade_state == "SUCCESS" || (self.expired_at < Time.now.to_i && self.expired_at != -1)
+  end
+
   def is_expired
     if self.price_pay == 0 || self.expired_at == -1
       return false
     end
-    # if self.pay_finished == true && self.trade_state != "SUCCESS"
     if self.need_order_query
       self.orderquery()
     end
