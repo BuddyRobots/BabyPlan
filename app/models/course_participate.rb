@@ -11,7 +11,7 @@ class CourseParticipate
   SECRET = "01265a8ba50284999508d680f7387664"
   APIKEY = "1juOmajJrHO3f2NFA0a8dIYy2qAamtnK"
   MCH_ID = "1388434302"
-  NOTIFY_URL = "http://babyplan.bjfpa.org.cn/user_mobile/courses/notify"
+  NOTIFY_URL = "http://#{Rails.configuration.domain}/user_mobile/courses/notify"
 
   include Mongoid::Document
   include Mongoid::Timestamps
@@ -220,8 +220,8 @@ class CourseParticipate
       "nonce_str" => nonce_str,
       "body" => self.course_inst.course.name,
       "out_trade_no" => self.order_id,
-      "total_fee" => (self.price_pay * 100).round.to_s,
-      # "total_fee" => 1.to_s,
+      # "total_fee" => (self.price_pay * 100).round.to_s,
+      "total_fee" => 1.to_s,
       "spbill_create_ip" => remote_ip,
       "notify_url" => NOTIFY_URL,
       "trade_type" => "JSAPI",

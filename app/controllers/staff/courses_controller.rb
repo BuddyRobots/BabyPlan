@@ -123,7 +123,7 @@ class Staff::CoursesController < Staff::ApplicationController
 
   def qrcode
     @course_inst = CourseInst.where(id: params[:id]).first
-    signin_url = "http://#{Rails.configuration.host}/user_mobile/courses/#{@course_inst.id.to_s}/signin?time=#{Time.now.to_i.to_s}&class_idx=#{params[:class_num].to_s}"
+    signin_url = "http://#{Rails.configuration.domain}/user_mobile/courses/#{@course_inst.id.to_s}/signin?time=#{Time.now.to_i.to_s}&class_idx=#{params[:class_num].to_s}"
     qrcode = RQRCode::QRCode.new(signin_url)
     filename = "#{@course_inst.id.to_s}_#{params[:class_num].to_s}"
     png = qrcode.as_png(
