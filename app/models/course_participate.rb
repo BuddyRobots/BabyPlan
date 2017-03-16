@@ -106,7 +106,7 @@ class CourseParticipate
   end
 
   def renew
-    if (self.is_expired || self.price_pay != self.course_inst.price_pay) && self.course_inst.price_pay > 0
+    if self.course_inst.price_pay > 0
       self.update_attributes(
         {
           expired_at: (Time.now + 10.minutes).to_i,
@@ -229,13 +229,11 @@ class CourseParticipate
     signature = Util.sign(data, APIKEY)
     data["sign"] = signature
 
+
     response = CourseParticipate.post("/pay/unifiedorder",
       :body => Util.hash_to_xml(data))
 
     # todo: handle error messages
-    logger.info "AAAAAAAAAAAAAAAAAAAA"
-    logger.info response.body.inspect
-    logger.info "AAAAAAAAAAAAAAAAAAAA"
 
     doc = Nokogiri::XML(response.body)
     prepay_id = doc.search('prepay_id').children[0].text

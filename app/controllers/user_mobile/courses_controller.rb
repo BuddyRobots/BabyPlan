@@ -66,9 +66,6 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
   end
 
   def new
-
-
-
     info_ary = params[:state].split(',')
     ci_id = info_ary[0]
     renew = info_ary[1] == "renew"
@@ -87,7 +84,9 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
     end
 
     # for those refund and sign up again, or those click re-signup after expired
-    @course_participate.renew
+    if !(@course_participate.present? && params[:direct_pay] == "true")
+      @course_participate.renew
+    end
 
     @course_participate = @course_participate || CourseParticipate.create_new(current_user, @course)
     @course_participate.clear_refund
