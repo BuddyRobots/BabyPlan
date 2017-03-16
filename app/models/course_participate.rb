@@ -47,7 +47,6 @@ class CourseParticipate
   field :trade_state, type: String
   field :trade_state_updated_at, type: Integer
   field :expired_at, type: Integer, default: -1
-  field :refund_requested, type: Boolean, default: false
   field :refund_finished, type: Boolean, default: false
   field :refund_status, type: String
   # it has occurred that the client has paid but the pay_finished is not updated as true.
@@ -448,14 +447,8 @@ class CourseParticipate
     if self.refund_finished == true && !%w[SUCCESS, FAIL, CHANGE].include?(self.refund_status)
       self.refundquery
     end
-    if self.refund_requested == false
+    if self.refund_finished == false
       ""
-    elsif self.refund_request_handled == false
-      "已申请退款"
-    elsif self.refund_approved == false
-      "退款申请被拒绝"
-    elsif self.refund_finished == false
-      "退款失败"
     elsif self.refund_status == "PROCESSING"
       "退款处理中"
     elsif self.refund_status == 'FAIL' || self.refund_status == 'CHANGE'
@@ -468,11 +461,7 @@ class CourseParticipate
   end
 
   def clear_refund
-    return if self.refund_requested = false
     self.update_attributes({
-      refund_requested: false,
-      refund_request_handled: false,
-      refund_approved: false,
       refund_finished: false,
       refund_status: ""
     })
