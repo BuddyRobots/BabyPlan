@@ -233,6 +233,9 @@ class CourseParticipate
       :body => Util.hash_to_xml(data))
 
     # todo: handle error messages
+    logger.info "AAAAAAAAAAAAAAAAAAAA"
+    logger.info response.body.inspect
+    logger.info "AAAAAAAAAAAAAAAAAAAA"
 
     doc = Nokogiri::XML(response.body)
     prepay_id = doc.search('prepay_id').children[0].text
