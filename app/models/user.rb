@@ -477,11 +477,8 @@ class User
     nil
   end
 
-  def self.age_for_select(with_default = true)
-    hash = { "0~1岁" => 0, "1~2岁" => 1, "2~3岁" => 2, "3岁以上" => 3 }
-    if with_default
-      hash["选择年龄区间"] = -1
-    end
+  def self.age_for_select
+    hash = { "选择年龄区间" => 0, "0~1岁" => 1, "1~2岁" => 2, "2~3岁" => 3, "3岁以上" => 4 }
     hash 
   end
 end

@@ -16,7 +16,7 @@ $ ->
     render_more = $(this)
     render_more.hide()
     $(".load").show()
-    $.getJSON "/user_mobile/courses/more?keyword=" + window.keyword + "&price=" + window.price + "&page=" + page, (data) ->
+    $.getJSON "/user_mobile/courses/more?keyword=" + window.keyword + "&price=" + window.price + "&age=" + window.age + "&page=" + page, (data) ->
       $(".load").hide()
       render_more.show()
       if data.success
@@ -42,3 +42,12 @@ $ ->
         location.href = "/user_mobile/courses"
       else
         location.href = "/user_mobile/courses?price=" + price
+
+  $("#choice-age").change ->
+    $("#choice-age option:selected").each ->
+      age = $(this).val()
+      console.log age
+      if age == "0"
+        location.href = "/user_mobile/courses"
+      else
+        location.href = "/user_mobile/courses?age=" + age

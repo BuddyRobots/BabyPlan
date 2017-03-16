@@ -300,7 +300,7 @@ class CourseInst
   end
 
   def status_class
-    if self.capacity == self.effective_signup_num
+    if self.capacity <= self.effective_signup_num
       return "greyribbon"
     elsif self.capacity - self.effective_signup_num <= 5 && self.capacity - self.effective_signup_num > 0
       return "redribbon"
