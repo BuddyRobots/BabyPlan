@@ -16,7 +16,7 @@ $ ->
     render_more = $(this)
     render_more.hide()
     $(".load").show()
-    $.getJSON "/user_mobile/courses/more?keyword=" + window.keyword + "&page=" + page, (data) ->
+    $.getJSON "/user_mobile/courses/more?keyword=" + window.keyword + "&price=" + window.price + "&page=" + page, (data) ->
       $(".load").hide()
       render_more.show()
       if data.success
@@ -36,11 +36,9 @@ $ ->
 
   $("#choice-price").change ->
     $("#choice-price option:selected").each ->
-      keyword = $(this).text()
-      
-      keyword = keyword.split("~")
-      console.log(keyword)
-      lower = keyword[0]
-      upper = keyword[1]
-      console.log(lower)
-      location.href = "/user_mobile/courses?keyword=" + keyword
+      price = $(this).val()
+      console.log price
+      if price == "0"
+        location.href = "/user_mobile/courses"
+      else
+        location.href = "/user_mobile/courses?price=" + price
