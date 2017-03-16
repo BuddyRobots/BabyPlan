@@ -311,6 +311,5 @@ class CourseInst
 
  def self.price_for_select
    hash = { "选择价格区间" => 0, "免费" => 1, "0~20元" => 2, "20~40元" => 3, "40元以上" => 4 }
-   hash 
  end
 end
