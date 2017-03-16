@@ -70,7 +70,7 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
     @course_participate = @current_user.course_participates.where(course_inst_id: @course.id).first
 
     # if the order is expired, redirect to the show page
-    if @course_participate.present? && @course_participate.is_expred
+    if @course_participate.present? && @course_participate.is_expired
       redirect_to action: :show, id: params[:state] and return
     end
 
