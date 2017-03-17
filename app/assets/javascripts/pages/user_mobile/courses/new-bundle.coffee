@@ -1,6 +1,5 @@
 $ ->
-  $.mobile_page_notification $("#remainTime").text(), 5000
-
+  $.mobile_page_notification $("#remainTime").text()
 
   pay = ->
     WeixinJSBridge.invoke 'getBrandWCPayRequest', {
