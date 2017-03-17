@@ -6,15 +6,17 @@
     window.course_id="#{@course.id.to_s}"
 
 - content_for :app_content do
-  - if @course.price_pay > 0
-    .hide
-      %span#appId= @pay_info["appId"]
-      %span#timeStamp= @pay_info["timeStamp"]
-      %span#nonceStr= @pay_info["nonceStr"]
-      %span#package= @pay_info["package"]
-      %span#signType= @pay_info["signType"]
-      %span#paySign= @pay_info["sign"]
   .content-area
+    - if @course.price_pay > 0
+      .hide
+        %span#appId= @pay_info["appId"]
+        %span#timeStamp= @pay_info["timeStamp"]
+        %span#nonceStr= @pay_info["nonceStr"]
+        %span#package= @pay_info["package"]
+        %span#signType= @pay_info["signType"]
+        %span#paySign= @pay_info["sign"]
+    .hide
+      %span#remainTime= @course_participate.remain_time
     .header
       .cloud
         %p 购买课程
@@ -39,7 +41,6 @@
         .price.clearfix
           %span.float-left 课程价格：
           %span.float-right#public-price= @course.price_pay
-      %p.notice 订单须在十分钟内支付或确认，超时将关闭订单
     - if @course.price_pay > 0
       %a.btn#wechat-pay{:href => "javascript:void(0);", :type => "button"}　微信支付
     - else

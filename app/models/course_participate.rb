@@ -252,6 +252,16 @@ class CourseParticipate
     # return retval
   end
 
+  def remain_time
+    n = (self.expired_at - Time.now.to_i) / 60
+    if n < 1
+      remain_time = "订单即将过期，请尽快"
+    else
+      remain_time = "订单还有" + n.to_s + "分钟过期，请尽快"
+    end
+    remain_time + (self.price_pay == 0 ? "确认" : "支付")
+  end
+
   def get_pay_info
     retval = {
       "appId" => APPID,
