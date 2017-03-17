@@ -261,7 +261,7 @@ $ ->
 
   $(".finish-btn").click ->
 
-
+    $(".course-again").show()
     code = $("#course-num").val()
     capacity = parseInt($("#course-capacity").val())
     price = $("#course-charge").val()
@@ -554,7 +554,8 @@ $ ->
   refresh_signin_info(0)
 
 
-  $(".course-aggin").click ->
+  $(".course-again").click ->
+    $(this).hide()
     $(".unshelve-btn").attr("disabled", true)
     $(".unedit-box").toggle()
     $(".edit-box").toggle()
@@ -568,7 +569,6 @@ $ ->
     $("#course-charge").val(window.price)
     $("#public-charge").val(window.price_pay)
     $("#course-times").val(window.length)
-    $("#course-date").val($("#date-span").text())
     $("#course-speaker").val($("#speaker-span").text())
     $("#course-address").val($("#address-span").text())
     $("#min-age").val(window.min_age)
@@ -580,4 +580,5 @@ $ ->
     $(".edit-btn").toggle()
     $(".finish-btn").toggle()
     is_edit = true
+    $("#calendar").fullCalendar('removeEvents')
 

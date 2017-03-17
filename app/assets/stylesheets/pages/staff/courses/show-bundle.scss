@@ -709,8 +709,13 @@ h2 {
 	margin-left: 4px;
 }
 .course-again {
+  display: inline-block;
+  width: 60px;
+  text-align: center;
+  vertical-align: middle;
 	font-size: 12px;
 	color: #f7873d;
+  padding: 0;
 	border: 1px solid #f7873d;
 	border-radius: 2px;
 }
