@@ -252,19 +252,22 @@ class CourseParticipate
     # return retval
   end
 
-  def get_pay_info
+  def remain_time
     n = (self.expired_at - Time.now.to_i) / 60
     if n < 1
       remain_time = "订单即将过期，请尽快"
     else
       remain_time = "订单还有" + n.to_s + "分钟过期，请尽快"
     end
+    remain_time + (self.price_pay == 0 ? "确认" : "支付")
+  end
+
+  def get_pay_info
     retval = {
       "appId" => APPID,
       "timeStamp" => Time.now.to_i.to_s,
       "nonceStr" => Util.random_str(32),
       "package" => "prepay_id=" + self.prepay_id,
-      "remainTime" => remain_time + (self.price_pay == 0 ? "确认" : "支付"),
       "signType" => "MD5"
     }
     signature = Util.sign(retval, APIKEY)

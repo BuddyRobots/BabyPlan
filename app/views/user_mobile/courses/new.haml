@@ -7,7 +7,7 @@
 
 - content_for :app_content do
   .hide
-    %span#remainTime= @pay_info["remainTime"]
+    %span#remainTime= @course_participate.remain_time
     - if @course.price_pay > 0
       %span#appId= @pay_info["appId"]
       %span#timeStamp= @pay_info["timeStamp"]
