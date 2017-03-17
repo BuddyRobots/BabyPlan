@@ -108,7 +108,7 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
   #     end
   #     @pay_info = @course_participate.get_pay_info
   #   end
-  # end
+  end
 
   def notify
     # get out_trade_no, which is the order_id in CourseParticipate

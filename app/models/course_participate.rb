@@ -97,7 +97,7 @@ class CourseParticipate
     #                  price_pay: course_inst.price_pay)
     cp = self.create({
       course_inst_id: course_inst.id,
-      client_id: client.id
+      client_id: client.id,
       course_id: course_inst.course.id
       })
     # cp.course_inst = course_inst
