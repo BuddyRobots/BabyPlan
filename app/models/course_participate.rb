@@ -257,7 +257,7 @@ class CourseParticipate
     if n < 1
       remain_time = "订单即将过期，请尽快"
     else
-      remain_time = "订单还有" + n.to_s "分钟过期，请尽快"
+      remain_time = "订单还有" + n.to_s + "分钟过期，请尽快"
     end
     retval = {
       "appId" => APPID,
