@@ -93,32 +93,55 @@ class CourseParticipate
   end
 
   def self.create_new(client, course_inst)
-    cp = self.create(order_id: Util.random_str(32),
-                     price_pay: course_inst.price_pay)
-    cp.course_inst = course_inst
-    cp.client = client
-    cp.course = course_inst.course
-    cp.save
-    cp.update_attributes({expired_at: (Time.now + 10.minutes).to_i})
-    CourseOrderExpiredWorker.perform_in((600 + 10).seconds, cp.id.to_s)
-    cp
+    # cp = self.create(order_id: Util.random_str(32),
+    #                  price_pay: course_inst.price_pay)
+    cp = self.create({
+      course_inst_id: course_inst.id,
+      client_id: client.id,
+      course_id: course_inst.course.id
+      })
+    # cp.course_inst = course_inst
+    # cp.client = client
+    # cp.course = course_inst.course
+    # cp.save
+    # cp.update_attributes({expired_at: (Time.now + 10.minutes).to_i})
+    # CourseOrderExpiredWorker.perform_in((600 + 10).seconds, cp.id.to_s)
+    # cp
     # return cp.unifiedorder_interface(remote_ip, openid)
   end
 
-  def renew
-    # if self.course_inst.price_pay > 0
+  def create_order(remote_ip, openid)
+    self.clear_refund
     self.update_attributes(
       {
         expired_at: (Time.now + 10.minutes).to_i,
         order_id: Util.random_str(32),
-        price_pay: self.course_inst.price_pay,
-        prepay_id: self.course_inst.price_pay == 0 ? "free" : ""
+        price_pay: course_inst.price_pay,
+        prepay_id: ""
       })
-    if self.course_inst.price_pay > 0
-      CourseOrderExpiredWorker.perform_in((600 + 10).seconds, self.id.to_s)
+    if self.price_pay == 0
+      self.update_attribute(:prepay_id, "free")
+    else
+      self.unifiedorder_interface(remote_ip, openid)
+      CourseOrderExpiredWorker.perform_in(600.seconds, self.id.to_s)
     end
-    # end
+    
   end
+
+  # def renew
+  #   # if self.course_inst.price_pay > 0
+  #   self.update_attributes(
+  #     {
+  #       expired_at: (Time.now + 10.minutes).to_i,
+  #       order_id: Util.random_str(32),
+  #       price_pay: self.course_inst.price_pay,
+  #       prepay_id: self.course_inst.price_pay == 0 ? "free" : ""
+  #     })
+  #   if self.course_inst.price_pay > 0
+  #     CourseOrderExpiredWorker.perform_in((600 + 10).seconds, self.id.to_s)
+  #   end
+  #   # end
+  # end
 
   def orderquery
     self.update_attributes({renew_status: false})
