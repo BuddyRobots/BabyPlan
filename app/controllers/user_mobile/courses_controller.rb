@@ -84,7 +84,12 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
       redirect_to action: :show, id: params[:state] and return
     end
 
-    @open_id = params[:code].present? ? Weixin.get_oauth_open_id(params[:code]) : nil
+    @open_id = params[:code].present? ? Weixin.get_oauth_open_id(params[:code]) : ""
+    if @open_id.nil?
+      # need to re-get the openid
+      redirect_to action: :show, id: params[:state] and return
+    end
+
     @course_participate.create_order(@remote_ip, @open_id)
     @pay_info = @course_participate.get_pay_info
 
