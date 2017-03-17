@@ -106,16 +106,18 @@ class CourseParticipate
   end
 
   def renew
-    if (self.is_expired || self.price_pay != self.course_inst.price_pay) && self.course_inst.price_pay > 0
-      self.update_attributes(
-        {
-          expired_at: (Time.now + 10.minutes).to_i,
-          order_id: Util.random_str(32),
-          price_pay: self.course_inst.price_pay,
-          prepay_id: ""
-        })
+    # if self.course_inst.price_pay > 0
+    self.update_attributes(
+      {
+        expired_at: (Time.now + 10.minutes).to_i,
+        order_id: Util.random_str(32),
+        price_pay: self.course_inst.price_pay,
+        prepay_id: self.course_inst.price_pay == 0 ? "free" : ""
+      })
+    if self.course_inst.price_pay > 0
       CourseOrderExpiredWorker.perform_in((600 + 10).seconds, self.id.to_s)
     end
+    # end
   end
 
   def orderquery
@@ -229,6 +231,7 @@ class CourseParticipate
     signature = Util.sign(data, APIKEY)
     data["sign"] = signature
 
+
     response = CourseParticipate.post("/pay/unifiedorder",
       :body => Util.hash_to_xml(data))
 
@@ -296,7 +299,7 @@ class CourseParticipate
   end
 
   def is_expired
-    if self.price_pay == 0 || self.expired_at == -1
+    if self.expired_at == -1
       return false
     end
     if self.need_order_query
