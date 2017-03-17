@@ -67,15 +67,15 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
 
   def new
     @course = CourseInst.where(id: params[:state]).first
-    @cp = @current_user.course_participates.where(course_inst_id: @course.id).first || CourseParticipate.create_new(current_user, @course)
+    @course_participate = @current_user.course_participates.where(course_inst_id: @course.id).first || CourseParticipate.create_new(current_user, @course)
 
-    if @cp.prepay_id.present?
-      if @cp.pay_finished == true || @cp.trade_state == "SUCCESS"
+    if @course_participate.prepay_id.present?
+      if @course_participate.pay_finished == true || @course_participate.trade_state == "SUCCESS"
         # has pay
         redirect_to action: :show, id: params[:state] and return
       end
-      if @cp.is_expired == false
-        @pay_info = @cp.get_pay_info
+      if @course_participate.is_expired == false
+        @pay_info = @course_participate.get_pay_info
         return
       end
     end
@@ -85,8 +85,8 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
     end
 
     @open_id = params[:code].present? ? Weixin.get_oauth_open_id(params[:code]) : nil
-    @cp.create_order(@remote_ip, @open_id)
-    @pay_info = @cp.get_pay_info
+    @course_participate.create_order(@remote_ip, @open_id)
+    @pay_info = @course_participate.get_pay_info
 
 
   #   # if the order is expired, redirect to the show page
