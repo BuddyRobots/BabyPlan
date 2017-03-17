@@ -4,5 +4,5 @@
 
 - content_for :app_content do
   .content-area
-    %p.caption= @agreement.title
-    %p.content= @agreement.content
+    %p.caption= @agreement.try(:title)
+    %p.content= @agreement.try(:content)

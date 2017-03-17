@@ -2,7 +2,7 @@
   = javascript_include_tag "pages/admin/agreements/index-bundle"
   = stylesheet_link_tag "pages/admin/agreements/index-bundle", :media => "all"
   :javascript
-    window.aid = "#{@agreement.id.to_s}"
+    window.aid = "#{@agreement.try(:id).to_s}"
 
 .content-area
   .content-box
@@ -15,8 +15,8 @@
     .manage-content
       .display-box
         .display-area
-          %p.title= @agreement.title.present? ? @agreement.title : xxxxxx儿童中心用户须知
-          .display-content= @agreement.content.html_safe
+          %p.title= @agreement.try(:title)
+          .display-content= @agreement.present? ? @agreement.content.try(:html_safe) : ""
 
 
       / 点击edit-btn后display-box隐藏，edit-area显示
