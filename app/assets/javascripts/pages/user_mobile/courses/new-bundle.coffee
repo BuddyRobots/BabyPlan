@@ -1,4 +1,7 @@
 $ ->
+  $.mobile_page_notification $("#remainTime").text(), 5000
+
+
   pay = ->
     WeixinJSBridge.invoke 'getBrandWCPayRequest', {
       'appId': $("#appId").text(),
@@ -60,3 +63,4 @@ $ ->
                 location.href = "/user_mobile/courses/" + window.course_id + '/pay_success'
               )
     )
+
