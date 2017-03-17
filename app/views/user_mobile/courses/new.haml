@@ -14,7 +14,8 @@
       %span#package= @pay_info["package"]
       %span#signType= @pay_info["signType"]
       %span#paySign= @pay_info["sign"]
-  %span#remainTime= @course_participate.remain_time
+  .hide
+    %span#remainTime= @course_participate.remain_time
   .content-area
     .header
       .cloud
