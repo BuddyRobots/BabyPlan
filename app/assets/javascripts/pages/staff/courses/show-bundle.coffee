@@ -330,6 +330,7 @@ $ ->
           $("#address-span").text(address)
           window.min_age = min_age
           window.max_age = max_age
+          # $("#school-span").text(school)
           if min_age == ""
             $("#min-age-span").text("无")
           else

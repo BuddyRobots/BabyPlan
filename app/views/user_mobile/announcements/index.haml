@@ -15,7 +15,7 @@
             .left-div
               %img.visit{:src => e.photo.nil? ? asset_path("web/announcement.png") : e.photo.path}
             .right-div
-              %img.icon{src: asset_path("kidscenter/gao.png")}
+              / %img.icon{src: asset_path("kidscenter/gao.png")}
               %p.caption= e.title
               %p.message= truncate(strip_tags(e.content).strip(), length: 50)
               .location-div

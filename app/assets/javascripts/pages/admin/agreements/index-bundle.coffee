@@ -34,16 +34,14 @@ $ ->
       $.page_notification "请输入标题"
       return
     if content.replace(/(<([^>]+)>)/ig, "").trim() == ""
-      $.page_notification "请输入公告内容"
+      $.page_notification "请输入须知内容"
       return
 
-    $.putJSON(
-      '/admin/agreements/' + window.aid,
+    $.postJSON(
+      '/admin/agreements',
       {
-        agreement: {
-          title: title
-          content: content
-        }
+        title: title
+        content: content
       },
       (data) ->
         console.log data

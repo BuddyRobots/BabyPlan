@@ -105,9 +105,9 @@
             %span.edit-box
               %input.input-area.form-control#max-age{:type => "text"}
             / %label.input-caption.margin-l 授课单位:
-            / %span.unedit-box#company-span
+            / %span.unedit-box#school-span= @course_inst.school
             / %span.edit-box
-            /   %input.input-area.form-control#course-company{:type => "text"}
+            /   %input.input-area.form-control#course-school{:type => "text"}
           .calendar-wrapper.clearfix
             %label.class-calendar 课程日历:
             .show-calendar#calendar
@@ -146,7 +146,7 @@
                 %tbody
                   - @participates[:data].each do |e|
                     %tr
-                      %td.td-data= e.client.name
+                      %td.td-data= e.client.name_or_parent
                       %td.td-data= e.client.address
                       %td.td-data= e.client.mobile
                       %td.td-data= e.status_str
@@ -191,7 +191,7 @@
                   .user-item.clearfix
                     %img.book-img{:src => r.client.avatar.present? ? r.client.avatar.path : asset_path("web/boy.png")}
                     %p.user-name
-                      %span= r.client.name
+                      %span= r.client.name_or_parent
                       - r.score.times do
                         %img.star-img{src: asset_path("managecenter/star.png")}
                     %p.date= r.created_at.strftime("%Y-%m-%d %H:%M")

@@ -10,6 +10,7 @@ class Staff::CoursesController < Staff::ApplicationController
     @keyword = params[:keyword]
     params[:page] = params[:course_inst_page]
     course_insts = @keyword.present? ? current_center.course_insts.where(name: /#{Regexp.escape(@keyword)}/) : current_center.course_insts.all
+    course_insts = course_insts.desc(:created_at)
     @course_insts = auto_paginate(course_insts)
     @course_insts[:data] = @course_insts[:data].map do |e|
       e.course_inst_info
@@ -122,7 +123,7 @@ class Staff::CoursesController < Staff::ApplicationController
 
   def qrcode
     @course_inst = CourseInst.where(id: params[:id]).first
-    signin_url = "http://#{Rails.configuration.host}/user_mobile/courses/#{@course_inst.id.to_s}/signin?time=#{Time.now.to_i.to_s}&class_idx=#{params[:class_num].to_s}"
+    signin_url = "http://#{Rails.configuration.domain}/user_mobile/courses/#{@course_inst.id.to_s}/signin?time=#{Time.now.to_i.to_s}&class_idx=#{params[:class_num].to_s}"
     qrcode = RQRCode::QRCode.new(signin_url)
     filename = "#{@course_inst.id.to_s}_#{params[:class_num].to_s}"
     png = qrcode.as_png(
@@ -164,33 +165,4 @@ class Staff::CoursesController < Staff::ApplicationController
     render json: retval_wrapper(retval) and return
   end
 
-
-  # 与退款有关
-  # def next_refund_request
-  #   cp = CourseParticipate.waiting_for_refund(@current_center)
-  #   if cp.present?
-  #     retval = {
-  #       id: cp.id.to_s,
-  #       course_name: cp.course_inst.name || cp.course_inst.course.name,
-  #       course_id: cp.course_inst.id.to_s,
-  #       client_name: cp.client.name,
-  #       client_id: cp.client.id.to_s
-  #     }
-  #     render json: retval_wrapper(retval) and return
-  #   else
-  #     render json: retval_wrapper(ErrCode::BLANK_DATA) and return
-  #   end
-  # end
-
-  # def reject_refund
-  #   @course_participate = CourseParticipate.where(id: params[:id]).first
-  #   retval = @course_participate.reject_refund(params[:feedback])
-  #   render json: retval_wrapper(retval) and return
-  # end
-
-  # def approve_refund
-  #   @course_participate = CourseParticipate.where(id: params[:id]).first
-  #   retval = @course_participate.approve_refund(params[:feedback])
-  #   render json: retval_wrapper(retval) and return
-  # end
 end

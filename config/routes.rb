@@ -1,5 +1,7 @@
-Rails.application.routes.draw do
+require 'sidekiq/web'
 
+Rails.application.routes.draw do
+  mount Sidekiq::Web => '/sidekiq'
   mount RuCaptcha::Engine => "/rucaptcha"
 
   match "/weixin_js_signature" => 'application#signature', :via => :get
@@ -126,8 +128,6 @@ Rails.application.routes.draw do
         post :signin_client
         get :signin_info
         get :stat
-        post :reject_refund
-        post :approve_refund
       end
     end
 
@@ -253,6 +253,7 @@ Rails.application.routes.draw do
         post :verify
       end
       collection do
+        get :agreement
         get :feeds
         get :announcements
         get :courses

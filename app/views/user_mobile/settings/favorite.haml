@@ -22,9 +22,22 @@
                   %img.visit{:src => f.img_src}
                 .right-div
                   %img.mini-icon{src: asset_path("kidscenter/" + f.fav_icon + ".png")}
-                  %p.caption= f.name
-                  %p.article= truncate(strip_tags(f.desc).strip(), length: 50)
-                  .location-div
+                  %span.caption= f.name
+                  - if f.course_inst.present?
+                    %span{class: f.course_inst.status_class}
+                    .location-div.flex-div
+                      .age-div
+                        %span.age 适龄 : 
+                        %span.age= f.course_inst.min_age.present? ? f.course_inst.min_age.to_s + "~" + f.course_inst.max_age.to_s + "岁" : "无"
+                      .price-div
+                        %span.age.price 价格:
+                        %span.age= f.course_inst.judge_price
+                    .location-div
+                      %img.time{src: asset_path("web/time.png")}
+                      %span.date= truncate(f.course_inst.date.strip(), length: 25)
+                  - else
+                    %p.article= truncate(strip_tags(f.desc).strip(), length: 50)
+                  .location-div.margin-b
                     %img.location{src: asset_path("web/location.png")}
                     %span.center= f.center_str
             .line-btn-delete

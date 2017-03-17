@@ -17,6 +17,7 @@ class CourseInst
   field :date_in_calendar, type: Array, default: [ ]
   field :min_age, type: Integer
   field :max_age, type: Integer
+  field :school, type: String
 
   has_one :photo, class_name: "Material", inverse_of: :course_inst_photo
   has_one :feed
@@ -57,7 +58,8 @@ class CourseInst
       speaker: course_inst_info[:speaker],
       date_in_calendar: course_inst_info[:date_in_calendar],
       min_age: course_inst_info[:min_age],
-      max_age: course_inst_info[:max_age]
+      max_age: course_inst_info[:max_age],
+      school: course_inst_info[:school]
     })
     course_inst.center = center
     course_inst.save
@@ -99,7 +101,8 @@ class CourseInst
         address: course_inst_info["address"],
         date_in_calendar: course_inst_info["date_in_calendar"],
         min_age: course_inst_info["min_age"],
-        max_age: course_inst_info["max_age"]
+        max_age: course_inst_info["max_age"],
+        school: course_inst_info["school"]
       }
     )
     nil
@@ -151,7 +154,7 @@ class CourseInst
     cur_num = 0
     self.course_participates.each do |e|
       next if e.is_success == false
-      info = {mobile: e.client.mobile, name: e.client.name, signin: e.signin_info[class_num.to_i].present?.to_s}
+      info = {mobile: e.client.mobile, name: e.client.name_or_parent, signin: e.signin_info[class_num.to_i].present?.to_s}
       if cur_num == group_size
         cur_num = 0
         retval << {line: cur_group}
@@ -204,12 +207,13 @@ class CourseInst
     {
       ele_name: self.name || self.course.name,
       ele_id: self.id.to_s,
-      ele_photo: self.photo.nil? ? ActionController::Base.helpers.asset_path("banner.png") : self.photo.path,
+      ele_photo: self.photo.nil? ? ActionController::Base.helpers.asset_path("web/course.png") : self.photo.path,
       ele_content: ActionController::Base.helpers.truncate(ActionController::Base.helpers.strip_tags(self.course.desc).strip(), length: 50),
       ele_center: self.center.name,
       ele_age: self.min_age.present? ? self.min_age.to_s + "~" + self.max_age.to_s + "岁" : "无",
       ele_price: self.judge_price,
-      ele_date:  ActionController::Base.helpers.truncate(self.date.strip(), length: 25)
+      ele_date:  ActionController::Base.helpers.truncate(self.date.strip(), length: 25),
+      ele_status: self.status_class
     }
   end
 
@@ -223,7 +227,7 @@ class CourseInst
 
   def effective_signup_num
     # self.course_participates.where(trade_state: "SUCCESS").length
-    self.course_participates.select { |e| e.is_expred == false } .length
+    self.course_participates.select { |e| e.is_effective } .length
   end
 
   def income_stat
@@ -294,4 +298,18 @@ class CourseInst
       signup_start_str: signup_time_ary.present? ? Time.at(signup_time_ary[0]).strftime('%Y-%m-%d') : nil
     }
   end
+
+  def status_class
+    if self.capacity <= self.effective_signup_num
+      return "greyribbon"
+    elsif self.capacity - self.effective_signup_num <= 5 && self.capacity - self.effective_signup_num > 0
+      return "redribbon"
+    else
+      return "greenribbon"
+    end
+  end
+
+ def self.price_for_select
+   hash = { "选择价格区间" => 0, "免费" => 1, "0~20元" => 2, "20~40元" => 3, "40元以上" => 4 }
+ end
 end
