@@ -89,32 +89,9 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
     @pay_info = @course_participate.get_pay_info
 
 
-  #   # if the order is expired, redirect to the show page
-  #   if @course_participate.present? && @course_participate.is_expired && renew == false
-  #   end
-
-  #   @course_participate = @course_participate || CourseParticipate.create_new(current_user, @course)
-
-  #   # for those refund and sign up again, or those click re-signup after expired
-  #   if params[:direct_pay] != "true"
-  #     @course_participate.renew
-  #   end
-  #   @course_participate.clear_refund
-  #   if @course.price_pay > 0
-  #     @course_participate.update_attributes({renew_status: true})
-  #     if @course_participate.prepay_id.blank?
-  #       @open_id = Weixin.get_oauth_open_id(params[:code])
-  #       @course_participate.unifiedorder_interface(@remote_ip, @open_id)
-  #     end
-  #     @pay_info = @course_participate.get_pay_info
-  #   end
   end
 
   def notify
-    # get out_trade_no, which is the order_id in CourseParticipate
-    # ci = CourseParticipate.where(order_id: out_trade_no).first
-    # get result_code, err_code and err_code_des
-    # ci.update_order(result_code, err_code, err_code_des)
     logger.info "AAAAAAAAAAAAAAAAA"
     logger.info request.inspect
     logger.info "AAAAAAAAAAAAAAAAA"
