@@ -227,6 +227,7 @@ $ ->
     $("#course-address").val($("#address-span").text())
     $("#min-age").val(window.min_age)
     $("#max-age").val(window.max_age)
+    $("#course-school").val($("#school-span").text())
 
     $("#course-num").css("width", $(".num-box").width() - $(".course-num").width()-5)
 
@@ -271,6 +272,7 @@ $ ->
     address = $("#course-address").val()
     min_age = $("#min-age").val()
     max_age = $("#max-age").val()
+    school = $("#course-school").val()
 
     fc_events = $('#calendar').fullCalendar('clientEvents')
     date_in_calendar = []
@@ -300,6 +302,7 @@ $ ->
           date_in_calendar: date_in_calendar
           min_age: min_age
           max_age: max_age
+          school: school
         }
       },
       (data) ->
@@ -327,8 +330,15 @@ $ ->
           $("#address-span").text(address)
           window.min_age = min_age
           window.max_age = max_age
-          $("#min-age-span").text(min_age + "岁")
-          $("#max-age-span").text(max_age + "岁")
+          # $("#school-span").text(school)
+          if min_age == ""
+            $("#min-age-span").text("无")
+          else
+            $("#min-age-span").text(min_age + "岁")
+          if max_age == ""
+            $("#max-age-span").text("无")
+          else
+            $("#max-age-span").text(max_age + "岁")
 
           disable_repeat()
           $(".class-calendar").toggle()

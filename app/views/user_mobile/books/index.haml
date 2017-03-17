@@ -31,7 +31,7 @@
             .left-div
               %img.visit{:src => e.cover.nil? ? asset_path("web/book.png") : e.cover.path}
             .right-div
-              %img.icon{src: asset_path("kidscenter/hui.png")}
+              / %img.icon{src: asset_path("kidscenter/hui.png")}
               %p.caption= e.name
               %p.message= truncate(strip_tags(e.desc).strip(), length: 50)
               .location-div

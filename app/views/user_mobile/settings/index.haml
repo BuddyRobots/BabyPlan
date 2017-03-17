@@ -17,7 +17,7 @@
       %img.back{src: asset_path("back.png")}
     .face.clearfix
       %img.avator-icon{:src => @current_user.avatar.present? ? @current_user.avatar.path : asset_path("web/boy.png")}
-      %p.username= @current_user.name
+      %p.username= @current_user.name_or_parent
 
     .collect-div
       %a.collect{:href => favorite_user_mobile_settings_path}

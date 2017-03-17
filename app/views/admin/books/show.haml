@@ -69,7 +69,7 @@
                   .user-item.clearfix
                     %img.book-img{:src => r.client.avatar.present? ? r.client.avatar.path : asset_path("web/boy.png")}
                     %p.user-name
-                      %span= r.client.name
+                      %span= r.client.name_or_parent
                       - r.score.times do
                         %img.star-img{src: asset_path("managecenter/star.png")}
                     %p.date= r.created_at.strftime("%Y-%m-%d %H:%M")
@@ -98,7 +98,7 @@
                 %tbody
                   - @borrows[:data].each do |b|
                     %tr
-                      %td= b.client.name
+                      %td= b.client.name_or_parent
                       %td= Time.at(b.borrow_at).strftime("%Y-%m-%d %H:%M")
                       %td{class: b.return_class}= b.return_status_str
                       %td.td-data 

@@ -11,7 +11,7 @@ class CourseParticipate
   SECRET = "01265a8ba50284999508d680f7387664"
   APIKEY = "1juOmajJrHO3f2NFA0a8dIYy2qAamtnK"
   MCH_ID = "1388434302"
-  NOTIFY_URL = "http://babyplan.bjfpa.org.cn/user_mobile/courses/notify"
+  NOTIFY_URL = "http://#{Rails.configuration.domain}/user_mobile/courses/notify"
 
   include Mongoid::Document
   include Mongoid::Timestamps
@@ -29,7 +29,6 @@ class CourseParticipate
   field :trade_state_desc, type: String
 
   # refund related
-  field :refund_feedback, type: String, default: ""
   field :refund_result_code, type: String
   field :refund_err_code, type: String
   field :refund_err_code_des, type: String
@@ -48,9 +47,6 @@ class CourseParticipate
   field :trade_state, type: String
   field :trade_state_updated_at, type: Integer
   field :expired_at, type: Integer, default: -1
-  field :refund_requested, type: Boolean, default: false
-  field :refund_request_handled, type: Boolean, default: false
-  field :refund_approved, type: Boolean, default: false
   field :refund_finished, type: Boolean, default: false
   field :refund_status, type: String
   # it has occurred that the client has paid but the pay_finished is not updated as true.
@@ -67,6 +63,10 @@ class CourseParticipate
   # needed, it is queried and updated from wechat
   field :renew_status, type: Boolean
 
+  field :closed_at, type: Integer
+  field :close_result, type: Boolean
+  field :close_err_code, type: String
+
   belongs_to :course_inst
   belongs_to :course
   belongs_to :client, class_name: "User", inverse_of: :course_participates
@@ -76,6 +76,9 @@ class CourseParticipate
   def status_str
     if self.need_order_query
       self.orderquery()
+    end
+    if is_expired
+      return "过期未付款"
     end
     if pay_finished != true
       return "未付款"
@@ -90,29 +93,55 @@ class CourseParticipate
   end
 
   def self.create_new(client, course_inst)
-    cp = self.create(order_id: Util.random_str(32),
-                     price_pay: course_inst.price_pay)
-    cp.course_inst = course_inst
-    cp.client = client
-    cp.course = course_inst.course
-    cp.save
-    expired_at = Time.now + 4.hours
-    cp.update_attributes({expired_at: expired_at.to_i})
-    cp
+    # cp = self.create(order_id: Util.random_str(32),
+    #                  price_pay: course_inst.price_pay)
+    cp = self.create({
+      course_inst_id: course_inst.id,
+      client_id: client.id,
+      course_id: course_inst.course.id
+      })
+    # cp.course_inst = course_inst
+    # cp.client = client
+    # cp.course = course_inst.course
+    # cp.save
+    # cp.update_attributes({expired_at: (Time.now + 10.minutes).to_i})
+    # CourseOrderExpiredWorker.perform_in((600 + 10).seconds, cp.id.to_s)
+    # cp
     # return cp.unifiedorder_interface(remote_ip, openid)
   end
 
-  def renew
-    if (self.is_expired || self.price_pay != self.course_inst.price_pay) && self.course_inst.price_pay > 0
-      self.update_attributes(
-        {
-          expired_at: (Time.now + 4.hours).to_i,
-          order_id: Util.random_str(32),
-          price_pay: self.course_inst.price_pay,
-          prepay_id: ""
-        })
+  def create_order(remote_ip, openid)
+    self.clear_refund
+    self.update_attributes(
+      {
+        expired_at: (Time.now + 10.minutes).to_i,
+        order_id: Util.random_str(32),
+        price_pay: course_inst.price_pay,
+        prepay_id: ""
+      })
+    if self.price_pay == 0
+      self.update_attribute(:prepay_id, "free")
+    else
+      self.unifiedorder_interface(remote_ip, openid)
+      CourseOrderExpiredWorker.perform_in(600.seconds, self.id.to_s)
     end
+    
   end
+
+  # def renew
+  #   # if self.course_inst.price_pay > 0
+  #   self.update_attributes(
+  #     {
+  #       expired_at: (Time.now + 10.minutes).to_i,
+  #       order_id: Util.random_str(32),
+  #       price_pay: self.course_inst.price_pay,
+  #       prepay_id: self.course_inst.price_pay == 0 ? "free" : ""
+  #     })
+  #   if self.course_inst.price_pay > 0
+  #     CourseOrderExpiredWorker.perform_in((600 + 10).seconds, self.id.to_s)
+  #   end
+  #   # end
+  # end
 
   def orderquery
     self.update_attributes({renew_status: false})
@@ -168,6 +197,45 @@ class CourseParticipate
     end
   end
 
+  def closeorder_interface
+    nonce_str = Util.random_str(32)
+    data = {
+      "appid" => APPID,
+      "mch_id" => MCH_ID,
+      "nonce_str" => nonce_str,
+      "out_trade_no" => self.order_id
+    }
+    signature = Util.sign(data, APIKEY)
+    data["sign"] = signature
+
+    response = CourseParticipate.post("/pay/closeorder",
+      body: Util.hash_to_xml(data))
+
+    doc = Nokogiri::XML(response.body)
+    success = doc.search('return_code').children[0].text
+    if success != "SUCCESS"
+      self.update_attributes({
+        closed_at: Time.now.to_i,
+        close_result: false
+      })
+    else
+      result_code = doc.search('result_code').children[0].text
+      if result_code == "SUCCESS"
+        self.update_attributes({
+          closed_at: Time.now.to_i,
+          close_result: true
+        })
+      else
+        err_code = doc.search('err_code').children[0].text
+        self.update_attributes({
+          closed_at: Time.now.to_i,
+          close_result: false,
+          close_err_code: err_code
+        })
+      end
+    end
+  end
+
   def unifiedorder_interface(remote_ip, openid)
     nonce_str = Util.random_str(32)
     data = {
@@ -176,16 +244,16 @@ class CourseParticipate
       "nonce_str" => nonce_str,
       "body" => self.course_inst.course.name,
       "out_trade_no" => self.order_id,
-      "total_fee" => (self.price_pay * 100).round.to_s,
-      # "total_fee" => 1.to_s,
+      "total_fee" => Rails.env == "production" ? (self.price_pay * 100).round.to_s : 1.to_s,
       "spbill_create_ip" => remote_ip,
       "notify_url" => NOTIFY_URL,
       "trade_type" => "JSAPI",
       "openid" => openid,
-      "time_expire" => Time.at(self.expired_at + 600).strftime("%Y%m%d%H%M%S")
+      "time_expire" => Time.at(self.expired_at).strftime("%Y%m%d%H%M%S")
     }
     signature = Util.sign(data, APIKEY)
     data["sign"] = signature
+
 
     response = CourseParticipate.post("/pay/unifiedorder",
       :body => Util.hash_to_xml(data))
@@ -205,6 +273,16 @@ class CourseParticipate
     # signature = Util.sign(retval, APIKEY)
     # retval["sign"] = signature
     # return retval
+  end
+
+  def remain_time
+    n = (self.expired_at - Time.now.to_i) / 60
+    if n < 1
+      remain_time = "订单即将过期，请尽快"
+    else
+      remain_time = "订单还有" + n.to_s + "分钟过期，请尽快"
+    end
+    remain_time + (self.price_pay == 0 ? "确认" : "支付")
   end
 
   def get_pay_info
@@ -246,11 +324,17 @@ class CourseParticipate
     return self.renew_status || (self.pay_finished == true && self.trade_state != "SUCCESS")
   end
 
+  def is_effective
+    if self.need_order_query
+      self.orderquery()
+    end
+    self.trade_state == "SUCCESS" || (self.expired_at > Time.now.to_i && self.expired_at != -1)
+  end
+
   def is_expired
-    if self.price_pay == 0
+    if self.expired_at == -1
       return false
     end
-    # if self.pay_finished == true && self.trade_state != "SUCCESS"
     if self.need_order_query
       self.orderquery()
     end
@@ -278,64 +362,20 @@ class CourseParticipate
     self.trade_state == "SUCCESS"
   end
 
-  # def refund_allowed
-  #   return self.is_success && self.course_inst.status == CourseInst::NOT_BEGIN && self.refund_requested == false
-  # end
-
-  # def request_refund
-  #   if self.refund_allowed
-  #     self.update_attributes({refund_requested: true})
-  #     nil
-  #   elsif self.refund_requested == true
-  #     ErrCode::REFUND_REQUESTED
-  #   else
-  #     ErrCode::REFUND_NOT_ALLOWED
-  #   end
-  # end
+  def refund_allowed
+    return self.is_success && Date.parse(self.course_inst.start_date).prev_day.at_beginning_of_day.future? && self.refund_finished == false
+  end
 
   def review
     self.course_inst.reviews.where(client_id: self.client.id).first
   end
 
-  # def self.waiting_for_refund(center)
-  #   course_insts = center.course_insts
-  #   CourseParticipate.any_in(course_inst_id: course_insts.map { |e| e.id.to_s}).where(refund_requested: true, refund_request_handled: false).first
-  # end
-
-  # def reject_refund(feedback)
-  #   self.update_attributes({
-  #     refund_request_handled: true,
-  #     refund_approved: false,
-  #     refund_feedback: feedback
-  #   })
-  #   Message.create_refund_reject_message(self)
-  #   nil
-  # end
-
-  # def approve_refund(feedback)
-  #   self.refund
-  #   self.update_attributes({
-  #     refund_request_handled: true,
-  #     refund_approved: true,
-  #     refund_feedback: feedback
-  #   })
-  #   nil
-  # end
-
-  def approve_refund
-    if Date.parse(self.course_inst.start_date).prev_day.at_beginning_of_day.future?
-      self.refund
-      self.update_attributes({
-        refund_request_handled: true,
-        refund_approved: true
-        })
-      nil
-    else
-      retval = ErrCode::REFUND_TIME_FAIL
-    end
-  end
-
   def refund
+    if !Date.parse(self.course_inst.start_date).prev_day.at_beginning_of_day.future?
+      # refund now allowed
+      return ErrCode::REFUND_TIME_FAIL
+    end
+
     if self.price_pay == 0
       self.update_attributes({
         refund_status: "SUCCESS",
@@ -354,9 +394,8 @@ class CourseParticipate
       "op_user_id" => MCH_ID,
       "out_trade_no" => self.order_id,
       "out_refund_no" => self.order_id,
-      "total_fee" => (self.price_pay * 100).round.to_s,
-      # "total_fee" => 1.to_s,
-      "refund_fee" => (self.price_pay * 100).round.to_s,
+      "total_fee" => Rails.env == "production" ? (self.price_pay * 100).round.to_s : 1.to_s,
+      "refund_fee" => Rails.env == "production" ? (self.price_pay * 100).round.to_s : 1.to_s,
       "nonce_str" => nonce_str,
       "sign_type" => "MD5"
     }
@@ -391,6 +430,7 @@ class CourseParticipate
           wechat_refund_fee: wechat_refund_fee,
           refund_finished: true
         })
+        self.clear_pay
         Bill.create_course_refund_item(self)
         retval = { success: true, wechat_refund_id: wechat_refund_id, wechat_refund_channel: wechat_refund_channel }
         return retval
@@ -439,7 +479,6 @@ class CourseParticipate
         retval = { success: true, refund_status: refund_status }
         if refund_status == "SUCCESS"
           Bill.confirm_course_refund_item(self)
-          self.clear_pay
         end
         return retval
       end
@@ -450,14 +489,8 @@ class CourseParticipate
     if self.refund_finished == true && !%w[SUCCESS, FAIL, CHANGE].include?(self.refund_status)
       self.refundquery
     end
-    if self.refund_requested == false
+    if self.refund_finished == false
       ""
-    elsif self.refund_request_handled == false
-      "已申请退款"
-    elsif self.refund_approved == false
-      "退款申请被拒绝"
-    elsif self.refund_finished == false
-      "退款失败"
     elsif self.refund_status == "PROCESSING"
       "退款处理中"
     elsif self.refund_status == 'FAIL' || self.refund_status == 'CHANGE'
@@ -470,11 +503,7 @@ class CourseParticipate
   end
 
   def clear_refund
-    return if self.refund_requested = false
     self.update_attributes({
-      refund_requested: false,
-      refund_request_handled: false,
-      refund_approved: false,
       refund_finished: false,
       refund_status: ""
     })
@@ -502,7 +531,12 @@ class CourseParticipate
       name: self.course_inst.name || self.course.name,
       content: self.course.desc,
       center: self.course_inst.center.name,
-      photo: self.course_inst.photo
+      photo: self.course_inst.photo,
+      min_age: self.course_inst.min_age,
+      max_age: self.course_inst.max_age,
+      judge_price: self.course_inst.judge_price,
+      date: self.course_inst.date,
+      status_class: self.course_inst.status_class
     }
   end
 
@@ -510,9 +544,13 @@ class CourseParticipate
     {
       ele_name: self.course_inst.name || self.course.name,
       ele_id: self.course_inst.id.to_s,
-      ele_photo: self.course_inst.photo.nil? ? ActionController::Base.helpers.asset_path("banner.png") : self.course_inst.photo.path,
+      ele_photo: self.course_inst.photo.nil? ? ActionController::Base.helpers.asset_path("web/course.png") : self.course_inst.photo.path,
       ele_content: ActionController::Base.helpers.truncate(ActionController::Base.helpers.strip_tags(self.course.desc).strip(), length: 50),
-      ele_center: self.course_inst.center.name
+      ele_center: self.course_inst.center.name,
+      ele_age: self.course_inst.min_age.present? ? self.course_inst.min_age.to_s + "~" + self.course_inst.max_age.to_s + "岁" : "无",
+      ele_price: self.course_inst.judge_price,
+      ele_date:  ActionController::Base.helpers.truncate(self.course_inst.date.strip(), length: 25),
+      ele_status: self.course_inst.status_class
     }
   end
 end

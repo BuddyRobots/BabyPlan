@@ -16,13 +16,16 @@
               %img.visit{:src => e.img_src}
             .right-div
               %img.icon{src: asset_path("kidscenter/" + e.feed_icon + ".png")}
-              %p.caption= e.name
+              %span.caption= e.name
               - if e.course_inst.present?
-                .location-div
-                  %span.age 适合年龄 : 
-                  %span.age= e.course_inst.min_age.present? ? e.course_inst.min_age.to_s + "~" + e.course_inst.max_age.to_s + "岁" : "无"
-                  %span.age.price 价格:
-                  %span.age= e.course_inst.judge_price
+                %span{class: e.course_inst.status_class}
+                .location-div.flex-div
+                  .age-div
+                    %span.age 适龄 : 
+                    %span.age= e.course_inst.min_age.present? ? e.course_inst.min_age.to_s + "~" + e.course_inst.max_age.to_s + "岁" : "无"
+                  .price-div
+                    %span.age.price 价格:
+                    %span.age= e.course_inst.judge_price
                 .location-div
                   %img.time{src: asset_path("web/time.png")}
                   %span.date= truncate(e.course_inst.date.strip(), length: 25)

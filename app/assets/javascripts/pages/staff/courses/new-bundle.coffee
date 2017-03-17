@@ -77,6 +77,7 @@ $ ->
     address = $("#course-address").val()
     min_age = $("#min-age").val()
     max_age = $("#max-age").val()
+    school = $("#school").val()
 
     fc_events = $('#calendar').fullCalendar('clientEvents')
     date_in_calendar = []
@@ -107,6 +108,7 @@ $ ->
         date_in_calendar: date_in_calendar
         min_age: min_age
         max_age: max_age
+        school: school
       },
       (data) ->
         if data.success
