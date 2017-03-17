@@ -508,7 +508,7 @@ class CourseParticipate
     {
       ele_name: self.course_inst.name || self.course.name,
       ele_id: self.course_inst.id.to_s,
-      ele_photo: self.course_inst.photo.nil? ? ActionController::Base.helpers.asset_path("banner.png") : self.course_inst.photo.path,
+      ele_photo: self.course_inst.photo.nil? ? ActionController::Base.helpers.asset_path("web/course.png") : self.course_inst.photo.path,
       ele_content: ActionController::Base.helpers.truncate(ActionController::Base.helpers.strip_tags(self.course.desc).strip(), length: 50),
       ele_center: self.course_inst.center.name,
       ele_age: self.course_inst.min_age.present? ? self.course_inst.min_age.to_s + "~" + self.course_inst.max_age.to_s + "岁" : "无",

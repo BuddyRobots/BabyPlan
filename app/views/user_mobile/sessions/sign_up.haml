@@ -29,8 +29,9 @@
         %input#password-confirm.input-div{:type => "password"}
 
     %a.signup{:href => "javascript:void(0);"} 注册
-    .agreement-div
-      %span 我已阅读并同意
-      %a.user-agreement 《儿童中心用户须知》
+    - if Agreement.first.present?
+      .agreement-div
+        %span 我已阅读并同意
+        %a.user-agreement{href: agreement_user_mobile_sessions_path} 《儿童中心用户须知》
  
    
