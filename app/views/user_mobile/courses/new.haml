@@ -6,15 +6,15 @@
     window.course_id="#{@course.id.to_s}"
 
 - content_for :app_content do
-  - if @course.price_pay > 0
-    .hide
+  .hide
+    %span#remainTime= @pay_info["remainTime"]
+    - if @course.price_pay > 0
       %span#appId= @pay_info["appId"]
       %span#timeStamp= @pay_info["timeStamp"]
       %span#nonceStr= @pay_info["nonceStr"]
       %span#package= @pay_info["package"]
       %span#signType= @pay_info["signType"]
       %span#paySign= @pay_info["sign"]
-      %span#remainTime= @pay_info["remainTime"]
   .content-area
     .header
       .cloud
