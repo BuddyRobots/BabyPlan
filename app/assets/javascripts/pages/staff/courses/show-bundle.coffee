@@ -552,3 +552,32 @@ $ ->
         $.mobile_page_notification "服务器出错"
 
   refresh_signin_info(0)
+
+
+  $(".course-aggin").click ->
+    $(".unshelve-btn").attr("disabled", true)
+    $(".unedit-box").toggle()
+    $(".edit-box").toggle()
+    $(".class-calendar").toggle()
+    $(".calendar-operation-wrapper").toggle()
+    $(".calendar-wrapper").css("border", "1px solid #c8c8c8")
+    $("#calendar").removeClass("show-calendar").addClass("edit-calendar")
+    $("#upload-photo").toggle()
+    $("#course-num").val($("#num-span").text())
+    $("#course-capacity").val(window.capacity)
+    $("#course-charge").val(window.price)
+    $("#public-charge").val(window.price_pay)
+    $("#course-times").val(window.length)
+    $("#course-date").val($("#date-span").text())
+    $("#course-speaker").val($("#speaker-span").text())
+    $("#course-address").val($("#address-span").text())
+    $("#min-age").val(window.min_age)
+    $("#max-age").val(window.max_age)
+    $("#course-school").val($("#school-span").text())
+
+    $("#course-num").css("width", $(".num-box").width() - $(".course-num").width()-5)
+
+    $(".edit-btn").toggle()
+    $(".finish-btn").toggle()
+    is_edit = true
+
