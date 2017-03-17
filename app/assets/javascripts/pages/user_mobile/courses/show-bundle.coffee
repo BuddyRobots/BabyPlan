@@ -67,7 +67,7 @@ $ ->
           $("#refundModal").modal('hide')
           setTimeout(->
             location.href="/user_mobile/courses/" + window.course_inst_id
-          }, 2000);
+          , 2000);
         else
           if data.code == REFUND_TIME_FAIL
             $.mobile_page_notification("该课程距开课只有一天时间，已经不能退款！")
