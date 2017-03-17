@@ -65,7 +65,7 @@ $ ->
         if data.success
           $.mobile_page_notification("退款成功，正在跳转")
           $("#refundModal").modal('hide')
-          setTimeout(function(){
+          setTimeout(->
             location.href="/user_mobile/courses/" + window.course_inst_id
           }, 2000);
         else
