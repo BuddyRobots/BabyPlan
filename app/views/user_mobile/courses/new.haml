@@ -39,6 +39,7 @@
         .price.clearfix
           %span.float-left 课程价格：
           %span.float-right#public-price= @course.price_pay
+      %p.notice 订单须在十分钟内支付或确认，超时将关闭订单
     - if @course.price_pay > 0
       %a.btn#wechat-pay{:href => "javascript:void(0);", :type => "button"}　微信支付
     - else
