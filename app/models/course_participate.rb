@@ -264,7 +264,7 @@ class CourseParticipate
       "timeStamp" => Time.now.to_i.to_s,
       "nonceStr" => Util.random_str(32),
       "package" => "prepay_id=" + self.prepay_id,
-      "remainTime" => remain_time + (self.price_pay == 0 ? "确认" : "支付")
+      "remainTime" => remain_time + (self.price_pay == 0 ? "确认" : "支付"),
       "signType" => "MD5"
     }
     signature = Util.sign(retval, APIKEY)
