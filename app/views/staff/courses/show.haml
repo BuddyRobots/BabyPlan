@@ -146,7 +146,7 @@
                 %tbody
                   - @participates[:data].each do |e|
                     %tr
-                      %td.td-data= e.client.name
+                      %td.td-data= e.client.name_or_parent
                       %td.td-data= e.client.address
                       %td.td-data= e.client.mobile
                       %td.td-data= e.status_str
@@ -191,7 +191,7 @@
                   .user-item.clearfix
                     %img.book-img{:src => r.client.avatar.present? ? r.client.avatar.path : asset_path("web/boy.png")}
                     %p.user-name
-                      %span= r.client.name
+                      %span= r.client.name_or_parent
                       - r.score.times do
                         %img.star-img{src: asset_path("managecenter/star.png")}
                     %p.date= r.created_at.strftime("%Y-%m-%d %H:%M")

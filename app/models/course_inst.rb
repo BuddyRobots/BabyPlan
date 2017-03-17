@@ -154,7 +154,7 @@ class CourseInst
     cur_num = 0
     self.course_participates.each do |e|
       next if e.is_success == false
-      info = {mobile: e.client.mobile, name: e.client.name, signin: e.signin_info[class_num.to_i].present?.to_s}
+      info = {mobile: e.client.mobile, name: e.client.name_or_parent, signin: e.signin_info[class_num.to_i].present?.to_s}
       if cur_num == group_size
         cur_num = 0
         retval << {line: cur_group}

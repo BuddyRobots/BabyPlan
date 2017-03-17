@@ -122,6 +122,10 @@ class User
     { uid: u.id.to_s }
   end
 
+  def name_or_parent
+    self.name.present? ? self.name : "家长:" + self.parent
+  end
+
   def self.find_by_auth_key(auth_key)
     info = Encryption.decrypt_auth_key(auth_key)
     uid = info.split(',')[0]
@@ -302,7 +306,7 @@ class User
   def client_info
     {
       id: self.id.to_s,
-      name: self.name,
+      name: self.name_or_parent,
       gender: self.gender,
       age: self.birthday.present? ? Date.today.year - self.birthday.year : nil,
       parent: self.parent,
