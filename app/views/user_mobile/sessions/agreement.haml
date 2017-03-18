@@ -5,4 +5,4 @@
 - content_for :app_content do
   .content-area
     %p.caption= @agreement.try(:title)
-    .content= @agreement.try(:content).html_safe
+    .content= @agreement.try(:content).to_s.html_safe
