@@ -121,8 +121,6 @@
     - else
       - if @course.status == CourseInst::OVER
         %button.btn.unclick-btn{:type => "button"} 已结束
-      - elsif @course.capacity <= @course.effective_signup_num
-        %button.btn.unclick-btn{:type => "button"} 无剩余容量
       - else
         %a.btn.click-btn{href: new_user_mobile_course_path + "/?direct_pay=true&state=" + @course.id.to_s, :type => "button"}= @course.price_pay == 0 ? "去确认" : "去付款"
 

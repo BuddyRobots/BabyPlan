@@ -18,7 +18,7 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
           @courses = @courses.where(price_pay: "0")
         else
           @courses = @courses.where(:price_pay.gt => internal[0]) if internal[0].present?
-          @courses = @courses.where(:price_pay.lt => internal[1]) if internal[1].present?
+          @courses = @courses.where(:price_pay.lte => internal[1]) if internal[1].present?
         end
       end
       if params[:age].present?
@@ -45,7 +45,7 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
         @courses = @courses.where(price_pay: "0")
       else
         @courses = @courses.where(:price_pay.gt => internal[0]) if internal[0].present?
-        @courses = @courses.where(:price_pay.lt => internal[1]) if internal[1].present?
+        @courses = @courses.where(:price_pay.lte => internal[1]) if internal[1].present?
       end
     end
     if params[:age].present?
