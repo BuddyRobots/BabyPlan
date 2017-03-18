@@ -18,14 +18,14 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
           @courses = @courses.where(price_pay: "0")
         else
           @courses = @courses.where(:price_pay.gt => internal[0]) if internal[0].present?
-          @courses = @courses.where(:price_pay.lt => internal[1]) if internal[1].present?
+          @courses = @courses.where(:price_pay.lte => internal[1]) if internal[1].present?
         end
       end
       if params[:age].present?
         internals = [[nil, nil], [0, 1], [1, 2], [2, 3], [3, 100]]
         internal = internals[params[:age].to_i]
         if internal[0].present? && internal[1].present?
-          @courses = @courses.where(:min_age.lt => internal[1]).where(:max_age.gt => internal[0])
+          @courses = @courses.where(:min_age.lte => internal[1]).where(:max_age.gte => internal[0])
         end
       end
       @courses = auto_paginate(@courses)[:data]
@@ -45,14 +45,14 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
         @courses = @courses.where(price_pay: "0")
       else
         @courses = @courses.where(:price_pay.gt => internal[0]) if internal[0].present?
-        @courses = @courses.where(:price_pay.lt => internal[1]) if internal[1].present?
+        @courses = @courses.where(:price_pay.lte => internal[1]) if internal[1].present?
       end
     end
     if params[:age].present?
       internals = [[nil, nil], [0, 1], [1, 2], [2, 3], [3, 100]]
       internal = internals[params[:age].to_i]
       if internal[0].present? && internal[1].present?
-        @courses = @courses.where(:min_age.lt => internal[1]).where(:max_age.gt => internal[0])
+        @courses = @courses.where(:min_age.lte => internal[1]).where(:max_age.gte => internal[0])
       end
     end
     @courses = auto_paginate(@courses)[:data]
