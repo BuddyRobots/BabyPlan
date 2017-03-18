@@ -25,7 +25,7 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
         internals = [[nil, nil], [0, 1], [1, 2], [2, 3], [3, 100]]
         internal = internals[params[:age].to_i]
         if internal[0].present? && internal[1].present?
-          @courses = @courses.where(:min_age.lte => internal[1]).where(:max_age.gte => internal[0])
+          @courses = @courses.where(:min_age.lt => internal[1]).where(:max_age.gt => internal[0])
         end
       end
       @courses = auto_paginate(@courses)[:data]
@@ -52,7 +52,7 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
       internals = [[nil, nil], [0, 1], [1, 2], [2, 3], [3, 100]]
       internal = internals[params[:age].to_i]
       if internal[0].present? && internal[1].present?
-        @courses = @courses.where(:min_age.lte => internal[1]).where(:max_age.gte => internal[0])
+        @courses = @courses.where(:min_age.lt => internal[1]).where(:max_age.gt => internal[0])
       end
     end
     @courses = auto_paginate(@courses)[:data]
