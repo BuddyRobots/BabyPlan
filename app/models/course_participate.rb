@@ -188,7 +188,7 @@ class CourseParticipate
           wechat_transaction_id: wechat_transaction_id
         })
         if trade_state == "SUCCESS"
-          self.update_attributes({pay_finished: true})
+          self.update_attributes({pay_finished: true, expired_at: -1})
           Bill.confirm_course_participate_item(self)
         end
         retval = { success: true, trade_state: trade_state, trade_state_desc: trade_state_desc }
