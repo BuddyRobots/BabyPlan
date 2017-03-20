@@ -147,7 +147,7 @@ class CourseParticipate
 
   def orderquery
     self.update_attributes({renew_status: false})
-    if self.order_id.blank?
+    if self.order_id.blank? || self.prepay_id == "free"
       return nil
     end
     nonce_str = Util.random_str(32)
