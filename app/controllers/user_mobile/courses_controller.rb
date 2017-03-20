@@ -107,7 +107,7 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
 
   def pay_finished
     @course_participate = CourseParticipate.where(id: params[:id]).first
-    @course_participate.update_attributes({pay_finished: true})
+    @course_participate.update_attributes({pay_finished: true, expired_at: -1})
     if @course_participate.price_pay == 0
       @course_participate.update_attributes({
         trade_state: "SUCCESS"

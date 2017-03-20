@@ -123,7 +123,7 @@ class User
   end
 
   def name_or_parent
-    self.name.present? ? self.name : "家长:" + self.parent
+    self.is_pregnant ? "家长:" + self.parent : self.name
   end
 
   def self.find_by_auth_key(auth_key)
