@@ -210,6 +210,8 @@ $ ->
 
   $(".edit-btn").click ->
     $(".unshelve-btn").attr("disabled", true)
+    $(".delete-btn").attr("disabled", true)
+    $(".course-again").toggle()
     $(".unedit-box").toggle()
     $(".edit-box").toggle()
     $(".class-calendar").toggle()
@@ -266,8 +268,6 @@ $ ->
 
 
   $(".finish-btn").click ->
-
-    $(".course-again").show()
     code = $("#course-num").val()
     capacity = parseInt($("#course-capacity").val())
     price = $("#course-charge").val()
@@ -319,7 +319,8 @@ $ ->
           $(".finish-btn").toggle()
           $(".unedit-box").show()
           $(".edit-box").hide()
-
+          $(".course-again").toggle()
+          $(".delete-btn").attr("disabled", false)
           $(".unshelve-btn").attr("disabled", false)
 
           $("#num-span").text(code)
@@ -334,6 +335,7 @@ $ ->
           $("#date-span").text(date)
           $("#speaker-span").text(speaker)
           $("#address-span").text(address)
+          $("#school-span").text(school)
           window.min_age = min_age
           window.max_age = max_age
           # $("#school-span").text(school)
@@ -368,21 +370,29 @@ $ ->
     $(".finish-btn").hide()
     $(".edit-btn").hide()
     $(".unshelve-btn").hide()
+    $(".delete-btn").hide()
+    $(".again-btn").hide()
 
   $("#register-message").click ->
     $(".finish-btn").hide()
     $(".edit-btn").hide()
     $(".unshelve-btn").hide()
+    $(".delete-btn").hide()
+    $(".again-btn").hide()
 
   $("#course-sign").click ->
     $(".finish-btn").hide()
     $(".edit-btn").hide()
     $(".unshelve-btn").hide()
+    $(".delete-btn").hide()
+    $(".again-btn").hide()
 
   $("#statistics").click ->
     $(".finish-btn").hide()
     $(".edit-btn").hide()
     $(".unshelve-btn").hide()
+    $(".delete-btn").hide()
+    $(".again-btn").hide()
 
   $("#course-message").click ->
     if is_edit
@@ -390,6 +400,7 @@ $ ->
     else
       $(".edit-btn").show()
     $(".unshelve-btn").show()
+    $(".delete-btn").show()
 
   # calender set
   $( "#datepicker" ).datepicker({
@@ -564,13 +575,17 @@ $ ->
   $(".course-again").click ->
     $(this).hide()
     $(".unshelve-btn").attr("disabled", true)
+    $(".delete-btn").attr("disabled", true)
     $(".unedit-box").toggle()
     $(".edit-box").toggle()
+    $(".name-box").toggle()
+    $("#name-span").toggle()
     $(".class-calendar").toggle()
     $(".calendar-operation-wrapper").toggle()
     $(".calendar-wrapper").css("border", "1px solid #c8c8c8")
     $("#calendar").removeClass("show-calendar").addClass("edit-calendar")
     $("#upload-photo").toggle()
+    $("#course-name").val($("#name-span").text())
     $("#course-num").val($("#num-span").text())
     $("#course-capacity").val(window.capacity)
     $("#course-charge").val(window.price)
@@ -585,7 +600,115 @@ $ ->
     $("#course-num").css("width", $(".num-box").width() - $(".course-num").width()-5)
 
     $(".edit-btn").toggle()
-    $(".finish-btn").toggle()
+    $(".again-btn").toggle()
     is_edit = true
     $("#calendar").fullCalendar('removeEvents')
+
+
+  $(".again-btn").click ->
+    name = $("#course-name").val()
+    code = $("#course-num").val()
+    capacity = parseInt($("#course-capacity").val())
+    price = $("#course-charge").val()
+    price_pay = $("#public-charge").val()
+    length = parseInt($("#course-times").val())
+    date = $("#course-date").val()
+    speaker = $("#course-speaker").val()
+    address = $("#course-address").val()
+    min_age = $("#min-age").val()
+    max_age = $("#max-age").val()
+    school = $("#course-school").val()
+    available = true
+
+    fc_events = $('#calendar').fullCalendar('clientEvents')
+    date_in_calendar = []
+
+    $.each(
+      fc_events,
+      (index, fc_event) ->
+        date_in_calendar.push(fc_event.start._i + "," + fc_event.end._i)
+    )
+
+    ret = check_course_input(code, capacity, price, price_pay, length, date, speaker, address, date_in_calendar, min_age, max_age)
+    if ret == false
+      return
+
+    $.postJSON(
+      '/staff/courses/',
+      {
+        course: {
+          course_id: window.course_id
+          available: available
+          name: name
+          code: code
+          capacity: capacity
+          price: price
+          price_pay: price_pay
+          length: length
+          date: date
+          speaker: speaker
+          address: address
+          date_in_calendar: date_in_calendar
+          min_age: min_age
+          max_age: max_age
+          school: school
+        }
+      },
+      (data) ->
+        console.log data
+        if data.success
+          is_edit = false
+          $(".edit-btn").toggle()
+          $(".again-btn").toggle()
+          $(".unedit-box").show()
+          $(".edit-box").hide()
+          $(".course-again").toggle()
+          $(".delete-btn").attr("disabled", false)
+          $(".unshelve-btn").attr("disabled", false)
+
+          $("#name-span").text(name)
+          $("#num-span").text(code)
+          $("#capacity-span").text(capacity + "人")
+          $("#charge-span").text(price + "元")
+          $("#public-span").text(price_pay + "元")
+          $("#times-span").text(length + "次")
+          window.capacity = capacity
+          window.price = price
+          window.price_pay = price_pay
+          window.length = length
+          $("#date-span").text(date)
+          $("#speaker-span").text(speaker)
+          $("#address-span").text(address)
+          $("#school-span").text(school)
+          window.min_age = min_age
+          window.max_age = max_age
+          # $("#school-span").text(school)
+          if min_age == ""
+            $("#min-age-span").text("无")
+          else
+            $("#min-age-span").text(min_age + "岁")
+          if max_age == ""
+            $("#max-age-span").text("无")
+          else
+            $("#max-age-span").text(max_age + "岁")
+
+          disable_repeat()
+          $(".class-calendar").toggle()
+          $(".calendar-operation-wrapper").toggle()
+          $(".calendar-wrapper").css("border", "0")
+          $("#calendar").removeClass("edit-calendar").addClass("show-calendar")
+          $("#upload-photo").toggle()
+
+          if has_photo
+            $("#upload-photo-form").submit()
+        else
+          if data.code == COURSE_DATE_UNMATCH
+            $.page_notification "更新失败，课次与上课时间不匹配"
+          else if data.code == COURSE_INST_EXIST
+            $.page_notification "更新失败，开课编号已存在"
+          else
+            $.page_notification "服务器出错，请稍后重试"
+    )
+
+
 

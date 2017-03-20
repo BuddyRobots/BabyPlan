@@ -125,7 +125,7 @@ input, label, h5 {
 #num-span {
 	width: auto;
 }
-#course-address, #course-date {
+#course-address, #course-date, #course-name {
 	width: 80%;
 }
 .course-times {
@@ -719,3 +719,15 @@ h2 {
 	border: 1px solid #f7873d;
 	border-radius: 2px;
 }
+.delete-btn {
+	@extend .edit-btn;
+	right: 260px;
+}
+.again-btn {
+	@extend .edit-btn;
+	display: none;
+}
+.name-box {
+	display: none;
+}
+
