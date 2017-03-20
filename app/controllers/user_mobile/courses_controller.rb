@@ -64,12 +64,23 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
     @back = params[:back]
     @course = CourseInst.where(id: params[:id]).first
     @course_participate = @current_user.course_participates.where(course_inst_id: @course.id).first
+
+    # refresh order status
+    if @course_participate.present? && @course_participate.renew_status
+      @course_participate.orderquery
+    end
+
     @refund_status_str = @course_participate.try(:refund_status_str).to_s
   end
 
   def new
     @course = CourseInst.where(id: params[:state]).first
     @course_participate = @current_user.course_participates.where(course_inst_id: @course.id).first || CourseParticipate.create_new(current_user, @course)
+
+    # refresh order status
+    if @course_participate.present? && @course_participate.renew_status
+      @course_participate.orderquery
+    end
 
     if @course_participate.prepay_id.present?
       if @course_participate.pay_finished == true || @course_participate.trade_state == "SUCCESS"

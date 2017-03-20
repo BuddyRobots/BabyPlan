@@ -118,6 +118,7 @@ class CourseParticipate
         expired_at: (Time.now + 10.minutes).to_i,
         order_id: Util.random_str(32),
         price_pay: course_inst.price_pay,
+        renew_status: true,
         prepay_id: ""
       })
     if self.price_pay == 0
@@ -412,7 +413,7 @@ class CourseParticipate
     else
       refund_result_code = doc.search('result_code').children[0].text
       self.update_attributes({refund_result_code: refund_result_code})
-      if result_code != "SUCCESS"
+      if refund_result_code != "SUCCESS"
         err_code = doc.search('err_code').children[0].text
         err_code_des = doc.search('err_code_des').children[0].text
         self.update_attributes({
@@ -465,7 +466,7 @@ class CourseParticipate
     else
       refund_result_code = doc.search('result_code').children[0].text
       self.update_attributes({refund_result_code: refund_result_code})
-      if result_code != "SUCCESS"
+      if refund_result_code != "SUCCESS"
         err_code = doc.search('err_code').children[0].text
         err_code_des = doc.search('err_code_des').children[0].text
         self.update_attributes({
