@@ -15,7 +15,7 @@
       .display-box
         .display-area
           %p.title= @agreement.try(:title)
-          .display-content= @agreement.present? ? @agreement.try(:content).html_safe : ""
+          .display-content= @agreement.present? ? @agreement.try(:content).to_s.html_safe : ""
 
 
       / 点击edit-btn后display-box隐藏，edit-area显示
