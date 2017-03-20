@@ -9,17 +9,17 @@ class Staff::CoursesController < Staff::ApplicationController
   def index
     @keyword = params[:keyword]
     params[:page] = params[:course_inst_page]
-    course_insts = @keyword.present? ? current_center.course_insts.where(name: /#{Regexp.escape(@keyword)}/) : current_center.course_insts.all
+    course_insts = @keyword.present? ? current_center.course_insts.where(name: /#{Regexp.escape(@keyword)}/).is_available : current_center.course_insts.is_available
     course_insts = course_insts.desc(:created_at)
     @course_insts = auto_paginate(course_insts)
     @course_insts[:data] = @course_insts[:data].map do |e|
       e.course_inst_info
     end
     params[:page] = params[:course_page]
-    courses = @keyword.present? ? Course.is_available.where(name: /#{Regexp.escape(@keyword)}/) : Course.is_available
-    @courses = auto_paginate(courses)
-    @courses[:data] = @courses[:data].map do |e|
-      e.course_info
+    unshelf_course_insts = @keyword.present? ? current_center.course_insts.where(name: /#{Regexp.escape(@keyword)}/).where(available: false) : current_center.course_insts.where(available: false)
+    @unshelf_course_insts = auto_paginate(unshelf_course_insts)
+    @unshelf_course_insts[:data] = @unshelf_course_insts[:data].map do |e|
+      e.course_inst_info
     end
 
     @profile = params[:profile]
@@ -31,10 +31,10 @@ class Staff::CoursesController < Staff::ApplicationController
   end
 
   def new
-    @course = Course.where(id: params[:course_id]).first
-    if @course.blank?
-      redirect_to action: :index and return
-    end
+    # @course = Course.where(id: params[:course_id]).first
+    # if @course.blank?
+    #   redirect_to action: :index and return
+    # end
   end
 
   def show_template

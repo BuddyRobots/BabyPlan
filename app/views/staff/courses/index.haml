@@ -15,14 +15,20 @@
           %input.form-control#search-input{:type => "text", :placeholder => "输入课程名称", value: "#{@keyword}"}
           %span.input-group-btn
             %button.btn.btn-default#search-btn{:type => "button"}
+      .btn.add-btn{:type => "button"} 
+        %img.add{src: asset_path("managecenter/add.png")}
+        添加课程
+      .btn.view-btn{:type => "button"} 
+        %img.view{src: asset_path("web/timetable.png")}
+        查看课表
 
     .manage-content
       .tabbable
         %ul.nav.nav-tabs
           %li.active
-            %a{"data-toggle" => "tab", :href => "#tab1"} 本区开课
+            %a{"data-toggle" => "tab", :href => "#tab1"} 已开课程
           %li
-            %a#open_course{"data-toggle" => "tab", :href => "#tab2"} 可开课程
+            %a#open_course{"data-toggle" => "tab", :href => "#tab2"} 未开课程
 
         .tab-content
           #tab1.tab-pane.active
@@ -40,7 +46,7 @@
                         %th 上课时间
                         %th 上课地址
                         %th 主讲人
-                        %th 市场价
+                        %th 公益价
                         %th 操&nbsp作
                     %tbody
                       - @course_insts[:data].each do |ci|
@@ -49,7 +55,7 @@
                           %td= ci[:date]
                           %td= ci[:address]
                           %td= ci[:speaker]
-                          %td= ci[:price]
+                          %td= ci[:price_pay]
                           %td
                             - if ci[:available]
                               %a.set-available.link-available{:href => "javascript:void(0);"} 下架
@@ -59,7 +65,7 @@
 
           #tab2.tab-pane
             .open-course
-              - if @courses[:data].length == 0
+              - if @unshelf_course_insts[:data].length == 0
                 .undiscover
                   %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
                   %span.message 抱歉！暂无课程信息
@@ -69,22 +75,25 @@
                     %thead
                       %tr
                         %th 课&nbsp程
-                        %th 编&nbsp号
+                        %th 上课时间
+                        %th 上课地址
                         %th 主讲人
-                        %th 市场价
+                        %th 公益价
                         %th 操&nbsp作
                     %tbody
-                      - @courses[:data].each do |e|
-                        / %tr{class: i == 1 ? "clicked" : (i == 2 ? "unavailable" : "") }
-                        %tr{class: e[:available] == false ? "unavailable" : ""}
+                      - @unshelf_course_insts[:data].each do |ci|
+                        %tr{class: "book-record #{ ci[:available] ? "available" : "unavailable" }", "data-id" => ci[:id]}
+                          %td= link_to ci[:name], "/staff/courses/#{ci[:id]}"
+                          %td= ci[:date]
+                          %td= ci[:address]
+                          %td= ci[:speaker]
+                          %td= ci[:price_pay]
                           %td
-                            = link_to e[:name], "/staff/courses/" + e[:id] + "/show_template"
-                          %td= e[:code]
-                          %td= e[:speaker]
-                          %td= e[:price]
-                          %td#open
-                            = link_to "开设课程", "/staff/courses/new?course_id=" + e[:id], class: "prepare"
-                = render "staff/partials/auto_paginate", locals: { instance: @courses, url: "/staff/courses?keyword=#{@keyword}&profile=template&", page: 'course_page'}    
+                            - if ci[:available]
+                              %a.set-available.link-available{:href => "javascript:void(0);"} 下架
+                            - else
+                              %a.set-available.link-unavailable{:href => "javascript:void(0);"} 上架
+                = render "staff/partials/auto_paginate", locals: { instance: @unshelf_course_insts, url: "/staff/courses?keyword=#{@keyword}&profile=template&", page: 'course_page'}    
         
 
 

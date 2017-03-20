@@ -87,12 +87,6 @@ $ ->
       (index, fc_event) ->
         date_in_calendar.push(fc_event.start._i + "," + fc_event.end._i)
     )
-    
-    # first_day = datepicker[0]
-    # start_time = first_day.split(',')[0]
-    # start_date = start_time.split('T')[0]
-    # console.log(start_date)
-
 
     ret = check_course_input(code, capacity, price, price_pay, length, date, speaker, address, date_in_calendar)
     if ret == false

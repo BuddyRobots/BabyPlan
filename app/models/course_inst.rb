@@ -18,6 +18,7 @@ class CourseInst
   field :min_age, type: Integer
   field :max_age, type: Integer
   field :school, type: String
+  field :start_course, type: Integer
 
   has_one :photo, class_name: "Material", inverse_of: :course_inst_photo
   has_one :feed
@@ -59,7 +60,8 @@ class CourseInst
       date_in_calendar: course_inst_info[:date_in_calendar],
       min_age: course_inst_info[:min_age],
       max_age: course_inst_info[:max_age],
-      school: course_inst_info[:school]
+      school: course_inst_info[:school],
+      start_course: course_inst_info[:start_course]
     })
     course_inst.center = center
     course_inst.save
