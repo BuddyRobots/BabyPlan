@@ -1,0 +1,64 @@
+html {
+	font-size: 16px;
+	height: 100%;
+}
+body {
+	font-family:"Microsoft YaHei";
+	font-size: 62.5%;
+	height: 100%;
+}
+body, p, img, div, ul, li, a, h3, span, form, hr, input, label {
+	margin:0;
+	padding:0;
+}
+a{
+	border:none;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	-webkit-tap-highlight-color:transparent;
+	outline:none；
+}
+
+.content-area {
+	position:relative;
+	width:100%;
+	max-width:640px;
+	height: 100%;
+	-webkit-overflow-scrolling: touch;
+	overflow: auto;
+	margin:0 auto;
+  padding: 6.25% 3.125%;
+}
+.caption {
+	font-size: 3.8em;
+	color: #3e3e3e;
+	text-align: center;
+	font-weight: bold;
+	margin-bottom: 6.25%;
+}
+.content {
+	color: #3e3e3e;
+	font-size: 2.8em;
+}
+
+
+@media screen and (max-width:640px) {
+	.content-area {
+		font-size: 100%;
+	}
+}
+@media screen and (max-width: 560px) {
+    .content-area {
+        font-size: 85%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .content-area {
+        font-size: 60%;
+    }
+}
+@media screen and (max-width: 400px) {
+    .content-area {
+        font-size: 50%;
+    }
+}

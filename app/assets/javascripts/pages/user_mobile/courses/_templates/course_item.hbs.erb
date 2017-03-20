@@ -3,13 +3,18 @@
     <img class="visit" src={{ele_photo}}>
   </div>
   <div class="right-div">
-    <img class="icon" src="<%= asset_path('kidscenter/ke.png') %>">
-    <p class="caption">{{ele_name}}</p>
-    <div class="location-div">
-      <span class="age">适合年龄:</span>
-      <span class="age">{{ele_age}}</span>
-      <span class="age price">价格:</span>
-      <span class="age">{{ele_price}}</span>
+   
+    <span class="caption">{{ele_name}}</span>
+    <span class= {{ele_status}}></span>
+    <div class="location-div flex-div">
+      <div class="age-div">
+        <span class="age">适龄:</span>
+        <span class="age">{{ele_age}}</span>
+      </div>
+      <div class="price-div">
+        <span class="age price">价格:</span>
+        <span class="age">{{ele_price}}</span>
+      </div>
     </div>
     <div class="location-div">
       <img class="time" src="<%= asset_path('web/time.png') %>">

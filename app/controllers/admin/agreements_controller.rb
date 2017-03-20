@@ -3,9 +3,11 @@ class Admin::AgreementsController < Admin::ApplicationController
     @agreement = Agreement.first
   end
 
-  def update
-  	@agreement = Agreement.where(id: params[:id]).first
-    retval = @agreement.update_agreement(params[:agreement])
-    render json: retval_wrapper(retval)
+  def create
+  	@agreement = Agreement.first || Agreement.create
+    @agreement.title = params[:title]
+    @agreement.content = params[:content]
+    @agreement.save
+    render json: retval_wrapper(nil)
   end
 end

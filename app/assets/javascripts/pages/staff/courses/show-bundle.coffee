@@ -237,7 +237,7 @@ $ ->
 
 
 
-  check_course_input = (code, capacity, price, price_pay, length, date, speaker, address, date_in_calendar) ->
+  check_course_input = (code, capacity, price, price_pay, length, date, speaker, address, date_in_calendar, min_age, max_age) ->
     if code == "" || capacity == "" || price == "" || length == "" || date == "" || speaker == "" || address == ""
       $.page_notification("请将信息补充完整")
       return false
@@ -255,6 +255,12 @@ $ ->
       return false
     if parseInt(length) != date_in_calendar.length
       $.page_notification("课次与上课时间不匹配")
+      return false
+    if min_age != "" && !$.isNumeric(min_age) || parseInt(min_age) < 0
+      $.page_notification("请填写正确的最小适龄")
+      return false
+    if max_age != "" && !$.isNumeric(max_age) || parseInt(max_age) < 0 || parseInt(max_age) < parseInt(min_age)
+      $.page_notification("请填写正确的最大适龄")
       return false
     return true
 
@@ -283,7 +289,7 @@ $ ->
         date_in_calendar.push(fc_event.start._i + "," + fc_event.end._i)
     )
 
-    ret = check_course_input(code, capacity, price, price_pay, length, date, speaker, address, date_in_calendar)
+    ret = check_course_input(code, capacity, price, price_pay, length, date, speaker, address, date_in_calendar, min_age, max_age)
     if ret == false
       return
 
@@ -330,6 +336,7 @@ $ ->
           $("#address-span").text(address)
           window.min_age = min_age
           window.max_age = max_age
+          # $("#school-span").text(school)
           if min_age == ""
             $("#min-age-span").text("无")
           else

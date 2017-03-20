@@ -18,8 +18,8 @@
         %a#upload-photo{:href => "#"}
           %img.avatar-icon{:src => @current_user.avatar.present? ? @current_user.avatar.path : asset_path("web/avatar.png")}
       .item.clearfix
-        %span.left 儿童姓名
-        %span.right= @current_user.name
+        %span.left 姓名
+        %span.right= @current_user.name_or_parent
       .item.clearfix
         %span.left 账户
         %span.right= @current_user.mobile

@@ -2,6 +2,9 @@ $ ->
   if window.first_signin == "true"
     $.mobile_page_notification("请先完善个人资料")
 
+  if $("#choice").is(":checked")
+    $("#num1, #num2, #num3").hide()
+
   $( "#datepicker" ).datepicker({
     changeMonth: true,
     changeYear: true,
@@ -12,6 +15,7 @@ $ ->
 
   $("#datepicker").val(window.birthday_str)
 
+
   $("#confirm").click ->
     name = $("#name").val()
     birthday = $("#datepicker").val()
@@ -19,6 +23,13 @@ $ ->
     parent = $("#parent").val()
     address = $("#address").val()
     is_pregnant = $("#choice").is(":checked")
+    if is_pregnant == true && parent == ""
+      $.mobile_page_notification("请将填写家长姓名")
+      return false
+    
+    if is_pregnant == false && name == ""
+      $.mobile_page_notification("请将填写儿童姓名")
+      return false
 
     $.postJSON(
       '/user_mobile/settings/update_profile/',

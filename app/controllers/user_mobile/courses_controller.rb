@@ -3,11 +3,30 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
   # similar to search_new
   def index
     @keyword = params[:keyword]
+    @price = params[:price].to_i
+    @age = params[:age].to_i
     if @current_user.client_centers.present?
       @courses = CourseInst.is_available.any_in(center_id: @current_user.client_centers.is_available.map { |e| e.id.to_s})
       @courses = @courses.desc(:created_at)
       if params[:keyword].present?
         @courses = @courses.where(name: /#{params[:keyword]}/)
+      end
+      if params[:price].present?
+        internals = [[nil, nil], [nil, 0], [0, 20], [20, 40], [40, nil]]
+        internal = internals[params[:price].to_i]
+        if params[:price].to_i == 1
+          @courses = @courses.where(price_pay: "0")
+        else
+          @courses = @courses.where(:price_pay.gt => internal[0]) if internal[0].present?
+          @courses = @courses.where(:price_pay.lte => internal[1]) if internal[1].present?
+        end
+      end
+      if params[:age].present?
+        internals = [[nil, nil], [0, 1], [1, 2], [2, 3], [3, 100]]
+        internal = internals[params[:age].to_i]
+        if internal[0].present? && internal[1].present?
+          @courses = @courses.where(:min_age.lt => internal[1]).where(:max_age.gt => internal[0])
+        end
       end
       @courses = auto_paginate(@courses)[:data]
     end
@@ -18,6 +37,23 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
     @courses = @courses.desc(:created_at)
     if params[:keyword].present?
       @courses = @courses.where(name: /#{params[:keyword]}/)
+    end
+    if params[:price].present?
+      internals = [[nil, nil], [nil, 0], [0, 20], [20, 40], [40, nil]]
+      internal = internals[params[:price].to_i]
+      if params[:price].to_i == 1
+        @courses = @courses.where(price_pay: "0")
+      else
+        @courses = @courses.where(:price_pay.gt => internal[0]) if internal[0].present?
+        @courses = @courses.where(:price_pay.lte => internal[1]) if internal[1].present?
+      end
+    end
+    if params[:age].present?
+      internals = [[nil, nil], [0, 1], [1, 2], [2, 3], [3, 100]]
+      internal = internals[params[:age].to_i]
+      if internal[0].present? && internal[1].present?
+        @courses = @courses.where(:min_age.lt => internal[1]).where(:max_age.gt => internal[0])
+      end
     end
     @courses = auto_paginate(@courses)[:data]
     @courses = @courses.map { |e| e.more_info }
@@ -33,31 +69,36 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
 
   def new
     @course = CourseInst.where(id: params[:state]).first
-    @course_participate = @current_user.course_participates.where(course_inst_id: @course.id).first
+    @course_participate = @current_user.course_participates.where(course_inst_id: @course.id).first || CourseParticipate.create_new(current_user, @course)
 
-    # if the order is expired, redirect to the show page
-    if @course_participate.present? && @course_participate.is_expred
+    if @course_participate.prepay_id.present?
+      if @course_participate.pay_finished == true || @course_participate.trade_state == "SUCCESS"
+        # has pay
+        redirect_to action: :show, id: params[:state] and return
+      end
+      if @course_participate.is_expired == false
+        @pay_info = @course_participate.get_pay_info
+        return
+      end
+    end
+
+    if @course.capacity <= @course.effective_signup_num
       redirect_to action: :show, id: params[:state] and return
     end
 
-    @course_participate = @course_participate || CourseParticipate.create_new(current_user, @course)
-    @course_participate.clear_refund
-    if @course.price_pay > 0
-      @course_participate.update_attributes({renew_status: true})
-      if @course_participate.prepay_id.blank?
-        @open_id = Weixin.get_oauth_open_id(params[:code])
-        @course_participate.renew
-        @course_participate.unifiedorder_interface(@remote_ip, @open_id)
-      end
-      @pay_info = @course_participate.get_pay_info
+    @open_id = params[:code].present? ? Weixin.get_oauth_open_id(params[:code]) : ""
+    if @open_id.nil?
+      # need to re-get the openid
+      redirect_to action: :show, id: params[:state] and return
     end
+
+    @course_participate.create_order(@remote_ip, @open_id)
+    @pay_info = @course_participate.get_pay_info
+
+
   end
 
   def notify
-    # get out_trade_no, which is the order_id in CourseParticipate
-    # ci = CourseParticipate.where(order_id: out_trade_no).first
-    # get result_code, err_code and err_code_des
-    # ci.update_order(result_code, err_code, err_code_des)
     logger.info "AAAAAAAAAAAAAAAAA"
     logger.info request.inspect
     logger.info "AAAAAAAAAAAAAAAAA"
@@ -69,7 +110,6 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
     @course_participate.update_attributes({pay_finished: true})
     if @course_participate.price_pay == 0
       @course_participate.update_attributes({
-        prepay_id: "free",
         trade_state: "SUCCESS"
       })
     else
@@ -79,8 +119,8 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
   end
 
   def pay_failed
-    @course_participate = CourseParticipate.where(id: params[:id]).first
-    @course_participate.renew
+    # @course_participate = CourseParticipate.where(id: params[:id]).first
+    # @course_participate.renew
     render json: retval_wrapper(nil) and return
   end
 
@@ -121,7 +161,7 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
 
   def request_refund
     @course_participate = CourseParticipate.where(id: params[:id]).first
-    retval = @course_participate.approve_refund
+    retval = @course_participate.refund
     render json: retval_wrapper(retval) and return
   end
 

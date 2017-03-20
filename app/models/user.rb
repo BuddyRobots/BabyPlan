@@ -122,6 +122,10 @@ class User
     { uid: u.id.to_s }
   end
 
+  def name_or_parent
+    self.is_pregnant ? "家长:" + self.parent : self.name
+  end
+
   def self.find_by_auth_key(auth_key)
     info = Encryption.decrypt_auth_key(auth_key)
     uid = info.split(',')[0]
@@ -302,7 +306,7 @@ class User
   def client_info
     {
       id: self.id.to_s,
-      name: self.name,
+      name: self.name_or_parent,
       gender: self.gender,
       age: self.birthday.present? ? Date.today.year - self.birthday.year : nil,
       parent: self.parent,
@@ -475,5 +479,9 @@ class User
     deposit = self.deposit || Deposit.create_new(self)
     deposit.refund(center)
     nil
+  end
+
+  def self.age_for_select
+    hash = { "选择年龄区间" => 0, "0~1岁" => 1, "1~2岁" => 2, "2~3岁" => 3, "3岁以上" => 4 }
   end
 end

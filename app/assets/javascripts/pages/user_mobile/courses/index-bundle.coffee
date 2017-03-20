@@ -16,7 +16,7 @@ $ ->
     render_more = $(this)
     render_more.hide()
     $(".load").show()
-    $.getJSON "/user_mobile/courses/more?keyword=" + window.keyword + "&page=" + page, (data) ->
+    $.getJSON "/user_mobile/courses/more?keyword=" + window.keyword + "&price=" + window.price + "&age=" + window.age + "&page=" + page, (data) ->
       $(".load").hide()
       render_more.show()
       if data.success
@@ -33,3 +33,21 @@ $ ->
           )
       else
         $.mobile_page_notification "服务器出错"
+
+  $("#choice-price").change ->
+    $("#choice-price option:selected").each ->
+      price = $(this).val()
+      console.log price
+      if price == "0"
+        location.href = "/user_mobile/courses"
+      else
+        location.href = "/user_mobile/courses?price=" + price
+
+  $("#choice-age").change ->
+    $("#choice-age option:selected").each ->
+      age = $(this).val()
+      console.log age
+      if age == "0"
+        location.href = "/user_mobile/courses"
+      else
+        location.href = "/user_mobile/courses?age=" + age

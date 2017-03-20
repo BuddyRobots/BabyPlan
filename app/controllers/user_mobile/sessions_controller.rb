@@ -105,6 +105,10 @@ class UserMobile::SessionsController < UserMobile::ApplicationController
     @books = auto_paginate(@books)[:data]
     render "user_mobile/books/index"
   end
+
+  def agreement
+    @agreement = Agreement.first
+  end
 end
 
   
