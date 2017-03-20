@@ -35,7 +35,7 @@ class UserMobile::SettingsController < UserMobile::ApplicationController
   end
 
   def course
-    @courses_participates = @current_user.course_participates.desc(:created_at)
+    @courses_participates = @current_user.course_participates.where(:prepay_id.ne => nil).where(:prepay_id.ne => "").desc(:created_at)
     @courses_participates = @courses_participates.select { |e| e.is_expired == false }
     @courses_participates = auto_paginate(@courses_participates)
     @courses_participates[:data] = @courses_participates[:data].map do |e|
