@@ -21,7 +21,7 @@ class CourseParticipate
   field :price_pay, type: Float
   field :signin_info, type: Array, default: []
 
-  field :prepay_id, type: String
+  field :prepay_id, type: String, default: ""
   field :wechat_transaction_id, type: String
   field :result_code, type: String
   field :err_code, type: String
@@ -98,7 +98,8 @@ class CourseParticipate
     cp = self.create({
       course_inst_id: course_inst.id,
       client_id: client.id,
-      course_id: course_inst.course.id
+      course_id: course_inst.course.id,
+      prepay_id: ""
       })
     # cp.course_inst = course_inst
     # cp.client = client
@@ -188,7 +189,7 @@ class CourseParticipate
           wechat_transaction_id: wechat_transaction_id
         })
         if trade_state == "SUCCESS"
-          self.update_attributes({pay_finished: true})
+          self.update_attributes({pay_finished: true, expired_at: -1})
           Bill.confirm_course_participate_item(self)
         end
         retval = { success: true, trade_state: trade_state, trade_state_desc: trade_state_desc }
