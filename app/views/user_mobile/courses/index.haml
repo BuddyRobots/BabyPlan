@@ -10,15 +10,15 @@
   .content-area
     = render "user_mobile/partials/list_header", list_type: "courses"
     = render "user_mobile/partials/no_centers"
-    .choice-div
-      .choice-item.border-right
-        = select_tag "choice-price", options_for_select(CourseInst.price_for_select, @price.to_s), class: "no-padding"
-        .triangle
-      .choice-item
-        = select_tag "choice-age", options_for_select(User.age_for_select, @age.to_s), class: "no-padding"
-        .triangle
     - if User.see_feeds(@current_user)
       - if @courses.present?
+        .choice-div
+          .choice-item.border-right
+            = select_tag "choice-price", options_for_select(CourseInst.price_for_select, @price.to_s), class: "no-padding"
+            .triangle
+          .choice-item
+            = select_tag "choice-age", options_for_select(User.age_for_select, @age.to_s), class: "no-padding"
+            .triangle
         - @courses.each do |e|
           .content{data: {id: e.id.to_s}}
             .left-div
