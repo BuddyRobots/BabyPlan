@@ -9,7 +9,7 @@ $ ->
 
   $("#search-btn").click ->
     keyword = $("#input-box").val()
-    window.location.href = "/user_mobile/courses?keyword=" + keyword
+    window.location.href = "/user_mobile/courses?keyword=" + keyword + "&price=" + window.price + "&age=" + window.age
 
 
   $(".render-more").click ->
@@ -35,19 +35,21 @@ $ ->
         $.mobile_page_notification "服务器出错"
 
   $("#choice-price").change ->
+    keyword = $("#input-box").val()
     $("#choice-price option:selected").each ->
       price = $(this).val()
       console.log price
       if price == "0"
-        location.href = "/user_mobile/courses"
+        location.href = "/user_mobile/courses?keyword=" + keyword + "&age=" + window.age
       else
-        location.href = "/user_mobile/courses?price=" + price
+        location.href = "/user_mobile/courses?price=" + price + "&keyword=" + keyword + "&age=" + window.age
 
   $("#choice-age").change ->
+    keyword = $("#input-box").val()
     $("#choice-age option:selected").each ->
       age = $(this).val()
       console.log age
       if age == "0"
-        location.href = "/user_mobile/courses"
+        location.href = "/user_mobile/courses?keyword=" + keyword + "&price=" + window.price
       else
-        location.href = "/user_mobile/courses?age=" + age
+        location.href = "/user_mobile/courses?age=" + age + "&keyword=" + keyword + "&price=" + window.price
