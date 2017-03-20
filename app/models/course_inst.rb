@@ -45,7 +45,7 @@ class CourseInst
       return ErrCode::COURSE_INST_EXIST
     end
     course_inst = course.course_insts.create({
-      name: course.name,
+      name: course_inst_info[:name],
       available: course_inst_info[:available],
       code: code,
       inst_code: course_inst_info[:code],
@@ -63,7 +63,7 @@ class CourseInst
     })
     course_inst.center = center
     course_inst.save
-    Feed.create(course_inst_id: course_inst.id, name: course.name, center_id: center.id, available: course_inst_info[:available])
+    Feed.create(course_inst_id: course_inst.id, name: course_inst.name, center_id: center.id, available: course_inst_info[:available])
     { course_inst_id: course_inst.id.to_s }
   end
 

@@ -580,11 +580,11 @@ $ ->
     $(".edit-box").toggle()
     $(".name-box").toggle()
     $("#name-span").toggle()
+    $("#upload-photo1").toggle()
     $(".class-calendar").toggle()
     $(".calendar-operation-wrapper").toggle()
     $(".calendar-wrapper").css("border", "1px solid #c8c8c8")
     $("#calendar").removeClass("show-calendar").addClass("edit-calendar")
-    $("#upload-photo").toggle()
     $("#course-name").val($("#name-span").text())
     $("#course-num").val($("#num-span").text())
     $("#course-capacity").val(window.capacity)
@@ -601,9 +601,20 @@ $ ->
 
     $(".edit-btn").toggle()
     $(".again-btn").toggle()
-    is_edit = true
     $("#calendar").fullCalendar('removeEvents')
+    is_edit = true
 
+  $("#upload-photo1").click ->
+    if is_edit
+      $("#photo_file1").trigger("click")
+
+  $("#photo_file1").change (event) ->
+    $("#old-img").attr("src", "")
+    if event.target.files[0] == undefined
+      return
+    has_photo = true
+    photo = $(".edit-photo1")[0]
+    photo.src = URL.createObjectURL(event.target.files[0])
 
   $(".again-btn").click ->
     name = $("#course-name").val()
@@ -658,56 +669,18 @@ $ ->
         console.log data
         if data.success
           is_edit = false
-          $(".edit-btn").toggle()
-          $(".again-btn").toggle()
-          $(".unedit-box").show()
-          $(".edit-box").hide()
-          $(".course-again").toggle()
-          $(".delete-btn").attr("disabled", false)
-          $(".unshelve-btn").attr("disabled", false)
-
-          $("#name-span").text(name)
-          $("#num-span").text(code)
-          $("#capacity-span").text(capacity + "人")
-          $("#charge-span").text(price + "元")
-          $("#public-span").text(price_pay + "元")
-          $("#times-span").text(length + "次")
-          window.capacity = capacity
-          window.price = price
-          window.price_pay = price_pay
-          window.length = length
-          $("#date-span").text(date)
-          $("#speaker-span").text(speaker)
-          $("#address-span").text(address)
-          $("#school-span").text(school)
-          window.min_age = min_age
-          window.max_age = max_age
-          # $("#school-span").text(school)
-          if min_age == ""
-            $("#min-age-span").text("无")
+          if has_photo ==false
+            location.href = "/staff/courses"
           else
-            $("#min-age-span").text(min_age + "岁")
-          if max_age == ""
-            $("#max-age-span").text("无")
-          else
-            $("#max-age-span").text(max_age + "岁")
-
-          disable_repeat()
-          $(".class-calendar").toggle()
-          $(".calendar-operation-wrapper").toggle()
-          $(".calendar-wrapper").css("border", "0")
-          $("#calendar").removeClass("edit-calendar").addClass("show-calendar")
-          $("#upload-photo").toggle()
-
-          if has_photo
-            $("#upload-photo-form").submit()
+            $("#upload-photo-form1")[0].action = "/staff/courses/" + data.course_inst_id + "/upload_photo"
+            $("#upload-photo-form1").submit()
         else
-          if data.code == COURSE_DATE_UNMATCH
-            $.page_notification "更新失败，课次与上课时间不匹配"
-          else if data.code == COURSE_INST_EXIST
-            $.page_notification "更新失败，开课编号已存在"
+          if data.code == COURSE_INST_EXIST
+            $.page_notification("课程编号已存在")
+          else if data.code == COURSE_DATE_UNMATCH
+            $.page_notification("课次与上课时间不匹配")
           else
-            $.page_notification "服务器出错，请稍后重试"
+            $.page_notification("服务器出错")
     )
 
 

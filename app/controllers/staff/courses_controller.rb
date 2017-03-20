@@ -90,6 +90,7 @@ class Staff::CoursesController < Staff::ApplicationController
     end
     photo = Photo.new
     photo.photo = params[:photo_file]
+    photo.photo = params[:photo_file1]
     photo.store_photo!
     filepath = photo.photo.file.file
     m = Material.create(path: "/uploads/photos/" + filepath.split('/')[-1])

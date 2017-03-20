@@ -78,6 +78,13 @@
               %a#upload-photo{href: "javascript:void(0);"}
                 %img.edit-photo{src: asset_path("web/photo.png")}
 
+              = form_tag("/", method: "post", multipart: true, id: "upload-photo-form1", class: "hide") do
+                = file_field_tag "photo_file1", { class: "hide", accept: ".jpg,.png" }
+              %a#upload-photo1{href: "javascript:void(0);"}
+                %img.edit-photo1{src: asset_path("web/photo.png")}
+
+
+
           .controls.controls-row
             %label.input-caption 开课编号:
             %span.num-box
