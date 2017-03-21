@@ -35,6 +35,7 @@ class UserMobile::SettingsController < UserMobile::ApplicationController
   end
 
   def course
+    @current_user.course_participates.each { |e| e.renew_status && e.orderquery }
     @courses_participates = @current_user.course_participates.where(:prepay_id.ne => nil).where(:prepay_id.ne => "").desc(:created_at)
     @courses_participates = @courses_participates.select { |e| e.is_expired == false }
     @courses_participates = auto_paginate(@courses_participates)

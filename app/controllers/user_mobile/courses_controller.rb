@@ -110,9 +110,11 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
   end
 
   def notify
-    logger.info "AAAAAAAAAAAAAAAAA"
+    logger.info "^^^^^^^^^^^^^^^^^"
     logger.info request.inspect
-    logger.info "AAAAAAAAAAAAAAAAA"
+    logger.info "^^^^^^^^^^^^^^^^^"
+    logger.info params.inspect
+    logger.info "^^^^^^^^^^^^^^^^^"
     render :xml => {return_code: "SUCCESS"}.to_xml(dasherize: false, root: "xml") and return
   end
 

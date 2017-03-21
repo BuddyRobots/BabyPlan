@@ -1,9 +1,5 @@
 class AccountsController < ApplicationController
   def create
-    Rails.logger.info "AAAAAAAAAAAA"
-    Rails.logger.info params[:mobile]
-    Rails.logger.info "AAAAAAAAAAAA"
-    Rails.logger.info params[:html]
 
     uid = User.create_client(params[:mobile])
 
