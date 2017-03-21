@@ -1,14 +1,12 @@
 - content_for :head do
   = javascript_include_tag "pages/staff/courses/new-bundle"
   = stylesheet_link_tag "pages/staff/courses/new-bundle", :media => "all"
-  / :javascript
-  /   window.cid = "#{@course.id.to_s}"
 
 .content-area
   /courses-new
   .content-box
     .manage-box
-      %a#back{:href => "/staff/courses?profile=template"}
+      %a#back{:href => "/staff/courses"}
         %img{src: asset_path("web/back.png")}
       %p.course-add 添加课程
       .btn.end-btn{:type => "button"} 
@@ -23,7 +21,6 @@
           %form.form-inline
             %label.input-caption 课程名称:
             %input.input-area.form-control#course-name{:type => "text"}
-            / %span.unedit-box#name-span= @course.name
           .form-group
             %label.input-caption 上课时间:
             %input.input-area.form-control#course-date{:type => "text"}
@@ -39,26 +36,29 @@
       .controls.controls-row
         %label.input-caption 开课编号:
         %span.num-box
-          %span.course-num= @course.code + "-"
-          %input.input-area.form-control#course-code{:type => "text"}
         %label.input-caption 主讲人:
-        %input.input-area.form-control#course-speaker{:type => "text", value: @course.speaker}
+        %input.input-area.form-control#course-speaker{:type => "text"}
         %label.input-caption.kids-capacity 容量:
         %input.input-area.form-control#course-capacity{:type => "text"}
       .controls.controls-row
         %label.input-caption.course-length 课次:
-        %input.input-area.form-control#course-length{:type => "text", value: @course.length}
+        %input.input-area.form-control#course-length{:type => "text"}
         %label.input-caption 市场价:
-        %input.input-area.form-control#course-price{:type => "text", value: @course.price}
+        %input.input-area.form-control#course-price{:type => "text"}
         %label.input-caption 公益价:
-        %input.input-area.form-control#public-price{:type => "text", value: @course.price_pay}
+        %input.input-area.form-control#public-price{:type => "text"}
       .controls.controls-row
         %label.input-caption 最小适龄:
-        %input.input-area.form-control#min-age{:type => "text", value: @course.min_age}
+        %input.input-area.form-control#min-age{:type => "text"}
         %label.input-caption.margin-l 最大适龄:
-        %input.input-area.form-control#max-age{:type => "text", value: @course.max_age}
-        / %label.input-caption.margin-l 开课单位:
-        / %input.input-area.form-control#school{:type => "text", value: @course.school}
+        %input.input-area.form-control#max-age{:type => "text"}
+        %label.input-caption.margin-l 开课单位:
+        %input.input-area.form-control#school{:type => "text"}
+
+      .course-introduce
+        %span.introduce 课程介绍:
+        %span.wangedit-area
+          #edit-area
       
       .calendar-wrapper.clearfix
         .calendar-operation-wrapper

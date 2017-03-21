@@ -24,10 +24,15 @@ $ ->
 
   initialLocaleCode = "zh-cn"
   $("#calendar").fullCalendar({
+    buttonText: {
+      today: "今天"
+      month: "月课表"
+      week: "周课表"
+    }
     header:
-      left: 'prev,next today'
+      left: 'agendaWeek,month'
       center: 'title'
-      right: 'month,agendaWeek,agendaDay,listMonth'
+      right: 'prev,next today'
     locale: initialLocaleCode
     weekNumbers: true
     navLinks: true

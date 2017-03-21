@@ -139,4 +139,39 @@ class Weixin
     return response.body
   end
 
+  def self.course_notice(cp, content)
+    user = cp.user_openid
+    course_name = cp.course_inst.name
+    content = content
+    body = {
+      "touser": user,
+      "template_id": "XaIM2TKa7w78F8J2qB2bTtcVf_PlDq2F_wao3dznJTE",
+      "data": {
+        "first": {
+          "value": "您报名的课程有变动",
+          "color": "#173177"
+        },
+        "keyword1": {
+          "value": course_name,
+          "color": "#173177"
+        },
+        "keyword2": {
+          "value": content,
+          "color": "#173177"
+        },
+        "remark": {
+          "value": "儿童中心祝您上课愉快",
+          "color": "#173177"
+        }
+      }
+    }
+    
+    url = "/cgi-bin/message/template/send?access_token=#{Weixin.get_access_token}"
+    response = Weixin.post(url, :body => body.to_json)
+    if response.body["errcode"] == 0
+      return true
+    else
+      return false
+    end   
+  end
 end

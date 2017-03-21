@@ -19,6 +19,8 @@ class CourseInst
   field :max_age, type: Integer
   field :school, type: String
   field :start_course, type: Integer
+  field :desc, type: String
+  field :delete, type: Boolean, default: false
 
   has_one :photo, class_name: "Material", inverse_of: :course_inst_photo
   has_one :feed
@@ -33,6 +35,7 @@ class CourseInst
   has_many :bills
 
   scope :is_available, ->{ where(available: true) }
+  default_scope { where(:delete.ne => true) }
 
 
   def self.create_course_inst(staff, center, course_inst_info)
@@ -61,7 +64,8 @@ class CourseInst
       min_age: course_inst_info[:min_age],
       max_age: course_inst_info[:max_age],
       school: course_inst_info[:school],
-      start_course: course_inst_info[:start_course]
+      start_course: course_inst_info[:start_course],
+      desc: course_inst_info[:desc]
     })
     course_inst.center = center
     course_inst.save
@@ -104,7 +108,9 @@ class CourseInst
         date_in_calendar: course_inst_info["date_in_calendar"],
         min_age: course_inst_info["min_age"],
         max_age: course_inst_info["max_age"],
-        school: course_inst_info["school"]
+        school: course_inst_info["school"],
+        start_course: course_inst_info["start_course"],
+        desc: course_inst_info["desc"]
       }
     )
     nil
@@ -312,6 +318,6 @@ class CourseInst
   end
 
  def self.price_for_select
-   hash = { "选择价格区间" => 0, "免费" => 1, "0~20元" => 2, "20~40元" => 3, "40元以上" => 4 }
+    hash = { "选择价格区间" => 0, "免费" => 1, "0~20元" => 2, "20~40元" => 3, "40元以上" => 4 }
  end
 end

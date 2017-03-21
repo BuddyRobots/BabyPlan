@@ -1,3 +1,4 @@
+#= require wangEditor.min
 #= require moment.min
 #= require fullcalendar.min
 #= require locale-all
@@ -6,6 +7,20 @@
 #= require "./_templates/signin_info"
 
 $ ->
+
+  editor = new wangEditor('edit-area')
+
+  editor.config.menus = [
+        'head',
+        'img'
+     ]
+
+  editor.config.uploadImgUrl = '/materials'
+  editor.config.uploadHeaders = {
+    'Accept' : 'HTML'
+  }
+  editor.config.hideLinkImg = true
+  editor.create()
 
   refresh_stat = ->
     $.getJSON "/staff/courses/" + window.cid + "/stat", (data) ->
@@ -235,6 +250,10 @@ $ ->
 
     $(".edit-btn").toggle()
     $(".finish-btn").toggle()
+    $(".wangedit-area").toggle()
+    $(".introduce-details").toggle()
+    desc = $(".introduce-details").text()
+    editor.$txt.html(desc)
     is_edit = true
 
 
@@ -279,6 +298,7 @@ $ ->
     min_age = $("#min-age").val()
     max_age = $("#max-age").val()
     school = $("#course-school").val()
+    desc = editor.$txt.html()
 
     fc_events = $('#calendar').fullCalendar('clientEvents')
     date_in_calendar = []
@@ -288,6 +308,10 @@ $ ->
       (index, fc_event) ->
         date_in_calendar.push(fc_event.start._i + "," + fc_event.end._i)
     )
+
+    first_day = date_in_calendar[0]
+    start_time = first_day.split(',')[0]
+    start_course = Date.parse(start_time)
 
     ret = check_course_input(code, capacity, price, price_pay, length, date, speaker, address, date_in_calendar, min_age, max_age)
     if ret == false
@@ -309,6 +333,8 @@ $ ->
           min_age: min_age
           max_age: max_age
           school: school
+          start_course: start_course
+          desc: desc
         }
       },
       (data) ->
@@ -320,6 +346,8 @@ $ ->
           $(".unedit-box").show()
           $(".edit-box").hide()
           $(".course-again").toggle()
+          $(".wangedit-area").toggle()
+          $(".introduce-details").toggle()
           $(".delete-btn").attr("disabled", false)
           $(".unshelve-btn").attr("disabled", false)
 
@@ -336,9 +364,12 @@ $ ->
           $("#speaker-span").text(speaker)
           $("#address-span").text(address)
           $("#school-span").text(school)
+
+          $(".introduce-details").text("")
+          $(".introduce-details").append(desc)
           window.min_age = min_age
           window.max_age = max_age
-          # $("#school-span").text(school)
+          $("#school-span").text(school)
           if min_age == ""
             $("#min-age-span").text("无")
           else
@@ -372,6 +403,7 @@ $ ->
     $(".unshelve-btn").hide()
     $(".delete-btn").hide()
     $(".again-btn").hide()
+    $(".notice-btn").hide()
 
   $("#register-message").click ->
     $(".finish-btn").hide()
@@ -379,6 +411,7 @@ $ ->
     $(".unshelve-btn").hide()
     $(".delete-btn").hide()
     $(".again-btn").hide()
+    $(".notice-btn").show()
 
   $("#course-sign").click ->
     $(".finish-btn").hide()
@@ -386,6 +419,7 @@ $ ->
     $(".unshelve-btn").hide()
     $(".delete-btn").hide()
     $(".again-btn").hide()
+    $(".notice-btn").hide()
 
   $("#statistics").click ->
     $(".finish-btn").hide()
@@ -393,6 +427,7 @@ $ ->
     $(".unshelve-btn").hide()
     $(".delete-btn").hide()
     $(".again-btn").hide()
+    $(".notice-btn").hide()
 
   $("#course-message").click ->
     if is_edit
@@ -401,6 +436,7 @@ $ ->
       $(".edit-btn").show()
     $(".unshelve-btn").show()
     $(".delete-btn").show()
+    $(".notice-btn").hide()
 
   # calender set
   $( "#datepicker" ).datepicker({
@@ -602,6 +638,11 @@ $ ->
     $(".edit-btn").toggle()
     $(".again-btn").toggle()
     $("#calendar").fullCalendar('removeEvents')
+    
+    $(".wangedit-area").toggle()
+    $(".introduce-details").toggle()
+    desc = $(".introduce-details").text()
+    editor.$txt.html(desc)
     is_edit = true
 
   $("#upload-photo1").click ->
@@ -630,6 +671,7 @@ $ ->
     max_age = $("#max-age").val()
     school = $("#course-school").val()
     available = true
+    desc = editor.$txt.html()
 
     fc_events = $('#calendar').fullCalendar('clientEvents')
     date_in_calendar = []
@@ -643,6 +685,7 @@ $ ->
     first_day = date_in_calendar[0]
     start_time = first_day.split(',')[0]
     start_course = Date.parse(start_time)
+
     
     ret = check_course_input(code, capacity, price, price_pay, length, date, speaker, address, date_in_calendar, min_age, max_age)
     if ret == false
@@ -668,6 +711,7 @@ $ ->
           max_age: max_age
           school: school
           start_course: start_course
+          desc: desc
         }
       },
       (data) ->
@@ -687,6 +731,35 @@ $ ->
           else
             $.page_notification("服务器出错")
     )
+  
 
+  $(".delete-btn").click ->
+    $.postJSON(
+      "/staff/courses/" + window.cid + "/set_delete",
+      {
+        deleted: true
+      },
+      (data) ->
+        if data.success
+          location.href = "/staff/courses"
+        else
+          if data.code == COURSE_INST_EXIST
+            $.page_notification("该课程有人报名，不能删除", 1000)
+      )
 
+  $(".delivery-btn").click ->
+    content = $(".text-div").val()
+    $.postJSON(
+      "/staff/courses/" + window.cid + "/course_notice",
+      {
+        content: content
+        },
+      (data) -> 
+        if data.success
+          $("#noticeModal").hide()
+          $.page_notification("通知发送成功", 1000)
+        else
+          if data.code == COURSE_INST_NOT_EXIST
+            $.page_notification("该课程没有人员参与报名", 1000)
+      )
 

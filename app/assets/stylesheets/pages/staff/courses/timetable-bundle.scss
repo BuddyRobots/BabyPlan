@@ -48,7 +48,7 @@
 #back {
 	float: left;
 }
-.course-add {
+.course-view {
 	float: left;
 	font-size: 16px;
 	color: #323232;
@@ -62,7 +62,7 @@
 	float: right;
 	margin: 20px 20px 0 0;
 }
-.end-btn {
+.download-btn {
 	float: right;
 	margin: 11.5px 20px 0 0;
 	width: 100px;
@@ -73,139 +73,15 @@
 	background: #f7873d;
 	border-radius: 6px;
 }
-.end-btn:hover {
+.download-btn:hover {
 	color: white;
 }
-.top-box {
-	margin-top: 10px;
-}
-.text-message {
-	width: 50%;
-	float: left;
-}
-.form-inline {
-	margin: 20px 0;
-}
-#name-span {
-	font-size: 16px;
-}
-.form-group {
-	margin: 20px 0;
-}
-.input-caption {
-	display: inline-block;
-	margin-right: 5px;
-	font-size: 16px;
-	color: #323232;
-	margin-left: 20px;
-	font-weight: normal;
-}
-.course-length {
-	margin-left: 52px;
-}
-#course-address, #course-date {
-	width: 80%;
-}
-.num-box {
-	@extend .input-area;
-}
-#photo {
-	width: 200px;
-	height: 138px;
-}
-.photo {
-	width: 17.25%;
-	display: inline-block;
-	margin-left: 7.5%;
-	margin-top: 0.5%;
-}
-.kids-capacity {
-	margin-left: 36px;
-}
-.input-area {
-	display: inline-block;
-	width: 17.2%;
-	height: 30px;
-}
-.controls-row {
-	margin-bottom: 20px;
+.calendar-div {
+	padding: 40px;
 }
 
-.calendar-wrapper {
-	width: 72.7%;
-	margin-left: 20px;
-	margin-bottom: 20px;
-	border: 1px solid #c8c8c8;
-	border-radius: 6px;
-}
-.calendar-operation-wrapper {
-	width: 40%;
-	float: left;
-	text-align: center;
-}
 #calendar {
-	width: 59%;
-	float: right;
+	width: 100%;
 	font-size: 14px;
 }
-.title {
-	font-size: 18px;
-	color: #323232;
-	text-align: center;
-	margin: 20px 0 10px 0;
-}
-.small-tips {
-	font-size: 16px;
-	color: #c8c8c8;
-	text-align: center;
-	margin-bottom: 20px;
-}
-.input-date {
-	display: inline-block;
-	margin-right: 5px;
-	font-size: 16px;
-	color: #323232;
-	vertical-align: middle;
-	font-weight: normal;
-}
-#add-event {
-	width: 240px;
-	background: #10c078;
-	font-size: 16px;
-	color: white;
-}
-.add-btn:hover {
-	color: white;
-}
-.repeat {
-	width: 240px;
-	margin: 10px auto;
-}
-.date-btn {
-	float: left;
-	width: 110px;
-	background: #c8c8c8;
-	font-size: 16px;
-	color: white;
-}
-.date-btn:hover {
-	color: white;
-}
-.week-btn {
-	@extend .date-btn;
-	float: right;
-}
-h2 {
-	font-size: 18px;
-	padding-top: 5px;
-}
 
-.active-btn {
-	background: #f7873d;
-}
-
-
-
-.margin-l {
-	margin-left: 4px;
-}

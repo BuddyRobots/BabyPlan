@@ -119,6 +119,7 @@ Rails.application.routes.draw do
       collection do
         get :get_id_by_name
         get :next_refund_request
+        get :timetable
       end
       member do
         post :set_available
@@ -128,6 +129,8 @@ Rails.application.routes.draw do
         post :signin_client
         get :signin_info
         get :stat
+        post :set_delete
+        post :course_notice
       end
     end
 

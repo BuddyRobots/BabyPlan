@@ -10,13 +10,14 @@ class Staff::CoursesController < Staff::ApplicationController
     @keyword = params[:keyword]
     params[:page] = params[:course_inst_page]
     course_insts = @keyword.present? ? current_center.course_insts.where(name: /#{Regexp.escape(@keyword)}/).is_available : current_center.course_insts.is_available
-    course_insts = course_insts.desc(:created_at)
+    course_insts = course_insts.desc(:start_course)
     @course_insts = auto_paginate(course_insts)
     @course_insts[:data] = @course_insts[:data].map do |e|
       e.course_inst_info
     end
     params[:page] = params[:course_page]
     unshelf_course_insts = @keyword.present? ? current_center.course_insts.where(name: /#{Regexp.escape(@keyword)}/).where(available: false) : current_center.course_insts.where(available: false)
+    unshelf_course_insts = unshelf_course_insts.desc(:start_course)
     @unshelf_course_insts = auto_paginate(unshelf_course_insts)
     @unshelf_course_insts[:data] = @unshelf_course_insts[:data].map do |e|
       e.course_inst_info
@@ -164,6 +165,31 @@ class Staff::CoursesController < Staff::ApplicationController
     end
     retval = course_inst.signin_info(params[:class_num])
     render json: retval_wrapper(retval) and return
+  end
+
+  def set_delete
+    @course_inst = CourseInst.where(id: params[:id]).first
+    if @course_inst.course_participates.present?
+      render json: retval_wrapper(ErrCode::COURSE_INST_EXIST) and return
+    end
+    @course_inst.update_attribute(:delete, params[:deleted])
+    @course_inst.save
+    render json: retval_wrapper(nil)
+  end
+
+  def course_notice
+    @course_inst = CourseInst.where(id: params[:id]).first
+    if @course_inst.course_participates.blank?
+      render json: retval_wrapper(ErrCode::COURSE_INST_NOT_EXIST) and return
+    end
+    @target = @course_inst.course_participates
+    content = params[:content]
+    retval = Weixin.course_notice(@target, content)
+    render json: retval_wrapper(retval)
+  end
+
+  def timetable
+    
   end
 
 end

@@ -35,6 +35,7 @@
     .btn.delete-btn{:type => "button"} 
       %img.delete{src: asset_path("web/delete2.png")}
       删除
+    .btn.notice-btn{:type => "button", "data-target" => "#noticeModal", "data-toggle" => "modal"} 编辑通知
 
     .tabbable
       %a{:href => "/staff/courses"}
@@ -126,6 +127,13 @@
             %span.unedit-box#school-span= @course_inst.school
             %span.edit-box
               %input.input-area.form-control#course-school{:type => "text"}
+          .course-introduce.clearfix
+            %span.introduce 课程介绍:
+            %div.introduce-details
+              = @course_inst.desc.to_s.html_safe
+            %span.wangedit-area
+              #edit-area
+
           .calendar-wrapper.clearfix
             %label.class-calendar 课程日历:
             .show-calendar#calendar
@@ -284,4 +292,17 @@
   %p
     %span.ui-icon.ui-icon-alert{:style => "float:left; margin:12px 12px 20px 0;"}>
     确定删除？
+
+
+#noticeModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
+  .modal-dialog
+    .modal-content
+      .modalheader
+        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: asset_path("managecenter/close.png")}
+      .modal-body
+        .notice-div
+          %p.notice-content 请编辑通知的内容:
+          %textarea.text-div{placeholder: "短信通知内容"}
+          .btn.delivery-btn{:type => "button"} 发送通知
+
         

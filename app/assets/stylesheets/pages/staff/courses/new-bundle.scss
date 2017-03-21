@@ -1,3 +1,4 @@
+@import "wangEditor";
 @import "fullcalendar.min";
 @import "jquery-ui";
 
@@ -103,7 +104,7 @@
 .course-length {
 	margin-left: 52px;
 }
-#course-address, #course-date {
+#course-address, #course-date, #course-name {
 	width: 80%;
 }
 .num-box {
@@ -208,4 +209,20 @@ h2 {
 
 .margin-l {
 	margin-left: 4px;
+}
+.course-introduce {
+	margin:20px;
+}
+.introduce {
+	font-size: 16px;
+	margin-right: 5px;
+	vertical-align: top;
+}
+.wangedit-area {
+	display: inline-block;
+	width: 68.5%;
+	font-size: 16px;
+}
+#edit-area {
+	height: 200px;
 }

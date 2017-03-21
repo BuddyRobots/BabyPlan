@@ -2,8 +2,25 @@
 #= require fullcalendar.min
 #= require locale-all
 #= require datepicker-zh-TW
+#= require wangEditor.min
 
 $ ->
+
+  # wangEditor
+  editor = new wangEditor('edit-area')
+
+  editor.config.menus = [
+        'head',
+        'img'
+     ]
+
+  editor.config.uploadImgUrl = '/materials'
+  editor.config.uploadHeaders = {
+    'Accept' : 'HTML'
+  }
+  editor.config.hideLinkImg = true
+  editor.create()
+
   has_photo = false
 
   can_repeat = false
@@ -43,7 +60,7 @@ $ ->
 
   $("#course-code").css("width", $(".num-box").width() - $(".course-num").width() - 5)
 
-  check_course_input = (code, capacity, price, price_pay, length, date, speaker, address, date_in_calendar) ->
+  check_course_input = (code, capacity, price, price_pay, length, date, speaker, address, date_in_calendar, min_age, max_age) ->
     if code == "" || capacity == "" || price == "" || length == "" || date == "" || speaker == "" || address == ""
       $.page_notification("请将信息补充完整")
       return false
@@ -62,12 +79,18 @@ $ ->
     if parseInt(length) != date_in_calendar.length
       $.page_notification("课次与上课时间不匹配")
       return false
+    if min_age != "" && !$.isNumeric(min_age) || parseInt(min_age) < 0
+      $.page_notification("请填写正确的最小适龄")
+      return false
+    if max_age != "" && !$.isNumeric(max_age) || parseInt(max_age) < 0 || parseInt(max_age) < parseInt(min_age)
+      $.page_notification("请填写正确的最大适龄")
+      return false
     return true
 
   $(".end-btn").click ->
-    course_id = window.cid
+    name = $("#course-name").val()
     available = !$("#unshelve").is(":checked")
-    code = $("#course-code").val()
+    code = $(".num-box").text()
     capacity = parseInt($("#course-capacity").val())
     price = $("#course-price").val()
     price_pay = $("#public-price").val()
@@ -78,6 +101,7 @@ $ ->
     min_age = $("#min-age").val()
     max_age = $("#max-age").val()
     school = $("#school").val()
+    desc = editor.$txt.html()
 
     fc_events = $('#calendar').fullCalendar('clientEvents')
     date_in_calendar = []
@@ -88,21 +112,20 @@ $ ->
         date_in_calendar.push(fc_event.start._i + "," + fc_event.end._i)
     )
     
-    # first_day = datepicker[0]
-    # start_time = first_day.split(',')[0]
-    # start_date = start_time.split('T')[0]
-    # console.log(start_date)
+    first_day = date_in_calendar[0]
+    start_time = first_day.split(',')[0]
+    start_course = Date.parse(start_time)
 
 
-    ret = check_course_input(code, capacity, price, price_pay, length, date, speaker, address, date_in_calendar)
+    ret = check_course_input(code, capacity, price, price_pay, length, date, speaker, address, date_in_calendar, min_age, max_age)
     if ret == false
       return
 
     $.postJSON(
       '/staff/courses/',
       course: {
-        course_id: course_id
         available: available
+        name: name
         code: code
         capacity: capacity
         price: price
@@ -115,6 +138,8 @@ $ ->
         min_age: min_age
         max_age: max_age
         school: school
+        desc: desc
+        start_course: start_course
       },
       (data) ->
         if data.success
