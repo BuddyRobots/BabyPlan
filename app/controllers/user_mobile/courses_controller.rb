@@ -117,6 +117,7 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
     logger.info "^^^^^^^^^^^^^^^^^"
     logger.info params.inspect
     logger.info "^^^^^^^^^^^^^^^^^"
+    CourseParticipate.notify_callback(request.raw_post)
     render :xml => {return_code: "SUCCESS"}.to_xml(dasherize: false, root: "xml") and return
   end
 
