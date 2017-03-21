@@ -179,6 +179,10 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
   # judge whether a course_participate is expired
   def is_expired
     cp = CourseParticipate.where(id: params[:id]).first
-    render json: retval_wrapper({is_expired: cp.is_expired}) and return
+    is_expired = cp.is_expired
+    if params[:before_pay]
+      cp.update_attributes({renew_status: true})
+    end
+    render json: retval_wrapper({is_expired: is_expired}) and return
   end
 end
