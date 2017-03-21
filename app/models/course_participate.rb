@@ -145,6 +145,49 @@ class CourseParticipate
   #   # end
   # end
 
+  def self.notify_callback(content)
+    doc = Nokogiri::XML(content)
+    order_id = doc.search('out_trade_no').children[0].text
+    cp = CourseParticipate.where(order_id: order_id).first
+    if cp.nil?
+      logger.info "ERROR!!!!!!!!!!!!!!"
+      logger.info "order is finished, but it seems that the user re-pay"
+      logger.info "ERROR!!!!!!!!!!!!!!"
+      return
+    end
+    success = doc.search('return_code').children[0].text
+    logger.info "!!!!!!!!!!!!!!!!!!!"
+    logger.info success
+    if success != "SUCCESS"
+      return nil
+    else
+      result_code = doc.search('result_code').children[0].text
+      logger.info "!!!!!!!!!!!!!!!!!!!"
+      logger.info result_code
+      if result_code != "SUCCESS"
+        err_code = doc.search('err_code').children[0].text
+        err_code_des = doc.search('err_code_des').children[0].text
+        cp.update_attributes({
+          trade_state: result_code,
+          err_code: err_code,
+          err_code_des: err_code_des
+        })
+      else
+        wechat_transaction_id = doc.search('transaction_id').children[0].try(:text)
+        logger.info "!!!!!!!!!!!!!!!!!!!"
+        logger.info wechat_transaction_id
+        cp.update_attributes({
+          trade_state: "SUCCESS",
+          trade_state_updated_at: Time.now.to_i,
+          wechat_transaction_id: wechat_transaction_id,
+          pay_finished: true,
+          expired_at: -1
+        })
+        Bill.confirm_course_participate_item(cp)
+      end
+    end
+  end
+
   def orderquery
     self.update_attributes({renew_status: false})
     if self.order_id.blank? || self.prepay_id == "free"
@@ -340,7 +383,7 @@ class CourseParticipate
     if self.need_order_query
       self.orderquery()
     end
-    self.trade_state != "SUCCESS" && self.expired_at < Time.now.to_i
+    self.trade_state != "SUCCESS" && self.trade_state != "USERPAYING" && self.expired_at < Time.now.to_i
   end
 
   def is_paying
@@ -351,7 +394,8 @@ class CourseParticipate
     if self.need_order_query
       self.orderquery()
     end
-    self.pay_finished == true && self.trade_state != "SUCCESS"
+    # self.pay_finished == true && self.trade_state != "SUCCESS"
+    self.trade_state == "USERPAYING"
   end
 
   def is_success

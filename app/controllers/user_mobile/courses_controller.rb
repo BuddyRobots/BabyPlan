@@ -1,5 +1,7 @@
 class UserMobile::CoursesController < UserMobile::ApplicationController
   skip_before_filter :require_sign_in, only: [:notify]
+  skip_before_filter :init, only: [:notify]
+  skip_before_filter :get_keyword, only: [:notify]
   # similar to search_new
   def index
     @keyword = params[:keyword]
@@ -111,10 +113,11 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
 
   def notify
     logger.info "^^^^^^^^^^^^^^^^^"
-    logger.info request.inspect
+    logger.info request.raw_post
     logger.info "^^^^^^^^^^^^^^^^^"
     logger.info params.inspect
     logger.info "^^^^^^^^^^^^^^^^^"
+    CourseParticipate.notify_callback(request.raw_post)
     render :xml => {return_code: "SUCCESS"}.to_xml(dasherize: false, root: "xml") and return
   end
 
