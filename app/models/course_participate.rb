@@ -178,6 +178,7 @@ class CourseParticipate
         logger.info wechat_transaction_id
         cp.update_attributes({
           trade_state: "SUCCESS",
+          trade_state_desc: "",
           trade_state_updated_at: Time.now.to_i,
           wechat_transaction_id: wechat_transaction_id,
           pay_finished: true,
