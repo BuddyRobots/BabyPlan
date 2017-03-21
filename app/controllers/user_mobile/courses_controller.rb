@@ -93,6 +93,10 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
         @pay_info = @course_participate.get_pay_info
         return
       end
+      if params[:direct_pay].to_s == "true" && @course_participate.is_expired == true
+        # expired, need to re-sign-up
+        redirect_to action: :show, id: params[:state] and return
+      end
     end
 
     if @course.capacity <= @course.effective_signup_num
