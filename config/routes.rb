@@ -288,6 +288,7 @@ Rails.application.routes.draw do
         post :upload_avatar
         post :pay_finished
         post :pay_failed
+        get :get_openid
       end
     end
   end

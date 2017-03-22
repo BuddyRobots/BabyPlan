@@ -96,4 +96,11 @@ class UserMobile::SettingsController < UserMobile::ApplicationController
     retval = @current_user.get_avatar(params[:server_id])
     render json: retval_wrapper(retval) and return
   end
+
+  def get_openid
+    @open_id = Weixin.get_oauth_open_id(params[:code])
+    current_user.update_attribute(:user_openid, @open_id)
+    current_user.save
+    redirect_to params[:state].blank? ? "/user_mobile/feeds" : params[:state]
+  end
 end

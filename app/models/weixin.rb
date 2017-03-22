@@ -148,7 +148,7 @@ class Weixin
       "template_id": "XaIM2TKa7w78F8J2qB2bTtcVf_PlDq2F_wao3dznJTE",
       "data": {
         "first": {
-          "value": "您报名的课程有变动",
+          "value": "您报名的课程有变动!",
           "color": "#173177"
         },
         "keyword1": {
@@ -160,7 +160,7 @@ class Weixin
           "color": "#173177"
         },
         "remark": {
-          "value": "儿童中心祝您上课愉快",
+          "value": "北京市社区儿童中心祝您上课愉快",
           "color": "#173177"
         }
       }

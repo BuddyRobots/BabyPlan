@@ -14,17 +14,16 @@
           %input.form-control#search-input{:type => "text", :placeholder => "输入绘本名称", :value => "#{@keyword}"}
           %span.input-group-btn
             %button.btn.btn-default#search-btn{:type => "button"}
-      .btn.bookadd-btn{:type => "button"} 
+      .btn.bookadd-btn{:type => "button", "data-target" => "#isbnModal", "data-toggle" => "modal"} 
         %img.book-edit{src: asset_path("managecenter/add.png")}
         添加绘本
-      .btn.merge-book{:type => "button"} 绘本合并
       .btn.download-code{:type => "button"} 二维码下载
     
     .manage-content
       .tabbable
         %ul.nav.nav-tabs
           %li.active
-            %a#book-list{"data-toggle" => "tab", :href => "#tab1"} 绘本列表
+            %a#book-list{"data-toggle" => "tab", :href => "#tab1"} 馆藏绘本
           %li
             %a#timeover{"data-toggle" => "tab", :href => "#tab2"} 逾期绘本
 
@@ -41,21 +40,19 @@
                     %thead
                       %tr
                         %th 绘本名称
-                        %th 标&nbsp签
+                        %th 书&nbsp号
+                        %th 作&nbsp者
                         %th 数&nbsp量
                         %th 在架
-                        %th 作&nbsp者
-                        %th 书&nbsp号
                         %th 操&nbsp作
                     %tbody
                       - @books[:data].each do |b|
                         %tr{class: "book-record #{ b[:available] ? "available" : "unavailable" }", "data-id" => b[:id]}
                           %td= link_to b[:name], "/staff/books/#{b[:id]}"
-                          %td= truncate((b[:tags] || "").gsub(',', '，'), length: 20)
+                          %td= b[:isbn]
+                          %td= b[:author]
                           %td= b[:stock].to_s + "本"
                           %td= b[:available_stock].to_s + "本"
-                          %td= b[:author]
-                          %td= b[:isbn]
                           %td
                             - if b[:available]
                               %a.set-available.link-available{:href => "javascript:void(0);"} 下架
@@ -137,6 +134,29 @@
         .btn-div
           %button.btn#lost-cancel{type: "button"} 取&nbsp消
           %button.btn#lost-confirm{type: "button"} 确&nbsp定
+
+
+#isbnModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
+  .modal-dialog
+    .modal-content
+      .modalheader
+        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: asset_path("managecenter/close.png")}
+      .modal-body
+        .isbn-div
+          .input-box
+            %p.isbn-name ISBN号
+            .outer-div
+              %input.isbn-input
+              .btn.isbn-search-btn{type: "button"} 查询
+          .isbn-notice-div
+            %span.isbn-space
+            %span.isbn-book-name 咖妃国行
+
+          .input-box
+            %p.isbn-name 数量
+            .outer-div
+              %input.isbn-input-num
+          .btn.isbn-confirm-btn.button-disabled{:type => "button"} 确定
       
 
 

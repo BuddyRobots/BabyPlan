@@ -302,7 +302,13 @@
       .modal-body
         .notice-div
           %p.notice-content 请编辑通知的内容:
-          %textarea.text-div{placeholder: "短信通知内容"}
+          %p.notice-content 您报名的课程有变动！
+          %span.notice-content 课程名称:
+          %span.notice-content= @course_inst.name
+          .notice-textarea
+            %span.notice-content.vt 情况说明:
+            %textarea.text-div{placeholder: "课程变动的原因解释"}
+          %p.notice-content.notice-bottom 北京市社区儿童中心祝您上课愉快
           .btn.delivery-btn{:type => "button"} 发送通知
 
         

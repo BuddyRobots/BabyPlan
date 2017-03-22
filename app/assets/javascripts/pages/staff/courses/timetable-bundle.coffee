@@ -1,9 +1,17 @@
 # = require moment.min
-#= require fullcalendar.min
+#= require fullcalendar
 #= require locale-all
 #= require datepicker-zh-TW
 
 $ ->
+  $ ->
+    $('#fc-dateSelect').delegate 'select', 'change', ->
+      fcsYear = $('#fcs_date_year').val()
+      fcsMonth = $('#fcs_date_month').val()
+      $('#calendar').fullCalendar 'gotoDate', fcsYear, fcsMonth
+      return
+    return
+
   has_photo = false
 
   can_repeat = false
@@ -30,7 +38,7 @@ $ ->
       week: "周课表"
     }
     header:
-      left: 'agendaWeek,month'
+      left: 'basicWeek,month'
       center: 'title'
       right: 'prev,next today'
     locale: initialLocaleCode
@@ -40,11 +48,20 @@ $ ->
     eventLimit: true
     fixedWeekCount: false
     nowIndicator: true
-    height: 355
+    height: 500
+    allDaySlot: false
+    weekMode: 'liquid'
+    weekNumberTitle: "周"
+    
     # aspectRatio: 2
     eventClick: (calEvent, jsEvent, view) ->
       $("#calendar").fullCalendar('removeEvents', calEvent.id)
+
+
+
   })
+
+
 
   $("#course-code").css("width", $(".num-box").width() - $(".course-num").width() - 5)
 

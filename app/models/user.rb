@@ -22,7 +22,7 @@ class User
   field :mobile_verify_code, type: String
   field :password_verify_code, type: String
   field :auth_key, type: String
-
+  field :user_openid, type: String
   # for staff
   NEW = 1
   NORMAL = 2

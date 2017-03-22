@@ -4,13 +4,6 @@ $ ->
 	# $("#signup-signin").click ->
 	# location.href = "/staff/books/" + data.book_id
 
-
-  $(".bookadd-btn").click ->
-    location.href = "/staff/books/new"
-
-  $(".merge-book").click ->
-    location.href = "/staff/books/merge"
-
   $(".download-code").click ->
     location.href = "/staff/books/code_list"
 
