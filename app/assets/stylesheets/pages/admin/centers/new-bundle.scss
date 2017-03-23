@@ -84,9 +84,9 @@
 	margin-top: 20px;
 }
 #photo {
-	width: 11%;
-	height: 88px;
-	margin: 15px 0 0 60px;
+	width: 200px;
+	height: 138px;
+	margin: 15px 0 0 40px;
 }
 .input-name {
 	display: inline-block;
@@ -100,7 +100,7 @@
 .form-inline {
 	margin: 20px 0;
 }
-#center-name, #center-address {
+#center-name, #center-address, #center-open-time {
 	width: 80%;
 	height: 30px;
 }
@@ -148,6 +148,7 @@
 .center-introduce {
 	padding-top: 5px;
 	margin-bottom: 20px;
+	margin-top: 15px;
 }
 
 
@@ -199,6 +200,7 @@
 .form-group {
 	font-size: 14px;
 	color: #323232;
+	margin-bottom: 20px;
 }
 .form-control {
 	display: inline-block;
@@ -208,4 +210,15 @@
 }
 .cover-caption, #cover-name {
 	margin-left: 15px;
+}
+
+
+.input-div {
+	display: inline-block;
+	width: 160px;
+	height: 30px;
+	margin-right: 15px;
+}
+.no-margin {
+	margin-left: 0;
 }

@@ -3,7 +3,6 @@
   = stylesheet_link_tag "pages/staff/courses/show-bundle", :media => "all"
   :javascript
     window.cid = "#{@course_inst.id.to_s}"
-    window.course_id = "#{@course_inst.course.id.to_s}"
     window.capacity = "#{@course_inst.capacity}"
     window.price = "#{@course_inst.price}"
     window.price_pay = "#{@course_inst.price_pay}"
@@ -88,11 +87,9 @@
 
           .controls.controls-row
             %label.input-caption 开课编号:
-            %span.num-box
-              %span.course-num= @course_inst.course.code + "-" 
-              %span.unedit-box#num-span= @course_inst.inst_code
-              %span.edit-box
-                %input.input-area.form-control#course-num{:type => "text"}
+            %span.unedit-box#num-span= @course_inst.code
+            %span.edit-box
+              %input.input-area.form-control#course-num{:type => "text"}
             %label.input-caption.course-speaker 主讲人:
             %span.unedit-box#speaker-span= @course_inst.speaker
             %span.edit-box

@@ -246,7 +246,6 @@ $ ->
     $("#max-age").val(window.max_age)
     $("#course-school").val($("#school-span").text())
 
-    $("#course-num").css("width", $(".num-box").width() - $(".course-num").width()-5)
 
     $(".edit-btn").toggle()
     $(".finish-btn").toggle()
@@ -633,7 +632,6 @@ $ ->
     $("#max-age").val(window.max_age)
     $("#course-school").val($("#school-span").text())
 
-    $("#course-num").css("width", $(".num-box").width() - $(".course-num").width()-5)
 
     $(".edit-btn").toggle()
     $(".again-btn").toggle()
@@ -695,7 +693,7 @@ $ ->
       '/staff/courses/',
       {
         course: {
-          course_id: window.course_id
+          # course_id: window.course_id
           available: available
           name: name
           code: code

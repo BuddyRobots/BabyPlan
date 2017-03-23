@@ -68,7 +68,7 @@ class Admin::CentersController < Admin::ApplicationController
     @center = Center.where(id: params[:id]).first
     render json: retval_wrapper(ErrCode::CENTER_NOT_EXIST) and return if @center.nil?
     retval = @center.update_info(params[:center])
-    render json: retval_wrapper(retval)
+    render json: retval_wrapper(retval) and return
   end
 
   def upload_photo

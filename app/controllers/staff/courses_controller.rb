@@ -32,6 +32,7 @@ class Staff::CoursesController < Staff::ApplicationController
   end
 
   def new
+    @center = current_center
     # @course = Course.where(id: params[:course_id]).first
     # if @course.blank?
     #   redirect_to action: :index and return
@@ -48,7 +49,7 @@ class Staff::CoursesController < Staff::ApplicationController
   def show
     @profile = params[:profile]
     @course_inst = CourseInst.where(id: params[:id]).first
-
+   
     reviews = @course_inst.reviews
     if params[:review_type].present?
       reviews = reviews.where(status: params[:review_type].to_i)

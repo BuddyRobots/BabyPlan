@@ -9,6 +9,10 @@ class Center
   field :lng, type: String
   field :desc, type: String
   field :available, type: Boolean
+  field :abbr, type: String
+  field :open_time, type: String
+  field :price_upper, type: Integer
+  field :classtime_upper, type: Integer
 
   has_one :photo, class_name: "Material", inverse_of: :center_photo
   has_many :course_insts
@@ -39,7 +43,11 @@ class Center
       desc: center_info[:desc],
       available: center_info[:available],
       lat: center_info[:lat],
-      lng: center_info[:lng]
+      lng: center_info[:lng],
+      abbr: center_info[:abbr],
+      open_time: center_info[:open_time],
+      price_upper: center_info[:price_upper].to_i,
+      classtime_upper: center_info[:classtime_upper].to_i
     )
     { center_id: center.id.to_s }
   end
@@ -130,7 +138,11 @@ class Center
         address: center_info["address"],
         desc: center_info["desc"],
         lat: center_info["lat"],
-        lng: center_info["lng"]
+        lng: center_info["lng"],
+        open_time: center_info["open_time"],
+        abbr: center_info["abbr"],
+        price_upper: center_info["price_upper"].to_i,
+        classtime_upper: center_info["classtime_upper"].to_i
       }
     )
     nil
@@ -361,5 +373,11 @@ class Center
     if self.statistics.where(type: Statistic::OFF_SHELF, stat_date: stat_date).blank?
       self.statistics.create(type: Statistic::OFF_SHELF, stat_date: stat_date, value: off_shelf)
     end
+  end
+
+  def course_num
+    num = (self.course_insts.count + 1).to_s
+    num = num.rjust(4, "0")
+    self.abbr + Time.now.year.to_s + num
   end
 end

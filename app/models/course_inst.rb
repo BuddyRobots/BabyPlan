@@ -42,16 +42,18 @@ class CourseInst
     if course_inst_info["length"].to_i != course_inst_info["date_in_calendar"].length
       return ErrCode::COURSE_DATE_UNMATCH
     end
-    course = Course.where(id: course_inst_info[:course_id]).first
-    code = course.code + "-" + course_inst_info[:code]
-    course_inst = CourseInst.where(code: code).first
+
+    # course = Course.where(id: course_inst_info[:course_id]).first
+    # code = course.code + "-" + course_inst_info[:code]
+    course_inst = CourseInst.where(code: course_inst_info[:code]).first
     if course_inst.present?
       return ErrCode::COURSE_INST_EXIST
     end
-    course_inst = course.course_insts.create({
+    course_inst = center.course_insts.create({
       name: course_inst_info[:name],
       available: course_inst_info[:available],
-      code: code,
+      # code: code,
+      code: course_inst_info[:code],
       inst_code: course_inst_info[:code],
       length: course_inst_info[:length],
       address: course_inst_info[:address],

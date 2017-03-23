@@ -152,6 +152,8 @@ Rails.application.routes.draw do
         post :clear_list
         post :download_all_qr
         get :download_qr_list
+        post :isbn_search
+        post :isbn_add_book
       end
     end
 

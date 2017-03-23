@@ -97,3 +97,64 @@ $ ->
 
   if window.profile == "borrows"
     $("#timeover").trigger("click")
+
+
+  $(".isbn-search-btn").click ->
+    isbn = $(".isbn-input").val()
+    $.postJSON(
+      '/staff/books/isbn_search',
+      {
+        isbn: isbn
+        },
+      (data) ->
+        if !data.success
+          if data.code == BOOK_NOT_EXIST
+            $(".isbn-notice").text("未找到对应图书").css({color:"#d70c19", visibility:"visible"})
+          if data.code == BOOK_IN_CENTER
+            $(".isbn-notice").text("本中心藏有该书，请修改藏书数量").css({color:"#d70c19", visibility:"visible"})
+        else
+          $(".isbn-notice").text("书名:" + data.name).css({color:"#10c078", visibility:"visible"})
+    )
+
+  $(".close").click ->
+    $(".isbn-input").val("")
+    $(".isbn-input-num").val("")
+    $(".isbn-notice").css("visibility", "hidden")
+    $(".isbn-confirm-btn").addClass("button-disabled")
+    $(".isbn-confirm-btn").removeClass("button-enabled")
+
+  $('#isbnModal').on 'hidden.bs.modal', ->
+    $(".isbn-input").val("")
+    $(".isbn-input-num").val("")
+    $(".isbn-notice").css("visibility", "hidden")
+    $(".isbn-confirm-btn").addClass("button-disabled")
+    $(".isbn-confirm-btn").removeClass("button-enabled")
+
+  check_input = ->
+    if $(".isbn-input").val().trim() == "" || $(".isbn-input-num").val().trim() == "" || $(".isbn-notice").text() == "未找到对应图书"
+      $(".isbn-confirm-btn").addClass("button-disabled")
+      $(".isbn-confirm-btn").removeClass("button-enabled")
+    else
+      $(".isbn-confirm-btn").addClass("button-enabled")
+      $(".isbn-confirm-btn").removeClass("button-disabled")
+
+  $(".isbn-input").keyup ->
+    check_input()
+  $(".isbn-input-num").keyup ->
+    check_input()
+
+  $(".isbn-confirm-btn").click ->
+    isbn = $(".isbn-input").val()
+    num = $(".isbn-input-num").val()
+    $.postJSON(
+      '/staff/books/isbn_add_book',
+      {
+        isbn: isbn
+        num: num
+      },
+      (data) ->
+        if data.success
+          location.href = "/staff/books"
+      )
+
+

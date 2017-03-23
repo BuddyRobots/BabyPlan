@@ -92,8 +92,15 @@ $ ->
     name = $("#center-name").val()
     address = $("#center-address").val()
     desc = editor.$txt.html()
+    open_time = $("#center-open-time").val()
+    abbr = $("#center-abbr").val().trim()
+    price_upper = $("#price-upper").val()
+    classtime_upper = $("#classtime-upper").val()
     available = !$("#inlineCheckbox1").is(":checked")
-    if name == "" || address == "" || desc == ""
+    if !$.isNumeric(price_upper) || !$.isNumeric(classtime_upper)
+      $.page_notification("请输入正确的数字", 1000)
+      return false
+    if name == "" || address == "" || desc == "" || abbr == ""
       $.page_notification("请补全信息")
       return
     if window.lat == null
@@ -109,6 +116,10 @@ $ ->
           available: available
           lat: window.lat
           lng: window.lng
+          abbr: abbr
+          open_time: open_time
+          price_upper: price_upper
+          classtime_upper: classtime_upper
         }
       },
       (data) ->

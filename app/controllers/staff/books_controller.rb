@@ -196,4 +196,31 @@ class Staff::BooksController < Staff::ApplicationController
     retval = QrExport.create_qr(current_center, params[:id], params[:num])
     render json: retval_wrapper(retval) and return
   end
+
+  def isbn_search
+    if Book.where(isbn: params[:isbn]).first.blank?
+      render json: retval_wrapper(ErrCode::BOOK_NOT_EXIST) and return
+    elsif current_center.books.where(isbn: params[:isbn]).first.present?
+      render json: retval_wrapper(ErrCode::BOOK_IN_CENTER) and return
+    else
+      book = Book.where(isbn: params[:isbn]).first
+      retval = book.try(:name)
+      render json: retval_wrapper({name:retval}) and return
+    end
+  end
+
+  def isbn_add_book
+    if current_center.books.where(isbn: params[:isbn]).present?
+      @book = current_center.books.where(isbn: params[:isbn]).first
+      stock = @book.stock
+      @book.update_attribute(:stock, stock + params[:num].to_i)
+      @book.save
+      render json: retval_wrapper(nil) and return
+    else
+      # if Book.where(isbn: params[:isbn]).present?
+      #   Book.center_book(current_user, current_center, params[:isbn], params[:num])
+      #   render "/staff/books" and return
+      # end
+    end
+  end
 end

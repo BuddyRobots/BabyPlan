@@ -24,24 +24,35 @@
             %label.input-name 中心名称:
             %input.input-area.form-control#center-name{:type => "text"}
           .form-group
+            %label.input-name 开放时间:
+            %input.input-area.form-control#center-open-time{:type => "text"}
+          .form-group
             %label.input-name 详细地址:
             %input.input-area.form-control#center-address{:type => "text"}
         = form_tag("/", method: "post", multipart: true, id: "upload-photo-form", class: "hide") do
           = file_field_tag "photo_file", { class: "hide", accept: ".jpg,.png" }
         %a#upload-photo{href: "javascript:void(0);"}
           %img#photo{src: asset_path("web/photo.png")}
+      .controls.controls-row
+        %label.input-name 中心代号:
+        %input.input-div.form-control#center-abbr{:type => "text"}
+        %label.input-name.no-margin 公益价上限:
+        %input.input-div.form-control#price-upper{:type => "text"}
+        %label.input-name.no-margin#total 授课时间上限:
+        %input.input-div.form-control#classtime-upper{:type => "text"}
 
+      
+      
+      .center-introduce.clearfix
+        %span.introduce 中心介绍:
+        .wangedit-area
+          #edit-area
       .map-position.clearfix
         %span.map-address 地图位置:
         %span.notice 
           请在地图上点击定位或
         %a#auto-locate{:href => "javascript:void(0);"} 自动定位
         #map-container
-      
-      .center-introduce.clearfix
-        %span.introduce 中心介绍:
-        .wangedit-area
-          #edit-area
 
 / #uploadPhotoModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
 /   .modal-dialog

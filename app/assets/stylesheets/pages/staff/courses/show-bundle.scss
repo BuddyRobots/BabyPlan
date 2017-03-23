@@ -123,9 +123,9 @@ input, label, h5 {
 .num-box {
 	@extend .input-area;
 }
-#num-span {
-	width: auto;
-}
+// #num-span {
+// 	width: auto;
+// }
 #course-address, #course-date, #course-name {
 	width: 80%;
 }
@@ -152,13 +152,13 @@ input, label, h5 {
 .num-box {
 	@extend .unedit-box;
 }
-.course-num {
-	vertical-align: middle;
-	font-size: 14px;
-	color: #323232;
-	height: 30px;
-	line-height: 30px;
-}
+// .course-num {
+// 	vertical-align: middle;
+// 	font-size: 14px;
+// 	color: #323232;
+// 	height: 30px;
+// 	line-height: 30px;
+// }
 .edit-box {
 	display: none;
 }
