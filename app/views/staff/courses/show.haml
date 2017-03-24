@@ -17,9 +17,6 @@
     .btn.finish-btn{:type => "button"} 
       %img.ticker{src: asset_path("managecenter/ticker.png")}
       完成
-    .btn.again-btn{:type => "button"} 
-      %img.ticker{src: asset_path("managecenter/ticker.png")}
-      完成
     .btn.edit-btn{:type => "button"} 
       %img.edit{src: asset_path("managecenter/edit.png")}
       编辑
@@ -78,18 +75,9 @@
               %a#upload-photo{href: "javascript:void(0);"}
                 %img.edit-photo{src: asset_path("web/photo.png")}
 
-              = form_tag("/", method: "post", multipart: true, id: "upload-photo-form1", class: "hide") do
-                = file_field_tag "photo_file1", { class: "hide", accept: ".jpg,.png" }
-              %a#upload-photo1{href: "javascript:void(0);"}
-                %img.edit-photo1{src: asset_path("web/photo.png")}
-
-
-
           .controls.controls-row
             %label.input-caption 开课编号:
-            %span.unedit-box#num-span= @course_inst.code
-            %span.edit-box
-              %input.input-area.form-control#course-num{:type => "text"}
+            %span.course-num-box#num-span= @course_inst.code
             %label.input-caption.course-speaker 主讲人:
             %span.unedit-box#speaker-span= @course_inst.speaker
             %span.edit-box
@@ -220,9 +208,9 @@
                     %p.date= r.created_at.strftime("%Y-%m-%d %H:%M")
                     %p.user-review-content= r.content
                     - if r.is_private
-                      %button.btn.open-btn.show-review{:type => "button", data: {id: r.id.to_s}} 公开
+                      .btn.open-btn.show-review{:type => "button", data: {id: r.id.to_s}} 公开
                     - else
-                      %button.btn.open-btn.hide-review{:type => "button", data: {id: r.id.to_s}} 隐藏
+                      .btn.open-btn.hide-review{:type => "button", data: {id: r.id.to_s}} 隐藏
             = render "staff/partials/auto_paginate", locals: { instance: @reviews, url: "/staff/courses/" + @course_inst.id.to_s + "?profile=reviews&", page: 'review_page'}
           
           

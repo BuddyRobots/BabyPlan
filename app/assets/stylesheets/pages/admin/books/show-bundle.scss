@@ -32,9 +32,14 @@
 .tabbable {
 	margin: 20px 20px auto 20px;
 }
+.tab-back {
+	position: absolute;
+	top: 19px;
+}
 .nav-tabs {
 	margin-bottom: 0;
 	border-bottom: 0;
+	padding-left: 55px;
 	li {
 		font-size: 16px;
 		color: #323232;

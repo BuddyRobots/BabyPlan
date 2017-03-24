@@ -6,7 +6,6 @@ class CourseInst
   field :name, type: String
   field :available, type: Boolean
   field :code, type: String
-  field :inst_code, type: String
   field :length, type: Integer
   field :address, type: String
   field :capacity, type: Integer
@@ -54,7 +53,6 @@ class CourseInst
       available: course_inst_info[:available],
       # code: code,
       code: course_inst_info[:code],
-      inst_code: course_inst_info[:code],
       length: course_inst_info[:length],
       address: course_inst_info[:address],
       capacity: course_inst_info[:capacity],
@@ -81,6 +79,8 @@ class CourseInst
       name: self.name || self.course.name,
       available: self.available,
       speaker: self.speaker,
+      school: self.school,
+      center: self.center.name,
       price: self.price,
       price_pay: self.price_pay,
       address: self.address,
@@ -89,7 +89,7 @@ class CourseInst
   end
 
   def update_info(course_inst_info)
-    course_inst = self.course.course_insts.where(inst_code: course_inst_info["code"]).first
+    course_inst = CourseInst.where(code: course_inst_info["code"]).first
     if course_inst.present? && course_inst.id != self.id
       return ErrCode::COURSE_INST_EXIST
     end
@@ -98,8 +98,8 @@ class CourseInst
     end
     self.update_attributes(
       {
-        code: self.course.code + "-" + course_inst_info["code"],
-        inst_code: course_inst_info["code"],
+        code: course_inst_info["code"],
+        # inst_code: course_inst_info["code"],
         price: course_inst_info["price"],
         price_pay: course_inst_info["price_pay"],
         length: course_inst_info["length"],

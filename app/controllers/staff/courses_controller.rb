@@ -33,6 +33,8 @@ class Staff::CoursesController < Staff::ApplicationController
 
   def new
     @center = current_center
+    @course_inst = CourseInst.where(id: params[:cid]).first
+
     # @course = Course.where(id: params[:course_id]).first
     # if @course.blank?
     #   redirect_to action: :index and return
@@ -101,6 +103,7 @@ class Staff::CoursesController < Staff::ApplicationController
     redirect_to action: :show, id: @course_inst.id.to_s and return
   end
 
+  # code is modify ---alan
   def get_id_by_name
     course_name = params[:course_name]
     scan_result = course_name.scan(/\((.+)\)/)

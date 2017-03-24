@@ -90,7 +90,6 @@ $ ->
   $(".end-btn").click ->
     name = $("#course-name").val()
     available = !$("#unshelve").is(":checked")
-    code = $(".num-box").text()
     capacity = parseInt($("#course-capacity").val())
     price = $("#course-price").val()
     price_pay = $("#public-price").val()
@@ -102,7 +101,8 @@ $ ->
     max_age = $("#max-age").val()
     school = $("#school").val()
     desc = editor.$txt.html()
-
+    code = $(".num-box").text()
+    
     fc_events = $('#calendar').fullCalendar('clientEvents')
     date_in_calendar = []
 
@@ -111,15 +111,13 @@ $ ->
       (index, fc_event) ->
         date_in_calendar.push(fc_event.start._i + "," + fc_event.end._i)
     )
-    
-    first_day = date_in_calendar[0]
-    start_time = first_day.split(',')[0]
-    start_course = Date.parse(start_time)
-
-
     ret = check_course_input(code, capacity, price, price_pay, length, date, speaker, address, date_in_calendar, min_age, max_age)
     if ret == false
       return
+
+    first_day = date_in_calendar[0]
+    start_time = first_day.split(',')[0]
+    start_course = Date.parse(start_time)
 
     $.postJSON(
       '/staff/courses/',

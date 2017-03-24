@@ -77,12 +77,33 @@
 .course-edit {
 	margin-top: -2px;
 }
-.table-box {
-	// position: relative;
-	padding: 0;
-	margin: 20px 20px auto 20px;
+.tabbable {
+	padding: 20px;
 }
-#user-table {
+	
+.nav-tabs {
+	margin-bottom: 0;
+	border-bottom: 0;
+	li {
+		font-size: 16px;
+		color: #323232;
+	}
+}
+.local-course {
+	border: 1px solid #ddd;
+	border-radius: 0 6px 6px 6px;
+	padding: 20px 20px 10px 20px;
+}
+.open-course {
+	border: 1px solid #ddd;
+	border-radius: 6px;
+	padding: 20px;
+}
+.table-box {
+	position: relative;
+	padding: 0;
+}
+#local-course-table, #course-table {
 	border-radius: 6px;
 	border: 1px solid #c8c8c8;
 	font-size: 14px;
@@ -101,18 +122,6 @@
 		line-height: 45px;
 		text-align: center;
 		padding: 0;
-		.unshelve {
-			color: #969696;
-		}
-		.shelve {
-			color: #f7873d;
-		}
-	}
-	.unavailable {
-		background: #eaeaea;
-	}
-	.clicked {
-		background: #fdd3b9;
 	}
 }
 .undiscover {
@@ -129,3 +138,7 @@
 	color: #969696;
 	margin-left: 20px;
 }
+.select-page {
+	margin: 10px 0 7px 0;
+}
+

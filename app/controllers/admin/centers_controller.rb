@@ -9,6 +9,7 @@ class Admin::CentersController < Admin::ApplicationController
   def index
     @keyword = params[:keyword]
     centers = @keyword.present? ? Center.where(name: /#{Regexp.escape(@keyword)}/) : Center.all
+    centers = centers.desc(:created_at)
     @centers = auto_paginate(centers)
     @centers[:data] = @centers[:data].map do |e|
       e.center_info

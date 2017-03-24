@@ -97,6 +97,8 @@ $ ->
     price_upper = $("#price-upper").val()
     classtime_upper = $("#classtime-upper").val()
     available = !$("#inlineCheckbox1").is(":checked")
+    code = 1
+    year = 2017
     if !$.isNumeric(price_upper) || !$.isNumeric(classtime_upper)
       $.page_notification("请输入正确的数字", 1000)
       return false
@@ -120,6 +122,8 @@ $ ->
           open_time: open_time
           price_upper: price_upper
           classtime_upper: classtime_upper
+          code: code
+          year: year
         }
       },
       (data) ->

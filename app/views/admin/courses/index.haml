@@ -3,6 +3,7 @@
   = stylesheet_link_tag "pages/admin/courses/index-bundle", :media => "all"
   :javascript
     window.keyword = "#{@keyword}"
+    window.profile = "#{@profile}"
 
 .content-area
   /courses-index
@@ -13,36 +14,69 @@
           %input.form-control#search-input{:type => "text", :placeholder => "输入课程名称", :value => "#{@keyword}"}
           %span.input-group-btn
             %button.btn.btn-default#search-btn{:type => "button"}
-      .btn.add-btn{:type => "button"} 
-        %img.course-edit{src: asset_path("managecenter/add.png")}
-        添加课程
+      
     
     .manage-content
-      - if @courses[:data].length == 0
-        .undiscover
-          %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
-          %span.message 抱歉！暂无课程信息
-      - else
-        .table-box
-          %table.table.table-bordered#user-table
-            %thead
-              %tr
-                %th 课&nbsp程
-                %th 编&nbsp号
-                %th 主讲人
-                %th 费&nbsp用
-                %th 操&nbsp作
-            %tbody
-              - @courses[:data].each do |c|
-                %tr{class: "#{ c[:available] ? "available" : "unavailable" }", "data-id" => c[:id]}
-                  %td= link_to c[:name], "/admin/courses/#{c[:id]}"
-                  %td= c[:code]
-                  %td= c[:speaker]
-                  %td= c[:price]
-                  %td
-                    - if c[:available]
-                      %a.set-available.link-available{:href => "javascript:void(0);"} 下架
-                    - else
-                      %a.set-available.link-unavailable{:href => "javascript:void(0);"} 上架
-        = render "admin/partials/auto_paginate", locals: { instance: @courses, url: "/admin/courses?keyword=#{@keyword}&", page: 'page'}
-        
+      .tabbable
+        %ul.nav.nav-tabs
+          %li.active
+            %a{"data-toggle" => "tab", :href => "#tab1"} 已开课程
+          %li
+            %a#unopen_course{"data-toggle" => "tab", :href => "#tab2"} 未开课程
+
+
+        .tab-content
+          #tab1.tab-pane.active
+            .local-course
+              - if @course_insts[:data].length == 0
+                .undiscover
+                  %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
+                  %span.message 抱歉！暂无课程信息
+              - else
+                .table-box
+                  %table.table.table-bordered#local-course-table
+                    %thead
+                      %tr
+                        %th 课&nbsp程
+                        %th 上课时间
+                        %th 儿童中心
+                        %th 授课单位
+                        %th 价&nbsp格
+                    %tbody
+                      - @course_insts[:data].each do |ci|
+                        %tr{class: "book-record #{ ci[:available] ? "available" : "unavailable" }", "data-id" => ci[:id]}
+                          %td= link_to ci[:name], "/admin/courses/#{ci[:id]}"
+                          %td= ci[:date]
+                          %td= ci[:center]
+                          %td= ci[:school]
+                          %td= ci[:price_pay]
+                          
+                = render "admin/partials/auto_paginate", locals: { instance: @course_insts, url: "/admin/courses?keyword=#{@keyword}&", page: 'course_inst_page'}
+
+          #tab2.tab-pane
+            .open-course
+              - if @unshelf_course_insts[:data].length == 0
+                .undiscover
+                  %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
+                  %span.message 抱歉！暂无课程信息
+              - else
+                .table-box
+                  %table.table.table-bordered#course-table
+                    %thead
+                      %tr
+                        %th 课&nbsp程
+                        %th 上课时间
+                        %th 儿童中心
+                        %th 授课单位
+                        %th 价&nbsp格
+                    %tbody
+                      - @unshelf_course_insts[:data].each do |ci|
+                        %tr{class: "book-record #{ ci[:available] ? "available" : "unavailable" }", "data-id" => ci[:id]}
+                          %td= link_to ci[:name], "/admin/courses/#{ci[:id]}"
+                          %td= ci[:date]
+                          %td= ci[:center]
+                          %td= ci[:school]
+                          %td= ci[:price_pay]
+                          
+                = render "admin/partials/auto_paginate", locals: { instance: @unshelf_course_insts, url: "/admin/courses?keyword=#{@keyword}&profile=unshelf&", page: 'course_page'}
+          

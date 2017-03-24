@@ -12,9 +12,9 @@ $ ->
     code = event.which
     if code == 13
       search()
-      
-  $(".add-btn").click ->
-    location.href = "/admin/courses/new"
+
+  if window.profile == "unshelf"
+    $('.nav-tabs a[href="#tab2"]').tab('show')
 
   $(".set-available").click ->
     current_state = "unavailable"

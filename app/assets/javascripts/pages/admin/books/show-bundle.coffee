@@ -132,11 +132,9 @@ $ ->
             $("#available-status").text("在架上")
       )
 
-  if window.profile == "reviews"
-    $("#user-review").trigger("click")
 
-  if window.profile == "borrows"
-    $("#borrow-message").trigger("click")
+  if window.profile == "stocks"
+    $("#stocks-message").trigger("click")
 
   $(".details").click ->
     span = $(this).find("span")

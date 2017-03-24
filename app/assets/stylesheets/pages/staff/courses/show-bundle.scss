@@ -92,12 +92,12 @@ input, label, h5 {
 	margin-left: 7.5%;
 	margin-top: 0.5%;
 }
-.unedit-photo, .edit-photo, .edit-photo1 {
+.unedit-photo, .edit-photo, {
 	width: 200px;
 	height: 138px;
 	object-fit: contain;
 }
-#upload-photo, #upload-photo1 {
+#upload-photo {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -346,11 +346,17 @@ h2 {
 	position: absolute;
 	width: 100px;
 	height: 36px;
+	line-height: 36px;
+	padding: 0;
 	top: 14px;
 	right: 20px;
 	color: white;
 	background: #f7873d;
 	border: 0;
+	outline: none;
+}
+.open-btn:hover {
+	color: white;
 }
 
 //tab3
@@ -580,9 +586,10 @@ h2 {
 	.sign-data {
 		width: 100px;
 		height:45px;
-		line-height: 45px;
+		// line-height: 45px;
 		text-align: center;
-		padding: 0;
+    // padding: 0;
+		padding: 8px 0;
 	}
 	.check-in {
 		background: rgb(16, 192, 120);
@@ -720,15 +727,14 @@ h2 {
 	border: 1px solid #f7873d;
 	border-radius: 2px;
 }
+.course-again:hover {
+  cursor: pointer;
+}
 .delete-btn {
 	@extend .edit-btn;
 	right: 260px;
 }
 .notice-btn {
-	@extend .edit-btn;
-	display: none;
-}
-.again-btn {
 	@extend .edit-btn;
 	display: none;
 }
@@ -820,4 +826,10 @@ h2 {
 }
 .notice-bottom {
 	margin-bottom: 15px;
+}
+#name-span {
+  vertical-align: middle;
+}
+.course-num-box {
+	@extend .unedit-box;
 }

@@ -8,13 +8,13 @@
 .content-area
   .manage-content
     .tabbable
+      %a{:href => "/admin/books"}
+        %img.tab-back{src: asset_path("web/tab-back.png")}
       %ul.nav.nav-tabs
         %li.active
           %a#book-message{"data-toggle" => "tab", :href => "#tab1"} 绘本信息
         %li
-          %a#user-review{"data-toggle" => "tab", :href => "#tab2"} 用户评价
-        %li
-          %a#borrow-message{"data-toggle" => "tab", :href => "#tab3"} 借阅信息
+          %a#stocks-message{"data-toggle" => "tab", :href => "#tab2"} 馆藏情况
         
 
       .tab-content
@@ -58,31 +58,7 @@
             = image_tag(@book.back.nil? ? asset_path("web/coverempty.png") : @book.back.path, class: "back-img")
 
         #tab2.tab-pane
-          - if @reviews[:data].blank?
-            .undiscover
-              %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
-              %span.undiscover-message 抱歉！暂无查找信息
-          - else
-            .user-review-box
-              - @reviews[:data].each do |r|
-                .book-description
-                  .user-item.clearfix
-                    %img.book-img{:src => r.client.avatar.present? ? r.client.avatar.path : asset_path("web/boy.png")}
-                    %p.user-name
-                      %span= r.client.name_or_parent
-                      - r.score.times do
-                        %img.star-img{src: asset_path("managecenter/star.png")}
-                    %p.date= r.created_at.strftime("%Y-%m-%d %H:%M")
-                    %p.user-review-content= r.content
-                    - if r.is_private
-                      %span.review-status#unopen 未公开
-                    - else
-                      %span.review-status#open 已公开
-            = render "admin/partials/auto_paginate", locals: { instance: @reviews, url: "/admin/books/" + @book.id.to_s + "?profile=reviews&", page: 'review_page'}
-          
-
-        #tab3.tab-pane
-          - if @borrows[:data].blank?
+          - if @stocks[:data].blank?
             .undiscover
               %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
               %span.undiscover-message 抱歉！暂无查找信息
@@ -91,28 +67,14 @@
               %table.table.table-bordered#user-table1
                 %thead
                   %tr
-                    %th 借阅人
-                    %th 借阅时间
-                    %th 归还时间
-                    %th 操&nbsp作
+                    %th 儿童中心
+                    %th 数&nbsp量
+                    %th 在&nbsp架
                 %tbody
-                  - @borrows[:data].each do |b|
+                  - @stocks[:data].each do |s|
                     %tr
-                      %td= b.client.name_or_parent
-                      %td= Time.at(b.borrow_at).strftime("%Y-%m-%d %H:%M")
-                      %td{class: b.return_class}= b.return_status_str
-                      %td.td-data 
-                        - if b.review.present?
-                          %a.details{:href => "javascript:void(0);"} 
-                            绘本评价
-                            %span.triangle-down
-                        - else
-                          .unreturn-review　暂未评论
-                    - if b.review.present?
-                      %tr.status
-                        %td{:colspan => "4"}
-                          .comments-book
-                            %span 评价：
-                            %span.comments-content= b.review.content
-            = render "admin/partials/auto_paginate", locals: { instance: @borrows, url: "/admin/books/" + @book.id.to_s + "?profile=borrows&", page: 'borrow_page'}
+                      %td= s[:center]
+                      %td= s[:stock].to_s + "本"
+                      %td= s[:available_stock].to_s + "本"
+            = render "admin/partials/auto_paginate", locals: { instance: @stocks, url: "/admin/books/" + @book.id.to_s + "?profile=stocks&", page: 'stock_page'}
       

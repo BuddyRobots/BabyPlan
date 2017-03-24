@@ -56,16 +56,13 @@ class Admin::BooksController < Admin::ApplicationController
       redirect_to action: :index and return
     end
 
-    reviews = @book.reviews
-    if params[:review_type].present?
-      reviews = reviews.where(status: params[:review_type].to_i)
+    stocks = @book.name
+    stocks = Book.where(name: stocks).all
+    params[:page] = params[:stock_page]
+    @stocks = auto_paginate(stocks)
+    @stocks[:data] = @stocks[:data].map do |s|
+      s.book_info
     end
-    params[:page] = params[:review_page]
-    @reviews = auto_paginate(reviews)
-
-    borrows = @book.book_borrows
-    params[:page] = params[:borrow_page]
-    @borrows = auto_paginate(borrows)
   end
 
   def show_transfer

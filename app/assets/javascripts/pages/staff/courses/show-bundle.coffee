@@ -234,7 +234,6 @@ $ ->
     $(".calendar-wrapper").css("border", "1px solid #c8c8c8")
     $("#calendar").removeClass("show-calendar").addClass("edit-calendar")
     $("#upload-photo").toggle()
-    $("#course-num").val($("#num-span").text())
     $("#course-capacity").val(window.capacity)
     $("#course-charge").val(window.price)
     $("#public-charge").val(window.price_pay)
@@ -298,6 +297,7 @@ $ ->
     max_age = $("#max-age").val()
     school = $("#course-school").val()
     desc = editor.$txt.html()
+    code = $("#num-span").text()
 
     fc_events = $('#calendar').fullCalendar('clientEvents')
     date_in_calendar = []
@@ -350,7 +350,6 @@ $ ->
           $(".delete-btn").attr("disabled", false)
           $(".unshelve-btn").attr("disabled", false)
 
-          $("#num-span").text(code)
           $("#capacity-span").text(capacity + "人")
           $("#charge-span").text(price + "元")
           $("#public-span").text(price_pay + "元")
@@ -401,7 +400,6 @@ $ ->
     $(".edit-btn").hide()
     $(".unshelve-btn").hide()
     $(".delete-btn").hide()
-    $(".again-btn").hide()
     $(".notice-btn").hide()
 
   $("#register-message").click ->
@@ -409,7 +407,6 @@ $ ->
     $(".edit-btn").hide()
     $(".unshelve-btn").hide()
     $(".delete-btn").hide()
-    $(".again-btn").hide()
     $(".notice-btn").show()
 
   $("#course-sign").click ->
@@ -417,7 +414,6 @@ $ ->
     $(".edit-btn").hide()
     $(".unshelve-btn").hide()
     $(".delete-btn").hide()
-    $(".again-btn").hide()
     $(".notice-btn").hide()
 
   $("#statistics").click ->
@@ -425,7 +421,6 @@ $ ->
     $(".edit-btn").hide()
     $(".unshelve-btn").hide()
     $(".delete-btn").hide()
-    $(".again-btn").hide()
     $(".notice-btn").hide()
 
   $("#course-message").click ->
@@ -608,128 +603,8 @@ $ ->
 
 
   $(".course-again").click ->
-    $(this).hide()
-    $(".unshelve-btn").attr("disabled", true)
-    $(".delete-btn").attr("disabled", true)
-    $(".unedit-box").toggle()
-    $(".edit-box").toggle()
-    $(".name-box").toggle()
-    $("#name-span").toggle()
-    $("#upload-photo1").toggle()
-    $(".class-calendar").toggle()
-    $(".calendar-operation-wrapper").toggle()
-    $(".calendar-wrapper").css("border", "1px solid #c8c8c8")
-    $("#calendar").removeClass("show-calendar").addClass("edit-calendar")
-    $("#course-name").val($("#name-span").text())
-    $("#course-num").val($("#num-span").text())
-    $("#course-capacity").val(window.capacity)
-    $("#course-charge").val(window.price)
-    $("#public-charge").val(window.price_pay)
-    $("#course-times").val(window.length)
-    $("#course-speaker").val($("#speaker-span").text())
-    $("#course-address").val($("#address-span").text())
-    $("#min-age").val(window.min_age)
-    $("#max-age").val(window.max_age)
-    $("#course-school").val($("#school-span").text())
-
-
-    $(".edit-btn").toggle()
-    $(".again-btn").toggle()
-    $("#calendar").fullCalendar('removeEvents')
+    location.href = "/staff/courses/new?cid=" + window.cid
     
-    $(".wangedit-area").toggle()
-    $(".introduce-details").toggle()
-    desc = $(".introduce-details").text()
-    editor.$txt.html(desc)
-    is_edit = true
-
-  $("#upload-photo1").click ->
-    if is_edit
-      $("#photo_file1").trigger("click")
-
-  $("#photo_file1").change (event) ->
-    $("#old-img").attr("src", "")
-    if event.target.files[0] == undefined
-      return
-    has_photo = true
-    photo = $(".edit-photo1")[0]
-    photo.src = URL.createObjectURL(event.target.files[0])
-
-  $(".again-btn").click ->
-    name = $("#course-name").val()
-    code = $("#course-num").val()
-    capacity = parseInt($("#course-capacity").val())
-    price = $("#course-charge").val()
-    price_pay = $("#public-charge").val()
-    length = parseInt($("#course-times").val())
-    date = $("#course-date").val()
-    speaker = $("#course-speaker").val()
-    address = $("#course-address").val()
-    min_age = $("#min-age").val()
-    max_age = $("#max-age").val()
-    school = $("#course-school").val()
-    available = true
-    desc = editor.$txt.html()
-
-    fc_events = $('#calendar').fullCalendar('clientEvents')
-    date_in_calendar = []
-
-    $.each(
-      fc_events,
-      (index, fc_event) ->
-        date_in_calendar.push(fc_event.start._i + "," + fc_event.end._i)
-    )
-
-    first_day = date_in_calendar[0]
-    start_time = first_day.split(',')[0]
-    start_course = Date.parse(start_time)
-
-    
-    ret = check_course_input(code, capacity, price, price_pay, length, date, speaker, address, date_in_calendar, min_age, max_age)
-    if ret == false
-      return
-
-    $.postJSON(
-      '/staff/courses/',
-      {
-        course: {
-          # course_id: window.course_id
-          available: available
-          name: name
-          code: code
-          capacity: capacity
-          price: price
-          price_pay: price_pay
-          length: length
-          date: date
-          speaker: speaker
-          address: address
-          date_in_calendar: date_in_calendar
-          min_age: min_age
-          max_age: max_age
-          school: school
-          start_course: start_course
-          desc: desc
-        }
-      },
-      (data) ->
-        console.log data
-        if data.success
-          is_edit = false
-          if has_photo ==false
-            location.href = "/staff/courses"
-          else
-            $("#upload-photo-form1")[0].action = "/staff/courses/" + data.course_inst_id + "/upload_photo"
-            $("#upload-photo-form1").submit()
-        else
-          if data.code == COURSE_INST_EXIST
-            $.page_notification("课程编号已存在")
-          else if data.code == COURSE_DATE_UNMATCH
-            $.page_notification("课次与上课时间不匹配")
-          else
-            $.page_notification("服务器出错")
-    )
-  
 
   $(".delete-btn").click ->
     $.postJSON(

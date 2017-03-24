@@ -13,6 +13,8 @@ class Center
   field :open_time, type: String
   field :price_upper, type: Integer
   field :classtime_upper, type: Integer
+  field :code, type: Integer
+  field :year, type: Integer
 
   has_one :photo, class_name: "Material", inverse_of: :center_photo
   has_many :course_insts
@@ -47,7 +49,9 @@ class Center
       abbr: center_info[:abbr],
       open_time: center_info[:open_time],
       price_upper: center_info[:price_upper].to_i,
-      classtime_upper: center_info[:classtime_upper].to_i
+      classtime_upper: center_info[:classtime_upper].to_i,
+      code: center_info[:code],
+      year: center_info[:year]
     )
     { center_id: center.id.to_s }
   end
@@ -375,9 +379,16 @@ class Center
     end
   end
 
-  def course_num
-    num = (self.course_insts.count + 1).to_s
-    num = num.rjust(4, "0")
-    self.abbr + Time.now.year.to_s + num
+  def get_code
+    cur_year = Time.now.year
+    if cur_year != self.year
+      self.update_attributes({
+        year: cur_year,
+        code: 1
+      })
+    end
+    ret_code = self.abbr + year.to_s + self.code.to_s.rjust(4, "0")
+    self.update_attribute(:code, self.code + 1)
+    return ret_code
   end
 end
