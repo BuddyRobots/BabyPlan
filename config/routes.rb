@@ -78,6 +78,8 @@ Rails.application.routes.draw do
     end
     resources :transfers do
     end
+    resources :schools do
+    end
   end
 
   namespace :staff do

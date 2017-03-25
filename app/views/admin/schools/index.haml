@@ -1,0 +1,106 @@
+- content_for :head do
+  = javascript_include_tag "pages/admin/schools/index-bundle"
+  = stylesheet_link_tag "pages/admin/schools/index-bundle", :media => "all"
+  :javascript
+    window.profile = "#{@keyword}"
+
+
+.content-area
+  .content-box
+    .manage-box
+      .user-search-box
+        .input-group
+          %input.form-control#search-input{:type => "text", :placeholder => "输入单位名称", value: "#{@keyword}"}
+          %span.input-group-btn
+            %button.btn.btn-default#search-btn{:type => "button"}
+      .btn.add-btn{:type => "button", "data-target" => "#unityModal", "data-toggle" => "modal"} 
+        %img.add{src: asset_path("managecenter/add.png")}
+        添加单位
+      
+
+    .manage-content
+      .tabbable
+        %ul.nav.nav-tabs
+          %li.active
+            %a{"data-toggle" => "tab", :href => "#tab1"} 授课单位
+          %li
+            %a#open_course{"data-toggle" => "tab", :href => "#tab2"} 已关闭单位
+
+        .tab-content
+          #tab1.tab-pane.active
+            .local-course
+              - if @schools[:data].length == 0
+                .undiscover
+                  %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
+                  %span.message 抱歉！暂无单位信息
+              - else
+                .table-box
+                  %table.table.table-bordered#local-course-table
+                    %thead
+                      %tr
+                        %th 授课单位名称
+                        %th 负责人
+                        %th 联系方式
+                        %th 操&nbsp作
+                    %tbody
+                      - @schools[:data].each do |ci|
+                        %tr{"data-id" => ci[:id]}
+                          %td= link_to ci[:name], "/admin/schools/#{ci[:id]}"
+                          %td= ci[:manager]
+                          %td= ci[:mobile]
+                          %td
+                            %a.set-available{:href => "javascript:void(0);"} 编辑
+                            
+                = render "admin/partials/auto_paginate", locals: { instance: @schools, url: "/admin/schools?keyword=#{@keyword}&", page: 'open_page'}
+
+          #tab2.tab-pane
+            .open-course
+              - if @close_schools[:data].length == 0
+                .undiscover
+                  %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
+                  %span.message 抱歉！暂无课程信息
+              - else
+                .table-box
+                  %table.table.table-bordered#course-table
+                    %thead
+                      %tr
+                        %th 授课单位名称
+                        %th 负责人
+                        %th 联系方式
+                        %th 操&nbsp作
+                    %tbody
+                      - @close_schools[:data].each do |ci|
+                        %tr{"data-id" => ci[:id]}
+                          %td= link_to ci[:name], "/admin/schools/#{ci[:id]}"
+                          %td= ci[:manager]
+                          %td= ci[:mobile]
+                          %td
+                            %a.set-available{:href => "javascript:void(0);"} 编辑
+                = render "admin/partials/auto_paginate", locals: { instance: @close_schools, url: "/admin/schools?keyword=#{@keyword}&profile=close&", page: 'close_page'}
+
+
+
+#unityModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
+  .modal-dialog
+    .modal-content
+      .modalheader
+        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: asset_path("managecenter/close.png")}
+      .modal-body
+        .unity-div
+          .input-box
+            %p.unity-name 授课单位名称
+            .outer-div
+              %input.unity-input#unity-name{type: "text"}
+          .unity-notice-div
+            %span.unity-space
+            %span.unity-notice
+
+          .input-box
+            %p.unity-name 负责人
+            .outer-div
+              %input.unity-input-num#unity-manager{type: "text"}
+          .input-box.mt
+            %p.unity-name 联系方式
+            .outer-div
+              %input.unity-input-mobile#unity-mobile{type: "text"}
+          .btn.unity-confirm-btn.button-disabled#confirm{:type => "button"} 确定

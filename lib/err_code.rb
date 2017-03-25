@@ -39,6 +39,7 @@ module ErrCode
 
   REFUND_TIME_FAIL = -36
   BOOK_IN_CENTER = -37
+  UNITY_IS_EXIST = -38
 
   def self.ret_false(code)
     msg = self.message(code)
@@ -123,6 +124,8 @@ module ErrCode
       "该课程距开课只有一天时间，已经不能退款！"
     when BOOK_IN_CENTER
       "本中心藏有该书"
+    when UNITY_IS_EXIST
+      "该单位已存在"
     else
       nil
     end

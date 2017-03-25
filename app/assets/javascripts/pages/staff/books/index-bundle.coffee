@@ -140,6 +140,7 @@ $ ->
 
   $(".isbn-input").keyup ->
     check_input()
+    $(".isbn-notice").css("visibility", "hidden")
   $(".isbn-input-num").keyup ->
     check_input()
 

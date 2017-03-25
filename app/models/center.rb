@@ -32,6 +32,7 @@ class Center
   has_many :bills
 
   has_and_belongs_to_many :clients, class_name: "User", inverse_of: :client_centers
+  has_and_belongs_to_many :schools
 
   scope :is_available, ->{ where(available: true) }
 
