@@ -58,7 +58,7 @@
       .course-introduce
         %span.introduce 课程介绍:
         %span.wangedit-area
-          #edit-area= @course_inst.try(:desc)
+          #edit-area= @course_inst.try(:desc).to_s.html_safe
       
       .calendar-wrapper.clearfix
         .calendar-operation-wrapper

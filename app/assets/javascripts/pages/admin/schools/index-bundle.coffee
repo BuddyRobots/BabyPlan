@@ -49,12 +49,13 @@ $ ->
     check_input()
 
 
-  $("#confirm").click ->
+  $("#confirm-unity").click ->
     name = $("#unity-name").val()
     manager = $("#unity-manager").val()
     mobile = $("#unity-mobile").val()
     available = true
-    if !$.isNumeric(mobile)
+    mobile_retval = $.regex.isMobile(mobile)
+    if mobile_retval == false
       $.page_notification("请输入正确的联系方式", 1000)
       return false
     $.postJSON(
@@ -78,6 +79,7 @@ $ ->
     )
 
 
+    
   # $(".set-available").click ->
   #   current_state = "unavailable"
   #   if $(this).hasClass("link-available")

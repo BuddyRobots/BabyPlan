@@ -9,6 +9,7 @@ class Admin::SchoolsController < Admin::ApplicationController
     @keyword = params[:keyword]
     params[:page] = params[:open_page]
     schools = @keyword.present? ? School.where(name: /#{Regexp.escape(@keyword)}/).is_available : School.is_available
+    schools = schools.desc(:created_at)
     @schools = auto_paginate(schools)
     @schools[:data] = @schools[:data].map do |s|
       s.school_info
@@ -24,11 +25,15 @@ class Admin::SchoolsController < Admin::ApplicationController
   end
 
   def show
-    
+    @school = School.where(id: params[:id]).first
+    course_insts = @school.course_insts.all
+    @course_insts = auto_paginate(course_insts)
+    @course_insts[:data] = @course_insts[:data].map do |c|
+      c.course_inst_info
+    end
   end
   def create
   	retval = School.create_school(params[:school])
-    byebug
     render json: retval_wrapper(retval) and return
   end
 end

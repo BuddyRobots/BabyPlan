@@ -1,3 +1,40 @@
 - content_for :head do
-  = javascript_include_tag "pages/admin/books/index-bundle"
-  = stylesheet_link_tag "pages/admin/books/index-bundle", :media => "all"
+  = javascript_include_tag "pages/admin/schools/show-bundle"
+  = stylesheet_link_tag "pages/admin/schools/show-bundle", :media => "all"
+
+
+.content-area
+  .content-box
+    .manage-box.clearfix
+      %a#back{:href => "/admin/schools"}
+        %img{src: asset_path("web/back.png")}
+      %p.school-name= @school.name
+      .btn.status-btn.close-btn{:type => "button"}
+        %img.end{src: asset_path("managecenter/unshelve.png")}
+        关闭
+      
+    .manage-content
+      - if @course_insts[:data].blank?
+        .undiscover
+          %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
+          %span.undiscover-message 抱歉！没有课程信息
+      - else
+        .table-box
+          %table.table.table-bordered#user-table
+            %thead
+              %tr
+                %th 课程名称
+                %th 主讲人
+                %th 儿童中心
+                %th 报名人数
+                %th 总收入
+            %tbody
+              - @course_insts[:data].each do |c|
+                %tr
+                  %td= c[:name]
+                  %td= c[:speaker]
+                  %td= c[:center]
+                  %td= c
+                  %td= c
+                   
+        = render "admin/partials/auto_paginate", locals: { instance: @course_insts, url: "/admin/schools/" + @schools.id.to_s, page: 'page'} 

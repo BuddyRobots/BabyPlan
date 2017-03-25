@@ -10,6 +10,7 @@ class School
   has_and_belongs_to_many :course_insts
   has_and_belongs_to_many :centers
 
+
   scope :is_available, ->{where(available: true)}
 
   def self.create_school(school_info)
@@ -33,25 +34,5 @@ class School
       mobile: self.mobile,
       available: self.available
     }
-  end
-
-  def self.public_and_mine(client)
-    r1 = self.where(status: PUBLIC)
-    r2 = self.where(client_id: client.id)
-    r1.concat(r2).uniq
-  end
-
-  def is_private
-    return self.status == PRIVATE
-  end
-
-  def show
-    self.update_attributes({status: PUBLIC})
-    nil
-  end
-
-  def hide
-    self.update_attributes({status: PRIVATE})
-    nil
   end
 end

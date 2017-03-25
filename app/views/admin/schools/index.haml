@@ -2,7 +2,8 @@
   = javascript_include_tag "pages/admin/schools/index-bundle"
   = stylesheet_link_tag "pages/admin/schools/index-bundle", :media => "all"
   :javascript
-    window.profile = "#{@keyword}"
+    window.keyword = "#{@keyword}"
+    window.profile = "#{@profile}"
 
 
 .content-area
@@ -49,7 +50,7 @@
                           %td= ci[:manager]
                           %td= ci[:mobile]
                           %td
-                            %a.set-available{:href => "javascript:void(0);"} 编辑
+                            %a.edit{:href => "javascript:void(0);"} 编辑
                             
                 = render "admin/partials/auto_paginate", locals: { instance: @schools, url: "/admin/schools?keyword=#{@keyword}&", page: 'open_page'}
 
@@ -75,7 +76,7 @@
                           %td= ci[:manager]
                           %td= ci[:mobile]
                           %td
-                            %a.set-available{:href => "javascript:void(0);"} 编辑
+                            %a.edit{:href => "javascript:void(0);"} 编辑
                 = render "admin/partials/auto_paginate", locals: { instance: @close_schools, url: "/admin/schools?keyword=#{@keyword}&profile=close&", page: 'close_page'}
 
 
@@ -103,4 +104,4 @@
             %p.unity-name 联系方式
             .outer-div
               %input.unity-input-mobile#unity-mobile{type: "text"}
-          .btn.unity-confirm-btn.button-disabled#confirm{:type => "button"} 确定
+          .btn.unity-confirm-btn.button-disabled#confirm-unity{:type => "button"} 确定
