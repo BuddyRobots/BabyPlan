@@ -72,11 +72,11 @@
                     %tbody
                       - @close_schools[:data].each do |ci|
                         %tr{data: {id: ci[:id], name: ci[:name], manager: ci[:manager], mobile: ci[:mobile]}}
-                          %td.name= link_to ci[:name], "/admin/schools/#{ci[:id]}"
+                          %td.name= ci[:name]
                           %td= ci[:manager]
                           %td= ci[:mobile]
                           %td
-                            %a.edit{:href => "javascript:void(0);"} 编辑
+                            %a#open-school{:href => "javascript:void(0);"} 开放
                 = render "admin/partials/auto_paginate", locals: { instance: @close_schools, url: "/admin/schools?keyword=#{@keyword}&profile=close&", page: 'close_page'}
 
 

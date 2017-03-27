@@ -79,6 +79,9 @@ Rails.application.routes.draw do
     resources :transfers do
     end
     resources :schools do
+      member do
+        post :set_available
+      end
     end
   end
 

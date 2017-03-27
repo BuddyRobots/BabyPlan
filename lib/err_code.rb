@@ -127,6 +127,8 @@ module ErrCode
       "本中心藏有该书"
     when UNITY_IS_EXIST
       "该单位已存在"
+    when UNITY_NOT_EXIST
+      "该单位不存在"
     else
       nil
     end

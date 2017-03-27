@@ -50,16 +50,12 @@ $ ->
 
   $(".add-btn").click ->
     $("#unityModal").modal("show")
-    $('#myModal').on('show.bs.modal', ->
-      {
-        $("#unity-confirm").attr("data-action", "new")
-    })
-    console.log($("#unity-confirm").attr("data-action"))
-    
+    $("#confirm-unity").attr("data-btn", "new")
+      
 
   $(".edit").click ->
     $("#unityModal").modal("show")
-    $("#unity-confirm").attr("data-action", "edit")
+    $("#confirm-unity").attr("data-btn", "edit")
     name = $(this).closest("tr").attr("data-name")
     manager = $(this).closest("tr").attr("data-manager")
     mobile = $(this).closest("tr").attr("data-mobile")
@@ -71,8 +67,8 @@ $ ->
     $("#confirm-unity").removeClass("button-disabled")
 
   $("#confirm-unity").click ->
-    type = $(this).attr("data-action")
-    # console.log(type)
+    type = $(this).attr("data-btn")
+    console.log(type)
     name = $("#unity-name").val()
     manager = $("#unity-manager").val()
     mobile = $("#unity-mobile").val()
@@ -101,8 +97,7 @@ $ ->
             if data.code == UNITY_IS_EXIST
               $(".unity-notice").text("该单位已存在").css({visibility: "visible", color: "#d70c19"})
       )
-      return false
-    if type == "eidt"
+    if type == "edit"
       $.putJSON(
         '/admin/schools/' + window.cid,
         {
@@ -122,42 +117,20 @@ $ ->
             if data.code = UNITY_NOT_EXIST
               $(".unity-notice").text("该单位不存在").css({visibility: "visible", color: "#d70c19"})
       )
-      return false
-        
 
-
-    
-  # $(".set-available").click ->
-  #   current_state = "unavailable"
-  #   if $(this).hasClass("link-available")
-  #     current_state = "available"
-  #   cid = $(this).closest("tr").attr("data-id")
-  #   link = $(this)
-  #   console.log current_state
-  #   $.postJSON(
-  #     '/staff/courses/' + cid + '/set_available',
-  #     {
-  #       available: current_state == "unavailable"
-  #     },
-  #     (data) ->
-  #       console.log data
-  #       if data.success
-  #         $.page_notification("操作完成")
-  #         location.href = "/staff/courses"
-  #         # if current_state == "available"
-  #         #   link.removeClass("link-available")
-  #         #   link.addClass("link-unavailable")
-  #         #   link.text("上架")
-  #         #   link.closest("tr").removeClass("available")
-  #         #   link.closest("tr").addClass("unavailable")
-  #         # else
-  #         #   link.addClass("link-available")
-  #         #   link.removeClass("link-unavailable")
-  #         #   link.text("下架")
-  #         #   link.closest("tr").addClass("available")
-  #         #   link.closest("tr").removeClass("unavailable")
-  #     )
-  #   return false
+  $("#open-school").click ->
+    sid = $(this).closest("tr").attr("data-id")
+    $.postJSON(
+      '/admin/schools/' + sid + "/set_available",
+      {
+        available: true
+      },
+      (data) ->
+        if data.success
+          $.page_notification("操作完成", 1000)
+          location.href = "/admin/schools"
+    )
+      
 
 
  

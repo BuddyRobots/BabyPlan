@@ -1,6 +1,8 @@
 - content_for :head do
   = javascript_include_tag "pages/admin/schools/show-bundle"
   = stylesheet_link_tag "pages/admin/schools/show-bundle", :media => "all"
+  :javascript
+    window.sid = "#{@school.id.to_s}"
 
 
 .content-area
@@ -9,9 +11,10 @@
       %a#back{:href => "/admin/schools"}
         %img{src: asset_path("web/back.png")}
       %p.school-name= @school.name
-      .btn.status-btn.close-btn{:type => "button"}
-        %img.end{src: asset_path("managecenter/unshelve.png")}
-        关闭
+      - if @school.available == true
+        .btn.status-btn.close-school-btn{:type => "button"}
+          %img.end{src: asset_path("managecenter/unshelve.png")}
+          关闭
       
     .manage-content
       - if @course_insts[:data].blank?
@@ -38,3 +41,15 @@
                   %td= c[:amount]
                    
         = render "admin/partials/auto_paginate", locals: { instance: @course_insts, url: "/admin/schools/" + @school.id.to_s + "?", page: 'page'} 
+
+#schoolModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
+  .modal-dialog
+    .modal-content
+      .modalheader
+        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: asset_path("managecenter/close.png")}
+      .modal-body
+        %p.message 关闭该授课单位将清空该单位开设的所有课程！
+        %p.message 是否确定要关闭该授课单位?
+        .btn-div
+          %button.btn#cancel{type: "button"} 取&nbsp消
+          %button.btn#confirm-close{type: "button"} 确&nbsp定

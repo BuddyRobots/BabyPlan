@@ -38,8 +38,14 @@ class Admin::SchoolsController < Admin::ApplicationController
   end
 
   def update
-    course_inst = CourseInst.where(id: params[:id]).first
-    retval = course_inst.update_info(params[:school])
+    @school = School.where(id: params[:id]).first
+    retval = @school.update_info(params[:school])
+    render json: retval_wrapper(retval) and return
+  end
+
+  def set_available
+    @school = School.where(id: params[:id]).first
+    retval = @school.set_available(params[:available])
     render json: retval_wrapper(retval) and return
   end
 end

@@ -36,7 +36,7 @@ class School
 
   def self.schools_for_select
     hash = { }
-    School.all.each do |c|
+    School.is_available.each do |c|
       hash[c.name] = c.id.to_s
     end
     hash 
@@ -54,6 +54,16 @@ class School
         mobile: school_info[:mobile]
       }
     )
+    nil
+  end
+
+  def set_available(available)
+    self.update_attribute(:available, available == true)
+    if available != true
+      self.course_insts.each do |c|
+        self.course_insts.delete(c)
+      end
+    end
     nil
   end
 end
