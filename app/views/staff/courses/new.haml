@@ -53,7 +53,7 @@
         %label.input-caption.margin-l 最大适龄:
         %input.input-area.form-control#max-age{:type => "text", value: @course_inst.try(:max_age)}
         %label.input-caption.margin-l 开课单位:
-        %input.input-area.form-control#school{:type => "text", value: @course_inst.try(:school)}
+        = select_tag "school_id", options_for_select(School.schools_for_select), class: "form-control input-area", :include_blank => "请选择开课单位"
 
       .course-introduce
         %span.introduce 课程介绍:

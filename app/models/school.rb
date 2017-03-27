@@ -7,9 +7,7 @@ class School
   field :mobile, type: Integer
   field :available, type: Boolean
 
-  has_and_belongs_to_many :course_insts
-  has_and_belongs_to_many :centers
-
+  has_many :course_insts
 
   scope :is_available, ->{where(available: true)}
 
@@ -34,5 +32,28 @@ class School
       mobile: self.mobile,
       available: self.available
     }
+  end
+
+  def self.schools_for_select
+    hash = { }
+    School.all.each do |c|
+      hash[c.name] = c.id.to_s
+    end
+    hash 
+  end
+
+  def update_info(school_info)
+    school = School.where(name: school_info[:name]).first
+    if !school.present?
+      return ErrCode::UNITY_NOT_EXIST
+    end
+    self.update_attributes(
+      {
+        name: school_info[:name],
+        manager: school_info[:manager],
+        mobile: school_info[:mobile]
+      }
+    )
+    nil
   end
 end

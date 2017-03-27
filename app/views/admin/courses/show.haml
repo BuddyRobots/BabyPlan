@@ -86,7 +86,7 @@
             %span.edit-box
               %input.input-area.form-control#max-age{:type => "text"}
             %label.input-caption.margin-l 授课单位:
-            %span.unedit-box#school-span= @course_inst.school
+            %span.unedit-box#school-span= @course_inst.school.try(:name)
             %span.edit-box
               %input.input-area.form-control#course-school{:type => "text"}
           .course-introduce.clearfix

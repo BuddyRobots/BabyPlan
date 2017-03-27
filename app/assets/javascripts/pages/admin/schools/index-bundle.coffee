@@ -48,8 +48,31 @@ $ ->
   $("#unity-mobile").keyup ->
     check_input()
 
+  $(".add-btn").click ->
+    $("#unityModal").modal("show")
+    $('#myModal').on('show.bs.modal', ->
+      {
+        $("#unity-confirm").attr("data-action", "new")
+    })
+    console.log($("#unity-confirm").attr("data-action"))
+    
+
+  $(".edit").click ->
+    $("#unityModal").modal("show")
+    $("#unity-confirm").attr("data-action", "edit")
+    name = $(this).closest("tr").attr("data-name")
+    manager = $(this).closest("tr").attr("data-manager")
+    mobile = $(this).closest("tr").attr("data-mobile")
+    window.cid = $(this).closest("tr").attr("data-id")
+    $("#unity-name").val(name)
+    $("#unity-manager").val(manager)
+    $("#unity-mobile").val(mobile)
+    $("#confirm-unity").addClass("button-enabled")
+    $("#confirm-unity").removeClass("button-disabled")
 
   $("#confirm-unity").click ->
+    type = $(this).attr("data-action")
+    # console.log(type)
     name = $("#unity-name").val()
     manager = $("#unity-manager").val()
     mobile = $("#unity-mobile").val()
@@ -58,25 +81,49 @@ $ ->
     if mobile_retval == false
       $.page_notification("请输入正确的联系方式", 1000)
       return false
-    $.postJSON(
-      '/admin/schools',
-      {
-        school: {
-          name: name
-          manager: manager
-          mobile: mobile
-          available: available
-        }
-      },
-      (data) ->
-        if data.success
-          $("#unityModal").modal("hide")
-          $.page_notification("操作完成", 1000)
-          location.href = "/admin/schools"
-        else
-          if data.code == UNITY_IS_EXIST
-            $(".unity-notice").text("该单位已存在").css({visibility: "visible", color: "#d70c19"})
-    )
+    if type == "new"
+      $.postJSON(
+        '/admin/schools',
+        {
+          school: {
+            name: name
+            manager: manager
+            mobile: mobile
+            available: available
+          }
+        },
+        (data) ->
+          if data.success
+            $("#unityModal").modal("hide")
+            $.page_notification("操作完成", 1000)
+            location.href = "/admin/schools"
+          else
+            if data.code == UNITY_IS_EXIST
+              $(".unity-notice").text("该单位已存在").css({visibility: "visible", color: "#d70c19"})
+      )
+      return false
+    if type == "eidt"
+      $.putJSON(
+        '/admin/schools/' + window.cid,
+        {
+          school: {
+            name: name
+            manager: manager
+            mobile: mobile
+            available: available
+          }
+        },
+        (data) ->
+          if data.success
+            $("#unityModal").modal("hide")
+            $.page_notification("操作完成", 1000)
+            location.href = "/admin/schools"
+          else
+            if data.code = UNITY_NOT_EXIST
+              $(".unity-notice").text("该单位不存在").css({visibility: "visible", color: "#d70c19"})
+      )
+      return false
+        
 
 
     

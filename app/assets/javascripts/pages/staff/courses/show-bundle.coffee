@@ -243,8 +243,6 @@ $ ->
     $("#course-address").val($("#address-span").text())
     $("#min-age").val(window.min_age)
     $("#max-age").val(window.max_age)
-    $("#course-school").val($("#school-span").text())
-
 
     $(".edit-btn").toggle()
     $(".finish-btn").toggle()
@@ -296,9 +294,10 @@ $ ->
     min_age = $("#min-age").val()
     max_age = $("#max-age").val()
     school = $("#course-school").val()
+    school_name = $("#course-school option:selected").text()
     desc = editor.$txt.html()
     code = $("#num-span").text()
-
+    
     fc_events = $('#calendar').fullCalendar('clientEvents')
     date_in_calendar = []
 
@@ -361,13 +360,12 @@ $ ->
           $("#date-span").text(date)
           $("#speaker-span").text(speaker)
           $("#address-span").text(address)
-          $("#school-span").text(school)
+          $("#school-span").text(school_name)
 
           $(".introduce-details").text("")
           $(".introduce-details").append(desc)
           window.min_age = min_age
           window.max_age = max_age
-          $("#school-span").text(school)
           if min_age == ""
             $("#min-age-span").text("无")
           else

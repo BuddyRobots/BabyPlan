@@ -14,7 +14,7 @@
           %input.form-control#search-input{:type => "text", :placeholder => "输入单位名称", value: "#{@keyword}"}
           %span.input-group-btn
             %button.btn.btn-default#search-btn{:type => "button"}
-      .btn.add-btn{:type => "button", "data-target" => "#unityModal", "data-toggle" => "modal"} 
+      .btn.add-btn{:type => "button"}
         %img.add{src: asset_path("managecenter/add.png")}
         添加单位
       
@@ -45,8 +45,8 @@
                         %th 操&nbsp作
                     %tbody
                       - @schools[:data].each do |ci|
-                        %tr{"data-id" => ci[:id]}
-                          %td= link_to ci[:name], "/admin/schools/#{ci[:id]}"
+                        %tr{data: {id: ci[:id], name: ci[:name], manager: ci[:manager], mobile: ci[:mobile]}}
+                          %td.name= link_to ci[:name], "/admin/schools/#{ci[:id]}"
                           %td= ci[:manager]
                           %td= ci[:mobile]
                           %td
@@ -71,8 +71,8 @@
                         %th 操&nbsp作
                     %tbody
                       - @close_schools[:data].each do |ci|
-                        %tr{"data-id" => ci[:id]}
-                          %td= link_to ci[:name], "/admin/schools/#{ci[:id]}"
+                        %tr{data: {id: ci[:id], name: ci[:name], manager: ci[:manager], mobile: ci[:mobile]}}
+                          %td.name= link_to ci[:name], "/admin/schools/#{ci[:id]}"
                           %td= ci[:manager]
                           %td= ci[:mobile]
                           %td
@@ -105,3 +105,7 @@
             .outer-div
               %input.unity-input-mobile#unity-mobile{type: "text"}
           .btn.unity-confirm-btn.button-disabled#confirm-unity{:type => "button"} 确定
+
+
+  
+

@@ -34,7 +34,7 @@
                   %td= c[:name]
                   %td= c[:speaker]
                   %td= c[:center]
-                  %td= c
-                  %td= c
+                  %td= c[:course_participates]
+                  %td= c[:amount]
                    
-        = render "admin/partials/auto_paginate", locals: { instance: @course_insts, url: "/admin/schools/" + @schools.id.to_s, page: 'page'} 
+        = render "admin/partials/auto_paginate", locals: { instance: @course_insts, url: "/admin/schools/" + @school.id.to_s + "?", page: 'page'} 

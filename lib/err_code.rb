@@ -40,6 +40,7 @@ module ErrCode
   REFUND_TIME_FAIL = -36
   BOOK_IN_CENTER = -37
   UNITY_IS_EXIST = -38
+  UNITY_NOT_EXIST = -39
 
   def self.ret_false(code)
     msg = self.message(code)

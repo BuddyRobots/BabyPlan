@@ -16,7 +16,7 @@ class CourseInst
   field :date_in_calendar, type: Array, default: [ ]
   field :min_age, type: Integer
   field :max_age, type: Integer
-  field :school, type: String
+  # field :school, type: String
   field :start_course, type: Integer
   field :desc, type: String
   field :delete, type: Boolean, default: false
@@ -33,7 +33,7 @@ class CourseInst
   has_many :favorites
   has_many :bills
 
-  has_and_belongs_to_many :schools
+  belongs_to :school
   scope :is_available, ->{ where(available: true) }
   default_scope { where(:delete.ne => true) }
 
@@ -80,12 +80,14 @@ class CourseInst
       name: self.name || self.course.name,
       available: self.available,
       speaker: self.speaker,
-      school: self.school,
+      school: self.school.try(:name),
       center: self.center.name,
       price: self.price,
       price_pay: self.price_pay,
       address: self.address,
-      date: self.date
+      date: self.date,
+      course_participates: self.course_participates.size,
+      amount: self.bills.sum("amount")
     }
   end
 

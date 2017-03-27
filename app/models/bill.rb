@@ -193,4 +193,5 @@ class Bill
       offline_amount: offline_amount
     }
   end
+
 end
