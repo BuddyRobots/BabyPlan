@@ -110,10 +110,10 @@
             %span.edit-box
               %input.input-area.form-control#max-age{:type => "text"}
             %label.input-caption.margin-l 授课单位:
-            %span.unedit-box#school-span= @course_inst.school.name
+            %span.unedit-box#school-span= @course_inst.school.try(:name)
             %span.edit-box
               / %input.input-area.form-control#course-school{:type => "text"}
-              = select_tag "course-school", options_for_select(School.schools_for_select, @course_inst.school.id), class: "form-control input-area", :include_blank => "请选择开课单位"
+              = select_tag "course-school", options_for_select(School.schools_for_select, @course_inst.school.try(:id)), class: "form-control input-area", :include_blank => "请选择开课单位"
           .course-introduce.clearfix
             %span.introduce 课程介绍:
             %div.introduce-details

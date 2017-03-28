@@ -77,11 +77,16 @@
 	color: white;
 }
 .calendar-div {
-	padding: 40px;
+	padding: 20px 40px;
 }
 
 #calendar {
 	width: 100%;
 	font-size: 14px;
 }
-
+.eventstyle {
+	font-size: 12px;
+	text-align: center;
+	padding: 0;
+	line-height: 14px;
+}

@@ -45,7 +45,7 @@ class Admin::SchoolsController < Admin::ApplicationController
 
   def set_available
     @school = School.where(id: params[:id]).first
-    retval = @school.set_available(params[:available])
-    render json: retval_wrapper(retval) and return
+    retval = @school.update_attribute(:available, params[:available])
+    render json: retval_wrapper(nil) and return
   end
 end

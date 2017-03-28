@@ -55,7 +55,7 @@ $ ->
     location.href = "/staff/courses/new"
 
   $(".view-btn").click ->
-    location.href = "/staff/courses/timetable"
+    location.href = "/staff/courses/coursetable"
 
 
   # $("#confirm-btn").click ->

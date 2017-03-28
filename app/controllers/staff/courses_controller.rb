@@ -192,8 +192,18 @@ class Staff::CoursesController < Staff::ApplicationController
     render json: retval_wrapper(retval)
   end
 
-  def timetable
-    
+  def coursetable
+  end
+
+  def calendar_data
+    @course_insts = current_center.course_insts.is_available.all
+    retval = @course_insts.map do |c|
+      {
+        name: ActionController::Base.helpers.truncate(c.name, length: 10),
+        date_in_calendar: c.date_in_calendar
+      }
+    end
+    render json: retval_wrapper(course: retval) and return
   end
 
 end

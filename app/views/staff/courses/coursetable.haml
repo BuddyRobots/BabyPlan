@@ -1,6 +1,8 @@
 - content_for :head do
-  = javascript_include_tag "pages/staff/courses/timetable-bundle"
-  = stylesheet_link_tag "pages/staff/courses/timetable-bundle", :media => "all"
+  = javascript_include_tag "pages/staff/courses/coursetable-bundle"
+  = stylesheet_link_tag "pages/staff/courses/coursetable-bundle", :media => "all"
+  :javascript
+    window.course_insts = "#{@date_str}"
 
 .content-area
   /courses-new

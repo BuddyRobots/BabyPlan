@@ -299,7 +299,7 @@ a.fc-event,
 .fc-event-title {
 	padding: 0 1px;
 	}
-	
+
 .fc .ui-resizable-handle {
 	display: block;
 	position: absolute;
@@ -420,9 +420,9 @@ table.fc-border-separate {
 font-size: 14px;
 font-family: Arial;
 font-weight: 600;
-padding: 12px 12px 0px 12px;
-line-height: 23px;
-height: 23px;
+/*padding: 12px 12px 0px 12px;*/
+line-height: 14px;
+height: 14px;
 color: #555;
 }
 

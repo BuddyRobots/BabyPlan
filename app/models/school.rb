@@ -56,14 +56,4 @@ class School
     )
     nil
   end
-
-  def set_available(available)
-    self.update_attribute(:available, available == true)
-    if available != true
-      self.course_insts.each do |c|
-        self.course_insts.delete(c)
-      end
-    end
-    nil
-  end
 end

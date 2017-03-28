@@ -124,7 +124,8 @@ Rails.application.routes.draw do
       collection do
         get :get_id_by_name
         get :next_refund_request
-        get :timetable
+        get :coursetable
+        get :calendar_data
       end
       member do
         post :set_available
