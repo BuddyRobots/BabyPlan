@@ -27,6 +27,7 @@ class Book
   has_one :qr_export
 
   belongs_to :center
+  belongs_to :operator
   has_many :book_insts
   has_many :book_borrows
   has_many :reviews

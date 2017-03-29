@@ -122,7 +122,7 @@ class Staff::CoursesController < Staff::ApplicationController
 
   def set_available
     @course_inst = CourseInst.where(id: params[:id]).first
-    retval = ErrCode::COURSE_INST_NOT_EXIST if @course.blank?
+    retval = ErrCode::COURSE_INST_NOT_EXIST if @course_inst.blank?
     retval = @course_inst.set_available(params[:available])
     render json: retval_wrapper(retval)
   end
@@ -199,11 +199,15 @@ class Staff::CoursesController < Staff::ApplicationController
     @course_insts = current_center.course_insts.is_available.all
     retval = @course_insts.map do |c|
       {
-        name: ActionController::Base.helpers.truncate(c.name, length: 10),
+        name: ActionController::Base.helpers.truncate(c.name, length: 12),
         date_in_calendar: c.date_in_calendar
       }
     end
     render json: retval_wrapper(course: retval) and return
+  end
+
+  def tableprint
+    
   end
 
 end

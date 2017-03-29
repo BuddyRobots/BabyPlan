@@ -1,8 +1,6 @@
 - content_for :head do
   = javascript_include_tag "pages/staff/courses/coursetable-bundle"
   = stylesheet_link_tag "pages/staff/courses/coursetable-bundle", :media => "all"
-  :javascript
-    window.course_insts = "#{@date_str}"
 
 .content-area
   /courses-new
@@ -16,6 +14,17 @@
     .manage-content
       .calendar-div
         #calendar
-      
+
+#tableModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
+  .modal-dialog
+    .modal-content
+      .modalheader
+        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: asset_path("managecenter/close.png")}
+      .modal-body
+        %p.message 点击确定将跳转至课表打印页
+        %p.message 是否确定要打印当前课表?
+        .btn-div
+          %a.btn#confirm-print{target: "_blank", href: tableprint_staff_courses_path} 确&nbsp定
+
 
 

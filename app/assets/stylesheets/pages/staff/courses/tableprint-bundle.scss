@@ -1,0 +1,17 @@
+@import "fullcalendar";
+@import "jquery-ui";
+@import "fullcalendar.print1";
+
+
+#calendar {
+	width: 1240px;
+	font-size: 14px;
+	margin: 20px;
+}
+.eventstyle {
+	font-size: 12px;
+	text-align: center;
+	padding: 0;
+	line-height: 14px;
+	color: #666;
+}

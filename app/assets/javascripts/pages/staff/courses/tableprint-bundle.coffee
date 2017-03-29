@@ -34,7 +34,7 @@ $ ->
     eventLimit: true
     fixedWeekCount: false
     nowIndicator: true
-    height: 610
+    # height: 760
     allDaySlot: false
     weekMode: 'liquid'
     weekNumberTitle: "周"
@@ -44,7 +44,7 @@ $ ->
     # minTime: 8
     # maxTime: 21
     
-    # aspectRatio: 2
+    aspectRatio: 1.7
     # eventClick: (calEvent, jsEvent, view) ->
     #   $("#calendar").fullCalendar('removeEvents', calEvent.id)
 
@@ -75,12 +75,8 @@ $ ->
 
   parse_calendar_events()
 
-
   $(".download-btn").click ->
-    $("#tableModal").modal("show")
-
-  $("#confirm-print").click ->
-    $("#tableModal").modal("hide")
+    window.print()
     
 
  

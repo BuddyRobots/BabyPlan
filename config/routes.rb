@@ -44,6 +44,7 @@ Rails.application.routes.draw do
       member do
         put :change_center
         put :change_status
+        post :set_available
       end
     end
     resources :announcements do
@@ -126,6 +127,7 @@ Rails.application.routes.draw do
         get :next_refund_request
         get :coursetable
         get :calendar_data
+        get :tableprint
       end
       member do
         post :set_available

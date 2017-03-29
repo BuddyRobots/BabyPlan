@@ -41,6 +41,8 @@ module ErrCode
   BOOK_IN_CENTER = -37
   UNITY_IS_EXIST = -38
   UNITY_NOT_EXIST = -39
+  OPERATOR_IS_EXIST = -40
+  OPERATOR_NOT_EXIST = -41
 
   def self.ret_false(code)
     msg = self.message(code)
@@ -129,6 +131,10 @@ module ErrCode
       "该单位已存在"
     when UNITY_NOT_EXIST
       "该单位不存在"
+    when OPERATOR_IS_EXIST
+      "该录入员已存在"
+    when OPERATOR_NOT_EXIST
+      "该录入员不存在"
     else
       nil
     end
