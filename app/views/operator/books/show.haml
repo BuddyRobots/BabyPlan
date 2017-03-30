@@ -1,0 +1,261 @@
+- content_for :head do
+  = javascript_include_tag "pages/operator/books/show-bundle"
+  = stylesheet_link_tag "pages/operator/books/show-bundle", :media => "all"
+  :javascript
+    window.profile = "#{@profile}"
+    window.bid = "#{@book.id.to_s}"
+    window.stock = "#{@book.stock}"
+    window.age_lower_bound = "#{@book.age_lower_bound}"
+    window.age_upper_bound = "#{@book.age_upper_bound}"
+
+.content-area
+  .manage-content
+    .btn.finish-btn{:type => "button"} 
+      %img.ticker{src: asset_path("managecenter/ticker.png")}
+      完成
+    .btn.edit-btn{:type => "button", "data-toggle" => "modal"} 
+      %img.edit{src: asset_path("managecenter/edit.png")}
+      编辑
+    .btn.QRcode-btn{:type => "button"}
+      %img.QRcode{src: asset_path("web/qrcode.png")} 导出二维码
+    - if @book.available == true
+      .btn.unshelve-btn.available{:type => "button"} 
+        %img.end{src: asset_path("managecenter/unshelve.png")}
+        %span 下架
+    - else
+      .btn.unshelve-btn.unavailable{:type => "button"} 
+        %img.end{src: asset_path("managecenter/shelve.png")}
+        %span 上架
+    .tabbable
+      %a{:href => "/staff/books"}
+        %img.back{src: asset_path("web/tab-back.png")}
+      %ul.nav.nav-tabs
+        %li.active
+          %a#book-message{"data-toggle" => "tab", :href => "#tab1"} 绘本信息
+        %li
+          %a#user-review{"data-toggle" => "tab", :href => "#tab2"} 用户评价
+        %li
+          %a#borrow-message{"data-toggle" => "tab", :href => "#tab3"} 借阅信息
+        %li
+          %a#return-book{"data-toggle" => "tab", :href => "#tab4"} 绘本归还
+
+      .tab-content
+        #tab1.tab-pane.active
+          .controls.controls-row
+            %label.input-caption 绘本名称:
+            %span.unedit-box#name-span= @book.name
+            %span.edit-box
+              %input.input-area.form-control#name-input{:type => "text"}
+            %label.input-caption#author 作者:
+            %span.unedit-box#author-span= @book.author
+            %span.edit-box
+              %input.input-area.form-control#author-input{:type => "text"}
+            %label.input-caption#publisher 出版社:
+            %span.unedit-box#publisher-span= @book.publisher
+            %span.edit-box
+              %input.input-area.form-control#publisher-input{:type => "text"}
+          .controls.controls-row
+            %label.input-caption#illustrator-label 插画作者:
+            %span.unedit-box#illustrator-span= @book.illustrator
+            %span.edit-box
+              %input.input-area.form-control#illustrator-input{:type => "text"} 
+            %label.input-caption#translator 译者:
+            %span.unedit-box#translator-span= @book.translator
+            %span.edit-box
+              %input.input-area.form-control#translator-input{:type => "text"}
+            %label.input-caption#book-number 书号:
+            %span.unedit-box#isbn-span= @book.isbn
+            %span.edit-box
+              %input.input-area.form-control#isbn-input{:type => "text"}
+          .controls.controls-row
+            %label.input-caption#mixage-label 最小适龄:
+            %span.unedit-box#age-lower-bound-span= @book.age_lower_bound.blank? ? "未填写" : @book.age_lower_bound.to_s + "岁"
+            %span.edit-box
+              %input.input-area.form-control#age-lower-bound-input{:type => "text"}      
+            %label.input-caption#mixage-label 最大适龄:
+            %span.unedit-box#age-upper-bound-span= @book.age_upper_bound.blank? ? "未填写" : @book.age_upper_bound.to_s + "岁"
+            %span.edit-box
+              %input.input-area.form-control#age-upper-bound-input{:type => "text"}  
+            %label.input-caption#total 数量:
+            %span.unedit-box#stock-span= @book.stock.to_s + "本"
+            %span.edit-box
+              %input.input-area.form-control#stock-input{:type => "text"}
+          .form-inline.clearfix#tag-form
+            %span.unedit-box.type-span.type-span-template
+            %label.input-caption 标签:
+            - (@book.tags || "").split(',').each do |tag|
+              %span.unedit-box.type-span.type-span-ele= tag
+            %span.edit-box
+              %ul#type-tag
+                   
+          .book-introduce.clearfix
+            %span.introduce 书籍介绍:
+            %div.introduce-details
+              = @book.desc.html_safe
+            %span.wangedit-area
+              #edit-area
+
+          = form_tag("/staff/books/" + @book.id.to_s + "/upload_photo", method: "post", multipart: true, id: "upload-photo-form", class: "hide") do
+            = text_field_tag "has_cover"
+            = text_field_tag "has_back"
+            = file_field_tag "cover_file", { class: "hide", accept: ".jpg,.png" }
+            = file_field_tag "back_file", { class: "hide", accept: ".jpg,.png" }
+          .cover-back
+            %span.book-cover 封面:
+            .photo-div#upload-cover-div
+              %a#upload-cover{href: "javascript:void(0);"}
+                %img#cover-photo.photo{src: @book.cover.nil? ? asset_path("web/coverempty.png") : @book.cover.path}
+              %a.upload-photo{href: "javascript:void(0);"}
+                %img#cover-edit-photo.edit-photo{src: asset_path("web/addcover.png")}
+            %span.book-back 封底:
+            .photo-div#upload-back-div
+              %a#upload-back{href: "javascript:void(0);"}
+                %img#back-photo.photo{src: @book.back.nil? ? asset_path("web/coverempty.png") : @book.back.path}
+              %a.upload-photo{href: "javascript:void(0);"}
+                %img#back-edit-photo.edit-photo{src: asset_path("web/addcover.png")}
+        #tab2.tab-pane
+          - if @reviews[:data].blank?
+            .undiscover
+              %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
+              %span.undiscover-message 抱歉！暂无查找信息
+          - else
+            .user-review-box
+              - @reviews[:data].each do |r|
+                .book-description
+                  .user-item.clearfix
+                    %img.book-img{:src => r.client.avatar.present? ? r.client.avatar.path : asset_path("web/boy.png")}
+                    %p.user-name
+                      %span= r.client.name_or_parent
+                      - r.score.times do
+                        %img.star-img{src: asset_path("managecenter/star.png")}
+                    %p.date= r.created_at.strftime("%Y-%m-%d %H:%M")
+                    %p.user-review-content= r.content
+                    - if r.is_private
+                      %button.btn#open-btn.show-review{:type => "button", data: {id: r.id.to_s}} 公开
+                    - else
+                      %button.btn#open-btn.hide-review{:type => "button", data: {id: r.id.to_s}} 隐藏
+            = render "staff/partials/auto_paginate", locals: { instance: @reviews, url: "/staff/books/" + @book.id.to_s + "?profile=reviews&", page: 'review_page'}
+
+        #tab3.tab-pane
+          - if @borrows[:data].blank?
+            .undiscover
+              %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
+              %span.undiscover-message 抱歉！暂无查找信息
+          - else
+            .table-box
+              %table.table.table-bordered#user-table
+                %thead
+                  %tr
+                    %th 借阅人
+                    %th 借阅时间
+                    %th 归还时间
+                    %th 操&nbsp作
+                %tbody
+                  - @borrows[:data].each do |b|
+                    %tr
+                      %td= b.client.name_or_parent
+                      %td= Time.at(b.borrow_at).strftime("%Y-%m-%d %H:%M")
+                      %td{class: b.return_class}= b.return_status_str
+                      %td.td-data 
+                        - if b.review.present?
+                          %a.details{:href => "javascript:void(0);"} 
+                            绘本评价
+                            %span.triangle-down
+                        - else
+                          .unreturn-review　暂未评论
+                    - if b.review.present?
+                      %tr.status
+                        %td{:colspan => "4"}
+                          .comments-book
+                            %span 评价：
+                            %span.comments-content= b.review.content
+            = render "staff/partials/auto_paginate", locals: { instance: @borrows, url: "/staff/books/" + @book.id.to_s + "?profile=borrows&", page: 'borrow_page'} 
+
+        #tab4.tab-pane
+          - if @unreturned[:data].blank?
+            .undiscover
+              %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
+              %span.undiscover-message 抱歉！暂无查找信息
+          - else
+            .table-box
+              %table.table.table-bordered#user-table1
+                %thead
+                  %tr
+                    %th 借阅人
+                    %th 手机号码
+                    %th 借阅时间
+                    %th 逾期天数
+                    %th{colspan: "2"} 操&nbsp作
+                %tbody
+                  - @unreturned[:data].each do |b|
+                    %tr{data: {id: b.id.to_s, name: b.book.name, clientname: b.client.name_or_parent}}
+                      %td= link_to b.client.name, "/staff/clients/#{b.client.id.to_s}"
+                      %td= b.client.mobile
+                      %td= Time.at(b.borrow_at).strftime("%Y-%m-%d %H:%M")
+                      %td{class: b.return_class}= b.expire_days_str
+                      %td
+                        %a.return{href: "javascript:void(0);"} 归还
+                      %td
+                        %a.lost{href: "javascript:void(0);"} 丢失
+            = render "staff/partials/auto_paginate", locals: { instance: @unreturned, url: "/staff/books/" + @book.id.to_s + "?profile=return&", page: 'unreturned_page'}
+            / .select-page 
+            /   %span.totalitems= "共#{@unreturned[:total_page]}页,总计#{@unreturned[:total_number]}条"
+            /   %span.choice-page
+            /     %ul.pagination.pagination-sm
+            /       %li
+            /         %a{:href => "/staff/books/" + @book.id.to_s + "?profile=return&unreturned_page=#{@unreturned[:previous_page]}"} «
+            /       - ( (@unreturned[:previous_page] > 2 ? @unreturned[:previous_page] - 2 : 1) .. (@unreturned[:next_page] < @unreturned[:total_page] - 2 ? @unreturned[:next_page] + 2 : @unreturned[:total_page]) ).to_a.each do |page|
+            /         %li
+            /           %a{:href => "/staff/books/" + @book.id.to_s + "?profile=return&unreturned_page=#{page}"}= page
+            /       %li
+            /         %a{:href => "/staff/books/" + @book.id.to_s + "?profile=return&unreturned_page=#{@unreturned[:next_page]}"} »
+#editor-content.hide
+  = @book.desc.html_safe
+
+
+#QR-codeModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
+  .modal-dialog
+    .modal-content
+      .modalheader
+        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: asset_path("managecenter/close.png")}
+      .modal-body
+        %form.form-inline.form-div{:role => "form"}
+          .form-group
+            %label.control-label.code-label{:for => "borrow-num"} 二维码数量
+            %input.unclicked-box#code-num.form-control{:type => "text"}
+          .confirm-button
+            %button.btn#confirm-qr-code.button-disabled{:href => "javascript:void(0);"} 下载二维码
+            %button.btn#transfer-qr-code.button-disabled{:href => "javascript:void(0);"} 导出到表格
+
+#returnModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
+  .modal-dialog
+    .modal-content
+      .modalheader
+        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: asset_path("managecenter/close.png")}
+      .modal-body
+        %p.message
+          %span.client-name 王小明
+          %span 借阅的绘本
+          %span.book-name《书名很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长》
+          %span 将归还，是否确定立即归还该书？
+        .btn-div
+          %button.btn#return-cancel{type: "button"} 取&nbsp消
+          %button.btn#return-confirm{type: "button"} 确&nbsp定
+
+#lostModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
+  .modal-dialog
+    .modal-content
+      .modalheader
+        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: asset_path("managecenter/close.png")}
+      .modal-body
+        %p.lost-caption 绘本丢失
+        %p.message 
+          %span.client-name 王小明
+          %span 借阅的绘本
+          %span.book-name《书名很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长》
+          %span 已丢失？
+        .btn-div
+          %button.btn#lost-cancel{type: "button"} 取&nbsp消
+          %button.btn#lost-confirm{type: "button"} 确&nbsp定
+
+

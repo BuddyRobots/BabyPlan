@@ -1,5 +1,5 @@
 require 'zip'
-class Book
+class BookTemplate
 
   include Mongoid::Document
   include Mongoid::Timestamps
@@ -15,33 +15,20 @@ class Book
   field :age_lower_bound, type: Integer
   field :age_upper_bound, type: Integer
   field :tags, type: String
-  field :stock, type: Integer
-  field :available, type: Boolean
 
   #ralationships specific for material
   has_one :cover, class_name: "Material", inverse_of: :cover_book
   has_one :back, class_name: "Material", inverse_of: :back_book
 
-  has_one :feed
-
-  has_one :qr_export
-
-  belongs_to :center
-  belongs_to :book_template
   belongs_to :operator
-  has_many :book_insts
-  has_many :book_borrows
-  has_many :reviews
-  has_many :favorites
+  has_many :books
 
-  scope :is_available, ->{ where(available: true) }
-
-  def self.create_book(staff, center, book_info)
-    book = center.books.where(isbn: book_info[:isbn]).first
-    if book.present?
+  def self.create_book(operator, book_info)
+    book_template = operator.book_templates.where(isbn: book_info[:isbn]).first
+    if book_template.present?
       return ErrCode::BOOK_EXIST
     end
-    book = center.books.create(
+    book_template = operator.book_templates.create(
       name: book_info[:name],
       type: book_info[:type],
       isbn: book_info[:isbn],
@@ -52,21 +39,15 @@ class Book
       illustrator: book_info[:illustrator],
       desc: book_info[:desc],
       age_lower_bound: book_info[:age_lower_bound],
-      age_upper_bound: book_info[:age_upper_bound],
-      stock: book_info[:stock],
-      available: book_info[:available]
+      age_upper_bound: book_info[:age_upper_bound]
     )
-    Feed.create(book_id: book.id, name: book.name, center_id: center.id, available: book_info[:available])
-    { book_id: book.id.to_s }
+    { book_template_id: book_template.id.to_s }
   end
 
   def book_info
-    available_stock = self.stock - self.book_borrows.where(status: BookBorrow::NORMAL, return_at: nil).length
-    available_stock = [0, available_stock].max
     {
       id: self.id.to_s,
       name: self.name,
-      center: self.center.name,
       author: self.author,
       publisher: self.publisher,
       translator: self.translator,
@@ -74,9 +55,6 @@ class Book
       tags: tags,
       isbn: self.isbn,
       type: self.type,
-      stock: self.stock,
-      available_stock: available_stock,
-      available: self.available,
       age_lower_bound: self.age_lower_bound,
       age_upper_bound: self.age_upper_bound
     }

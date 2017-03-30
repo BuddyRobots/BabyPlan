@@ -68,7 +68,7 @@
                           %td= u[:name]
                           %td= u[:company]
                           %td= u[:mobile]
-                          %td
+                          %td= u[:count].to_s + "本"
                           %td
                             %a.edit{:href => "javascript:void(0);"} 编辑
                           %td

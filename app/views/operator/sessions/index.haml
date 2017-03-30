@@ -1,0 +1,38 @@
+- content_for :head do
+  = javascript_include_tag "pages/operator/sessions/index-bundle"
+  = stylesheet_link_tag "pages/operator/sessions/index-bundle", :media => "all"
+
+.content-area
+  / sessions-index
+  %p.caption 欢迎访问儿童中心图书信息录入系统
+  %img.master{:src => asset_path("managecenter/master.png")}
+
+/ signin
+#signinModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
+  .modal-dialog
+    .modal-content
+      %img.close-signin{"aria-hidden" => "true", "data-dismiss" => "modal", src: asset_path("managecenter/close.png")} 
+      .modal-body
+        .content-box
+          .logo-box
+            %img.sign-logo{src: asset_path("managecenter/logo.png")}
+              %span.kids-center 图书信息录入系统
+          %p.notice.error-notice 您的账号或密码不正确
+          .form-horizontal
+            .form-group
+              %label.col-sm-2.control-label{:for => "mobile"} 账&nbsp号
+              .col-sm-10
+                %input.unclicked-box#mobile.form-control{:placeholder => "请输入账号", :type => "text"}
+            %p.mobile-notice 请填写完整的账号
+            .form-group
+              %label.col-sm-2.control-label{:for => "mobile"} 密&nbsp码
+              .col-sm-10
+                %input.unclicked-box#password.form-control{:placeholder => "请输入密码", :type => "password"}
+            %button.btn#signin.button-disabled{:href => "javascript:void(0);"} 登&nbsp录
+      
+
+      
+
+
+        
+

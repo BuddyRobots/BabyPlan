@@ -1,44 +1,39 @@
 - content_for :head do
-  = javascript_include_tag "pages/staff/books/new-bundle"
-  = stylesheet_link_tag "pages/staff/books/new-bundle", :media => "all"
+  = javascript_include_tag "pages/operator/books/new-bundle"
+  = stylesheet_link_tag "pages/operator/books/new-bundle", :media => "all"
   :javascript
     window.keyword = "#{@keyword}"
 
 .content-area
   /books-new
   .content-box
-    .manage-box.clearfix
-      %a#back{:href => "/staff/books"}
-        %img{src: asset_path("web/back.png")}
-      %p.book-add 添加绘本
+    .manage-box
+      %a#back{:href => "/operator/books"}
+        %img{src: asset_path("web/back2.png")}
       .btn.end-btn{:type => "button"} 
         %img.end{src: asset_path("managecenter/ticker.png")}
         完成
-      %label.checkbox-inline.open#available
-        %input#inlineCheckbox1{:type => "checkbox"} 暂不上架
 
     .manage-content
       .controls.controls-row
-        %label.input-caption 绘本名称:
+        %label.input-caption ISBN号:
+        %input.input-area.form-control#book-isbn{:type => "text"}
+        %label.input-caption#author 书名:
         %input.input-area.form-control#book-name{:type => "text"}
-        %label.input-caption#author 作者:
-        %input.input-area.form-control#book-author{:type => "text"}
-        %label.input-caption#publisher 出版社:
-        %input.input-area.form-control#book-publisher{:type => "text"}
       .controls.controls-row
-        %label.input-caption 插画作者:
-        %input.input-area.form-control#book-illustrator{:type => "text"}
+        %label.input-caption#book-number 作者:
+        %input.input-area.form-control#book-author{:type => "text"}
         %label.input-caption#translator 译者:
         %input.input-area.form-control#book-translator{:type => "text"}
-        %label.input-caption#book-number 书号:
-        %input.input-area.form-control#book-isbn{:type => "text"}
+        %label.input-caption 插画作者:
+        %input.input-area.form-control#book-illustrator{:type => "text"}
       .controls.controls-row
+        %label.input-caption#publisher 出版社:
+        %input.input-area.form-control#book-publisher{:type => "text"}
         %label.input-caption 最小适龄:
         %input.input-area.form-control#age-lower-bound{:type => "text"}
         %label.input-caption 最大适龄:
         %input.input-area.form-control#age-upper-bound{:type => "text"}
-        %label.input-caption#total 数量:
-        %input.input-area.form-control#book-stock{:type => "text"}
       .form-inline
         %label.input-caption 标签:
         %span

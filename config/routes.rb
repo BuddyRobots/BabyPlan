@@ -86,6 +86,20 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :operator do
+    resources :sessions do
+      collection do
+        get :signout
+        post :change_password
+      end
+    end
+    resources :books do
+      member do
+        post :upload_photo
+      end
+    end
+  end
+
   namespace :staff do
     resources :sessions do
       member do

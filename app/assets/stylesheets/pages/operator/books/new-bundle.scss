@@ -1,0 +1,224 @@
+@import "wangEditor";
+@import "jquery-ui";
+@import "jquery.tagit";
+
+
+.modal-body, label {
+  margin: 0;
+  padding: 0;
+  max-height: 600px;
+}
+.content-area {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  top: 0;
+  box-shadow: -1px -1px 6px #9c9c9c inset;
+  padding-top: 48px;
+}
+.content-box {
+  position: relative;
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  background: white;  
+  height: 100%;
+}
+.manage-box {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  -webkit-justify-content: space-between;
+  -moz-justify-content: space-between;
+  -ms-justify-content: space-between;
+  -o-justify-content: space-between;
+  -webkit-align-items: flex-end;
+  -moz-align-items: flex-end;
+  -ms-align-items: flex-end;
+  -o-align-items: flex-end;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.manage-content {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  overflow: auto;
+  position: absolute;
+  top: 72px;
+  left: 0px;
+  bottom: 30px;
+  right: 0px;
+}
+.end-btn {
+  width: 144px;
+  height: 48px;
+  padding: 0;
+  line-height: 46px;
+  color: white;
+  background: #f7873d;
+  border-radius: 6px;
+}
+.end-btn:hover {
+  background: #f7873d;
+  color: white;
+}
+
+.form-inline {
+  margin: 20px 0 20px 51px;
+}
+.input-caption {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 16px;
+  color: #323232;
+  font-weight: normal;
+}
+#author, #translator {
+  margin-left: 32px;
+}
+#book-number {
+  margin-left: 21px;
+}
+#publisher {
+  margin-left: 5px;
+}
+.input-area {
+  display: inline-block;
+  width: 180px;
+  height: 30px;
+  margin: 0 20px 0 10px;
+}
+#book-type {
+  width: 79.6%;
+}
+#type-tag {
+  display: inline-block;
+  vertical-align: middle;
+  width: 82.9%;
+  border: 1px solid #ccc;
+  margin-left: 10px;
+}
+.controls-row {
+  margin: 20px 0 20px 30px;
+}
+.introduce {
+  display: inline-block;
+  vertical-align: top;
+  font-size: 16px;
+  color: #323232;
+  margin: 0 10px 15px 20px;
+}
+.wangedit-area {
+  display: inline-block;
+  width: 78.5%;
+  font-size: 16px;
+}
+#edit-area {
+  height: 200px;
+}
+.book-introduce {
+  margin-bottom: 20px;
+}
+.cover-back {
+  font-size: 16px;
+  margin-left: 50px;
+  span {
+    vertical-align: top;
+    margin-right: 10px;
+  }
+}
+
+#upload-cover {
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  margin-right: 50px;
+}
+#upload-back {
+  @extend #upload-cover;
+}
+
+#uploadCoverModal {
+  .modal-dialog {
+    position:absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -250px;
+    margin-top: -106px;
+    width: 500px;
+    height: 210px;
+    border-radius: 10px;
+  }
+}
+#uploadBackModal {
+  .modal-dialog {
+    position:absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -250px;
+    margin-top: -106px;
+    width: 500px;
+    height: 210px;
+    border-radius: 10px;
+  }
+}
+.modal-backdrop {
+  background-color: #999;
+}
+.close {
+  position: absolute;
+  right: -14px;
+  top: -12px;
+  opacity: 0.7;
+  z-index: 10;
+}
+.close:hover {
+  opacity: 1;
+}
+.modal-header {
+  height: 50px;
+  line-height: 50px;
+  box-shadow: 0 -1px 6px #9c9c9c; 
+}
+.caption {
+  font-size: 18px;
+  color: #323232;
+}
+.modal-body {
+  box-shadow: 0 1px 6px #9c9c9c; 
+}
+#browser-cover-click {
+  font-size: 16px;
+  text-decoration: none;
+  height:60px;
+  line-height: 60px;
+  color: #323232;
+  vertical-align: middle;
+}
+#browser-back-click {
+  @extend #browser-cover-click;
+}
+.form-group {
+  font-size: 14px;
+  color: #323232;
+  margin-bottom: 0;
+}
+.modal-footer {
+  background: white;
+}
+#cover-img, #back-img {
+  width: 100px;
+  height: 100px;
+  margin-right: 50px;
+  cursor: pointer;
+}
+.cover-caption, .back-caption, #cover-name, #back-name {
+  margin-left: 15px;
+}
+.photo {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
