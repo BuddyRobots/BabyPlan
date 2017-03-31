@@ -17,10 +17,17 @@ class Operator::ApplicationController < ApplicationController
   end
 
   def refresh_operator_session
-    @current_operator = cookies[:operator_key].blank? ? nil : Operator.find_by_auth_key(cookies[:operator_key])
+    if cookies[:operator_key].blank?
+      @current_operator = nil
+    else
+      @current_operator = Operator.find_by_auth_key(cookies[:operator_key])
+      if @current_operator.blank?
+        @current_operator = User.find_by_auth_key(cookies[:operator_key])
+        @current_operator = nil if @current_operator.try(:is_admin) != true
+      end
+    end
     if !current_operator.nil?
       # If current user is not empty, set cookie
-      logger.info "AAAAAAAAAA"
       cookies[:operator_key] = {
         :value => cookies[:operator_key],
         :expires => 24.months.from_now,

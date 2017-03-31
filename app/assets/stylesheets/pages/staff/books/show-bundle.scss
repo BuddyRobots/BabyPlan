@@ -1,6 +1,4 @@
-@import "wangEditor";
 @import "jquery-ui";
-@import "jquery.tagit";
 
 .modal-body, input, label {
 	margin: 0;
@@ -50,9 +48,13 @@
 	@extend .edit-btn;
 	display: none;
 }
-.QRcode-btn {
+.delete-btn {
 	@extend .edit-btn;
 	right: 260px;
+}
+.QRcode-btn {
+	@extend .edit-btn;
+	right: 380px;
 	width: 136px;
 }
 .QRcode {
@@ -110,7 +112,7 @@
 #book-number, #total {
 	margin-left: 16px;
 }
-.unedit-box {
+.unedit-box, .unedit-stock-box {
 	display: inline-block;
 	vertical-align: middle;
 	font-size: 14px;
@@ -120,7 +122,7 @@
 	line-height: 30px;
 	margin: 0 20px 0 0;
 }
-.edit-box {
+.edit-box, .edit-stock-box {
 	display: none;
 	margin-right: 20px;
 }
@@ -249,12 +251,15 @@
 	height: 100px;
 	display: none;
 }
-.edit-photo, .photo {
+.edit-photo {
 	width: 100px;
 	height: 100px;
 	object-fit: contain;
 }
-
+.photo {
+  width: 100px;
+  height: 100px;
+}
 #uploadCoverModal {
 	.modal-dialog {
 		position:absolute;

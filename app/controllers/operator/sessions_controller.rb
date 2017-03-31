@@ -27,7 +27,12 @@ class Operator::SessionsController < Operator::ApplicationController
     if current_operator.blank?
       redirect_to operator_sessions_path and return
     end
-    cookies.delete(:operator_key, :domain => :all)
-    redirect_to operator_sessions_path and return
+    if current_operator.class == User
+      cookies.delete(:operator_key, :domain => :all)
+      redirect_to operator_sessions_path and return
+    else
+      cookies.delete(:operator_key, :domain => :all)
+      redirect_to operator_sessions_path and return
+    end
   end
 end

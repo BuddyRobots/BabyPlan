@@ -2,7 +2,8 @@ class Operator::BooksController < Operator::ApplicationController
 
   def index
     @keyword = params[:keyword]
-    book_templates = @keyword.present? ? current_operator.book_templates.where(name: /#{Regexp.escape(@keyword)}/) : current_operator.book_templates.all
+    book_templates = current_operator.class  == User ? BookTemplate.all : current_operator.book_templates
+    book_templates = book_templates.where(name: /#{Regexp.escape(@keyword)}/) if @keyword.present?
     book_templates = book_templates.desc(:created_at)
     @book_templates = auto_paginate(book_templates)
     @book_templates[:data] = @book_templates[:data].map do |b|
@@ -15,12 +16,32 @@ class Operator::BooksController < Operator::ApplicationController
   end
 
   def show
-   
+    @book = BookTemplate.where(id: params[:id]).first
   end
 
   def create
     retval = BookTemplate.create_book(current_operator, params[:book_template])
     render json: retval_wrapper(retval) and return
+  end
+
+  def update
+    @book = current_operator.book_templates.where(id: params[:id]).first
+    if @book.nil?
+      retval = ErrCode::BOOK_NOT_EXIST
+    end
+    @book.update_info(params[:book])
+    render json: retval_wrapper(retval)
+  end
+
+  def destroy
+    @book = current_operator.book_templates.where(id: params[:id]).first
+    if !@book.books.present?
+      retval = @book.destroy
+      render json: retval_wrapper(nil)
+    else
+      retval = ErrCode::BOOK_EXIST
+      render json: retval_wrapper(retval)
+    end
   end
 
   def upload_photo

@@ -165,6 +165,7 @@ Rails.application.routes.draw do
         get :download_qrcode
         post :add_to_list
         post :delete_qr_code
+        post :set_delete
       end
       collection do
         get :code_list

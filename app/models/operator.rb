@@ -37,10 +37,10 @@ class Operator
   end
 
   def self.signin(mobile, password)
-    user = Operator.where(mobile: mobile).first
+    user = Operator.where(mobile: mobile).first || User.where(user_type: User::ADMIN, mobile: mobile).first
     return ErrCode::USER_NOT_EXIST if !user.present?
     return ErrCode::WRONG_PASSWORD if user.password != Encryption.encrypt_password(password)
-    return ErrCode::ACCOUNT_LOCKED if user.available == false
+    return ErrCode::ACCOUNT_LOCKED if user.class == Operator && user.available == false
     auth_key = user.generate_auth_key
     user.update_attribute(:auth_key, auth_key)
     return { auth_key: auth_key }

@@ -107,6 +107,7 @@ $ ->
         isbn: isbn
         },
       (data) ->
+        console.log(data)
         if !data.success
           if data.code == BOOK_NOT_EXIST
             $(".isbn-notice").text("未找到对应图书").css({color:"#d70c19", visibility:"visible"})
@@ -147,11 +148,13 @@ $ ->
   $(".isbn-confirm-btn").click ->
     isbn = $(".isbn-input").val()
     num = $(".isbn-input-num").val()
+    available = true
     $.postJSON(
       '/staff/books/isbn_add_book',
       {
         isbn: isbn
         num: num
+        available: available
       },
       (data) ->
         if data.success

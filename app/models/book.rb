@@ -17,6 +17,7 @@ class Book
   field :tags, type: String
   field :stock, type: Integer
   field :available, type: Boolean
+  field :delete, type: Boolean, default: false
 
   #ralationships specific for material
   has_one :cover, class_name: "Material", inverse_of: :cover_book
@@ -35,6 +36,7 @@ class Book
   has_many :favorites
 
   scope :is_available, ->{ where(available: true) }
+  default_scope { where(:delete.ne => true)}
 
   def self.create_book(staff, center, book_info)
     book = center.books.where(isbn: book_info[:isbn]).first
@@ -60,6 +62,16 @@ class Book
     { book_id: book.id.to_s }
   end
 
+  def self.add_to_center(staff, center, book_template, num, available)
+    book = center.books.create(
+      book_template_id: book_template.id,
+      stock: num,
+      available: available
+      )
+    Feed.create(book_id: book.id, name: book.name, center_id: center.id, available: available)
+    { book_id: book.id.to_s }
+  end
+
   def book_info
     available_stock = self.stock - self.book_borrows.where(status: BookBorrow::NORMAL, return_at: nil).length
     available_stock = [0, available_stock].max
@@ -82,22 +94,56 @@ class Book
     }
   end
 
-  def update_info(book_info)
-    self.update_attributes(
-      {
-        name: book_info["name"],
-        type: book_info["type"],
-        stock: book_info["stock"],
-        isbn: book_info["isbn"],
-        tags: (book_info[:tags] || []).join(','),
-        author: book_info["author"],
-        publisher: book_info["publisher"],
-        translator: book_info["translator"],
-        age_lower_bound: book_info["age_lower_bound"],
-        age_upper_bound: book_info["age_upper_bound"],
-        illustrator: book_info["illustrator"]
-      }
-    )
+  def name
+    return self.try(:book_template).try(:name)
+  end
+
+  def author
+    return self.try(:book_template).try(:author)
+  end
+
+  def publisher
+    return self.try(:book_template).try(:publisher)
+  end
+
+  def illustrator
+    return self.try(:book_template).try(:illustrator)
+  end
+
+  def translator
+    return self.try(:book_template).try(:translator)
+  end
+
+  def isbn
+    return self.try(:book_template).try(:isbn)
+  end
+
+  def tags
+    return self.try(:book_template).try(:tags)
+  end
+
+  def age_lower_bound
+    return self.try(:book_template).try(:age_lower_bound)
+  end
+
+  def age_upper_bound
+    return self.try(:book_template).try(:age_upper_bound)
+  end
+
+  def desc
+    return self.try(:book_template).try(:desc)
+  end
+
+  def cover
+    return self.try(:book_template).try(:cover)
+  end
+
+  def back
+    return self.try(:book_template).try(:back)
+  end
+
+  def update_info(stock)
+    self.update_attribute(:stock, stock)
     nil
   end
 
