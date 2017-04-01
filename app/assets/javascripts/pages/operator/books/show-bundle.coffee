@@ -2,6 +2,9 @@
 #= require tag-it.min
 $ ->
 
+  if window.user == "User"
+    $(".btn").attr("disabled", true)
+    
   has_cover = false
   has_back = false
   is_edit = false

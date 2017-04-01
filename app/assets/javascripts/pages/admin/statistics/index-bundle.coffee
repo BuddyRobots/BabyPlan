@@ -252,6 +252,30 @@ $ ->
             data: data.stat.income_center
           } ]
 
+        $('#school-income-statistics').highcharts
+          chart:
+            type: 'column'
+          title: text: null
+          xAxis:
+            type: 'category'
+          yAxis:
+            min: 0
+            title: text: '授课单位收入(元)'
+          legend: enabled: false
+          tooltip: valueSuffix: '元'
+          credits:
+               enabled: false
+          plotOptions: series: point: events: click: (event) ->
+            if previousPoint
+              previousPoint.update color: '#90c5fc'
+            previousPoint = this
+            this.update color: '#227dda'
+            return
+          series: [ {
+            name: '授课单位收入'
+            data: data.stat.income_school
+          } ]
+
       else
         $.page_notification "服务器出错，请稍后再试"
 

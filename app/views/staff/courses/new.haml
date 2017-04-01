@@ -23,10 +23,10 @@
             %input.input-area.form-control#course-name{:type => "text", value: @course_inst.try(:name)}
           .form-group
             %label.input-caption 上课时间:
-            %input.input-area.form-control#course-date{:type => "text"}
+            %input.input-area.form-control#course-date{:type => "text", placeholder: "必填"}
           .form-group
             %label.input-caption 上课地址:
-            %input.input-area.form-control#course-address{:type => "text", value: @course_inst.try(:address)}
+            %input.input-area.form-control#course-address{:type => "text", value: @course_inst.try(:address), placeholder: "必填"}
         .photo
           = form_tag("/", method: "post", multipart: true, id: "upload-photo-form", class: "hide") do
             = file_field_tag "photo_file", { class: "hide", accept: ".jpg,.png" }
@@ -37,16 +37,16 @@
         %label.input-caption 开课编号:
         %span.num-box= @center.get_code
         %label.input-caption 主讲人:
-        %input.input-area.form-control#course-speaker{:type => "text", value: @course_inst.try(:speaker)}
+        %input.input-area.form-control#course-speaker{:type => "text", value: @course_inst.try(:speaker), placeholder: "必填"}
         %label.input-caption.kids-capacity 容量:
-        %input.input-area.form-control#course-capacity{:type => "text", value: @course_inst.try(:capacity)}
+        %input.input-area.form-control#course-capacity{:type => "text", value: @course_inst.try(:capacity), placeholder: "必填"}
       .controls.controls-row
         %label.input-caption.course-length 课次:
-        %input.input-area.form-control#course-length{:type => "text", value: @course_inst.try(:length)}
+        %input.input-area.form-control#course-length{:type => "text", value: @course_inst.try(:length), placeholder: "必填"}
         %label.input-caption 市场价:
         %input.input-area.form-control#course-price{:type => "text", value: @course_inst.try(:price)}
         %label.input-caption 公益价:
-        %input.input-area.form-control#public-price{:type => "text", value: @course_inst.try(:price_pay)}
+        %input.input-area.form-control#public-price{:type => "text", value: @course_inst.try(:price_pay), placeholder: "必填"}
       .controls.controls-row
         %label.input-caption 最小适龄:
         %input.input-area.form-control#min-age{:type => "text", value: @course_inst.try(:min_age)}

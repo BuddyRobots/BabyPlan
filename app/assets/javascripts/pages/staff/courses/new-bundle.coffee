@@ -60,7 +60,7 @@ $ ->
 
 
   check_course_input = (code, capacity, price, price_pay, length, date, speaker, address, date_in_calendar, min_age, max_age, school) ->
-    if code == "" || capacity == "" || price == "" || length == "" || date == "" || speaker == "" || address == "" || school == ""
+    if code == "" || capacity == "" || price_pay == "" || length == "" || date == "" || speaker == "" || address == "" || school == ""
       $.page_notification("请将信息补充完整")
       return false
     if !$.isNumeric(capacity) || parseInt(capacity) <= 0

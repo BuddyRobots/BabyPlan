@@ -65,7 +65,7 @@
                 %tbody
                   - @participates[:data].each do |e|
                     %tr
-                      %td.td-data= e.course_inst.name || e.course_inst.course.name
+                      %td.td-data= e.course_inst.name
                       %td.td-data= e.course_inst.duration
                       %td.td-data= e.course_inst.center.address
                       %td.td-data= e.course_inst.speaker

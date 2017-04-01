@@ -14,3 +14,6 @@ $ ->
 
   $(".bookadd-btn").click ->
     location.href = "/operator/books/new"
+
+  if window.user == "User"
+    $(".bookadd-btn").attr("disabled", true)

@@ -387,8 +387,31 @@ class Center
         code: 1
       })
     end
-    ret_code = self.abbr + year.to_s + self.code.to_s.rjust(4, "0")
+    ret_code = self.abbr + self.year.to_s + self.code.to_s.rjust(4, "0")
     self.update_attribute(:code, self.code + 1)
     return ret_code
+  end
+
+  def self.migrate
+    abbr = {
+      "西一": "XY",
+      "西二": "XE",
+      "西三": "XS",
+      "西四": "XSI",
+      "西五": "XW",
+      "国家": "GJ",
+      "玩伴": "WB",
+      "爱玩": "AW",
+      "东四": "DS"
+    }
+
+    Center.all.each do |c|
+      abbr.each do |k, v|
+        if c.name.include?(k.to_s)
+          c.update_attribute(:abbr, v)
+          break
+        end
+      end
+    end
   end
 end

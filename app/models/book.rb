@@ -4,17 +4,17 @@ class Book
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  field :name, type: String
-  field :type, type: String
-  field :isbn, type: String
-  field :author, type: String
-  field :publisher, type: String
-  field :translator, type: String
-  field :illustrator, type: String
-  field :desc, type: String
-  field :age_lower_bound, type: Integer
-  field :age_upper_bound, type: Integer
-  field :tags, type: String
+  # field :name, type: String
+  # field :type, type: String
+  # field :isbn, type: String
+  # field :author, type: String
+  # field :publisher, type: String
+  # field :translator, type: String
+  # field :illustrator, type: String
+  # field :desc, type: String
+  # field :age_lower_bound, type: Integer
+  # field :age_upper_bound, type: Integer
+  # field :tags, type: String
   field :stock, type: Integer
   field :available, type: Boolean
   field :delete, type: Boolean, default: false
@@ -120,6 +120,10 @@ class Book
 
   def tags
     return self.try(:book_template).try(:tags)
+  end
+
+  def type
+    return self.try(:book_template).try(:type)
   end
 
   def age_lower_bound

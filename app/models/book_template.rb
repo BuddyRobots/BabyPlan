@@ -104,7 +104,7 @@ class BookTemplate
       if bt.present?
         next
       end
-      BookTemplate.create({
+      bt = BookTemplate.create({
         name: b.name,
         type: b.type,
         isbn: b.isbn,

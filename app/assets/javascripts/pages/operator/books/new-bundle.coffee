@@ -81,7 +81,7 @@ $ ->
     illustrator = $("#book-illustrator").val().trim()
     
     desc = editor.$txt.html()
-    if name == "" || isbn == "" || desc == ""
+    if name == "" || isbn == "" || desc == "" || author == "" || publisher == ""
       $.page_notification("请补全信息")
       return
 

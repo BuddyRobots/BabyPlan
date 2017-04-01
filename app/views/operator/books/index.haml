@@ -3,6 +3,7 @@
   = stylesheet_link_tag "pages/operator/books/index-bundle", :media => "all"
   :javascript
     window.keyword = "#{@keyword}"
+    window.user = "#{@current_operator.class}"
    
 .content-area
   /books-index

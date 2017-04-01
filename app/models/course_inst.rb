@@ -322,8 +322,28 @@ class CourseInst
     end
   end
 
- def self.price_for_select
+  def self.price_for_select
     hash = { "选择价格区间" => 0, "免费" => 1, "0~20元" => 2, "20~40元" => 3, "40元以上" => 4 }
- end
+  end
+
+  def self.migrate
+    Center.all.map do |c|
+      c.update_attributes({
+        year: 2017,
+        code: 1
+        })
+      c.course_insts.all.map do |ci|
+        ci.update_attributes({
+          name: ci.name.blank? ? ci.course.name : ci.name,
+          capacity: ci.capacity.blank? ? ci.course.capacity : ci.capacity,
+          price: ci.price.blank? ? ci.course.price : ci.price,
+          price_pay: ci.price_pay.blank? ? ci.course.price_pay : ci.price_pay,
+          length: ci.length.blank? ? ci.course.length : ci.length,
+          desc: ci.desc.blank? ? ci.course.desc : ci.desc,
+          code: c.get_code 
+          })
+      end
+    end
+  end
 
 end
