@@ -116,15 +116,16 @@ class CourseParticipate
     self.update_attributes(
       {
         expired_at: (Time.now + 10.minutes).to_i,
-        order_id: Util.random_str(32),
+        # order_id: Util.random_str(32),
         price_pay: course_inst.price_pay,
         renew_status: true,
         prepay_id: ""
       })
+    order_id = Util.random_str(32)
     if self.price_pay == 0
-      self.update_attribute(:prepay_id, "free")
+      self.update_attributes({prepay_id: "free", order_id: order_id})
     else
-      self.unifiedorder_interface(remote_ip, openid)
+      self.unifiedorder_interface(remote_ip, openid, order_id)
       CourseOrderExpiredWorker.perform_in(600.seconds, self.id.to_s)
     end
     
@@ -282,14 +283,14 @@ class CourseParticipate
     end
   end
 
-  def unifiedorder_interface(remote_ip, openid)
+  def unifiedorder_interface(remote_ip, openid, order_id)
     nonce_str = Util.random_str(32)
     data = {
       "appid" => APPID,
       "mch_id" => MCH_ID,
       "nonce_str" => nonce_str,
       "body" => self.course_inst.course.name,
-      "out_trade_no" => self.order_id,
+      "out_trade_no" => order_id,
       "total_fee" => Rails.env == "production" ? (self.price_pay * 100).round.to_s : 1.to_s,
       "spbill_create_ip" => remote_ip,
       "notify_url" => NOTIFY_URL,
@@ -308,7 +309,7 @@ class CourseParticipate
 
     doc = Nokogiri::XML(response.body)
     prepay_id = doc.search('prepay_id').children[0].text
-    self.update_attributes({prepay_id: prepay_id})
+    self.update_attributes({prepay_id: prepay_id, order_id: order_id})
     # retval = {
     #   "appId" => APPID,
     #   "timeStamp" => Time.now.to_i.to_s,
