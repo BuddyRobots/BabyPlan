@@ -74,11 +74,14 @@ $ ->
     name = $("#entry-name").val()
     company = $("#entry-company").val()
     mobile = $("#entry-mobile").val()
-    password = $("#entry-password").val()
+    password = $("#entry-password").val().trim()
     available = true
     mobile_retval = $.regex.isMobile(mobile)
     if mobile_retval == false
       $.page_notification("请输入正确的联系方式", 1000)
+      return false
+    if password == ""
+      $.page_notification("请输入密码", 1000)
       return false
     if type == "new"
       $.postJSON(

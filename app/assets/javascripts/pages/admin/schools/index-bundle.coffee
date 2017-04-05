@@ -34,10 +34,10 @@ $ ->
 
   check_input = ->
     if $(".unity-input").val().trim() == "" || $(".unity-input-num").val().trim() == "" || $("#unity-mobile").val().trim() == ""
-      $(".unity-confirm-btn").addClass("button-disabled")
+      $(".unity-confirm-btn").addClass("button-disabled").attr("disabled", true)
       $(".unity-confirm-btn").removeClass("button-enabled")
     else
-      $(".unity-confirm-btn").addClass("button-enabled")
+      $(".unity-confirm-btn").addClass("button-enabled").attr("disabled", false)
       $(".unity-confirm-btn").removeClass("button-disabled")
 
   $(".unity-input").keyup ->

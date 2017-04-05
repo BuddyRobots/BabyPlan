@@ -133,10 +133,10 @@ $ ->
 
   check_input = ->
     if $(".isbn-input").val().trim() == "" || $(".isbn-input-num").val().trim() == "" || $(".isbn-notice").text() == "未找到对应图书"
-      $(".isbn-confirm-btn").addClass("button-disabled")
+      $(".isbn-confirm-btn").addClass("button-disabled").attr("disabled", true)
       $(".isbn-confirm-btn").removeClass("button-enabled")
     else
-      $(".isbn-confirm-btn").addClass("button-enabled")
+      $(".isbn-confirm-btn").addClass("button-enabled").attr("disabled", false)
       $(".isbn-confirm-btn").removeClass("button-disabled")
 
   $(".isbn-input").keyup ->

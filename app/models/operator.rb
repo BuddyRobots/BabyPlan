@@ -68,7 +68,7 @@ class Operator
         name: operator_info[:name],
         company: operator_info[:company],
         mobile: operator_info[:mobile],
-        password: operator_info[:password]
+        password: Encryption.encrypt_password(operator_info[:password]) 
       }
     )
     nil
