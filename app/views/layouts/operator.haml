@@ -10,9 +10,9 @@
 - content_for :app_content do
   .wrapper
     .header
-      %a{:href => "#"}
+      %a{:href => operator_books_path}
         %img.logo{src: asset_path("managecenter/logo.png")}
-      %p.leftword 图书信息录入系统
+      %p.leftword#jump_to_books 图书信息录入系统
 
       /登录注册页面的layout
       - if @current_operator.present?

@@ -112,9 +112,9 @@
                     %tr
                       %td= ci[:name]
                       %td= ci[:date]
-                      %td= ci[:address]
+                      %td.courseinst-address= ci[:address]
                       %td= ci[:speaker]
-                      %td= ci[:price]
+                      %td= ci[:price].to_s + "元"
             = render "admin/partials/auto_paginate", locals: { instance: @course_insts, url: "/admin/centers/" + @center.id.to_s + "?profile=courses&", page: 'course_inst_page'}
             
         #tab3.tab-pane
@@ -136,7 +136,7 @@
                 %tbody
                   - @books[:data].each do |b|
                     %tr
-                      %td= b[:name]
+                      %td.bookinst-name= b[:name]
                       %td= truncate((b[:tags] || "").gsub(',', '，'), length: 20)
                       %td= b[:stock].to_s + "本"
                       %td= b[:available_stock].to_s + "本"

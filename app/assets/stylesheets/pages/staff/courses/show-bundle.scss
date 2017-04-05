@@ -380,8 +380,8 @@ h2 {
 		font-size: 14px;
 		color: #505050;
 		height:45px;
-		line-height: 45px;
 		text-align: center;
+		vertical-align: middle;
 		padding: 0;
 		.unshelve {
 			color: #969696;
@@ -834,4 +834,9 @@ h2 {
 #course-school {
 	padding-top: 0;
 	padding-bottom: 0;
+}
+
+
+#client-address {
+	width: 45%;
 }

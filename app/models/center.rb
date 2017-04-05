@@ -394,15 +394,8 @@ class Center
 
   def self.migrate
     abbr = {
-      "西一": "XY",
-      "西二": "XE",
-      "西三": "XS",
-      "西四": "XSI",
-      "西五": "XW",
-      "国家": "GJ",
-      "玩伴": "WB",
-      "爱玩": "AW",
-      "东四": "DS"
+      "小马厂": "XMC",
+      "手帕口": "SPK"
     }
 
     Center.all.each do |c|

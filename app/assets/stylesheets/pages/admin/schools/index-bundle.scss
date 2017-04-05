@@ -138,8 +138,8 @@ input, label {
 		font-size: 14px;
 		color: #505050;
 		height:45px;
-		line-height: 45px;
 		text-align: center;
+		vertical-align: middle;
 		padding: 0;
 	}
 	.prepare {
@@ -306,4 +306,8 @@ input, label {
 }
 .mt {
   margin-top: 24px;
+}
+
+.school-name {
+	width: 55%;
 }

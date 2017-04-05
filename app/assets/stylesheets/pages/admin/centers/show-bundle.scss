@@ -278,8 +278,8 @@
 		font-size: 14px;
 		color: #505050;
 		height:45px;
-		line-height: 45px;
 		text-align: center;
+		vertical-align: middle;
 		padding: 0;
 	}
 	.unavailable {
@@ -315,4 +315,11 @@
 }
 .control-rows {
 	margin-top: 5px;
+}
+
+.courseinst-address {
+	width: 45%;
+}
+.bookinst-name {
+	width: 45%;
 }

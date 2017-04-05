@@ -46,10 +46,10 @@
                     %tbody
                       - @books[:data].each do |e|
                         %tr
-                          %td= link_to e[:name], "/admin/books/#{e[:id]}"
+                          %td#manage-book-name= link_to e[:name], "/admin/books/#{e[:id]}"
                           %td= e[:isbn]
                           %td= e[:author]
-                          %td= e[:stock]
+                          %td= e[:stock].to_s + "本"
                          
                 = render "admin/partials/auto_paginate", locals: { instance: @books, url: "/admin/books?transfer_keyword=#{@transfer_keyword}&book_keyword=#{@book_keyword}&", page: 'page'}
           #tab2.tab-pane  
@@ -75,7 +75,7 @@
                           %td= e[:out_time].present? ? Time.at(e[:out_time]).strftime("%Y.%m.%d") : ""
                           %td= e[:out_center]
                           %td= e[:in_center]
-                          %td= e[:count]
+                          %td= e[:count].to_s + "本"
                           %td{class: e[:status_class]}= e[:status_str]
                           %td
                             = link_to "详情", "/admin/books/#{e[:id]}/show_transfer"

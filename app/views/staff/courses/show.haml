@@ -160,7 +160,7 @@
                   - @participates[:data].each do |e|
                     %tr
                       %td.td-data= e.client.name_or_parent
-                      %td.td-data= e.client.address
+                      %td.td-data#client-address= e.client.address
                       %td.td-data= e.client.mobile
                       %td.td-data= e.status_str
                       %td.td-data

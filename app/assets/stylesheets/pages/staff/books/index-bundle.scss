@@ -84,7 +84,7 @@
 .tab-box {
 	border: 1px solid #ddd;
 	border-radius: 0 6px 6px 6px;
-	padding: 20px 0;
+	padding-top: 20px;
 }
 .nav-tabs {
 	margin-bottom: 0;
@@ -114,8 +114,8 @@
 		font-size: 14px;
 		color: #505050;
 		height:45px;
-		line-height: 45px;
 		text-align: center;
+		vertical-align: middle;
 		padding: 0;
 		.unshelve {
 			color: #969696;
@@ -403,4 +403,8 @@
 }
 .button-enabled {
 	background: #f7873d;
+}
+
+.book-short-name {
+	width: 45%;
 }

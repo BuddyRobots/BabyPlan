@@ -48,7 +48,7 @@
                     %tbody
                       - @books[:data].each do |b|
                         %tr{class: "book-record #{ b[:available] ? "available" : "unavailable" }", "data-id" => b[:id]}
-                          %td= link_to b[:name], "/staff/books/#{b[:id]}"
+                          %td.book-short-name= link_to b[:name], "/staff/books/#{b[:id]}"
                           %td= b[:isbn]
                           %td= b[:author]
                           %td= b[:stock].to_s + "本"
@@ -81,7 +81,7 @@
                       - @borrows[:data].each do |b|
                         %tr{data: {id: b.id.to_s, name: b.book.name, clientname: b.client.name_or_parent}}
                           %td= link_to b.client.name_or_parent, "/staff/clients/#{b.client.id.to_s}"
-                          %td= link_to b.book.name, "/staff/books/#{b.book.id.to_s}"
+                          %td.book-short-name= link_to b.book.name, "/staff/books/#{b.book.id.to_s}"
                           %td= b.client.mobile
                           %td= Time.at(b.borrow_at).strftime("%Y-%m-%d %H:%M")
                           %td{class: b.return_class}= b.expire_days_str

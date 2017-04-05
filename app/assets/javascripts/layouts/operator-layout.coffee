@@ -86,4 +86,6 @@ $ ->
     if code == 13
       confirm()
 
+  $("#jump_to_books").click ->
+    location.href = "/operator/books"
 

@@ -49,7 +49,7 @@
                           %td= ci[:date]
                           %td= ci[:center]
                           %td= ci[:school]
-                          %td= ci[:price_pay]
+                          %td= ci[:price_pay].to_s + "元"
                           
                 = render "admin/partials/auto_paginate", locals: { instance: @course_insts, url: "/admin/courses?keyword=#{@keyword}&", page: 'course_inst_page'}
 
@@ -76,7 +76,7 @@
                           %td= ci[:date]
                           %td= ci[:center]
                           %td= ci[:school]
-                          %td= ci[:price_pay]
+                          %td= ci[:price_pay].to_s + "元"
                           
                 = render "admin/partials/auto_paginate", locals: { instance: @unshelf_course_insts, url: "/admin/courses?keyword=#{@keyword}&profile=unshelf&", page: 'course_page'}
           

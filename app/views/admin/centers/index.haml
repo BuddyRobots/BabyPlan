@@ -37,7 +37,7 @@
               - @centers[:data].each do |c|
                 %tr{"data-id" => c[:id], class: c[:available] == true ? "available" : "unavailable"}
                   %td= link_to c[:name], "/admin/centers/#{c[:id]}"
-                  %td= c[:address]
+                  %td.manage-center-address= c[:address]
                   %td= c[:staffs_desc]
                   %td= c[:books_desc]
                   %td= c[:courses_desc]

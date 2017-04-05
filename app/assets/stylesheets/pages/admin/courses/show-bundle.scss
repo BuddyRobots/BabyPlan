@@ -374,8 +374,8 @@ h2 {
 		font-size: 14px;
 		color: #505050;
 		height:45px;
-		line-height: 45px;
 		text-align: center;
+		vertical-align: middle;
 		padding: 0;
 		.unshelve {
 			color: #969696;
@@ -820,4 +820,8 @@ h2 {
 }
 .notice-bottom {
 	margin-bottom: 15px;
+}
+
+#manage-course-address {
+	width: 45%;
 }
