@@ -43,10 +43,6 @@ class School
   end
 
   def update_info(school_info)
-    school = School.where(name: school_info[:name]).first
-    if !school.present?
-      return ErrCode::UNITY_NOT_EXIST
-    end
     self.update_attributes(
       {
         name: school_info[:name],

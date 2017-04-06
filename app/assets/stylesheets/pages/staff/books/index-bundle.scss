@@ -382,8 +382,19 @@
 	width: 20%;
 }
 .isbn-notice {
+	display: inline-block;
+	width: 77%;
 	font-size: 12px;
 	margin-left: 3px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	vertical-align: middle;
+}
+.isbn-notice:hover {
+	cursor: pointer;
+	overflow: auto;
+	white-space: pre-wrap;
 }
 .isbn-confirm-btn {
 	width: 100%;

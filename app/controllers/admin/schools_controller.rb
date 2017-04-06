@@ -39,6 +39,9 @@ class Admin::SchoolsController < Admin::ApplicationController
 
   def update
     @school = School.where(id: params[:id]).first
+    if !@school.present?
+      render json: retval_wrapper(ErrCode::UNITY_NOT_EXIST) and return
+    end
     retval = @school.update_info(params[:school])
     render json: retval_wrapper(retval) and return
   end

@@ -107,7 +107,6 @@ $ ->
         isbn: isbn
         },
       (data) ->
-        console.log(data)
         if !data.success
           if data.code == BOOK_NOT_EXIST
             $(".isbn-notice").text("未找到对应图书").css({color:"#d70c19", visibility:"visible"})

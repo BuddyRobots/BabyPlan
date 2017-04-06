@@ -228,4 +228,3 @@ $ ->
     photo = $("#back-edit-photo")[0]
     photo.src = URL.createObjectURL(event.target.files[0])
 
-

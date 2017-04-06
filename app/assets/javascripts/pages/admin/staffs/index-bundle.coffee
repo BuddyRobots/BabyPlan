@@ -1,5 +1,8 @@
 
 $ ->
+
+  window.modal_type = ""
+
   if window.profile == "operator"
     $('.nav-tabs a[href="#tab2"]').tab('show')
 
@@ -35,12 +38,20 @@ $ ->
     $(".entry-confirm-btn").removeClass("button-enabled")
 
   check_input = ->
-    if $(".entry-input").val().trim() == "" || $(".entry-input-num").val().trim() == "" || $("#entry-mobile").val().trim() == "" || $("#entry-password").val().trim() == ""
-      $(".entry-confirm-btn").addClass("button-disabled")
-      $(".entry-confirm-btn").removeClass("button-enabled")
-    else
-      $(".entry-confirm-btn").addClass("button-enabled")
-      $(".entry-confirm-btn").removeClass("button-disabled")
+    if window.modal_type == "new"
+      if $(".entry-input").val().trim() == "" || $(".entry-input-num").val().trim() == "" || $("#entry-mobile").val().trim() == "" || $("#entry-password").val().trim() == ""
+        $(".entry-confirm-btn").addClass("button-disabled").attr("disabled", true)
+        $(".entry-confirm-btn").removeClass("button-enabled")
+      else
+        $(".entry-confirm-btn").addClass("button-enabled").attr("disabled", false)
+        $(".entry-confirm-btn").removeClass("button-disabled")
+    if window.modal_type == "edit"
+      if $(".entry-input").val().trim() == "" || $(".entry-input-num").val().trim() == "" || $("#entry-mobile").val().trim() == ""
+        $(".entry-confirm-btn").addClass("button-disabled").attr("disabled", true)
+        $(".entry-confirm-btn").removeClass("button-enabled")
+      else
+        $(".entry-confirm-btn").addClass("button-enabled").attr("disabled", false)
+        $(".entry-confirm-btn").removeClass("button-disabled")
 
   $(".entry-input").keyup ->
     check_input() 
@@ -53,20 +64,27 @@ $ ->
     check_input()
 
   $(".add-btn").click ->
+    window.modal_type = "new"
     $("#entryModal").modal("show")
+    $("#admin-reset-password").text("初始密码")
     $("#confirm-entry").attr("data-btn", "new")
       
 
   $(".edit").click ->
+    window.modal_type = "edit"
     $("#entryModal").modal("show")
     $("#confirm-entry").attr("data-btn", "edit")
     name = $(this).closest("tr").attr("data-name")
     company = $(this).closest("tr").attr("data-company")
     mobile = $(this).closest("tr").attr("data-mobile")
     window.oid = $(this).closest("tr").attr("data-id")
+    window.password = $(this).closest("tr").attr("data-password")
     $("#entry-name").val(name)
     $("#entry-company").val(company)
     $("#entry-mobile").val(mobile)
+    $("#admin-reset-password").text("重置密码")
+    $(".entry-confirm-btn").addClass("button-enabled").attr("disabled", false)
+    $(".entry-confirm-btn").removeClass("button-disabled")
 
   $("#confirm-entry").click ->
     type = $(this).attr("data-btn")
@@ -81,8 +99,10 @@ $ ->
       $.page_notification("请输入正确的联系方式", 1000)
       return false
     if password == ""
-      $.page_notification("请输入密码", 1000)
-      return false
+      password = window.password
+    else
+      password = $("#entry-password").val().trim()
+
     if type == "new"
       $.postJSON(
         '/admin/staffs',

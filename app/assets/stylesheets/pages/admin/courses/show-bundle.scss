@@ -165,7 +165,20 @@ input, label, h5 {
 #date-span, #address-span {
 	width: 75%;
 }
-
+#address-span {
+	line-height: 20px;
+	height: 20px;
+	vertical-align: middle;
+	display: inline-block;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+#address-span:hover {
+	cursor: pointer;
+	white-space: pre-wrap;
+	overflow: visible;
+}
 
 .class-calendar {
 	float: left;

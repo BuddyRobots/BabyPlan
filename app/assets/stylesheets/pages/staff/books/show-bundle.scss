@@ -122,6 +122,20 @@
 	line-height: 30px;
 	margin: 0 20px 0 0;
 }
+#name-span {
+	line-height: 20px;
+	height: 20px;
+	vertical-align: middle;
+	display: inline-block;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+#name-span:hover {
+	cursor: pointer;
+	white-space: pre-wrap;
+	overflow: visible;
+}
 .edit-box, .edit-stock-box {
 	display: none;
 	margin-right: 20px;

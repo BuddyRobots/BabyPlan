@@ -160,11 +160,11 @@ $ ->
   $(".finish-btn").click ->
     stock = $("#stock-input").val()
     if stock == ""
-      $.page_notification("请补全信息")
+      $.page_notification("请补全信息", 1000)
       return
 
     if $.isNumeric(stock) == false || parseInt(stock) < 0
-      $.page_notification("请输入合法的库存数量")
+      $.page_notification("请输入合法的库存数量", 1000)
       return
     $.putJSON(
       '/staff/books/' + window.bid,
@@ -173,7 +173,7 @@ $ ->
       },
       (data) ->
         if data.success
-          $.page_notification("图书信息更新成功")
+          $.page_notification("图书信息更新成功", 1000)
           $(".unedit-stock-box").toggle()
           $(".shelve").toggle()
           $(".edit-stock-box").toggle()

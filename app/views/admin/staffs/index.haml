@@ -64,7 +64,7 @@
                         %th{:colspan => 2} 操&nbsp作
                     %tbody
                       - @operators[:data].each do |u|
-                        %tr{class: "#{u[:available] ? "available" : "unavailable"}", data: {id: u[:id], name: u[:name], company: u[:company], mobile: u[:mobile]} }
+                        %tr{class: "#{u[:available] ? "available" : "unavailable"}", data: {id: u[:id], name: u[:name], company: u[:company], mobile: u[:mobile], password: u[:password]}}
                           %td= u[:name]
                           %td= u[:company]
                           %td= u[:mobile]
@@ -103,7 +103,7 @@
             .outer-div
               %input.entry-input-num#entry-company{type: "text"}
           .input-box.mt
-            %p.entry-name 初始密码
+            %p.entry-name#admin-reset-password 初始密码
             .outer-div
               %input.entry-input-mobile#entry-password{type: "password"}
           .btn.entry-confirm-btn.button-disabled#confirm-entry{:type => "button"} 确定

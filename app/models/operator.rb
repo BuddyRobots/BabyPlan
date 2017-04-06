@@ -52,7 +52,7 @@ class Operator
       mobile: self.mobile,
       name: self.name,
       company: self.company,
-      password: self.password,
+      password: Encryption.decrypt_password(self.password),
       count: self.book_templates.count,
       available: self.available
     }

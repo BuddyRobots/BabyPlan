@@ -256,6 +256,12 @@ a{
   background-size:100%;
   background-position:center;
 }
+.endribbon {
+  @extend .redribbon;
+  background: image-url("web/endribbon") no-repeat;
+  background-size:100%;
+  background-position:center;
+}
 
 .choice-div {
   @extend .content;

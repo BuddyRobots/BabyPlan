@@ -10,8 +10,8 @@ class Staff::BooksController < Staff::ApplicationController
     @profile = params[:profile]
     @keyword = params[:keyword]
     if @keyword.present?
-      book_template = BookTemplate.where(name: /#{Regexp.escape(@keyword)}/).first
-      books = current_center.books.where(book_template_id: book_template.id).all
+      book_template = BookTemplate.where(name: /#{Regexp.escape(@keyword)}/)
+      books = current_center.books.where(name: book_template.name)
     else
       books = current_center.books.all
     end

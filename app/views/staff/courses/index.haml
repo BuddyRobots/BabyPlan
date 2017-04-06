@@ -55,7 +55,7 @@
                           %td= ci[:date]
                           %td= ci[:address]
                           %td= ci[:speaker]
-                          %td= ci[:price_pay]
+                          %td= ci[:price_pay].to_s + "元"
                           %td
                             - if ci[:available]
                               %a.set-available.link-available{:href => "javascript:void(0);"} 下架
@@ -87,7 +87,7 @@
                           %td= ci[:date]
                           %td= ci[:address]
                           %td= ci[:speaker]
-                          %td= ci[:price_pay]
+                          %td= ci[:price_pay].to_s + "元"
                           %td
                             - if ci[:available]
                               %a.set-available.link-available{:href => "javascript:void(0);"} 下架
