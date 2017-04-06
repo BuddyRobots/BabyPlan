@@ -132,8 +132,6 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
       @course_participate.update_attributes({
         trade_state: "SUCCESS"
       })
-    else
-      Bill.create_course_participate_item(@course_participate)
     end
     render json: retval_wrapper(nil) and return
   end
