@@ -10,12 +10,11 @@ class Staff::BooksController < Staff::ApplicationController
     @profile = params[:profile]
     @keyword = params[:keyword]
     if @keyword.present?
-      book_template = BookTemplate.where(name: /#{Regexp.escape(@keyword)}/)
-      books = current_center.books.where(name: book_template.name)
+      book_template_id_ary = BookTemplate.where(name: /#{Regexp.escape(@keyword)}/).map { |e| e.id.to_s }
+      books = current_center.books.where(:book_template_id.in => book_template_id_ary)
     else
       books = current_center.books.all
     end
-    # books = @keyword.present? ? current_center.books.where(name: /#{Regexp.escape(@keyword)}/) : current_center.books.all
     @books = auto_paginate(books)
     @books[:data] = @books[:data].map do |e|
       e.book_info
