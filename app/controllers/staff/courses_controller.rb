@@ -176,7 +176,8 @@ class Staff::CoursesController < Staff::ApplicationController
     if @course_inst.course_participates.present?
       render json: retval_wrapper(ErrCode::COURSE_INST_EXIST) and return
     end
-    @course_inst.update_attribute(:delete, params[:deleted])
+    @course_inst.update_attribute(:deleted, params[:deleted])
+    @course_inst.feed.destroy
     @course_inst.save
     render json: retval_wrapper(nil)
   end

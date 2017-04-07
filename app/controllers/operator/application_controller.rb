@@ -1,5 +1,6 @@
 class Operator::ApplicationController < ApplicationController
   layout 'layouts/operator'
+  skip_before_filter :refresh_session
   before_filter :refresh_operator_session, :require_sign_in
 
   attr_reader :current_operator
@@ -26,6 +27,9 @@ class Operator::ApplicationController < ApplicationController
         @current_operator = nil if @current_operator.try(:is_admin) != true
       end
     end
+    logger.info "!!!!!!!!!!!!!"
+    logger.info current_operator.inspect
+    logger.info "!!!!!!!!!!!!!"
     if !current_operator.nil?
       # If current user is not empty, set cookie
       cookies[:operator_key] = {

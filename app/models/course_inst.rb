@@ -16,10 +16,10 @@ class CourseInst
   field :date_in_calendar, type: Array, default: [ ]
   field :min_age, type: Integer
   field :max_age, type: Integer
-  # field :school, type: String
+  field :school, type: String
   field :start_course, type: Integer
   field :desc, type: String
-  field :delete, type: Boolean, default: false
+  field :deleted, type: Boolean, default: false
 
   has_one :photo, class_name: "Material", inverse_of: :course_inst_photo
   has_one :feed
@@ -35,7 +35,7 @@ class CourseInst
 
   belongs_to :school
   scope :is_available, ->{ where(available: true) }
-  default_scope { where(:delete.ne => true) }
+  default_scope { where(:deleted.ne => true) }
 
 
   def self.create_course_inst(staff, center, course_inst_info)
@@ -344,6 +344,7 @@ class CourseInst
           price_pay: ci.price_pay.blank? ? ci.course.price_pay : ci.price_pay,
           length: ci.length.blank? ? ci.course.length : ci.length,
           desc: ci.desc.blank? ? ci.course.desc : ci.desc,
+          start_course: DateTime.parse(ci.start_time).to_time,
           code: c.get_code 
           })
       end
@@ -351,3 +352,4 @@ class CourseInst
   end
 
 end
+  

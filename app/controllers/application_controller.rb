@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   # protect_from_forgery with: :exception
   protect_from_forgery with: :null_session, if: Proc.new { |c| c.request.format == 'application/json' }
-  before_filter :init
+  before_filter :init, :refresh_session
 
   attr_reader :current_user
   attr_reader :center_name
@@ -16,10 +16,12 @@ class ApplicationController < ActionController::Base
   def init
     @remote_ip = request.remote_ip
     @code = params[:code]
-    refresh_session(params[:auth_key] || cookies[:auth_key])
+    # refresh_session(params[:auth_key] || cookies[:auth_key])
   end
 
-  def refresh_session(auth_key)
+  # def refresh_session(auth_key)
+  def refresh_session
+    auth_key = params[:auth_key] || cookies[:auth_key]
     @current_user = auth_key.blank? ? nil : User.find_by_auth_key(auth_key)
     if !current_user.nil?
       # If current user is not empty, set cookie

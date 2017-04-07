@@ -17,7 +17,7 @@ class Book
   # field :tags, type: String
   field :stock, type: Integer
   field :available, type: Boolean
-  field :delete, type: Boolean, default: false
+  field :deleted, type: Boolean, default: false
 
   #ralationships specific for material
   has_one :cover, class_name: "Material", inverse_of: :cover_book
@@ -35,8 +35,9 @@ class Book
   has_many :reviews
   has_many :favorites
 
+  default_scope { where(:deleted.ne => true)}
   scope :is_available, ->{ where(available: true) }
-  default_scope { where(:delete.ne => true)}
+  
 
   def self.create_book(staff, center, book_info)
     book = center.books.where(isbn: book_info[:isbn]).first

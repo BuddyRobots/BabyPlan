@@ -8,7 +8,8 @@ class UserMobile::BooksController < UserMobile::ApplicationController
       @books = Book.is_available.any_in(center_id: @current_user.client_centers.is_available.map { |e| e.id.to_s})
       @books = @books.desc(:created_at)
       if @keyword.present?
-        @books = @books.where(name: /#{params[:keyword]}/)
+        book_template_id_ary = BookTemplate.where(name: /#{Regexp.escape(@keyword)}/).map { |e| e.id.to_s }
+        @books = @books.where(:book_template_id.in => book_template_id_ary)
       end
       if @lower.present? && @upper.present?
         @books = @books.where(:age_lower_bound.lt => @upper.to_i).where(:age_upper_bound.gt => @lower.to_i)
@@ -24,7 +25,8 @@ class UserMobile::BooksController < UserMobile::ApplicationController
     @books = Book.is_available.any_in(center_id: @current_user.client_centers.is_available.map { |e| e.id.to_s})
     @books = @books.desc(:created_at)
     if @keyword.present?
-      @books = @books.where(name: /#{params[:keyword]}/)
+      book_template_id_ary = BookTemplate.where(name: /#{Regexp.escape(@keyword)}/).map { |e| e.id.to_s }
+      @books = @books.where(:book_template_id.in => book_template_id_ary)
     end
     if @lower.present? && @upper.present?
       @books = @books.where(:age_lower_bound.lt => @upper.to_i).where(:age_upper_bound.gt => @lower.to_i)

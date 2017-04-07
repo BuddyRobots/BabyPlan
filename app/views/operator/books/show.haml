@@ -62,7 +62,7 @@
               %input.input-area.form-control#age-upper-bound-input{:type => "text"}  
           .form-inline.clearfix#tag-form
             %span.unedit-box.type-span.type-span-template
-            %label.input-caption 类型:
+            %label.input-caption 标签:
             - (@book.tags || "").split(',').each do |tag|
               %span.unedit-box.type-span.type-span-ele= tag
             %span.edit-box

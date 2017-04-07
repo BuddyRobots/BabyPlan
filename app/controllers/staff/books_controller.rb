@@ -207,9 +207,13 @@ class Staff::BooksController < Staff::ApplicationController
       render json: retval_wrapper(ErrCode::BOOK_NOT_EXIST) and return
     else
       book_template = BookTemplate.where(isbn: params[:isbn]).first
-      books = current_center.books.where(book_template_id: book_template.id).first 
+      books = current_center.books.unscoped.where(book_template_id: book_template.id).first 
       if books.present?
-        render json: retval_wrapper(ErrCode::BOOK_IN_CENTER) and return
+        if books.deleted == true
+          render json: retval_wrapper(ErrCode::BOOK_DELETE) and return
+        else
+          render json: retval_wrapper(ErrCode::BOOK_IN_CENTER) and return
+        end
       else
         book = BookTemplate.where(isbn: params[:isbn]).first
         retval = book.try(:name)
@@ -220,12 +224,19 @@ class Staff::BooksController < Staff::ApplicationController
 
   def isbn_add_book
     book_template = BookTemplate.where(isbn: params[:isbn]).first
-    @books = current_center.books.where(book_template_id: book_template.id).first
+    @books = current_center.books.unscoped.where(book_template_id: book_template.id).first
     if @books.present?
-      stock = @books.stock
-      @books.update_attribute(:stock, stock + params[:num].to_i)
-      @books.save
-      render json: retval_wrapper(nil) and return
+      if @books.deleted == true
+        @books.update_attributes(deleted: false, stock: params[:num].to_i)
+        @books.save
+        Feed.create(book_id: @books.id, name: @books.name, center_id: current_center.id, available: @books.available)
+        render json: retval_wrapper(nil) and return
+      else
+        stock = @books.stock
+        @books.update_attribute(:stock, stock + params[:num].to_i)
+        @books.save
+        render json: retval_wrapper(nil) and return
+      end
     else
       retval = Book.add_to_center(current_user, current_center, book_template, params[:num], params[:available])
       render json: retval_wrapper(retval) and return
@@ -237,7 +248,8 @@ class Staff::BooksController < Staff::ApplicationController
     if @book.stock != 0
       render json: retval_wrapper(ErrCode::BOOK_EXIST) and return
     end
-    @book.update_attribute(:delete, params[:deleted])
+    @book.update_attribute(:deleted, params[:deleted])
+    @book.feed.destroy
     @book.save
     render json: retval_wrapper(nil)
   end

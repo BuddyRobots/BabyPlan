@@ -43,6 +43,7 @@ module ErrCode
   UNITY_NOT_EXIST = -39
   OPERATOR_IS_EXIST = -40
   OPERATOR_NOT_EXIST = -41
+  BOOK_DELETE = -42
 
   def self.ret_false(code)
     msg = self.message(code)
@@ -135,6 +136,8 @@ module ErrCode
       "该录入员已存在"
     when OPERATOR_NOT_EXIST
       "该录入员不存在"
+    when BOOK_DELETE
+      "该绘本曾经上架过"
     else
       nil
     end
