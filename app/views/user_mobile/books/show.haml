@@ -67,7 +67,7 @@
           %span= Time.at(@book_borrow.borrow_at + BorrowSetting.first.borrow_duration * 86400 ).strftime("%Y-%m-%d")
         .item
           %span.borrow-time 归还时间:
-          %span= @book_borrow.return_at.present? ? Time.at(@book_borrow.return_at).strftime("%Y-%m-%d %H:%M") : "暂未归还"
+          %span{class: @book_borrows.status_class}= @book_borrow.return_at.present? ? Time.at(@book_borrow.return_at).strftime("%Y-%m-%d %H:%M") : "暂未归还"
       .item
         %span.book-vt 地址：
         %span#address= @book.center.address

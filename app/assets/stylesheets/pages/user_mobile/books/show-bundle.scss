@@ -169,6 +169,17 @@ a{
 	display: inline-block;
 	width: 80%;
 }
+.overtime {
+	color: #d70c19;
+}
+.unreturn {
+	color: #d70c19;
+}
+.returned {
+	color: #999;
+}
+
+
 
 @media screen and (max-width:640px) {
 	.content-area, #refundModal {
