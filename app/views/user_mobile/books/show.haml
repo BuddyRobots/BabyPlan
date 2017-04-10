@@ -64,7 +64,7 @@
           %span= Time.at(@book_borrow.borrow_at).strftime("%Y-%m-%d %H:%M")
         .item
           %span.borrow-time 应还时间:
-          %span= Time.at(@book_borrow.borrow_at + BorrowSetting.borrow_duration * 86400 ).strftime("%Y-%m-%d %H:%M")
+          %span= Time.at(@book_borrow.borrow_at + BorrowSetting.first.borrow_duration * 86400 ).strftime("%Y-%m-%d %H:%M")
         .item
           %span.borrow-time 归还时间:
           %span= Time.at(@book_borrow.return_at).strftime("%Y-%m-%d %H:%M")

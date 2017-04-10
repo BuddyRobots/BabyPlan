@@ -90,7 +90,7 @@ class BookBorrow
     if self.return_at.blank?
       return "unreturn"
     else
-      return "return"
+      return "returned"
     end
   end
 
