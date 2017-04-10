@@ -40,8 +40,8 @@ class UserMobile::BooksController < UserMobile::ApplicationController
 
   def show
     @back = params[:back]
-    @book = Book.where(id: params[:id]).first
-    @book_borrow = @current_user.book_borrows.where(book_id: @book.id).first
+    @book_borrow = BookBorrow.where(id: params[:id]).first
+    @book = @book_borrow.book
   end
 
   def favorite

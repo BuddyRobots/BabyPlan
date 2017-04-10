@@ -24,7 +24,7 @@
         %img.icon{src: asset_path("web/cry.png")}
     - else
       - @book_borrows.each do |e|
-        .details{data: {id: e.book.id.to_s}}
+        .details{data: {id: e.id.to_s}}
           .left-div
             %img.visit{:src => e.book.cover.nil? ? asset_path("web/book.png") : e.book.cover.path}
           .right-div
