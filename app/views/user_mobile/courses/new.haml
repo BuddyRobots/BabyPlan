@@ -40,7 +40,7 @@
       .price-div
         .price.clearfix
           %span.float-left 课程价格：
-          %span.float-right#public-price= @course.price_pay
+          %span.float-right#public-price= @course.price_pay.to_s + "元"
     - if @course.price_pay > 0
       %a.btn#wechat-pay{:href => "javascript:void(0);", :type => "button"}　微信支付
     - else
