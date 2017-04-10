@@ -112,6 +112,10 @@ a, button, input, optgroup, select, textarea {
 	outline: none;
 	margin-top: 0.8rem;
 }
+.click-btn:hover {
+	background: #227dda;
+	color: #fff;
+}
 
 
 @media screen and (max-width: 320px) {
