@@ -98,7 +98,7 @@ class BookBorrow
     if self.is_expired
       return "已逾期"
     end
-    return self.return_at.present? ? "已还" : Time.at(self.borrow_at + BorrowSetting.first.borrow_duration * 86400 ).strftime("%Y-%m-%d") + "归还"
+    return self.return_at.present? ? "已还" : "未还"
   end
 
   def expire_days
