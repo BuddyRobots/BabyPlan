@@ -250,6 +250,7 @@ class Staff::BooksController < Staff::ApplicationController
     end
     @book.update_attribute(:deleted, params[:deleted])
     @book.feed.destroy
+    @book.favorites.destroy
     @book.save
     render json: retval_wrapper(nil)
   end

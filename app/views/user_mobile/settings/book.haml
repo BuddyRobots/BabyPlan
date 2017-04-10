@@ -30,7 +30,7 @@
           .right-div
             %p.caption 
               = e.book.name
-              / %span 8月14日归还
+              %span{class: e.status_class}= e.status_str
             %p.article= truncate(strip_tags(e.book.desc).strip(), length: 50)
             .location-div
               %img.location{src: asset_path("web/location.png")}

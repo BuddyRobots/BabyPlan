@@ -178,6 +178,7 @@ class Staff::CoursesController < Staff::ApplicationController
     end
     @course_inst.update_attribute(:deleted, params[:deleted])
     @course_inst.feed.destroy
+    @course_inst.favorites.destroy
     @course_inst.save
     render json: retval_wrapper(nil)
   end

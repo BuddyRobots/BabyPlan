@@ -124,27 +124,9 @@ a{
 	background:white;
 	border-radius: 10px;
 	padding: 0 2.345%;
-	p {
-		font-size: 2.8em;
-		color:#3e3e3e;
-		line-height:150%;
-		padding-top: 2%;
-	}
-	h1 {
-		font-size: 3.6em;
-	}
-	h2 {
-		font-size: 3em;
-	}
-	h3 {
-		font-size: 2.4em;
-	}
-	h4 {
-		font-size: 1.8em;
-	}
-	h5 {
-		font-size: 1.4em;
-	}
+	font-size: 2.8em;
+	color:#3e3e3e;
+	line-height:150%;
 }
 
 .anotherbook {
@@ -179,6 +161,14 @@ a{
 	}
 }
 
+.book-vt {
+	display: inline-block;
+	vertical-align: top;
+}
+#address {
+	display: inline-block;
+	width: 85%;
+}
 
 @media screen and (max-width:640px) {
 	.content-area, #refundModal {

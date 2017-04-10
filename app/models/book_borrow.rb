@@ -83,6 +83,24 @@ class BookBorrow
     return self.return_at.present? ? Time.at(self.return_at).strftime("%Y-%m-%d %H:%M") : "暂未归还"
   end
 
+  def status_class
+    if self.status == self.is_expired
+      return "overtime"
+    end
+    if self.return_at.blank?
+      return "unreturn"
+    else
+      return "return"
+    end
+  end
+
+  def status_str
+    if self.is_expired
+      return "已逾期"
+    end
+    return self.return_at.present? ? "已还" : "暂未归还"
+  end
+
   def expire_days
     borrow_duration = BorrowSetting.first.try(:borrow_duration)
     if borrow_duration.blank?
