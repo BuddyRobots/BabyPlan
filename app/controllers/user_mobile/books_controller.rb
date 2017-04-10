@@ -12,7 +12,8 @@ class UserMobile::BooksController < UserMobile::ApplicationController
         @books = @books.where(:book_template_id.in => book_template_id_ary)
       end
       if @lower.present? && @upper.present?
-        @books = @books.where(:age_lower_bound.lt => @upper.to_i).where(:age_upper_bound.gt => @lower.to_i)
+        book_template_id_ary = BookTemplate.where(:age_lower_bound.lt => @upper.to_i).where(:age_upper_bound.gt => @lower.to_i).map { |e| e.id.to_s}
+        @books = @books.where(:book_template_id.in => book_template_id_ary)
       end
       @books = auto_paginate(@books)[:data]
     end
@@ -29,7 +30,8 @@ class UserMobile::BooksController < UserMobile::ApplicationController
       @books = @books.where(:book_template_id.in => book_template_id_ary)
     end
     if @lower.present? && @upper.present?
-      @books = @books.where(:age_lower_bound.lt => @upper.to_i).where(:age_upper_bound.gt => @lower.to_i)
+      book_template_id_ary = BookTemplate.where(:age_lower_bound.lt => @upper.to_i).where(:age_upper_bound.gt => @lower.to_i).map { |e| e.id.to_s}
+      @books = @books.where(:book_template_id.in => book_template_id_ary)
     end
     @books = auto_paginate(@books)[:data]
     @books = @books.map { |e| e.more_info }

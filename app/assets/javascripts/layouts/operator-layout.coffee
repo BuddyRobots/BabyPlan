@@ -32,11 +32,11 @@ $ ->
     if $("#password").val().trim() == "" ||
         $("#new-password").val().trim() == "" ||
         $("#confirm-password").val().trim() == ""
-      $("#confirm").addClass("button-disabled")
+      $("#confirm").addClass("button-disabled").attr("disabled", true)
       $("#confirm").removeClass("button-enabled")
     else
       $("#confirm").removeClass("button-disabled")
-      $("#confirm").addClass("button-enabled")
+      $("#confirm").addClass("button-enabled").attr("disabled", false)
 
   $("#password").keyup (event) ->
     code = event.which

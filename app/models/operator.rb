@@ -75,8 +75,8 @@ class Operator
   end
 
   def change_password(old_password, new_password)
-    return ErrCode::WRONG_PASSWORD if Encryption.encrypt_password(old_password) != self.password
-    self.update_attributes(password: Encryption.encrypt_password(new_password))
+    return ErrCode::WRONG_PASSWORD if Encryption.encrypt_password(old_password.to_s) != self.password
+    self.update_attributes(password: Encryption.encrypt_password(new_password.to_s))
     nil
   end
 end

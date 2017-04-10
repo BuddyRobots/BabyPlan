@@ -98,7 +98,6 @@ class CourseParticipate
     cp = self.create({
       course_inst_id: course_inst.id,
       client_id: client.id,
-      course_id: course_inst.course.id,
       prepay_id: ""
       })
     # cp.course_inst = course_inst
@@ -243,7 +242,7 @@ class CourseParticipate
       "appid" => APPID,
       "mch_id" => MCH_ID,
       "nonce_str" => nonce_str,
-      "body" => self.course_inst.course.name,
+      "body" => self.course_inst.name,
       "out_trade_no" => self.order_id,
       "total_fee" => Rails.env == "production" ? (self.price_pay * 100).round.to_s : 1.to_s,
       "spbill_create_ip" => remote_ip,
@@ -530,7 +529,7 @@ class CourseParticipate
     {
       id: self.course_inst.id.to_s,
       name: self.course_inst.name || self.course.name,
-      content: self.course.desc,
+      content: self.course_inst.desc,
       center: self.course_inst.center.name,
       photo: self.course_inst.photo,
       min_age: self.course_inst.min_age,
@@ -546,7 +545,7 @@ class CourseParticipate
       ele_name: self.course_inst.name || self.course.name,
       ele_id: self.course_inst.id.to_s,
       ele_photo: self.course_inst.photo.nil? ? ActionController::Base.helpers.asset_path("web/course.png") : self.course_inst.photo.path,
-      ele_content: ActionController::Base.helpers.truncate(ActionController::Base.helpers.strip_tags(self.course.desc).strip(), length: 50),
+      ele_content: ActionController::Base.helpers.truncate(ActionController::Base.helpers.strip_tags(self.course_inst.desc).strip(), length: 50),
       ele_center: self.course_inst.center.name,
       ele_age: self.course_inst.min_age.present? ? self.course_inst.min_age.to_s + "~" + self.course_inst.max_age.to_s + "岁" : "无",
       ele_price: self.course_inst.judge_price,
