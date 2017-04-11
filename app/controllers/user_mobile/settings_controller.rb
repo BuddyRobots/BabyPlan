@@ -21,6 +21,12 @@ class UserMobile::SettingsController < UserMobile::ApplicationController
     end
   end
 
+  def show
+    @back = params[:back]
+    @book_borrow = BookBorrow.where(id: params[:id]).first
+    @book = @book_borrow.book
+  end
+
   def pay_finished
     @deposit = current_user.deposit
     @deposit.update_attributes({pay_finished: true})

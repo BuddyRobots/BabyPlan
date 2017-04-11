@@ -38,10 +38,15 @@ class UserMobile::BooksController < UserMobile::ApplicationController
     render json: retval_wrapper({more: @books}) and return
   end
 
+  # def show
+  #   @back = params[:back]
+  #   @book_borrow = BookBorrow.where(id: params[:id]).first
+  #   @book = @book_borrow.book
+  # end
+
   def show
     @back = params[:back]
-    @book_borrow = BookBorrow.where(id: params[:id]).first
-    @book = @book_borrow.book
+    @book = Book.where(id: params[:id]).first
   end
 
   def favorite

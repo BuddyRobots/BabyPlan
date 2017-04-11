@@ -1,7 +1,7 @@
 $ ->
   $(".details").click ->
     bid = $(this).attr("data-id")
-    window.location.href = "/user_mobile/books/" + bid + "?back=setting"
+    window.location.href = "/user_mobile/settings/" + bid + "?back=setting"
 
   pay = ->
     WeixinJSBridge.invoke 'getBrandWCPayRequest', {

@@ -1,0 +1,214 @@
+html {
+	font-size: 16px;
+}
+body {
+	font-family:"Microsoft YaHei";
+	font-size: 62.5%;
+}
+body, p, img, div, ul, li, a, h1, h2, h3, h4, h5, {
+	margin:0;
+	padding:0;
+}
+a{
+	border:none;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	-webkit-tap-highlight-color:transparent;
+	outline:none；
+}
+.content-area {
+	width:100%;
+	max-width:640px;
+	margin:0 auto;
+	background: linear-gradient(
+    45deg, 
+    #fef29c 45%, 
+    #fcc204 45%, #fcc204 50%, 
+    #fef29c 50%, #fef29c 95%, 
+    #fcc204 95%, #fcc204);
+    background-size: 10px 10px;
+    padding-bottom: 2%;
+}
+.header {
+	position:relative;
+	width:100%;
+	.crocodile {
+		width:100%;
+		max-width:640px;
+		object-fit: contain;
+	}
+	.back {
+		position:absolute;
+		top:6.35%;
+		left:2.82%;
+		width:9.375%;
+		max-width: 60px;
+	}
+}
+
+.boxtitle {
+	position:relative;
+	width:100%;
+	text-align:center;
+	padding-bottom:3.13%;
+	.bookcloud {
+		background: image-url("bookcloud.png") no-repeat;
+		background-size:100%;
+		background-position:center;
+		width:69.4375%;
+		max-width:438px;
+		padding:5% 0;
+		margin:0 auto;
+		p {
+			font-size: 3.6em;
+			color:#d70c19;
+		}
+	}
+}
+.right-float {
+	padding-right: 3.2%;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	padding-top: 1%;
+	display: -webkit-flex;
+	-webkit-align-items: center;
+	-webkit-justify-content: flex-end;
+}
+.a-div {
+	width: 6.25%;
+	max-width: 40px;
+	margin-right: 2%;
+}
+.smallheart {
+	width: 100%;
+	max-width:40px;
+}
+.dialog {
+	@extend .smallheart;
+}
+.num {
+	font-size: 1.8em;
+	color:#666;
+}
+.content {
+	width: 95.3125%;
+	margin: 0 auto;
+	background: white;
+	border-radius: 10px;
+	padding: 3.12% 0 2% 2.5%;
+	font-size: 2.8em;
+	color: #3e3e3e;
+}
+.moveright {
+	margin-left: 9.6%;
+}
+.title-div {
+	position:relative;
+	width:100%;
+	background: image-url("linecloud.png") no-repeat;
+	background-size:41.406%;
+	background-position:center;
+	margin-top:4.69%;
+	margin-bottom:2.35%;
+	text-align:center;
+	p {
+		line-height:300%;
+		font-size: 3.6em;
+		color:#3e3e3e;
+	}
+}
+
+.article {
+	width:95.3125%;
+	margin:0 auto;
+	background:white;
+	border-radius: 10px;
+	padding: 0 2.345%;
+	font-size: 2.8em;
+	color:#3e3e3e;
+	line-height:150%;
+}
+
+.anotherbook {
+	position:relative;
+	width:95.3125%;
+	margin:0 auto;
+	background:white;
+	border-radius: 10px;
+	margin-bottom:3.125%;
+}
+.residual {
+	color: #d70c19;
+}
+.description {
+	position:absolute;
+	width:25.573%;
+	max-width:156px;
+	top:15.3%;
+	right:2.46%;
+	background:#d70c18;
+	border-radius:5px;
+	text-align:center;
+	padding-top:2.1%;
+	padding-bottom:1.1%;
+	a {
+		text-decoration: none;
+		font-size: 2.4em;
+		color:white;
+		&:hover {
+			color:orange;
+		}
+	}
+}
+
+.book-vt {
+	display: inline-block;
+	vertical-align: top;
+}
+#address {
+	display: inline-block;
+	width: 80%;
+}
+.overtime {
+	color: #d70c19;
+}
+.unreturn {
+	color: #d70c19;
+}
+.returned {
+	color: #999;
+}
+
+
+
+@media screen and (max-width:640px) {
+	.content-area, #refundModal {
+		font-size: 100%;
+	}
+}
+@media screen and (max-width: 560px) {
+    .content-area, #refundModal {
+        font-size: 85%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .content-area, #refundModal {
+        font-size: 67%;
+    }
+}
+@media screen and (max-width: 420px) {
+    .content-area, #refundModal {
+        font-size: 63%;
+    }
+}
+@media screen and (max-width: 400px) {
+    .content-area, #refundModal {
+        font-size: 56%;
+    }
+}
+@media screen and (max-width: 320px) {
+    .content-area, #refundModal {
+        font-size: 50%;
+    }
+}

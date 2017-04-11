@@ -1,6 +1,6 @@
 - content_for :app_head do
-  = javascript_include_tag "pages/user_mobile/books/show-bundle"
-  = stylesheet_link_tag "pages/user_mobile/books/show-bundle", :media => "all"
+  = javascript_include_tag "pages/user_mobile/settings/show-bundle"
+  = stylesheet_link_tag "pages/user_mobile/settings/show-bundle", :media => "all"
   :javascript
     window.book_id="#{@book.id.to_s}"
 
@@ -53,11 +53,16 @@
     .content
       .item 
         %p.center= @book.center.name
-      .item
-        %span 中心剩余
-        / %span.residual= @book.stock - @book.book_borrows.count
-        %span.residual= [0, @book.stock - @book.book_borrows.where(status: BookBorrow::NORMAL, return_at: nil).length].max
-        %span 本
+      - if @book_borrow.present?
+        .item
+          %span.borrow-time 借出时间:
+          %span= Time.at(@book_borrow.borrow_at).strftime("%Y-%m-%d %H:%M")
+        .item
+          %span.borrow-time 应还时间:
+          %span= Time.at(@book_borrow.borrow_at + BorrowSetting.first.borrow_duration * 86400 ).strftime("%Y-%m-%d")
+        .item
+          %span.borrow-time 归还时间:
+          %span{class: @book_borrow.status_class}= @book_borrow.return_at.present? ? Time.at(@book_borrow.return_at).strftime("%Y-%m-%d %H:%M") : "暂未归还"
       .item
         %span.book-vt 地址：
         %span#address= @book.center.address
