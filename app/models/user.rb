@@ -36,7 +36,6 @@ class User
   field :parent, type: String
   field :address, type: String
   field :created_by_staff, type: Boolean, default: false
-  field :first_signin, type: Boolean, default: true
   field :is_pregnant, type: Boolean
 
   # relationships specific for clients
@@ -100,7 +99,6 @@ class User
       if center.present? || center.class == Center
         u.client_centers << center
       end
-      u.first_signin = false
       u.save
     end
 
@@ -307,7 +305,7 @@ class User
   def client_info
     {
       id: self.id.to_s,
-      name: self.name_or_parent.present? ? self.name_or_parent : "未命名",
+      name: self.name_or_parent.present? ? self.name_or_parent : "未填写",
       gender: self.gender,
       age: self.birthday.present? ? Date.today.year - self.birthday.year : nil,
       parent: self.parent,
@@ -375,12 +373,6 @@ class User
       Material.create_avatar(self, url_path)
     end
     nil
-  end
-
-  def update_first_signin
-    cur_val = self.first_signin
-    self.update_attributes({first_signin: false}) if cur_val
-    cur_val
   end
 
   def has_expired_book

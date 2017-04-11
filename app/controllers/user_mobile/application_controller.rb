@@ -1,7 +1,7 @@
 class UserMobile::ApplicationController < ApplicationController
   layout 'layouts/user_mobile'
   # before_filter :require_sign_in, :get_current_center
-  before_filter :require_sign_in, :get_keyword
+  before_filter :require_sign_in, :get_keyword, :bind_openid
 
   def get_keyword
   	@keyword = params[:keyword].to_s
@@ -14,7 +14,9 @@ class UserMobile::ApplicationController < ApplicationController
           session[:user_return_to] = request.fullpath
           redirect_to new_user_mobile_session_path(code: ErrCode::REQUIRE_SIGNIN) and return
         end
-        redirect_to profile_user_mobile_settings_path + "?first_signin=true" and return if current_user.update_first_signin
+        if current_user.name_or_parent.blank? && request.path != "/user_mobile/settings/profile"
+          redirect_to profile_user_mobile_settings_path + "?unnamed=true" and return
+        end
       end
       format.json do
         if current_user.blank?
