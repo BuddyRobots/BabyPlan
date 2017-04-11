@@ -92,7 +92,7 @@
         %button.btn.unclick-btn{:type => "button"} 无剩余容量
       - else
         - if @course.price_pay > 0
-          %a.btn.click-btn{href: "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxfe4fd89f6f5f9f57&redirect_uri=#{CGI::escape('http://' + Rails.configuration.domain + '/user_mobile/courses/new/')}&response_type=code&scope=snsapi_base&state=#{@course.id.to_s}#wechat_redirect", :type => "button"} 我要报名
+          %a.btn.click-btn{href: "https://open.weixin.qq.com/connect/oauth2/authorize?appid=#{Rails.configuration.wechat_pay_app_id}&redirect_uri=#{CGI::escape('http://' + Rails.configuration.domain + '/user_mobile/courses/new/')}&response_type=code&scope=snsapi_base&state=#{@course.id.to_s}#wechat_redirect", :type => "button"} 我要报名
         - else
           %a.btn.click-btn{href: "/user_mobile/courses/new/?state=#{@course.id.to_s}"} 我要报名
     - elsif @course_participate.is_expired
@@ -102,7 +102,7 @@
         %button.btn.unclick-btn{:type => "button"} 无剩余容量
       - else
         - if @course.price_pay > 0
-          %a.btn.click-btn{href: "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxfe4fd89f6f5f9f57&redirect_uri=#{CGI::escape('http://' + Rails.configuration.domain + '/user_mobile/courses/new/')}&response_type=code&scope=snsapi_base&state=#{@course.id.to_s}#wechat_redirect", :type => "button"} 已过期，重新报名
+          %a.btn.click-btn{href: "https://open.weixin.qq.com/connect/oauth2/authorize?appid=#{Rails.configuration.wechat_pay_app_id}&redirect_uri=#{CGI::escape('http://' + Rails.configuration.domain + '/user_mobile/courses/new/')}&response_type=code&scope=snsapi_base&state=#{@course.id.to_s}#wechat_redirect", :type => "button"} 已过期，重新报名
         - else
           %a.btn.click-btn{href: "/user_mobile/courses/new/?state=#{@course.id.to_s}"} 已过期，重新报名
     - elsif @course_participate.is_success

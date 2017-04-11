@@ -5,10 +5,19 @@ class Deposit
   base_uri "https://api.mch.weixin.qq.com"
   format  :xml
 
-  APPID = "wxfe4fd89f6f5f9f57"
-  SECRET = "01265a8ba50284999508d680f7387664"
-  APIKEY = "1juOmajJrHO3f2NFA0a8dIYy2qAamtnK"
-  MCH_ID = "1388434302"
+  # APPID = "wxfe4fd89f6f5f9f57"
+  # SECRET = "01265a8ba50284999508d680f7387664"
+  # APIKEY = "1juOmajJrHO3f2NFA0a8dIYy2qAamtnK"
+  # MCH_ID = "1388434302"
+  # NOTIFY_URL = "http://#{Rails.configuration.domain}/user_mobile/courses/notify"
+
+  # APPID = "wxfe4fd89f6f5f9f57"
+  APPID = Rails.configuration.wechat_pay_app_id
+  # SECRET = "01265a8ba50284999508d680f7387664"
+  SECRET = Rails.configuration.wechat_pay_app_key
+  # APIKEY = "1juOmajJrHO3f2NFA0a8dIYy2qAamtnK"
+  APIKEY = Rails.configuration.wechat_pay_api_key
+  MCH_ID = Rails.configuration.wechat_mch_id
   NOTIFY_URL = "http://#{Rails.configuration.domain}/user_mobile/courses/notify"
 
   include Mongoid::Document
