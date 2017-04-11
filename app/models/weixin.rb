@@ -7,8 +7,10 @@ class Weixin
   base_uri "https://api.weixin.qq.com"
   format  :json
 
-  APPID = "wx69353371388b899b"
-  SECRET = "ac87a676aed464f1069f1b71e158ef68"
+  # APPID = "wx69353371388b899b"
+  APPID = Rails.configuration.wechat_app_id
+  # SECRET = "ac87a676aed464f1069f1b71e158ef68"
+  SECRET = Rails.configuration.wechat_app_key
 
   def self.get_access_token
     @@redis ||= Redis.new

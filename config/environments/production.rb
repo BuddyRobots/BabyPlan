@@ -75,4 +75,14 @@ Rails.application.configure do
   config.log_formatter = ::Logger::Formatter.new
 
   config.domain = "babyplan.bjfpa.org.cn"
+
+  config.wechat_app_id = "wx69353371388b899b"
+  config.wechat_app_key = "ac87a676aed464f1069f1b71e158ef68"
+
+  config.wechat_pay_app_id = "wxfe4fd89f6f5f9f57"
+  config.wechat_pay_app_key = "01265a8ba50284999508d680f7387664"
+
+  config.wechat_pay_api_key = "1juOmajJrHO3f2NFA0a8dIYy2qAamtnK"
+
+  config.wechat_mch_id = "1388434302"
 end
