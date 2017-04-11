@@ -12,9 +12,9 @@
     .desc
       .controls.controls-row
         %label.input-caption 迁出地点:
-        %span.unedit-box= @transfer.out_center.name
+        %span.unedit-box.text-ellipsis= @transfer.out_center.name
         %label.input-caption 迁入地点:
-        %span.unedit-box= @transfer.in_center.name
+        %span.unedit-box.text-ellipsis= @transfer.in_center.name
         %label.input-caption 迁移状态:
         %span.unedit-box= @transfer.status_str
         
