@@ -27,11 +27,13 @@ class UserMobile::ApplicationController < ApplicationController
   end
 
   def bind_openid
-    url = request.fullpath.split('?')[0]
-    if url != "/user_mobile/settings/get_openid" && url != "/user_mobile/settings/profile" && current_user.user_openid.blank?
-      @state = request.fullpath
-      # render template: "/user_mobile/settings/openid"
-      redirect_to "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx0bad9193f1246547&redirect_uri=#{CGI::escape('http://' + Rails.configuration.domain + '/user_mobile/settings/get_openid/')}&response_type=code&scope=snsapi_base&state=#{@state}#wechat_redirect"
+    if current_user.present?
+      url = request.fullpath.split('?')[0]
+      if url != "/user_mobile/settings/get_openid" && url != "/user_mobile/settings/profile" && current_user.user_openid.blank?
+        @state = request.fullpath
+        # render template: "/user_mobile/settings/openid"
+        redirect_to "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx0bad9193f1246547&redirect_uri=#{CGI::escape('http://' + Rails.configuration.domain + '/user_mobile/settings/get_openid/')}&response_type=code&scope=snsapi_base&state=#{@state}#wechat_redirect"
+      end
     end
   end
 end
