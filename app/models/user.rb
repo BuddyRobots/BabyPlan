@@ -307,7 +307,7 @@ class User
   def client_info
     {
       id: self.id.to_s,
-      name: self.name_or_parent,
+      name: self.name_or_parent.present? ? self.name_or_parent : "未命名",
       gender: self.gender,
       age: self.birthday.present? ? Date.today.year - self.birthday.year : nil,
       parent: self.parent,
