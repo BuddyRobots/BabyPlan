@@ -3,7 +3,7 @@ class Operator::SessionsController < Operator::ApplicationController
 
   # show the index page
   def index
-   
+     
   end
 
   # signin
