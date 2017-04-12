@@ -181,7 +181,7 @@ class Weixin
     data = {
       "nonce_str" => nonce_str,
       "mch_billno" => mch_billno,
-      "mch_id" => MCH_ID,
+      "mch_id" => config.wechat_mch_id,
       "wxappid" => APPID,
       "send_name" => "少儿创客",
       "re_openid" => openid,
@@ -190,7 +190,7 @@ class Weixin
       "wishing" => wishing,
       "client_ip" => "101.200.35.126",
       "act_name" => "退还押金",
-      "remark" => "少儿创客退款"
+      "remark" => "儿童中心退款"
     }
     signature = Util.sign(data, APIKEY)
     data["sign"] = signature
