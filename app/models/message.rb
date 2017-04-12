@@ -19,7 +19,7 @@ class Message
     course_participate.client.messages.create(content: content)
   end
 
-  def self.course_notice_create(type, content, errcode, errmsg, cousre_id)
+  def self.course_notice_create(type, content, errcode, errmsg, course_id)
     course_inst = CourseInst.where(id: course_id).first
     message = course_inst.message.create(
       message_type: type,
