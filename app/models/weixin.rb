@@ -167,8 +167,8 @@ class Weixin
     
     url = "/cgi-bin/message/template/send?access_token=#{Weixin.get_access_token}"
     response = Weixin.post(url, :body => body.to_json)
-    errmsg = response.errmsg
-    errcode = response.errcode
+    errmsg = response.body["errmsg"]
+    errcode = response.body["errcode"]
     Message.course_notice_create(Message::WECHAT, content, errcode, errmsg, course_id)
     if response.body["errcode"] == 0
       return true
