@@ -147,7 +147,7 @@ class Weixin
       "template_id": "XaIM2TKa7w78F8J2qB2bTtcVf_PlDq2F_wao3dznJTE",
       "data": {
         "first": {
-          "value": "您报名的课程有变动!",
+          "value": "尊敬的用户您好，您报名参加的课程有变动!",
           "color": "#173177"
         },
         "keyword1": {
