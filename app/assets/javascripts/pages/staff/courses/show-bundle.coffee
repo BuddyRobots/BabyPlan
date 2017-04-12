@@ -635,3 +635,8 @@ $ ->
             $.page_notification("该课程没有人员参与报名", 1000)
       )
 
+  $(".notice-message").mouseover ->
+    $(".display-message").fadetoggle("slow")
+  $(".notice-message").mouseout ->
+    $(".display-message").fadetoggle("slow")
+

@@ -831,6 +831,7 @@ h2 {
 	width: 100%;
 	background: #f7873d;
 	color: #fff;
+	margin-bottom: 15px;
 }
 .delivery-btn:hover {
 	color: #fff;
@@ -853,24 +854,11 @@ h2 {
 #client-address {
 	width: 45%;
 }
-.message-div {
-	margin: 15px 0;
-}
-.notice-vt {
-	display: inline-block;
-	vertical-align: top;
-}
+
 .notice-message {
-	width: 80%;
-	vertical-align: middle;
-	display: inline-block;
-	overflow: hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;
+	color: #173177;
 }
-.notice-message:hover {
-	cursor: pointer;
-	white-space: pre-wrap;
-	overflow: visible;
+.display-message {
+	display: none;
 }
 
