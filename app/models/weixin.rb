@@ -167,7 +167,7 @@ class Weixin
     
     url = "/cgi-bin/message/template/send?access_token=#{Weixin.get_access_token}"
     response = Weixin.post(url, :body => body.to_json)
-    logger.info response.body
+    Rails.logger.info response.body
     if response.body["errcode"] == 0
       return true
     else
