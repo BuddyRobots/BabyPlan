@@ -7,7 +7,7 @@ class Operator::ApplicationController < ApplicationController
   def require_sign_in
     respond_to do |format|
       format.html do
-        redirect_to operator_sessions_path(code: ErrCode::REQUIRE_SIGNIN) and return if current_operator.blank?
+        redirect_to operator_sessions_path(code: ErrCode::REQUIRE_SIGNIN) and return if current_operator.blank? || !current_operator.is_admin
       end
       format.json do
         if current_operator.blank?
