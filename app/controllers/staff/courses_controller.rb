@@ -188,10 +188,14 @@ class Staff::CoursesController < Staff::ApplicationController
     if @course_inst.course_participates.blank?
       render json: retval_wrapper(ErrCode::COURSE_INST_NOT_EXIST) and return
     end
-    @target = @course_inst.course_participates
+    @target = @course_inst.course_participates.map {|c| c.client}
+    @target_openid = @target.map {|t| t.user_openid}
     content = params[:content]
-    retval = Weixin.course_notice(@target, content)
-    render json: retval_wrapper(retval)
+    course_name = @course_inst.name
+    @target_openid.each do |t|
+      retval = Weixin.course_notice(t, content, course_name)
+    end
+    render json: retval_wrapper(nil)
   end
 
   def coursetable

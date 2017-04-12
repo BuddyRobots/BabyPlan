@@ -141,12 +141,9 @@ class Weixin
     return response.body
   end
 
-  def self.course_notice(cp, content)
-    user = cp.user_openid
-    course_name = cp.course_inst.name
-    content = content
+  def self.course_notice(cp, content, course_name)
     body = {
-      "touser": user,
+      "touser": cp,
       "template_id": "XaIM2TKa7w78F8J2qB2bTtcVf_PlDq2F_wao3dznJTE",
       "data": {
         "first": {
