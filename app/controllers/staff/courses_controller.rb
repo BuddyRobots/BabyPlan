@@ -194,8 +194,9 @@ class Staff::CoursesController < Staff::ApplicationController
     course_name = @course_inst.name
     course_id = params[:id]
     @target_openid.each do |t|
-      retval = Weixin.course_notice(t, content, course_name, course_id)
+      retval = Weixin.course_notice(t, content, course_name)
     end
+    Message.course_notice_create(Message::WECHAT, content, course_id)
     render json: retval_wrapper(nil)
   end
 

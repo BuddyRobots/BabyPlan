@@ -141,7 +141,7 @@ class Weixin
     return response.body
   end
 
-  def self.course_notice(cp, content, course_name, course_id)
+  def self.course_notice(cp, content, course_name)
     body = {
       "touser": cp,
       "template_id": "XaIM2TKa7w78F8J2qB2bTtcVf_PlDq2F_wao3dznJTE",
@@ -167,9 +167,6 @@ class Weixin
     
     url = "/cgi-bin/message/template/send?access_token=#{Weixin.get_access_token}"
     response = Weixin.post(url, :body => body.to_json)
-    errmsg = response.body["errmsg"]
-    errcode = response.body["errcode"]
-    Message.course_notice_create(Message::WECHAT, content, errcode, errmsg, course_id)
     if response.body["errcode"] == 0
       return true
     else
