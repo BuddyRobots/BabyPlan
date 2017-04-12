@@ -313,7 +313,7 @@ class CourseInst
   end
 
   def status_class
-    if DateTime.parse(self.start_time).future?
+    if Time.zone.parse(self.start_time).future?
       if self.capacity <= self.effective_signup_num
         return "greyribbon"
       elsif self.capacity - self.effective_signup_num <= 5 && self.capacity - self.effective_signup_num > 0
@@ -344,7 +344,7 @@ class CourseInst
           price_pay: ci.price_pay.blank? ? ci.course.price_pay : ci.price_pay,
           length: ci.length.blank? ? ci.course.length : ci.length,
           desc: ci.desc.blank? ? ci.course.desc : ci.desc,
-          start_course: DateTime.parse(ci.start_time).to_time,
+          start_course: Time.zone.parse(ci.start_time).to_time,
           code: c.get_code 
           })
       end
