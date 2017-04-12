@@ -33,6 +33,8 @@ class CourseInst
   has_many :favorites
   has_many :bills
 
+  has_many :messages
+
   belongs_to :school
   scope :is_available, ->{ where(available: true) }
   default_scope { where(:deleted.ne => true) }

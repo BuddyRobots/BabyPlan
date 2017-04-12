@@ -192,8 +192,9 @@ class Staff::CoursesController < Staff::ApplicationController
     @target_openid = @target.map {|t| t.user_openid}
     content = params[:content]
     course_name = @course_inst.name
+    course_id = params[:id]
     @target_openid.each do |t|
-      retval = Weixin.course_notice(t, content, course_name)
+      retval = Weixin.course_notice(t, content, course_name, course_id)
     end
     render json: retval_wrapper(nil)
   end
