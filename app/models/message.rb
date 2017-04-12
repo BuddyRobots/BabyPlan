@@ -2,8 +2,12 @@ class Message
   include Mongoid::Document
   include Mongoid::Timestamps
 
+  WECHAT = 1
+
   field :unread, type: Boolean, default: true
   field :content, type: String
+
+  field :message_type, type: Integer
 
   belongs_to :client, class_name: "User", inverse_of: :messages
 
