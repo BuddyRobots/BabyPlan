@@ -62,7 +62,7 @@ class BookInst
       ""
     else
       client = self.current_borrow.client
-      client.name + "，" + client.mobile
+      client.name_or_parent + "，" + client.mobile
     end
   end
 end

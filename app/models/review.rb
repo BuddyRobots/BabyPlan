@@ -19,7 +19,7 @@ class Review
     {
       score: self.score,
       content: self.content,
-      user_name: self.client.name,
+      user_name: self.client.name_or_parent,
       created_at: self.created_at,
       avatar_path: self.client.avatar.try(:path)
     }
