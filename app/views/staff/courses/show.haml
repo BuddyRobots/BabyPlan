@@ -297,6 +297,10 @@
             %textarea.text-div{placeholder: "课程变动的原因解释"}
           %p.notice-content.notice-bottom 北京市社区儿童中心祝您上课愉快
           .btn.delivery-btn{:type => "button"} 发送通知
-          
+          - if @course_inst.messages.present?
+            - @course_inst.messages.each do |m|
+              .message-div
+                %span.notice-vt 通知:
+                %span.notice-message= truncate(m.content, length: 30)
 
         

@@ -628,6 +628,7 @@ $ ->
       (data) -> 
         if data.success
           $("#noticeModal").hide()
+          $(".text-div").val("")
           $.page_notification("通知发送成功", 1000)
         else
           if data.code == COURSE_INST_NOT_EXIST
