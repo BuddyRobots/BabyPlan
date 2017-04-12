@@ -107,9 +107,9 @@
                 %p.cash
                   %span 当前借阅本数：
                   %span= @user.cur_books_num
-                .btn-div
-                  %button.btn#deposit-btn{class: @user.deposit_paid ? "hide" : ""}= "缴纳押金" + (BorrowSetting.first.try(:deposit) || 100).to_s + "元"
-                  %button.btn#deposit-refund{class: !@user.deposit_paid ? "hide" : ""} 退回押金
+                / .btn-div
+                /   %button.btn#deposit-btn{class: @user.deposit_paid ? "hide" : ""}= "缴纳押金" + (BorrowSetting.first.try(:deposit) || 100).to_s + "元"
+                /   %button.btn#deposit-refund{class: !@user.deposit_paid ? "hide" : ""} 退回押金
             .desc-div
               %p.title 滞纳金缴纳
               .cash-div

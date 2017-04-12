@@ -173,4 +173,41 @@ class Weixin
       return false
     end   
   end
+
+  def self.red_packet(user, total_amount, wishing)
+    openid = user.user_openid
+    nonce_str = Util.random_str(32)
+    mch_billno = Util.billno_random_str
+    data = {
+      "nonce_str" => nonce_str,
+      "mch_billno" => mch_billno,
+      "mch_id" => MCH_ID,
+      "wxappid" => APPID,
+      "send_name" => "少儿创客",
+      "re_openid" => openid,
+      "total_amount" => total_amount,
+      "total_num" => 1.to_i,
+      "wishing" => wishing,
+      "client_ip" => "101.200.35.126",
+      "act_name" => "退还押金",
+      "remark" => "少儿创客退款"
+    }
+    signature = Util.sign(data, APIKEY)
+    data["sign"] = signature
+    self.base_uri "https://api.mch.weixin.qq.com"
+    self.format :xml
+    url = "/mmpaymkttransfers/sendredpack"
+    response = Weixin.post(url, :body => Util.hash_to_xml(data))
+    self.base_uri "https://api.weixin.qq.com"
+    self.format :json
+
+    doc = Nokogiri::XML(response.body)
+    success = doc.search('result_code').children[0].text
+    if success == "SUCCESS"
+      return 1
+    else
+      errcode = doc.search('err_code').children[0].text
+      return errcode
+    end
+  end
 end
