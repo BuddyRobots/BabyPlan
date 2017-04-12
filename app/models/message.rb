@@ -21,7 +21,7 @@ class Message
 
   def self.course_notice_create(type, content, errcode, errmsg, course_id)
     course_inst = CourseInst.where(id: course_id).first
-    message = course_inst.message.create(
+    message = course_inst.messages.create(
       message_type: type,
       content: content,
       errcode: errcode,
