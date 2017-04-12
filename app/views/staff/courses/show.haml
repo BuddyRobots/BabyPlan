@@ -300,8 +300,8 @@
           - if @course_inst.messages.present?
             - @course_inst.messages.each do |m|
               .message-div
-                %span= m.created_at.strftime("%Y-%m-%d %H:%M") + "已发送"
-                %span.notice-message 课程调整通知:
+                %span.notice-date= m.created_at.strftime("%Y-%m-%d %H:%M") + "已发送"
+                %span.notice-message 课程调整通知
               %p.display-message= m.content
 
         
