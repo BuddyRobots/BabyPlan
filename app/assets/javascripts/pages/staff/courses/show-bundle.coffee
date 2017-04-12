@@ -636,7 +636,7 @@ $ ->
       )
 
   $(".notice-message").mouseover ->
-    $(".display-message").fadeIn("slow")
+    $(this).siblings(".display-message").fadeIn("slow")
   $(".notice-message").mouseout ->
-    $(".display-message").fadeOut("slow")
+    $(this).siblings(".display-message").fadeOut("slow")
 
