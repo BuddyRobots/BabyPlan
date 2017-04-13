@@ -133,7 +133,7 @@ a{
 	padding: 3.68%;
 	border-radius: 0;
 }
-#cancel {
+.btn {
 	position: fixed;
 	bottom: 0;
 	width: 100%;
@@ -143,6 +143,8 @@ a{
 	color: #fff;
 	padding: 3%;
 	border-radius: 0;
+	border: 0;
+	outline: 0;
 }
 .map-div {
 	width:95.625%;
