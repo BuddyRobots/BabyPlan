@@ -1,6 +1,6 @@
 class Operator::ApplicationController < ApplicationController
   layout 'layouts/operator'
-  skip_before_filter :refresh_session
+  # skip_before_filter :refresh_session
   before_filter :refresh_operator_session, :require_sign_in
 
   attr_reader :current_operator
