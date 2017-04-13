@@ -1,7 +1,7 @@
 class UserMobile::ApplicationController < ApplicationController
   layout 'layouts/user_mobile'
   # before_filter :require_sign_in, :get_current_center
-  before_filter :require_sign_in, :get_keyword, :bind_openid
+  before_filter :refresh_session, :require_sign_in, :get_keyword, :bind_openid
 
   def get_keyword
   	@keyword = params[:keyword].to_s
@@ -34,6 +34,36 @@ class UserMobile::ApplicationController < ApplicationController
         # render template: "/user_mobile/settings/openid"
         redirect_to "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx0bad9193f1246547&redirect_uri=#{CGI::escape('http://' + Rails.configuration.domain + '/user_mobile/settings/get_openid/')}&response_type=code&scope=snsapi_base&state=#{@state}#wechat_redirect"
       end
+    end
+  end
+
+  def refresh_session
+    auth_key = params[:auth_key] || cookies[:auth_key]
+    @current_user = auth_key.blank? ? nil : User.find_by_auth_key(auth_key)
+    if !current_user.nil?
+      # If current user is not empty, set cookie
+      if current_user.is_client
+        logger.info "AAAAAAAAAA"
+        cookies[:auth_key] = {
+          :value => auth_key,
+          :expires => 24.months.from_now,
+          :domain => :all
+        }
+        return true
+      else
+        logger.info "AAAAAAAAAA"
+        logger.info "AAAAAAAAAA"
+        cookies[:auth_key] = {
+          :value => auth_key,
+          :expires => Rails.env == "production" ? 5.minutes.from_now : 24.months.from_now,
+          :domain => :all
+        }
+        return true
+      end
+    else
+      # If current user is empty, delete cookie
+      cookies.delete(:auth_key, :domain => :all)
+      return false
     end
   end
 end

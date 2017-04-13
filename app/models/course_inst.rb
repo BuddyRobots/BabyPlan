@@ -89,7 +89,7 @@ class CourseInst
       address: self.address,
       date: self.date,
       course_participates: self.course_participates.size,
-      amount: self.bills.sum("amount")
+      amount: self.bills.sum("amount").to_i
     }
   end
 
