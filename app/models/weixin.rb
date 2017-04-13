@@ -174,7 +174,8 @@ class Weixin
     end   
   end
 
-  def self.red_packet(user, total_amount, wishing)
+  def self.red_packet(user_id, total_amount, wishing)
+    user = User.find(user_id)
     openid = user.user_openid
     nonce_str = Util.random_str(32)
     mch_billno = Util.billno_random_str
@@ -182,7 +183,7 @@ class Weixin
       "nonce_str" => nonce_str,
       "mch_billno" => mch_billno,
       "mch_id" => config.wechat_mch_id,
-      "wxappid" => APPID,
+      "wxappid" => config.wechat_app_id,
       "send_name" => "少儿创客",
       "re_openid" => openid,
       "total_amount" => total_amount,
@@ -192,7 +193,7 @@ class Weixin
       "act_name" => "退还押金",
       "remark" => "儿童中心退款"
     }
-    signature = Util.sign(data, APIKEY)
+    signature = Util.sign(data, config.wechat_pay_api_key)
     data["sign"] = signature
     self.base_uri "https://api.mch.weixin.qq.com"
     self.format :xml
