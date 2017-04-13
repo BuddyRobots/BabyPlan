@@ -182,10 +182,16 @@ class Center
         end
       end
     end
-    num = self.statistics.where(type: Statistic::CLIENT_NUM).
-                          where(:stat_date.gt => (Time.now - 10.weeks).to_i).
-                          asc(:stat_date).map { |e| e.value || 0 }
-    num = num.each_with_index.map { |e, i| i % 7 == 0 ? e : nil } .select { |e| e }
+    num = self.clients.where(:created_at.gt => Time.now - 10.weeks).asc(:created_at).map { |e| (e.created_at.to_i - Time.now.to_i + 10.weeks.to_i) / 1.weeks.to_i }
+    num = num.group_by { |e| e } .map { |k,v| v.length}
+    num.reverse!
+    total_num = User.count
+    num.map! { |e| total_num = total_num - e }
+    num.reverse!
+    # num = self.statistics.where(type: Statistic::CLIENT_NUM).
+    #                       where(:stat_date.gt => (Time.now - 10.weeks).to_i).
+    #                       asc(:stat_date).map { |e| e.value || 0 }
+    # num = num.each_with_index.map { |e, i| i % 7 == 0 ? e : nil } .select { |e| e }
     {
       gender: gender.to_a,
       age: age.to_a,
@@ -220,7 +226,7 @@ class Center
                                  where(:stat_date.lt => end_time).
                                  desc(:stat_date).map { |e| e.value || 0 }
     signup_num = signup_num.each_slice(day).map { |a| a }
-    signup_num = signup_num.blank? ? 0 : signup_num.map { |e| e.sum } .reverse
+    signup_num = signup_num.blank? ? [0] : signup_num.map { |e| e.sum } .reverse
     allowance = self.statistics.where(type: Statistic::ALLOWANCE).
                                 where(:stat_date.gt => start_time).
                                 where(:stat_date.lt => end_time).
@@ -273,7 +279,7 @@ class Center
                                  where(:stat_date.lt => end_time).
                                  desc(:stat_date).map { |e| e.value || 0 }
     borrow_num = borrow_num.each_slice(day).map { |a| a }
-    borrow_num = borrow_num.blank? ? 0 : borrow_num.map { |e| e.sum } .reverse
+    borrow_num = borrow_num.blank? ? [0] : borrow_num.map { |e| e.sum } .reverse
     stock_num = self.statistics.where(type: Statistic::STOCK).
                                 where(:stat_date.gt => start_time).
                                 where(:stat_date.lt => end_time).

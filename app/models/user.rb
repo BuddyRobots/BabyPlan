@@ -422,7 +422,7 @@ class User
         end
       end
     end
-    num = User.where(:created_at.gt => Time.now - 10.weeks).asc(:created_at).map { |e| (e.created_at.to_i - Time.now.to_i + 10.weeks.to_i) / 1.weeks.to_i }
+    num = User.client.where(:created_at.gt => Time.now - 10.weeks).asc(:created_at).map { |e| (e.created_at.to_i - Time.now.to_i + 10.weeks.to_i) / 1.weeks.to_i }
     num = num.group_by { |e| e } .map { |k,v| v.length}
     num.reverse!
     total_num = User.count
