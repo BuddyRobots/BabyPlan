@@ -4,6 +4,7 @@ require 'httparty'
 class Weixin
 
   include HTTParty
+  pkcs12 File.read('public/cert/apiclient_cert.p12'), Rails.configuration.wechat_mch_id
   base_uri "https://api.weixin.qq.com"
   format  :json
 
