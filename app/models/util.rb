@@ -1,4 +1,6 @@
 class Util
+  MCH_ID = Rails.configuration.wechat_mch_id
+  
   def self.random_str(length)
     o = [('a'..'z'), ('A'..'Z'), ('0'..'9')].map { |i| i.to_a }.flatten
     str = (0...length).map { o[rand(o.length)] }.join
@@ -17,7 +19,7 @@ class Util
   end
 
   def self.billno_random_str
-    mch_id = "1445887202"
+    mch_id = MCH_ID
     date = Time.now.strftime("%Y%m%d%H%M%S")
     ran = Random.rand(1...10000).to_s
     str = mch_id + date + ran

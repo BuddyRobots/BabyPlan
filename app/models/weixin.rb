@@ -11,6 +11,8 @@ class Weixin
   APPID = Rails.configuration.wechat_app_id
   # SECRET = "ac87a676aed464f1069f1b71e158ef68"
   SECRET = Rails.configuration.wechat_app_key
+  MCH_ID = Rails.configuration.wechat_mch_id
+  APIKEY = Rails.configuration.wechat_pay_api_key
 
   def self.get_access_token
     @@redis ||= Redis.new
@@ -182,8 +184,8 @@ class Weixin
     data = {
       "nonce_str" => nonce_str,
       "mch_billno" => mch_billno,
-      "mch_id" => config.wechat_mch_id,
-      "wxappid" => config.wechat_app_id,
+      "mch_id" => MCH_ID,
+      "wxappid" => APPID,
       "send_name" => "少儿创客",
       "re_openid" => openid,
       "total_amount" => total_amount,
@@ -193,7 +195,7 @@ class Weixin
       "act_name" => "退还押金",
       "remark" => "儿童中心退款"
     }
-    signature = Util.sign(data, config.wechat_pay_api_key)
+    signature = Util.sign(data, APIKEY)
     data["sign"] = signature
     self.base_uri "https://api.mch.weixin.qq.com"
     self.format :xml
