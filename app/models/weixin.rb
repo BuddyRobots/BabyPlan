@@ -208,7 +208,7 @@ class Weixin
     doc = Nokogiri::XML(response.body)
     success = doc.search('result_code').children[0].text
     if success == "SUCCESS"
-      return 1
+      return "ok"
     else
       errcode = doc.search('err_code').children[0].text
       return errcode

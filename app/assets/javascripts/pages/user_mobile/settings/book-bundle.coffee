@@ -35,3 +35,15 @@ $ ->
 
   $("#confirm-pay").click ->
     pay()
+
+  $("#deposit").click ->
+    $.postJSON(
+      '/user_mobile/settings/refund_deposit',
+      {},
+      (data) ->
+        if data.str == "ok"
+          $.mobile_page_notification("退款成功", 1000)
+          setTimeout(location.href = "/user_mobile/settings/book", 1200)
+        else
+          $.mobile_page_notification("服务器错误")
+      )

@@ -109,4 +109,15 @@ class UserMobile::SettingsController < UserMobile::ApplicationController
     current_user.save
     redirect_to params[:state].blank? ? "/user_mobile/feeds" : params[:state]
   end
+
+  def refund_deposit
+    if @current_user.present?
+      user_id = @current_user.id
+      total_amount = @current_user.deposit.amount
+      wishing = "退还绘本押金"
+      # retval = Weixin.red_packet(user_id, total_amount, wishing)
+      retval = "ok"
+      render json: retval_wrapper(str: retval) and return
+    end
+  end
 end
