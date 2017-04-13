@@ -25,6 +25,6 @@
     .map-div
       #map-container
     - if @follow
-      %button.btn#cancel{:type => "button", href: "/user_mobile/centers/#{@center.id.to_s}/set_follow?follow=false"} 取消关注
+      .btn#cancel{:type => "button", href: "/user_mobile/centers/#{@center.id.to_s}/set_follow?follow=false"} 取消关注
     - else
-      %button.btn#cancel{:type => "button", href: "/user_mobile/centers/#{@center.id.to_s}/set_follow?follow=true"} 关注此中心
+      .btn#cancel{:type => "button", href: "/user_mobile/centers/#{@center.id.to_s}/set_follow?follow=true"} 关注此中心
