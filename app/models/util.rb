@@ -17,7 +17,7 @@ class Util
   end
 
   def self.billno_random_str
-    mch_id = Rails.config.wechat_mch_id
+    mch_id = "1445887202"
     date = Time.now.strftime("%Y%m%d%H%M%S")
     ran = Random.rand(1...10000).to_s
     str = mch_id + date + ran
