@@ -314,6 +314,7 @@ Rails.application.routes.draw do
         post :pay_finished
         post :pay_failed
         get :get_openid
+        post :fefund_deposit
       end
     end
   end
