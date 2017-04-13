@@ -24,7 +24,8 @@
     %p#linkaddress= @center.address
     .map-div
       #map-container
-    - if @follow
-      %a.btn#cancel{:type => "button", href: "/user_mobile/centers/#{@center.id.to_s}/set_follow?follow=false"} 取消关注
-    - else
-      %a.btn#cancel{:type => "button", href: "/user_mobile/centers/#{@center.id.to_s}/set_follow?follow=true"} 关注此中心
+    .btn-div
+      - if @follow
+        %a.btn#cancel{:type => "button", href: "/user_mobile/centers/#{@center.id.to_s}/set_follow?follow=false"} 取消关注
+      - else
+        %a.btn#cancel{:type => "button", href: "/user_mobile/centers/#{@center.id.to_s}/set_follow?follow=true"} 关注此中心
