@@ -226,7 +226,7 @@ class Center
                                  where(:stat_date.lt => end_time).
                                  desc(:stat_date).map { |e| e.value || 0 }
     signup_num = signup_num.each_slice(day).map { |a| a }
-    signup_num = signup_num.blank? ? 0 : signup_num.map { |e| e.sum } .reverse
+    signup_num = signup_num.blank? ? [0] : signup_num.map { |e| e.sum } .reverse
     allowance = self.statistics.where(type: Statistic::ALLOWANCE).
                                 where(:stat_date.gt => start_time).
                                 where(:stat_date.lt => end_time).
@@ -279,7 +279,7 @@ class Center
                                  where(:stat_date.lt => end_time).
                                  desc(:stat_date).map { |e| e.value || 0 }
     borrow_num = borrow_num.each_slice(day).map { |a| a }
-    borrow_num = borrow_num.blank? ? 0 : borrow_num.map { |e| e.sum } .reverse
+    borrow_num = borrow_num.blank? ? [0] : borrow_num.map { |e| e.sum } .reverse
     stock_num = self.statistics.where(type: Statistic::STOCK).
                                 where(:stat_date.gt => start_time).
                                 where(:stat_date.lt => end_time).
