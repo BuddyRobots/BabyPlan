@@ -93,4 +93,8 @@ class Feed
       ele_status_class: self.course_inst.present? ? self.course_inst.status_class : ""
     }
   end
+
+  def update_name(name)
+    self.update_attribute(name, name)
+  end
 end
