@@ -121,7 +121,8 @@ class CourseInst
         desc: course_inst_info["desc"]
       }
     )
-    self.feed.update_name(course_inst_info["name"])
+    self.feed.name = course_inst_info["name"]
+    self.save
     nil
   end
 
