@@ -293,7 +293,7 @@ $ ->
     address = $("#course-address").val()
     min_age = $("#min-age").val()
     max_age = $("#max-age").val()
-    school = $("#course-school").val()
+    school_id = $("#course-school").val()
     school_name = $("#course-school option:selected").text()
     desc = editor.$txt.html()
     code = $("#num-span").text()
@@ -330,7 +330,7 @@ $ ->
           date_in_calendar: date_in_calendar
           min_age: min_age
           max_age: max_age
-          school: school
+          school_id: school_id
           start_course: start_course
           desc: desc
         }
