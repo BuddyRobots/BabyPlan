@@ -8,27 +8,25 @@
     window.lng = "#{@center.lng}"
 
 - content_for :app_content do
-  
 
 
-  
-  / .content-area
-  /   .header
-  /     %img.photo{:src => @center.photo.nil? ? asset_path("web/center.png") : @center.photo.path }
-  /     / %a{href: "#", onClick: "history.go(-1);return true;"}
-  /     %a{href: user_mobile_centers_path}
-  /       %img.back{src: asset_path("haidiancenter/back.png")}
-  /   .cloud
-  /     %p#center-name=@center.name
-  /   .description
-  /     %p
-  /       = @center.desc.to_s.html_safe
-  /   .cloud
-  /     %p 详细地址
-  /   %p#linkaddress= @center.address
-  /   .map-div
-  /     #map-container
-  /   - if @follow
-  /     %a.btn#cancel{:type => "button", href: "/user_mobile/centers/#{@center.id.to_s}/set_follow?follow=false"} 取消关注
-  /   - else
-  /     %a.btn#cancel{:type => "button", href: "/user_mobile/centers/#{@center.id.to_s}/set_follow?follow=true"} 关注此中心
+  .content-area
+    .header
+      %img.photo{:src => @center.photo.nil? ? asset_path("web/center.png") : @center.photo.path }
+      / %a{href: "#", onClick: "history.go(-1);return true;"}
+      %a{href: user_mobile_centers_path}
+        %img.back{src: asset_path("haidiancenter/back.png")}
+    .cloud
+      %p#center-name=@center.name
+    .description
+      %p
+        = @center.desc.to_s.html_safe
+    .cloud
+      %p 详细地址
+    %p#linkaddress= @center.address
+    .map-div
+      #map-container
+    - if @follow
+      %a.btn#cancel{href: "/user_mobile/centers/#{@center.id.to_s}/set_follow?follow=false"} 取消关注
+    - else
+      %a.btn#cancel{href: "/user_mobile/centers/#{@center.id.to_s}/set_follow?follow=true"} 关注此中心
