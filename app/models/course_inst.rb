@@ -117,6 +117,7 @@ class CourseInst
         max_age: course_inst_info["max_age"],
         school_id: course_inst_info["school_id"],
         start_course: course_inst_info["start_course"],
+        name: course_inst_info["name"],
         desc: course_inst_info["desc"]
       }
     )
