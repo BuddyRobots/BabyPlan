@@ -277,12 +277,20 @@ class Book
       time_unit = "月数"
       day = 30
     end
-    borrow_num = Statistic.where(type: Statistic::BORROW_NUM).
-                           where(:stat_date.gt => start_time).
-                           where(:stat_date.lt => end_time).
-                           desc(:stat_date).map { |e| e.value }
-    borrow_num = borrow_num.each_slice(day).map { |a| a }
-    borrow_num = borrow_num.map { |e| e.sum } .reverse
+
+    interval = day.days.to_i
+
+    bbs = BookBorrow.where(:created_at.gt => start_time)
+                    .where(:created_at.lt => end_time)
+                    .asc(:created_at)
+    dp_num = (end_time - start_time) / interval
+    bb_num = bbs.map { |e| (e.created_at.to_i - (start_time.to_i)) / interval }
+    bb_num = bb_num.group_by { |e| e }
+    bb_num.each { |k,v| bb_num[k] = v.length }
+    bb_num = (0 .. dp_num - 1).to_a.map { |e| bb_num[e].to_i }
+    bb_num.reverse!
+
+
     stock_num = Statistic.where(type: Statistic::STOCK).
                           where(:stat_date.gt => start_time).
                           where(:stat_date.lt => end_time).
@@ -313,9 +321,9 @@ class Book
       borrow_center = borrow_center[0..max_num - 2] + [ele]
     end
     {
-      total_borrow: borrow_num.sum,
+      total_borrow: bb_num.sum,
       borrow_time_unit: time_unit,
-      borrow_num: borrow_num,
+      borrow_num: [1,2,3,4],
       stock_time_unit: time_unit,
       stock_num: stock_num,
       off_shelf_num: off_shelf_num,

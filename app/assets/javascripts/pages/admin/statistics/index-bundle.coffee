@@ -140,6 +140,7 @@ $ ->
         $("#total-signup").text(data.stat.total_signup)
         $("#total-money").text(data.stat.total_money)
 
+
         $('#register-statistics').highcharts
             title:
               text: null
@@ -296,6 +297,7 @@ $ ->
     $.getJSON "/admin/statistics/book_stats?duration=" + duration + "&start_date=" + start_date + "&end_date=" + end_date, (data) ->
       if data.success
         $("#total-borrow").text(data.stat.total_borrow)
+        console.log data.stat.borrow_num
         $('#borrow-statistics').highcharts
             title:
               text: null
