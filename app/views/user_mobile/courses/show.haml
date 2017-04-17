@@ -49,9 +49,9 @@
         .left-div
           %span 主讲人：
           %span= @course.speaker
-        / .right-div
-        /   %span 授课单位：
-        /   %span= @course.school
+        .right-div
+          %span 授课单位：
+          %span= @course.school.try(:name)
       .item-div.clearfix
         %span.class_time 上课时间：
         %span.desc_time= @course.date

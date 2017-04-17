@@ -59,8 +59,8 @@ $ ->
   })
 
 
-  check_course_input = (code, capacity, price, price_pay, length, date, speaker, address, date_in_calendar, min_age, max_age, school) ->
-    if code == "" || capacity == "" || price_pay == "" || length == "" || date == "" || speaker == "" || address == "" || school == ""
+  check_course_input = (code, capacity, price, price_pay, length, date, speaker, address, date_in_calendar, min_age, max_age, school_id) ->
+    if code == "" || capacity == "" || price_pay == "" || length == "" || date == "" || speaker == "" || address == "" || school_id == ""
       $.page_notification("请将信息补充完整")
       return false
     if !$.isNumeric(capacity) || parseInt(capacity) <= 0
@@ -98,10 +98,10 @@ $ ->
     address = $("#course-address").val()
     min_age = $("#min-age").val()
     max_age = $("#max-age").val()
-    school = $("#school_id").val()
+    school_id = $("#school_id").val()
     desc = editor.$txt.html()
     code = $(".num-box").text()
-    console.log(school)
+    console.log(school_id)
     fc_events = $('#calendar').fullCalendar('clientEvents')
     date_in_calendar = []
 
@@ -110,7 +110,7 @@ $ ->
       (index, fc_event) ->
         date_in_calendar.push(fc_event.start._i + "," + fc_event.end._i)
     )
-    ret = check_course_input(code, capacity, price, price_pay, length, date, speaker, address, date_in_calendar, min_age, max_age, school)
+    ret = check_course_input(code, capacity, price, price_pay, length, date, speaker, address, date_in_calendar, min_age, max_age, school_id)
     if ret == false
       return
 
@@ -134,7 +134,7 @@ $ ->
         date_in_calendar: date_in_calendar
         min_age: min_age
         max_age: max_age
-        school: school
+        school_id: school_id
         desc: desc
         start_course: start_course
       },

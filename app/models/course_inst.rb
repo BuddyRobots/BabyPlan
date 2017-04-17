@@ -16,7 +16,7 @@ class CourseInst
   field :date_in_calendar, type: Array, default: [ ]
   field :min_age, type: Integer
   field :max_age, type: Integer
-  field :school, type: String
+  field :school_id, type: String
   field :start_course, type: Integer
   field :desc, type: String
   field :deleted, type: Boolean, default: false
@@ -66,7 +66,7 @@ class CourseInst
       date_in_calendar: course_inst_info[:date_in_calendar],
       min_age: course_inst_info[:min_age],
       max_age: course_inst_info[:max_age],
-      school: course_inst_info[:school],
+      school_id: course_inst_info[:school_id],
       start_course: course_inst_info[:start_course],
       desc: course_inst_info[:desc]
     })
@@ -115,11 +115,13 @@ class CourseInst
         date_in_calendar: course_inst_info["date_in_calendar"],
         min_age: course_inst_info["min_age"],
         max_age: course_inst_info["max_age"],
-        school: course_inst_info["school"],
+        school_id: course_inst_info["school_id"],
         start_course: course_inst_info["start_course"],
+        name: course_inst_info["name"],
         desc: course_inst_info["desc"]
       }
     )
+    self.feed.update_attributes({name: course_inst_info["name"]})
     nil
   end
 

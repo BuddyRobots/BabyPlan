@@ -244,6 +244,9 @@ $ ->
     $("#min-age").val(window.min_age)
     $("#max-age").val(window.max_age)
 
+    $("#name-span").toggle()
+    $("#course-name").val(window.course_name)
+
     $(".edit-btn").toggle()
     $(".finish-btn").toggle()
     $(".wangedit-area").toggle()
@@ -293,10 +296,12 @@ $ ->
     address = $("#course-address").val()
     min_age = $("#min-age").val()
     max_age = $("#max-age").val()
-    school = $("#course-school").val()
+    school_id = $("#course-school").val()
     school_name = $("#course-school option:selected").text()
     desc = editor.$txt.html()
     code = $("#num-span").text()
+
+    name = $("#course-name").val()
     
     fc_events = $('#calendar').fullCalendar('clientEvents')
     date_in_calendar = []
@@ -320,6 +325,7 @@ $ ->
       {
         course_inst: {
           code: code
+          name: name
           capacity: capacity
           price: price
           price_pay: price_pay
@@ -330,7 +336,7 @@ $ ->
           date_in_calendar: date_in_calendar
           min_age: min_age
           max_age: max_age
-          school: school
+          school_id: school_id
           start_course: start_course
           desc: desc
         }
@@ -362,6 +368,8 @@ $ ->
           $("#address-span").text(address)
           $("#school-span").text(school_name)
 
+          $("#name-span").show().text(name)
+
           $(".introduce-details").text("")
           $(".introduce-details").append(desc)
           window.min_age = min_age
@@ -384,6 +392,7 @@ $ ->
 
           if has_photo
             $("#upload-photo-form").submit()
+          location.href = "/staff/courses/" + window.cid
         else
           if data.code == COURSE_DATE_UNMATCH
             $.page_notification "更新失败，课次与上课时间不匹配"
