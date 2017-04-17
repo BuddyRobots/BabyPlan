@@ -121,7 +121,6 @@ class CourseInst
         desc: course_inst_info["desc"]
       }
     )
-    # self.feed.update_attributes({name: course_inst_info["name"]})
     self.feed.update_attribute(:name, course_inst_info["name"])
     nil
   end
