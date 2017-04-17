@@ -72,6 +72,7 @@ class CourseParticipate
 
   belongs_to :course_inst
   belongs_to :course
+  belongs_to :center
   belongs_to :client, class_name: "User", inverse_of: :course_participates
 
   scope :paid, ->{ where(trade_state: "SUCCESS") }
@@ -101,6 +102,7 @@ class CourseParticipate
     cp = self.create({
       course_inst_id: course_inst.id,
       client_id: client.id,
+      center_id: course_inst.center.id,
       prepay_id: ""
       })
     # cp.course_inst = course_inst
@@ -555,5 +557,11 @@ class CourseParticipate
       ele_date:  ActionController::Base.helpers.truncate(self.course_inst.date.strip(), length: 25),
       ele_status: self.course_inst.status_class
     }
+  end
+
+  def self.migrate
+    CourseParticipate.all.each do |e|
+      e.update_attribute(:center_id, e.course_inst.center.id)
+    end
   end
 end

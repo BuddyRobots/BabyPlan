@@ -57,7 +57,7 @@ $ ->
             name: '人数'
             data: data.stat.age
           } ]
-
+        console.log data.stat.num
         $('#nums-statistics').highcharts
             title:
               text: null
@@ -66,7 +66,6 @@ $ ->
                 text: '周数'
             yAxis:
               title: text: '儿童数量'
-              max: 10
             # tooltip: valueSuffix: '千'
             credits:
                  enabled: false
@@ -74,8 +73,20 @@ $ ->
               enabled: false
             series: [
               {
-                data: data.stat.num
                 pointStart: 1
+                data: data.stat.num
+                # data: [
+                #   11
+                #   15
+                #   15
+                #   94
+                #   147
+                #   179
+                #   210
+                #   258
+                #   310
+                #   328
+                # ]
               }
             ]
       else

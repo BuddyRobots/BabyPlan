@@ -423,13 +423,10 @@ class User
       end
     end
     num = User.client.where(:created_at.gt => Time.now - 10.weeks).asc(:created_at).map { |e| (e.created_at.to_i - Time.now.to_i + 10.weeks.to_i) / 1.weeks.to_i }
-    num = num.group_by { |e| e } .map { |k,v| v.length}
-    num.reverse!
+    num = num.group_by { |e| e }
+    num.each { |k,v| num[k] = v.length }
     total_num = User.count
-    num.map! { |e| total_num = total_num - e }
-    num.reverse!
-    # num = Statistic.where(center_id: nil, type: Statistic::CLIENT_NUM, :stat_date.gt => (Time.now - 10.weeks).to_i).asc(:stat_date).map { |e| e.value }
-    # num = num.each_with_index.map { |e, i| i % 7 == 0 ? e : nil } .select { |e| e }
+    num = (0..9).to_a.map { |e| total_num = total_num - num[9-e].to_i } .reverse
     {
       gender: gender.to_a,
       age: age.to_a,
