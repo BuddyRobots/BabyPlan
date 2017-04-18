@@ -22,6 +22,7 @@ class BookTemplate
 
   belongs_to :operator
   has_many :books
+  has_many :stock_changes
 
   def self.create_book(operator, book_info)
     book_template = operator.book_templates.where(isbn: book_info[:isbn]).first

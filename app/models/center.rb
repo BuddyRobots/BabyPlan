@@ -30,6 +30,7 @@ class Center
   has_many :feeds
   has_many :statistics
   has_many :bills
+  has_many :stock_changes
 
   has_many :course_participates
   has_many :book_borrows

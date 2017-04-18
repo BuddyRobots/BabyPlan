@@ -35,6 +35,8 @@ class Book
   has_many :reviews
   has_many :favorites
 
+  has_many :stock_changes
+
   default_scope { where(:deleted.ne => true)}
   scope :is_available, ->{ where(available: true) }
   
@@ -69,6 +71,7 @@ class Book
       stock: num,
       available: available
       )
+    book.stock_changes.create(num: num.to_i, center_id: center.id, book_template_id: book_template.id)
     Feed.create(book_id: book.id, name: book.name, center_id: center.id, available: available)
     { book_id: book.id.to_s }
   end
