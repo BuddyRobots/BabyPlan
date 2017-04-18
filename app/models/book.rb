@@ -293,7 +293,6 @@ class Book
     bb_num = (0 .. dp_num - 1).to_a.map { |e| bb_num[e].to_i }
     bb_num.reverse!
 
-
     stock_num = Statistic.where(type: Statistic::STOCK).
                           where(:stat_date.gt => start_time).
                           where(:stat_date.lt => end_time).
@@ -307,15 +306,15 @@ class Book
     off_shelf_num = off_shelf_num.each_slice(day).map { |a| a }
     off_shelf_num = off_shelf_num.map { |e| e.sum } .reverse
 
-
     max_num = 5
     borrow_center_hash = { }
     Center.all.each do |c|
-      borrow_num = c.statistics.where(type: Statistic::BORROW_NUM).
-                                where(:stat_date.gt => start_time).
-                                where(:stat_date.lt => end_time).
-                                desc(:stat_date).map { |e| e.value }
-      borrow_center_hash[c.name] = borrow_num.sum
+      c_bb_num = bbs.where(center_id: c.id).map { |e| [(e.created_at.to_i - start_time.to_i) / interval, e.price_pay] }
+      c_bb_num = c_bb_num.group_by { |e| e[0] }
+      c_bb_num.each { |k,v| c_bb_num[k] = v.map { |e| e[1] } .sum }
+      c_bb_num = (0 .. dp_num - 1).to_a.map { |e| c_bb_num[e].to_i }
+      c_bb_num.reverse!
+      borrow_center_hash[c.name] = c_bb_num.sum
     end
     borrow_center = borrow_center_hash.to_a
     borrow_center = borrow_center.sort { |x, y| -x[1] <=> -y[1] }
@@ -326,7 +325,7 @@ class Book
     {
       total_borrow: bb_num.sum,
       borrow_time_unit: time_unit,
-      borrow_num: [1,2,3,4],
+      borrow_num: bb_num,
       stock_time_unit: time_unit,
       stock_num: stock_num,
       off_shelf_num: off_shelf_num,

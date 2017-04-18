@@ -145,7 +145,7 @@ $ ->
             title:
               text: null
             xAxis: 
-              tickInterval: 5
+              tickInterval: 1
               title:
                 text: data.stat.signup_time_unit
             yAxis:
@@ -297,13 +297,12 @@ $ ->
     $.getJSON "/admin/statistics/book_stats?duration=" + duration + "&start_date=" + start_date + "&end_date=" + end_date, (data) ->
       if data.success
         $("#total-borrow").text(data.stat.total_borrow)
-        console.log data.stat.borrow_num
+        console.log data.stat.borrow_time_unit
         $('#borrow-statistics').highcharts
             title:
               text: null
             xAxis: 
-              type: 'datetime'
-              tickInterval: 0
+              tickInterval: 1
               title:
                 text: data.stat.borrow_time_unit
             yAxis:
@@ -317,8 +316,7 @@ $ ->
               {
                 color: '#90c5fc'
                 data: data.stat.borrow_num
-                pointStart: Date.UTC(2016, 9, 1),
-                pointInterval: 24 * 3600 * 1000
+                pointStart: 1
               }
             ]
 
