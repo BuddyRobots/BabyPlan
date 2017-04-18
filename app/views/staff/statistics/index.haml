@@ -75,8 +75,6 @@
                     .income-div
                       %p#total-money.total-nums 91234
                       %p.total-category 元
-                    .chart-pie-div
-                      #bonu-statistics
                     .chart-column-div
                       #income-statistics
                 .right-div
@@ -88,6 +86,12 @@
                         %td.td-data= i + 1
                         %td.td-data= link_to truncate(e[:name], length: 10), "/staff/courses/#{e[:id]}"
                         %td.td-data= e[:cp_num]
+
+              .school
+                .left-div
+                  %p.column-title 各授课单位收入情况
+                  #school-income-statistics
+                .right-div
 
         #tab3.tab-pane
           .desc

@@ -125,39 +125,6 @@ $ ->
               }
             ]
 
-        $('#bonu-statistics').highcharts
-          chart:
-            plotBackgroundColor: null
-            plotBorderWidth: null
-            plotShadow: false
-          colors: ['#90c5fc', '#227dda', '#ED561B', '#DDDF00',
-                          '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4']
-          title: text: null
-          tooltip: pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-          plotOptions: pie:
-            allowPointSelect: true
-            cursor: 'pointer'
-            dataLabels: enabled: false
-            showInLegend: true
-          credits:
-               enabled: false
-          legend:
-            itemStyle:
-                color: '#969696'
-          series: [ {
-            type: 'pie'
-            data: [
-              [
-                '个人支付'
-                data.stat.total_income
-              ]
-              [
-                '政府补贴'
-                data.stat.total_allowance
-              ]
-            ]
-          } ]
-
         $('#income-statistics').highcharts
           chart: type: 'column'
           title: text: null
@@ -189,6 +156,30 @@ $ ->
               pointStart: 1
             }
           ]
+
+        $('#school-income-statistics').highcharts
+          chart:
+            type: 'column'
+          title: text: null
+          xAxis:
+            type: 'category'
+          yAxis:
+            min: 0
+            title: text: '授课单位收入(元)'
+          legend: enabled: false
+          tooltip: valueSuffix: '元'
+          credits:
+               enabled: false
+          plotOptions: series: point: events: click: (event) ->
+            if previousPoint
+              previousPoint.update color: '#90c5fc'
+            previousPoint = this
+            this.update color: '#227dda'
+            return
+          series: [ {
+            name: '授课单位收入'
+            # data: data.stat.income_school
+          } ]
       else
         $.page_notification "服务器出错，请稍后再试"
 
