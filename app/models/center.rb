@@ -31,6 +31,9 @@ class Center
   has_many :statistics
   has_many :bills
 
+  has_many :course_participates
+  has_many :book_borrows
+
   has_and_belongs_to_many :clients, class_name: "User", inverse_of: :client_centers
 
   scope :is_available, ->{ where(available: true) }

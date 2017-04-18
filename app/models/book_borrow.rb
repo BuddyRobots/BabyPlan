@@ -15,6 +15,7 @@ class BookBorrow
 
   belongs_to :book_inst
   belongs_to :book
+  belongs_to :center
   belongs_to :client, class_name: "User", inverse_of: :book_borrows
 
   scope :unreturned, ->{ where(status: NORMAL, return_at: nil) }
@@ -125,5 +126,11 @@ class BookBorrow
 
   def pay_latefee
     self.update_attributes({latefee_paid: true})
+  end
+
+  def self.migrate
+    BookBorrow.all.each do |e|
+      e.update_attribute(:center_id, e.book.center.id)
+    end
   end
 end

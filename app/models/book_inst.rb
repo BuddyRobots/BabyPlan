@@ -35,6 +35,7 @@ class BookInst
     end
     borrow = self.book_borrows.create(borrow_at: Time.now.to_i, client_id: client.id)
     borrow.book = self.book
+    borrow.center = self.book.center
     borrow.save
     { borrow_id: borrow.id.to_s }
   end

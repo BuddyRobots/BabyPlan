@@ -189,7 +189,7 @@ class Transfer
       stock = [book.stock - out_count, 0].max
       book.update_attributes({stock: stock})
     end
-    # 2. create new books in the in center
+    # 2. change the stock of the books in the in center
     books = { }
     uniq_arrived_books = self.arrived_books.uniq
     uniq_arrived_books.each do |e|
@@ -203,22 +203,9 @@ class Transfer
     end
     books.each do |book_id, info|
       book = Book.where(id: book_id).first
-      cover = book.cover
-      back = book.back
+      bt = book.bt
       new_book = book.clone
       new_book.center = self.in_center
-      if cover.present?
-        new_cover = cover.clone
-        new_cover.save
-        new_cover.cover_book = new_book
-        new_cover.save
-      end
-      if back.present?
-        new_back = back.clone
-        new_back.save
-        new_back.back_book = new_book
-        new_back.save
-      end
       new_book.stock = info["in_count"]
       new_book.save
       books[book_id]["book_inst"].each do |book_inst|
