@@ -206,7 +206,7 @@ class Transfer
     end
     books.each do |book_id, info|
       book = Book.where(id: book_id).first
-      bt = book.bt
+      bt = book.book_template
       in_center_book = self.in_center.books.unscoped.where(book_template_id: bt.id).first
       if in_center_book.present?
         in_center_book.update_attributes(deleted: false, stock: in_center_book.stock + info["in_count"])
