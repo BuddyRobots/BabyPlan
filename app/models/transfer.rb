@@ -187,6 +187,9 @@ class Transfer
     books.each do |book_id, out_count|
       book = Book.where(id: book_id).first
       stock = [book.stock - out_count, 0].max
+      book.stock_changes.create(num: stock - book.stock,
+                                center_id: self.out_center.id,
+                                book_template_id: book.book_template.id)
       book.update_attributes({stock: stock})
     end
     # 2. change the stock of the books in the in center
@@ -204,12 +207,24 @@ class Transfer
     books.each do |book_id, info|
       book = Book.where(id: book_id).first
       bt = book.bt
-      new_book = book.clone
-      new_book.center = self.in_center
-      new_book.stock = info["in_count"]
-      new_book.save
+      in_center_book = self.in_center.books.unscoped.where(book_template_id: bt.id).first
+      if in_center_book.present?
+        in_center_book.update_attribute(:deleted: false, :stock: in_center_book.stock + info["in_count"])
+        in_center_book.stock_changes.create(num: info["in_count"],
+                                            center_id: self.in_center.id,
+                                            book_template_id: book.book_template.id)
+      else
+        in_center_book = self.in_center.books.create(
+          book_template_id: book_template.id,
+          stock: info["in_count"],
+          available: true
+        )
+        in_center_book.stock_changes.create(num: info["in_count"],
+                                            center_id: self.in_center.id,
+                                            book_template_id: book.book_template.id)
+      end
       books[book_id]["book_inst"].each do |book_inst|
-        book_inst.book = new_book
+        book_inst.book = in_center_book
         book_inst.save
       end
     end
