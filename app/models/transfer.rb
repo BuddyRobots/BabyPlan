@@ -212,16 +212,16 @@ class Transfer
         in_center_book.update_attributes(deleted: false, stock: in_center_book.stock + info["in_count"])
         in_center_book.stock_changes.create(num: info["in_count"],
                                             center_id: self.in_center.id,
-                                            book_template_id: book.book_template.id)
+                                            book_template_id: bt.id)
       else
         in_center_book = self.in_center.books.create(
-          book_template_id: book_template.id,
+          book_template_id: bt.id,
           stock: info["in_count"],
           available: true
         )
         in_center_book.stock_changes.create(num: info["in_count"],
                                             center_id: self.in_center.id,
-                                            book_template_id: book.book_template.id)
+                                            book_template_id: bt.id)
       end
       books[book_id]["book_inst"].each do |book_inst|
         book_inst.book = in_center_book
