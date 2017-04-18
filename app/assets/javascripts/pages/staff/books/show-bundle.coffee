@@ -166,10 +166,13 @@ $ ->
     if $.isNumeric(stock) == false || parseInt(stock) < 0
       $.page_notification("请输入合法的库存数量", 1000)
       return
+
+    num = parseInt(stock) - parseInt(window.stock)
     $.putJSON(
       '/staff/books/' + window.bid,
       {
         stock: parseInt(stock)
+        num: num
       },
       (data) ->
         if data.success

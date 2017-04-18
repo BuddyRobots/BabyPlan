@@ -69,6 +69,7 @@ class Staff::BooksController < Staff::ApplicationController
     @book = current_center.books.where(id: params[:id]).first
     retval = ErrCode::BOOK_NOT_EXIST if @book.nil?
     @book.update_info(params[:stock])
+    @book.stock_changes.create(num: params[:num], center_id: current_center.id, book_template_id: @book.book_template.id)
     render json: retval_wrapper(retval)
   end
 
@@ -228,13 +229,13 @@ class Staff::BooksController < Staff::ApplicationController
     if @books.present?
       if @books.deleted == true
         @books.update_attributes(deleted: false, stock: params[:num].to_i)
-        @books.save
+        @books.stock_changes.create(num: params[:num].to_i, center_id: current_center.id, book_template_id: book_template.id)
         Feed.create(book_id: @books.id, name: @books.name, center_id: current_center.id, available: @books.available)
         render json: retval_wrapper(nil) and return
       else
         stock = @books.stock
         @books.update_attribute(:stock, stock + params[:num].to_i)
-        @books.save
+        @books.stock_changes.create(num: params[:num].to_i, center_id: current_center.id, book_template_id: book_template.id)
         render json: retval_wrapper(nil) and return
       end
     else
