@@ -12,6 +12,11 @@ class UserMobile::SettingsController < UserMobile::ApplicationController
       @open_id = Weixin.get_oauth_open_id(params[:code])
       @deposit = @current_user.deposit
       @deposit = @deposit || Deposit.create_new(@current_user)
+      if @deposit.trade_state == "SUCCESS"
+        # the deposit has bee paid
+        @pay_info = @deposit.get_pay_info
+        return
+      end
       @deposit.renew
       @deposit.update_attributes({renew_status: true})
       if @deposit.prepay_id.blank?
@@ -19,6 +24,16 @@ class UserMobile::SettingsController < UserMobile::ApplicationController
       end
       @pay_info = @deposit.get_pay_info
     end
+  end
+
+  def notify
+    logger.info "^^^^^^^^^^^^^^^^^"
+    logger.info request.raw_post
+    logger.info "^^^^^^^^^^^^^^^^^"
+    logger.info params.inspect
+    logger.info "^^^^^^^^^^^^^^^^^"
+    Deposit.notify_callback(request.raw_post)
+    render :xml => {return_code: "SUCCESS"}.to_xml(dasherize: false, root: "xml") and return
   end
 
   def show
@@ -30,7 +45,7 @@ class UserMobile::SettingsController < UserMobile::ApplicationController
   def pay_finished
     @deposit = current_user.deposit
     @deposit.update_attributes({pay_finished: true})
-    Bill.create_online_deposit_pay_item(@deposit)
+    # Bill.create_online_deposit_pay_item(@deposit)
     render json: retval_wrapper(nil) and return
   end
 

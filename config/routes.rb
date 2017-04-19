@@ -298,6 +298,8 @@ Rails.application.routes.draw do
     end
     resources :settings do
       collection do
+        post :notify
+        get :notify
         get :book
         get :course
         get :favorite

@@ -49,6 +49,10 @@ class Bill
     self.update_attribute(:finished, true)
   end
 
+  def confirm_deposit_item
+    self.update_attribute(:finished, true)
+  end
+
 =begin
   def self.confirm_course_participate_item(course_participate)
     bill_item = Bill.where(order_id: course_participate.order_id, type: COURSE_PARTICIPATE).first
@@ -83,23 +87,25 @@ class Bill
     end
   end
 
-  def self.create_offline_deposit_pay_item(center, deposit)
-    Bill.create({
-      center_id: center.id,
-      user_id: deposit.user.id,
-      amount: deposit.amount,
-      type: DEPOSIT_PAY,
-      channel: OFFLINE
-    })
-  end
+  # def self.create_offline_deposit_pay_item(center, deposit)
+  #   Bill.create({
+  #     center_id: center.id,
+  #     user_id: deposit.user.id,
+  #     amount: deposit.amount,
+  #     type: DEPOSIT_PAY,
+  #     channel: OFFLINE
+  #   })
+  # end
 
   def self.create_online_deposit_pay_item(deposit)
     Bill.create({
       user_id: deposit.user.id,
+      deposit_id: deposit.id,
       amount: deposit.amount,
       type: DEPOSIT_PAY,
       channel: WECHAT,
       order_id: deposit.order_id,
+      prepay_id: deposit.prepay_id,
       wechat_transaction_id: deposit.wechat_transaction_id,
       finished: false
     })
