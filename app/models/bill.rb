@@ -25,6 +25,7 @@ class Bill
   belongs_to :user
   belongs_to :course_inst
   belongs_to :course_participate
+  belongs_to :deposit
 
   def self.create_course_participate_item(course_participate, prepay_id, order_id)
     if course_participate.price_pay <= 0
