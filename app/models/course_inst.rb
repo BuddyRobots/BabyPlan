@@ -67,7 +67,7 @@ class CourseInst
       min_age: course_inst_info[:min_age],
       max_age: course_inst_info[:max_age],
       school_id: course_inst_info[:school_id],
-      start_course: course_inst_info[:start_course],
+      start_course: Time.parse(course_inst_info[:start_course]),
       desc: course_inst_info[:desc]
     })
     course_inst.center = center
@@ -116,7 +116,7 @@ class CourseInst
         min_age: course_inst_info["min_age"],
         max_age: course_inst_info["max_age"],
         school_id: course_inst_info["school_id"],
-        start_course: course_inst_info["start_course"],
+        start_course: Time.parse(course_inst_info["start_course"]),
         name: course_inst_info["name"],
         desc: course_inst_info["desc"]
       }

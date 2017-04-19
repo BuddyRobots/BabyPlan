@@ -10,6 +10,8 @@ scheduler = Rufus::Scheduler.new
 scheduler.every '3s' do
   # Rails.logger.info "AAAAAAAAA"
   # print "BBBBBBBB"
+  # CourseParticipate.send_course_remind
+  # BookBorrow.send_book_remind
 end
 
 scheduler.every("1d") do

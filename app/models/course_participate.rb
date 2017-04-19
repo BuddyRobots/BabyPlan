@@ -626,4 +626,19 @@ class CourseParticipate
       e.update_attribute(:center_id, e.course_inst.center.id)
     end
   end
+
+  def self.send_course_remind
+    @cis = CourseInst.where(:start_course.gt => Time.now.end_of_day).where(:start_course.lt => Time.now.end_of_day + 1.day)
+    ci_id = @cis.map {|c| c.id}
+    ci_id.each do |c|
+      ci = CourseInst.where(id: c).first
+      course_name = ci.name
+      openid = ci.course_participates.map { |cp| cp.client.user_openid }
+      openid.each do |u|
+        user_name = User.where(user_openid: u).first.name
+        Weixin.course_start_notice(u, course_name, user_name)
+      end
+    end
+  end
+
 end

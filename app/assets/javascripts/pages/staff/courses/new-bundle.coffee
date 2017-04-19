@@ -116,7 +116,7 @@ $ ->
 
     first_day = date_in_calendar[0]
     start_time = first_day.split(',')[0]
-    start_course = Date.parse(start_time)
+    start_course = start_time
 
     $.postJSON(
       '/staff/courses/',
