@@ -174,7 +174,7 @@ class Course
   end
 
   def self.course_rank(max_num = 5)
-    courses = Course.all.map do |e|
+    courses = CourseInst.all.map do |e|
       reviews = e.reviews
       score = reviews.map { |r| r.score || 0 } .sum * 1.0
       {
