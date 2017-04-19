@@ -138,7 +138,7 @@ $ ->
     $.getJSON "/admin/statistics/course_stats?duration=" + duration + "&start_date=" + start_date + "&end_date=" + end_date, (data) ->
       if data.success
         $("#total-signup").text(data.stat.total_signup)
-        $("#total-money").text(data.stat.total_money)
+        $("#total-money").text(data.stat.total_income)
 
 
         $('#register-statistics').highcharts

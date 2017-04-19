@@ -115,13 +115,13 @@ class Course
     signup_num = signup_num.group_by { |e| e }
     signup_num.each { |k,v| signup_num[k] = v.length }
     signup_num = (0 .. dp_num - 1).to_a.map { |e| signup_num[e].to_i }
-    signup_num.reverse!
+    # signup_num.reverse!
 
     income = cps.map { |e| [(e.created_at.to_i - start_time.to_i) / interval, e.price_pay] }
     income = income.group_by { |e| e[0] }
     income.each { |k,v| income[k] = v.map { |e| e[1] } .sum }
     income = (0 .. dp_num - 1).to_a.map { |e| income[e].to_i }
-    income.reverse!
+    # income.reverse!
 
 
     max_num = 5
@@ -132,7 +132,7 @@ class Course
       c_income = c_income.group_by { |e| e[0] }
       c_income.each { |k,v| c_income[k] = v.map { |e| e[1] } .sum }
       c_income = (0 .. dp_num - 1).to_a.map { |e| c_income[e].to_i }
-      c_income.reverse!
+      # c_income.reverse!
       income_center_hash[c.name] = c_income.sum
     end
     income_center = income_center_hash.to_a
@@ -148,7 +148,7 @@ class Course
       s_income = s_income.group_by { |e| e[0] }
       s_income.each { |k,v| s_income[k] = v.map { |e| e[1] } .sum }
       s_income = (0 .. dp_num - 1).to_a.map { |e| s_income[e].to_i }
-      s_income.reverse!
+      # s_income.reverse!
       income_school_hash[s.name] = s_income.sum
     end
     income_school = income_school_hash.to_a

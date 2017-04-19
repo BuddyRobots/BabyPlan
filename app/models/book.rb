@@ -282,29 +282,45 @@ class Book
     end
 
     interval = day.days.to_i
+    dp_num = (end_time - start_time) / interval
 
     bbs = BookBorrow.where(:created_at.gt => start_time)
                     .where(:created_at.lt => end_time)
                     .asc(:created_at)
-    dp_num = (end_time - start_time) / interval
     bb_num = bbs.map { |e| (e.created_at.to_i - (start_time.to_i)) / interval }
     bb_num = bb_num.group_by { |e| e }
     bb_num.each { |k,v| bb_num[k] = v.length }
     bb_num = (0 .. dp_num - 1).to_a.map { |e| bb_num[e].to_i }
-    bb_num.reverse!
+    # bb_num.reverse!
 
-    stock_num = Statistic.where(type: Statistic::STOCK).
-                          where(:stat_date.gt => start_time).
-                          where(:stat_date.lt => end_time).
-                          desc(:stat_date).map { |e| e.value }
-    stock_num = stock_num.each_slice(day).map { |a| a }
-    stock_num = stock_num.map { |e| e.sum } .reverse
-    off_shelf_num = Statistic.where(type: Statistic::OFF_SHELF).
-                              where(:stat_date.gt => start_time).
-                              where(:stat_date.lt => end_time).
-                              desc(:stat_date).map { |e| e.value }
-    off_shelf_num = off_shelf_num.each_slice(day).map { |a| a }
-    off_shelf_num = off_shelf_num.map { |e| e.sum } .reverse
+    cur_stock_num = Book.all.map { |e| e.stock } .sum
+    stock_changes = StockChange.where(:created_at.gt => start_time)
+                               .where(:created_at.lt => end_time)
+                               .asc(:created_at)
+    stock_changes = stock_changes.map { |e| [(e.created_at.to_i - start_time.to_i) / interval, e.num] }
+    stock_changes = stock_changes.group_by { |e| e[0] }
+    stock_changes.each { |k,v| stock_changes[k] = v.map { |e| e[1] } .sum }
+    stock_num = (0 .. dp_num - 1).to_a.map { |e| cur_stock_num - stock_changes[e].to_i }
+
+    cur_off_shelf_num = BookBorrow.where(retuan_at: nil).length
+    borrows = BookBorrow.where(:borrowed_at.gt => start_time.to_i)
+                        .where(:borrowed_at.lt => end_time.to_i)
+    borrows = borrows.map { |e| (e.created_at.to_i - start_time.to_i) / interval }
+    borrows = borrows.group_by { |e| e }
+    borrows.each { |k,v| borrows[k] = v.length }
+    borrows = (0 .. dp_num - 1).to_a.map { |e| borrows[e].to_i }
+
+    returns = BookBorrow.where(:borrowed_at.gt => start_time.to_i)
+                        .where(:borrowed_at.lt => end_time.to_i)
+    returns = returns.map { |e| (e.created_at.to_i - start_time.to_i) / interval }
+    returns = returns.group_by { |e| e }
+    returns.each { |k,v| returns[k] = v.length }
+    returns = (0 .. dp_num - 1).to_a.map { |e| returns[e].to_i }
+
+    off_shelf_num = (0 .. dp_num - 1).to_a.map do |e|
+      cur_off_shelf_num = [cur_off_shelf_num + borrows[dp_num - 1 - e] - returns[dp_num - 1 - e], 0].max
+    end
+    off_shelf_num.reverse!
 
     max_num = 5
     borrow_center_hash = { }
