@@ -236,10 +236,10 @@ class Book
         hor_idx = in_page_idx % per_line
         start_y = start_point[1] - ver_interval * ver_idx
         start_x = start_point[0] + hor_interval * hor_idx
-        bounding_box([start_x, start_y], width: 70, height: 90) do
+        bounding_box([start_x, start_y], width: 70, height: 100) do
           font("public/simsun/simsun.ttf") do
-            text ActionController::Base.helpers.truncate(book_name, length: 23), size: 6
-            text ActionController::Base.helpers.truncate(book_press, length: 23), size: 6
+            text ActionController::Base.helpers.truncate(book_name, length: 22), size: 6
+            text ActionController::Base.helpers.truncate(book_press, length: 22), size: 6
           end
           image folder + png_file, position: :center, width: 70, height: 70
         end

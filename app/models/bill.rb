@@ -18,13 +18,15 @@ class Bill
   field :finished, type: Boolean, default: true
 
   field :order_id, type: String
+  field :prepay_id, type: String
   field :wechat_transaction_id, type: String
 
   belongs_to :center
   belongs_to :user
   belongs_to :course_inst
+  belongs_to :course_participate
 
-  def self.create_course_participate_item(course_participate)
+  def self.create_course_participate_item(course_participate, prepay_id, order_id)
     if course_participate.price_pay <= 0
       return
     end
@@ -32,21 +34,29 @@ class Bill
       center_id: course_participate.course_inst.center.id,
       user_id: course_participate.client.id,
       course_inst_id: course_participate.course_inst.id,
+      course_participate_id: course_participate.id,
       amount: course_participate.price_pay,
       type: COURSE_PARTICIPATE,
       channel: WECHAT,
-      order_id: course_participate.order_id,
+      order_id: order_id,
+      prepay_id: prepay_id,
       wechat_transaction_id: course_participate.wechat_transaction_id,
       finished: false
     })
   end
 
+  def confirm_course_participate_item
+    self.update_attribute(:finished, true)
+  end
+
+=begin
   def self.confirm_course_participate_item(course_participate)
     bill_item = Bill.where(order_id: course_participate.order_id, type: COURSE_PARTICIPATE).first
     if bill_item.present?
       bill_item.update_attribute(:finished, true)
     end
   end
+=end
 
   def self.create_course_refund_item(course_participate)
     if course_participate.price_pay <= 0
@@ -56,6 +66,7 @@ class Bill
       center_id: course_participate.course_inst.center.id,
       user_id: course_participate.client.id,
       course_inst_id: course_participate.course_inst.id,
+      course_participate_id: course_participate.id,
       amount: -course_participate.price_pay,
       type: COURSE_REFUND,
       channel: WECHAT,

@@ -26,7 +26,6 @@ class ApplicationController < ActionController::Base
     if !current_user.nil?
       # If current user is not empty, set cookie
       if current_user.is_client
-        logger.info "AAAAAAAAAA"
         cookies[:auth_key] = {
           :value => auth_key,
           :expires => 24.months.from_now,
@@ -34,8 +33,6 @@ class ApplicationController < ActionController::Base
         }
         return true
       else
-        logger.info "AAAAAAAAAA"
-        logger.info "AAAAAAAAAA"
         cookies[:auth_key] = {
           :value => auth_key,
           :expires => Rails.env == "production" ? 5.minutes.from_now : 24.months.from_now,

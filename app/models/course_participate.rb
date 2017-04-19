@@ -75,6 +75,8 @@ class CourseParticipate
   belongs_to :center
   belongs_to :client, class_name: "User", inverse_of: :course_participates
 
+  has_many :bills
+
   scope :paid, ->{ where(trade_state: "SUCCESS") }
 
   def status_str
@@ -120,14 +122,16 @@ class CourseParticipate
     self.update_attributes(
       {
         expired_at: (Time.now + 10.minutes).to_i,
-        order_id: Util.random_str(32),
+        # order_id: Util.random_str(32),
         price_pay: course_inst.price_pay,
+        renew_status: true,
         prepay_id: ""
       })
+    order_id = Util.random_str(32)
     if self.price_pay == 0
-      self.update_attribute(:prepay_id, "free")
+      self.update_attributes({prepay_id: "free", order_id: order_id})
     else
-      self.unifiedorder_interface(remote_ip, openid)
+      self.unifiedorder_interface(remote_ip, openid, order_id)
       CourseOrderExpiredWorker.perform_in(600.seconds, self.id.to_s)
     end
     
@@ -148,9 +152,64 @@ class CourseParticipate
   #   # end
   # end
 
+  def self.notify_callback(content)
+    doc = Nokogiri::XML(content)
+    order_id = doc.search('out_trade_no').children[0].text
+
+
+    bill = Bill.where(order_id: order_id).first
+    if bill.blank?
+      logger.info "ERROR!!!!!!!!!!!!!!"
+      logger.info "order is finished, but corresponding bill cannot be found"
+      logger.info "ERROR!!!!!!!!!!!!!!"
+      return
+    end
+
+    cp = bill.course_participate
+    if cp.nil?
+      logger.info "ERROR!!!!!!!!!!!!!!"
+      logger.info "order is finished, but corresponding course_participate cannot be found"
+      logger.info "ERROR!!!!!!!!!!!!!!"
+      return
+    end
+    success = doc.search('return_code').children[0].text
+    logger.info "!!!!!!!!!!!!!!!!!!!"
+    logger.info success
+    if success != "SUCCESS"
+      return nil
+    else
+      result_code = doc.search('result_code').children[0].text
+      logger.info "!!!!!!!!!!!!!!!!!!!"
+      logger.info result_code
+      if result_code != "SUCCESS"
+        err_code = doc.search('err_code').children[0].text
+        err_code_des = doc.search('err_code_des').children[0].text
+        cp.update_attributes({
+          trade_state: result_code,
+          err_code: err_code,
+          err_code_des: err_code_des
+        })
+      else
+        wechat_transaction_id = doc.search('transaction_id').children[0].try(:text)
+        logger.info "!!!!!!!!!!!!!!!!!!!"
+        logger.info wechat_transaction_id
+        cp.update_attributes({
+          trade_state: "SUCCESS",
+          trade_state_desc: "",
+          trade_state_updated_at: Time.now.to_i,
+          wechat_transaction_id: wechat_transaction_id,
+          pay_finished: true,
+          expired_at: -1
+        })
+        # Bill.confirm_course_participate_item(cp)
+        bill.confirm_course_participate_item
+      end
+    end
+  end
+
   def orderquery
     self.update_attributes({renew_status: false})
-    if self.order_id.blank?
+    if self.order_id.blank? || self.prepay_id == "free"
       return nil
     end
     nonce_str = Util.random_str(32)
@@ -194,7 +253,8 @@ class CourseParticipate
         })
         if trade_state == "SUCCESS"
           self.update_attributes({pay_finished: true, expired_at: -1})
-          Bill.confirm_course_participate_item(self)
+          bill = Bill.where(order_id: self.order_id).first
+          bill.confirm_course_participate_item
         end
         retval = { success: true, trade_state: trade_state, trade_state_desc: trade_state_desc }
         return retval
@@ -241,14 +301,14 @@ class CourseParticipate
     end
   end
 
-  def unifiedorder_interface(remote_ip, openid)
+  def unifiedorder_interface(remote_ip, openid, order_id)
     nonce_str = Util.random_str(32)
     data = {
       "appid" => APPID,
       "mch_id" => MCH_ID,
       "nonce_str" => nonce_str,
       "body" => self.course_inst.name,
-      "out_trade_no" => self.order_id,
+      "out_trade_no" => order_id,
       "total_fee" => Rails.env == "production" ? (self.price_pay * 100).round.to_s : 1.to_s,
       "spbill_create_ip" => remote_ip,
       "notify_url" => NOTIFY_URL,
@@ -267,7 +327,8 @@ class CourseParticipate
 
     doc = Nokogiri::XML(response.body)
     prepay_id = doc.search('prepay_id').children[0].text
-    self.update_attributes({prepay_id: prepay_id})
+    self.update_attributes({prepay_id: prepay_id, order_id: order_id})
+    Bill.create_course_participate_item(self, prepay_id, order_id)
     # retval = {
     #   "appId" => APPID,
     #   "timeStamp" => Time.now.to_i.to_s,
@@ -343,7 +404,7 @@ class CourseParticipate
     if self.need_order_query
       self.orderquery()
     end
-    self.trade_state != "SUCCESS" && self.expired_at < Time.now.to_i
+    self.trade_state != "SUCCESS" && self.trade_state != "USERPAYING" && self.expired_at < Time.now.to_i
   end
 
   def is_paying
@@ -354,7 +415,8 @@ class CourseParticipate
     if self.need_order_query
       self.orderquery()
     end
-    self.pay_finished == true && self.trade_state != "SUCCESS"
+    # self.pay_finished == true && self.trade_state != "SUCCESS"
+    self.trade_state == "USERPAYING"
   end
 
   def is_success
@@ -416,7 +478,7 @@ class CourseParticipate
     else
       refund_result_code = doc.search('result_code').children[0].text
       self.update_attributes({refund_result_code: refund_result_code})
-      if result_code != "SUCCESS"
+      if refund_result_code != "SUCCESS"
         err_code = doc.search('err_code').children[0].text
         err_code_des = doc.search('err_code_des').children[0].text
         self.update_attributes({
@@ -469,7 +531,7 @@ class CourseParticipate
     else
       refund_result_code = doc.search('result_code').children[0].text
       self.update_attributes({refund_result_code: refund_result_code})
-      if result_code != "SUCCESS"
+      if refund_result_code != "SUCCESS"
         err_code = doc.search('err_code').children[0].text
         err_code_des = doc.search('err_code_des').children[0].text
         self.update_attributes({

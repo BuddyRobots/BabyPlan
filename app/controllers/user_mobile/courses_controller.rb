@@ -1,5 +1,7 @@
 class UserMobile::CoursesController < UserMobile::ApplicationController
   skip_before_filter :require_sign_in, only: [:notify]
+  skip_before_filter :init, only: [:notify]
+  skip_before_filter :get_keyword, only: [:notify]
   # similar to search_new
   def index
     @keyword = params[:keyword]
@@ -64,12 +66,23 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
     @back = params[:back]
     @course = CourseInst.where(id: params[:id]).first
     @course_participate = @current_user.course_participates.where(course_inst_id: @course.id).first
+
+    # refresh order status
+    if @course_participate.present? && @course_participate.renew_status
+      @course_participate.orderquery
+    end
+
     @refund_status_str = @course_participate.try(:refund_status_str).to_s
   end
 
   def new
     @course = CourseInst.where(id: params[:state]).first
     @course_participate = @current_user.course_participates.where(course_inst_id: @course.id).first || CourseParticipate.create_new(current_user, @course)
+
+    # refresh order status
+    if @course_participate.present? && @course_participate.renew_status
+      @course_participate.orderquery
+    end
 
     if @course_participate.prepay_id.present?
       if @course_participate.pay_finished == true || @course_participate.trade_state == "SUCCESS"
@@ -79,6 +92,10 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
       if @course_participate.is_expired == false
         @pay_info = @course_participate.get_pay_info
         return
+      end
+      if params[:direct_pay].to_s == "true" && @course_participate.is_expired == true
+        # expired, need to re-sign-up
+        redirect_to action: :show, id: params[:state] and return
       end
     end
 
@@ -99,9 +116,12 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
   end
 
   def notify
-    logger.info "AAAAAAAAAAAAAAAAA"
-    logger.info request.inspect
-    logger.info "AAAAAAAAAAAAAAAAA"
+    logger.info "^^^^^^^^^^^^^^^^^"
+    logger.info request.raw_post
+    logger.info "^^^^^^^^^^^^^^^^^"
+    logger.info params.inspect
+    logger.info "^^^^^^^^^^^^^^^^^"
+    CourseParticipate.notify_callback(request.raw_post)
     render :xml => {return_code: "SUCCESS"}.to_xml(dasherize: false, root: "xml") and return
   end
 
@@ -112,8 +132,6 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
       @course_participate.update_attributes({
         trade_state: "SUCCESS"
       })
-    else
-      Bill.create_course_participate_item(@course_participate)
     end
     render json: retval_wrapper(nil) and return
   end
@@ -168,6 +186,10 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
   # judge whether a course_participate is expired
   def is_expired
     cp = CourseParticipate.where(id: params[:id]).first
-    render json: retval_wrapper({is_expired: cp.is_expired}) and return
+    is_expired = cp.is_expired
+    if params[:before_pay]
+      cp.update_attributes({renew_status: true})
+    end
+    render json: retval_wrapper({is_expired: is_expired}) and return
   end
 end

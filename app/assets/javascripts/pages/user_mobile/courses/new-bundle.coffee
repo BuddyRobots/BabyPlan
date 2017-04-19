@@ -35,7 +35,9 @@ $ ->
     # should first send request to server to check whether the order is expired, and if expired, redirect to show page
     $.postJSON(
       '/user_mobile/courses/' + window.course_participate_id + '/is_expired',
-      { },
+      {
+        before_pay: true
+      },
       (data) ->
         if data.success
           if data.is_expired
