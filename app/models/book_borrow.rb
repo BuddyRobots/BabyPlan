@@ -135,7 +135,7 @@ class BookBorrow
   end
 
   def self.send_book_remind
-    @books = BookBorrow.where(:return_at.gt => Time.now.end_of_day).where(:return_at.lt => Time.now.end_of_day + 1.day)
+    @books = BookBorrow.where(:borrow_at.gt => Time.now.end_of_day - BorrowSetting.borrow_duration)
     b_id = @books.map {|b| b.id}
     b_id.each do |b|
       book = BookBorrow.where(id: b).first
