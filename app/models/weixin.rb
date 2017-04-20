@@ -177,6 +177,72 @@ class Weixin
     end   
   end
 
+  def self.course_start_notice(openid, course_name, user_name)
+    body = {
+      "touser": openid,
+      "template_id": "nP01oidKj_p4cLFGuZws3yPWVAIt7IXi0P_tGPn45VU",
+      "data": {
+        "first": {
+          "value": "尊敬的用户您好，您报名参加的课程将于明天开始上课!",
+          "color": "#173177"
+        },
+        "keyword1": {
+          "value": course_name,
+          "color": "#173177"
+        },
+        "keyword2": {
+          "value": user_name,
+          "color": "#173177"
+        },
+        "remark": {
+          "value": "若无法参加课程请及时联系中心客服!",
+          "color": "#173177"
+        }
+      }
+    }
+    
+    url = "/cgi-bin/message/template/send?access_token=#{Weixin.get_access_token}"
+    response = Weixin.post(url, :body => body.to_json)
+    if response.body["errcode"] == 0
+      return true
+    else
+      return false
+    end   
+  end
+
+  def self.book_return_notice(openid, book_name, return_time)
+    body = {
+      "touser": openid,
+      "template_id": "2S4VVtCGxJsVpEeqJsmBBLOTjgBMiQFhX8k49jxZuSg",
+      "data": {
+        "first": {
+          "value": "尊敬的用户您好，您借阅的书籍!",
+          "color": "#173177"
+        },
+        "keyword1": {
+          "value": book_name,
+          "color": "#173177"
+        },
+        "keyword2": {
+          "value": return_time,
+          "color": "#173177"
+        },
+        "remark": {
+          "value": "请及时归还，超时将会产生滞纳金！",
+          "color": "#173177"
+        }
+      }
+    }
+    
+    url = "/cgi-bin/message/template/send?access_token=#{Weixin.get_access_token}"
+    response = Weixin.post(url, :body => body.to_json)
+    if response.body["errcode"] == 0
+      return true
+    else
+      return false
+    end   
+  end
+
   def self.red_packet(user_id, total_amount, wishing)
     user = User.find(user_id)
     openid = user.user_openid
@@ -214,4 +280,5 @@ class Weixin
       return errcode
     end
   end
+
 end

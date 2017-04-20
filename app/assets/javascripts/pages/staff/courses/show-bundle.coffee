@@ -314,7 +314,7 @@ $ ->
 
     first_day = date_in_calendar[0]
     start_time = first_day.split(',')[0]
-    start_course = Date.parse(start_time)
+    start_course = start_time
 
     ret = check_course_input(code, capacity, price, price_pay, length, date, speaker, address, date_in_calendar, min_age, max_age)
     if ret == false
