@@ -239,7 +239,7 @@ class Weixin
     if response.body["errcode"] == 0
       return true
     else
-      Rails.logger.info response.body["errcode"]
+      print response.body["errcode"]
       return false
     end   
   end
