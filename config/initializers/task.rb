@@ -12,8 +12,8 @@ scheduler.every '1m' do
   # print "BBBBBBBB"
   CourseParticipate.send_course_remind
   Rails.logger.info "CCCCCCC"
-  # BookBorrow.send_book_remind
-  # Rails.logger.info "DDDDDDD"
+  BookBorrow.send_book_remind
+  Rails.logger.info "DDDDDDD"
 end
 
 scheduler.every("1d") do
