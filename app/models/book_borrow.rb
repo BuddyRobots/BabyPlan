@@ -135,12 +135,12 @@ class BookBorrow
   end
 
   def self.send_book_remind
-    @books = BookBorrow.where(:borrow_at.gt => Time.now.end_of_day - BorrowSetting.first.borrow_duration)
+    @books = BookBorrow.where(:borrow_at.gt => Time.now.end_of_day - (BorrowSetting.first.borrow_duration).day)
     b_id = @books.map {|b| b.id}
     b_id.each do |b|
       book = BookBorrow.where(id: b).first
       book_name = book.book.name
-      return_time = book.return_at
+      return_time = book.borrow_at + (BorrowSetting.first.borrow_duration).day
       openid = book.client.user_openid
       Weixin.book_return_notice(openid, book_name, return_time)
     end
