@@ -140,7 +140,7 @@ class BookBorrow
     b_id.each do |b|
       book = BookBorrow.where(id: b).first
       book_name = book.book.name
-      return_time = book.borrow_at + (BorrowSetting.first.borrow_duration).day
+      return_time = Time.at(book.borrow_at + (BorrowSetting.first.borrow_duration).day).strftime("%Y-%m-%d")
       openid = book.client.user_openid
       Weixin.book_return_notice(openid, book_name, return_time)
     end
