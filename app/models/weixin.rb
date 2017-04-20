@@ -170,7 +170,8 @@ class Weixin
     
     url = "/cgi-bin/message/template/send?access_token=#{Weixin.get_access_token}"
     response = Weixin.post(url, :body => body.to_json)
-    if response.body["errcode"] == 0
+    retval = JSON.parse(response.body)
+    if retval["errcode"] == 0
       return true
     else
       return false
@@ -203,7 +204,8 @@ class Weixin
     
     url = "/cgi-bin/message/template/send?access_token=#{Weixin.get_access_token}"
     response = Weixin.post(url, :body => body.to_json)
-    if response.body["errcode"] == 0
+    retval = JSON.parse(response.body)
+    if retval["errcode"] == 0
       return true
     else
       return false
@@ -236,10 +238,10 @@ class Weixin
     
     url = "/cgi-bin/message/template/send?access_token=#{Weixin.get_access_token}"
     response = Weixin.post(url, :body => body.to_json)
-    if response.body["errcode"] == 0
+    retval = JSON.parse(response.body)
+    if retval["errcode"] == 0
       return true
     else
-      print response.body
       return false
     end   
   end
