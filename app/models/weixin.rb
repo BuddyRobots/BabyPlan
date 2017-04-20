@@ -239,7 +239,7 @@ class Weixin
     if response.body["errcode"] == 0
       return true
     else
-      print response.body["errcode"]
+      print response.body
       return false
     end   
   end
