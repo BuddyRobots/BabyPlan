@@ -159,7 +159,7 @@ $ ->
           else if data.code == COURSE_DATE_UNMATCH
             $.page_notification("课次与上课时间不匹配")
           else if data.code == COURSE_TIME_UPPER
-            $.page_notification("超过本中心授课时间上限,本周停止开课")
+            $.page_notification("超过本中心授课时间上限,该周停止开课")
           else
             $.page_notification("服务器出错")
       )
