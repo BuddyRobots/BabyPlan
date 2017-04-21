@@ -18,7 +18,7 @@ $ ->
 
   $("#confirm").click ->
     name = $("#name").val()
-    birthday = $("#datepicker").val()
+    birthday = $("#birthday").val()
     gender = $("#gender").val()
     parent = $("#parent").val()
     address = $("#address").val()
