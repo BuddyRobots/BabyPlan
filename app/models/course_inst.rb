@@ -59,7 +59,7 @@ class CourseInst
       class_time = (course_end - course_start).to_i
       total_time += class_time
     end
-    if total_time > center.classtime_upper*3600
+    if center.classtime_upper.present? && total_time > center.classtime_upper * 3600
       return ErrCode::COURSE_TIME_UPPER
     end
     # course = Course.where(id: course_inst_info[:course_id]).first
