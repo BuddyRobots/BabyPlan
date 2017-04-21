@@ -20,7 +20,7 @@
       .item-box#num2
         %span.item 出生日期：
         / %input.input-div#datepicker{value: @current_user.birthday_str}
-        %input.date-div{type: "date", value: @current_user.birthday_str}
+        %input.date-div{type: "date", value: @current_user.birthday_str, placeholder: "请点击选择出生日期"}
       .item-box#num3
         %span.item 性别：
         = select_tag "gender", options_for_select(User.genders_for_select, @current_user.gender), class: "input-div"
