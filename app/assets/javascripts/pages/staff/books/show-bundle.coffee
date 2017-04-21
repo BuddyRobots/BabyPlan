@@ -190,6 +190,9 @@ $ ->
 
           window.stock = stock
         else
+          if data.code == BOOK_NOT_RETURNED
+            $.page_notification("绘本在架数量不能小于借出数量", 1000)
+            return
           $.page_notification("服务器出错")
       )
 

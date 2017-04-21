@@ -69,7 +69,10 @@ class Staff::BooksController < Staff::ApplicationController
     @book = current_center.books.where(id: params[:id]).first
     retval = ErrCode::BOOK_NOT_EXIST if @book.nil?
     if @book.book_borrows.present?
-      borrow_num = @book.book_borrows.where(return_at: "").count
+      borrow_num = @book.book_borrows.where(return_at: nil).count
+      if borrow_num > params[:stock]
+        retval = ErrCode::BOOK_NOT_RETURNED
+      end
     end
     @book.update_info(params[:stock])
     @book.stock_changes.create(num: params[:num], center_id: current_center.id, book_template_id: @book.book_template.id)
