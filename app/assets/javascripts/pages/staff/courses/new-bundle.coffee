@@ -114,6 +114,13 @@ $ ->
     if ret == false
       return
 
+    if $.isNumeric(price_pay) == false
+      $.page_notification("请输入正确的数字", 1000)
+      return
+    if parseInt(price_pay) > window.price_upper
+      $.page_notification("超出公益价上限", 1000)
+      return
+
     first_day = date_in_calendar[0]
     start_time = first_day.split(',')[0]
     start_course = start_time
@@ -151,6 +158,8 @@ $ ->
             $.page_notification("课程编号已存在")
           else if data.code == COURSE_DATE_UNMATCH
             $.page_notification("课次与上课时间不匹配")
+          else if data.code == COURSE_TIME_UPPER
+            $.page_notification("超过本中心授课时间上限,本周停止开课")
           else
             $.page_notification("服务器出错")
       )

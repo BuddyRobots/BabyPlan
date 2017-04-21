@@ -94,17 +94,20 @@ $ ->
     desc = editor.$txt.html()
     open_time = $("#center-open-time").val()
     abbr = $("#center-abbr").val().trim()
-    price_upper = $("#price-upper").val()
-    classtime_upper = $("#classtime-upper").val()
+    price_upper = $("#price-upper").val().trim()
+    classtime_upper = $("#classtime-upper").val().trim()
     available = !$("#inlineCheckbox1").is(":checked")
     code = 1
     year = 2017
-    if !$.isNumeric(price_upper) || !$.isNumeric(classtime_upper)
-      $.page_notification("请输入正确的数字", 1000)
-      return false
-    if name == "" || address == "" || desc == "" || abbr == ""
+    
+    if name == "" || address == "" || desc == "" || abbr == "" || price_upper == "" || classtime_upper == ""
       $.page_notification("请补全信息")
       return
+    
+    if $.isNumeric(price_upper) == false || $.isNumeric(classtime_upper) == false
+      $.page_notification("请输入正确的数字", 1000)
+      return
+
     if window.lat == null
       $.page_notification("请在地图上确定具体位置")
       return

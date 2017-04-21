@@ -69,11 +69,11 @@
             %span.edit-box
               %input.input-div.form-control#center-abbr{:type => "text"}
             %label.input-caption.no-margin 公益价上限:
-            %span.unedit-div#price-upper-span= @center.price_upper.to_s + "元"
+            %span.unedit-div#price-upper-span= @center.price_upper.present? ? @center.price_upper.to_s + "元" : ""
             %span.edit-box
               %input.input-div.form-control#price-upper{:type => "text"}
             %label.input-caption.no-margin#total 授课时间上限:
-            %span.unedit-div#classtime-upper-span= @center.classtime_upper.to_s + "小时"
+            %span.unedit-div#classtime-upper-span= @center.classtime_upper.present? ? @center.classtime_upper.to_s + "小时" : ""
             %span.edit-box
               %input.input-div.form-control#classtime-upper{:type => "text"}
           

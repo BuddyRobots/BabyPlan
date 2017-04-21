@@ -1,6 +1,8 @@
 - content_for :head do
   = javascript_include_tag "pages/staff/courses/new-bundle"
   = stylesheet_link_tag "pages/staff/courses/new-bundle", :media => "all"
+  :javascript
+    window.price_upper = "#{@center.price_upper}"
 
 .content-area
   /courses-new
