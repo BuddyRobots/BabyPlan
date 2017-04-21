@@ -51,7 +51,7 @@
                           %td= e[:author]
                           %td= e[:stock].to_s + "本"
                          
-                = render "admin/partials/auto_paginate", locals: { instance: @books, url: "/admin/books?transfer_keyword=#{@transfer_keyword}&book_keyword=#{@book_keyword}&", page: 'page'}
+                = render "admin/partials/auto_paginate", locals: { instance: @books, url: "/admin/books?transfer_keyword=#{@transfer_keyword}&book_keyword=#{@book_keyword}&", page: 'stock_page'}
           #tab2.tab-pane  
             .book-migrate
               - if @transfers[:data].blank?
