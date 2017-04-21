@@ -45,6 +45,23 @@ class CourseInst
       return ErrCode::COURSE_DATE_UNMATCH
     end
 
+    course_date = Date.parse(course_inst_info[:start_course])
+    week_start = course_date.beginning_of_week.to_time
+    week_end = course_date.end_of_week.to_time
+    course_insts = CourseInst.where(:start_course.gt => week_start).where(:start_course.lt => week_end)
+    ci_array = course_insts.map {|ci| ci.id}
+    total_time = 0
+    ci_array.each do |ci|
+      ci_instance = CourseInst.where(id: ci).first
+      course_date = ci_instance.date_in_calendar[0].split(',')
+      course_start = Time.parse(course_date[0])
+      course_end = Time.parse(course_date[1])
+      class_time = (course_end - course_start).to_i
+      total_time += class_time
+    end
+    if total_time > center.classtime_upper*3600
+      return ErrCode::COURSE_TIME_UPPER
+    end
     # course = Course.where(id: course_inst_info[:course_id]).first
     # code = course.code + "-" + course_inst_info[:code]
     course_inst = CourseInst.where(code: course_inst_info[:code]).first

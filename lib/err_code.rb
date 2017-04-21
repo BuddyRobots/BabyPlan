@@ -44,6 +44,7 @@ module ErrCode
   OPERATOR_IS_EXIST = -40
   OPERATOR_NOT_EXIST = -41
   BOOK_DELETE = -42
+  COURSE_TIME_UPPER = -43
 
   def self.ret_false(code)
     msg = self.message(code)
@@ -138,6 +139,8 @@ module ErrCode
       "该录入员不存在"
     when BOOK_DELETE
       "该绘本曾经上架过"
+    when COURSE_TIME_UPPER
+      "超过中心授课时间上限"
     else
       nil
     end

@@ -84,7 +84,7 @@ class CourseParticipate
       self.orderquery()
     end
     if is_expired
-      return "过期未付款"
+      return "已过期"
     end
     if pay_finished != true
       return "未付款"
