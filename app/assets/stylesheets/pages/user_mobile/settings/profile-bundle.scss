@@ -88,8 +88,11 @@ a {
 	border: none;
 	outline: none;
 	// -webkit-appearance: none;
-	appearance: none;
+	// appearance: none;
 	background: none;
+}
+.date-div {
+  width: 60%;
 }
 #address {
 	width: 65%;
