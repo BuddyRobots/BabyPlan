@@ -14,8 +14,8 @@ $ ->
   $( "#datepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd" )
 
   $("#datepicker").val(window.birthday_str)
-  
-  $("#birthday").val(window.birthday_str)
+
+  $("#birthday").val(window.birthday)
 
   $("#confirm").click ->
     name = $("#name").val()
