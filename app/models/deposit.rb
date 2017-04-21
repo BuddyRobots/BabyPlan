@@ -49,6 +49,7 @@ class Deposit
   field :renew_status, type: Boolean
 
   belongs_to :user
+  has_many :bills
 
   def self.create_new(client)
     deposit_amount = BorrowSetting.first.try(:deposit) || 100

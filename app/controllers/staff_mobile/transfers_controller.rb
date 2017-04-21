@@ -53,6 +53,8 @@ class StaffMobile::TransfersController < StaffMobile::ApplicationController
 
   def transfer_in
     @transfer_id = params[:transfer_id]
+    @name = params[:name]
+    @isbn = params[:isbn]
     if params[:book_id].present?
       @book = Book.where(id: params[:book_id]).first
       @name = @book.try(:name)
