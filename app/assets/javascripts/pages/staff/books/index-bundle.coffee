@@ -113,7 +113,7 @@ $ ->
           if data.code == BOOK_DELETE
             $(".isbn-notice").text("该绘本曾经上架过").css({color:"#d70c19", visibility:"visible"})
           if data.code == BOOK_IN_CENTER
-            $(".isbn-notice").text("本中心藏有该书，请修改藏书数量").css({color:"#d70c19", visibility:"visible"})
+            $(".isbn-notice").text("本中心藏有该书，请输入新增绘本数量").css({color:"#d70c19", visibility:"visible"})
         else
           $(".isbn-notice").text("书名:" + data.name).css({color:"#10c078", visibility:"visible"})
     )
