@@ -207,7 +207,7 @@ class Staff::CoursesController < Staff::ApplicationController
     @course_insts = current_center.course_insts.is_available.all
     retval = @course_insts.map do |c|
       {
-        name: ActionController::Base.helpers.truncate(c.name, length: 9),
+        name: ActionController::Base.helpers.truncate(c.name, length: 12),
         date_in_calendar: c.date_in_calendar
       }
     end
