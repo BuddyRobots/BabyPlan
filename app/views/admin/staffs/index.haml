@@ -45,7 +45,7 @@
                           %td= u[:center]
                           %td= u[:mobile]
                           %td= u[:status]
-                = render "admin/partials/auto_paginate", locals: { instance: @staffs, url: "/admin/staffs?keyword=#{@keyword}&", page: 'page'}
+                = render "admin/partials/auto_paginate", locals: { instance: @staffs, url: "/admin/staffs?keyword=#{@keyword}&", page: 'staff_page'}
           #tab2.tab-pane
             .open-course
               - if @operators[:data].length == 0
