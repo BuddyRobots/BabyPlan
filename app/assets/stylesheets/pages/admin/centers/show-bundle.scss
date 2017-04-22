@@ -127,6 +127,22 @@
 	width: 80%;
 	height: 30px;
 }
+
+#address-span {
+	width: 75%;
+	line-height: 20px;
+	height: 20px;
+	vertical-align: middle;
+	display: inline-block;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+#address-span:hover {
+	cursor: pointer;
+	white-space: pre-wrap;
+	overflow: visible;
+}
 .shelve {
 	color: #0fc077;
 	vertical-align: middle;
