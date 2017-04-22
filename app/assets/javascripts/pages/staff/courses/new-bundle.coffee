@@ -125,6 +125,9 @@ $ ->
     start_time = first_day.split(',')[0]
     start_course = start_time
 
+    if window.course_photo
+      path = window.course_photo_path
+
     $.postJSON(
       '/staff/courses/',
       course: {
@@ -144,6 +147,7 @@ $ ->
         school_id: school_id
         desc: desc
         start_course: start_course
+        path: path
       },
       (data) ->
         if data.success

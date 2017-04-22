@@ -286,7 +286,6 @@ $ ->
 
 
   $(".finish-btn").click ->
-    code = $("#course-num").val()
     capacity = parseInt($("#course-capacity").val())
     price = $("#course-charge").val()
     price_pay = $("#public-charge").val()
@@ -392,7 +391,6 @@ $ ->
 
           if has_photo
             $("#upload-photo-form").submit()
-          location.href = "/staff/courses/" + window.cid
         else
           if data.code == COURSE_DATE_UNMATCH
             $.page_notification "更新失败，课次与上课时间不匹配"

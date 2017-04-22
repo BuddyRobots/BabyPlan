@@ -71,7 +71,6 @@ class CourseInst
     course_inst = center.course_insts.create({
       name: course_inst_info[:name],
       available: course_inst_info[:available],
-      # code: code,
       code: course_inst_info[:code],
       length: course_inst_info[:length],
       address: course_inst_info[:address],
@@ -87,6 +86,10 @@ class CourseInst
       start_course: Time.parse(course_inst_info[:start_course]),
       desc: course_inst_info[:desc]
     })
+    if course_inst_info[:path].present?
+      m = Material.create(path: course_inst_info[:path])
+      course_inst.photo = m
+    end
     course_inst.center = center
     course_inst.save
     Feed.create(course_inst_id: course_inst.id, name: course_inst.name, center_id: center.id, available: course_inst_info[:available])
