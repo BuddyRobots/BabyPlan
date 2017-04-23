@@ -120,7 +120,7 @@ class UserMobile::SettingsController < UserMobile::ApplicationController
   end
 
   def get_openid
-    @open_id = Weixin.get_oauth_open_id(params[:code])
+    @open_id = Weixin.get_oauth_open_id(params[:code], false)
     current_user.update_attribute(:user_openid, @open_id)
     current_user.save
     redirect_to params[:state].blank? ? "/user_mobile/feeds" : params[:state]
