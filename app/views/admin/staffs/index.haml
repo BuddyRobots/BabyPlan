@@ -3,6 +3,7 @@
   = stylesheet_link_tag "pages/admin/staffs/index-bundle", :media => "all"
   :javascript
     window.keyword = "#{@keyword}"
+    window.profile = "#{@profile}"
 
 .content-area
   .content-box
@@ -12,26 +13,97 @@
           %input.form-control#search-input{:type => "text", :placeholder => "输入姓名", :value => "#{@keyword}"}
           %span.input-group-btn
             %button.btn.btn-default#search-btn{:type => "button"}
+      .btn.add-btn{:type => "button"} 添加录入员
     .manage-content
-      - if @staffs[:data].length == 0
-        .undiscover
-          %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
-          %span.message 抱歉！暂无查找信息
-      - else
-        .table-box
-          %table.table.table-bordered#user-table
-            %thead
-              %tr
-                %th 工作人员
-                %th 儿童中心
-                %th 联系电话
-                %th 状&nbsp态
-            %tbody
-              - @staffs[:data].each do |u|
-                %tr
-                  %td= link_to u[:name], "/admin/staffs/#{u[:id]}"
-                  %td= u[:center]
-                  %td= u[:mobile]
-                  %td= u[:status]
-        = render "admin/partials/auto_paginate", locals: { instance: @staffs, url: "/admin/staffs?keyword=#{@keyword}&", page: 'page'}
-      
+      .tabbable
+        %ul.nav.nav-tabs
+          %li.active
+            %a{"data-toggle" => "tab", :href => "#tab1"} 工作人员
+          %li
+            %a#unopen_course{"data-toggle" => "tab", :href => "#tab2"} 录入员
+
+        .tab-content
+          #tab1.tab-pane.active
+            .local-course
+              - if @staffs[:data].length == 0
+                .undiscover
+                  %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
+                  %span.message 抱歉！暂无查找信息
+              - else
+                .table-box
+                  %table.table.table-bordered#user-table
+                    %thead
+                      %tr
+                        %th 工作人员
+                        %th 儿童中心
+                        %th 联系电话
+                        %th 状&nbsp态
+                    %tbody
+                      - @staffs[:data].each do |u|
+                        %tr
+                          %td= link_to u[:name], "/admin/staffs/#{u[:id]}"
+                          %td= u[:center]
+                          %td= u[:mobile]
+                          %td= u[:status]
+                = render "admin/partials/auto_paginate", locals: { instance: @staffs, url: "/admin/staffs?keyword=#{@keyword}&", page: 'staff_page'}
+          #tab2.tab-pane
+            .open-course
+              - if @operators[:data].length == 0
+                .undiscover
+                  %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
+                  %span.message 抱歉！暂无查找信息
+              - else
+                .table-box
+                  %table.table.table-bordered#operator-table
+                    %thead
+                      %tr
+                        %th 录入员
+                        %th 所属单位
+                        %th 登录手机号
+                        %th 已录本数
+                        %th{:colspan => 2} 操&nbsp作
+                    %tbody
+                      - @operators[:data].each do |u|
+                        %tr{class: "#{u[:available] ? "available" : "unavailable"}", data: {id: u[:id], name: u[:name], company: u[:company], mobile: u[:mobile], password: u[:password]}}
+                          %td= u[:name]
+                          %td= u[:company]
+                          %td= u[:mobile]
+                          %td= u[:count].to_s + "本"
+                          %td
+                            %a.edit{:href => "javascript:void(0);"} 编辑
+                          %td
+                            - if u[:available] == true
+                              %a.set-available.link-available{:href => "javascript:void(0);"} 锁定
+                            - else
+                              %a.set-available.link-unavailable{:href => "javascript:void(0);"} 解锁
+                         
+                = render "admin/partials/auto_paginate", locals: { instance: @operators, url: "/admin/staffs?keyword=#{@keyword}&profile=operator&", page: 'page'}
+
+#entryModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
+  .modal-dialog
+    .modal-content
+      .modalheader
+        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: asset_path("managecenter/close.png")}
+      .modal-body
+        .entry-div
+          .input-box
+            %p.entry-name 登录手机号
+            .outer-div
+              %input.entry-input-mobile#entry-mobile{type: "text"}
+          
+          .entry-notice-div
+            %span.entry-space
+            %span.entry-notice
+          .input-box
+            %p.entry-name 录入员姓名
+            .outer-div
+              %input.entry-input#entry-name{type: "text"}
+          .input-box.mt
+            %p.entry-name 所属单位
+            .outer-div
+              %input.entry-input-num#entry-company{type: "text"}
+          .input-box.mt
+            %p.entry-name#admin-reset-password 初始密码
+            .outer-div
+              %input.entry-input-mobile#entry-password{type: "password"}
+          .btn.entry-confirm-btn.button-disabled#confirm-entry{:type => "button"} 确定

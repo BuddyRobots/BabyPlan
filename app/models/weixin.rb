@@ -4,11 +4,16 @@ require 'httparty'
 class Weixin
 
   include HTTParty
+  pkcs12 File.read('public/cert/apiclient_cert.p12'), Rails.configuration.wechat_mch_id
   base_uri "https://api.weixin.qq.com"
   format  :json
 
-  APPID = "wx69353371388b899b"
-  SECRET = "ac87a676aed464f1069f1b71e158ef68"
+  # APPID = "wx69353371388b899b"
+  APPID = Rails.configuration.wechat_app_id
+  # SECRET = "ac87a676aed464f1069f1b71e158ef68"
+  SECRET = Rails.configuration.wechat_app_key
+  MCH_ID = Rails.configuration.wechat_mch_id
+  APIKEY = Rails.configuration.wechat_pay_api_key
 
   def self.get_access_token
     @@redis ||= Redis.new
@@ -137,6 +142,146 @@ class Weixin
     response = Weixin.post("/cgi-bin/menu/create?access_token=#{self.get_access_token}",
       :body => data.to_json)
     return response.body
+  end
+
+  def self.course_notice(cp, content, course_name)
+    body = {
+      "touser": cp,
+      "template_id": "XaIM2TKa7w78F8J2qB2bTtcVf_PlDq2F_wao3dznJTE",
+      "data": {
+        "first": {
+          "value": "尊敬的用户您好，您报名参加的课程有变动!",
+          "color": "#173177"
+        },
+        "keyword1": {
+          "value": course_name,
+          "color": "#173177"
+        },
+        "keyword2": {
+          "value": content,
+          "color": "#173177"
+        },
+        "remark": {
+          "value": "北京市社区儿童中心祝您上课愉快!",
+          "color": "#173177"
+        }
+      }
+    }
+    
+    url = "/cgi-bin/message/template/send?access_token=#{Weixin.get_access_token}"
+    response = Weixin.post(url, :body => body.to_json)
+    retval = JSON.parse(response.body)
+    if retval["errcode"] == 0
+      return true
+    else
+      return false
+    end   
+  end
+
+  def self.course_start_notice(openid, course_name, user_name)
+    body = {
+      "touser": openid,
+      "template_id": "nP01oidKj_p4cLFGuZws3yPWVAIt7IXi0P_tGPn45VU",
+      "data": {
+        "first": {
+          "value": "尊敬的用户您好，您报名参加的课程将于明天开始上课!",
+          "color": "#173177"
+        },
+        "keyword1": {
+          "value": course_name,
+          "color": "#173177"
+        },
+        "keyword2": {
+          "value": user_name,
+          "color": "#173177"
+        },
+        "remark": {
+          "value": "若无法参加课程请及时联系中心客服!",
+          "color": "#173177"
+        }
+      }
+    }
+    
+    url = "/cgi-bin/message/template/send?access_token=#{Weixin.get_access_token}"
+    response = Weixin.post(url, :body => body.to_json)
+    retval = JSON.parse(response.body)
+    if retval["errcode"] == 0
+      return true
+    else
+      return false
+    end   
+  end
+
+  def self.book_return_notice(openid, book_name, return_time)
+    body = {
+      "touser": openid,
+      "template_id": "2S4VVtCGxJsVpEeqJsmBBLOTjgBMiQFhX8k49jxZuSg",
+      "data": {
+        "first": {
+          "value": "尊敬的用户您好，您借阅的书籍!",
+          "color": "#173177"
+        },
+        "keyword1": {
+          "value": book_name,
+          "color": "#173177"
+        },
+        "keyword2": {
+          "value": return_time,
+          "color": "#173177"
+        },
+        "remark": {
+          "value": "请及时归还，超时将会产生滞纳金！",
+          "color": "#173177"
+        }
+      }
+    }
+    
+    url = "/cgi-bin/message/template/send?access_token=#{Weixin.get_access_token}"
+    response = Weixin.post(url, :body => body.to_json)
+    retval = JSON.parse(response.body)
+    if retval["errcode"] == 0
+      return true
+    else
+      return false
+    end   
+  end
+
+  def self.red_packet(user_id, total_amount, wishing)
+    user = User.find(user_id)
+    openid = user.user_openid
+    nonce_str = Util.random_str(32)
+    mch_billno = Util.billno_random_str
+    data = {
+      "nonce_str" => nonce_str,
+      "mch_billno" => mch_billno,
+      "mch_id" => MCH_ID,
+      "wxappid" => APPID,
+      "send_name" => "少儿创客",
+      "re_openid" => openid,
+      "total_amount" => total_amount,
+      "total_num" => 1.to_i,
+      "wishing" => wishing,
+      "client_ip" => "101.200.35.126",
+      "act_name" => "退还押金",
+      "remark" => "儿童中心退款"
+    }
+    signature = Util.sign(data, APIKEY)
+    data["sign"] = signature
+    self.base_uri "https://api.mch.weixin.qq.com"
+    self.format :xml
+    url = "/mmpaymkttransfers/sendredpack"
+    response = Weixin.post(url, :body => Util.hash_to_xml(data))
+    self.base_uri "https://api.weixin.qq.com"
+    self.format :json
+
+    doc = Nokogiri::XML(response.body)
+    success = doc.search('result_code').children[0].text
+    if success == "SUCCESS"
+      return "ok"
+    else
+      errcode = doc.search('err_code').children[0].text
+      return errcode
+    end
   end
 
 end

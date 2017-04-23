@@ -55,6 +55,8 @@
               %a{:href => "/admin/announcements"} 公告信息管理
             %li{class: @active_tab == "center" ? "active" : ""}
               %a{:href => "/admin/centers"} 儿童中心管理
+            %li{class: @active_tab == "school" ? "active" : ""}
+              %a{:href => "/admin/schools"} 授课单位管理
             %li{class: @active_tab == "statistics" ? "active" : ""}
               %a{:href => "/admin/statistics"} 统计信息查询
 
@@ -83,5 +85,5 @@
               .col-sm-8
                 %input.unclicked-box#confirm-password.form-control{:type => "password"}
             .confirm-button
-              %button.btn#confirm.button-disabled{:href => "javascript:void(0);"} 确定
+              %button.btn#confirm-modify-pwd.button-disabled{:href => "javascript:void(0);"} 确定
 

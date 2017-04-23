@@ -79,3 +79,5 @@ $ ->
 
   $("#start").click ->
     start_in_scan()
+  $("#go-on").click ->
+    start_in_scan()

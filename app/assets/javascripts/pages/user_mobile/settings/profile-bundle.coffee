@@ -1,5 +1,5 @@
 $ ->
-  if window.first_signin == "true"
+  if window.unnamed == "true"
     $.mobile_page_notification("请先完善个人资料")
 
   if $("#choice").is(":checked")
@@ -15,10 +15,11 @@ $ ->
 
   $("#datepicker").val(window.birthday_str)
 
+  $("#birthday").val(window.birthday)
 
   $("#confirm").click ->
     name = $("#name").val()
-    birthday = $("#datepicker").val()
+    birthday = $("#birthday").val()
     gender = $("#gender").val()
     parent = $("#parent").val()
     address = $("#address").val()
@@ -46,7 +47,7 @@ $ ->
       },
       (data) ->
         if data.success
-          if window.first_signin == "true"
+          if window.unnamed == "true"
             window.location.href = "/user_mobile/feeds"
           else
             $.mobile_page_notification("已更新")

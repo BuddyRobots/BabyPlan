@@ -1,0 +1,337 @@
+@import "wangEditor";
+@import "jquery-ui";
+@import "jquery.tagit";
+
+.modal-body, input, label {
+	margin: 0;
+	padding: 0;
+	max-height: 600px;
+}
+
+.content-area {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  top: 0;
+  box-shadow: -1px -1px 6px #9c9c9c inset;
+  padding-top: 48px;
+}
+.content-box {
+  position: relative;
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  background: white;  
+  height: 100%;
+}
+.manage-box {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  -webkit-justify-content: space-between;
+  -moz-justify-content: space-between;
+  -ms-justify-content: space-between;
+  -o-justify-content: space-between;
+  -webkit-align-items: flex-end;
+  -moz-align-items: flex-end;
+  -ms-align-items: flex-end;
+  -o-align-items: flex-end;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.manage-content {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  overflow: auto;
+  position: absolute;
+  top: 72px;
+  left: 0px;
+  bottom: 30px;
+  right: 0px;
+}
+.edit-btn {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 144px;
+  height: 48px;
+  padding: 0;
+  line-height: 46px;
+  color: white;
+  background: #f7873d;
+  border-radius: 6px;
+}
+.edit-btn:hover {
+  background: #f7873d;
+  color: white;
+}
+.delete-btn {
+  @extend .edit-btn;
+  right: 168px;
+}
+.finish-btn {
+  @extend .edit-btn;
+  display: none;
+}
+
+.tabbable {
+	margin: 20px 0 0 0;
+}
+.back {
+	position: absolute;
+	top: 19px;
+}
+.nav-tabs {
+	margin-bottom: 0;
+	padding-left: 55px;
+	li {
+		font-size: 16px;
+		color: #323232;
+	}
+}
+.shelve {
+	color: #0fc077;
+	vertical-align: middle;
+}
+.form-inline {
+	margin: 20px 0 20px 51px;
+	#type-input {
+		width: 79.6%;
+	}
+}
+.input-caption {
+	display: inline-block;
+	vertical-align: middle;
+	font-size: 16px;
+	color: #464646;
+	margin-right: 10px;
+	font-weight: normal;
+}
+#author {
+	margin-left: 31px;
+}
+#publisher {
+  margin-left: 15px;
+}
+#book-number, #total {
+	margin-left: 10px;
+}
+#name, #translator {
+  margin-left: 32px;
+}
+
+.unedit-box {
+	display: inline-block;
+	vertical-align: middle;
+	font-size: 14px;
+	color: #323232;
+	width: 18.5%;
+	height: 30px;
+	line-height: 30px;
+	margin: 0 20px 0 0;
+}
+.edit-box {
+	display: none;
+	margin-right: 20px;
+}
+.input-area {
+	display: inline-block;
+	width: 18.5%;
+	height: 30px;
+}
+.type-span {
+	border: 1px solid #c8c8c8;
+	border-radius: 4px;
+	color: #969696;
+	width: auto;
+	height: 28px !important;
+	text-align: center;
+	line-height: 28px;
+	margin-right: 10px;
+	padding: 0 10px;
+}
+.type-span-template {
+	display: none;
+}
+#type-tag {
+	display: inline-block;
+	vertical-align: middle;
+	width: 81%;
+	border: 1px solid #ccc;
+	margin-left: 0;
+}
+.controls-row {
+	margin: 20px 0 20px 20px;
+}
+.introduce {
+	display: inline-block;
+	vertical-align: top;
+	float: left;
+	font-size: 16px;
+	color: #323232;
+	margin:0 13px 0 19px;
+}
+.wangedit-area {
+	float: left;
+	width: 76.7%;
+	font-size: 16px;
+	display: none;
+}
+#edit-area {
+	height: 200px;
+}
+.book-introduce {
+	margin-bottom: 20px;
+}
+.introduce-details {
+	font-size: 14px;
+	color: #323232;
+	display: inline-block;
+	width: 71.5%;
+}
+
+.shelve-number {
+	color: #d70c19;
+	font-size: 14px;
+}
+.bookuse-message {
+	margin: 0 20px;
+	border: 1px solid #ddd;
+	border-bottom-left-radius: 6px;
+	border-bottom-right-radius: 6px;
+	border-top: 0;
+}
+.table {
+	margin: 0;
+	border: 0;
+	font-size: 14px;
+	color: #323232;
+	td {
+		text-align: center;
+	}
+}
+.photo-div {
+	display: inline-block;
+	position: relative;
+	margin-right: 10px;
+	margin-left: 10px;
+}
+.cover-back {
+	margin-left: 51px;
+	margin-top: 20px;
+	font-size: 16px;
+	color: #323232;
+}
+.book-cover {
+	vertical-align: top;
+}
+.book-back {
+	@extend .book-cover;
+}
+#upload-cover {
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+	margin-right: 50px;
+}
+#upload-back {
+	@extend #upload-cover;
+}
+.upload-photo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	width: 100px;
+	height: 100px;
+	display: none;
+}
+.edit-photo {
+	width: 100px;
+	height: 100px;
+	object-fit: contain;
+}
+.photo {
+  width: 100px;
+  height: 100px;
+}
+
+#deleteModal {
+  .modal-dialog {
+    position:absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -220px;
+    margin-top: -113px;
+    width: 438px;
+    height: 226px;
+    border-radius: 6px; 
+  }
+  .modal-body {
+    padding: 40px;
+  }
+}
+.modal-backdrop {
+  background-color: #999;
+}
+.close {
+  position: absolute;
+  right: -14px;
+  top: -14px;
+  opacity: 0.7;
+  z-index: 10;
+}
+.close:hover {
+  opacity: 1;
+}
+.message {
+  font-size: 16px;
+  color: #323232;
+  text-align: center;
+  margin: 20px 0;
+}
+.btn-div {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  -webkit-justify-content: space-between;
+  -moz-justify-content: space-between;
+  -ms-justify-content: space-between;
+  -o-justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
+  .btn {
+    width: 45%;
+    font-size: 16px;
+    color: white;
+    border: 0;
+    height: 40px;
+  }
+}
+#cancel {
+  background: #10c078;
+  outline: none;
+}
+#confirm-delete {
+  background: #f7873d;
+  outline: none;
+}
+#name-span {
+	width: 45%;
+	line-height: 20px;
+	height: 20px;
+	vertical-align: middle;
+	display: inline-block;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+#name-span:hover {
+	cursor: pointer;
+	white-space: pre-wrap;
+	overflow: visible;
+}
+

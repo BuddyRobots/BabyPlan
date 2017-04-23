@@ -137,11 +137,18 @@ $ ->
     $(".map-notice").css("display", "inline-block")
     $(".introduce-details").toggle()
     $(".wangedit-area").toggle()
+    $(".unedit-div").toggle()
 
     $("#name-input").val($("#name-span").text())
     $("#center-address").val($("#address-span").text())
     $("#edit-area").html($(".introduce-details").html())
-
+    $("#time-input").val($("#time-span").text())
+    $("#center-abbr").val($("#abbr-span").text())
+    $("#price-upper").val(window.price_upper)
+    $("#classtime-upper").val(window.classtime_upper)
+    console.log("AAAAAAAA")
+    console.log(window.price_upper)
+    console.log(window.classtime_upper)
     $(".edit-btn").toggle()
     $(".finish-btn").toggle()
 
@@ -152,6 +159,18 @@ $ ->
     name = $("#name-input").val()
     address = $("#center-address").val()
     desc = editor.$txt.html()
+    open_time = $("#time-input").val()
+    abbr = $("#center-abbr").val()
+    price_upper = $("#price-upper").val().trim()
+    classtime_upper = $("#classtime-upper").val().trim()
+
+    if name == "" || address == "" || desc == "" || abbr == "" || price_upper == "" || classtime_upper == ""
+      $.page_notification("请补全信息", 1000)
+      return
+
+    if $.isNumeric(price_upper) == false || $.isNumeric(classtime_upper) == false
+      $.page_notification("请输入正确的数字", 1000)
+      return false
 
     $.putJSON(
       '/admin/centers/' + window.cid,
@@ -162,6 +181,10 @@ $ ->
           desc: desc
           lat: window.lat
           lng: window.lng
+          open_time: open_time
+          abbr: abbr
+          price_upper: price_upper
+          classtime_upper: classtime_upper
         }
       },
       (data) ->
@@ -180,9 +203,15 @@ $ ->
           $("#name-span").text(name)
           $("#address-span").text(address)
           $(".introduce-details").html(desc)
+          $(".unedit-div").show()
+          $("#time-span").text(open_time)
+          $("#abbr-span").text(abbr)
+          $("#price-upper-span").text(price_upper + "元")
+          $("#classtime-upper-span").text(classtime_upper + "小时")
           disable_set_marker()
           if has_photo
             $("#upload-photo-form").submit()
+          location.href = "/admin/centers/" + window.cid
         else
           if data.code == CENTER_EXIST
             $.page_notification "儿童中心已存在"

@@ -25,6 +25,7 @@ class Bill
   belongs_to :user
   belongs_to :course_inst
   belongs_to :course_participate
+  belongs_to :deposit
 
   def self.create_course_participate_item(course_participate, prepay_id, order_id)
     if course_participate.price_pay <= 0
@@ -46,6 +47,10 @@ class Bill
   end
 
   def confirm_course_participate_item
+    self.update_attribute(:finished, true)
+  end
+
+  def confirm_deposit_item
     self.update_attribute(:finished, true)
   end
 
@@ -83,23 +88,25 @@ class Bill
     end
   end
 
-  def self.create_offline_deposit_pay_item(center, deposit)
-    Bill.create({
-      center_id: center.id,
-      user_id: deposit.user.id,
-      amount: deposit.amount,
-      type: DEPOSIT_PAY,
-      channel: OFFLINE
-    })
-  end
+  # def self.create_offline_deposit_pay_item(center, deposit)
+  #   Bill.create({
+  #     center_id: center.id,
+  #     user_id: deposit.user.id,
+  #     amount: deposit.amount,
+  #     type: DEPOSIT_PAY,
+  #     channel: OFFLINE
+  #   })
+  # end
 
   def self.create_online_deposit_pay_item(deposit)
     Bill.create({
       user_id: deposit.user.id,
+      deposit_id: deposit.id,
       amount: deposit.amount,
       type: DEPOSIT_PAY,
       channel: WECHAT,
       order_id: deposit.order_id,
+      prepay_id: deposit.prepay_id,
       wechat_transaction_id: deposit.wechat_transaction_id,
       finished: false
     })
@@ -204,4 +211,5 @@ class Bill
       offline_amount: offline_amount
     }
   end
+
 end

@@ -96,8 +96,8 @@
 		font-size: 14px;
 		color: #505050;
 		height:45px;
-		line-height: 45px;
 		text-align: center;
+		vertical-align: middle;
 		padding: 0;
 		.unshelve {
 			color: #969696;
@@ -191,4 +191,8 @@
 #confirm {
 	background: #f7873d;
 	outline: none;
+}
+
+.manage-center-address {
+	width: 45%;
 }

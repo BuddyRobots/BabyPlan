@@ -19,11 +19,11 @@ a{
 }
 
 .content-area{
+	position: relative;
 	width:100%;
 	max-width:640px;
 	min-height: 100%;
 	-webkit-overflow-scrolling: touch;
-	overflow: auto;
 	margin:0 auto;
 	background: linear-gradient(
     45deg, 

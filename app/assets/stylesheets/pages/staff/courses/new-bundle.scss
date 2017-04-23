@@ -1,3 +1,4 @@
+@import "wangEditor";
 @import "fullcalendar.min";
 @import "jquery-ui";
 
@@ -76,9 +77,6 @@
 .end-btn:hover {
 	color: white;
 }
-.top-box {
-	margin-top: 10px;
-}
 .text-message {
 	width: 50%;
 	float: left;
@@ -103,11 +101,13 @@
 .course-length {
 	margin-left: 52px;
 }
-#course-address, #course-date {
+#course-address, #course-date, #course-name {
 	width: 80%;
 }
 .num-box {
 	@extend .input-area;
+	vertical-align: middle;
+	line-height: 30px;
 }
 #photo {
 	width: 200px;
@@ -117,7 +117,7 @@
 	width: 17.25%;
 	display: inline-block;
 	margin-left: 7.5%;
-	margin-top: 0.5%;
+	margin-top: 1%;
 }
 .kids-capacity {
 	margin-left: 36px;
@@ -208,4 +208,24 @@ h2 {
 
 .margin-l {
 	margin-left: 4px;
+}
+.course-introduce {
+	margin:20px;
+}
+.introduce {
+	font-size: 16px;
+	margin-right: 5px;
+	vertical-align: top;
+}
+.wangedit-area {
+	display: inline-block;
+	width: 68.5%;
+	font-size: 16px;
+}
+#edit-area {
+	height: 200px;
+}
+#school_id {
+	padding-top: 0;
+	padding-bottom: 0;
 }

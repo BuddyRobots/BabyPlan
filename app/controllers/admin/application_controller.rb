@@ -1,7 +1,7 @@
 class Admin::ApplicationController < ApplicationController
   layout 'layouts/admin'
   before_filter :admin_init
-  before_filter :require_sign_in
+  before_filter :refresh_session, :require_sign_in
 
   def admin_init
     if @current_user.try(:user_type) != User::ADMIN
@@ -21,4 +21,5 @@ class Admin::ApplicationController < ApplicationController
       end
     end
   end
+
 end

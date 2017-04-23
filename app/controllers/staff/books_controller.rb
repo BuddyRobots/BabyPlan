@@ -9,7 +9,12 @@ class Staff::BooksController < Staff::ApplicationController
   def index
     @profile = params[:profile]
     @keyword = params[:keyword]
-    books = @keyword.present? ? current_center.books.where(name: /#{Regexp.escape(@keyword)}/) : current_center.books.all
+    if @keyword.present?
+      book_template_id_ary = BookTemplate.where(name: /#{Regexp.escape(@keyword)}/).map { |e| e.id.to_s }
+      books = current_center.books.where(:book_template_id.in => book_template_id_ary)
+    else
+      books = current_center.books.all
+    end
     @books = auto_paginate(books)
     @books[:data] = @books[:data].map do |e|
       e.book_info
@@ -63,7 +68,14 @@ class Staff::BooksController < Staff::ApplicationController
   def update
     @book = current_center.books.where(id: params[:id]).first
     retval = ErrCode::BOOK_NOT_EXIST if @book.nil?
-    @book.update_info(params[:book])
+    if @book.book_borrows.present?
+      borrow_num = @book.book_borrows.where(return_at: nil).count
+      if borrow_num > params[:stock]
+        retval = ErrCode::BOOK_NOT_RETURNED
+      end
+    end
+    @book.update_info(params[:stock])
+    @book.stock_changes.create(num: params[:num], center_id: current_center.id, book_template_id: @book.book_template.id)
     render json: retval_wrapper(retval)
   end
 
@@ -195,5 +207,58 @@ class Staff::BooksController < Staff::ApplicationController
   def add_to_list
     retval = QrExport.create_qr(current_center, params[:id], params[:num])
     render json: retval_wrapper(retval) and return
+  end
+
+  def isbn_search
+    if !BookTemplate.where(isbn: params[:isbn]).first.present?
+      render json: retval_wrapper(ErrCode::BOOK_NOT_EXIST) and return
+    else
+      book_template = BookTemplate.where(isbn: params[:isbn]).first
+      books = current_center.books.unscoped.where(book_template_id: book_template.id).first 
+      if books.present?
+        if books.deleted == true
+          render json: retval_wrapper(ErrCode::BOOK_DELETE) and return
+        else
+          render json: retval_wrapper(ErrCode::BOOK_IN_CENTER) and return
+        end
+      else
+        book = BookTemplate.where(isbn: params[:isbn]).first
+        retval = book.try(:name)
+        render json: retval_wrapper({name:retval}) and return
+      end
+    end
+  end
+
+  def isbn_add_book
+    book_template = BookTemplate.where(isbn: params[:isbn]).first
+    @books = current_center.books.unscoped.where(book_template_id: book_template.id).first
+    if @books.present?
+      if @books.deleted == true
+        @books.update_attributes(deleted: false, stock: params[:num].to_i)
+        @books.stock_changes.create(num: params[:num].to_i, center_id: current_center.id, book_template_id: book_template.id)
+        Feed.create(book_id: @books.id, name: @books.name, center_id: current_center.id, available: @books.available)
+        render json: retval_wrapper(nil) and return
+      else
+        stock = @books.stock
+        @books.update_attribute(:stock, stock + params[:num].to_i)
+        @books.stock_changes.create(num: params[:num].to_i, center_id: current_center.id, book_template_id: book_template.id)
+        render json: retval_wrapper(nil) and return
+      end
+    else
+      retval = Book.add_to_center(current_user, current_center, book_template, params[:num], params[:available])
+      render json: retval_wrapper(retval) and return
+    end
+  end
+
+  def set_delete
+    @book = Book.where(id: params[:id]).first
+    if @book.stock != 0
+      render json: retval_wrapper(ErrCode::BOOK_EXIST) and return
+    end
+    @book.update_attribute(:deleted, params[:deleted])
+    @book.feed.destroy
+    @book.favorites.destroy
+    @book.save
+    render json: retval_wrapper(nil)
   end
 end

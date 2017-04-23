@@ -24,26 +24,26 @@
         %img.icon{src: asset_path("web/cry.png")}
     - else
       - @book_borrows.each do |e|
-        .details{data: {id: e.book.id.to_s}}
+        .details{data: {id: e.id.to_s}}
           .left-div
             %img.visit{:src => e.book.cover.nil? ? asset_path("web/book.png") : e.book.cover.path}
           .right-div
             %p.caption 
-              = e.book.name
-              / %span 8月14日归还
+              = truncate(e.book.name, length: 10)
+              %span{class: e.status_class}= e.status_str
             %p.article= truncate(strip_tags(e.book.desc).strip(), length: 50)
             .location-div
               %img.location{src: asset_path("web/location.png")}
               %span.center= e.book.center.name
 
     - if @pay_info.present?
-      / %a.btn.click-btn#confirm-pay{href: "javascript:void(0);"}= "押金#{BorrowSetting.deposit}元，确认支付"
+      %a.btn.click-btn#confirm-pay{href: "javascript:void(0);"}= "押金#{BorrowSetting.deposit}元，确认支付"
     - elsif @current_user.deposit.try(:is_paying)
       %button.btn.unclick-btn{type: "button"} 支付进行中
     - elsif @current_user.deposit_paid == false
-      / %a.btn.click-btn#deposit-pay{href: "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxfe4fd89f6f5f9f57&redirect_uri=#{CGI::escape('http://babyplan.bjfpa.org.cn/user_mobile/settings/book/')}&response_type=code&scope=snsapi_base&state=#{true}#wechat_redirect", :type => "button"} 缴纳押金
+      %a.btn.click-btn#deposit-pay{href: "https://open.weixin.qq.com/connect/oauth2/authorize?appid=#{Rails.configuration.wechat_pay_app_id}&redirect_uri=#{CGI::escape('http://' + Rails.configuration.domain + '/user_mobile/settings/book/')}&response_type=code&scope=snsapi_base&state=#{true}#wechat_redirect", :type => "button"} 缴纳押金
     - else
-      %button.btn#deposit{type: "button"} 已缴押金
+      %button.btn#deposit{type: "button"} 退还押金
 
     / %button.btn#redeposit{type: "button"} 重新缴纳押金
     / %button.btn#deposit-pay{type: "button"} 缴纳押金

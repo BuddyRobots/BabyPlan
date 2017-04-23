@@ -23,11 +23,11 @@
               %span 迁出时间：
               %span#date= Time.at(@transfer.out_time).strftime("%Y-%m-%d %H:%M")
           .items
-            %span 迁出中心：
-            %span#center-out= @transfer.out_center.name
+            %span.vt 迁出中心：
+            %span.width75#center-out= @transfer.out_center.name
           .items
-            %span 迁入中心：
-            %span#center-in= @transfer.in_center.name
+            %span.vt 迁入中心：
+            %span.width75#center-in= @transfer.in_center.name
       / 缺失绘本项#lost-book
       - if @transfer.arrived_books.present? && @lost_books_info.present?
         .content-div#lost-book
@@ -63,7 +63,7 @@
           %button.btn.full-btn#start{:type => "button"}　开始迁入
         - else
           %button.btn.left-btn#confirm-transfer-in{:type => "button"} 完成
-          %button.btn.right-btn#start{:type => "button"} 继续迁入
+          %button.btn.right-btn#go-on{:type => "button"} 继续迁入
       - else
         / 回到首页button
         %button.btn.full-btn#back{:type => "button"}　回到首页

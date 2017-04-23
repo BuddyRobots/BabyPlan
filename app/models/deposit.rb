@@ -5,11 +5,20 @@ class Deposit
   base_uri "https://api.mch.weixin.qq.com"
   format  :xml
 
-  APPID = "wxfe4fd89f6f5f9f57"
-  SECRET = "01265a8ba50284999508d680f7387664"
-  APIKEY = "1juOmajJrHO3f2NFA0a8dIYy2qAamtnK"
-  MCH_ID = "1388434302"
-  NOTIFY_URL = "http://#{Rails.configuration.domain}/user_mobile/courses/notify"
+  # APPID = "wxfe4fd89f6f5f9f57"
+  # SECRET = "01265a8ba50284999508d680f7387664"
+  # APIKEY = "1juOmajJrHO3f2NFA0a8dIYy2qAamtnK"
+  # MCH_ID = "1388434302"
+  # NOTIFY_URL = "http://#{Rails.configuration.domain}/user_mobile/courses/notify"
+
+  # APPID = "wxfe4fd89f6f5f9f57"
+  APPID = Rails.configuration.wechat_pay_app_id
+  # SECRET = "01265a8ba50284999508d680f7387664"
+  SECRET = Rails.configuration.wechat_pay_app_key
+  # APIKEY = "1juOmajJrHO3f2NFA0a8dIYy2qAamtnK"
+  APIKEY = Rails.configuration.wechat_pay_api_key
+  MCH_ID = Rails.configuration.wechat_mch_id
+  NOTIFY_URL = "http://#{Rails.configuration.domain}/user_mobile/settings/notify"
 
   include Mongoid::Document
   include Mongoid::Timestamps
@@ -40,10 +49,11 @@ class Deposit
   field :renew_status, type: Boolean
 
   belongs_to :user
+  has_many :bills
 
   def self.create_new(client)
     deposit_amount = BorrowSetting.first.try(:deposit) || 100
-    deposit = self.create(order_id: Util.random_str(32),
+    deposit = self.create(# order_id: Util.random_str(32),
                           amount: deposit_amount)
     deposit.user = client
     deposit.save
@@ -64,14 +74,14 @@ class Deposit
 
   def unifiedorder_interface(remote_ip, openid)
     nonce_str = Util.random_str(32)
+    order_id = Util.random_str(32)
     data = {
       "appid" => APPID,
       "mch_id" => MCH_ID,
       "nonce_str" => nonce_str,
       "body" => "绘本借阅押金",
-      "out_trade_no" => self.order_id,
-      "total_fee" => (self.amount * 100).to_s,
-      # "total_fee" => 1.to_s,
+      "out_trade_no" => order_id,
+      "total_fee" => Rails.env == "production" ? (self.amount * 100).round.to_s : 1.to_s,
       "spbill_create_ip" => remote_ip,
       "notify_url" => NOTIFY_URL,
       "trade_type" => "JSAPI",
@@ -88,7 +98,62 @@ class Deposit
 
     doc = Nokogiri::XML(response.body)
     prepay_id = doc.search('prepay_id').children[0].text
-    self.update_attributes({prepay_id: prepay_id})
+    self.update_attributes({prepay_id: prepay_id, order_id: order_id})
+    Bill.create_online_deposit_pay_item(self)
+  end
+
+  def self.notify_callback(content)
+    doc = Nokogiri::XML(content)
+    order_id = doc.search('out_trade_no').children[0].text
+
+
+    bill = Bill.where(order_id: order_id).first
+    if bill.blank?
+      logger.info "ERROR!!!!!!!!!!!!!!"
+      logger.info "order is finished, but corresponding bill cannot be found"
+      logger.info "ERROR!!!!!!!!!!!!!!"
+      return
+    end
+
+    deposit = bill.deposit
+    if deposit.nil?
+      logger.info "ERROR!!!!!!!!!!!!!!"
+      logger.info "order is finished, but corresponding course_participate cannot be found"
+      logger.info "ERROR!!!!!!!!!!!!!!"
+      return
+    end
+    success = doc.search('return_code').children[0].text
+    logger.info "!!!!!!!!!!!!!!!!!!!"
+    logger.info success
+    if success != "SUCCESS"
+      return nil
+    else
+      result_code = doc.search('result_code').children[0].text
+      logger.info "!!!!!!!!!!!!!!!!!!!"
+      logger.info result_code
+      if result_code != "SUCCESS"
+        err_code = doc.search('err_code').children[0].text
+        err_code_des = doc.search('err_code_des').children[0].text
+        deposit.update_attributes({
+          trade_state: result_code,
+          err_code: err_code,
+          err_code_des: err_code_des
+        })
+      else
+        wechat_transaction_id = doc.search('transaction_id').children[0].try(:text)
+        logger.info "!!!!!!!!!!!!!!!!!!!"
+        logger.info wechat_transaction_id
+        deposit.update_attributes({
+          trade_state: "SUCCESS",
+          trade_state_desc: "",
+          trade_state_updated_at: Time.now.to_i,
+          wechat_transaction_id: wechat_transaction_id,
+          pay_finished: true,
+          expired_at: -1
+        })
+        bill.confirm_deposit_item
+      end
+    end
   end
 
   def get_pay_info
@@ -108,7 +173,7 @@ class Deposit
     self.update_attributes(
       {
         expired_at: (Time.now + 1.days).to_i,
-        order_id: Util.random_str(32),
+        # order_id: Util.random_str(32),
         prepay_id: ""
       })
   end
@@ -159,7 +224,8 @@ class Deposit
         })
         if trade_state == "SUCCESS"
           self.update_attributes({pay_finished: true})
-          Bill.confirm_online_deposit_pay_item(self)
+          bill = Bill.where(order_id: self.order_id).first
+          bill.confirm_course_participate_item
         end
         retval = { success: true, trade_state: trade_state, trade_state_desc: trade_state_desc }
         return retval

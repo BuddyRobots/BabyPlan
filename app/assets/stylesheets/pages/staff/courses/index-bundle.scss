@@ -34,6 +34,26 @@ input, label {
 	bottom: 0px;
 	right: 0px;
 }
+.add-btn {
+	position: absolute;
+	top: 11.5px;
+	right: 20px;
+	z-index: 10;
+	width: 100px;
+	height: 34px;
+	padding: 0;
+	line-height: 32px;
+	color: white;
+	background: #f7873d;
+	border-radius: 6px;
+}
+.add-btn:hover {
+	color: white;
+}
+.view-btn {
+	@extend .add-btn;
+	right: 140px;
+}
 .user-search-box {
 	position: absolute;
 	width: 200px;
@@ -91,12 +111,12 @@ input, label {
 .local-course {
 	border: 1px solid #ddd;
 	border-radius: 0 6px 6px 6px;
-	padding: 20px;
+	padding: 20px 20px 10px 20px;
 }
 .open-course {
 	border: 1px solid #ddd;
 	border-radius: 6px;
-	padding: 20px;
+	padding: 20px 20px 10px 20px;
 }
 .table-box {
 	position: relative;
@@ -152,3 +172,39 @@ input, label {
 .select-page {
 	margin: 10px 0 7px 0;
 }
+
+
+// modify
+.link-available {
+	color: #f7873d;
+}
+.link-available:link {
+	color: #f7873d;
+}
+.link-available:visited {
+	color: #f7873d;
+}
+.link-available:hover {
+	color: #f7873d;
+}
+.link-available:active {
+	color: #f7873d;
+}
+.link-unavailable {
+	color: #10c078;
+}
+.link-unavailable:link {
+	color: #10c078;
+}
+.link-unavailable:visited {
+	color: #10c078;
+}
+.link-unavailable:hover {
+	color: #10c078;
+}
+.link-unavailable:active {
+	color: #10c078;
+}
+
+
+

@@ -5,8 +5,8 @@ class UserMobile::FeedsController < UserMobile::ApplicationController
     if @current_user.client_centers.present?
       @feeds = Feed.is_available.any_in(center_id: @current_user.client_centers.is_available.map { |e| e.id.to_s} + [nil])
       @feeds = @feeds.desc(:created_at)
-      if params[:keyword].present?
-        @feeds = @feeds.where(name: /#{params[:keyword]}/)
+      if @keyword.present?
+        @feeds = @feeds.where(name: /#{Regexp.escape(@keyword)}/)
       end
       @feeds = auto_paginate(@feeds)[:data]
     end
@@ -15,8 +15,9 @@ class UserMobile::FeedsController < UserMobile::ApplicationController
   def more
     @feeds = Feed.is_available.any_in(center_id: @current_user.client_centers.is_available.map { |e| e.id.to_s} + [nil])
     @feeds = @feeds.desc(:created_at)
-    if params[:keyword].present?
-      @feeds = @feeds.where(name: /#{params[:keyword]}/)
+    @keyword = params[:keyword]
+    if @keyword.present?
+      @feeds = @feeds.where(name: /#{Regexp.escape(@keyword)}/)
     end
     @feeds = auto_paginate(@feeds)[:data]
     @feeds = @feeds.map { |e| e.more_info }

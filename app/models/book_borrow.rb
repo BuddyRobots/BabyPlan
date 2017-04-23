@@ -15,6 +15,7 @@ class BookBorrow
 
   belongs_to :book_inst
   belongs_to :book
+  belongs_to :center
   belongs_to :client, class_name: "User", inverse_of: :book_borrows
 
   scope :unreturned, ->{ where(status: NORMAL, return_at: nil) }
@@ -83,6 +84,24 @@ class BookBorrow
     return self.return_at.present? ? Time.at(self.return_at).strftime("%Y-%m-%d %H:%M") : "暂未归还"
   end
 
+  def status_class
+    if self.status == self.is_expired
+      return "overtime"
+    end
+    if self.return_at.blank?
+      return "unreturn"
+    else
+      return "returned"
+    end
+  end
+
+  def status_str
+    if self.is_expired
+      return "已逾期"
+    end
+    return self.return_at.present? ? "已还" : "未还"
+  end
+
   def expire_days
     borrow_duration = BorrowSetting.first.try(:borrow_duration)
     if borrow_duration.blank?
@@ -107,5 +126,23 @@ class BookBorrow
 
   def pay_latefee
     self.update_attributes({latefee_paid: true})
+  end
+
+  def self.migrate
+    BookBorrow.all.each do |e|
+      e.update_attribute(:center_id, e.book.center.id)
+    end
+  end
+
+  def self.send_book_remind
+    @books = BookBorrow.where(:borrow_at.gt => Time.now.end_of_day - (BorrowSetting.first.borrow_duration).day)
+    b_id = @books.map {|b| b.id}
+    b_id.each do |b|
+      book = BookBorrow.where(id: b).first
+      book_name = book.book.name
+      return_time = Time.at(book.borrow_at + (BorrowSetting.first.borrow_duration).day).strftime("%Y-%m-%d")
+      openid = book.client.user_openid
+      Weixin.book_return_notice(openid, book_name, return_time)
+    end
   end
 end

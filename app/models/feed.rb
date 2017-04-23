@@ -74,7 +74,7 @@ class Feed
     elsif self.book.present?
       self.book.cover.nil? ? ActionController::Base.helpers.asset_path("web/book.png") : self.book.cover.path
     else
-      self.announcement.photo.nil? ? ActionController::Base.helpers.asset_path("web/announcement.png") : self.announcement.photo.path
+      self.announcement.try(:photo).nil? ? ActionController::Base.helpers.asset_path("web/announcement.png") : self.announcement.try(:photo).path
     end
   end
 

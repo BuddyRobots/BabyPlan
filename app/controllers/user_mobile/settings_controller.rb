@@ -12,6 +12,11 @@ class UserMobile::SettingsController < UserMobile::ApplicationController
       @open_id = Weixin.get_oauth_open_id(params[:code])
       @deposit = @current_user.deposit
       @deposit = @deposit || Deposit.create_new(@current_user)
+      if @deposit.trade_state == "SUCCESS"
+        # the deposit has bee paid
+        @pay_info = @deposit.get_pay_info
+        return
+      end
       @deposit.renew
       @deposit.update_attributes({renew_status: true})
       if @deposit.prepay_id.blank?
@@ -21,10 +26,26 @@ class UserMobile::SettingsController < UserMobile::ApplicationController
     end
   end
 
+  def notify
+    logger.info "^^^^^^^^^^^^^^^^^"
+    logger.info request.raw_post
+    logger.info "^^^^^^^^^^^^^^^^^"
+    logger.info params.inspect
+    logger.info "^^^^^^^^^^^^^^^^^"
+    Deposit.notify_callback(request.raw_post)
+    render :xml => {return_code: "SUCCESS"}.to_xml(dasherize: false, root: "xml") and return
+  end
+
+  def show
+    @back = params[:back]
+    @book_borrow = BookBorrow.where(id: params[:id]).first
+    @book = @book_borrow.book
+  end
+
   def pay_finished
     @deposit = current_user.deposit
     @deposit.update_attributes({pay_finished: true})
-    Bill.create_online_deposit_pay_item(@deposit)
+    # Bill.create_online_deposit_pay_item(@deposit)
     render json: retval_wrapper(nil) and return
   end
 
@@ -73,7 +94,7 @@ class UserMobile::SettingsController < UserMobile::ApplicationController
   end
 
   def profile
-    @first_signin = params[:first_signin]
+    @unnamed = params[:unnamed]
   end
 
   def update_profile
@@ -96,5 +117,25 @@ class UserMobile::SettingsController < UserMobile::ApplicationController
   def upload_avatar
     retval = @current_user.get_avatar(params[:server_id])
     render json: retval_wrapper(retval) and return
+  end
+
+  def get_openid
+    @open_id = Weixin.get_oauth_open_id(params[:code])
+    current_user.update_attribute(:user_openid, @open_id)
+    current_user.save
+    redirect_to params[:state].blank? ? "/user_mobile/feeds" : params[:state]
+  end
+
+  def refund_deposit
+    if @current_user.present?
+      user_id = @current_user.id
+      total_amount = @current_user.deposit.amount
+      wishing = "退还绘本押金"
+      retval = Weixin.red_packet(user_id, total_amount, wishing)
+      if retval == "ok"
+        @current_user.update_attributes({pay_finished: false, trade_state: ""})
+      end
+      render json: retval_wrapper(str: retval) and return
+    end
   end
 end

@@ -1,0 +1,61 @@
+- content_for :app_head do
+  = stylesheet_link_tag "layouts/operator-layout", :media => "all"
+  = javascript_include_tag "layouts/operator-layout"
+  = yield :head
+  :javascript
+    window.code = "#{@code}"
+
+
+- content_for :app_content do
+  .wrapper
+    .header
+      %a{:href => operator_books_path}
+        %img.logo{src: asset_path("managecenter/logo.png")}
+      %p.leftword#jump_to_books 图书信息录入系统
+
+      /登录注册页面的layout
+      - if @current_operator.present?
+        %ul.kids-manage
+          %li.manage#manage-photo
+            %img.manager{src: asset_path("managecenter/headphoto.png")}
+            .btn-group
+              %a.btn.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+                = @current_operator.name
+                %span.caret
+              %ul.dropdown-menu
+                %li 
+                  %a.modify_password{:href => "javascript:void(0);"} 修改密码
+          %li.manage
+            %a{:href => signout_operator_sessions_path}
+              %img.turnoff-icon{src: asset_path("managecenter/turnoff.png")}
+      - else
+        %p.rightword 欢迎您访问儿童中心图书信息录入系统！
+        %button.btn#sign-in{"data-target" => "#signinModal", "data-toggle" => "modal", :type => "button"} 登录
+    
+    %div.user_unsign_in
+      = yield
+= render :template => 'layouts/application'
+
+/ modify_password
+#modify_passwordModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      %img.close-btn{"aria-hidden" => "true", "data-dismiss" => "modal", src: asset_path("managecenter/close.png")}
+      .modal-body
+        .set-password-box
+          %form.form-horizontal#form-layout{:role => "form"}
+            .form-group.change
+              %label.col-sm-4.control-label#label-name{:for => "forget-password"} 原始密码
+              .col-sm-8
+                %input.unclicked-box#password.form-control{:type => "password"}
+            .form-group.change
+              %label.col-sm-4.control-label#label-name{:for => "forget-password"} 重设密码
+              .col-sm-8
+                %input.unclicked-box#new-password.form-control{:type => "password"}
+            .form-group.change
+              %label.col-sm-4.control-label#label-name{:for => "forget-confirm-password"} 确认密码
+              .col-sm-8
+                %input.unclicked-box#confirm-password.form-control{:type => "password"}
+            .confirm-button
+              %button.btn#confirm.button-disabled{:href => "javascript:void(0);"} 确定
+

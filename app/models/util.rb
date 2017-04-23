@@ -1,4 +1,6 @@
 class Util
+  MCH_ID = Rails.configuration.wechat_mch_id
+  
   def self.random_str(length)
     o = [('a'..'z'), ('A'..'Z'), ('0'..'9')].map { |i| i.to_a }.flatten
     str = (0...length).map { o[rand(o.length)] }.join
@@ -14,5 +16,13 @@ class Util
 
   def self.hash_to_xml(h)
     "<xml>" + h.to_a.map { |e| "<#{e[0]}>#{e[1]}</#{e[0]}>" } .join + "</xml>"
+  end
+
+  def self.billno_random_str
+    mch_id = MCH_ID
+    date = Time.now.strftime("%Y%m%d%H%M%S")
+    ran = Random.rand(1...10000).to_s
+    str = mch_id + date + ran
+    return str
   end
 end

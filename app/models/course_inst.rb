@@ -6,7 +6,6 @@ class CourseInst
   field :name, type: String
   field :available, type: Boolean
   field :code, type: String
-  field :inst_code, type: String
   field :length, type: Integer
   field :address, type: String
   field :capacity, type: Integer
@@ -17,7 +16,10 @@ class CourseInst
   field :date_in_calendar, type: Array, default: [ ]
   field :min_age, type: Integer
   field :max_age, type: Integer
-  field :school, type: String
+  field :school_id, type: String
+  field :start_course, type: Integer
+  field :desc, type: String
+  field :deleted, type: Boolean, default: false
 
   has_one :photo, class_name: "Material", inverse_of: :course_inst_photo
   has_one :feed
@@ -31,24 +33,46 @@ class CourseInst
   has_many :favorites
   has_many :bills
 
+  has_many :messages
+
+  belongs_to :school
   scope :is_available, ->{ where(available: true) }
+  default_scope { where(:deleted.ne => true) }
 
 
   def self.create_course_inst(staff, center, course_inst_info)
     if course_inst_info["length"].to_i != course_inst_info["date_in_calendar"].length
       return ErrCode::COURSE_DATE_UNMATCH
     end
-    course = Course.where(id: course_inst_info[:course_id]).first
-    code = course.code + "-" + course_inst_info[:code]
-    course_inst = CourseInst.where(code: code).first
+    if center.classtime_upper.present?
+      course_date = Time.parse(course_inst_info[:start_course])
+      week_start = course_date.beginning_of_week
+      week_end = course_date.end_of_week
+      course_insts = center.course_insts.where(:start_course.gt => week_start.to_i).where(:start_course.lt => week_end.to_i)
+      ci_array = course_insts.map {|ci| ci.id}
+      total_time = 0
+      ci_array.each do |ci|
+        ci_instance = CourseInst.where(id: ci).first
+        course_date = ci_instance.date_in_calendar[0].split(',')
+        course_start = Time.parse(course_date[0])
+        course_end = Time.parse(course_date[1])
+        class_time = (course_end - course_start).to_i
+        total_time += class_time
+      end
+      if total_time > center.classtime_upper * 3600
+        return ErrCode::COURSE_TIME_UPPER
+      end
+    end
+    # course = Course.where(id: course_inst_info[:course_id]).first
+    # code = course.code + "-" + course_inst_info[:code]
+    course_inst = CourseInst.where(code: course_inst_info[:code]).first
     if course_inst.present?
       return ErrCode::COURSE_INST_EXIST
     end
-    course_inst = course.course_insts.create({
-      name: course.name,
+    course_inst = center.course_insts.create({
+      name: course_inst_info[:name],
       available: course_inst_info[:available],
-      code: code,
-      inst_code: course_inst_info[:code],
+      code: course_inst_info[:code],
       length: course_inst_info[:length],
       address: course_inst_info[:address],
       capacity: course_inst_info[:capacity],
@@ -59,11 +83,17 @@ class CourseInst
       date_in_calendar: course_inst_info[:date_in_calendar],
       min_age: course_inst_info[:min_age],
       max_age: course_inst_info[:max_age],
-      school: course_inst_info[:school]
+      school_id: course_inst_info[:school_id],
+      start_course: Time.parse(course_inst_info[:start_course]),
+      desc: course_inst_info[:desc]
     })
+    if course_inst_info[:path].present?
+      m = Material.create(path: course_inst_info[:path])
+      course_inst.photo = m
+    end
     course_inst.center = center
     course_inst.save
-    Feed.create(course_inst_id: course_inst.id, name: course.name, center_id: center.id, available: course_inst_info[:available])
+    Feed.create(course_inst_id: course_inst.id, name: course_inst.name, center_id: center.id, available: course_inst_info[:available])
     { course_inst_id: course_inst.id.to_s }
   end
 
@@ -73,15 +103,19 @@ class CourseInst
       name: self.name || self.course.name,
       available: self.available,
       speaker: self.speaker,
+      school: self.school.try(:name),
+      center: self.center.name,
       price: self.price,
       price_pay: self.price_pay,
       address: self.address,
-      date: self.date
+      date: self.date,
+      course_participates: self.course_participates.size,
+      amount: self.bills.sum("amount").to_i
     }
   end
 
   def update_info(course_inst_info)
-    course_inst = self.course.course_insts.where(inst_code: course_inst_info["code"]).first
+    course_inst = CourseInst.where(code: course_inst_info["code"]).first
     if course_inst.present? && course_inst.id != self.id
       return ErrCode::COURSE_INST_EXIST
     end
@@ -90,8 +124,8 @@ class CourseInst
     end
     self.update_attributes(
       {
-        code: self.course.code + "-" + course_inst_info["code"],
-        inst_code: course_inst_info["code"],
+        code: course_inst_info["code"],
+        # inst_code: course_inst_info["code"],
         price: course_inst_info["price"],
         price_pay: course_inst_info["price_pay"],
         length: course_inst_info["length"],
@@ -102,9 +136,13 @@ class CourseInst
         date_in_calendar: course_inst_info["date_in_calendar"],
         min_age: course_inst_info["min_age"],
         max_age: course_inst_info["max_age"],
-        school: course_inst_info["school"]
+        school_id: course_inst_info["school_id"],
+        start_course: Time.parse(course_inst_info["start_course"]),
+        name: course_inst_info["name"],
+        desc: course_inst_info["desc"]
       }
     )
+    self.feed.update_attribute(:name, course_inst_info["name"])
     nil
   end
 
@@ -300,16 +338,43 @@ class CourseInst
   end
 
   def status_class
-    if self.capacity <= self.effective_signup_num
-      return "greyribbon"
-    elsif self.capacity - self.effective_signup_num <= 5 && self.capacity - self.effective_signup_num > 0
-      return "redribbon"
+    if Time.zone.parse(self.start_time).future?
+      if self.capacity <= self.effective_signup_num
+        return "greyribbon"
+      elsif self.capacity - self.effective_signup_num <= 5 && self.capacity - self.effective_signup_num > 0
+        return "redribbon"
+      else
+        return "greenribbon"
+      end
     else
-      return "greenribbon"
+      return "endribbon"
     end
   end
 
- def self.price_for_select
-   hash = { "选择价格区间" => 0, "免费" => 1, "0~20元" => 2, "20~40元" => 3, "40元以上" => 4 }
- end
+  def self.price_for_select
+    hash = { "选择价格区间" => 0, "免费" => 1, "0~20元" => 2, "20~40元" => 3, "40元以上" => 4 }
+  end
+
+  def self.migrate
+    Center.all.map do |c|
+      c.update_attributes({
+        year: 2017,
+        code: 1
+        })
+      c.course_insts.all.map do |ci|
+        ci.update_attributes({
+          name: ci.name.blank? ? ci.course.name : ci.name,
+          capacity: ci.capacity.blank? ? ci.course.capacity : ci.capacity,
+          price: ci.price.blank? ? ci.course.price : ci.price,
+          price_pay: ci.price_pay.blank? ? ci.course.price_pay : ci.price_pay,
+          length: ci.length.blank? ? ci.course.length : ci.length,
+          desc: ci.desc.blank? ? ci.course.desc : ci.desc,
+          start_course: Time.zone.parse(ci.start_time).to_time,
+          code: c.get_code 
+          })
+      end
+    end
+  end
+
 end
+  

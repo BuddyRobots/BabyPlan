@@ -65,9 +65,9 @@
                 %tbody
                   - @participates[:data].each do |e|
                     %tr
-                      %td.td-data= e.course_inst.name || e.course_inst.course.name
+                      %td.td-data= e.course_inst.name
                       %td.td-data= e.course_inst.duration
-                      %td.td-data= e.course_inst.center.address
+                      %td.td-data#short-address= e.course_inst.center.address
                       %td.td-data= e.course_inst.speaker
                       %td.td-data= e.status_str
                       %td.td-data 
@@ -76,7 +76,7 @@
                             上课情况
                             %span.triangle-down
                         - else
-                          .unreturn-review　上课情况
+                          .course-unreturn-review 上课情况
                     - if e.is_success
                       %tr.status
                         %td{:colspan => "6"}
@@ -107,9 +107,6 @@
                 %p.cash
                   %span 当前借阅本数：
                   %span= @user.cur_books_num
-                .btn-div
-                  %button.btn#deposit-btn{class: @user.deposit_paid ? "hide" : ""}= "缴纳押金" + (BorrowSetting.first.try(:deposit) || 100).to_s + "元"
-                  %button.btn#deposit-refund{class: !@user.deposit_paid ? "hide" : ""} 退回押金
             .desc-div
               %p.title 滞纳金缴纳
               .cash-div
@@ -147,7 +144,7 @@
                             绘本评价
                             %span.triangle-down
                         - else
-                          .unreturn-review　暂未评论
+                          .course-unreturn-review 暂未评论
                     - if b.review.present?
                       %tr.status
                         %td#bookborrow-review{:colspan => "4"}

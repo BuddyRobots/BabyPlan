@@ -1,0 +1,118 @@
+.modal-body {
+	margin: 0;
+	padding: 0;
+}
+// layout variable content
+.content-area {
+	position: absolute;
+	width: 100%;
+	bottom: 0;
+	top: 0;
+	background:#f7fcff;
+	box-shadow: -1px -1px 6px #9c9c9c inset;
+	padding: 20px;
+	text-align: center;
+	overflow: auto;
+}
+.caption {
+	font-size: 24px;
+	color: #323232;
+	padding: 60px 0;
+}
+
+
+// signin  modal
+#signinModal {
+	.modal-dialog {
+		position:absolute;
+		left: 50%;
+		top: 50%;
+		margin-left: -203px;
+		margin-top: -167px;
+		width: 406px;
+		height: 334px;
+		border-radius: 6px;
+	}
+	
+}
+.form-group {
+	margin-bottom: 20px;
+	font-weight: normal;
+}
+.modal-backdrop {
+	background-color: #999;
+}
+.close-signin {
+	position: absolute;
+	right: -14px;
+	top: -14px;
+	opacity: 0.7;
+	z-index: 10;
+}
+.close-signin:hover {
+	opacity: 1;
+}
+.content-box {
+	width: 66%;
+	margin: 0 auto;
+}
+.logo-box {
+	text-align:center;
+	padding: 30px 0 6px 0;
+}
+.sign-logo {
+	width: 64.285%;
+	max-width: 36px;
+}
+.kids-center {
+	font-size: 18px;
+	color: #323232;
+	margin-left: 10px;
+	vertical-align: middle;
+}
+.error-notice {
+	width:240px;
+	margin-left: 50px;
+	font-size: 12px;
+	color: #db1e2c;
+	margin-bottom: 4px;
+	visibility: hidden;
+}
+.mobile-notice {
+		font-size: 12px;
+		color: #969696;
+		margin-bottom: 12px;
+		margin-left: 50px;
+	}
+#signin{
+	width: 100%;
+	height: 40px;
+	border: 0;
+	margin-top: 5px;
+	margin-bottom: 30px;
+	border-radius: 4px;
+	font-size: 16px;
+	color: white;
+	outline: none;
+}
+.button-disabled {
+	background: #c8c8c8;
+}
+.button-enabled {
+	background: #ffa265;
+}
+.unclicked-box {
+	border: 1px solid #c8c8c8;
+}
+.clicked-box {
+	border: 1px solid #d70c19;
+}
+.clicked {
+	background: #d4d4d4;
+}
+.unclicked {
+	background: #fee4d2;
+}
+
+
+

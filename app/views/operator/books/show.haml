@@ -1,0 +1,113 @@
+- content_for :head do
+  = javascript_include_tag "pages/operator/books/show-bundle"
+  = stylesheet_link_tag "pages/operator/books/show-bundle", :media => "all"
+  :javascript
+    window.bid = "#{@book.id.to_s}"
+    window.age_lower_bound = "#{@book.age_lower_bound}"
+    window.age_upper_bound = "#{@book.age_upper_bound}"
+    window.user = "#{@current_operator.class}"
+
+.content-area
+  .content-box
+    .manage-box
+      %a#back{:href => "/operator/books"}
+        %img{src: asset_path("web/back2.png")}
+      .btn-box
+        .btn.delete-btn{:type => "button"} 
+          %img.delete{src: asset_path("web/delete2.png")}
+          删除
+        .btn.finish-btn{:type => "button"} 
+          %img.ticker{src: asset_path("managecenter/ticker.png")}
+          完成
+        .btn.edit-btn{:type => "button"} 
+          %img.edit{src: asset_path("managecenter/edit.png")}
+          编辑
+    .manage-content
+      .tab-content
+        #tab1.tab-pane.active
+          .controls.controls-row
+            %label.input-caption#book-number ISBN号:
+            %span.unedit-box#isbn-span= @book.isbn
+            %span.edit-box
+              %input.input-area.form-control#isbn-input{:type => "text"}
+            %label.input-caption#name 名称:
+            %span.unedit-box#name-span= @book.name
+            %span.edit-box
+              %input.input-area.form-control#name-input{:type => "text"}
+          .controls.controls-row
+            %label.input-caption#author 作者:
+            %span.unedit-box#author-span= @book.author
+            %span.edit-box
+              %input.input-area.form-control#author-input{:type => "text"}
+            %label.input-caption#translator 译者:
+            %span.unedit-box#translator-span= @book.translator
+            %span.edit-box
+              %input.input-area.form-control#translator-input{:type => "text"}
+            %label.input-caption#illustrator-label 插画作者:
+            %span.unedit-box#illustrator-span= @book.illustrator
+            %span.edit-box
+              %input.input-area.form-control#illustrator-input{:type => "text"}
+          .controls.controls-row
+            %label.input-caption#publisher 出版社:
+            %span.unedit-box#publisher-span= @book.publisher
+            %span.edit-box
+              %input.input-area.form-control#publisher-input{:type => "text"}
+            %label.input-caption#mixage-label 最小适龄:
+            %span.unedit-box#age-lower-bound-span= @book.age_lower_bound.blank? ? "未填写" : @book.age_lower_bound.to_s + "岁"
+            %span.edit-box
+              %input.input-area.form-control#age-lower-bound-input{:type => "text"}      
+            %label.input-caption#mixage-label 最大适龄:
+            %span.unedit-box#age-upper-bound-span= @book.age_upper_bound.blank? ? "未填写" : @book.age_upper_bound.to_s + "岁"
+            %span.edit-box
+              %input.input-area.form-control#age-upper-bound-input{:type => "text"}  
+          .form-inline.clearfix#tag-form
+            %span.unedit-box.type-span.type-span-template
+            %label.input-caption 标签:
+            - (@book.tags || "").split(',').each do |tag|
+              %span.unedit-box.type-span.type-span-ele= tag
+            %span.edit-box
+              %ul#type-tag
+                   
+          .book-introduce.clearfix
+            %span.introduce 书籍介绍:
+            %div.introduce-details
+              = @book.desc.html_safe
+            %span.wangedit-area
+              #edit-area
+
+          = form_tag("/operator/books/" + @book.id.to_s + "/upload_photo", method: "post", multipart: true, id: "upload-photo-form", class: "hide") do
+            = text_field_tag "has_cover"
+            = text_field_tag "has_back"
+            = file_field_tag "cover_file", { class: "hide", accept: ".jpg,.png" }
+            = file_field_tag "back_file", { class: "hide", accept: ".jpg,.png" }
+          .cover-back
+            %span.book-cover 封面:
+            .photo-div#upload-cover-div
+              %a#upload-cover{href: "javascript:void(0);"}
+                %img#cover-photo.photo{src: @book.cover.nil? ? asset_path("web/coverempty.png") : @book.cover.path}
+              %a.upload-photo{href: "javascript:void(0);"}
+                %img#cover-edit-photo.edit-photo{src: asset_path("web/addcover.png")}
+            %span.book-back 封底:
+            .photo-div#upload-back-div
+              %a#upload-back{href: "javascript:void(0);"}
+                %img#back-photo.photo{src: @book.back.nil? ? asset_path("web/coverempty.png") : @book.back.path}
+              %a.upload-photo{href: "javascript:void(0);"}
+                %img#back-edit-photo.edit-photo{src: asset_path("web/addcover.png")}
+       
+           
+#editor-content.hide
+  = @book.desc.html_safe
+
+
+#deleteModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
+  .modal-dialog
+    .modal-content
+      .modalheader
+        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: asset_path("managecenter/close.png")}
+      .modal-body
+        %p.message 删除后该绘本将从录入系统中清除!
+        %p.message 是否确定要删除该绘本?
+        .btn-div
+          %button.btn#cancel{type: "button"} 取&nbsp消
+          %button.btn#confirm-delete{type: "button", method: "delete"} 确&nbsp定
+

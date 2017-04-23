@@ -2,8 +2,8 @@
   = javascript_include_tag "pages/user_mobile/settings/profile-bundle"
   = stylesheet_link_tag "pages/user_mobile/settings/profile-bundle", :media => "all"
   :javascript
-    window.birthday_str="#{@current_user.birthday_str}"
-    window.first_signin="#{@first_signin}"
+    window.birthday="#{@current_user.birthday}"
+    window.unnamed="#{@unnamed}"
 
 - content_for :app_content do
   .content-area
@@ -19,7 +19,8 @@
         %input.input-div#name{value: @current_user.name}
       .item-box#num2
         %span.item 出生日期：
-        %input.input-div#datepicker{value: @current_user.birthday_str}
+        / %input.input-div#datepicker{value: @current_user.birthday_str}
+        %input.date-div#birthday{type: "date", value: @current_user.birthday}
       .item-box#num3
         %span.item 性别：
         = select_tag "gender", options_for_select(User.genders_for_select, @current_user.gender), class: "input-div"

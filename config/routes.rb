@@ -44,6 +44,7 @@ Rails.application.routes.draw do
       member do
         put :change_center
         put :change_status
+        post :set_available
       end
     end
     resources :announcements do
@@ -77,6 +78,25 @@ Rails.application.routes.draw do
       end
     end
     resources :transfers do
+    end
+    resources :schools do
+      member do
+        post :set_available
+      end
+    end
+  end
+
+  namespace :operator do
+    resources :sessions do
+      collection do
+        get :signout
+        post :change_password
+      end
+    end
+    resources :books do
+      member do
+        post :upload_photo
+      end
     end
   end
 
@@ -119,6 +139,9 @@ Rails.application.routes.draw do
       collection do
         get :get_id_by_name
         get :next_refund_request
+        get :coursetable
+        get :calendar_data
+        get :tableprint
       end
       member do
         post :set_available
@@ -128,6 +151,8 @@ Rails.application.routes.draw do
         post :signin_client
         get :signin_info
         get :stat
+        post :set_delete
+        post :course_notice
       end
     end
 
@@ -140,6 +165,7 @@ Rails.application.routes.draw do
         get :download_qrcode
         post :add_to_list
         post :delete_qr_code
+        post :set_delete
       end
       collection do
         get :code_list
@@ -149,6 +175,8 @@ Rails.application.routes.draw do
         post :clear_list
         post :download_all_qr
         get :download_qr_list
+        post :isbn_search
+        post :isbn_add_book
       end
     end
 
@@ -270,6 +298,8 @@ Rails.application.routes.draw do
     end
     resources :settings do
       collection do
+        post :notify
+        get :notify
         get :book
         get :course
         get :favorite
@@ -285,6 +315,8 @@ Rails.application.routes.draw do
         post :upload_avatar
         post :pay_finished
         post :pay_failed
+        get :get_openid
+        post :refund_deposit
       end
     end
   end

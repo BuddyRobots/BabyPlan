@@ -1,0 +1,49 @@
+- content_for :head do
+  = javascript_include_tag "pages/operator/books/index-bundle"
+  = stylesheet_link_tag "pages/operator/books/index-bundle", :media => "all"
+  :javascript
+    window.keyword = "#{@keyword}"
+    window.user = "#{@current_operator.class}"
+   
+.content-area
+  /books-index
+  .content-box
+    .manage-box
+      .btn.bookadd-btn{:type => "button"} 
+        %img.book-edit{src: asset_path("managecenter/add.png")}
+        添加绘本
+      .user-search-box
+        .input-group
+          %input.form-control#search-input{:type => "text", :placeholder => "输入绘本名称", :value => "#{@keyword}"}
+          %span.input-group-btn
+            %button.btn.btn-default#search-btn{:type => "button"}
+    
+    .manage-content
+      .tab-box
+        - if @book_templates[:data].length == 0
+          .undiscover
+            %img.undiscover-icon{src: asset_path("managecenter/undiscover.png")}
+            %span.message 抱歉！暂无绘本信息
+        - else
+          .table-box
+            %table.table.table-bordered#user-table
+              %thead
+                %tr
+                  %th.book-name 绘本名称
+                  %th 书&nbsp号
+                  %th 作&nbsp者
+                  %th 适&nbsp龄
+              %tbody
+                - @book_templates[:data].each do |b|
+                  %tr{"data-id" => b[:id]}
+                    %td= link_to b[:name], "/operator/books/#{b[:id]}"
+                    %td= b[:isbn]
+                    %td= b[:author]
+                    %td= b[:age_lower_bound].to_s + "~" + b[:age_upper_bound].to_s + "岁"
+                  
+          = render "operator/partials/auto_paginate", locals: { instance: @book_templates, url: "/operator/books?keyword=#{@keyword}&", page: 'page'}
+
+      
+
+
+                              

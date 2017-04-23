@@ -29,8 +29,6 @@ a{
 }
 
 .main-div {
-	position: fixed;
-	top: 0;
 	width: 100%;
 	max-width: 640px;
 	margin: 0 auto;
@@ -149,6 +147,13 @@ a{
 	color: #fff;
 }
 
+.vt {
+	vertical-align: top;
+}
+.width75 {
+	display: inline-block;
+	width: 70%;
+}
 
 @media screen and (max-width:640px) {
 	.main-div, .btn-div {

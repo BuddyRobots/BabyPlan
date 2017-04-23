@@ -1,6 +1,6 @@
 class StaffMobile::ApplicationController < ApplicationController
   layout 'layouts/staff_mobile'
-  before_filter :require_sign_in, :get_current_center
+  before_filter :refresh_session, :require_sign_in, :get_current_center
 
   attr_reader :current_center
 
@@ -29,4 +29,5 @@ class StaffMobile::ApplicationController < ApplicationController
       @current_center = current_user.staff_center
     end
   end
+
 end

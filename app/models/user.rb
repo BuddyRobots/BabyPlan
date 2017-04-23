@@ -22,7 +22,7 @@ class User
   field :mobile_verify_code, type: String
   field :password_verify_code, type: String
   field :auth_key, type: String
-
+  field :user_openid, type: String
   # for staff
   NEW = 1
   NORMAL = 2
@@ -36,7 +36,6 @@ class User
   field :parent, type: String
   field :address, type: String
   field :created_by_staff, type: Boolean, default: false
-  field :first_signin, type: Boolean, default: true
   field :is_pregnant, type: Boolean
 
   # relationships specific for clients
@@ -57,6 +56,7 @@ class User
   has_many :staff_logs
 
   has_one :avatar, class_name: "Material", inverse_of: :client
+
 
   scope :client, ->{ where(user_type: CLIENT) }
   scope :staff, ->{ any_of({user_type: STAFF}, {user_type: ADMIN}) }
@@ -99,7 +99,6 @@ class User
       if center.present? || center.class == Center
         u.client_centers << center
       end
-      u.first_signin = false
       u.save
     end
 
@@ -306,7 +305,7 @@ class User
   def client_info
     {
       id: self.id.to_s,
-      name: self.name_or_parent,
+      name: self.name_or_parent.present? ? self.name_or_parent : "未填写",
       gender: self.gender,
       age: self.birthday.present? ? Date.today.year - self.birthday.year : nil,
       parent: self.parent,
@@ -376,12 +375,6 @@ class User
     nil
   end
 
-  def update_first_signin
-    cur_val = self.first_signin
-    self.update_attributes({first_signin: false}) if cur_val
-    cur_val
-  end
-
   def has_expired_book
     self.book_borrows.select { |e| e.is_expired } .present?
   end
@@ -429,8 +422,13 @@ class User
         end
       end
     end
-    num = Statistic.where(center_id: nil, type: Statistic::CLIENT_NUM, :stat_date.gt => (Time.now - 10.weeks).to_i).asc(:stat_date).map { |e| e.value }
-    num = num.each_with_index.map { |e, i| i % 7 == 0 ? e : nil } .select { |e| e }
+    num = User.client.where(:created_at.gt => Time.now - 10.weeks)
+                     .asc(:created_at)
+                     .map { |e| (e.created_at.to_i - Time.now.to_i + 10.weeks.to_i) / 1.weeks.to_i }
+    num = num.group_by { |e| e }
+    num.each { |k,v| num[k] = v.length }
+    total_num = User.count
+    num = (0..9).to_a.map { |e| total_num = total_num - num[9-e].to_i } .reverse
     {
       gender: gender.to_a,
       age: age.to_a,

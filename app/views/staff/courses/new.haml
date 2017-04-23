@@ -2,13 +2,15 @@
   = javascript_include_tag "pages/staff/courses/new-bundle"
   = stylesheet_link_tag "pages/staff/courses/new-bundle", :media => "all"
   :javascript
-    window.cid = "#{@course.id.to_s}"
+    window.price_upper = "#{@center.price_upper}"
+    window.course_photo = "#{@course_inst.try(:photo).present?}"
+    window.course_photo_path = "#{@course_inst.try(:photo).try(:path)}"
 
 .content-area
   /courses-new
   .content-box
     .manage-box
-      %a#back{:href => "/staff/courses?profile=template"}
+      %a#back{:href => "/staff/courses"}
         %img{src: asset_path("web/back.png")}
       %p.course-add 添加课程
       .btn.end-btn{:type => "button"} 
@@ -22,42 +24,45 @@
         .text-message
           %form.form-inline
             %label.input-caption 课程名称:
-            %span.unedit-box#name-span= @course.name
+            %input.input-area.form-control#course-name{:type => "text", value: @course_inst.try(:name)}
           .form-group
             %label.input-caption 上课时间:
-            %input.input-area.form-control#course-date{:type => "text"}
+            %input.input-area.form-control#course-date{:type => "text", placeholder: "必填"}
           .form-group
             %label.input-caption 上课地址:
-            %input.input-area.form-control#course-address{:type => "text"}
+            %input.input-area.form-control#course-address{:type => "text", value: @course_inst.try(:address), placeholder: "必填"}
         .photo
           = form_tag("/", method: "post", multipart: true, id: "upload-photo-form", class: "hide") do
             = file_field_tag "photo_file", { class: "hide", accept: ".jpg,.png" }
           %a#upload-photo{href: "javascript:void(0);"}
-            %img.edit-photo#photo{src: asset_path("web/photo.png")}
+            %img.edit-photo#photo{:src => @course_inst.try(:photo).nil? ? asset_path("web/photo.png") : @course_inst.photo.path}
 
       .controls.controls-row
         %label.input-caption 开课编号:
-        %span.num-box
-          %span.course-num= @course.code + "-"
-          %input.input-area.form-control#course-code{:type => "text"}
+        %span.num-box= @center.get_code
         %label.input-caption 主讲人:
-        %input.input-area.form-control#course-speaker{:type => "text", value: @course.speaker}
+        %input.input-area.form-control#course-speaker{:type => "text", value: @course_inst.try(:speaker), placeholder: "必填"}
         %label.input-caption.kids-capacity 容量:
-        %input.input-area.form-control#course-capacity{:type => "text"}
+        %input.input-area.form-control#course-capacity{:type => "text", value: @course_inst.try(:capacity), placeholder: "必填"}
       .controls.controls-row
         %label.input-caption.course-length 课次:
-        %input.input-area.form-control#course-length{:type => "text", value: @course.length}
+        %input.input-area.form-control#course-length{:type => "text", value: @course_inst.try(:length), placeholder: "必填"}
         %label.input-caption 市场价:
-        %input.input-area.form-control#course-price{:type => "text", value: @course.price}
+        %input.input-area.form-control#course-price{:type => "text", value: @course_inst.try(:price)}
         %label.input-caption 公益价:
-        %input.input-area.form-control#public-price{:type => "text", value: @course.price_pay}
+        %input.input-area.form-control#public-price{:type => "text", value: @course_inst.try(:price_pay), placeholder: "必填"}
       .controls.controls-row
         %label.input-caption 最小适龄:
-        %input.input-area.form-control#min-age{:type => "text", value: @course.min_age}
+        %input.input-area.form-control#min-age{:type => "text", value: @course_inst.try(:min_age)}
         %label.input-caption.margin-l 最大适龄:
-        %input.input-area.form-control#max-age{:type => "text", value: @course.max_age}
-        / %label.input-caption.margin-l 开课单位:
-        / %input.input-area.form-control#school{:type => "text", value: @course.school}
+        %input.input-area.form-control#max-age{:type => "text", value: @course_inst.try(:max_age)}
+        %label.input-caption.margin-l 开课单位:
+        = select_tag "school_id", options_for_select(School.schools_for_select, @course_inst.try(:school_id)), class: "form-control input-area", :include_blank => "请选择开课单位"
+
+      .course-introduce
+        %span.introduce 课程介绍:
+        %span.wangedit-area
+          #edit-area= @course_inst.try(:desc).to_s.html_safe
       
       .calendar-wrapper.clearfix
         .calendar-operation-wrapper

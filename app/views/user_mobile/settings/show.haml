@@ -1,0 +1,68 @@
+- content_for :app_head do
+  = javascript_include_tag "pages/user_mobile/settings/show-bundle"
+  = stylesheet_link_tag "pages/user_mobile/settings/show-bundle", :media => "all"
+  :javascript
+    window.book_id="#{@book.id.to_s}"
+
+- content_for :app_content do
+  .content-area
+    .header
+      %img.crocodile{:src => @book.cover.present? ? @book.cover.path : asset_path("web/book.png")}
+      / %a{:href => @back == "setting" ? "/user_mobile/settings/book" : "/user_mobile/books"}
+      %a{:href => book_back_url(@back)}
+        %img.back{src: asset_path("back.png")}
+    .right-float
+      %a.a-div#concern{:href => "javascript:void(0);"}
+        - if @current_user.favorite_on(@book)
+          %img.smallheart{src: asset_path("concern.png"), data: {fav: "false"}}
+        - else
+          %img.smallheart{src: asset_path("cancel-concern.png"), data: {fav: "true"}}
+      %a.a-div{:href => user_mobile_reviews_path + "?back=" + @back.to_s + "&review_type=book&book_id=" + @book.id.to_s}
+        %img.dialog{src: asset_path("pinglun.png")}
+      %p.num= @book.reviews.public_and_mine(@current_user).count.to_s
+    .boxtitle
+      .bookcloud
+        %p= @book.name
+    .content
+      - if @book.age_range_str.present?
+        .item
+          %span 适合年龄：
+          %span.age= @book.age_range_str
+      - if @book.author.present?
+        .item
+          %span.moveright 作者：
+          %span.author= @book.author
+      - if @book.translator.present?
+        .item
+          %span.moveright 译者：
+          %span.translator= @book.translator
+      - if @book.illustrator.present?
+        .item
+          %span 插图作者：
+          %span.illustrtor= @book.illustrator
+      - if @book.tags.present?
+        .item
+          %span 书籍标签：
+          %span.type= @book.tags
+    .title-div
+      %p 书籍介绍
+    .article
+      = @book.desc.html_safe
+    .title-div
+      %p 借阅情况
+    .content
+      .item 
+        %p.center= @book.center.name
+      - if @book_borrow.present?
+        .item
+          %span.borrow-time 借出时间:
+          %span= Time.at(@book_borrow.borrow_at).strftime("%Y-%m-%d %H:%M")
+        .item
+          %span.borrow-time 应还时间:
+          %span= Time.at(@book_borrow.borrow_at + BorrowSetting.first.borrow_duration * 86400 ).strftime("%Y-%m-%d")
+        .item
+          %span.borrow-time 归还时间:
+          %span{class: @book_borrow.status_class}= @book_borrow.return_at.present? ? Time.at(@book_borrow.return_at).strftime("%Y-%m-%d %H:%M") : "暂未归还"
+      .item
+        %span.book-vt 地址：
+        %span#address= @book.center.address

@@ -92,10 +92,22 @@ $ ->
     name = $("#center-name").val()
     address = $("#center-address").val()
     desc = editor.$txt.html()
+    open_time = $("#center-open-time").val()
+    abbr = $("#center-abbr").val().trim()
+    price_upper = $("#price-upper").val().trim()
+    classtime_upper = $("#classtime-upper").val().trim()
     available = !$("#inlineCheckbox1").is(":checked")
-    if name == "" || address == "" || desc == ""
+    code = 1
+    year = 2017
+    
+    if name == "" || address == "" || desc == "" || abbr == "" || price_upper == "" || classtime_upper == ""
       $.page_notification("请补全信息")
       return
+    
+    if $.isNumeric(price_upper) == false || $.isNumeric(classtime_upper) == false
+      $.page_notification("请输入正确的数字", 1000)
+      return
+
     if window.lat == null
       $.page_notification("请在地图上确定具体位置")
       return
@@ -109,6 +121,12 @@ $ ->
           available: available
           lat: window.lat
           lng: window.lng
+          abbr: abbr
+          open_time: open_time
+          price_upper: price_upper
+          classtime_upper: classtime_upper
+          code: code
+          year: year
         }
       },
       (data) ->

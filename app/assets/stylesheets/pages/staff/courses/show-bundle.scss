@@ -1,3 +1,4 @@
+@import "wangEditor";
 @import "fullcalendar.min";
 @import "jquery-ui";
 
@@ -91,7 +92,7 @@ input, label, h5 {
 	margin-left: 7.5%;
 	margin-top: 0.5%;
 }
-.unedit-photo, .edit-photo {
+.unedit-photo, .edit-photo, {
 	width: 200px;
 	height: 138px;
 	object-fit: contain;
@@ -122,10 +123,10 @@ input, label, h5 {
 .num-box {
 	@extend .input-area;
 }
-#num-span {
-	width: auto;
-}
-#course-address, #course-date {
+// #num-span {
+// 	width: auto;
+// }
+#course-address, #course-date, #course-name {
 	width: 80%;
 }
 .course-times {
@@ -151,20 +152,33 @@ input, label, h5 {
 .num-box {
 	@extend .unedit-box;
 }
-.course-num {
-	vertical-align: middle;
-	font-size: 14px;
-	color: #323232;
-	height: 30px;
-	line-height: 30px;
-}
+// .course-num {
+// 	vertical-align: middle;
+// 	font-size: 14px;
+// 	color: #323232;
+// 	height: 30px;
+// 	line-height: 30px;
+// }
 .edit-box {
 	display: none;
 }
 #date-span, #address-span {
 	width: 75%;
 }
-
+#address-span {
+	line-height: 20px;
+	height: 20px;
+	vertical-align: middle;
+	display: inline-block;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+#address-span:hover {
+	cursor: pointer;
+	white-space: pre-wrap;
+	overflow: visible;
+}
 
 .class-calendar {
 	float: left;
@@ -345,11 +359,17 @@ h2 {
 	position: absolute;
 	width: 100px;
 	height: 36px;
+	line-height: 36px;
+	padding: 0;
 	top: 14px;
 	right: 20px;
 	color: white;
 	background: #f7873d;
 	border: 0;
+	outline: none;
+}
+.open-btn:hover {
+	color: white;
 }
 
 //tab3
@@ -373,8 +393,8 @@ h2 {
 		font-size: 14px;
 		color: #505050;
 		height:45px;
-		line-height: 45px;
 		text-align: center;
+		vertical-align: middle;
 		padding: 0;
 		.unshelve {
 			color: #969696;
@@ -579,9 +599,10 @@ h2 {
 	.sign-data {
 		width: 100px;
 		height:45px;
-		line-height: 45px;
+		// line-height: 45px;
 		text-align: center;
-		padding: 0;
+    // padding: 0;
+		padding: 8px 0;
 	}
 	.check-in {
 		background: rgb(16, 192, 120);
@@ -703,8 +724,152 @@ h2 {
 
 
 
-
-
 .margin-l {
 	margin-left: 4px;
 }
+.course-again {
+  display: inline-block;
+  width: 60px;
+  text-align: center;
+  vertical-align: middle;
+	font-size: 12px;
+	color: #f7873d;
+  padding: 0;
+	border: 1px solid #f7873d;
+	border-radius: 2px;
+}
+.course-again:hover {
+  cursor: pointer;
+}
+.delete-btn {
+	@extend .edit-btn;
+	right: 260px;
+}
+.notice-btn {
+	@extend .edit-btn;
+	display: none;
+}
+.name-box {
+	display: none;
+}
+.introduce {
+	display: inline-block;
+	vertical-align: top;
+	float: left;
+	font-size: 16px;
+	color: #323232;
+	margin-right: 10px;
+}
+.wangedit-area {
+	float: left;
+	width: 68.5%;
+	font-size: 16px;
+	display: none;
+}
+#edit-area {
+	height: 200px;
+}
+.course-introduce {
+	margin: 20px;
+}
+.introduce-details {
+	font-size: 14px;
+	color: #323232;
+	display: inline-block;
+	width: 68.5%;
+}
+#noticeModal {
+	.modal-body {
+		margin: 0;
+		padding: 0;
+	}
+	.modal-dialog {
+		position:absolute;
+		left: 50%;
+		top: 50%;
+		margin-left: -220px;
+		margin-top: -150px;
+		width: 440px;
+		height: 300px;
+		border-radius: 6px;	
+	}
+}
+.modal-backdrop {
+	background-color: #999;
+}
+.close {
+	position: absolute;
+	right: -14px;
+	top: -14px;
+	opacity: 0.7;
+	z-index: 10;
+}
+.close:hover {
+	opacity: 1;
+}
+.notice-div {
+	padding: 40px 50px;
+}
+.notice-content {
+	font-size: 16px;
+	color: #323232;
+}
+.vt {
+	vertical-align: top;
+}
+.text-div {
+	width: 78%;
+	height: 65px;
+	font-size: 14px;
+	color: #969696;
+	margin-bottom: 5px;
+	margin-top: 5px;
+	border: 1px solid #aaa;
+	outline: none;
+}
+.delivery-btn {
+	width: 100%;
+	background: #f7873d;
+	color: #fff;
+	margin-bottom: 15px;
+}
+.delivery-btn:hover {
+	color: #fff;
+}
+.notice-bottom {
+	margin-bottom: 15px;
+}
+#name-span {
+  vertical-align: middle;
+}
+.course-num-box {
+	@extend .unedit-box;
+}
+#course-school {
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
+
+#client-address {
+	width: 45%;
+}
+
+.message-div {
+	font-size: 0;
+}
+.notice-date {
+	font-size: 14px;
+}
+.notice-message {
+	font-size: 14px;
+	color: #173177;
+}
+.display-message {
+	width: 100%;
+	font-size: 14px;
+	padding: 5px;
+	display: none;
+	border: 1px solid #ddd;
+}
+

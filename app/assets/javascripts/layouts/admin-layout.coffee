@@ -6,11 +6,14 @@ $ ->
   $(".modify_password").click ->
     $("#modify_passwordModal").modal("show")
     $("#modify_passwordModal input").val("")
+    $("#confirm-modify-pwd").addClass("button-disabled")
+    $("#confirm-modify-pwd").removeClass("button-enabled")
+
 
   $(".close-btn").click ->
     $("input").val("")
     $("input").removeClass("clicked-box")
-    $("button").removeClass("button-enabled")
+    $("#confirm-modify-pwd").removeClass("button-enabled")
 
   toggle_password_tip = (wrong) ->
     if (wrong)
@@ -29,11 +32,11 @@ $ ->
     if $("#password").val().trim() == "" ||
         $("#new-password").val().trim() == "" ||
         $("#confirm-password").val().trim() == ""
-      $("#confirm").addClass("button-disabled")
-      $("#confirm").removeClass("button-enabled")
+      $("#confirm-modify-pwd").addClass("button-disabled")
+      $("#confirm-modify-pwd").removeClass("button-enabled")
     else
-      $("#confirm").removeClass("button-disabled")
-      $("#confirm").addClass("button-enabled")
+      $("#confirm-modify-pwd").addClass("button-enabled")
+      $("#confirm-modify-pwd").removeClass("button-disabled")
 
   $("#password").keyup (event) ->
     code = event.which
@@ -74,7 +77,7 @@ $ ->
           toggle_password_tip(true)
     )
 
-  $("#confirm").click ->
+  $("#confirm-modify-pwd").click ->
     confirm()
     return false
 

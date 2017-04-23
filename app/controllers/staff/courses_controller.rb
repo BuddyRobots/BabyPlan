@@ -9,17 +9,18 @@ class Staff::CoursesController < Staff::ApplicationController
   def index
     @keyword = params[:keyword]
     params[:page] = params[:course_inst_page]
-    course_insts = @keyword.present? ? current_center.course_insts.where(name: /#{Regexp.escape(@keyword)}/) : current_center.course_insts.all
-    course_insts = course_insts.desc(:created_at)
+    course_insts = @keyword.present? ? current_center.course_insts.where(name: /#{Regexp.escape(@keyword)}/).is_available : current_center.course_insts.is_available
+    course_insts = course_insts.desc(:start_course)
     @course_insts = auto_paginate(course_insts)
     @course_insts[:data] = @course_insts[:data].map do |e|
       e.course_inst_info
     end
     params[:page] = params[:course_page]
-    courses = @keyword.present? ? Course.is_available.where(name: /#{Regexp.escape(@keyword)}/) : Course.is_available
-    @courses = auto_paginate(courses)
-    @courses[:data] = @courses[:data].map do |e|
-      e.course_info
+    unshelf_course_insts = @keyword.present? ? current_center.course_insts.where(name: /#{Regexp.escape(@keyword)}/).where(available: false) : current_center.course_insts.where(available: false)
+    unshelf_course_insts = unshelf_course_insts.desc(:start_course)
+    @unshelf_course_insts = auto_paginate(unshelf_course_insts)
+    @unshelf_course_insts[:data] = @unshelf_course_insts[:data].map do |e|
+      e.course_inst_info
     end
 
     @profile = params[:profile]
@@ -31,10 +32,13 @@ class Staff::CoursesController < Staff::ApplicationController
   end
 
   def new
-    @course = Course.where(id: params[:course_id]).first
-    if @course.blank?
-      redirect_to action: :index and return
-    end
+    @center = current_center
+    @course_inst = CourseInst.where(id: params[:cid]).first
+
+    # @course = Course.where(id: params[:course_id]).first
+    # if @course.blank?
+    #   redirect_to action: :index and return
+    # end
   end
 
   def show_template
@@ -47,7 +51,7 @@ class Staff::CoursesController < Staff::ApplicationController
   def show
     @profile = params[:profile]
     @course_inst = CourseInst.where(id: params[:id]).first
-
+   
     reviews = @course_inst.reviews
     if params[:review_type].present?
       reviews = reviews.where(status: params[:review_type].to_i)
@@ -90,6 +94,7 @@ class Staff::CoursesController < Staff::ApplicationController
     end
     photo = Photo.new
     photo.photo = params[:photo_file]
+    photo.photo = params[:photo_file1]
     photo.store_photo!
     filepath = photo.photo.file.file
     m = Material.create(path: "/uploads/photos/" + filepath.split('/')[-1])
@@ -98,6 +103,7 @@ class Staff::CoursesController < Staff::ApplicationController
     redirect_to action: :show, id: @course_inst.id.to_s and return
   end
 
+  # code is modify ---alan
   def get_id_by_name
     course_name = params[:course_name]
     scan_result = course_name.scan(/\((.+)\)/)
@@ -116,7 +122,7 @@ class Staff::CoursesController < Staff::ApplicationController
 
   def set_available
     @course_inst = CourseInst.where(id: params[:id]).first
-    retval = ErrCode::COURSE_INST_NOT_EXIST if @course.blank?
+    retval = ErrCode::COURSE_INST_NOT_EXIST if @course_inst.blank?
     retval = @course_inst.set_available(params[:available])
     render json: retval_wrapper(retval)
   end
@@ -163,6 +169,53 @@ class Staff::CoursesController < Staff::ApplicationController
     end
     retval = course_inst.signin_info(params[:class_num])
     render json: retval_wrapper(retval) and return
+  end
+
+  def set_delete
+    @course_inst = CourseInst.where(id: params[:id]).first
+    if @course_inst.course_participates.present?
+      render json: retval_wrapper(ErrCode::COURSE_INST_EXIST) and return
+    end
+    @course_inst.update_attribute(:deleted, params[:deleted])
+    @course_inst.feed.destroy
+    @course_inst.favorites.destroy
+    @course_inst.save
+    render json: retval_wrapper(nil)
+  end
+
+  def course_notice
+    @course_inst = CourseInst.where(id: params[:id]).first
+    if @course_inst.course_participates.blank?
+      render json: retval_wrapper(ErrCode::COURSE_INST_NOT_EXIST) and return
+    end
+    @target = @course_inst.course_participates.map {|c| c.client}
+    @target_openid = @target.map {|t| t.user_openid}
+    content = params[:content]
+    course_name = @course_inst.name
+    course_id = params[:id]
+    @target_openid.each do |t|
+      retval = Weixin.course_notice(t, content, course_name)
+    end
+    Message.course_notice_create(Message::WECHAT, content, course_id)
+    render json: retval_wrapper(nil)
+  end
+
+  def coursetable
+  end
+
+  def calendar_data
+    @course_insts = current_center.course_insts.is_available.all
+    retval = @course_insts.map do |c|
+      {
+        name: ActionController::Base.helpers.truncate(c.name, length: 10),
+        date_in_calendar: c.date_in_calendar
+      }
+    end
+    render json: retval_wrapper(course: retval) and return
+  end
+
+  def tableprint
+    
   end
 
 end

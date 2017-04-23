@@ -14,7 +14,7 @@
     - else
       .desc-div
         .desc
-          %p.items= "读者姓名：" + @book_borrow.client.name
+          %p.items= "读者姓名：" + @book_borrow.client.name_or_parent
           %p.items= "手机号码：" + @book_borrow.client.mobile
           %p.items= "绘本名称：" + @book_inst.book.name
           - if @book_inst.book.isbn.present?

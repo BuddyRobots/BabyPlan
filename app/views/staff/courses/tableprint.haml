@@ -1,0 +1,13 @@
+- content_for :app_head do
+  = javascript_include_tag "pages/staff/courses/tableprint-bundle"
+  = stylesheet_link_tag "pages/staff/courses/tableprint-bundle", :media => "all"
+  
+- content_for :app_content do    
+  
+  .calendar-div
+    #calendar
+
+= render :template => 'layouts/application'
+      
+
+

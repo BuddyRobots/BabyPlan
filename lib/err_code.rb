@@ -38,6 +38,13 @@ module ErrCode
   OTHER_TYPE_USER_EXIST = -35
 
   REFUND_TIME_FAIL = -36
+  BOOK_IN_CENTER = -37
+  UNITY_IS_EXIST = -38
+  UNITY_NOT_EXIST = -39
+  OPERATOR_IS_EXIST = -40
+  OPERATOR_NOT_EXIST = -41
+  BOOK_DELETE = -42
+  COURSE_TIME_UPPER = -43
 
   def self.ret_false(code)
     msg = self.message(code)
@@ -120,6 +127,20 @@ module ErrCode
       "已注册为其他类型用户"
     when REFUND_TIME_FAIL
       "该课程距开课只有一天时间，已经不能退款！"
+    when BOOK_IN_CENTER
+      "本中心藏有该书"
+    when UNITY_IS_EXIST
+      "该单位已存在"
+    when UNITY_NOT_EXIST
+      "该单位不存在"
+    when OPERATOR_IS_EXIST
+      "该录入员已存在"
+    when OPERATOR_NOT_EXIST
+      "该录入员不存在"
+    when BOOK_DELETE
+      "该绘本曾经上架过"
+    when COURSE_TIME_UPPER
+      "超过中心授课时间上限"
     else
       nil
     end

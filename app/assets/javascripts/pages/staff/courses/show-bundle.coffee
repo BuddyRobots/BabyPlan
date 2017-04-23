@@ -1,3 +1,4 @@
+#= require wangEditor.min
 #= require moment.min
 #= require fullcalendar.min
 #= require locale-all
@@ -6,6 +7,20 @@
 #= require "./_templates/signin_info"
 
 $ ->
+
+  editor = new wangEditor('edit-area')
+
+  editor.config.menus = [
+        'head',
+        'img'
+     ]
+
+  editor.config.uploadImgUrl = '/materials'
+  editor.config.uploadHeaders = {
+    'Accept' : 'HTML'
+  }
+  editor.config.hideLinkImg = true
+  editor.create()
 
   refresh_stat = ->
     $.getJSON "/staff/courses/" + window.cid + "/stat", (data) ->
@@ -210,6 +225,8 @@ $ ->
 
   $(".edit-btn").click ->
     $(".unshelve-btn").attr("disabled", true)
+    $(".delete-btn").attr("disabled", true)
+    $(".course-again").toggle()
     $(".unedit-box").toggle()
     $(".edit-box").toggle()
     $(".class-calendar").toggle()
@@ -217,7 +234,6 @@ $ ->
     $(".calendar-wrapper").css("border", "1px solid #c8c8c8")
     $("#calendar").removeClass("show-calendar").addClass("edit-calendar")
     $("#upload-photo").toggle()
-    $("#course-num").val($("#num-span").text())
     $("#course-capacity").val(window.capacity)
     $("#course-charge").val(window.price)
     $("#public-charge").val(window.price_pay)
@@ -227,12 +243,16 @@ $ ->
     $("#course-address").val($("#address-span").text())
     $("#min-age").val(window.min_age)
     $("#max-age").val(window.max_age)
-    $("#course-school").val($("#school-span").text())
 
-    $("#course-num").css("width", $(".num-box").width() - $(".course-num").width()-5)
+    $("#name-span").toggle()
+    $("#course-name").val(window.course_name)
 
     $(".edit-btn").toggle()
     $(".finish-btn").toggle()
+    $(".wangedit-area").toggle()
+    $(".introduce-details").toggle()
+    desc = $(".introduce-details").text()
+    editor.$txt.html(desc)
     is_edit = true
 
 
@@ -266,9 +286,6 @@ $ ->
 
 
   $(".finish-btn").click ->
-
-
-    code = $("#course-num").val()
     capacity = parseInt($("#course-capacity").val())
     price = $("#course-charge").val()
     price_pay = $("#public-charge").val()
@@ -278,8 +295,13 @@ $ ->
     address = $("#course-address").val()
     min_age = $("#min-age").val()
     max_age = $("#max-age").val()
-    school = $("#course-school").val()
+    school_id = $("#course-school").val()
+    school_name = $("#course-school option:selected").text()
+    desc = editor.$txt.html()
+    code = $("#num-span").text()
 
+    name = $("#course-name").val()
+    
     fc_events = $('#calendar').fullCalendar('clientEvents')
     date_in_calendar = []
 
@@ -288,6 +310,10 @@ $ ->
       (index, fc_event) ->
         date_in_calendar.push(fc_event.start._i + "," + fc_event.end._i)
     )
+
+    first_day = date_in_calendar[0]
+    start_time = first_day.split(',')[0]
+    start_course = start_time
 
     ret = check_course_input(code, capacity, price, price_pay, length, date, speaker, address, date_in_calendar, min_age, max_age)
     if ret == false
@@ -298,6 +324,7 @@ $ ->
       {
         course_inst: {
           code: code
+          name: name
           capacity: capacity
           price: price
           price_pay: price_pay
@@ -308,7 +335,9 @@ $ ->
           date_in_calendar: date_in_calendar
           min_age: min_age
           max_age: max_age
-          school: school
+          school_id: school_id
+          start_course: start_course
+          desc: desc
         }
       },
       (data) ->
@@ -319,10 +348,12 @@ $ ->
           $(".finish-btn").toggle()
           $(".unedit-box").show()
           $(".edit-box").hide()
-
+          $(".course-again").toggle()
+          $(".wangedit-area").toggle()
+          $(".introduce-details").toggle()
+          $(".delete-btn").attr("disabled", false)
           $(".unshelve-btn").attr("disabled", false)
 
-          $("#num-span").text(code)
           $("#capacity-span").text(capacity + "人")
           $("#charge-span").text(price + "元")
           $("#public-span").text(price_pay + "元")
@@ -334,9 +365,14 @@ $ ->
           $("#date-span").text(date)
           $("#speaker-span").text(speaker)
           $("#address-span").text(address)
+          $("#school-span").text(school_name)
+
+          $("#name-span").show().text(name)
+
+          $(".introduce-details").text("")
+          $(".introduce-details").append(desc)
           window.min_age = min_age
           window.max_age = max_age
-          # $("#school-span").text(school)
           if min_age == ""
             $("#min-age-span").text("无")
           else
@@ -368,21 +404,29 @@ $ ->
     $(".finish-btn").hide()
     $(".edit-btn").hide()
     $(".unshelve-btn").hide()
+    $(".delete-btn").hide()
+    $(".notice-btn").hide()
 
   $("#register-message").click ->
     $(".finish-btn").hide()
     $(".edit-btn").hide()
     $(".unshelve-btn").hide()
+    $(".delete-btn").hide()
+    $(".notice-btn").show()
 
   $("#course-sign").click ->
     $(".finish-btn").hide()
     $(".edit-btn").hide()
     $(".unshelve-btn").hide()
+    $(".delete-btn").hide()
+    $(".notice-btn").hide()
 
   $("#statistics").click ->
     $(".finish-btn").hide()
     $(".edit-btn").hide()
     $(".unshelve-btn").hide()
+    $(".delete-btn").hide()
+    $(".notice-btn").hide()
 
   $("#course-message").click ->
     if is_edit
@@ -390,6 +434,8 @@ $ ->
     else
       $(".edit-btn").show()
     $(".unshelve-btn").show()
+    $(".delete-btn").show()
+    $(".notice-btn").hide()
 
   # calender set
   $( "#datepicker" ).datepicker({
@@ -559,3 +605,45 @@ $ ->
         $.mobile_page_notification "服务器出错"
 
   refresh_signin_info(0)
+
+
+  $(".course-again").click ->
+    location.href = "/staff/courses/new?cid=" + window.cid
+    
+
+  $(".delete-btn").click ->
+    $.postJSON(
+      "/staff/courses/" + window.cid + "/set_delete",
+      {
+        deleted: true
+      },
+      (data) ->
+        if data.success
+          location.href = "/staff/courses"
+        else
+          if data.code == COURSE_INST_EXIST
+            $.page_notification("该课程有人报名，不能删除", 1000)
+      )
+
+  $(".delivery-btn").click ->
+    content = $(".text-div").val()
+    $.postJSON(
+      "/staff/courses/" + window.cid + "/course_notice",
+      {
+        content: content
+        },
+      (data) -> 
+        if data.success
+          $("#noticeModal").hide()
+          $(".text-div").val("")
+          $.page_notification("通知发送成功", 1000)
+        else
+          if data.code == COURSE_INST_NOT_EXIST
+            $.page_notification("该课程没有人员参与报名", 1000)
+      )
+
+  $(".notice-message").mouseover ->
+    $(this).siblings(".display-message").fadeIn("slow")
+  $(".notice-message").mouseout ->
+    $(this).siblings(".display-message").fadeOut("slow")
+

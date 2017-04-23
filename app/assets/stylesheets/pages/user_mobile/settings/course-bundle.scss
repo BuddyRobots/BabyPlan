@@ -209,6 +209,12 @@ a{
   background-size:100%;
   background-position:center;
 }
+.endribbon {
+  @extend .redribbon;
+  background: image-url("web/endribbon") no-repeat;
+  background-size:100%;
+  background-position:center;
+}
 .flex-div {
   display: -webkit-flex;
   -webkit-justify-content: space-between;

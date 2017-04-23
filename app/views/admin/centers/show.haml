@@ -7,6 +7,8 @@
     window.lat = "#{@center.lat.to_s}"
     window.lng = "#{@center.lng.to_s}"
     window.profile = "#{@profile}"
+    window.price_upper = "#{@center.price_upper}"
+    window.classtime_upper = "#{@center.classtime_upper}"
 
 .content-area
   .manage-content
@@ -46,6 +48,11 @@
                 %span.edit-box
                   %input.input-area.form-control#name-input{:type => "text"}
               .form-group
+                %label.input-caption 开放时间:
+                %span.unedit-box#time-span= @center.open_time
+                %span.edit-box
+                  %input.input-area.form-control#time-input{:type => "text"}
+              .form-group
                 %label.input-caption 详细地址:
                 %span.unedit-box#address-span= @center.address
                 %span.edit-box
@@ -56,6 +63,26 @@
                 = file_field_tag "photo_file", { class: "hide", accept: ".jpg,.png" }
               %a#upload-photo{href: "javascript:void(0);"}
                 %img.edit-photo{src: asset_path("web/add-photo.png")}
+          .controls.controls-row
+            %label.input-caption 中心代号:
+            %span.unedit-div#abbr-span= @center.abbr
+            %span.edit-box
+              %input.input-div.form-control#center-abbr{:type => "text"}
+            %label.input-caption.no-margin 公益价上限:
+            %span.unedit-div#price-upper-span= @center.price_upper.present? ? @center.price_upper.to_s + "元" : ""
+            %span.edit-box
+              %input.input-div.form-control#price-upper{:type => "text"}
+            %label.input-caption.no-margin#total 授课时间上限:
+            %span.unedit-div#classtime-upper-span= @center.classtime_upper.present? ? @center.classtime_upper.to_s + "小时" : ""
+            %span.edit-box
+              %input.input-div.form-control#classtime-upper{:type => "text"}
+          
+          .center-introduce.clearfix
+            %span.introduce 中心介绍:
+            .introduce-details
+              = @center.desc.to_s.html_safe
+            %span.wangedit-area
+              #edit-area
           .map-position
             %span.map-address 地图位置:
             .map-notice
@@ -64,13 +91,6 @@
                   请在地图上点击定位或
                 %a#auto-locate{:href => "javascript:void(0);"} 自动定位
               #map-container
-          
-          .center-introduce.clearfix
-            %span.introduce 中心介绍:
-            .introduce-details
-              = @center.desc.to_s.html_safe
-            %span.wangedit-area
-              #edit-area
 
         #tab2.tab-pane
           - if @course_insts[:data].blank?
@@ -92,9 +112,9 @@
                     %tr
                       %td= ci[:name]
                       %td= ci[:date]
-                      %td= ci[:address]
+                      %td.courseinst-address= ci[:address]
                       %td= ci[:speaker]
-                      %td= ci[:price]
+                      %td= ci[:price].to_s + "元"
             = render "admin/partials/auto_paginate", locals: { instance: @course_insts, url: "/admin/centers/" + @center.id.to_s + "?profile=courses&", page: 'course_inst_page'}
             
         #tab3.tab-pane
@@ -116,7 +136,7 @@
                 %tbody
                   - @books[:data].each do |b|
                     %tr
-                      %td= b[:name]
+                      %td.bookinst-name= b[:name]
                       %td= truncate((b[:tags] || "").gsub(',', '，'), length: 20)
                       %td= b[:stock].to_s + "本"
                       %td= b[:available_stock].to_s + "本"

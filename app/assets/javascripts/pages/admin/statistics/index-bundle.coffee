@@ -138,13 +138,14 @@ $ ->
     $.getJSON "/admin/statistics/course_stats?duration=" + duration + "&start_date=" + start_date + "&end_date=" + end_date, (data) ->
       if data.success
         $("#total-signup").text(data.stat.total_signup)
-        $("#total-money").text(data.stat.total_money)
+        $("#total-money").text(data.stat.total_income)
+
 
         $('#register-statistics').highcharts
             title:
               text: null
             xAxis: 
-              tickInterval: 5
+              tickInterval: 1
               title:
                 text: data.stat.signup_time_unit
             yAxis:
@@ -162,38 +163,38 @@ $ ->
               }
             ]
 
-        $('#bonu-statistics').highcharts
-          chart:
-            plotBackgroundColor: null
-            plotBorderWidth: null
-            plotShadow: false
-          colors: ['#90c5fc', '#227dda', '#ED561B', '#DDDF00',
-                          '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4']
-          title: text: null
-          tooltip: pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-          plotOptions: pie:
-            allowPointSelect: true
-            cursor: 'pointer'
-            dataLabels: enabled: false
-            showInLegend: true
-          credits:
-               enabled: false
-          legend:
-            itemStyle:
-                color: '#969696'
-          series: [ {
-            type: 'pie'
-            data: [
-              [
-                '个人支付'
-                data.stat.total_income
-              ]
-              [
-                '政府补贴'
-                data.stat.total_allowance
-              ]
-            ]
-          } ]
+        # $('#bonu-statistics').highcharts
+        #   chart:
+        #     plotBackgroundColor: null
+        #     plotBorderWidth: null
+        #     plotShadow: false
+        #   colors: ['#90c5fc', '#227dda', '#ED561B', '#DDDF00',
+        #                   '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4']
+        #   title: text: null
+        #   tooltip: pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        #   plotOptions: pie:
+        #     allowPointSelect: true
+        #     cursor: 'pointer'
+        #     dataLabels: enabled: false
+        #     showInLegend: true
+        #   credits:
+        #        enabled: false
+        #   legend:
+        #     itemStyle:
+        #         color: '#969696'
+        #   series: [ {
+        #     type: 'pie'
+        #     data: [
+        #       [
+        #         '个人支付'
+        #         data.stat.total_income
+        #       ]
+        #       # [
+        #       #   '政府补贴'
+        #       #   data.stat.total_allowance
+        #       # ]
+        #     ]
+        #   } ]
 
         $('#income-statistics').highcharts
           chart: type: 'column'
@@ -213,12 +214,12 @@ $ ->
           legend:
             enabled: false
           series: [
-            {
-              name: "政府补贴"
-              color: '#227dda'
-              data: data.stat.allowance
-              pointStart: 1
-            }
+            # {
+            #   name: "政府补贴"
+            #   color: '#227dda'
+            #   data: data.stat.allowance
+            #   pointStart: 1
+            # }
             {
               name: "个人支付"
               color: '#90c5fc'
@@ -252,6 +253,30 @@ $ ->
             data: data.stat.income_center
           } ]
 
+        $('#school-income-statistics').highcharts
+          chart:
+            type: 'column'
+          title: text: null
+          xAxis:
+            type: 'category'
+          yAxis:
+            min: 0
+            title: text: '授课单位收入(元)'
+          legend: enabled: false
+          tooltip: valueSuffix: '元'
+          credits:
+               enabled: false
+          plotOptions: series: point: events: click: (event) ->
+            if previousPoint
+              previousPoint.update color: '#90c5fc'
+            previousPoint = this
+            this.update color: '#227dda'
+            return
+          series: [ {
+            name: '授课单位收入'
+            data: data.stat.income_school
+          } ]
+
       else
         $.page_notification "服务器出错，请稍后再试"
 
@@ -272,12 +297,12 @@ $ ->
     $.getJSON "/admin/statistics/book_stats?duration=" + duration + "&start_date=" + start_date + "&end_date=" + end_date, (data) ->
       if data.success
         $("#total-borrow").text(data.stat.total_borrow)
+        console.log data.stat.borrow_time_unit
         $('#borrow-statistics').highcharts
             title:
               text: null
             xAxis: 
-              type: 'datetime'
-              tickInterval: 0
+              tickInterval: 1
               title:
                 text: data.stat.borrow_time_unit
             yAxis:
@@ -291,8 +316,7 @@ $ ->
               {
                 color: '#90c5fc'
                 data: data.stat.borrow_num
-                pointStart: Date.UTC(2016, 9, 1),
-                pointInterval: 24 * 3600 * 1000
+                pointStart: 1
               }
             ]
 

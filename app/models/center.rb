@@ -9,6 +9,12 @@ class Center
   field :lng, type: String
   field :desc, type: String
   field :available, type: Boolean
+  field :abbr, type: String
+  field :open_time, type: String
+  field :price_upper, type: Integer
+  field :classtime_upper, type: Integer
+  field :code, type: Integer
+  field :year, type: Integer
 
   has_one :photo, class_name: "Material", inverse_of: :center_photo
   has_many :course_insts
@@ -24,6 +30,10 @@ class Center
   has_many :feeds
   has_many :statistics
   has_many :bills
+  has_many :stock_changes
+
+  has_many :course_participates
+  has_many :book_borrows
 
   has_and_belongs_to_many :clients, class_name: "User", inverse_of: :client_centers
 
@@ -39,7 +49,13 @@ class Center
       desc: center_info[:desc],
       available: center_info[:available],
       lat: center_info[:lat],
-      lng: center_info[:lng]
+      lng: center_info[:lng],
+      abbr: center_info[:abbr],
+      open_time: center_info[:open_time],
+      price_upper: center_info[:price_upper].to_i,
+      classtime_upper: center_info[:classtime_upper].to_i,
+      code: center_info[:code],
+      year: center_info[:year]
     )
     { center_id: center.id.to_s }
   end
@@ -130,7 +146,11 @@ class Center
         address: center_info["address"],
         desc: center_info["desc"],
         lat: center_info["lat"],
-        lng: center_info["lng"]
+        lng: center_info["lng"],
+        open_time: center_info["open_time"],
+        abbr: center_info["abbr"],
+        price_upper: center_info["price_upper"].to_i,
+        classtime_upper: center_info["classtime_upper"].to_i
       }
     )
     nil
@@ -166,10 +186,11 @@ class Center
         end
       end
     end
-    num = self.statistics.where(type: Statistic::CLIENT_NUM).
-                          where(:stat_date.gt => (Time.now - 10.weeks).to_i).
-                          asc(:stat_date).map { |e| e.value || 0 }
-    num = num.each_with_index.map { |e, i| i % 7 == 0 ? e : nil } .select { |e| e }
+    num = self.clients.where(:created_at.gt => Time.now - 10.weeks).asc(:created_at).map { |e| (e.created_at.to_i - Time.now.to_i + 10.weeks.to_i) / 1.weeks.to_i }
+    num = num.group_by { |e| e }
+    num.each { |k,v| num[k] = v.length }
+    total_num = self.clients.count
+    num = (0..9).to_a.map { |e| total_num = total_num - num[9-e].to_i } .reverse
     {
       gender: gender.to_a,
       age: age.to_a,
@@ -199,34 +220,31 @@ class Center
       time_unit = "月数"
       day = 30
     end
-    signup_num = self.statistics.where(type: Statistic::COURSE_SIGNUP_NUM).
-                                 where(:stat_date.gt => start_time).
-                                 where(:stat_date.lt => end_time).
-                                 desc(:stat_date).map { |e| e.value || 0 }
-    signup_num = signup_num.each_slice(day).map { |a| a }
-    signup_num = signup_num.blank? ? 0 : signup_num.map { |e| e.sum } .reverse
-    allowance = self.statistics.where(type: Statistic::ALLOWANCE).
-                                where(:stat_date.gt => start_time).
-                                where(:stat_date.lt => end_time).
-                                desc(:stat_date).map { |e| e.value || 0 }
-    allowance = allowance.each_slice(day).map { |a| a }
-    allowance = allowance.map { |e| e.sum } .reverse
-    income = self.statistics.where(type: Statistic::INCOME).
-                             where(:stat_date.gt => start_time).
-                             where(:stat_date.lt => end_time).
-                             desc(:stat_date).map { |e| e.value || 0 }
-    income = income.each_slice(day).map { |a| a }
-    income = income.map { |e| e.sum } .reverse
+    interval = day.days.to_i
+
+    cps = self.course_participates.where(:created_at.gt => start_time)
+                                  .where(:created_at.lt => end_time)
+                                  .where(trade_state: "SUCCESS")
+                                  .asc(:created_at)
+    dp_num = (end_time - start_time) / interval
+    signup_num = cps.map { |e| (e.created_at.to_i - (start_time.to_i)) / interval }
+    signup_num = signup_num.group_by { |e| e }
+    signup_num.each { |k,v| signup_num[k] = v.length }
+    signup_num = (0 .. dp_num - 1).to_a.map { |e| signup_num[e].to_i }
+    # signup_num.reverse!
+
+    income = cps.map { |e| [(e.created_at.to_i - start_time.to_i) / interval, e.price_pay] }
+    income = income.group_by { |e| e[0] }
+    income.each { |k,v| income[k] = v.map { |e| e[1] } .sum }
+    income = (0 .. dp_num - 1).to_a.map { |e| income[e].to_i }
+
     {
       signup_time_unit: time_unit,
       signup_num: signup_num,
       total_signup: signup_num.sum,
       total_income: income.sum,
-      total_allowance: allowance.sum,
       income_time_unit: time_unit,
-      allowance: allowance,
-      income:income,
-      total_money: allowance.sum + income.sum
+      income: income,
     }
   end
 
@@ -252,28 +270,51 @@ class Center
       time_unit = "月数"
       day = 30
     end
-    borrow_num = self.statistics.where(type: Statistic::BORROW_NUM).
-                                 where(:stat_date.gt => start_time).
-                                 where(:stat_date.lt => end_time).
-                                 desc(:stat_date).map { |e| e.value || 0 }
-    borrow_num = borrow_num.each_slice(day).map { |a| a }
-    borrow_num = borrow_num.blank? ? 0 : borrow_num.map { |e| e.sum } .reverse
-    stock_num = self.statistics.where(type: Statistic::STOCK).
-                                where(:stat_date.gt => start_time).
-                                where(:stat_date.lt => end_time).
-                                desc(:stat_date).map { |e| e.value || 0 }
-    stock_num = stock_num.each_slice(day).map { |a| a }
-    stock_num = stock_num.map { |e| e.sum } .reverse
-    off_shelf_num = self.statistics.where(type: Statistic::OFF_SHELF).
-                                    where(:stat_date.gt => start_time).
-                                    where(:stat_date.lt => end_time).
-                                    desc(:stat_date).map { |e| e.value || 0 }
-    off_shelf_num = off_shelf_num.each_slice(day).map { |a| a }
-    off_shelf_num = off_shelf_num.map { |e| e.sum } .reverse
+    interval = day.days.to_i
+    dp_num = (end_time - start_time) / interval
+
+    bbs = self.book_borrows.where(:created_at.gt => start_time)
+                           .where(:created_at.lt => end_time)
+                           .asc(:created_at)
+    bb_num = bbs.map { |e| (e.created_at.to_i - (start_time.to_i)) / interval }
+    bb_num = bb_num.group_by { |e| e }
+    bb_num.each { |k,v| bb_num[k] = v.length }
+    bb_num = (0 .. dp_num - 1).to_a.map { |e| bb_num[e].to_i }
+    # bb_num.reverse!
+
+    cur_stock_num = self.books.all.map { |e| e.stock } .sum
+    stock_changes = self.stock_changes.where(:created_at.gt => start_time)
+                                      .where(:created_at.lt => end_time)
+                                      .asc(:created_at)
+    stock_changes = stock_changes.map { |e| [(e.created_at.to_i - start_time.to_i) / interval, e.num] }
+    stock_changes = stock_changes.group_by { |e| e[0] }
+    stock_changes.each { |k,v| stock_changes[k] = v.map { |e| e[1] } .sum }
+    stock_num = (0 .. dp_num - 1).to_a.map { |e| cur_stock_num - stock_changes[e].to_i }
+
+    cur_off_shelf_num = self.book_borrows.where(retuan_at: nil).length
+    borrows = self.book_borrows.where(:borrowed_at.gt => start_time.to_i)
+                               .where(:borrowed_at.lt => end_time.to_i)
+    borrows = borrows.map { |e| (e.created_at.to_i - start_time.to_i) / interval }
+    borrows = borrows.group_by { |e| e }
+    borrows.each { |k,v| borrows[k] = v.length }
+    borrows = (0 .. dp_num - 1).to_a.map { |e| borrows[e].to_i }
+
+    returns = self.book_borrows.where(:borrowed_at.gt => start_time.to_i)
+                               .where(:borrowed_at.lt => end_time.to_i)
+    returns = returns.map { |e| (e.created_at.to_i - start_time.to_i) / interval }
+    returns = returns.group_by { |e| e }
+    returns.each { |k,v| returns[k] = v.length }
+    returns = (0 .. dp_num - 1).to_a.map { |e| returns[e].to_i }
+
+    off_shelf_num = (0 .. dp_num - 1).to_a.map do |e|
+      cur_off_shelf_num = [cur_off_shelf_num + borrows[dp_num - 1 - e] - returns[dp_num - 1 - e], 0].max
+    end
+    off_shelf_num.reverse!
+
     {
-      total_borrow: borrow_num.sum,
+      total_borrow: bb_num.sum,
       borrow_time_unit: time_unit,
-      borrow_num: borrow_num,
+      borrow_num: bb_num,
       stock_time_unit: time_unit,
       stock_num: stock_num,
       off_shelf_num: off_shelf_num
@@ -360,6 +401,35 @@ class Center
     end
     if self.statistics.where(type: Statistic::OFF_SHELF, stat_date: stat_date).blank?
       self.statistics.create(type: Statistic::OFF_SHELF, stat_date: stat_date, value: off_shelf)
+    end
+  end
+
+  def get_code
+    cur_year = Time.now.year
+    if cur_year != self.year
+      self.update_attributes({
+        year: cur_year,
+        code: 1
+      })
+    end
+    ret_code = self.abbr + self.year.to_s + self.code.to_s.rjust(4, "0")
+    self.update_attribute(:code, self.code + 1)
+    return ret_code
+  end
+
+  def self.migrate
+    abbr = {
+      "小马厂": "XMC",
+      "手帕口": "SPK"
+    }
+
+    Center.all.each do |c|
+      abbr.each do |k, v|
+        if c.name.include?(k.to_s)
+          c.update_attribute(:abbr, v)
+          break
+        end
+      end
     end
   end
 end

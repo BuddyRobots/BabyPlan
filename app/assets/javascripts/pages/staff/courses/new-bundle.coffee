@@ -2,8 +2,25 @@
 #= require fullcalendar.min
 #= require locale-all
 #= require datepicker-zh-TW
+#= require wangEditor.min
 
 $ ->
+
+  # wangEditor
+  editor = new wangEditor('edit-area')
+
+  editor.config.menus = [
+        'head',
+        'img'
+     ]
+
+  editor.config.uploadImgUrl = '/materials'
+  editor.config.uploadHeaders = {
+    'Accept' : 'HTML'
+  }
+  editor.config.hideLinkImg = true
+  editor.create()
+
   has_photo = false
 
   can_repeat = false
@@ -41,10 +58,9 @@ $ ->
       $("#calendar").fullCalendar('removeEvents', calEvent.id)
   })
 
-  $("#course-code").css("width", $(".num-box").width() - $(".course-num").width() - 5)
 
-  check_course_input = (code, capacity, price, price_pay, length, date, speaker, address, date_in_calendar) ->
-    if code == "" || capacity == "" || price == "" || length == "" || date == "" || speaker == "" || address == ""
+  check_course_input = (code, capacity, price, price_pay, length, date, speaker, address, date_in_calendar, min_age, max_age, school_id) ->
+    if code == "" || capacity == "" || price_pay == "" || length == "" || date == "" || speaker == "" || address == "" || school_id == ""
       $.page_notification("请将信息补充完整")
       return false
     if !$.isNumeric(capacity) || parseInt(capacity) <= 0
@@ -62,12 +78,17 @@ $ ->
     if parseInt(length) != date_in_calendar.length
       $.page_notification("课次与上课时间不匹配")
       return false
+    if min_age != "" && !$.isNumeric(min_age) || parseInt(min_age) < 0
+      $.page_notification("请填写正确的最小适龄")
+      return false
+    if max_age != "" && !$.isNumeric(max_age) || parseInt(max_age) < 0 || parseInt(max_age) < parseInt(min_age)
+      $.page_notification("请填写正确的最大适龄")
+      return false
     return true
 
   $(".end-btn").click ->
-    course_id = window.cid
+    name = $("#course-name").val()
     available = !$("#unshelve").is(":checked")
-    code = $("#course-code").val()
     capacity = parseInt($("#course-capacity").val())
     price = $("#course-price").val()
     price_pay = $("#public-price").val()
@@ -77,8 +98,10 @@ $ ->
     address = $("#course-address").val()
     min_age = $("#min-age").val()
     max_age = $("#max-age").val()
-    school = $("#school").val()
-
+    school_id = $("#school_id").val()
+    desc = editor.$txt.html()
+    code = $(".num-box").text()
+    console.log(school_id)
     fc_events = $('#calendar').fullCalendar('clientEvents')
     date_in_calendar = []
 
@@ -87,16 +110,29 @@ $ ->
       (index, fc_event) ->
         date_in_calendar.push(fc_event.start._i + "," + fc_event.end._i)
     )
-
-    ret = check_course_input(code, capacity, price, price_pay, length, date, speaker, address, date_in_calendar)
+    ret = check_course_input(code, capacity, price, price_pay, length, date, speaker, address, date_in_calendar, min_age, max_age, school_id)
     if ret == false
       return
+
+    if $.isNumeric(price_pay) == false
+      $.page_notification("请输入正确的数字", 1000)
+      return
+    if parseInt(price_pay) > window.price_upper
+      $.page_notification("超出公益价上限", 1000)
+      return
+
+    first_day = date_in_calendar[0]
+    start_time = first_day.split(',')[0]
+    start_course = start_time
+
+    if window.course_photo
+      path = window.course_photo_path
 
     $.postJSON(
       '/staff/courses/',
       course: {
-        course_id: course_id
         available: available
+        name: name
         code: code
         capacity: capacity
         price: price
@@ -108,7 +144,10 @@ $ ->
         date_in_calendar: date_in_calendar
         min_age: min_age
         max_age: max_age
-        school: school
+        school_id: school_id
+        desc: desc
+        start_course: start_course
+        path: path
       },
       (data) ->
         if data.success
@@ -120,9 +159,11 @@ $ ->
             $("#upload-photo-form").submit()
         else
           if data.code == COURSE_INST_EXIST
-            $.page_notification("课程编号已存在")
+            $.page_notification("课程编号已存在", 1000)
           else if data.code == COURSE_DATE_UNMATCH
-            $.page_notification("课次与上课时间不匹配")
+            $.page_notification("课次与上课时间不匹配", 1000)
+          else if data.code == COURSE_TIME_UPPER
+            $.page_notification("超过本中心授课时间上限,该周停止开课", 1000)
           else
             $.page_notification("服务器出错")
       )

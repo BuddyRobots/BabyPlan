@@ -100,7 +100,6 @@ a{
 		span {
 			float:right;
 			font-size:0.85714em;
-			color: #d70c19;
 			vertical-align: top;
 			margin-right:2.46%;
 		}
@@ -156,10 +155,22 @@ a{
 	color: #fff;
 	background: #d70c19;
 }
-#deposit-pay, #confirm-pay {
+#deposit-pay, #confirm-pay, #deposit {
 	color: #fff;
 	background: #d70c19;
 }
+
+.overtime {
+	color: #d70c19;
+}
+.unreturn {
+	color: #d70c19;
+}
+.returned {
+	color: #999;
+}
+
+
 
 @media screen and (max-width:640px) {
 	.content-area {

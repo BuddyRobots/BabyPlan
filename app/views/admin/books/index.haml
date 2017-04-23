@@ -23,7 +23,7 @@
       .tabbable
         %ul.nav.nav-tabs
           %li.active
-            %a#books-tab{"data-toggle" => "tab", :href => "#tab1"} 全部绘本
+            %a#books-tab{"data-toggle" => "tab", :href => "#tab1"} 馆藏绘本
           %li
             %a#transfers-tab{"data-toggle" => "tab", :href => "#tab2"} 绘本迁移
 
@@ -40,21 +40,18 @@
                     %thead
                       %tr
                         %th 绘本名称
-                        %th 儿童中心
-                        %th 标&nbsp签
-                        %th 数&nbsp量
+                        %th 书号
                         %th 作&nbsp者
-                        %th ISBN编码
+                        %th 数&nbsp量
                     %tbody
                       - @books[:data].each do |e|
                         %tr
-                          %td= link_to e[:name], "/admin/books/#{e[:id]}"
-                          %td= e[:center]
-                          %td= truncate((e[:tags] || "").gsub(',', '，'), length: 10)
-                          %td= e[:stock]
-                          %td= e[:author]
+                          %td#manage-book-name= link_to e[:name], "/admin/books/#{e[:id]}"
                           %td= e[:isbn]
-                = render "admin/partials/auto_paginate", locals: { instance: @books, url: "/admin/books?transfer_keyword=#{@transfer_keyword}&book_keyword=#{@book_keyword}&", page: 'page'}
+                          %td= e[:author]
+                          %td= e[:stock].to_s + "本"
+                         
+                = render "admin/partials/auto_paginate", locals: { instance: @books, url: "/admin/books?transfer_keyword=#{@transfer_keyword}&book_keyword=#{@book_keyword}&", page: 'stock_page'}
           #tab2.tab-pane  
             .book-migrate
               - if @transfers[:data].blank?
@@ -78,7 +75,7 @@
                           %td= e[:out_time].present? ? Time.at(e[:out_time]).strftime("%Y.%m.%d") : ""
                           %td= e[:out_center]
                           %td= e[:in_center]
-                          %td= e[:count]
+                          %td= e[:count].to_s + "本"
                           %td{class: e[:status_class]}= e[:status_str]
                           %td
                             = link_to "详情", "/admin/books/#{e[:id]}/show_transfer"

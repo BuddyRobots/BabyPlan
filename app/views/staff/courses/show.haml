@@ -11,6 +11,8 @@
     window.profile = "#{@profile}"
     window.min_age = "#{@course_inst.min_age}"
     window.max_age = "#{@course_inst.max_age}"
+    window.course_name = "#{@course_inst.name}"
+  
 
 .content-area
   .manage-content
@@ -28,6 +30,11 @@
       .btn.unshelve-btn.unavailable{:type => "button"} 
         %img.end{src: asset_path("managecenter/shelve.png")}
         %span 上架
+    .btn.delete-btn{:type => "button"} 
+      %img.delete{src: asset_path("web/delete2.png")}
+      删除
+    .btn.notice-btn{:type => "button", "data-target" => "#noticeModal", "data-toggle" => "modal"} 编辑通知
+
     .tabbable
       %a{:href => "/staff/courses"}
         %img.back{src: asset_path("web/tab-back.png")}
@@ -50,6 +57,9 @@
               .form-inline
                 %label.input-caption 课程名称:
                 %span#name-span= @course_inst.name
+                %span.edit-box.name-box
+                  %input.input-area.form-control#course-name{:type => "text"}
+                %span.course-again 再次开课
               .form-inline
                 %label.input-caption 上课时间:
                 %span.unedit-box#date-span= @course_inst.date
@@ -69,11 +79,7 @@
 
           .controls.controls-row
             %label.input-caption 开课编号:
-            %span.num-box
-              %span.course-num= @course_inst.course.code + "-" 
-              %span.unedit-box#num-span= @course_inst.inst_code
-              %span.edit-box
-                %input.input-area.form-control#course-num{:type => "text"}
+            %span.course-num-box#num-span= @course_inst.code
             %label.input-caption.course-speaker 主讲人:
             %span.unedit-box#speaker-span= @course_inst.speaker
             %span.edit-box
@@ -104,10 +110,18 @@
             %span.unedit-box#max-age-span= @course_inst.max_age.blank? ? "无" : @course_inst.max_age.to_s + "岁"
             %span.edit-box
               %input.input-area.form-control#max-age{:type => "text"}
-            / %label.input-caption.margin-l 授课单位:
-            / %span.unedit-box#school-span= @course_inst.school
-            / %span.edit-box
-            /   %input.input-area.form-control#course-school{:type => "text"}
+            %label.input-caption.margin-l 授课单位:
+            %span.unedit-box#school-span= @course_inst.school.try(:name)
+            %span.edit-box
+              / %input.input-area.form-control#course-school{:type => "text"}
+              = select_tag "course-school", options_for_select(School.schools_for_select, @course_inst.school.try(:id)), class: "form-control input-area", :include_blank => "请选择开课单位"
+          .course-introduce.clearfix
+            %span.introduce 课程介绍:
+            %div.introduce-details
+              = @course_inst.desc.to_s.html_safe
+            %span.wangedit-area
+              #edit-area
+
           .calendar-wrapper.clearfix
             %label.class-calendar 课程日历:
             .show-calendar#calendar
@@ -147,7 +161,7 @@
                   - @participates[:data].each do |e|
                     %tr
                       %td.td-data= e.client.name_or_parent
-                      %td.td-data= e.client.address
+                      %td.td-data#client-address= e.client.address
                       %td.td-data= e.client.mobile
                       %td.td-data= e.status_str
                       %td.td-data
@@ -197,9 +211,9 @@
                     %p.date= r.created_at.strftime("%Y-%m-%d %H:%M")
                     %p.user-review-content= r.content
                     - if r.is_private
-                      %button.btn.open-btn.show-review{:type => "button", data: {id: r.id.to_s}} 公开
+                      .btn.open-btn.show-review{:type => "button", data: {id: r.id.to_s}} 公开
                     - else
-                      %button.btn.open-btn.hide-review{:type => "button", data: {id: r.id.to_s}} 隐藏
+                      .btn.open-btn.hide-review{:type => "button", data: {id: r.id.to_s}} 隐藏
             = render "staff/partials/auto_paginate", locals: { instance: @reviews, url: "/staff/courses/" + @course_inst.id.to_s + "?profile=reviews&", page: 'review_page'}
           
           
@@ -266,4 +280,29 @@
   %p
     %span.ui-icon.ui-icon-alert{:style => "float:left; margin:12px 12px 20px 0;"}>
     确定删除？
+
+
+#noticeModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
+  .modal-dialog
+    .modal-content
+      .modalheader
+        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: asset_path("managecenter/close.png")}
+      .modal-body
+        .notice-div
+          %p.notice-content 请编辑通知的内容:
+          %p.notice-content 您报名的课程有变动！
+          %span.notice-content 课程名称:
+          %span.notice-content= @course_inst.name
+          .notice-textarea
+            %span.notice-content.vt 情况说明:
+            %textarea.text-div{placeholder: "课程变动的原因解释"}
+          %p.notice-content.notice-bottom 北京市社区儿童中心祝您上课愉快!
+          .btn.delivery-btn{:type => "button"} 发送通知
+          - if @course_inst.messages.present?
+            - @course_inst.messages.each do |m|
+              .message-div
+                %span.notice-date= m.created_at.strftime("%Y-%m-%d %H:%M") + "已发送"
+                %span.notice-message 课程调整通知
+                %p.display-message= m.content
+
         

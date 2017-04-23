@@ -34,20 +34,28 @@ $ ->
         console.log data
         if data.success
           $.page_notification("操作完成")
-          if current_state == "available"
-            link.removeClass("link-available")
-            link.addClass("link-unavailable")
-            link.text("上架")
-            link.closest("tr").removeClass("available")
-            link.closest("tr").addClass("unavailable")
-          else
-            link.addClass("link-available")
-            link.removeClass("link-unavailable")
-            link.text("下架")
-            link.closest("tr").addClass("available")
-            link.closest("tr").removeClass("unavailable")
+          location.href = "/staff/courses"
+          # if current_state == "available"
+          #   link.removeClass("link-available")
+          #   link.addClass("link-unavailable")
+          #   link.text("上架")
+          #   link.closest("tr").removeClass("available")
+          #   link.closest("tr").addClass("unavailable")
+          # else
+          #   link.addClass("link-available")
+          #   link.removeClass("link-unavailable")
+          #   link.text("下架")
+          #   link.closest("tr").addClass("available")
+          #   link.closest("tr").removeClass("unavailable")
       )
     return false
+
+
+  $(".add-btn").click ->
+    location.href = "/staff/courses/new"
+
+  $(".view-btn").click ->
+    location.href = "/staff/courses/coursetable"
 
 
   # $("#confirm-btn").click ->

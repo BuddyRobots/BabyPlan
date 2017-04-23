@@ -5,11 +5,12 @@
     window.profile = "#{@profile}"
     window.bid = "#{@book.id.to_s}"
     window.stock = "#{@book.stock}"
-    window.age_lower_bound = "#{@book.age_lower_bound}"
-    window.age_upper_bound = "#{@book.age_upper_bound}"
 
 .content-area
   .manage-content
+    .btn.delete-btn{:type => "button"} 
+      %img.delete{src: asset_path("web/delete2.png")}
+      删除
     .btn.finish-btn{:type => "button"} 
       %img.ticker{src: asset_path("managecenter/ticker.png")}
       完成
@@ -26,6 +27,7 @@
       .btn.unshelve-btn.unavailable{:type => "button"} 
         %img.end{src: asset_path("managecenter/shelve.png")}
         %span 上架
+
     .tabbable
       %a{:href => "/staff/books"}
         %img.back{src: asset_path("web/tab-back.png")}
@@ -44,56 +46,56 @@
           .controls.controls-row
             %label.input-caption 绘本名称:
             %span.unedit-box#name-span= @book.name
-            %span.edit-box
-              %input.input-area.form-control#name-input{:type => "text"}
+            / %span.edit-box
+            /   %input.input-area.form-control#name-input{:type => "text"}
             %label.input-caption#author 作者:
             %span.unedit-box#author-span= @book.author
-            %span.edit-box
-              %input.input-area.form-control#author-input{:type => "text"}
+            / %span.edit-box
+            /   %input.input-area.form-control#author-input{:type => "text"}
             %label.input-caption#publisher 出版社:
             %span.unedit-box#publisher-span= @book.publisher
-            %span.edit-box
-              %input.input-area.form-control#publisher-input{:type => "text"}
+            / %span.edit-box
+            /   %input.input-area.form-control#publisher-input{:type => "text"}
           .controls.controls-row
             %label.input-caption#illustrator-label 插画作者:
             %span.unedit-box#illustrator-span= @book.illustrator
-            %span.edit-box
-              %input.input-area.form-control#illustrator-input{:type => "text"} 
+            / %span.edit-box
+            /   %input.input-area.form-control#illustrator-input{:type => "text"} 
             %label.input-caption#translator 译者:
             %span.unedit-box#translator-span= @book.translator
-            %span.edit-box
-              %input.input-area.form-control#translator-input{:type => "text"}
+            / %span.edit-box
+            /   %input.input-area.form-control#translator-input{:type => "text"}
             %label.input-caption#book-number 书号:
             %span.unedit-box#isbn-span= @book.isbn
-            %span.edit-box
-              %input.input-area.form-control#isbn-input{:type => "text"}
+            / %span.edit-box
+            /   %input.input-area.form-control#isbn-input{:type => "text"}
           .controls.controls-row
             %label.input-caption#mixage-label 最小适龄:
             %span.unedit-box#age-lower-bound-span= @book.age_lower_bound.blank? ? "未填写" : @book.age_lower_bound.to_s + "岁"
-            %span.edit-box
-              %input.input-area.form-control#age-lower-bound-input{:type => "text"}      
+            / %span.edit-box
+            /   %input.input-area.form-control#age-lower-bound-input{:type => "text"}      
             %label.input-caption#mixage-label 最大适龄:
             %span.unedit-box#age-upper-bound-span= @book.age_upper_bound.blank? ? "未填写" : @book.age_upper_bound.to_s + "岁"
-            %span.edit-box
-              %input.input-area.form-control#age-upper-bound-input{:type => "text"}  
+            / %span.edit-box
+            /   %input.input-area.form-control#age-upper-bound-input{:type => "text"}  
             %label.input-caption#total 数量:
-            %span.unedit-box#stock-span= @book.stock.to_s + "本"
-            %span.edit-box
+            %span.unedit-stock-box#stock-span= @book.stock.to_s + "本"
+            %span.edit-stock-box
               %input.input-area.form-control#stock-input{:type => "text"}
           .form-inline.clearfix#tag-form
             %span.unedit-box.type-span.type-span-template
             %label.input-caption 标签:
             - (@book.tags || "").split(',').each do |tag|
               %span.unedit-box.type-span.type-span-ele= tag
-            %span.edit-box
-              %ul#type-tag
+            / %span.edit-box
+            /   %ul#type-tag
                    
           .book-introduce.clearfix
             %span.introduce 书籍介绍:
             %div.introduce-details
               = @book.desc.html_safe
-            %span.wangedit-area
-              #edit-area
+            / %span.wangedit-area
+            /   #edit-area
 
           = form_tag("/staff/books/" + @book.id.to_s + "/upload_photo", method: "post", multipart: true, id: "upload-photo-form", class: "hide") do
             = text_field_tag "has_cover"
@@ -105,14 +107,14 @@
             .photo-div#upload-cover-div
               %a#upload-cover{href: "javascript:void(0);"}
                 %img#cover-photo.photo{src: @book.cover.nil? ? asset_path("web/coverempty.png") : @book.cover.path}
-              %a.upload-photo{href: "javascript:void(0);"}
-                %img#cover-edit-photo.edit-photo{src: asset_path("web/addcover.png")}
+              / %a.upload-photo{href: "javascript:void(0);"}
+              /   %img#cover-edit-photo.edit-photo{src: asset_path("web/addcover.png")}
             %span.book-back 封底:
             .photo-div#upload-back-div
               %a#upload-back{href: "javascript:void(0);"}
                 %img#back-photo.photo{src: @book.back.nil? ? asset_path("web/coverempty.png") : @book.back.path}
-              %a.upload-photo{href: "javascript:void(0);"}
-                %img#back-edit-photo.edit-photo{src: asset_path("web/addcover.png")}
+              / %a.upload-photo{href: "javascript:void(0);"}
+              /   %img#back-edit-photo.edit-photo{src: asset_path("web/addcover.png")}
         #tab2.tab-pane
           - if @reviews[:data].blank?
             .undiscover
@@ -162,7 +164,7 @@
                             绘本评价
                             %span.triangle-down
                         - else
-                          .unreturn-review　暂未评论
+                          .unreturn-review 暂未评论
                     - if b.review.present?
                       %tr.status
                         %td{:colspan => "4"}
@@ -189,7 +191,7 @@
                 %tbody
                   - @unreturned[:data].each do |b|
                     %tr{data: {id: b.id.to_s, name: b.book.name, clientname: b.client.name_or_parent}}
-                      %td= link_to b.client.name, "/staff/clients/#{b.client.id.to_s}"
+                      %td= link_to b.client.name_or_parent, "/staff/clients/#{b.client.id.to_s}"
                       %td= b.client.mobile
                       %td= Time.at(b.borrow_at).strftime("%Y-%m-%d %H:%M")
                       %td{class: b.return_class}= b.expire_days_str
@@ -198,17 +200,7 @@
                       %td
                         %a.lost{href: "javascript:void(0);"} 丢失
             = render "staff/partials/auto_paginate", locals: { instance: @unreturned, url: "/staff/books/" + @book.id.to_s + "?profile=return&", page: 'unreturned_page'}
-            / .select-page 
-            /   %span.totalitems= "共#{@unreturned[:total_page]}页,总计#{@unreturned[:total_number]}条"
-            /   %span.choice-page
-            /     %ul.pagination.pagination-sm
-            /       %li
-            /         %a{:href => "/staff/books/" + @book.id.to_s + "?profile=return&unreturned_page=#{@unreturned[:previous_page]}"} «
-            /       - ( (@unreturned[:previous_page] > 2 ? @unreturned[:previous_page] - 2 : 1) .. (@unreturned[:next_page] < @unreturned[:total_page] - 2 ? @unreturned[:next_page] + 2 : @unreturned[:total_page]) ).to_a.each do |page|
-            /         %li
-            /           %a{:href => "/staff/books/" + @book.id.to_s + "?profile=return&unreturned_page=#{page}"}= page
-            /       %li
-            /         %a{:href => "/staff/books/" + @book.id.to_s + "?profile=return&unreturned_page=#{@unreturned[:next_page]}"} »
+           
 #editor-content.hide
   = @book.desc.html_safe
 

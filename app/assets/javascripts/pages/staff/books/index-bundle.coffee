@@ -4,13 +4,6 @@ $ ->
 	# $("#signup-signin").click ->
 	# location.href = "/staff/books/" + data.book_id
 
-
-  $(".bookadd-btn").click ->
-    location.href = "/staff/books/new"
-
-  $(".merge-book").click ->
-    location.href = "/staff/books/merge"
-
   $(".download-code").click ->
     location.href = "/staff/books/code_list"
 
@@ -104,3 +97,69 @@ $ ->
 
   if window.profile == "borrows"
     $("#timeover").trigger("click")
+
+
+  $(".isbn-search-btn").click ->
+    isbn = $(".isbn-input").val()
+    $.postJSON(
+      '/staff/books/isbn_search',
+      {
+        isbn: isbn
+        },
+      (data) ->
+        if !data.success
+          if data.code == BOOK_NOT_EXIST
+            $(".isbn-notice").text("未找到对应图书").css({color:"#d70c19", visibility:"visible"})
+          if data.code == BOOK_DELETE
+            $(".isbn-notice").text("该绘本曾经上架过").css({color:"#d70c19", visibility:"visible"})
+          if data.code == BOOK_IN_CENTER
+            $(".isbn-notice").text("本中心藏有该书，请输入新增绘本数量").css({color:"#d70c19", visibility:"visible"})
+        else
+          $(".isbn-notice").text("书名:" + data.name).css({color:"#10c078", visibility:"visible"})
+    )
+
+  $(".close").click ->
+    $(".isbn-input").val("")
+    $(".isbn-input-num").val("")
+    $(".isbn-notice").css("visibility", "hidden")
+    $(".isbn-confirm-btn").addClass("button-disabled")
+    $(".isbn-confirm-btn").removeClass("button-enabled")
+
+  $('#isbnModal').on 'hidden.bs.modal', ->
+    $(".isbn-input").val("")
+    $(".isbn-input-num").val("")
+    $(".isbn-notice").css("visibility", "hidden")
+    $(".isbn-confirm-btn").addClass("button-disabled")
+    $(".isbn-confirm-btn").removeClass("button-enabled")
+
+  check_input = ->
+    if $(".isbn-input").val().trim() == "" || $(".isbn-input-num").val().trim() == "" || $(".isbn-notice").text() == "未找到对应图书"
+      $(".isbn-confirm-btn").addClass("button-disabled").attr("disabled", true)
+      $(".isbn-confirm-btn").removeClass("button-enabled")
+    else
+      $(".isbn-confirm-btn").addClass("button-enabled").attr("disabled", false)
+      $(".isbn-confirm-btn").removeClass("button-disabled")
+
+  $(".isbn-input").keyup ->
+    check_input()
+    $(".isbn-notice").css("visibility", "hidden")
+  $(".isbn-input-num").keyup ->
+    check_input()
+
+  $(".isbn-confirm-btn").click ->
+    isbn = $(".isbn-input").val()
+    num = $(".isbn-input-num").val()
+    available = true
+    $.postJSON(
+      '/staff/books/isbn_add_book',
+      {
+        isbn: isbn
+        num: num
+        available: available
+      },
+      (data) ->
+        if data.success
+          location.href = "/staff/books"
+      )
+
+

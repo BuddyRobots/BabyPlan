@@ -9,6 +9,7 @@ class Admin::CentersController < Admin::ApplicationController
   def index
     @keyword = params[:keyword]
     centers = @keyword.present? ? Center.where(name: /#{Regexp.escape(@keyword)}/) : Center.all
+    centers = centers.desc(:created_at)
     @centers = auto_paginate(centers)
     @centers[:data] = @centers[:data].map do |e|
       e.center_info
@@ -68,7 +69,7 @@ class Admin::CentersController < Admin::ApplicationController
     @center = Center.where(id: params[:id]).first
     render json: retval_wrapper(ErrCode::CENTER_NOT_EXIST) and return if @center.nil?
     retval = @center.update_info(params[:center])
-    render json: retval_wrapper(retval)
+    render json: retval_wrapper(retval) and return
   end
 
   def upload_photo

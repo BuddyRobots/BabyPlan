@@ -6,36 +6,36 @@
 
 .content-area
   /courses-new
-  .content-box
-    .manage-box.clearfix
-      %a#back{:href => "/admin/courses"}
-        %img{src: asset_path("web/back.png")}
-      %p.course-add 添加课程
-      .btn.end-btn{:type => "button", :href => "#kidsaddModal", "data-toggle" => "modal"} 
-        %img.end{src: asset_path("managecenter/ticker.png")}
-        完成
-      %label.checkbox-inline.open#available
-        %input#inlineCheckbox1{:type => "checkbox"} 暂不上架
+  / .content-box
+  /   .manage-box.clearfix
+  /     %a#back{:href => "/admin/courses"}
+  /       %img{src: asset_path("web/back.png")}
+  /     %p.course-add 添加课程
+  /     .btn.end-btn{:type => "button", :href => "#kidsaddModal", "data-toggle" => "modal"} 
+  /       %img.end{src: asset_path("managecenter/ticker.png")}
+  /       完成
+  /     %label.checkbox-inline.open#available
+  /       %input#inlineCheckbox1{:type => "checkbox"} 暂不上架
 
-    .manage-content
-      %form.form-inline
-        %label.input-name 课程名称:
-        %input.input-area.form-control#course-name{:type => "text"}
-        %label.input-caption#speaker 主讲人:
-        %input.input-area.form-control#course-speaker{:type => "text"}
-        %label.input-caption#nums 课次:
-        %input.input-area.form-control#course-length{:type => "text", placeholder: "请填写数字"}
-      %form.form-inline
-        %label.input-caption 课程编号:
-        %input.input-area.form-control#course-code{:type => "text"}
-        %label.input-caption 市场价(元):
-        %input.input-area.form-control#course-price{:type => "text", placeholder: "请填写数字"}
-        %label.input-caption#center-charge 公益价(元):
-        %input.input-area.form-control#public-price{:type => "text", placeholder: "请填写数字"}
+  /   .manage-content
+  /     %form.form-inline
+  /       %label.input-name 课程名称:
+  /       %input.input-area.form-control#course-name{:type => "text"}
+  /       %label.input-caption#speaker 主讲人:
+  /       %input.input-area.form-control#course-speaker{:type => "text"}
+  /       %label.input-caption#nums 课次:
+  /       %input.input-area.form-control#course-length{:type => "text", placeholder: "请填写数字"}
+  /     %form.form-inline
+  /       %label.input-caption 课程编号:
+  /       %input.input-area.form-control#course-code{:type => "text"}
+  /       %label.input-caption 市场价(元):
+  /       %input.input-area.form-control#course-price{:type => "text", placeholder: "请填写数字"}
+  /       %label.input-caption#center-charge 公益价(元):
+  /       %input.input-area.form-control#public-price{:type => "text", placeholder: "请填写数字"}
 
        
-      .course-introduce
-        %span.introduce 课程介绍:
-        %span.wangedit-area
-          #edit-area
+  /     .course-introduce
+  /       %span.introduce 课程介绍:
+  /       %span.wangedit-area
+  /         #edit-area
 

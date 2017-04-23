@@ -3,14 +3,17 @@ class CourseParticipate
 
   include HTTParty
   # pkcs12 File.read('public/cert/applient_cert.p12'), "1388434302"
-  pkcs12 File.read('public/cert/apiclient_cert.p12'), "1388434302"
+  pkcs12 File.read('public/cert/apiclient_cert.p12'), Rails.configuration.wechat_mch_id
   base_uri "https://api.mch.weixin.qq.com"
   format  :xml
 
-  APPID = "wxfe4fd89f6f5f9f57"
-  SECRET = "01265a8ba50284999508d680f7387664"
-  APIKEY = "1juOmajJrHO3f2NFA0a8dIYy2qAamtnK"
-  MCH_ID = "1388434302"
+  # APPID = "wxfe4fd89f6f5f9f57"
+  APPID = Rails.configuration.wechat_pay_app_id
+  # SECRET = "01265a8ba50284999508d680f7387664"
+  SECRET = Rails.configuration.wechat_pay_app_key
+  # APIKEY = "1juOmajJrHO3f2NFA0a8dIYy2qAamtnK"
+  APIKEY = Rails.configuration.wechat_pay_api_key
+  MCH_ID = Rails.configuration.wechat_mch_id
   NOTIFY_URL = "http://#{Rails.configuration.domain}/user_mobile/courses/notify"
 
   include Mongoid::Document
@@ -69,6 +72,7 @@ class CourseParticipate
 
   belongs_to :course_inst
   belongs_to :course
+  belongs_to :center
   belongs_to :client, class_name: "User", inverse_of: :course_participates
 
   has_many :bills
@@ -80,7 +84,7 @@ class CourseParticipate
       self.orderquery()
     end
     if is_expired
-      return "过期未付款"
+      return "已过期"
     end
     if pay_finished != true
       return "未付款"
@@ -100,7 +104,7 @@ class CourseParticipate
     cp = self.create({
       course_inst_id: course_inst.id,
       client_id: client.id,
-      course_id: course_inst.course.id,
+      center_id: course_inst.center.id,
       prepay_id: ""
       })
     # cp.course_inst = course_inst
@@ -303,7 +307,7 @@ class CourseParticipate
       "appid" => APPID,
       "mch_id" => MCH_ID,
       "nonce_str" => nonce_str,
-      "body" => self.course_inst.course.name,
+      "body" => self.course_inst.name,
       "out_trade_no" => order_id,
       "total_fee" => Rails.env == "production" ? (self.price_pay * 100).round.to_s : 1.to_s,
       "spbill_create_ip" => remote_ip,
@@ -592,7 +596,7 @@ class CourseParticipate
     {
       id: self.course_inst.id.to_s,
       name: self.course_inst.name || self.course.name,
-      content: self.course.desc,
+      content: self.course_inst.desc,
       center: self.course_inst.center.name,
       photo: self.course_inst.photo,
       min_age: self.course_inst.min_age,
@@ -608,7 +612,7 @@ class CourseParticipate
       ele_name: self.course_inst.name || self.course.name,
       ele_id: self.course_inst.id.to_s,
       ele_photo: self.course_inst.photo.nil? ? ActionController::Base.helpers.asset_path("web/course.png") : self.course_inst.photo.path,
-      ele_content: ActionController::Base.helpers.truncate(ActionController::Base.helpers.strip_tags(self.course.desc).strip(), length: 50),
+      ele_content: ActionController::Base.helpers.truncate(ActionController::Base.helpers.strip_tags(self.course_inst.desc).strip(), length: 50),
       ele_center: self.course_inst.center.name,
       ele_age: self.course_inst.min_age.present? ? self.course_inst.min_age.to_s + "~" + self.course_inst.max_age.to_s + "岁" : "无",
       ele_price: self.course_inst.judge_price,
@@ -616,4 +620,25 @@ class CourseParticipate
       ele_status: self.course_inst.status_class
     }
   end
+
+  def self.migrate
+    CourseParticipate.all.each do |e|
+      e.update_attribute(:center_id, e.course_inst.center.id)
+    end
+  end
+
+  def self.send_course_remind
+    @cis = CourseInst.where(:start_course.gt => Time.now.end_of_day).where(:start_course.lt => Time.now.end_of_day + 1.day)
+    ci_id = @cis.map {|c| c.id}
+    ci_id.each do |c|
+      ci = CourseInst.where(id: c).first
+      course_name = ci.name
+      openid = ci.course_participates.map { |cp| cp.client.user_openid }
+      openid.each do |u|
+        user_name = User.where(user_openid: u).first.name_or_parent
+        Weixin.course_start_notice(u, course_name, user_name)
+      end
+    end
+  end
+
 end

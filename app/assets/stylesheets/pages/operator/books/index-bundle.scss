@@ -1,0 +1,169 @@
+@import "jquery-ui";
+
+ul, li {
+	padding: 0;
+	margin: 0;
+}
+.content-area {
+	position: absolute;
+	width: 100%;
+	bottom: 0;
+	top: 0;
+	box-shadow: -1px -1px 6px #9c9c9c inset;
+	padding: 48px;
+}
+.content-box {
+	position: relative;
+	width: 100%;
+	max-width: 960px;
+	margin: 0 auto;
+	background: white;  
+	height: 100%;
+}
+.manage-box {
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	-webkit-justify-content: space-between;
+	-moz-justify-content: space-between;
+	-ms-justify-content: space-between;
+	-o-justify-content: space-between;
+	-webkit-align-items: flex-end;
+	-moz-align-items: flex-end;
+	-ms-align-items: flex-end;
+	-o-align-items: flex-end;
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+}
+.bookadd-btn {
+	width: 144px;
+	height: 48px;
+	padding: 0;
+	line-height: 46px;
+	font-size: 16px;
+	color: white;
+	background: #f7873d;
+	border-radius: 4px;
+}
+.bookadd-btn:hover {
+	background: #f7873d;
+	color: white;
+}
+.book-edit {
+	margin-top: -2px;
+}
+.user-search-box {
+	width: 200px;
+	height: 34px;
+	border-top-left-radius: 6px;
+	border-bottom-left-radius: 6px;
+}
+#appendedInputButton {
+	padding: 0;
+	width: 162px;
+	height: 34px;
+}
+#search-btn {
+	width: 34px;
+	height: 34px;
+	border: 1px solid #c8c8c8;
+	background: image-url("managecenter/search.png") no-repeat;
+	background-size: 22px;
+	background-position: 6px 6px;
+	outline: none;
+}
+.manage-content {
+	overflow: auto;
+	position: absolute;
+	top: 72px;
+	left: 0px;
+	bottom: 0px;
+	right: 0px;
+}
+
+.tabbable {
+	margin-top: 24px;
+	padding: 20px;
+}
+	
+.nav-tabs {
+	margin-bottom: 0;
+	border-bottom: 0;
+	li {
+		font-size: 16px;
+		color: #323232;
+	}
+}
+.moveout-box {
+	border: 1px solid #ddd;
+	border-radius: 0 6px 6px 6px;
+	padding: 20px;
+}
+.movein-box {
+	border: 1px solid #ddd;
+	border-radius: 6px;
+	padding: 20px;
+}
+#user-table {
+	border-radius: 6px;
+	font-size: 14px;
+	color: #323232;
+	margin-bottom: 0;
+	th {
+		text-align: center;
+		height: 40px;
+		line-height: 40px;
+		padding: 0;
+	}
+	td {
+		font-size: 14px;
+		color: #505050;
+		height:45px;
+		text-align: center;
+		padding: 0;
+		vertical-align: middle;
+	}
+	.prepare {
+		color: #f7873d;
+	}
+	.normal-end {
+		color: #969696;
+	}
+	.wrong-end {
+		color: #969696;
+	}
+	.transit {
+		color: #10c078;
+	}
+	.unavailable {
+		background: #eaeaea;
+	}
+	.clicked {
+		background: #fdd3b9;
+	}
+}
+// undiscover message
+.undiscover {
+	text-align: center;
+	padding: 30px;
+	border: 1px solid #ddd;
+	border-radius: 6px;
+}
+.undiscover-icon {
+	display: inline-block;
+	width: 100%;
+	max-width: 39px;
+}
+.message {
+	font-size: 16px;
+	color: #969696;
+	margin-left: 20px;
+}
+.select-page {
+	margin: 10px 0 0 0;
+}
+.book-name {
+	width: 50%;
+}

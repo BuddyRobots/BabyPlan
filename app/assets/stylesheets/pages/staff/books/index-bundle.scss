@@ -59,7 +59,7 @@
 	outline: none;
 }
 
-.bookadd-btn, .merge-book, .download-code {
+.bookadd-btn, .download-code {
 	float: right;
 	margin: 11.5px 20px 0 0;
 	width: 100px;
@@ -70,7 +70,7 @@
 	background: #f7873d;
 	border-radius: 4px;
 }
-.bookadd-btn:hover, .merge-book:hover, .download-code:hover {
+.bookadd-btn:hover, .download-code:hover {
 	background: #f7873d;
 	color: white;
 }
@@ -84,7 +84,7 @@
 .tab-box {
 	border: 1px solid #ddd;
 	border-radius: 0 6px 6px 6px;
-	padding: 20px 0;
+	padding-top: 20px;
 }
 .nav-tabs {
 	margin-bottom: 0;
@@ -114,8 +114,8 @@
 		font-size: 14px;
 		color: #505050;
 		height:45px;
-		line-height: 45px;
 		text-align: center;
+		vertical-align: middle;
 		padding: 0;
 		.unshelve {
 			color: #969696;
@@ -294,4 +294,128 @@
 		border-radius: 6px;	
 	}
 
+}
+
+#isbnModal {
+	.modal-body {
+		margin: 0;
+		padding: 0;
+	}
+	.modal-dialog {
+		position:absolute;
+		left: 50%;
+		top: 50%;
+		margin-left: -220px;
+		margin-top: -118px;
+		width: 440px;
+		height: 236px;
+		border-radius: 6px;	
+	}
+}
+.modal-backdrop {
+	background-color: #999;
+}
+.close {
+	position: absolute;
+	right: -14px;
+	top: -14px;
+	opacity: 0.7;
+	z-index: 10;
+}
+.close:hover {
+	opacity: 1;
+}
+.isbn-div {
+	padding: 40px 60px;
+}
+.input-box {
+	display: flex;
+	justify-content: space-between;
+	height: 34px;
+	line-height: 34px;
+}
+.isbn-name {
+	width: 20%;
+	font-size: 16px;
+	color: #323232;
+	text-align: right;
+	margin-right: 10px;
+}
+.outer-div {
+	width: 80%;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.isbn-input {
+	border: 0;
+	outline: none;
+	height: 30px;
+	line-height: 30px;
+	border-radius: 4px;
+	padding-left: 10px;
+}
+.isbn-input-num {
+	@extend .isbn-input;
+	width: 100%;
+}
+.isbn-search-btn {
+	height: 24px;
+	line-height: 24px;
+	border: 1px solid #f7873d;
+	font-size: 12px;
+	padding: 0;
+	color: #f7873d;
+	width: 48px;
+	margin-right: 10px;
+}
+.isbn-search-btn:hover {
+	color: #f7873d;
+}
+.isbn-notice-div {
+	margin: 2px 0;
+}
+.isbn-space {
+	display: inline-block;
+	width: 20%;
+}
+.isbn-notice {
+	display: inline-block;
+	width: 77%;
+	font-size: 12px;
+	margin-left: 3px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	vertical-align: middle;
+}
+.isbn-notice:hover {
+	cursor: pointer;
+	overflow: auto;
+	white-space: pre-wrap;
+}
+.isbn-confirm-btn {
+	width: 100%;
+	height: 34px;
+	padding: 0;
+	line-height: 32px;
+	color: white;
+	background: #f7873d;
+	border-radius: 4px;
+	margin-top: 30px;
+}
+.isbn-confirm-btn:hover {
+	color: white;
+}
+.button-disabled {
+	background: #c8c8c8;
+}
+.button-enabled {
+	background: #f7873d;
+}
+
+.book-short-name {
+	width: 45%;
 }

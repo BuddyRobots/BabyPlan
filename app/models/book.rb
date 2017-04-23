@@ -4,19 +4,20 @@ class Book
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  field :name, type: String
-  field :type, type: String
-  field :isbn, type: String
-  field :author, type: String
-  field :publisher, type: String
-  field :translator, type: String
-  field :illustrator, type: String
-  field :desc, type: String
-  field :age_lower_bound, type: Integer
-  field :age_upper_bound, type: Integer
-  field :tags, type: String
+  # field :name, type: String
+  # field :type, type: String
+  # field :isbn, type: String
+  # field :author, type: String
+  # field :publisher, type: String
+  # field :translator, type: String
+  # field :illustrator, type: String
+  # field :desc, type: String
+  # field :age_lower_bound, type: Integer
+  # field :age_upper_bound, type: Integer
+  # field :tags, type: String
   field :stock, type: Integer
   field :available, type: Boolean
+  field :deleted, type: Boolean, default: false
 
   #ralationships specific for material
   has_one :cover, class_name: "Material", inverse_of: :cover_book
@@ -27,12 +28,18 @@ class Book
   has_one :qr_export
 
   belongs_to :center
+  belongs_to :book_template
+  belongs_to :operator
   has_many :book_insts
   has_many :book_borrows
   has_many :reviews
   has_many :favorites
 
+  has_many :stock_changes
+
+  default_scope { where(:deleted.ne => true)}
   scope :is_available, ->{ where(available: true) }
+  
 
   def self.create_book(staff, center, book_info)
     book = center.books.where(isbn: book_info[:isbn]).first
@@ -58,6 +65,17 @@ class Book
     { book_id: book.id.to_s }
   end
 
+  def self.add_to_center(staff, center, book_template, num, available)
+    book = center.books.create(
+      book_template_id: book_template.id,
+      stock: num,
+      available: available
+      )
+    book.stock_changes.create(num: num.to_i, center_id: center.id, book_template_id: book_template.id)
+    Feed.create(book_id: book.id, name: book.name, center_id: center.id, available: available)
+    { book_id: book.id.to_s }
+  end
+
   def book_info
     available_stock = self.stock - self.book_borrows.where(status: BookBorrow::NORMAL, return_at: nil).length
     available_stock = [0, available_stock].max
@@ -74,26 +92,66 @@ class Book
       type: self.type,
       stock: self.stock,
       available_stock: available_stock,
-      available: self.available
+      available: self.available,
+      age_lower_bound: self.age_lower_bound,
+      age_upper_bound: self.age_upper_bound
     }
   end
 
-  def update_info(book_info)
-    self.update_attributes(
-      {
-        name: book_info["name"],
-        type: book_info["type"],
-        stock: book_info["stock"],
-        isbn: book_info["isbn"],
-        tags: (book_info[:tags] || []).join(','),
-        author: book_info["author"],
-        publisher: book_info["publisher"],
-        translator: book_info["translator"],
-        age_lower_bound: book_info["age_lower_bound"],
-        age_upper_bound: book_info["age_upper_bound"],
-        illustrator: book_info["illustrator"]
-      }
-    )
+  def name
+    return self.try(:book_template).try(:name)
+  end
+
+  def author
+    return self.try(:book_template).try(:author)
+  end
+
+  def publisher
+    return self.try(:book_template).try(:publisher)
+  end
+
+  def illustrator
+    return self.try(:book_template).try(:illustrator)
+  end
+
+  def translator
+    return self.try(:book_template).try(:translator)
+  end
+
+  def isbn
+    return self.try(:book_template).try(:isbn)
+  end
+
+  def tags
+    return self.try(:book_template).try(:tags)
+  end
+
+  def type
+    return self.try(:book_template).try(:type)
+  end
+
+  def age_lower_bound
+    return self.try(:book_template).try(:age_lower_bound)
+  end
+
+  def age_upper_bound
+    return self.try(:book_template).try(:age_upper_bound)
+  end
+
+  def desc
+    return self.try(:book_template).try(:desc)
+  end
+
+  def cover
+    return self.try(:book_template).try(:cover)
+  end
+
+  def back
+    return self.try(:book_template).try(:back)
+  end
+
+  def update_info(stock)
+    self.update_attribute(:stock, stock)
     nil
   end
 
@@ -222,34 +280,57 @@ class Book
       time_unit = "月数"
       day = 30
     end
-    borrow_num = Statistic.where(type: Statistic::BORROW_NUM).
-                           where(:stat_date.gt => start_time).
-                           where(:stat_date.lt => end_time).
-                           desc(:stat_date).map { |e| e.value }
-    borrow_num = borrow_num.each_slice(day).map { |a| a }
-    borrow_num = borrow_num.map { |e| e.sum } .reverse
-    stock_num = Statistic.where(type: Statistic::STOCK).
-                          where(:stat_date.gt => start_time).
-                          where(:stat_date.lt => end_time).
-                          desc(:stat_date).map { |e| e.value }
-    stock_num = stock_num.each_slice(day).map { |a| a }
-    stock_num = stock_num.map { |e| e.sum } .reverse
-    off_shelf_num = Statistic.where(type: Statistic::OFF_SHELF).
-                              where(:stat_date.gt => start_time).
-                              where(:stat_date.lt => end_time).
-                              desc(:stat_date).map { |e| e.value }
-    off_shelf_num = off_shelf_num.each_slice(day).map { |a| a }
-    off_shelf_num = off_shelf_num.map { |e| e.sum } .reverse
 
+    interval = day.days.to_i
+    dp_num = (end_time - start_time) / interval
+
+    bbs = BookBorrow.where(:created_at.gt => start_time)
+                    .where(:created_at.lt => end_time)
+                    .asc(:created_at)
+    bb_num = bbs.map { |e| (e.created_at.to_i - (start_time.to_i)) / interval }
+    bb_num = bb_num.group_by { |e| e }
+    bb_num.each { |k,v| bb_num[k] = v.length }
+    bb_num = (0 .. dp_num - 1).to_a.map { |e| bb_num[e].to_i }
+    # bb_num.reverse!
+
+    cur_stock_num = Book.all.map { |e| e.stock } .sum
+    stock_changes = StockChange.where(:created_at.gt => start_time)
+                               .where(:created_at.lt => end_time)
+                               .asc(:created_at)
+    stock_changes = stock_changes.map { |e| [(e.created_at.to_i - start_time.to_i) / interval, e.num] }
+    stock_changes = stock_changes.group_by { |e| e[0] }
+    stock_changes.each { |k,v| stock_changes[k] = v.map { |e| e[1] } .sum }
+    stock_num = (0 .. dp_num - 1).to_a.map { |e| cur_stock_num - stock_changes[e].to_i }
+
+    cur_off_shelf_num = BookBorrow.where(retuan_at: nil).length
+    borrows = BookBorrow.where(:borrowed_at.gt => start_time.to_i)
+                        .where(:borrowed_at.lt => end_time.to_i)
+    borrows = borrows.map { |e| (e.created_at.to_i - start_time.to_i) / interval }
+    borrows = borrows.group_by { |e| e }
+    borrows.each { |k,v| borrows[k] = v.length }
+    borrows = (0 .. dp_num - 1).to_a.map { |e| borrows[e].to_i }
+
+    returns = BookBorrow.where(:borrowed_at.gt => start_time.to_i)
+                        .where(:borrowed_at.lt => end_time.to_i)
+    returns = returns.map { |e| (e.created_at.to_i - start_time.to_i) / interval }
+    returns = returns.group_by { |e| e }
+    returns.each { |k,v| returns[k] = v.length }
+    returns = (0 .. dp_num - 1).to_a.map { |e| returns[e].to_i }
+
+    off_shelf_num = (0 .. dp_num - 1).to_a.map do |e|
+      cur_off_shelf_num = [cur_off_shelf_num + borrows[dp_num - 1 - e] - returns[dp_num - 1 - e], 0].max
+    end
+    off_shelf_num.reverse!
 
     max_num = 5
     borrow_center_hash = { }
     Center.all.each do |c|
-      borrow_num = c.statistics.where(type: Statistic::BORROW_NUM).
-                                where(:stat_date.gt => start_time).
-                                where(:stat_date.lt => end_time).
-                                desc(:stat_date).map { |e| e.value }
-      borrow_center_hash[c.name] = borrow_num.sum
+      c_bb_num = bbs.where(center_id: c.id).map { |e| [(e.created_at.to_i - start_time.to_i) / interval, e.price_pay] }
+      c_bb_num = c_bb_num.group_by { |e| e[0] }
+      c_bb_num.each { |k,v| c_bb_num[k] = v.map { |e| e[1] } .sum }
+      c_bb_num = (0 .. dp_num - 1).to_a.map { |e| c_bb_num[e].to_i }
+      c_bb_num.reverse!
+      borrow_center_hash[c.name] = c_bb_num.sum
     end
     borrow_center = borrow_center_hash.to_a
     borrow_center = borrow_center.sort { |x, y| -x[1] <=> -y[1] }
@@ -258,9 +339,9 @@ class Book
       borrow_center = borrow_center[0..max_num - 2] + [ele]
     end
     {
-      total_borrow: borrow_num.sum,
+      total_borrow: bb_num.sum,
       borrow_time_unit: time_unit,
-      borrow_num: borrow_num,
+      borrow_num: bb_num,
       stock_time_unit: time_unit,
       stock_num: stock_num,
       off_shelf_num: off_shelf_num,

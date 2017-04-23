@@ -32,9 +32,14 @@
 .tabbable {
 	margin: 20px 20px auto 20px;
 }
+.tab-back {
+	position: absolute;
+	top: 19px;
+}
 .nav-tabs {
 	margin-bottom: 0;
 	border-bottom: 0;
+	padding-left: 55px;
 	li {
 		font-size: 16px;
 		color: #323232;
@@ -48,9 +53,7 @@
 	border-bottom-left-radius: 6px;
 	border-bottom-right-radius: 6px;
 }
-#name-span {
-	margin-right: 8px;
-}
+
 .shelve {
 	color: #0fc077;
 	vertical-align: middle;
@@ -100,6 +103,22 @@
 .edit-box {
 	display: none;
 }
+
+#name-span {
+	margin-right: 8px;
+	line-height: 20px;
+	height: 20px;
+	vertical-align: middle;
+	display: inline-block;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+#name-span:hover {
+	cursor: pointer;
+	white-space: pre-wrap;
+	overflow: visible;
+}
 .input-area {
 	width: 238px;
 	height: 30px;
@@ -131,7 +150,7 @@
 	display: inline-block;
 	width: 100px;
 	height: 100px;
-	object-fit: contain;
+	// object-fit: contain;
 }
 .book-introduce {
 	margin-bottom: 20px;
