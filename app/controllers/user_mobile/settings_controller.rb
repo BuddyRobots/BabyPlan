@@ -15,7 +15,7 @@ class UserMobile::SettingsController < UserMobile::ApplicationController
       @open_id = Weixin.get_oauth_open_id(params[:code])
 
       logger.info "%%%%%%%%%%%%"
-      logger.info open_id
+      logger.info @open_id
       logger.info "%%%%%%%%%%%%"
 
       user_id = @current_user.id
