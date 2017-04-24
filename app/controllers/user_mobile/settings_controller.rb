@@ -25,7 +25,7 @@ class UserMobile::SettingsController < UserMobile::ApplicationController
       retval = Weixin.red_packet(user_id, total_amount, wishing, @open_id)
       logger.info "44444444444"
       if retval == "ok"
-        @current_user.update_attributes({pay_finished: false, trade_state: ""})
+        @current_user.deposit.update_attributes({pay_finished: false, trade_state: ""})
       end
       # render json: retval_wrapper(str: retval) and return
     end
