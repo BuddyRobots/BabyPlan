@@ -8,6 +8,21 @@ class UserMobile::SettingsController < UserMobile::ApplicationController
     @signin = params[:signin]
   end
 
+  def refund_deposit
+    if @current_user.present? && params[:state].to_s == "true"
+      @open_id = Weixin.get_oauth_open_id(params[:code])
+
+      user_id = @current_user.id
+      total_amount = @current_user.deposit.amount
+      wishing = "退还绘本押金"
+      retval = Weixin.red_packet(user_id, total_amount, wishing, @open_id)
+      if retval == "ok"
+        @current_user.update_attributes({pay_finished: false, trade_state: ""})
+      end
+      render json: retval_wrapper(str: retval) and return
+    end
+  end
+
   def book
     @book_borrows = @current_user.book_borrows.desc(:created_at)
     if params[:state].to_s == "true"
@@ -129,16 +144,5 @@ class UserMobile::SettingsController < UserMobile::ApplicationController
     redirect_to params[:state].blank? ? "/user_mobile/feeds" : params[:state]
   end
 
-  def refund_deposit
-    if @current_user.present?
-      user_id = @current_user.id
-      total_amount = @current_user.deposit.amount
-      wishing = "退还绘本押金"
-      retval = Weixin.red_packet(user_id, total_amount, wishing)
-      if retval == "ok"
-        @current_user.update_attributes({pay_finished: false, trade_state: ""})
-      end
-      render json: retval_wrapper(str: retval) and return
-    end
-  end
+
 end

@@ -251,9 +251,9 @@ class Weixin
     end   
   end
 
-  def self.red_packet(user_id, total_amount, wishing)
+  def self.red_packet(user_id, total_amount, wishing, open_id)
     user = User.find(user_id)
-    openid = user.user_openid
+    # openid = user.user_openid
     nonce_str = Util.random_str(32)
     mch_billno = Util.billno_random_str
     data = {
@@ -262,7 +262,7 @@ class Weixin
       "mch_id" => MCH_ID,
       "wxappid" => PAY_APPID,
       "send_name" => "少儿创客",
-      "re_openid" => openid,
+      "re_openid" => open_id,
       "total_amount" => total_amount,
       "total_num" => 1.to_i,
       "wishing" => wishing,

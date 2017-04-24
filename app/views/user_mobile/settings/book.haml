@@ -43,7 +43,8 @@
     - elsif @current_user.deposit_paid == false
       %a.btn.click-btn#deposit-pay{href: "https://open.weixin.qq.com/connect/oauth2/authorize?appid=#{Rails.configuration.wechat_pay_app_id}&redirect_uri=#{CGI::escape('http://' + Rails.configuration.domain + '/user_mobile/settings/book/')}&response_type=code&scope=snsapi_base&state=#{true}#wechat_redirect", :type => "button"} 缴纳押金
     - else
-      %button.btn#deposit{type: "button"} 退还押金
+      %a.btn#deposit{href: "https://open.weixin.qq.com/connect/oauth2/authorize?appid=#{Rails.configuration.wechat_pay_app_id}&redirect_uri=#{CGI::escape('http://' + Rails.configuration.domain + '/user_mobile/settings/refund_deposit/')}&response_type=code&scope=snsapi_base&state=#{true}#wechat_redirect", :type => "button"} 退还押金
+      / %button.btn#deposit{type: "button"} 退还押金
 
     / %button.btn#redeposit{type: "button"} 重新缴纳押金
     / %button.btn#deposit-pay{type: "button"} 缴纳押金

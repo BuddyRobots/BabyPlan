@@ -186,6 +186,7 @@ Rails.application.routes.draw do
         post :pay_latefee
         post :pay_deposit
         post :refund_deposit
+        get :refund_deposit
       end
     end
 
