@@ -1,5 +1,8 @@
 class UserMobile::SettingsController < UserMobile::ApplicationController
-	def index
+  skip_before_filter :require_sign_in, only: [:notify]
+  skip_before_filter :init, only: [:notify]
+  skip_before_filter :get_keyword, only: [:notify]
+  def index
     @msg_num = @current_user.messages.where(unread: true).length
 
     @signin = params[:signin]

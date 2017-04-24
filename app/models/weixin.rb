@@ -10,10 +10,11 @@ class Weixin
 
   # APPID = "wx69353371388b899b"
   APPID = Rails.configuration.wechat_app_id
+  PAY_APPID = Rails.configuration.wechat_pay_app_id
+  PAY_APIKEY = Rails.configuration.wechat_pay_api_key
   # SECRET = "ac87a676aed464f1069f1b71e158ef68"
   SECRET = Rails.configuration.wechat_app_key
   MCH_ID = Rails.configuration.wechat_mch_id
-  APIKEY = Rails.configuration.wechat_pay_api_key
 
   def self.get_access_token
     @@redis ||= Redis.new
@@ -259,7 +260,7 @@ class Weixin
       "nonce_str" => nonce_str,
       "mch_billno" => mch_billno,
       "mch_id" => MCH_ID,
-      "wxappid" => APPID,
+      "wxappid" => PAY_APPID,
       "send_name" => "少儿创客",
       "re_openid" => openid,
       "total_amount" => total_amount,
@@ -269,12 +270,15 @@ class Weixin
       "act_name" => "退还押金",
       "remark" => "儿童中心退款"
     }
-    signature = Util.sign(data, APIKEY)
+    signature = Util.sign(data, PAY_APIKEY)
     data["sign"] = signature
     self.base_uri "https://api.mch.weixin.qq.com"
     self.format :xml
     url = "/mmpaymkttransfers/sendredpack"
     response = Weixin.post(url, :body => Util.hash_to_xml(data))
+    Rails.logger.info "^^^^^^^^^^^^^^^^^^"
+    Rails.logger.info response.inspect
+    Rails.logger.info "^^^^^^^^^^^^^^^^^^"
     self.base_uri "https://api.weixin.qq.com"
     self.format :json
 
