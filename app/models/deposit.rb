@@ -50,6 +50,7 @@ class Deposit
 
   belongs_to :user
   has_many :bills
+  has_many :red_packets
 
   def self.create_new(client)
     deposit_amount = BorrowSetting.first.try(:deposit) || 100
