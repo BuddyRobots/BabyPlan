@@ -9,18 +9,27 @@ class UserMobile::SettingsController < UserMobile::ApplicationController
   end
 
   def refund_deposit
+    logger.info "111111111"
     if @current_user.present? && params[:state].to_s == "true"
+      logger.info "222222222"
       @open_id = Weixin.get_oauth_open_id(params[:code])
+
+      logger.info "%%%%%%%%%%%%"
+      logger.info open_id
+      logger.info "%%%%%%%%%%%%"
 
       user_id = @current_user.id
       total_amount = @current_user.deposit.amount
       wishing = "退还绘本押金"
+      logger.info "3333333333"
       retval = Weixin.red_packet(user_id, total_amount, wishing, @open_id)
+      logger.info "44444444444"
       if retval == "ok"
         @current_user.update_attributes({pay_finished: false, trade_state: ""})
       end
-      render json: retval_wrapper(str: retval) and return
+      # render json: retval_wrapper(str: retval) and return
     end
+    redirect_to action: :book and return
   end
 
   def book
