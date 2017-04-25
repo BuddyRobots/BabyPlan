@@ -2,7 +2,6 @@
   = javascript_include_tag "pages/staff/courses/new-bundle"
   = stylesheet_link_tag "pages/staff/courses/new-bundle", :media => "all"
   :javascript
-    window.price_upper = "#{@center.price_upper}"
     window.course_photo = "#{@course_inst.try(:photo).present?}"
     window.course_photo_path = "#{@course_inst.try(:photo).try(:path)}"
 

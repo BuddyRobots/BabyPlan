@@ -24,9 +24,9 @@ class UserMobile::SettingsController < UserMobile::ApplicationController
       logger.info "3333333333"
       retval = Weixin.red_packet(user_id, total_amount, wishing, @open_id)
       logger.info "44444444444"
-      if retval == "ok"
-        @current_user.deposit.update_attributes({pay_finished: false, trade_state: ""})
-      end
+      # if retval == "ok"
+      #   @current_user.deposit.update_attributes({pay_finished: false, trade_state: ""})
+      # end
       # render json: retval_wrapper(str: retval) and return
     end
     redirect_to action: :book and return

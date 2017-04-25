@@ -396,6 +396,10 @@ $ ->
             $.page_notification "更新失败，课次与上课时间不匹配"
           else if data.code == COURSE_INST_EXIST
             $.page_notification "更新失败，开课编号已存在"
+          else if data.code == PRICE_UPPER
+            $.page_notification("超出公益价上限", 1000)
+          else if data.code == COURSE_TIME_UPPER
+            $.page_notification("超出该中心授课时间上限", 1000)
           else
             $.page_notification "服务器出错，请稍后重试"
     )

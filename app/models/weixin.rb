@@ -284,11 +284,47 @@ class Weixin
 
     doc = Nokogiri::XML(response.body)
     success = doc.search('result_code').children[0].text
+    send_listid = doc.search('send_listid').children[0].text
+    user.deposit.red_packets.create({amount: total_amount, mch_billno: mch_billno, send_listid: send_listid, status: status, result_code: success})
+
     if success == "SUCCESS"
       return "ok"
     else
       errcode = doc.search('err_code').children[0].text
       return errcode
+    end
+  end
+
+  def self.query_redpacket_status(red_packet)
+    mch_billno = red_packet.mch_billno
+    nonce_str = Util.random_str(32)
+    data = {
+      "nonce_str" => nonce_str,
+      "mch_billno" => mch_billno,
+      "mch_id" => MCH_ID,
+      "appid" => PAY_APPID,
+      "billtype" => "MCHT"
+    }
+    signature = Util.sign(data, PAY_APIKEY)
+    data["sign"] = signature
+    self.base_uri "https://api.mch.weixin.qq.com"
+    self.format :xml
+    url = "/mmpaymkttransfers/gethbinfo"
+    response = Weixin.post(url, :body => Util.hash_to_xml(data))
+    self.base_uri "https://api.weixin.qq.com"
+    self.format :json
+    doc = Nokogiri::XML(response.body)
+    return_code = doc.search('return_code').children[0].text
+    if return_code == "SUCCESS"
+      result_code = doc.search('result_code').children[0].text
+      if result_code == "SUCCESS"
+        status = doc.search('status').children[0].text
+        red_packet.update_attribute(:status, status)
+        return "ok"
+      else
+        errcode = doc.search('err_code').children[0].text
+        return errcode
+      end
     end
   end
 
