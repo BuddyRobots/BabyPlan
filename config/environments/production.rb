@@ -85,4 +85,8 @@ Rails.application.configure do
   config.wechat_pay_api_key = "1juOmajJrHO3f2NFA0a8dIYy2qAamtnK"
 
   config.wechat_mch_id = "1388434302"
+
+  config.course_change_notice_template_id = "6CMui-tmplYhScux6_VxN2R9HzZ85g5C2J4p7Hf7QxQ"
+  config.course_start_notice_template_id = "97SgQ4opUduEKxg9g1ICX721-JQdXcB8l3TFWn9ge0c"
+  config.book_return_notice_template_id = "Nh3orrzy_jIQRhpUNqHZrNC_YwlpAjyxVB-UUiy8Uxg"
 end
