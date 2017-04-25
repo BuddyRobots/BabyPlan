@@ -1,7 +1,7 @@
 class UserMobile::ApplicationController < ApplicationController
   layout 'layouts/user_mobile'
   # before_filter :require_sign_in, :get_current_center
-  before_filter :require_sign_in, :first_sign_in, :bind_openid
+  before_filter :require_sign_in, :first_sign_in
 
   def require_sign_in
     respond_to do |format|

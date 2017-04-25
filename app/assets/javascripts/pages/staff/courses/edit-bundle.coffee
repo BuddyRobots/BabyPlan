@@ -37,7 +37,7 @@ $ ->
     eventLimit: true
     fixedWeekCount: false
     nowIndicator: true
-    height: 310
+    height: 350
     # contentHeight: 'auto'
     # aspectRatio: 15
     eventClick: (calEvent, jsEvent, view) ->

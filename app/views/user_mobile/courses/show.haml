@@ -68,32 +68,32 @@
     .course-desc.f14-op87
       = @course_inst.course.desc.html_safe
     - if @course_participate.nil? || @course_participate.prepay_id.blank?
-      - if Date.parse(@course_inst.end_date).past?
+      - if Time.parse(@course_inst.end_date).past?
         %button.btn.btn-style.bg2.f16.font-color1{type: "button"} 已结课
       - elsif @course_inst.capacity <= @course_inst.effective_signup_num
         %button.btn.btn-style.bg2.f16.font-color1{type: "button"} 已无名额
       - else
         %a.btn.btn-style.bg1.f16.font-color1{href: new_user_mobile_course_path} 立即报名
     - elsif @course_participate.is_expired
-      - if Date.parse(@course_inst.end_date).past?
+      - if Time.parse(@course_inst.end_date).past?
         %button.btn.btn-style.bg2.f16.font-color1{type: "button"} 已结课
       - elsif @course_inst.capacity <= @course_inst.effective_signup_num
         %button.btn.btn-style.bg2.f16.font-color1{type: "button"} 已无名额
       - else
         %a.btn.btn-style.bg1.f16.font-color1{href: "#"} 去付款
     - elsif @course_participate.is_success
-      - if Date.parse(@course_inst.start_date).future?
-        - if (Date.parse(@course_inst.start_date).to_time - 3.days).future?
+      - if Time.parse(@course_inst.start_date).future?
+        - if (Time.parse(@course_inst.start_date).beginning_of_day - 3.day).future?
           %a.refund.tc.font-color8.f14{href: "#"} 申请退款
         %button.btn.btn-style.bg2.f16.font-color1{type: "button"} 已报名
-      - if Date.parse(@course_inst.end_date).past?
+      - if Time.parse(@course_inst.end_date).past?
         %button.btn.btn-style.bg2.f16.font-color1{type: "button"} 已结课
-      - if Date.parse(@course_inst.start_date).past? && Date.parse(@course_inst.end_date).future?
+      - if Time.parse(@course_inst.start_date).past? && Time.parse(@course_inst.end_date).future?
         %a.btn.btn-style.bg1.f16.font-color1{href: "#"} 立即评价
     - elsif @course_participate.is_paying
       %button.btn.btn-style.bg2.f16.font-color1{type: "button"} 支付进行中
     - else
-      - if Date.parse(@course_inst.end_date).past?
+      - if Time.parse(@course_inst.end_date).past?
         %button.btn.btn-style.bg2.f16.font-color1{type: "button"} 已结课
       - elsif @course_inst.capacity <= @course_inst.effective_signup_num
         %button.btn.btn-style.bg2.f16.font-color1{type: "button"} 已无名额

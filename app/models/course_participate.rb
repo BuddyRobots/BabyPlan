@@ -53,6 +53,8 @@ class CourseParticipate
   field :refund_finished, type: Boolean, default: false
   field :refund_status, type: String
 
+  field :renew_status, type: Boolean
+
   belongs_to :course_inst
   belongs_to :course
   belongs_to :client, class_name: "User", inverse_of: :course_participates
@@ -98,6 +100,25 @@ class CourseParticipate
     expired_at = Time.now + 1.days
     cp.update_attributes({expired_at: expired_at.to_i})
     cp
+  end
+
+  def create_order(remote_ip, openid)
+    self.clear_refund
+    self.update_attributes(
+      {
+        expired_at: (Time.now + 10.minutes).to_i,
+        # order_id: Util.random_str(32),
+        price_pay: course_inst.price_pay,
+        renew_status: true,
+        prepay_id: ""
+      })
+    order_id = Util.random_str(32)
+    if self.price_pay == 0
+      self.update_attributes({prepay_id: "free", order_id: order_id})
+    else
+      self.unifiedorder_interface(remote_ip, openid, order_id)
+      CourseOrderExpiredWorker.perform_in(600.seconds, self.id.to_s)
+    end
   end
 
   def renew
@@ -249,6 +270,17 @@ class CourseParticipate
   end
 
   # status related
+  def need_order_query()
+    return self.renew_status || (self.pay_finished == true && self.trade_state != "SUCCESS")
+  end
+
+  def is_effective
+    if self.need_order_query
+      self.orderquery()
+    end
+    self.trade_state == "SUCCESS" || (self.expired_at > Time.now.to_i && self.expired_at != -1)
+  end
+
   def is_expired
     if self.price_pay == 0
       return false

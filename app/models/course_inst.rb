@@ -143,8 +143,8 @@ class CourseInst
   def end_date
     last_day = self.date_in_calendar[-1]
     return nil if last_day.blank?
-    end_time = last_day.split(',')[0]
-    end_date = end_time.split('T')[0]
+    end_time = last_day.split(',')[-1]
+    end_date = end_time
     return end_date
   end
 
@@ -152,7 +152,7 @@ class CourseInst
     first_day = self.date_in_calendar[0]
     return nil if first_day.blank?
     start_time = first_day.split(',')[0]
-    start_date = start_time.split('T')[0]
+    start_date = start_time
     return start_date
   end
 
