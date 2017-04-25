@@ -2,19 +2,19 @@ $ ->
   if window.first_signin == "true"
     $.mobile_page_notification("请先完善个人资料")
 
-  $( "#datepicker" ).datepicker({
-    changeMonth: true,
-    changeYear: true,
-    yearRange : '-20:+0'
-  })
-  $( "#datepicker" ).datepicker( $.datepicker.regional[ "zh-TW" ] )
-  $( "#datepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd" )
+  # $( "#datepicker" ).datepicker({
+  #   changeMonth: true,
+  #   changeYear: true,
+  #   yearRange : '-20:+0'
+  # })
+  # $( "#datepicker" ).datepicker( $.datepicker.regional[ "zh-TW" ] )
+  # $( "#datepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd" )
 
-  $("#datepicker").val(window.birthday_str)
+  $("#birthday").val(window.birthday)
 
   $("#confirm").click ->
     name = $("#name").val()
-    birthday = $("#datepicker").val()
+    birthday = $("#birthday").val()
     gender = $("#gender").val()
     parent = $("#parent").val()
     address = $("#address").val()

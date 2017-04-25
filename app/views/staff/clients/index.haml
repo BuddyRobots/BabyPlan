@@ -39,7 +39,7 @@
                     %tbody.font-color3
                       - @users[:data].each do |u|
                         %tr
-                          %td= link_to u[:name], "/staff/clients/#{u[:id]}"
+                          %td= link_to u[:name].present? ? u[:name] : "未命名", "/staff/clients/#{u[:id]}"
                           %td= u[:age].present? ? u[:age].to_s + "岁" : ""
                           %td= u[:gender] == 0 ? "男" : "女"
                           %td= u[:parent]

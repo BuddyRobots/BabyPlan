@@ -146,7 +146,7 @@ $ ->
       eventLimit: true
       fixedWeekCount: false
       nowIndicator: true
-      height: 310
+      height: 350
       eventClick: (calEvent, jsEvent, view) ->
         if is_edit == false
           return
