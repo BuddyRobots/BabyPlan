@@ -39,32 +39,46 @@ class CourseInst
   scope :is_available, ->{ where(available: true) }
   default_scope { where(:deleted.ne => true) }
 
-
-  def self.create_course_inst(staff, center, course_inst_info)
-    if course_inst_info["length"].to_i != course_inst_info["date_in_calendar"].length
-      return ErrCode::COURSE_DATE_UNMATCH
+  def self.check_upper(center, course_inst_info)
+    if center.price_upper.present?
+      if course_inst_info[:price_pay].to_i > center.price_upper
+        return ErrCode::PRICE_UPPER
+      end
     end
     if center.classtime_upper.present?
       course_date = Time.parse(course_inst_info[:start_course])
       week_start = course_date.beginning_of_week
       week_end = course_date.end_of_week
       course_insts = center.course_insts.where(:start_course.gt => week_start.to_i).where(:start_course.lt => week_end.to_i)
-      ci_array = course_insts.map {|ci| ci.id}
       total_time = 0
-      ci_array.each do |ci|
-        ci_instance = CourseInst.where(id: ci).first
-        course_date = ci_instance.date_in_calendar[0].split(',')
+      course_insts.each do |ci|
+        course_date = ci.date_in_calendar[0].split(',')
         course_start = Time.parse(course_date[0])
         course_end = Time.parse(course_date[1])
         class_time = (course_end - course_start).to_i
         total_time += class_time
       end
+      new_course_date = course_inst_info[:date_in_calendar]
+      course_date_arr = new_course_date[0].split(',') 
+      n_course_start = Time.parse(course_date_arr[0])
+      n_course_end = Time.parse(course_date_arr[1])
+      n_course_duration = (n_course_end - n_course_start).to_i
+      total_time = total_time + n_course_duration
       if total_time > center.classtime_upper * 3600
         return ErrCode::COURSE_TIME_UPPER
       end
     end
-    # course = Course.where(id: course_inst_info[:course_id]).first
-    # code = course.code + "-" + course_inst_info[:code]
+    return nil
+  end
+
+  def self.create_course_inst(staff, center, course_inst_info)
+    if course_inst_info["length"].to_i != course_inst_info["date_in_calendar"].length
+      return ErrCode::COURSE_DATE_UNMATCH
+    end
+    retval = self.check_upper(center, course_inst_info)
+    if retval.present?
+      return retval
+    end
     course_inst = CourseInst.where(code: course_inst_info[:code]).first
     if course_inst.present?
       return ErrCode::COURSE_INST_EXIST
@@ -122,6 +136,12 @@ class CourseInst
     if course_inst_info["length"].to_i != course_inst_info["date_in_calendar"].length
       return ErrCode::COURSE_DATE_UNMATCH
     end
+
+    retval = CourseInst.check_upper(self.center, course_inst_info)
+    if retval.present?
+      return retval
+    end
+
     self.update_attributes(
       {
         code: course_inst_info["code"],
