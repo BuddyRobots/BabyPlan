@@ -290,6 +290,18 @@ class User
     return false
   end
 
+  def review_on(ele)
+    if (ele.class == CourseInst)
+      review = self.reviews.where(course_inst: ele).first
+      return review.present?
+    end
+    if (ele.class == Book)
+      review = self.reviews.where(book: ele).first
+      return review.present?
+    end
+    return false
+  end
+
 end
 
 

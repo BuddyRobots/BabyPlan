@@ -33,6 +33,13 @@ Rails.application.configure do
   # Raises helpful error messages.
   config.assets.raise_runtime_errors = true
 
+  config.wechat_app_id = "wx0bad9193f1246547"
+  config.wechat_app_key = "68b29adfa28e31c6107d7a627373e74f"
+  
+  config.wechat_api_key = "bBdnzYarb9DQntl42QWxtC502K6r4l1G"
+
+  config.wechat_mch_id = "1445887202"
+
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 end

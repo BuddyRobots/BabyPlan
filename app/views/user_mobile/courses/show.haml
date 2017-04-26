@@ -73,23 +73,32 @@
       - elsif @course_inst.capacity <= @course_inst.effective_signup_num
         %button.btn.btn-style.bg2.f16.font-color1{type: "button"} 已无名额
       - else
-        %a.btn.btn-style.bg1.f16.font-color1{href: new_user_mobile_course_path} 立即报名
+        - if @course_inst.price > 0
+          %a.btn.btn-style.bg1.f16.font-color1{href: "https://open.weixin.qq.com/connect/oauth2/authorize?appid=#{Rails.configuration.wechat_app_id}&redirect_uri=#{CGI::escape('http://' + Rails.configuration.domain + '/user_mobile/courses/new/')}&response_type=code&scope=snsapi_base&state=#{@course_inst.id.to_s}#wechat_redirect", :type => "button"} 立即报名
+        - else
+          %a.btn.btn-style.bg1.f16.font-color1{href: "/user_mobile/courses/new/?state=#{@course_inst.id.to_s}"} 立即报名
     - elsif @course_participate.is_expired
       - if Time.parse(@course_inst.end_date).past?
         %button.btn.btn-style.bg2.f16.font-color1{type: "button"} 已结课
       - elsif @course_inst.capacity <= @course_inst.effective_signup_num
         %button.btn.btn-style.bg2.f16.font-color1{type: "button"} 已无名额
       - else
-        %a.btn.btn-style.bg1.f16.font-color1{href: "#"} 去付款
+        - if @course_inst.price > 0
+          %a.btn.btn-style.bg1.f16.font-color1{href: "https://open.weixin.qq.com/connect/oauth2/authorize?appid=#{Rails.configuration.wechat_app_id}&redirect_uri=#{CGI::escape('http://' + Rails.configuration.domain + '/user_mobile/courses/new/')}&response_type=code&scope=snsapi_base&state=#{@course_inst.id.to_s}#wechat_redirect", :type => "button"} 已过期,重新报名
+        - else
+          %a.btn.btn-style.bg1.f16.font-color1{href: "/user_mobile/courses/new/?state=#{@course_inst.id.to_s}"} 已过期,重新报名
     - elsif @course_participate.is_success
       - if Time.parse(@course_inst.start_date).future?
         - if (Time.parse(@course_inst.start_date).beginning_of_day - 3.day).future?
           %a.refund.tc.font-color8.f14{href: "#"} 申请退款
         %button.btn.btn-style.bg2.f16.font-color1{type: "button"} 已报名
-      - if Time.parse(@course_inst.end_date).past?
-        %button.btn.btn-style.bg2.f16.font-color1{type: "button"} 已结课
       - if Time.parse(@course_inst.start_date).past? && Time.parse(@course_inst.end_date).future?
-        %a.btn.btn-style.bg1.f16.font-color1{href: "#"} 立即评价
+        %button.btn.btn-style.bg2.f16.font-color1{type: "button"} 正在上课
+      - if Time.parse(@course_inst.end_date).past?
+        - if @current_user.review_on(@course_inst)
+          %button.btn.btn-style.bg2.f16.font-color1{type: "button"} 已结课
+        - else
+          %a.btn.btn-style.bg1.f16.font-color1{href: user_mobile_reviews_path + "?back=" + @back.to_s + "&review_type=course_inst&course_inst_id=" + @course_inst.id.to_s} 立即评价
     - elsif @course_participate.is_paying
       %button.btn.btn-style.bg2.f16.font-color1{type: "button"} 支付进行中
     - else
@@ -98,7 +107,7 @@
       - elsif @course_inst.capacity <= @course_inst.effective_signup_num
         %button.btn.btn-style.bg2.f16.font-color1{type: "button"} 已无名额
       - else
-        %a.btn.btn-style.bg1.f16.font-color1{href: "#"} 去付款
+        %a.btn.btn-style.bg1.f16.font-color1{href: new_user_mobile_course_path + "/?direct_pay=true&state=" + @course_inst.id.to_s, :type => "button"}= @course_inst.price == 0 ? "去确认" : "去付款"
 
 
 

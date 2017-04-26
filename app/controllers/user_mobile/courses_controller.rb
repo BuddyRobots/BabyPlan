@@ -50,7 +50,10 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
     @back = params[:back]
     @course_inst = CourseInst.where(id: params[:id]).first
     @course_participate = @current_user.course_participates.where(course_inst_id: @course_inst.id).first
-    @refund_status_str = @course_participate.try(:refund_status_str).to_s
+
+    if @course_participate.present? && @course_participate.renew_status
+      @course_participate.orderquery
+    end
   end
 
   # def new
