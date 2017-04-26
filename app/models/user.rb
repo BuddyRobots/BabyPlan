@@ -459,6 +459,10 @@ class User
     nil
   end
 
+  def allow_refund_deposit
+    self.cur_books_num == 0 && self.latefee_amount == 0
+  end
+
   def deposit_status_str
     self.deposit.present? ? self.deposit.status_str : "当前未缴纳"
   end
