@@ -11,7 +11,7 @@
           %span.success 退款已完成
         .item
           %span 您缴纳的绘本押金：
-          %span= @current_user.deposit.amount + "元"
+          %span= @current_user.deposit.amount.to_s + "元"
         .item
           %span 已通过微信红包返还，请返回微信首页查看并领取
     .btn-div
