@@ -16,6 +16,10 @@ class Weixin
   SECRET = Rails.configuration.wechat_app_key
   MCH_ID = Rails.configuration.wechat_mch_id
 
+  COURSE_CHANGE_TEMPLATE_ID = Rails.configuration.course_change_notice_template_id
+  COURSE_START_TEMPLATE_ID = Rails.configuration.course_start_notice_template_id
+  BOOK_RETURN_TEMPLATE_ID = Rails.configuration.book_return_notice_template_id
+
   def self.get_access_token
     @@redis ||= Redis.new
     expires_at = @@redis.get("weixin_access_token_expires_at").to_i
@@ -152,7 +156,7 @@ class Weixin
   def self.course_notice(cp, content, course_name)
     body = {
       "touser": cp,
-      "template_id": "XaIM2TKa7w78F8J2qB2bTtcVf_PlDq2F_wao3dznJTE",
+      "template_id": COURSE_CHANGE_TEMPLATE_ID,
       "data": {
         "first": {
           "value": "尊敬的用户您好，您报名参加的课程有变动!",
@@ -186,7 +190,7 @@ class Weixin
   def self.course_start_notice(openid, course_name, user_name)
     body = {
       "touser": openid,
-      "template_id": "nP01oidKj_p4cLFGuZws3yPWVAIt7IXi0P_tGPn45VU",
+      "template_id": COURSE_START_TEMPLATE_ID,
       "data": {
         "first": {
           "value": "尊敬的用户您好，您报名参加的课程将于明天开始上课!",
@@ -220,7 +224,7 @@ class Weixin
   def self.book_return_notice(openid, book_name, return_time)
     body = {
       "touser": openid,
-      "template_id": "2S4VVtCGxJsVpEeqJsmBBLOTjgBMiQFhX8k49jxZuSg",
+      "template_id": BOOK_RETURN_TEMPLATE_ID,
       "data": {
         "first": {
           "value": "尊敬的用户您好，您借阅的书籍!",
@@ -285,7 +289,7 @@ class Weixin
     doc = Nokogiri::XML(response.body)
     success = doc.search('result_code').children[0].text
     send_listid = doc.search('send_listid').children[0].text
-    user.deposit.red_packets.create({amount: total_amount, mch_billno: mch_billno, send_listid: send_listid, status: status, result_code: success})
+    user.deposit.red_packets.create({amount: total_amount, mch_billno: mch_billno, send_listid: send_listid, result_code: success})
 
     if success == "SUCCESS"
       return "ok"

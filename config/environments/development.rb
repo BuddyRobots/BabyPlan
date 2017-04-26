@@ -47,4 +47,9 @@ Rails.application.configure do
   config.wechat_pay_api_key = "bBdnzYarb9DQntl42QWxtC502K6r4l1G"
 
   config.wechat_mch_id = "1445887202"
+
+  config.course_change_notice_template_id = "XaIM2TKa7w78F8J2qB2bTtcVf_PlDq2F_wao3dznJTE"
+  config.course_start_notice_template_id = "nP01oidKj_p4cLFGuZws3yPWVAIt7IXi0P_tGPn45VU"
+  config.book_return_notice_template_id = "2S4VVtCGxJsVpEeqJsmBBLOTjgBMiQFhX8k49jxZuSg"
+  
 end

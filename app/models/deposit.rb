@@ -263,9 +263,9 @@ class Deposit
     self.trade_state == "SUCCESS"
   end
 
-  def refund(center)
+  def refund(center=nil)
     self.update_attributes({pay_finished: false, offline_paid: false, trade_state: ""})
-    Bill.create_deposit_refund_item(center, self)
+    # Bill.create_deposit_refund_item(center, self)
     nil
   end
 

@@ -34,10 +34,21 @@ class UserMobile::SettingsController < UserMobile::ApplicationController
 
   def book
     @book_borrows = @current_user.book_borrows.desc(:created_at)
+    @deposit = @current_user.deposit
+    if @deposit.present?
+      @pending_packet = @deposit.red_packets.any_of({status: "SENDING"}, {status: "SENT"}).first
+      if @pending_packet.present?
+        Weixin.query_redpacket_status(@pending_packet)
+        if @pending_packet.status == "RECEIVED"
+          @deposit.refund
+          @pending_packet = nil
+        end
+        return
+      end
+    end
     if params[:state].to_s == "true"
       @pay_deposit = "true"
       @open_id = Weixin.get_oauth_open_id(params[:code])
-      @deposit = @current_user.deposit
       @deposit = @deposit || Deposit.create_new(@current_user)
       if @deposit.trade_state == "SUCCESS"
         # the deposit has bee paid
