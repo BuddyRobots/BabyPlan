@@ -307,7 +307,7 @@ class Weixin
       "mch_billno" => mch_billno,
       "mch_id" => MCH_ID,
       "appid" => PAY_APPID,
-      "billtype" => "MCHT"
+      "bill_type" => "MCHT"
     }
     signature = Util.sign(data, PAY_APIKEY)
     data["sign"] = signature
