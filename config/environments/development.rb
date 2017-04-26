@@ -32,6 +32,7 @@ Rails.application.configure do
   # Checks for improperly declared sprockets dependencies.
   # Raises helpful error messages.
   config.assets.raise_runtime_errors = true
+  config.domain = "maker.buddyrobots.com"
 
   config.wechat_app_id = "wx0bad9193f1246547"
   config.wechat_app_key = "68b29adfa28e31c6107d7a627373e74f"
