@@ -255,6 +255,7 @@ Rails.application.routes.draw do
         post :pay_failed
         post :request_refund
         post :favorite
+        post :is_expired
       end
     end
     resources :feeds do

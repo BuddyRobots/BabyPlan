@@ -56,34 +56,43 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
     end
   end
 
-  # def new
-    # @course = CourseInst.where(id: params[:state]).first
-    # @course_participate = @current_user.course_participates.where(course_inst_id: @course.id).first
-    # @course_participate = @course_participate || CourseParticipate.create_new(current_user, @course)
-    # @course_participate.renew
-    # @course_participate.clear_refund
-    # if @course.price_pay > 0
-    #   @open_id = Weixin.get_oauth_open_id(params[:code])
-    #   if @course_participate.prepay_id.blank?
-    #     @course_participate.unifiedorder_interface(@remote_ip, @open_id)
-    #   end
-    #   @pay_info = @course_participate.get_pay_info
-    # end
-  # end
-
   def new
     @course = CourseInst.where(id: params[:state]).first
-    @course_participate = @current_user.course_participate.where(course_inst_id: @course.id).first
-    @course_participate = @course_participate || CourseParticipate.create_new(current_user, @course)
-    @course_participate.renew
-    @course_participate.clear_refund
-    if @course.price_pay > 0
-      @open_id = Weixin.get_oauth_open_id(params[:code])
-      if @course_participate.prepay_id.blank?
-        @coures_participate.unifiedorder_interface(@remote_ip, @open_id)
-      end
-      @pay_info = @course_participate.get_pay_info
+    @course_participate = @current_user.course_participates.where(course_inst_id: @course.id).first || CourseParticipate.create_new(current_user, @course)
+
+    # refresh order status
+    if @course_participate.present? && @course_participate.renew_status
+      @course_participate.orderquery
     end
+
+    if @course_participate.prepay_id.present?
+      if @course_participate.pay_finished == true || @course_participate.trade_state == "SUCCESS"
+        # has pay
+        redirect_to action: :show, id: params[:state] and return
+      end
+      if @course_participate.is_expired == false
+        @pay_info = @course_participate.get_pay_info
+        return
+      end
+      if params[:direct_pay].to_s == "true" && @course_participate.is_expired == true
+        # expired, need to re-sign-up
+        redirect_to action: :show, id: params[:state] and return
+      end
+    end
+
+    if @course.capacity <= @course.effective_signup_num
+      redirect_to action: :show, id: params[:state] and return
+    end
+
+    @open_id = params[:code].present? ? Weixin.get_oauth_open_id(params[:code]) : ""
+    if @open_id.nil?
+      # need to re-get the openid
+      redirect_to action: :show, id: params[:state] and return
+    end
+
+    @course_participate.create_order(@remote_ip, @open_id)
+    @pay_info = @course_participate.get_pay_info
+
   end
 
   def notify
@@ -91,26 +100,22 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
     # ci = CourseParticipate.where(order_id: out_trade_no).first
     # get result_code, err_code and err_code_des
     # ci.update_order(result_code, err_code, err_code_des)
-    render :xml => {return_code: "SUCCESS"} and return
+    CourseParticipate.notify_callback(request.raw_post)
+    render :xml => {return_code: "SUCCESS"}.to_xml(dasherize: false, root: "xml") and return
   end
 
   def pay_finished
     @course_participate = CourseParticipate.where(id: params[:id]).first
-    @course_participate.update_attributes({pay_finished: true})
+    @course_participate.update_attributes({pay_finished: true, expired_at: -1})
     if @course_participate.price_pay == 0
       @course_participate.update_attributes({
-        prepay_id: "free",
         trade_state: "SUCCESS"
       })
-    else
-      Bill.create_course_participate_item(@course_participate)
     end
     render json: retval_wrapper(nil) and return
   end
 
   def pay_failed
-    @course_participate = CourseParticipate.where(id: params[:id]).first
-    @course_participate.renew
     render json: retval_wrapper(nil) and return
   end
 
@@ -153,5 +158,14 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
     @course_participate = CourseParticipate.where(id: params[:id]).first
     retval = @course_participate.request_refund
     render json: retval_wrapper(retval) and return
+  end
+
+  def is_expired
+    cp = CourseParticipate.where(id: params[:id]).first
+    is_expired = cp.is_expired
+    if params[:before_pay]
+      cp.update_attributes({renew_status: true})
+    end
+    render json: retval_wrapper({is_expired: is_expired}) and return
   end
 end

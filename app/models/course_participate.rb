@@ -110,7 +110,7 @@ class CourseParticipate
       {
         expired_at: (Time.now + 10.minutes).to_i,
         # order_id: Util.random_str(32),
-        price_pay: course_inst.price_pay,
+        price_pay: course_inst.price,
         renew_status: true,
         prepay_id: ""
       })
@@ -119,7 +119,6 @@ class CourseParticipate
       self.update_attributes({prepay_id: "free", order_id: order_id})
     else
       self.unifiedorder_interface(remote_ip, openid, order_id)
-      CourseOrderExpiredWorker.perform_in(600.seconds, self.id.to_s)
     end
   end
 
