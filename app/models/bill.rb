@@ -18,13 +18,16 @@ class Bill
   field :finished, type: Boolean, default: true
 
   field :order_id, type: String
+  field :prepay_id, type: String
   field :wechat_transaction_id, type: String
 
   belongs_to :center
   belongs_to :user
   belongs_to :course_inst
+  belongs_to :course_participate
+  belongs_to :deposit
 
-  def self.create_course_participate_item(course_participate)
+  def self.create_course_participate_item(course_participate, prepay_id, order_id)
     if course_participate.price_pay <= 0
       return
     end
@@ -32,21 +35,33 @@ class Bill
       center_id: course_participate.course_inst.center.id,
       user_id: course_participate.client.id,
       course_inst_id: course_participate.course_inst.id,
+      course_participate_id: course_participate.id,
       amount: course_participate.price_pay,
       type: COURSE_PARTICIPATE,
       channel: WECHAT,
-      order_id: course_participate.order_id,
+      order_id: order_id,
+      prepay_id: prepay_id,
       wechat_transaction_id: course_participate.wechat_transaction_id,
       finished: false
     })
   end
 
+  def confirm_course_participate_item
+    self.update_attribute(:finished, true)
+  end
+
+  def confirm_deposit_item
+    self.update_attribute(:finished, true)
+  end
+
+=begin
   def self.confirm_course_participate_item(course_participate)
     bill_item = Bill.where(order_id: course_participate.order_id, type: COURSE_PARTICIPATE).first
     if bill_item.present?
       bill_item.update_attribute(:finished, true)
     end
   end
+=end
 
   def self.create_course_refund_item(course_participate)
     if course_participate.price_pay <= 0
@@ -56,6 +71,7 @@ class Bill
       center_id: course_participate.course_inst.center.id,
       user_id: course_participate.client.id,
       course_inst_id: course_participate.course_inst.id,
+      course_participate_id: course_participate.id,
       amount: -course_participate.price_pay,
       type: COURSE_REFUND,
       channel: WECHAT,
@@ -72,23 +88,25 @@ class Bill
     end
   end
 
-  def self.create_offline_deposit_pay_item(center, deposit)
-    Bill.create({
-      center_id: center.id,
-      user_id: deposit.user.id,
-      amount: deposit.amount,
-      type: DEPOSIT_PAY,
-      channel: OFFLINE
-    })
-  end
+  # def self.create_offline_deposit_pay_item(center, deposit)
+  #   Bill.create({
+  #     center_id: center.id,
+  #     user_id: deposit.user.id,
+  #     amount: deposit.amount,
+  #     type: DEPOSIT_PAY,
+  #     channel: OFFLINE
+  #   })
+  # end
 
   def self.create_online_deposit_pay_item(deposit)
     Bill.create({
       user_id: deposit.user.id,
+      deposit_id: deposit.id,
       amount: deposit.amount,
       type: DEPOSIT_PAY,
       channel: WECHAT,
       order_id: deposit.order_id,
+      prepay_id: deposit.prepay_id,
       wechat_transaction_id: deposit.wechat_transaction_id,
       finished: false
     })
@@ -193,4 +211,5 @@ class Bill
       offline_amount: offline_amount
     }
   end
+
 end

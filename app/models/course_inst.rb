@@ -246,7 +246,7 @@ class CourseInst
   end
 
   def effective_signup_num
-    self.course_participates.where(trade_state: "SUCCESS").length
+    self.course_participates.select { |e| e.is_effective } .length
   end
 
   def income_stat

@@ -28,7 +28,6 @@ class CourseParticipate
   field :trade_state_desc, type: String
 
   # refund related
-  field :refund_feedback, type: String, default: ""
   field :refund_result_code, type: String
   field :refund_err_code, type: String
   field :refund_err_code_des, type: String
@@ -47,23 +46,29 @@ class CourseParticipate
   field :trade_state, type: String
   field :trade_state_updated_at, type: Integer
   field :expired_at, type: Integer, default: -1
-  field :refund_requested, type: Boolean, default: false
-  field :refund_request_handled, type: Boolean, default: false
-  field :refund_approved, type: Boolean, default: false
   field :refund_finished, type: Boolean, default: false
   field :refund_status, type: String
 
   field :renew_status, type: Boolean
+  field :closed_at, type: Integer
+  field :close_result, type: Boolean
+  field :close_err_code, type: String
 
   belongs_to :course_inst
   belongs_to :course
+  belongs_to :center
   belongs_to :client, class_name: "User", inverse_of: :course_participates
+
+  has_many :bills
 
   scope :paid, ->{ where(trade_state: "SUCCESS") }
 
   def status_str
-    if self.pay_finished == true && self.trade_state != "SUCCESS"
+    if self.need_order_query
       self.orderquery()
+    end
+    if is_expired
+      return "已过期"
     end
     if pay_finished != true
       return "未付款"
@@ -91,15 +96,12 @@ class CourseParticipate
   # end
 
   def self.create_new(client, course_inst)
-    cp = self.create(order_id: Util.random_str(32),
-                     price_pay: course_inst.price_pay)
-    cp.course_inst = course_inst
-    cp.client = client
-    cp.course = course_inst.course
-    cp.save
-    expired_at = Time.now + 1.days
-    cp.update_attributes({expired_at: expired_at.to_i})
-    cp
+    cp = self.create({
+      course_inst_id: course_inst.id,
+      client_id: client.id,
+      center_id: course_inst.center.id,
+      prepay_id: ""
+      })
   end
 
   def create_order(remote_ip, openid)
@@ -121,17 +123,6 @@ class CourseParticipate
     end
   end
 
-  def renew
-    if (self.is_expired || self.price_pay != slef.course_inst.price_pay) && self.course_inst.price_pay > 0
-      self.update_attributes({
-        expired_at: (Time.now + 1.days).to_i,
-        order_id: Util.random_str(32),
-        price_pay: self.course_inst.price_pay,
-        prepay_id: ""
-        })
-    end
-  end
-
   # def renew
   #   if (self.is_expired || self.price_pay != self.course_inst.price_pay) && self.course_inst.price_pay > 0
   #     self.update_attributes(
@@ -143,6 +134,61 @@ class CourseParticipate
   #       })
   #   end
   # end
+
+  def self.notify_callback(content)
+    doc = Nokogiri::XML(content)
+    order_id = doc.search('out_trade_no').children[0].text
+
+
+    bill = Bill.where(order_id: order_id).first
+    if bill.blank?
+      logger.info "ERROR!!!!!!!!!!!!!!"
+      logger.info "order is finished, but corresponding bill cannot be found"
+      logger.info "ERROR!!!!!!!!!!!!!!"
+      return
+    end
+
+    cp = bill.course_participate
+    if cp.nil?
+      logger.info "ERROR!!!!!!!!!!!!!!"
+      logger.info "order is finished, but corresponding course_participate cannot be found"
+      logger.info "ERROR!!!!!!!!!!!!!!"
+      return
+    end
+    success = doc.search('return_code').children[0].text
+    logger.info "!!!!!!!!!!!!!!!!!!!"
+    logger.info success
+    if success != "SUCCESS"
+      return nil
+    else
+      result_code = doc.search('result_code').children[0].text
+      logger.info "!!!!!!!!!!!!!!!!!!!"
+      logger.info result_code
+      if result_code != "SUCCESS"
+        err_code = doc.search('err_code').children[0].text
+        err_code_des = doc.search('err_code_des').children[0].text
+        cp.update_attributes({
+          trade_state: result_code,
+          err_code: err_code,
+          err_code_des: err_code_des
+        })
+      else
+        wechat_transaction_id = doc.search('transaction_id').children[0].try(:text)
+        logger.info "!!!!!!!!!!!!!!!!!!!"
+        logger.info wechat_transaction_id
+        cp.update_attributes({
+          trade_state: "SUCCESS",
+          trade_state_desc: "",
+          trade_state_updated_at: Time.now.to_i,
+          wechat_transaction_id: wechat_transaction_id,
+          pay_finished: true,
+          expired_at: -1
+        })
+        # Bill.confirm_course_participate_item(cp)
+        bill.confirm_course_participate_item
+      end
+    end
+  end
 
   def orderquery
     if self.order_id.blank?
@@ -196,7 +242,7 @@ class CourseParticipate
     end
   end
 
-  def unifiedorder_interface(remote_ip, openid)
+  def unifiedorder_interface(remote_ip, openid, order_id)
     nonce_str = Util.random_str(32)
     data = {
       "appid" => APPID,
@@ -204,13 +250,13 @@ class CourseParticipate
       "nonce_str" => nonce_str,
       "body" => self.course_inst.course.name,
       "out_trade_no" => self.order_id,
-      "total_fee" => (self.price_pay * 100).round.to_s,
+      "total_fee" => Rails.env == "production" ? (self.price_pay * 100).round.to_s : 1.to_s,
       # "total_fee" => 1.to_s,
       "spbill_create_ip" => remote_ip,
       "notify_url" => NOTIFY_URL,
       "trade_type" => "JSAPI",
       "openid" => openid,
-      "time_expire" => Time.at(self.expired_at + 600).strftime("%Y%m%d%H%M%S")
+      "time_expire" => Time.at(self.expired_at).strftime("%Y%m%d%H%M%S")
     }
     signature = Util.sign(data, APIKEY)
     data["sign"] = signature
@@ -222,7 +268,8 @@ class CourseParticipate
 
     doc = Nokogiri::XML(response.body)
     prepay_id = doc.search('prepay_id').children[0].text
-    self.update_attributes({prepay_id: prepay_id})
+    self.update_attributes({prepay_id: prepay_id, order_id: order_id})
+    Bill.create_course_participate_item(self, prepay_id, order_id)
     # retval = {
     #   "appId" => APPID,
     #   "timeStamp" => Time.now.to_i.to_s,
@@ -282,80 +329,51 @@ class CourseParticipate
   end
 
   def is_expired
-    if self.price_pay == 0
+    if self.expired_at == -1
       return false
     end
-    if self.pay_finished == true && self.trade_state != "SUCCESS"
+    if self.need_order_query
       self.orderquery()
     end
-    self.trade_state != "SUCCESS" && self.expired_at < Time.now.to_i
+    self.trade_state != "SUCCESS" && self.trade_state != "USERPAYING" && self.expired_at < Time.now.to_i
   end
 
   def is_paying
     if self.price_pay == 0
       return false
     end
-    if self.pay_finished == true && self.trade_state != "SUCCESS"
+    # if self.pay_finished == true && self.trade_state != "SUCCESS"
+    if self.need_order_query
       self.orderquery()
     end
-    self.pay_finished == true && self.trade_state != "SUCCESS"
+    # self.pay_finished == true && self.trade_state != "SUCCESS"
+    self.trade_state == "USERPAYING"
   end
 
   def is_success
     if self.price_pay == 0
       return self.pay_finished
     end
-    if self.pay_finished == true && self.trade_state != "SUCCESS"
+    if need_order_query
       self.orderquery()
     end
     self.trade_state == "SUCCESS"
   end
 
   def refund_allowed
-    return self.is_success && self.course_inst.status == CourseInst::NOT_BEGIN && self.refund_requested == false
-  end
-
-  def request_refund
-    if self.refund_allowed
-      self.update_attributes({refund_requested: true})
-      nil
-    elsif self.refund_requested == true
-      ErrCode::REFUND_REQUESTED
-    else
-      ErrCode::REFUND_NOT_ALLOWED
-    end
+    return self.is_success && Date.parse(self.course_inst.start_date).prev_day.at_beginning_of_day.future? && self.refund_finished == false
   end
 
   def review
     self.course_inst.reviews.where(client_id: self.client.id).first
   end
 
-  def self.waiting_for_refund(center)
-    course_insts = center.course_insts
-    CourseParticipate.any_in(course_inst_id: course_insts.map { |e| e.id.to_s}).where(refund_requested: true, refund_request_handled: false).first
-  end
-
-  def reject_refund(feedback)
-    self.update_attributes({
-      refund_request_handled: true,
-      refund_approved: false,
-      refund_feedback: feedback
-    })
-    Message.create_refund_reject_message(self)
-    nil
-  end
-
-  def approve_refund(feedback)
-    self.refund
-    self.update_attributes({
-      refund_request_handled: true,
-      refund_approved: true,
-      refund_feedback: feedback
-    })
-    nil
-  end
-
   def refund
+    if !Date.parse(self.course_inst.start_date).prev_day.at_beginning_of_day.future?
+      # refund now allowed
+      return ErrCode::REFUND_TIME_FAIL
+    end
+
     if self.price_pay == 0
       self.update_attributes({
         refund_status: "SUCCESS",
@@ -374,9 +392,8 @@ class CourseParticipate
       "op_user_id" => MCH_ID,
       "out_trade_no" => self.order_id,
       "out_refund_no" => self.order_id,
-      "total_fee" => (self.price_pay * 100).round.to_s,
-      # "total_fee" => 1.to_s,
-      "refund_fee" => (self.price_pay * 100).round.to_s,
+      "total_fee" => Rails.env == "production" ? (self.price_pay * 100).round.to_s : 1.to_s,
+      "refund_fee" => Rails.env == "production" ? (self.price_pay * 100).round.to_s : 1.to_s,
       "nonce_str" => nonce_str,
       "sign_type" => "MD5"
     }
@@ -392,7 +409,7 @@ class CourseParticipate
     else
       refund_result_code = doc.search('result_code').children[0].text
       self.update_attributes({refund_result_code: refund_result_code})
-      if result_code != "SUCCESS"
+      if refund_result_code != "SUCCESS"
         err_code = doc.search('err_code').children[0].text
         err_code_des = doc.search('err_code_des').children[0].text
         self.update_attributes({
@@ -411,6 +428,7 @@ class CourseParticipate
           wechat_refund_fee: wechat_refund_fee,
           refund_finished: true
         })
+        self.clear_pay
         Bill.create_course_refund_item(self)
         retval = { success: true, wechat_refund_id: wechat_refund_id, wechat_refund_channel: wechat_refund_channel }
         return retval
@@ -444,7 +462,7 @@ class CourseParticipate
     else
       refund_result_code = doc.search('result_code').children[0].text
       self.update_attributes({refund_result_code: refund_result_code})
-      if result_code != "SUCCESS"
+      if refund_result_code != "SUCCESS"
         err_code = doc.search('err_code').children[0].text
         err_code_des = doc.search('err_code_des').children[0].text
         self.update_attributes({
@@ -459,7 +477,6 @@ class CourseParticipate
         retval = { success: true, refund_status: refund_status }
         if refund_status == "SUCCESS"
           Bill.confirm_course_refund_item(self)
-          self.clear_pay
         end
         return retval
       end
@@ -470,14 +487,8 @@ class CourseParticipate
     if self.refund_finished == true && !%w[SUCCESS, FAIL, CHANGE].include?(self.refund_status)
       self.refundquery
     end
-    if self.refund_requested == false
+    if self.refund_finished == false
       ""
-    elsif self.refund_request_handled == false
-      "已申请退款"
-    elsif self.refund_approved == false
-      "退款申请被拒绝"
-    elsif self.refund_finished == false
-      "退款失败"
     elsif self.refund_status == "PROCESSING"
       "退款处理中"
     elsif self.refund_status == 'FAIL' || self.refund_status == 'CHANGE'
@@ -490,11 +501,7 @@ class CourseParticipate
   end
 
   def clear_refund
-    return if self.refund_requested = false
     self.update_attributes({
-      refund_requested: false,
-      refund_request_handled: false,
-      refund_approved: false,
       refund_finished: false,
       refund_status: ""
     })
