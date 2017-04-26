@@ -21,6 +21,7 @@ class UserMobile::SettingsController < UserMobile::ApplicationController
       total_amount = @current_user.deposit.amount
       wishing = "退还绘本押金"
       retval = Weixin.red_packet(user_id, total_amount, wishing, @open_id)
+      redirect_to action: :refund_notice and return
       # if retval == "ok"
       #   @current_user.deposit.update_attributes({pay_finished: false, trade_state: ""})
       # end
@@ -161,5 +162,8 @@ class UserMobile::SettingsController < UserMobile::ApplicationController
     redirect_to params[:state].blank? ? "/user_mobile/feeds" : params[:state]
   end
 
+  def refund_notice
+    
+  end
 
 end
