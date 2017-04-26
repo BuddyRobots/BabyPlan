@@ -36,20 +36,19 @@
               %img.location{src: asset_path("web/location.png")}
               %span.center= e.book.center.name
 
-    - if @current_user.mobile == '13488881477'
-      - if @pay_info.present?
-        %a.btn.click-btn#confirm-pay{href: "javascript:void(0);"}= "押金#{BorrowSetting.deposit}元，确认支付"
-      - elsif @current_user.deposit.try(:is_paying)
-        %button.btn.unclick-btn{type: "button"} 支付进行中
-      - elsif @current_user.deposit_paid == false
-        %a.btn.click-btn#deposit-pay{href: "https://open.weixin.qq.com/connect/oauth2/authorize?appid=#{Rails.configuration.wechat_pay_app_id}&redirect_uri=#{CGI::escape('http://' + Rails.configuration.domain + '/user_mobile/settings/book/')}&response_type=code&scope=snsapi_base&state=#{true}#wechat_redirect", :type => "button"} 缴纳押金
-      - elsif @pending_packet.present?
-        - if @pending_packet.status == "SENDING"
-          %button.btn.deposit_status{type: "button", disabled: "disabled"} 押金退还中
-        - else
-          %button.btn.deposit_status{type: "button", disabled: "disabled"} 请接收押金退还红包
-      - elsif @current_user.allow_refund_deposit
-        %a.btn#deposit{href: "https://open.weixin.qq.com/connect/oauth2/authorize?appid=#{Rails.configuration.wechat_pay_app_id}&redirect_uri=#{CGI::escape('http://' + Rails.configuration.domain + '/user_mobile/settings/refund_deposit/')}&response_type=code&scope=snsapi_base&state=#{true}#wechat_redirect", :type => "button"} 退还押金
+    - if @pay_info.present?
+      %a.btn.click-btn#confirm-pay{href: "javascript:void(0);"}= "押金#{BorrowSetting.deposit}元，确认支付"
+    - elsif @current_user.deposit.try(:is_paying)
+      %button.btn.unclick-btn{type: "button"} 支付进行中
+    - elsif @current_user.deposit_paid == false
+      %a.btn.click-btn#deposit-pay{href: "https://open.weixin.qq.com/connect/oauth2/authorize?appid=#{Rails.configuration.wechat_pay_app_id}&redirect_uri=#{CGI::escape('http://' + Rails.configuration.domain + '/user_mobile/settings/book/')}&response_type=code&scope=snsapi_base&state=#{true}#wechat_redirect", :type => "button"} 缴纳押金
+    - elsif @pending_packet.present?
+      - if @pending_packet.status == "SENDING"
+        %button.btn.deposit_status{type: "button", disabled: "disabled"} 押金退还中
+      - else
+        %button.btn.deposit_status{type: "button", disabled: "disabled"} 请接收押金退还红包
+    - elsif @current_user.allow_refund_deposit
+      %a.btn#deposit{href: "https://open.weixin.qq.com/connect/oauth2/authorize?appid=#{Rails.configuration.wechat_pay_app_id}&redirect_uri=#{CGI::escape('http://' + Rails.configuration.domain + '/user_mobile/settings/refund_deposit/')}&response_type=code&scope=snsapi_base&state=#{true}#wechat_redirect", :type => "button"} 退还押金
 
 
     / %button.btn#redeposit{type: "button"} 重新缴纳押金
