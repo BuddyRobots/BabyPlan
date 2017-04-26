@@ -289,7 +289,7 @@ class Weixin
     doc = Nokogiri::XML(response.body)
     success = doc.search('result_code').children[0].text
     send_listid = doc.search('send_listid').children[0].text
-    user.deposit.red_packets.create({amount: total_amount, mch_billno: mch_billno, send_listid: send_listid, status: status, result_code: success})
+    user.deposit.red_packets.create({amount: total_amount, mch_billno: mch_billno, send_listid: send_listid, result_code: success})
 
     if success == "SUCCESS"
       return "ok"
