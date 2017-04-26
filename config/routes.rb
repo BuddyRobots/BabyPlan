@@ -318,6 +318,7 @@ Rails.application.routes.draw do
         get :get_openid
         post :refund_deposit
         get :refund_deposit
+        get :refund_notice
       end
     end
   end

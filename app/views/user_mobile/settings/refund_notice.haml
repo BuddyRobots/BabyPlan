@@ -1,0 +1,18 @@
+- content_for :app_head do
+  = javascript_include_tag "pages/user_mobile/settings/refund_notice-bundle"
+  = stylesheet_link_tag "pages/user_mobile/settings/refund_notice-bundle", :media => "all"
+
+- content_for :app_content do
+  .content-area
+    .desc-div
+      .success-div
+        .item
+          %img.icon{src: asset_path("web/finish.png")}
+          %span.success 退款已完成
+        .item
+          %span 您缴纳的绘本押金：
+          %span= @current_user.deposit.amount + "元"
+        .item
+          %span 已通过微信红包返还，请返回微信首页查看并领取
+    .btn-div
+      %a.btn#desc{href: book_user_mobile_settings_path} 查看详情
