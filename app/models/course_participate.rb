@@ -10,7 +10,7 @@ class CourseParticipate
   SECRET = "68b29adfa28e31c6107d7a627373e74f"
   MCH_ID = "1445887202"
   APIKEY = "bBdnzYarb9DQntl42QWxtC502K6r4l1G"
-  NOTIFY_URL = "http://babyplan.bjfpa.org.cn/user_mobile/courses/notify"
+  NOTIFY_URL = "http://maker.buddyrobots.com/user_mobile/courses/notify"
 
   include Mongoid::Document
   include Mongoid::Timestamps
@@ -248,7 +248,7 @@ class CourseParticipate
       "mch_id" => MCH_ID,
       "nonce_str" => nonce_str,
       "body" => self.course_inst.course.name,
-      "out_trade_no" => self.order_id,
+      "out_trade_no" => order_id,
       "total_fee" => Rails.env == "production" ? (self.price_pay * 100).round.to_s : 1.to_s,
       # "total_fee" => 1.to_s,
       "spbill_create_ip" => remote_ip,
@@ -279,6 +279,16 @@ class CourseParticipate
     # signature = Util.sign(retval, APIKEY)
     # retval["sign"] = signature
     # return retval
+  end
+
+  def remain_time
+    n = (self.expired_at - Time.now.to_i) / 60
+    if n < 1
+      remain_time = "订单即将过期，请尽快"
+    else
+      remain_time = "订单还有" + n.to_s + "分钟过期，请尽快"
+    end
+    remain_time + (self.price_pay == 0 ? "确认" : "支付")
   end
 
   def get_pay_info
