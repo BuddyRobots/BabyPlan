@@ -156,7 +156,7 @@
                               .comments
                                 %span.comments-title 评价：
                                 %span.comments-content= p.review.present? ? p.review.content : "暂未评价"
-                = render "staff/partials/auto_paginate", locals: { instance: @participates, url: "/staff/courses/" + @course_inst.id.to_s + "?profile=participates&", page: 'participates_page'}
+                = render "staff/partials/auto_paginate", locals: { instance: @participates, url: "/staff/courses/" + @course_inst.id.to_s + "?profile=participates&", page: 'participate_page'}
                       
           #tab3.tab-pane
             .desc-div
@@ -240,6 +240,6 @@
                         %p.reviews= r.content
                         .time-div.font-color4
                           %span.review-date= r.created_at.strftime("%Y-%m-%d %H:%M")
-                = render "staff/partials/auto_paginate", locals: { instance: @reviews, url: "/staff/courses/" + @course_inst.id.to_s + "?profile=reviews&", page: 'reviews_page'}       
+                = render "staff/partials/auto_paginate", locals: { instance: @reviews, url: "/staff/courses/" + @course_inst.id.to_s + "?profile=reviews&", page: 'review_page'}       
 
 
