@@ -115,46 +115,48 @@
                     %button.btn.week-btn#week-btn{:type => "button"} 每周重复
           #tab2.tab-pane
             .desc-div
-              .undiscover
-                %img.undiscover-icon{src: asset_path("undiscover.png")}
-              .table-box.border-btm
-                %table.table.table-hover.table-height
-                  %thead.th-bg.font-color2
-                    %tr
-                      %th 学生姓名
-                      %th 手机号
-                      %th 家庭住址
-                      %th 报名状态
-                      %th 课&nbsp次
-                  %tbody.font-color3
-                    - @participates[:data].each do |p|
+              - if @participates[:data].blank?
+                .undiscover
+                  %img.undiscover-icon{src: asset_path("undiscover.png")}
+              - else
+                .table-box.border-btm
+                  %table.table.table-hover.table-height
+                    %thead.th-bg.font-color2
                       %tr
-                        %td= p.client.name
-                        %td= p.client.mobile
-                        %td= p.client.address
-                        %td= p.status_str
-                        %td
-                          - if p.is_success
-                            %a.details.font-color-brown{href: "javascript:void(0);"} 
-                              上课情况
-                              %span.triangle-down
-                      - if p.is_success
-                        %tr.status
-                          %td{colspan: "5"}
-                            .course-status
-                              %span.item-status 上课状态：
-                              - p.course_inst.length.times do |i|
-                                - if p.signin_info[i].present?
-                                  %span.join-square
-                                - else
-                                  - if p.course_inst.is_class_pass?(i)
-                                    %span.miss-square
+                        %th 学生姓名
+                        %th 手机号
+                        %th 家庭住址
+                        %th 报名状态
+                        %th 课&nbsp次
+                    %tbody.font-color3
+                      - @participates[:data].each do |p|
+                        %tr
+                          %td= p.client.name
+                          %td= p.client.mobile
+                          %td= p.client.address
+                          %td= p.status_str
+                          %td
+                            - if p.is_success
+                              %a.details.font-color-brown{href: "javascript:void(0);"} 
+                                上课情况
+                                %span.triangle-down
+                        - if p.is_success
+                          %tr.status
+                            %td{colspan: "5"}
+                              .course-status
+                                %span.item-status 上课状态：
+                                - p.course_inst.length.times do |i|
+                                  - if p.signin_info[i].present?
+                                    %span.join-square
                                   - else
-                                    %span.square
-                            .comments
-                              %span.comments-title 评价：
-                              %span.comments-content= p.review.present? ? p.review.content : "暂未评价"
-              = render "staff/partials/auto_paginate", locals: { instance: @participates, url: "/staff/courses/" + @course_inst.id.to_s + "?profile=participates", page: 'participates_page'}
+                                    - if p.course_inst.is_class_pass?(i)
+                                      %span.miss-square
+                                    - else
+                                      %span.square
+                              .comments
+                                %span.comments-title 评价：
+                                %span.comments-content= p.review.present? ? p.review.content : "暂未评价"
+                = render "staff/partials/auto_paginate", locals: { instance: @participates, url: "/staff/courses/" + @course_inst.id.to_s + "?profile=participates", page: 'participates_page'}
                       
           #tab3.tab-pane
             .desc-div
