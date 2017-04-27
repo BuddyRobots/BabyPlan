@@ -36,6 +36,7 @@ module ErrCode
   DEPOSIT_NOT_PAID = -33
   NO_BOOKS_IN_TRANSFER = -34
   OTHER_TYPE_USER_EXIST = -35
+  REFUND_TIME_FAIL = - 36
 
   def self.ret_false(code)
     msg = self.message(code)
@@ -116,6 +117,8 @@ module ErrCode
       "迁移书目为空"
     when OTHER_TYPE_USER_EXIST
       "已注册为其他类型用户"
+    when REFUND_TIME_FAIL
+      "该课程距开课不足一天时间，已经不能退款！"
     else
       nil
     end

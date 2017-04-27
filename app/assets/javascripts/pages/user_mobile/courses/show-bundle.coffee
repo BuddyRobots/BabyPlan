@@ -65,12 +65,12 @@ $ ->
       { },
       (data) ->
         if data.success
-          $.mobile_page_notification("申请已提交，工作人员将在5个工作日内审核")
-          $("#confirmModal").modal('hide')
-        else
-          if data.code == REFUND_REQUESTED
-            $.mobile_page_notification("退款申请已提交")
-          else
-            $.mobile_page_notification("该课程不允许退款")
+          $.mobile_page_notification("退款成功，正在跳转")
           $("#refundModal").modal('hide')
+          setTimeout(->
+            location.href="/user_mobile/courses/" + window.course_inst_id
+          , 2000);
+        else
+          if data.code == REFUND_TIME_FAIL
+            $.mobile_page_notification("该课程距开课不足24小时，已经不能退款！")
       )

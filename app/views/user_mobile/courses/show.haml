@@ -89,7 +89,7 @@
           %a.btn.btn-style.bg1.f16.font-color1{href: "/user_mobile/courses/new/?state=#{@course_inst.id.to_s}"} 已过期,重新报名
     - elsif @course_participate.is_success
       - if Time.parse(@course_inst.start_date).future?
-        - if (Time.parse(@course_inst.start_date).beginning_of_day - 3.day).future?
+        - if (Time.parse(@course_inst.start_date).beginning_of_day - 1.day).future?
           %a.refund.tc.font-color8.f14{href: "#"} 申请退款
         %button.btn.btn-style.bg2.f16.font-color1{type: "button"} 已报名
       - if Time.parse(@course_inst.start_date).past? && Time.parse(@course_inst.end_date).future?
