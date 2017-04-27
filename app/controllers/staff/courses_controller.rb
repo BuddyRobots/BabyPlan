@@ -156,7 +156,7 @@ class Staff::CoursesController < Staff::ApplicationController
   def set_available
     @course_inst = CourseInst.where(id: params[:id]).first
     retval = ErrCode::COURSE_INST_NOT_EXIST if @course_inst.blank?
-    if @course_inst.course_participates.present?
+    if @course_inst.course_participates.present? && Time.parse(@course_inst.start_date).future?
       retval = ErrCode::COURSE_PARTICIPATE_EXIST
     else
       retval = @course_inst.set_available(params[:available])
