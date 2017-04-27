@@ -38,7 +38,7 @@
         %span.f12-op56.font-color2= @course.address
       .map-div
         #map-container
-    %p.f16.font-color6.tc.mt120= @course.price.tos + "元"
+    %p.f16.font-color6.tc.mt120= @course.price.to_s + "元"
     - if @course.price > 0
       %button.btn.pay-btn-style.bg4.font-color1.f16#wechat-pay{href: "javascript:void(0);"} 微信支付
     - else
