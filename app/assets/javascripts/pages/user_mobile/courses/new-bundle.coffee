@@ -1,4 +1,5 @@
 $ ->
+  # QQ map set
   marker = null
   map = null
   geocoder = null
@@ -12,19 +13,20 @@ $ ->
     origin,
     anchor
     )
-  
+
   init = ->
     center = new qq.maps.LatLng(window.lat, window.lng)
     map = new qq.maps.Map(document.getElementById("map-container"), {
-    center: center,
+      center: center,
       zoom: 12
       })
 
     marker = new qq.maps.Marker({
-    # 设置Marker的位置坐标
+      # 设置Marker的位置坐标
       position: center,
       map: map
       })
+    
     marker.setIcon(icon)
     marker.setTitle("test")
     marker.setVisible(true)
