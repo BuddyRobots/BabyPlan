@@ -160,7 +160,7 @@
                       
           #tab3.tab-pane
             .desc-div
-              - if !@course_inst.course_participates.where(trade_state: "SUCCESS").blank? 
+              - if @course_inst.course_participates.where(trade_state: "SUCCESS").blank? 
                 .undiscover
                   %img.undiscover-icon{src: asset_path("undiscover.png")}
               - else
