@@ -151,7 +151,7 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
   end
 
   def pay_success
-    # @course = CourseInst.where(id: params[:id]).first
+    @course = CourseInst.where(id: params[:id]).first
   end
 
   def request_refund

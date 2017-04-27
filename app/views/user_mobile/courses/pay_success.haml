@@ -8,8 +8,8 @@
     %p.f16-op87.mb24 支付完成!
     .desc-div.mb16
       %span.f14-op54 课程:
-      %span.f14-op54 少儿计算机知识学习
-    %p.f14-op54.mb60 将于2017/02/25 14:00准时开课，界时请提前到达～
-    %a.btn.btn-style.f16.bg1.font-color1#desc{type: "button"} 查看详情
+      %span.f14-op54= @course.name || @course.course.name
+    %p.f14-op54.mb60= "将于#{@course.start_time}准时开课，界时请提前到达～"
+    %a.btn.btn-style.f16.bg1.font-color1#desc{href: "/user_mobile/course/" + @course.id.to_s} 查看详情
 
 
