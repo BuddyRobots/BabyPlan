@@ -227,21 +227,18 @@ class CourseParticipate
         if trade_state == "SUCCESS"
           trade_state_desc = doc.search('trade_state').children[0].text
           wechat_transaction_id = doc.search('transaction_id').children[0].text
-          self.update_attributes({
-            trade_state: trade_state,
-            trade_state_updated_at: Time.now.to_i,
-            trade_state_desc: trade_state_desc,
-            wechat_transaction_id: wechat_transaction_id,
-            pay_finished: true,
-            expired_at: -1
-          })
           bill = Bill.where(order_id: self.order_id).first
           bill.confirm_course_participate_item
-          retval = { success: true, trade_state: trade_state, trade_state_desc: trade_state_desc }
-        elsif
-          out_trade_no = doc.search('out_trade_no').children[0].text
-          retval = {success: false, trade_state: trade_state, out_trade_no: out_trade_no}
         end
+        self.update_attributes({
+          trade_state: trade_state,
+          trade_state_updated_at: Time.now.to_i,
+          trade_state_desc: trade_state_desc,
+          wechat_transaction_id: wechat_transaction_id,
+          pay_finished: trade_state == "SUCCESS",
+          expired_at: -1
+        })
+        retval = { success: true, trade_state: trade_state, trade_state_desc: trade_state_desc }
         return retval
       end
     end
