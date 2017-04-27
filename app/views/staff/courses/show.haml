@@ -143,14 +143,14 @@
                           %td{colspan: "5"}
                             .course-status
                               %span.item-status 上课状态：
-                                - p.course_inst.length.times do |i|
-                                  - if p.signin_info[i].present?
-                                    %span.join-square
+                              - p.course_inst.length.times do |i|
+                                - if p.signin_info[i].present?
+                                  %span.join-square
+                                - else
+                                  - if p.course_inst.is_class_pass?(i)
+                                    %span.miss-square
                                   - else
-                                    - if p.course_inst.is_class_pass?(i)
-                                      %span.miss-square
-                                    - else
-                                      %span.square
+                                    %span.square
                             .comments
                               %span.comments-title 评价：
                               %span.comments-content= p.review.present? ? p.review.content : "暂未评价"
