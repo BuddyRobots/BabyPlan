@@ -251,14 +251,10 @@ class CourseInst
 
   def income_stat
     stat = {
-      all: 0,
-      personal: 0,
-      allowance: 0
+      all: 0
     }
     self.course_participates.paid.each do |e|
-      stat[:personal] += (e.price_pay || self.price_pay)
-      stat[:allowance] += (self.price - self.price_pay)
-      stat[:all] += (e.price_pay || self.price_pay + self.price - self.price_pay)
+      stat[:all] += e.price_pay
     end
     stat
   end
