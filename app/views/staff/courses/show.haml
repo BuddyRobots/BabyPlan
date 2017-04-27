@@ -127,43 +127,35 @@
                       %th 报名状态
                       %th 课&nbsp次
                   %tbody.font-color3
-                    %tr
-                      %td 王某某
-                      %td 15823241111
-                      %td 北京市东三环南路2号瑞赛商务楼
-                      %td 已付款
-                      %td
-                        %a.details.font-color-brown{href: "javascript:void(0);"} 
-                          上课情况
-                          %span.triangle-down
-                    %tr.status
-                      %td{colspan: "5"}
-                        .course-status
-                          %span.item-status 上课状态：
-                          %span.join-square
-                          %span.miss-square
-                          %span.square
-                        .comments
-                          %span.comments-title 家长评价：
-                          %span.comments-content 暂未评论
-                    %tr
-                      %td 王某某
-                      %td 15823241111
-                      %td 北京市东三环南路2号瑞赛商务楼
-                      %td 未付款
-                      %td
-                        %span.font-color4 上课情况
-                        %span.unpay-triangle-down
-              .select-page
-                %span.totalitems 共2页，总计18条
-                %span.choice-page
-                  %ul.pagination.pagination-sm
-                    %li
-                      %a{:href => "#"} «
-                    %li
-                      %a{:href => "#"} 1
-                    %li
-                      %a{:href => "#"} »    
+                    - @participates[:data].each do |p|
+                      %tr
+                        %td= p.client.name
+                        %td= p.client.mobile
+                        %td= p.client.address
+                        %td= p.status_str
+                        %td
+                          - if p.is_success
+                            %a.details.font-color-brown{href: "javascript:void(0);"} 
+                              上课情况
+                              %span.triangle-down
+                      - if p.is_success
+                        %tr.status
+                          %td{colspan: "5"}
+                            .course-status
+                              %span.item-status 上课状态：
+                                - p.course_inst.length.times do |i|
+                                  - if p.signin_info[i].present?
+                                    %span.join-square
+                                  - else
+                                    - if p.course_inst.is_class_pass?(i)
+                                      %span.miss-square
+                                    - else
+                                      %span.square
+                            .comments
+                              %span.comments-title 评价：
+                              %span.comments-content= p.review.present? ? p.review.content : "暂未评价"
+              = render "staff/partials/auto_paginate", locals: { instance: @participates, url: "/staff/courses/" + @course_inst.id.to_s + "?profile=participates", page: 'participates_page'}
+                      
           #tab3.tab-pane
             .desc-div
               .undiscover
