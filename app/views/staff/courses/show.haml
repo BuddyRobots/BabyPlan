@@ -160,7 +160,7 @@
                       
           #tab3.tab-pane
             .desc-div
-              - if [:data].blank?
+              - if !@course_inst.course_participates.where(trade_state: "SUCCESS").blank? 
                 .undiscover
                   %img.undiscover-icon{src: asset_path("undiscover.png")}
               - else
@@ -169,13 +169,7 @@
                     .class-choice
                       .form-group.choice-lesson
                         %label.input-caption 课次选择：
-                        %select.form-control.lesson-input.font-color3
-                          %option 第一次
-                          %option 第一次
-                          %option 第一次
-                          %option 第一次
-                          %option 第一次
-                        / = select_tag "class_num", options_for_select((1..@course_inst.length).to_a.map { |e| ["第" + e.to_s + "次课", e-1] }), class: 'form-control'
+                        = select_tag "class_num", options_for_select((1..@course_inst.length).to_a.map { |e| ["第" + e.to_s + "次课", e-1] }), class: 'form-control lesson-input font-color3'
                     .method
                       %p.caption 签到方式一：扫描签到
                       #qr-code
