@@ -54,7 +54,7 @@
   margin-bottom: 0.24rem;
 }
 .mt120 {
-  margin-top: 1.2rem;
+  margin-top: 0.5rem;
 }
 .date-icon, .location-icon {
   width: 0.32rem;
@@ -63,16 +63,27 @@
 }
 .map-div {
   #map-container {
-    height: 4.2rem;
+    height: 5rem;
     width: 100%;
   }
 }
 .pay-btn-style {
   width: 6.72rem;
-  margin: 0.36rem;
+  margin: 0.24rem;
   height: 0.96rem;
   border-radius: 2px;
   border: 0;
   outline: none;
-  padding: 0;
+}
+.pay-btn-style:link {
+  color: #fff;
+}
+.pay-btn-style:visited {
+  color: #fff;
+}
+.pay-btn-style:hover {
+  color: #fff;
+}
+.pay-btn-style:active {
+  color: #fff;
 }
