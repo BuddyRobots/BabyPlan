@@ -5,6 +5,8 @@
   :javascript
     window.course_participate_id="#{@course_participate.id.to_s}"
     window.course_id="#{@course.id.to_s}"
+    window.lat = "#{@course.center.lat}"
+    window.lng = "#{@course.center.lng}"
 
 - content_for :app_content do
   - if @course.price > 0
@@ -36,9 +38,9 @@
         %span.f12-op56.font-color2= @course.address
       .map-div
         #map-container
-    %p.f14.font-color6.tc.mt120= @course.price
+    %p.f16.font-color6.tc.mt120= @course.price
     - if @course.price > 0
-      %a.btn.bg4.font-color1.f16#wechat-pay{href: "javascript:void(0);"} 微信支付
+      %a.btn.pay-btn-style.bg4.font-color1.f16#wechat-pay{href: "javascript:void(0);"} 微信支付
     - else
-      %a.btn.bg4.font-color1.f16#free-course-signup{href: "javascript:void(0);"} 确认参加
+      %a.btn.pay-btn-style.bg4.font-color1.f16#free-course-signup{href: "javascript:void(0);"} 确认参加
 
