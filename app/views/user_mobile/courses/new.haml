@@ -2,48 +2,23 @@
   = javascript_include_tag "http://map.qq.com/api/js?v=2.exp"
   = javascript_include_tag "pages/user_mobile/courses/new-bundle"
   = stylesheet_link_tag "pages/user_mobile/courses/new-bundle", :media => "all"
-  / :javascript
-  /   window.course_participate_id="#{@course_participate.id.to_s}"
-  /   window.course_id="#{@course.id.to_s}"
-  /   window.lat = "#{@course.center.lat}"
-  /   window.lng = "#{@course.center.lng}"
+  :javascript
+    window.course_participate_id="#{@course_participate.id.to_s}"
+    window.course_id="#{@course.id.to_s}"
+    window.lat = "#{@course.center.lat}"
+    window.lng = "#{@course.center.lng}"
 
 - content_for :app_content do
-  / - if @course.price > 0
-  /   .hide
-  /     %span#appId= @pay_info["appId"]
-  /     %span#timeStamp= @pay_info["timeStamp"]
-  /     %span#nonceStr= @pay_info["nonceStr"]
-  /     %span#package= @pay_info["package"]
-  /     %span#signType= @pay_info["signType"]
-  /     %span#paySign= @pay_info["sign"]
-  /   .hide
-  /     %span#remainTime= @course_participate.remain_time
-  / .content-div
-  /   .head-div.bg1
-  /     %a.back-link#back{href: list_user_mobile_courses_path}
-  /       %img.back{src: asset_path("wap/back.png")}
-  /     %span.title.f16.font-color1.fb 订单确认
-  /   .item-div
-  /     .item
-  /       .icon-div
-  /         %img.icon{src: @course.photo.present? ? @course.photo.path : asset_path("wap/example.png")}
-  /       .word-div
-  /         %p.f16-op87.font-color2.course-name= @course.name
-  /     .desc-div.mt
-  /       %img.date-icon{src: asset_path("wap/date.png")}
-  /       %span.f12-op56.font-color2= @course.date
-  /     .desc-div.mb
-  /       %img.location-icon{src: asset_path("wap/location.png")}
-  /       %span.f12-op56.font-color2= @course.address
-  /     .map-div
-  /       #map-container
-  /   %p.f16.font-color6.tc.mt120= @course.price
-  /   - if @course.price > 0
-  /     %button.btn.pay-btn-style.bg4.font-color1.f16#wechat-pay{href: "javascript:void(0);"} 微信支付
-  /   - else
-  /     %button.btn.pay-btn-style.bg4.font-color1.f16#free-course-signup{href: "javascript:void(0);"} 确认参加
-
+  - if @course.price > 0
+    .hide
+      %span#appId= @pay_info["appId"]
+      %span#timeStamp= @pay_info["timeStamp"]
+      %span#nonceStr= @pay_info["nonceStr"]
+      %span#package= @pay_info["package"]
+      %span#signType= @pay_info["signType"]
+      %span#paySign= @pay_info["sign"]
+    .hide
+      %span#remainTime= @course_participate.remain_time
   .content-div
     .head-div.bg1
       %a.back-link#back{href: list_user_mobile_courses_path}
@@ -52,20 +27,21 @@
     .item-div
       .item
         .icon-div
-          %img.icon{src: asset_path("wap/example.png")}
+          %img.icon{src: @course.photo.present? ? @course.photo.path : asset_path("wap/example.png")}
         .word-div
-          %p.f16-op87.font-color2.course-nam
+          %p.f16-op87.font-color2.course-name= @course.name
       .desc-div.mt
         %img.date-icon{src: asset_path("wap/date.png")}
-        %span.f12-op56.font-color2
+        %span.f12-op56.font-color2= @course.date
       .desc-div.mb
         %img.location-icon{src: asset_path("wap/location.png")}
-        %span.f12-op56.font-color2
+        %span.f12-op56.font-color2= @course.address
       .map-div
         #map-container
-    %p.f16.font-color6.tc.mt120 200
-    / - if @course.price > 0
-    %button.btn.pay-btn-style.bg4.font-color1.f16#wechat-pay{href: "javascript:void(0);"} 微信支付
-    / - else
-    /   %a.btn.pay-btn-style.bg4.font-color1.f16#free-course-signup{href: "javascript:void(0);"} 确认参加
+    %p.f16.font-color6.tc.mt120= @course.price.tos + "元"
+    - if @course.price > 0
+      %button.btn.pay-btn-style.bg4.font-color1.f16#wechat-pay{href: "javascript:void(0);"} 微信支付
+    - else
+      %button.btn.pay-btn-style.bg4.font-color1.f16#free-course-signup{href: "javascript:void(0);"} 确认参加
+
 

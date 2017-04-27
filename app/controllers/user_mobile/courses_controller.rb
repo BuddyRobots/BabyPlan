@@ -57,47 +57,43 @@ class UserMobile::CoursesController < UserMobile::ApplicationController
   end
 
   def new
-    
+    @course = CourseInst.where(id: params[:state]).first
+    @course_participate = @current_user.course_participates.where(course_inst_id: @course.id).first || CourseParticipate.create_new(current_user, @course)
+
+    # refresh order status
+    if @course_participate.present? && @course_participate.renew_status
+      @course_participate.orderquery
+    end
+
+    if @course_participate.prepay_id.present?
+      if @course_participate.pay_finished == true || @course_participate.trade_state == "SUCCESS"
+        # has pay
+        redirect_to action: :show, id: params[:state] and return
+      end
+      if @course_participate.is_expired == false
+        @pay_info = @course_participate.get_pay_info
+        return
+      end
+      if params[:direct_pay].to_s == "true" && @course_participate.is_expired == true
+        # expired, need to re-sign-up
+        redirect_to action: :show, id: params[:state] and return
+      end
+    end
+
+    if @course.capacity <= @course.effective_signup_num
+      redirect_to action: :show, id: params[:state] and return
+    end
+
+    @open_id = params[:code].present? ? Weixin.get_oauth_open_id(params[:code]) : ""
+    if @open_id.nil?
+      # need to re-get the openid
+      redirect_to action: :show, id: params[:state] and return
+    end
+
+    @course_participate.create_order(@remote_ip, @open_id)
+    @pay_info = @course_participate.get_pay_info
+
   end
-
-  #  def new
-  #   @course = CourseInst.where(id: params[:state]).first
-  #   @course_participate = @current_user.course_participates.where(course_inst_id: @course.id).first || CourseParticipate.create_new(current_user, @course)
-
-  #   # refresh order status
-  #   if @course_participate.present? && @course_participate.renew_status
-  #     @course_participate.orderquery
-  #   end
-
-  #   if @course_participate.prepay_id.present?
-  #     if @course_participate.pay_finished == true || @course_participate.trade_state == "SUCCESS"
-  #       # has pay
-  #       redirect_to action: :show, id: params[:state] and return
-  #     end
-  #     if @course_participate.is_expired == false
-  #       @pay_info = @course_participate.get_pay_info
-  #       return
-  #     end
-  #     if params[:direct_pay].to_s == "true" && @course_participate.is_expired == true
-  #       # expired, need to re-sign-up
-  #       redirect_to action: :show, id: params[:state] and return
-  #     end
-  #   end
-
-  #   if @course.capacity <= @course.effective_signup_num
-  #     redirect_to action: :show, id: params[:state] and return
-  #   end
-
-  #   @open_id = params[:code].present? ? Weixin.get_oauth_open_id(params[:code]) : ""
-  #   if @open_id.nil?
-  #     # need to re-get the openid
-  #     redirect_to action: :show, id: params[:state] and return
-  #   end
-
-  #   @course_participate.create_order(@remote_ip, @open_id)
-  #   @pay_info = @course_participate.get_pay_info
-
-  # end
 
   def notify
     # get out_trade_no, which is the order_id in CourseParticipate
