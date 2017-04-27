@@ -223,19 +223,22 @@ class CourseParticipate
         retval = { success: false, err_code: err_code, err_code_des: err_code_des }
         return retval
       else
-        trade_state = doc.search('trade_state').children[0].text
-        trade_state_desc = doc.search('trade_state').children[0].text
-        wechat_transaction_id = doc.search('transaction_id').children[0].text
-        self.update_attributes({
-          trade_state: trade_state,
-          trade_state_updated_at: Time.now.to_i,
-          trade_state_desc: trade_state_desc,
-          wechat_transaction_id: wechat_transaction_id
-        })
         if trade_state == "SUCCESS"
+          trade_state = doc.search('trade_state').children[0].text
+          trade_state_desc = doc.search('trade_state').children[0].text
+          wechat_transaction_id = doc.search('transaction_id').children[0].text
+          self.update_attributes({
+            trade_state: trade_state,
+            trade_state_updated_at: Time.now.to_i,
+            trade_state_desc: trade_state_desc,
+            wechat_transaction_id: wechat_transaction_id
+          })
           Bill.confirm_course_participate_item(self)
+          retval = { success: true, trade_state: trade_state, trade_state_desc: trade_state_desc }
+        elsif
+          out_trade_no = doc.search('out_trade_no').children[0].text
+          retval = {success: false, trade_state: trade_state, out_trade_no: out_trade_no}
         end
-        retval = { success: true, trade_state: trade_state, trade_state_desc: trade_state_desc }
         return retval
       end
     end
