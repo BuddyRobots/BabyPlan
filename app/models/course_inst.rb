@@ -75,7 +75,8 @@ class CourseInst
       code: self.code,
       end_date: self.end_date,
       status_str: self.status_str,
-      status_class: self.status_class
+      status_class: self.status_class,
+      photo: self.photo
     }
   end
 
