@@ -66,6 +66,9 @@ $ ->
             link.addClass("font-color-red")
             link.removeClass("font-color-green")
             link.text("下架")
+        else
+          if data.code == COURSE_PARTICIPATE_EXIST
+            $.page_notification("该课程有人报名，不能下架")
       )
     return false
 

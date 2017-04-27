@@ -37,6 +37,7 @@ module ErrCode
   NO_BOOKS_IN_TRANSFER = -34
   OTHER_TYPE_USER_EXIST = -35
   REFUND_TIME_FAIL = - 36
+  COURSE_PARTICIPATE_EXIST = -37
 
   def self.ret_false(code)
     msg = self.message(code)
@@ -119,6 +120,8 @@ module ErrCode
       "已注册为其他类型用户"
     when REFUND_TIME_FAIL
       "该课程距开课不足一天时间，已经不能退款！"
+    when COURSE_PARTICIPATE_EXIST
+      "该课程有人报名"
     else
       nil
     end

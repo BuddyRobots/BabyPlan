@@ -156,6 +156,9 @@ class Staff::CoursesController < Staff::ApplicationController
   def set_available
     @course_inst = CourseInst.where(id: params[:id]).first
     retval = ErrCode::COURSE_INST_NOT_EXIST if @course_inst.blank?
+    if @course_inst.course_participates.present?
+      retval = ErrCode::COURSE_PARTICIPATE_EXIST
+    end
     retval = @course_inst.set_available(params[:available])
     render json: retval_wrapper(retval)
   end
