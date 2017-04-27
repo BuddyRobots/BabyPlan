@@ -223,8 +223,8 @@ class CourseParticipate
         retval = { success: false, err_code: err_code, err_code_des: err_code_des }
         return retval
       else
+        trade_state = doc.search('trade_state').children[0].text
         if trade_state == "SUCCESS"
-          trade_state = doc.search('trade_state').children[0].text
           trade_state_desc = doc.search('trade_state').children[0].text
           wechat_transaction_id = doc.search('transaction_id').children[0].text
           self.update_attributes({
