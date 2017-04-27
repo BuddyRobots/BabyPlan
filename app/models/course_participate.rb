@@ -231,9 +231,12 @@ class CourseParticipate
             trade_state: trade_state,
             trade_state_updated_at: Time.now.to_i,
             trade_state_desc: trade_state_desc,
-            wechat_transaction_id: wechat_transaction_id
+            wechat_transaction_id: wechat_transaction_id,
+            pay_finished: true,
+            expired_at: -1
           })
-          Bill.confirm_course_participate_item(self)
+          bill = Bill.where(order_id: self.order_id).first
+          bill.confirm_course_participate_item
           retval = { success: true, trade_state: trade_state, trade_state_desc: trade_state_desc }
         elsif
           out_trade_no = doc.search('out_trade_no').children[0].text
