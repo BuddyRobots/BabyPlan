@@ -38,35 +38,35 @@
                     %tbody.font-color3
                       - @participates[:data].each do |p|
                         %tr
-                          %td= p[:name]
-                          %td= p[:start_date]
-                          %td= p[:address]
-                          %td= p[:speaker]
-                          %td= p[:price]
-                          %td= p[:status_str]
-                        /   %td
-                        /     - if p.is_success  
-                        /       %a.details{:href => "javascript:void(0);"} 
-                        /         上课情况
-                        /         %span.triangle-down
-                        /     - else
-                        /       .pay-fail　上课情况
-                        / - if p.is_success
-                        /   %tr.status
-                        /     %td{colspan: "7"}
-                        /       .course-status
-                        /         %span.item-status 上课状态：
-                        /         - p.course_inst.length.times do |i|
-                        /           - if p.signin_info[i].present?
-                        /             %span.join-square
-                        /           - else
-                        /             - if p.course_inst.is_class_pass?(i)
-                        /               %span.miss-square
-                        /             - else
-                        /               %span.square
-                        /       .comments
-                        /         %span.comments-title 课程评价：
-                        /         %span.comments-content= p.review.present? ? p.review.content : "暂未评价"
+                          %td= p.course_inst.name
+                          %td= p.course_inst.duration
+                          %td= p.course_inst.center.address
+                          %td= p.course_inst.speaker
+                          %td= p.course_inst.price
+                          %td= p.status_str
+                          %td
+                            - if p.is_success  
+                              %a.details{:href => "javascript:void(0);"} 
+                                上课情况
+                                %span.triangle-down
+                            - else
+                              .pay-fail　上课情况
+                        - if p.is_success
+                          %tr.status
+                            %td{colspan: "7"}
+                              .course-status
+                                %span.item-status 上课状态：
+                                - p.course_inst.length.times do |i|
+                                  - if p.signin_info[i].present?
+                                    %span.join-square
+                                  - else
+                                    - if p.course_inst.is_class_pass?(i)
+                                      %span.miss-square
+                                    - else
+                                      %span.square
+                              .comments
+                                %span.comments-title 课程评价：
+                                %span.comments-content= p.review.present? ? p.review.content : "暂未评价"
                 
                 = render "staff/partials/auto_paginate", locals: { instance: @participates, url: "/staff/clients/" + @user.id.to_s, page: 'page'}
 
