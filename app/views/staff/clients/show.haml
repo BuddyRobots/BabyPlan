@@ -38,7 +38,7 @@
                     %tbody.font-color3
                       - @participates[:data].each do |p|
                         %tr
-                          %td= p.course_inst.name || p.course_inst.course.name
+                          %td= p.course_inst.course.name
                           %td= p.course_inst.duration
                           %td= p.course_inst.center.address
                           %td= p.course_inst.speaker
@@ -50,7 +50,7 @@
                                 上课情况
                                 %span.triangle-down
                             - else
-                              .unreturn-review　上课情况
+                              .pay-fail　上课情况
                         - if p.is_success
                           %tr.status
                             %td{colspan: "7"}
