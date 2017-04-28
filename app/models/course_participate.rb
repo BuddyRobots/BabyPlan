@@ -541,7 +541,7 @@ class CourseParticipate
   def participate_info
     {
       name: self.course_inst.name,
-      duration: self.course_inst.duration,
+      duration: Date.parse(self.course_inst.start_date),
       address: self.course_inst.center.address,
       speaker: self.course_inst.speaker,
       price: self.course_inst.price,
