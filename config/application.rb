@@ -32,6 +32,6 @@ module BabyPlan
 
     config.autoload_paths += Dir["#{config.root}/lib/**/"]
 
-    config.host = "babyplan.bjfpa.org.cn"
+    config.host = "maker.buddyrobots.com"
   end
 end
