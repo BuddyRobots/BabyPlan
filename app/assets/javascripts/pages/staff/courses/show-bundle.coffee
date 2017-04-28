@@ -518,11 +518,11 @@ $ ->
   if window.profile == "reviews"
     $("#user-review").trigger('click')
 
-  $(document).on 'click', '#hide-review', ->
+  $(document).on 'click', '.hide-review', ->
     rid = $(this).attr("data-id")
     hide_review(rid, $(this))
 
-  $(document).on 'click', '#show-review', ->
+  $(document).on 'click', '.show-review', ->
     rid = $(this).attr("data-id")
     show_review(rid, $(this))
 

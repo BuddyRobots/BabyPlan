@@ -94,7 +94,7 @@ $ ->
         if data.success
           $.page_notification("设置完成")
           ele.removeClass("show-review").addClass("hide-review")
-          ele.text("隐藏")
+          ele.text("隐藏评论")
         else
           $.page_notification("服务器出错")
       )
@@ -107,7 +107,7 @@ $ ->
         if data.success
           $.page_notification("设置完成")
           ele.removeClass("hide-review").addClass("show-review")
-          ele.text("公开")
+          ele.text("公开评论")
         else
           $.page_notification("服务器出错")
       )
