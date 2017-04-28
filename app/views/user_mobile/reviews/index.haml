@@ -20,7 +20,7 @@
             .word-div
               .row-div.clearfix.font-color2
                 %span.item-title.f14-op87= r[:user_name]
-                %span.item-value.f12-op56= r[:created_at]
+                %span.item-value.f12-op56= r[:created_at].strftime("%Y-%m-%d %H:%M")
               .row-div.font-color2
                 %span.f14-op54.course-review 课程评分
                 - r[:score].times do

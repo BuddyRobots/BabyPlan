@@ -31,14 +31,6 @@ class Review
     r1.merge(r2)
   end
 
-  def reviews_num
-    if self.length > 99
-      num = "99+"
-    else
-      num = self.length.to_s
-    end
-  end
-
   def is_private
     return self.status == PRIVATE
   end
