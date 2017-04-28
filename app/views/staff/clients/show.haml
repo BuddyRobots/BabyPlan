@@ -38,18 +38,12 @@
                     %tbody.font-color3
                       - @participates[:data].each do |p|
                         %tr
-                          / %td= p[:name]
-                          / %td= p[:start_date]
-                          / %td= p[:address]
-                          / %td= p[:speaker]
-                          / %td= p[:price]
-                          / %td= p[:status_str]
-                          %td= p.course_inst.try(:name)
-                          %td= Date.parse(p.course_inst.try(:start_date))
-                          %td= p.course_inst.try(:center).try(:address)
-                          %td= p.course_inst.try(:speaker)
-                          %td= p.course_inst.try(:price)
-                          %td= p.status_str
+                          %td= p[:name]
+                          %td= p[:start_date]
+                          %td= p[:address]
+                          %td= p[:speaker]
+                          %td= p[:price]
+                          %td= p[:status_str]
                           %td
                             - if p.is_success  
                               %a.details{:href => "javascript:void(0);"} 

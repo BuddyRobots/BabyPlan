@@ -546,8 +546,8 @@ class CourseParticipate
       speaker: self.course_inst.speaker,
       price: self.course_inst.price,
       status_str: self.status_str,
-      is_success: self.is_success
-
+      is_success: self.is_success,
+      length: self.course_inst.length
     }
   end
 end
