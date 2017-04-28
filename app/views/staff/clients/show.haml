@@ -68,7 +68,7 @@
                         /         %span.comments-title 课程评价：
                         /         %span.comments-content= p.review.present? ? p.review.content : "暂未评价"
                 
-                = render "staff/partials/auto_paginate", locals: { instance: @participates, url: "/staff/clients/" + @course_inst.id.to_s, page: 'page'}
+                = render "staff/partials/auto_paginate", locals: { instance: @participates, url: "/staff/clients/" + @user.id.to_s, page: 'page'}
 
 
      
