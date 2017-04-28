@@ -39,7 +39,7 @@
         %p.f14-op87= @course_inst.length.to_s + "次"
       .box
         %p.mb24.f12-op56 剩余名额
-        %p.f14-op87= ("#{@course_inst.capacity}".to_i - "#{@course_inst.effective_signup_num}".to_i)"/#{@course_inst.capacity}" + "人"
+        %p.f14-op87= ("#{@course_inst.capacity}".to_i - "#{@course_inst.effective_signup_num}".to_i).to_s"/#{@course_inst.capacity}" + "人"
       .box
         %p.mb24.f12-op56 评分
         %p.f14-op87= @course_inst.reviews.present? ? ("#{@course_inst.reviews.sum("score")}".to_i / "#{@course_inst.reviews.length}".to_i).to_s + "分" : "--"
