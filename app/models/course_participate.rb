@@ -82,19 +82,6 @@ class CourseParticipate
     return ""
   end
 
-  # def self.create_new(client, course_inst)
-  #   cp = self.create(order_id: Util.random_str(32),
-  #                    price_pay: course_inst.price_pay)
-  #   cp.course_inst = course_inst
-  #   cp.client = client
-  #   cp.course = course_inst.course
-  #   cp.save
-  #   expired_at = Time.now + 1.days
-  #   cp.update_attributes({expired_at: expired_at.to_i})
-  #   cp
-  #   # return cp.unifiedorder_interface(remote_ip, openid)
-  # end
-
   def self.create_new(client, course_inst)
     cp = self.create({
       course_inst_id: course_inst.id,
@@ -121,18 +108,6 @@ class CourseParticipate
       self.unifiedorder_interface(remote_ip, openid, order_id)
     end
   end
-
-  # def renew
-  #   if (self.is_expired || self.price_pay != self.course_inst.price_pay) && self.course_inst.price_pay > 0
-  #     self.update_attributes(
-  #       {
-  #         expired_at: (Time.now + 1.days).to_i,
-  #         order_id: Util.random_str(32),
-  #         price_pay: self.course_inst.price_pay,
-  #         prepay_id: ""
-  #       })
-  #   end
-  # end
 
   def self.notify_callback(content)
     doc = Nokogiri::XML(content)

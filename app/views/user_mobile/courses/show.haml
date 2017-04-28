@@ -18,7 +18,7 @@
     %img.course-icon.like-icon{src: asset_path("wap/like_normal.png"), data: {fav: "true"}}
   - if @current_user.reviews.present?
     %a.comment-icon.have-comment{:href => user_mobile_reviews_path + "?back=" + @back.to_s + "&course_inst_id=" + @course_inst.id.to_s}
-      %p.reviews-num.f12-op54= @course_inst.reviews.public_and_mine(@current_user).reviews_num
+      %p.reviews-num.f12-op54= @course_inst.reviews.reviews_num
   - else
     %a.comment-icon.no-comment{:href => user_mobile_reviews_path + "?back=" + @back.to_s + "&course_inst_id=" + @course_inst.id.to_s}
 

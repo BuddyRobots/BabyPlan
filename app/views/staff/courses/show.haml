@@ -189,13 +189,8 @@
                 .income-div
                   .income-items
                     %p.income-caption 收入统计(元)
-                    %p.income-nums 10000
-                  .income-items
-                    %p.income-caption 个人支付(元)
-                    %p.income-nums 6000
-                  .income-items#goverment
-                    %p.income-caption 政府补贴(元)
-                    %p.income-nums 4000
+                    %p.income-nums= @income_stat[:all]
+                  
               .pie-box
                 .gender-pie
                   %p.pie-title 性别比例
