@@ -18,7 +18,7 @@
     %img.course-icon.like-icon{src: asset_path("wap/like_normal.png"), data: {fav: "true"}}
   - if @current_user.reviews.present?
     %a.comment-icon.have-comment{:href => user_mobile_reviews_path + "?back=" + @back.to_s + "&course_inst_id=" + @course_inst.id.to_s}
-      %p.reviews-num.f12-op54= @course_inst.reviews.public_and_mine(@current_user)
+      %p.reviews-num.f12-op54= @course_inst.reviews.public_and_mine(@current_user).length
   - else
     %a.comment-icon.no-comment{:href => user_mobile_reviews_path + "?back=" + @back.to_s + "&course_inst_id=" + @course_inst.id.to_s}
 
@@ -42,7 +42,7 @@
         %p.f14-op87= "#{@course_inst.effective_signup_num}/#{@course_inst.capacity}" + "人"
       .box
         %p.mb24.f12-op56 评分
-        %p.f14-op87= @course_inst.reviews.present? ? "#{@course_inst.reviews.sum("score")}/#{@course_inst.reviews.length}".to_s + "分" : "--"
+        %p.f14-op87= @course_inst.reviews.present? ? ("#{@course_inst.reviews.sum("score")}" / "#{@course_inst.reviews.length}").to_s + "分" : "--"
   - if @course_participate.present? && @course_participate.is_success      
     .course-div.no-pt
       .sign-desc
