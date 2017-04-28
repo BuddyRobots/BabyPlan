@@ -40,9 +40,9 @@
                         %tr
                           %td= p.course_inst.try(:name)
                           %td= p.course_inst.try(:duration)
-                          %td= p.course_inst.center.address
-                          %td= p.course_inst.speaker
-                          %td= p.course_inst.price
+                          %td= p.course_inst.try(:center).try(:address)
+                          %td= p.course_inst.try(:speaker)
+                          %td= p.course_inst.try(:price)
                           %td= p.status_str
                           %td
                             - if p.is_success  
