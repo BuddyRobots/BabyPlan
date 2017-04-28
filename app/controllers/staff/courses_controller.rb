@@ -65,7 +65,7 @@ class Staff::CoursesController < Staff::ApplicationController
     if @course_inst.course_participates.present? && Time.parse(@course_inst.start_date).future?
       retval = ErrCode::COURSE_PARTICIPATE_EXIST
     else
-      CourseInst.where(id: params[:id]).delete
+      @course_inst.delete
     end
     # CourseInst.where(id: params[:id]).delete
     render json: retval_wrapper(retval) and return
