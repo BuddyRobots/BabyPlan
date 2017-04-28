@@ -223,9 +223,9 @@
                         .head-div.clearfix
                           %p.user-name.fl.font-color2= r.client.name
                           - if r.is_private
-                            %button.btn.fr.finish-normal.font-color1.show-review{type: "button", data: { id: r.id.to_s}} 公开评论
+                            .btn.fr.finish-normal.font-color1.show-review{type: "button", data: { id: r.id.to_s}} 公开评论
                           - else
-                            %button.btn.fr.edit-normal.font-color1.hide-review{type: "button", data: { id: r.id.to_s}} 隐藏评论
+                            .btn.fr.edit-normal.font-color1.hide-review{type: "button", data: { id: r.id.to_s}} 隐藏评论
                         %p.reviews= r.content
                         .time-div.font-color4
                           %span.review-date= r.created_at.strftime("%Y-%m-%d %H:%M")
