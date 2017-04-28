@@ -211,6 +211,9 @@ $ ->
         console.log(data)
         if data.success
           location.href = "/staff/courses"
+        else
+          if data.code == COURSE_PARTICIPATE_EXIST
+            $.page_notification("该课程有人报名参加，不能删除", 1000)
       )
 
 
@@ -342,31 +345,36 @@ $ ->
     )
 
   $("#user-review").click ->
-    $(".finish-btn").hide()
-    $(".edit-btn").hide()
-    $(".unshelve-btn").hide()
+    $("#finish-btn").hide()
+    $("#edit-btn").hide()
+    $("#unshelve-btn").hide()
+    $("#delete-btn").hide()
 
   $("#register-message").click ->
-    $(".finish-btn").hide()
-    $(".edit-btn").hide()
-    $(".unshelve-btn").hide()
+    $("#finish-btn").hide()
+    $("#edit-btn").hide()
+    $("#unshelve-btn").hide()
+    $("#delete-btn").hide()
 
   $("#course-sign").click ->
-    $(".finish-btn").hide()
-    $(".edit-btn").hide()
-    $(".unshelve-btn").hide()
+    $("#finish-btn").hide()
+    $("#edit-btn").hide()
+    $("#unshelve-btn").hide()
+    $("#delete-btn").hide()
 
   $("#statistics").click ->
-    $(".finish-btn").hide()
-    $(".edit-btn").hide()
-    $(".unshelve-btn").hide()
+    $("#finish-btn").hide()
+    $("#edit-btn").hide()
+    $("#unshelve-btn").hide()
+    $("#delete-btn").hide()
 
   $("#course-message").click ->
     if is_edit
-      $(".finish-btn").show()
+      $("#finish-btn").show()
     else
-      $(".edit-btn").show()
-    $(".unshelve-btn").show()
+      $("#edit-btn").show()
+    $("#unshelve-btn").show()
+    $("#delete-btn").show()
 
   # calender set
   $( "#datepicker" ).datepicker({

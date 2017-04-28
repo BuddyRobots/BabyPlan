@@ -61,8 +61,14 @@ class Staff::CoursesController < Staff::ApplicationController
   end
 
   def delete_course_inst
-    CourseInst.where(id: params[:id]).delete
-    render json: retval_wrapper(nil) and return
+    @course_inst = CourseInst.where(id: params[:id]).first
+    if @course_inst.course_participates.present? && Time.parse(@course_inst.start_date).future?
+      retval = ErrCode::COURSE_PARTICIPATE_EXIST
+    else
+      retval = CourseInst.where(id: params[:id]).delete
+    end
+    # CourseInst.where(id: params[:id]).delete
+    render json: retval_wrapper(retval) and return
   end
 
 
