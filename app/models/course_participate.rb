@@ -545,7 +545,9 @@ class CourseParticipate
       address: self.course_inst.center.address,
       speaker: self.course_inst.speaker,
       price: self.course_inst.price,
-      status_str: self.status_str
+      status_str: self.status_str,
+      is_success: self.is_success
+
     }
   end
 end
