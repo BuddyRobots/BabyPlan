@@ -42,7 +42,7 @@
         %p.f14-op87= "#{@course_inst.effective_signup_num}/#{@course_inst.capacity}" + "人"
       .box
         %p.mb24.f12-op56 评分
-        %p.f14-op87= @course_inst.reviews.present? ? "#{@course_inst.reviews.first.score.sum()}/#{@course_inst.reviews.length}".to_s + "分" : "--"
+        %p.f14-op87= @course_inst.reviews.present? ? "#{@course_inst.reviews.first.sum("score")}/#{@course_inst.reviews.length}".to_s + "分" : "--"
   - if @course_participate.present? && @course_participate.is_success      
     .course-div.no-pt
       .sign-desc
