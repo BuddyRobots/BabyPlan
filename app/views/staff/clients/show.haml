@@ -38,7 +38,7 @@
                     %tbody.font-color3
                       - @participates[:data].each do |p|
                         %tr
-                          %td= p.course_inst.course.name
+                          %td
                           %td= p.course_inst.duration
                           %td= p.course_inst.center.address
                           %td= p.course_inst.speaker
