@@ -68,7 +68,7 @@ class Staff::CoursesController < Staff::ApplicationController
       CourseInst.where(id: params[:id]).delete
     end
     # CourseInst.where(id: params[:id]).delete
-    render json: retval_wrapper(retval) and return
+    render json: retval_wrapper(retval || nil) and return
   end
 
 

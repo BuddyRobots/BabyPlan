@@ -201,6 +201,9 @@ $ ->
             btn.addClass("delete-normal")
             btn.removeClass("new-normal")
             btn.text("下架")
+        else
+          if data.code == COURSE_PARTICIPATE_EXIST
+            $.page_notification("该课程有人报名参加，不能下架", 1000)
       )
 
   $("#delete-btn").click ->
