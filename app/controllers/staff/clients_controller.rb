@@ -77,7 +77,7 @@ class Staff::ClientsController < Staff::ApplicationController
 
   def show
     @user = User.client.where(id: params[:id]).first
-    participates = @user.course_participates.paid
+    participates = @user.course_participates
     @participates = auto_paginate(participates)
     @participates[:data] = @participates[:data].map do |e|
       e.participate_info
