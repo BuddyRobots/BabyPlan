@@ -20,7 +20,7 @@
         .tab-content.bg3
           #tab1.tab-pane.active
             .desc-div
-              - if @participates[:data].length == 1
+              - if @participates[:data].blank?
                 .undiscover.f14
                   %img.undiscover-icon{src: asset_path("undiscover.png")}
               - else
@@ -36,93 +36,39 @@
                         %th 报名状态
                         %th 操&nbsp作
                     %tbody.font-color3
-                      %tr
-                        %td aa
-                        %td bb
-                        %td vv
-                        %td dd
-                        %td ddf
-                        %td df
-                        %td  
-                          %a.details{:href => "javascript:void(0);"} 
-                            上课情况
-                            %span.triangle-down
-                          / - else
-                          /   .unreturn-review　上课情况
-                      %tr.status
-                        %td{:colspan => "7"}
-                          .course-status
-                            %span.item-status 上课状态：
-                            %span.join-square
-                            %span.miss-square
-                            %span.square
-                          .comments
-                            %span.comments-title 课程评价：
-                            %span.comments-content 暂未评论
-                      %tr
-                        %td aa
-                        %td bb
-                        %td vv
-                        %td dd
-                        %td ddf
-                        %td df
-                        %td  
-                          %a.details{:href => "javascript:void(0);"} 
-                            上课情况
-                            %span.triangle-down
-                          / - else
-                          /   .unreturn-review　上课情况
-                      %tr.status
-                        %td{:colspan => "7"}
-                          .course-status
-                            %span.item-status 上课状态：
-                            %span.join-square
-                            %span.miss-square
-                            %span.square
-                          .comments
-                            %span.comments-title 课程评价：
-                            %span.comments-content 暂未评论
-                      / - @participates[:data].each do |e|
-                      /   %tr
-                      /     %td= e.course_inst.name || e.course_inst.course.name
-                      /     %td= e.course_inst.duration
-                      /     %td= e.course_inst.center.address
-                      /     %td= e.course_inst.speaker
-                      /     %td= e.course_inst.price
-                      /     %td= e.status_str
-                      /     %td 
-                      /       - if e.is_success
-                      /         %a.details{:href => "javascript:void(0);"} 
-                      /           上课情况
-                      /           %span.triangle-down
-                      /       - else
-                      /         .unreturn-review　上课情况
-                      /   - if e.is_success
-                      /     %tr.status
-                      /       %td{:colspan => "6"}
-                      /         .course-status
-                      /           %span.item-status 上课状态：
-                      /           - e.course_inst.length.times do |i|
-                      /             - if e.signin_info[i].present?
-                      /               %span.join-square
-                      /             - else
-                      /               - if e.course_inst.is_class_pass?(i)
-                      /                 %span.miss-square
-                      /               - else
-                      /                 %span.square
-                      /         .comments
-                      /           %span.comments-title 评论：
-                      /           %span.comments-content= e.review.present? ? e.review.content : "暂未评论"
-                .select-page 
-                  %span.totalitems 共1页，总计10条
-                  %span.choice-page
-                    %ul.pagination.pagination-sm
-                      %li
-                        %a{href: "#"} «
-                      %li
-                        %a{href: "#"} 1
-                      %li
-                        %a{href: "#"} »
+                      - @participates[:data].each do |p|
+                        %tr
+                          %td= p.course_inst.name || p.course_inst.course.name
+                          %td= p.course_inst.duration
+                          %td= p.course_inst.center.address
+                          %td= p.course_inst.speaker
+                          %td= p.course_inst.price
+                          %td= p.status_str
+                          %td
+                            - if p.is_success  
+                              %a.details{:href => "javascript:void(0);"} 
+                                上课情况
+                                %span.triangle-down
+                            - else
+                              .unreturn-review　上课情况
+                        - if p.is_success
+                          %tr.status
+                            %td{colspan: "7"}
+                              .course-status
+                                %span.item-status 上课状态：
+                                - p.course_inst.length.times do |i|
+                                  - if p.signin_info[i].present?
+                                    %span.join-square
+                                  - else
+                                    - if p.course_inst.is_class_pass?(i)
+                                      %span.miss-square
+                                    - else
+                                      %span.square
+                              .comments
+                                %span.comments-title 课程评价：
+                                %span.comments-content= p.review.present? ? p.review.content : "暂未评价"
+                
+                = render "staff/partials/auto_paginate", locals: { instance: @participates, url: "/staff/clients/" + @course_inst.id.to_s, page: 'page'}
 
 
      

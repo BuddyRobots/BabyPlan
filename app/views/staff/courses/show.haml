@@ -127,7 +127,7 @@
                         %th 手机号
                         %th 家庭住址
                         %th 报名状态
-                        %th 课&nbsp次
+                        %th 操&nbsp作
                     %tbody.font-color3
                       - @participates[:data].each do |p|
                         %tr
@@ -140,6 +140,8 @@
                               %a.details.font-color-brown{href: "javascript:void(0);"} 
                                 上课情况
                                 %span.triangle-down
+                            - else
+                              .pay-fail　上课情况
                         - if p.is_success
                           %tr.status
                             %td{colspan: "5"}
