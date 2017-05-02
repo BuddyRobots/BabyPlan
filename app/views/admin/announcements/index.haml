@@ -44,7 +44,7 @@
                 / %a.desc-click{:href => "/admin/announcements/" + e.id.to_s} 
                 /   详情
                 /   %img.desc-img{:src => "/assets/managecenter/double-right.png"}
-              = render "admin/partials/auto_paginate", locals: { instance: @global_eles, url: "/admin/announcements?profile=global&keyword=#{@keyword}&", page: 'page'}
+              = render "admin/partials/auto_paginate", locals: { instance: @global_eles, url: "/admin/announcements?profile=global&keyword=#{@keyword}&", page: 'global_page'}
              
           #tab2.tab-pane
             - if @local_eles[:data].length == 0
@@ -63,5 +63,5 @@
                   %p.kids-center= e.center.name
                   .desc
                     = e.plain_text
-              = render "admin/partials/auto_paginate", locals: { instance: @local_eles, url: "/admin/announcements?profile=local&keyword=#{@keyword}&", page: 'page'}
+              = render "admin/partials/auto_paginate", locals: { instance: @local_eles, url: "/admin/announcements?profile=local&keyword=#{@keyword}&", page: 'local_page'}
                    
