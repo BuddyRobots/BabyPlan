@@ -5,7 +5,7 @@ class UserMobile::ReviewsController < UserMobile::ApplicationController
     @course_inst = CourseInst.where(id: params[:course_inst_id]).first
     @cp = @course_inst.course_participates.where(client_id: @current_user.id).first
     @self_review = (@cp.present? && @cp.trade_state == "SUCCESS") && @current_user.reviews.where(course_inst_id: @course_inst.id).blank?
-    reviews = @course_inst.reviews.public_and_mine(@current_user)
+    reviews = @course_inst.reviews.where(status: 1)
     @ele = @course_inst
     @reviews = reviews.map { |e| e.review_info}
   end
