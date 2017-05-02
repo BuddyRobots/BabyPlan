@@ -263,7 +263,7 @@ class CourseInst
 
   def more_info
     {
-      ele_name: self.name
+      ele_name: self.name,
       ele_id: self.id.to_s,
       ele_photo: self.photo.nil? ? ActionController::Base.helpers.asset_path("web/course.png") : self.photo.path,
       ele_content: ActionController::Base.helpers.truncate(ActionController::Base.helpers.strip_tags(self.course_inst.desc).strip(), length: 50),
