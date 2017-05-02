@@ -2,7 +2,7 @@ class Admin::StatisticsController < Admin::ApplicationController
   before_filter :set_active_tab
   
   def index
-    @course_rank = Course.course_rank
+    @course_rank = CourseInst.course_rank
     @book_rank = Book.book_rank
   end
 
@@ -12,7 +12,7 @@ class Admin::StatisticsController < Admin::ApplicationController
   end
 
   def course_stats
-    @stat = Course.course_stats(params[:duration].to_i, params[:start_date], params[:end_date])
+    @stat = CourseInst.course_stats(params[:duration].to_i, params[:start_date], params[:end_date])
     render json: retval_wrapper({stat: @stat}) and return
   end
 
