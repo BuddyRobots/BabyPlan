@@ -36,7 +36,7 @@ class Feed
 
   def desc
     if self.course_inst.present?
-      self.course_inst.course.desc
+      self.course_inst.desc
     elsif self.book.present?
       self.book.desc
     elsif self.announcement.present?

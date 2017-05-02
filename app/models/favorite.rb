@@ -10,7 +10,7 @@ class Favorite
 
   def name
     if self.course_inst.present?
-      self.course_inst.name || self.course_inst.course.name
+      self.course_inst.name
     else
       self.book.name
     end
@@ -18,7 +18,7 @@ class Favorite
 
   def desc
     if self.course_inst.present?
-      self.course_inst.course.desc
+      self.course_inst.desc
     else
       self.book.desc
     end
