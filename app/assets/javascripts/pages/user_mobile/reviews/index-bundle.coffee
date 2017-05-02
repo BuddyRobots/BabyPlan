@@ -1,3 +1,4 @@
+#= require "./_templates/review_item"
 $ ->
 
   $("#submit").click ->
