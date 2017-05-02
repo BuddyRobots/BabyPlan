@@ -16,19 +16,34 @@
         - @reviews.each do |r|
           .item
             .icon-div
-              %img.icon{src: r[:avatar_path].present? ? r[:avatar_path] : asset_path("wap/avatar.png")}
+              %img.icon{src: r.client.avatar.present? ? r.client.avatar.path : asset_path("wap/avatar.png")}
             .word-div
               .row-div.clearfix.font-color2
-                %span.item-title.f14-op87= r[:user_name]
-                %span.item-value.f12-op56= r[:created_at].strftime("%Y-%m-%d %H:%M")
+                %span.item-title.f14-op87= r.client.name
+                %span.item-value.f12-op56= r.created_at.strftime("%Y-%m-%d %H:%M")
               .row-div.font-color2
                 %span.f14-op54.course-review 课程评分
-                - r[:score].times do
+                - r.score.times do
                   %img.star{src: asset_path("wap/star1.png")}
-                - (5 - r[:score]).times do
+                - (5 - r.score).times do
                   %img.star{src: asset_path("wap/star2.png")}
               .row-div.font-color2
-                %p.f14-op87= r[:content]
+                %p.f14-op87= r.content
+          / .item
+          /   .icon-div
+          /     %img.icon{src: r[:avatar_path].present? ? r[:avatar_path] : asset_path("wap/avatar.png")}
+          /   .word-div
+          /     .row-div.clearfix.font-color2
+          /       %span.item-title.f14-op87= r[:user_name]
+          /       %span.item-value.f12-op56= r[:created_at].strftime("%Y-%m-%d %H:%M")
+          /     .row-div.font-color2
+          /       %span.f14-op54.course-review 课程评分
+          /       - r[:score].times do
+          /         %img.star{src: asset_path("wap/star1.png")}
+          /       - (5 - r[:score]).times do
+          /         %img.star{src: asset_path("wap/star2.png")}
+          /     .row-div.font-color2
+          /       %p.f14-op87= r[:content]
         .render-more
           %p 点击加载更多
         .load-gif

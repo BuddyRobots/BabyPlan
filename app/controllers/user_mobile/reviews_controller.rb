@@ -7,7 +7,8 @@ class UserMobile::ReviewsController < UserMobile::ApplicationController
     @self_review = (@cp.present? && @cp.trade_state == "SUCCESS") && @current_user.reviews.where(course_inst_id: @course_inst.id).blank?
     reviews = @course_inst.reviews.where(status: 1)
     @ele = @course_inst
-    @reviews = reviews.map { |e| e.review_info}
+    # @reviews = reviews.map { |e| e.review_info}
+    @reviews = auto_paginate(reviews)[:data]
   end
 
   def create
@@ -24,7 +25,7 @@ class UserMobile::ReviewsController < UserMobile::ApplicationController
 
   def more
     @course_inst = CourseInst.where(id: params[:course_id]).first
-    @reviews = @course_inst.reviews.public_and_mine(@current_user).desc(:created_at)
+    @reviews = @course_inst.reviews.where(status: 1).desc(:created_at)
     @reviews = auto_paginate(@reviews)[:data]
     @reviews = @reviews.map { |r| r.more_info }
     render json: retval_wrapper({more: @reviews}) and return
