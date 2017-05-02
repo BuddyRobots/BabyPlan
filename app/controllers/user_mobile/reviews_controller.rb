@@ -23,7 +23,7 @@ class UserMobile::ReviewsController < UserMobile::ApplicationController
   end
 
   def more
-    @course_inst = CourseInst.where(id: params[:course_id]).first
+    @course_inst = CourseInst.where(id: params[:course_inst_id]).first
     @reviews = @course_inst.reviews.where(status: Review::PUBLIC).desc(:created_at)
     @reviews = auto_paginate(@reviews)[:data]
     @reviews = @reviews.map { |r| r.more_info }
