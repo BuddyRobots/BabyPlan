@@ -218,6 +218,9 @@ Rails.application.routes.draw do
 
   namespace :user_mobile do
     resources :reviews do
+      member do
+        get :more
+      end
     end
     resources :announcements do
       collection do
