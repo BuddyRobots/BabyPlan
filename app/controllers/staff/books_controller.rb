@@ -9,6 +9,7 @@ class Staff::BooksController < Staff::ApplicationController
   def index
     @profile = params[:profile]
     @keyword = params[:keyword]
+    params[:page] = params[:stock_page]
     if @keyword.present?
       book_template_id_ary = BookTemplate.where(name: /#{Regexp.escape(@keyword)}/).map { |e| e.id.to_s }
       books = current_center.books.where(:book_template_id.in => book_template_id_ary)

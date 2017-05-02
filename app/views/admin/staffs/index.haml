@@ -77,7 +77,7 @@
                             - else
                               %a.set-available.link-unavailable{:href => "javascript:void(0);"} 解锁
                          
-                = render "admin/partials/auto_paginate", locals: { instance: @operators, url: "/admin/staffs?keyword=#{@keyword}&profile=operator&", page: 'page'}
+                = render "admin/partials/auto_paginate", locals: { instance: @operators, url: "/admin/staffs?keyword=#{@keyword}&profile=operator&", page: 'operator_page'}
 
 #entryModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
   .modal-dialog

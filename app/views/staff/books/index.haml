@@ -58,7 +58,7 @@
                               %a.set-available.link-available{:href => "javascript:void(0);"} 下架
                             - else
                               %a.set-available.link-unavailable{:href => "javascript:void(0);"} 上架
-                = render "staff/partials/auto_paginate", locals: { instance: @books, url: "/staff/books?keyword=#{@keyword}&", page: 'page'}
+                = render "staff/partials/auto_paginate", locals: { instance: @books, url: "/staff/books?keyword=#{@keyword}&", page: 'stock_page'}
                 
           #tab2.tab-pane
             .tab-box
