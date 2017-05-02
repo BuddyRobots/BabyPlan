@@ -31,7 +31,7 @@ $ ->
     render_more = $(this)
     render_more.hide()
     $(".load-gif").show()
-    $.getJSON "/user_mobile/reviews/" + window.course_id + "more?page=" + page, (data) ->
+    $.getJSON "/user_mobile/reviews/more?course_inst_id=" + window.course_id + "&page=" + page + , (data) ->
       $(".load-gif").hide()
       render_more.show()
       if data.success
