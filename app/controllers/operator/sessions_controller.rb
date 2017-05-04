@@ -3,7 +3,7 @@ class Operator::SessionsController < Operator::ApplicationController
 
   # show the index page
   def index
-     
+     redirect_to operator_books_path
   end
 
   # signin
