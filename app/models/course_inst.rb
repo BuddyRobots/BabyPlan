@@ -16,7 +16,7 @@ class CourseInst
   field :date_in_calendar, type: Array, default: [ ]
   field :min_age, type: Integer
   field :max_age, type: Integer
-  field :school_id, type: String
+  # field :school_id, type: String
   field :start_course, type: Integer
   field :desc, type: String
   field :deleted, type: Boolean, default: false

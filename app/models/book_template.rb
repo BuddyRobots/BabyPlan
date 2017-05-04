@@ -122,5 +122,30 @@ class BookTemplate
       b.save
     end
   end
+
+  def self.pic_migrate
+    Book.all.each do |b|
+      bt = b.book_template
+      if bt.cover.present?
+        next
+      end
+      b_cover = Material.where(cover_book_id: b.id).first
+      if b_cover.present?
+        bt.cover = b_cover
+        bt.save
+      end
+    end
+    Book.all.each do |b|
+      bt = b.book_template
+      if bt.back.present?
+        next
+      end
+      b_back = Material.where(back_book_id: b.id).first
+      if b_back.present?
+        bt.back = b_back
+        bt.save
+      end 
+    end
+  end
 end
 

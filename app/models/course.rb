@@ -18,7 +18,7 @@ class Course
   field :school, type: String
   field :min_age, type: Integer
   field :max_age, type: Integer
-  
+
 
   has_one :photo, class_name: "Material", inverse_of: :course_photo
   has_many :course_insts

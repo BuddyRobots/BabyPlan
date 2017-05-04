@@ -8,6 +8,7 @@ class School
   field :available, type: Boolean
 
   has_many :course_insts
+  has_many :course_participates
 
   scope :is_available, ->{where(available: true)}
 
