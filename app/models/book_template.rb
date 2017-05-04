@@ -122,5 +122,14 @@ class BookTemplate
       b.save
     end
   end
+
+  def self.pic_migrate
+    Book.all.each do |b|
+      bt = BookTemplate.where(isbn: b.isbn).first
+      bt.cover = b.cover
+      bt.back = b.back
+      bt.save
+    end
+  end
 end
 

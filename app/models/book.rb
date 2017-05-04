@@ -142,13 +142,13 @@ class Book
     return self.try(:book_template).try(:desc)
   end
 
-  def cover
-    return self.try(:book_template).try(:cover)
-  end
+  # def cover
+  #   return self.try(:book_template).try(:cover)
+  # end
 
-  def back
-    return self.try(:book_template).try(:back)
-  end
+  # def back
+  #   return self.try(:book_template).try(:back)
+  # end
 
   def update_info(stock)
     self.update_attribute(:stock, stock)
