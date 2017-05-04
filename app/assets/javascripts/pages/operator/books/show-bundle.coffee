@@ -194,6 +194,7 @@ $ ->
     $("#deleteModal").modal("hide")
 
   $("#confirm-delete").click ->
+    $("#deleteModal").modal("hide")
     $.deleteJSON(
       '/operator/books/' + window.bid,
       {},
