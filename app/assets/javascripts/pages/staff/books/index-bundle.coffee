@@ -159,7 +159,7 @@ $ ->
       },
       (data) ->
         if data.success
-          location.href = "/staff/books"
+          location.href = "/staff/books/" + data.book_id
       )
 
 
