@@ -71,6 +71,7 @@ class CourseParticipate
   field :close_err_code, type: String
 
   belongs_to :course_inst
+  belongs_to :school
   belongs_to :course
   belongs_to :center
   belongs_to :client, class_name: "User", inverse_of: :course_participates
@@ -103,6 +104,7 @@ class CourseParticipate
     #                  price_pay: course_inst.price_pay)
     cp = self.create({
       course_inst_id: course_inst.id,
+      school_id: course_inst.school_id,
       client_id: client.id,
       center_id: course_inst.center.id,
       prepay_id: ""
@@ -624,6 +626,15 @@ class CourseParticipate
   def self.migrate
     CourseParticipate.all.each do |e|
       e.update_attribute(:center_id, e.course_inst.center.id)
+    end
+  end
+
+  def self.migrate_school_id
+    CourseParticipate.all.each do |e|
+      if e.course_inst.school_id.present?
+        e.school_id = e.course_inst.school_id
+        e.save
+      end
     end
   end
 
