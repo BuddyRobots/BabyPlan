@@ -3,7 +3,9 @@ class Operator::SessionsController < Operator::ApplicationController
 
   # show the index page
   def index
-     redirect_to operator_books_path
+    if current_operator.present?
+      redirect_to operator_books_path
+    end
   end
 
   # signin
