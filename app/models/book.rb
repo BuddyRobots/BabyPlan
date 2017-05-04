@@ -20,8 +20,8 @@ class Book
   field :deleted, type: Boolean, default: false
 
   #ralationships specific for material
-  has_one :cover, class_name: "Material", inverse_of: :cover_book
-  has_one :back, class_name: "Material", inverse_of: :back_book
+  # has_one :cover, class_name: "Material", inverse_of: :cover_book
+  # has_one :back, class_name: "Material", inverse_of: :back_book
 
   has_one :feed
 
@@ -142,13 +142,13 @@ class Book
     return self.try(:book_template).try(:desc)
   end
 
-  # def cover
-  #   return self.try(:book_template).try(:cover)
-  # end
+  def cover
+    return self.try(:book_template).try(:cover)
+  end
 
-  # def back
-  #   return self.try(:book_template).try(:back)
-  # end
+  def back
+    return self.try(:book_template).try(:back)
+  end
 
   def update_info(stock)
     self.update_attribute(:stock, stock)
