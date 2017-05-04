@@ -8,6 +8,7 @@ class Admin::BooksController < Admin::ApplicationController
 
   def index
     @book_keyword = params[:book_keyword]
+    params[:page] = params[:stock_page]
     @transfer_keyword = params[:transfer_keyword]
 
     books = @book_keyword.present? ? Book.where(name: /#{@book_keyword}/) : Book.all
@@ -23,6 +24,7 @@ class Admin::BooksController < Admin::ApplicationController
     else
       transfers = Transfer.all
     end
+    params[:page] = params[:transfer_page]
     @transfers = auto_paginate(transfers)
     @transfers[:data] = @transfers[:data].map do |e|
       e.transfer_info

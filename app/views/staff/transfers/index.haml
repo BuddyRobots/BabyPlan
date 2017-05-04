@@ -50,7 +50,7 @@
                             %a.details{:href => "/staff/transfers/#{e[:id]}"} 详情
                             - if e[:count] == 0 && e[:status] == Transfer::PREPARE
                               %a.details{:href => "/staff/transfers/#{e[:id]}/remove"} 删除
-                = render "staff/partials/auto_paginate", locals: { instance: @out_transfers, url: "/staff/transfers?keyword=#{@keyword}&", page: 'page'}
+                = render "staff/partials/auto_paginate", locals: { instance: @out_transfers, url: "/staff/transfers?keyword=#{@keyword}&", page: 'out_page'}
           #tab2.tab-pane  
             .movein-box
               - if @in_transfers[:data].blank?
@@ -76,5 +76,5 @@
                           %td#status{class: e[:status_class]}= e[:status_str]
                           %td
                             %a.details{:href => "/staff/transfers/#{e[:id]}"} 详情
-                = render "staff/partials/auto_paginate", locals: { instance: @in_transfers, url: "/staff/transfers?profile=in&keyword=#{@keyword}&", page: 'page'}
+                = render "staff/partials/auto_paginate", locals: { instance: @in_transfers, url: "/staff/transfers?profile=in&keyword=#{@keyword}&", page: 'in_page'}
                 

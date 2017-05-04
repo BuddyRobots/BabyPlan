@@ -19,14 +19,10 @@ class UserMobile::ReviewsController < UserMobile::ApplicationController
       @ele = Book.where(id: params[:book_id]).first
     else
       @ele = CourseInst.where(id: params[:course_id]).first
-      course = @ele.course
     end
     review = @ele.reviews.create(score: params[:score].to_i,
                         content: params[:content],
                         client_id: @current_user.id)
-    if course.present?
-      review.update_attribute(:course_id, course.id)
-    end
     render json: retval_wrapper(nil) and return
   end
 end

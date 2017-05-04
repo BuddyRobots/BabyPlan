@@ -8,6 +8,7 @@ class Admin::StaffsController < Admin::ApplicationController
 
   def index
     @keyword = params[:keyword]
+    params[:page] = params[:staff_page]
     staffs = @keyword.present? ? User.only_staff.where(name: /#{Regexp.escape(@keyword)}/) : User.only_staff
     staffs = staffs.where(mobile_verified: true)
     @staffs = auto_paginate(staffs)
@@ -15,6 +16,7 @@ class Admin::StaffsController < Admin::ApplicationController
       e.staff_info
     end
     @profile = params[:profile]
+    params[:page] = params[:operator_page]
     operators = @keyword.present? ? Operator.where(name: /#{Regexp.escape(@keyword)}/) : Operator.all
     @operators = auto_paginate(operators)
     @operators[:data] = @operators[:data].map do |o|

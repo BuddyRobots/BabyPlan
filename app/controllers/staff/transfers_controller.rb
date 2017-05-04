@@ -9,6 +9,7 @@ class Staff::TransfersController < Staff::ApplicationController
   def index
     @profile = params[:profile]
     @keyword = params[:keyword]
+    params[:page] = params[:out_page]
     out_transfers = current_center.out_transfers
     in_transfers = current_center.in_transfers
     if @keyword.present?
@@ -20,6 +21,7 @@ class Staff::TransfersController < Staff::ApplicationController
     @out_transfers[:data] = @out_transfers[:data].map do |e|
       e.transfer_info
     end
+    params[:page] = params[:in_page]
     @in_transfers = auto_paginate(in_transfers)
     @in_transfers[:data] = @in_transfers[:data].map do |e|
       e.transfer_info

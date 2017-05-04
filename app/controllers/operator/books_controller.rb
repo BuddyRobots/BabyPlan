@@ -1,5 +1,13 @@
 class Operator::BooksController < Operator::ApplicationController
 
+  def get_book_templates
+    if current_operator.class == User
+      BookTemplate.all
+    else
+      current_operator.book_templates
+    end
+  end
+
   def index
     @keyword = params[:keyword]
     book_templates = current_operator.class  == User ? BookTemplate.all : current_operator.book_templates
@@ -25,7 +33,7 @@ class Operator::BooksController < Operator::ApplicationController
   end
 
   def update
-    @book = current_operator.book_templates.where(id: params[:id]).first
+    @book = get_book_templates.where(id: params[:id]).first
     if @book.nil?
       retval = ErrCode::BOOK_NOT_EXIST
     end
@@ -34,7 +42,7 @@ class Operator::BooksController < Operator::ApplicationController
   end
 
   def destroy
-    @book = current_operator.book_templates.where(id: params[:id]).first
+    @book = get_book_templates.where(id: params[:id]).first
     if !@book.books.present?
       retval = @book.destroy
       render json: retval_wrapper(nil)
@@ -45,7 +53,7 @@ class Operator::BooksController < Operator::ApplicationController
   end
 
   def upload_photo
-    @book_template = current_operator.book_templates.where(id: params[:id]).first
+    @book_template = get_book_templates.where(id: params[:id]).first
     if @book_template.blank?
       redirect_to action: :index and return
     end
@@ -71,7 +79,7 @@ class Operator::BooksController < Operator::ApplicationController
   end
 
   def update_cover
-    @book_template = current_operator.book_templates.where(id: params[:id]).first
+    @book_template = get_book_templates.where(id: params[:id]).first
     if @book_template.blank?
       redirect_to action: :index and return
     end
@@ -86,7 +94,7 @@ class Operator::BooksController < Operator::ApplicationController
   end
 
   def update_back
-    @book_template = current_operator.book_templates.where(id: params[:id]).first
+    @book_template = get_book_templates.where(id: params[:id]).first
     if @book_template.blank?
       redirect_to action: :index and return
     end

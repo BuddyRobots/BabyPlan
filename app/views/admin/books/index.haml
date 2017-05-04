@@ -79,7 +79,7 @@
                           %td{class: e[:status_class]}= e[:status_str]
                           %td
                             = link_to "详情", "/admin/books/#{e[:id]}/show_transfer"
-                = render "admin/partials/auto_paginate", locals: { instance: @transfers, url: "/admin/books?profile=transfers&book_keyword=#{@book_keyword}&transfer_keyword=#{@transfer_keyword}&", page: 'page'}
+                = render "admin/partials/auto_paginate", locals: { instance: @transfers, url: "/admin/books?profile=transfers&book_keyword=#{@book_keyword}&transfer_keyword=#{@transfer_keyword}&", page: 'transfer_page'}
 
 #borrowModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
   .modal-dialog
