@@ -25,7 +25,7 @@ class BookTemplate
   has_many :stock_changes
 
   def self.create_book(operator, book_info)
-    book_template = operator.book_templates.where(isbn: book_info[:isbn]).first
+    book_template = BookTemplate.where(isbn: book_info[:isbn]).first
     if book_template.present?
       return ErrCode::BOOK_EXIST
     end
