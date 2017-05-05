@@ -243,7 +243,7 @@ class Center
 
     income_school_hash = { }
     School.all.each do |s|
-      s_income = cps.where(school_id: s.id).map { |e| [self.cal_idx(start_time, end_time, interval, e.created_at), e.price_pay] }
+      s_income = cps.where(school_id: s.id).map { |e| [CourseInst.cal_idx(start_time, end_time, interval, e.created_at), e.price_pay] }
       s_income = s_income.group_by { |e| e[0] }
       s_income.each { |k,v| s_income[k] = v.map { |e| e[1] } .sum }
       s_income = (0 .. dp_num - 1).to_a.map { |e| s_income[e].to_i }
