@@ -324,10 +324,10 @@ $ ->
             title:
               text: null
             xAxis: 
-              tickInterval: 5
+              tickInterval: 1
               title:
                 # text: '周数'
-                text: data.stock_time_unit
+                text: data.stat.stock_time_unit
             yAxis:
               title: text: '书籍数量(本)'
             tooltip: valueSuffix: '本'
