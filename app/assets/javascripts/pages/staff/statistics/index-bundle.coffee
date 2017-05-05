@@ -107,7 +107,7 @@ $ ->
             title:
               text: null
             xAxis: 
-              tickInterval: 5
+              tickInterval: 1
               title:
                 text: data.stat.signup_time_unit
             yAxis:
