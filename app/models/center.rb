@@ -238,6 +238,25 @@ class Center
     income.each { |k,v| income[k] = v.map { |e| e[1] } .sum }
     income = (0 .. dp_num - 1).to_a.map { |e| income[e].to_i }
 
+
+    max_num = 5
+
+    income_school_hash = { }
+    School.all.each do |s|
+      s_income = cps.where(school_id: s.id).map { |e| [self.cal_idx(start_time, end_time, interval, e.created_at), e.price_pay] }
+      s_income = s_income.group_by { |e| e[0] }
+      s_income.each { |k,v| s_income[k] = v.map { |e| e[1] } .sum }
+      s_income = (0 .. dp_num - 1).to_a.map { |e| s_income[e].to_i }
+      # s_income.reverse!
+      income_school_hash[s.name] = s_income.sum
+    end
+    income_school = income_school_hash.to_a
+    income_school = income_school.sort { |x, y| -x[1] <=> -y[1] }
+    if income_school.length > max_num
+      ele = ["其他", income_school[max_num - 1..-1].map { |e| e[1] } .sum]
+      income_school = income_school[0..max_num - 2] + [ele]
+    end
+
     {
       signup_time_unit: time_unit,
       signup_num: signup_num,
@@ -245,6 +264,7 @@ class Center
       total_income: income.sum,
       income_time_unit: time_unit,
       income: income,
+      income_school: income_school
     }
   end
 
@@ -318,7 +338,7 @@ class Center
       if e == 0
         cur_off_shelf_num
       else
-        cur_off_shelf_num = [cur_off_shelf_num + borrows[dp_num - e] - returns[dp_num - e], 0].max
+        cur_off_shelf_num = [cur_off_shelf_num - borrows[dp_num - e] + returns[dp_num - e], 0].max
       end
     end
     off_shelf_num.reverse!

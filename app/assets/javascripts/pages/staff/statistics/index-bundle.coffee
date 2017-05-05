@@ -178,7 +178,7 @@ $ ->
             return
           series: [ {
             name: '授课单位收入'
-            # data: data.stat.income_school
+            data: data.stat.income_school
           } ]
       else
         $.page_notification "服务器出错，请稍后再试"
