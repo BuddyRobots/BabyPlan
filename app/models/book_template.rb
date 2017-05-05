@@ -25,7 +25,7 @@ class BookTemplate
   has_many :stock_changes
 
   def self.create_book(operator, book_info)
-    book_template = operator.book_templates.where(isbn: book_info[:isbn]).first
+    book_template = BookTemplate.where(isbn: book_info[:isbn]).first
     if book_template.present?
       return ErrCode::BOOK_EXIST
     end
@@ -61,6 +61,10 @@ class BookTemplate
   end
 
   def update_info(book_info)
+    book_template = BookTemplate.where(isbn: book_info["isbn"])
+    if book_template.length > 1
+      return ErrCode::BOOK_EXIST
+    end
     self.update_attributes(
       {
         isbn: book_info["isbn"],

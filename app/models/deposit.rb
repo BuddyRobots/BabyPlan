@@ -74,6 +74,8 @@ class Deposit
   end
 
   def unifiedorder_interface(remote_ip, openid)
+    self.amount = BorrowSetting.first.try(:deposit) || 100
+    self.save
     nonce_str = Util.random_str(32)
     order_id = Util.random_str(32)
     data = {
