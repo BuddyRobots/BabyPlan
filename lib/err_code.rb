@@ -46,6 +46,7 @@ module ErrCode
   BOOK_DELETE = -42
   COURSE_TIME_UPPER = -43
   PRICE_UPPER = -44
+  REPEAT_ISBN = -45
 
   def self.ret_false(code)
     msg = self.message(code)
@@ -144,6 +145,8 @@ module ErrCode
       "超过中心授课时间上限"
     when PRICE_UPPER
       "超出公益价上限"
+    when REPEAT_ISBN
+      "isbn号重复"
     else
       nil
     end
