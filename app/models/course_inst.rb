@@ -318,9 +318,9 @@ class CourseInst
     interval = day.days.to_i
 
     cps = CourseParticipate.where(:created_at.gt => start_time)
-                                  .where(:created_at.lt => end_time)
-                                  .where(trade_state: "SUCCESS")
-                                  .asc(:created_at)
+                           .where(:created_at.lt => end_time)
+                           .where(trade_state: "SUCCESS")
+                           .asc(:created_at)
     dp_num = ((end_time - start_time) * 1.0 / interval).ceil
     signup_num = cps.map { |e| self.cal_idx(start_time, end_time, interval, e.created_at) }
     signup_num = signup_num.group_by { |e| e }

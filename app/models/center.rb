@@ -203,7 +203,7 @@ class Center
       start_time_ary = start_date.split('-').map { |e| e.to_i }
       start_time = Time.mktime(start_time_ary[0], start_time_ary[1], start_time_ary[2]).to_i
       end_time_ary = end_date.split('-').map { |e| e.to_i }
-      end_time = Time.mktime(end_time_ary[0], end_time_ary[1], end_time_ary[2]).to_i
+      end_time = Time.mktime(end_time_ary[0], end_time_ary[1], end_time_ary[2], 23, 59, 59).to_i
       duration = [0, end_time - start_time].max
     else
       start_time = Time.now.to_i - duration
@@ -226,14 +226,14 @@ class Center
                                   .where(:created_at.lt => end_time)
                                   .where(trade_state: "SUCCESS")
                                   .asc(:created_at)
-    dp_num = (end_time - start_time) / interval
-    signup_num = cps.map { |e| (e.created_at.to_i - (start_time.to_i)) / interval }
+    dp_num = ((end_time - start_time) * 1.0 / interval).ceil
+    signup_num = cps.map { |e| CourseInst.cal_idx(start_time, end_time, interval, e.created_at) }
     signup_num = signup_num.group_by { |e| e }
     signup_num.each { |k,v| signup_num[k] = v.length }
     signup_num = (0 .. dp_num - 1).to_a.map { |e| signup_num[e].to_i }
     # signup_num.reverse!
 
-    income = cps.map { |e| [(e.created_at.to_i - start_time.to_i) / interval, e.price_pay] }
+    income = cps.map { |e| [CourseInst.cal_idx(start_time, end_time, interval, e.created_at), e.price_pay] }
     income = income.group_by { |e| e[0] }
     income.each { |k,v| income[k] = v.map { |e| e[1] } .sum }
     income = (0 .. dp_num - 1).to_a.map { |e| income[e].to_i }
@@ -253,7 +253,7 @@ class Center
       start_time_ary = start_date.split('-').map { |e| e.to_i }
       start_time = Time.mktime(start_time_ary[0], start_time_ary[1], start_time_ary[2]).to_i
       end_time_ary = end_date.split('-').map { |e| e.to_i }
-      end_time = Time.mktime(end_time_ary[0], end_time_ary[1], end_time_ary[2]).to_i
+      end_time = Time.mktime(end_time_ary[0], end_time_ary[1], end_time_ary[2], 23, 59, 59).to_i
       duration = [0, end_time - start_time].max
     else
       start_time = Time.now.to_i - duration
@@ -270,13 +270,14 @@ class Center
       time_unit = "月数"
       day = 30
     end
+
     interval = day.days.to_i
-    dp_num = (end_time - start_time) / interval
+    dp_num = ((end_time - start_time) * 1.0 / interval).ceil
 
     bbs = self.book_borrows.where(:created_at.gt => start_time)
                            .where(:created_at.lt => end_time)
                            .asc(:created_at)
-    bb_num = bbs.map { |e| (e.created_at.to_i - (start_time.to_i)) / interval }
+    bb_num = bbs.map { |e| Book.cal_idx(start_time, end_time, interval, e.created_at) }
     bb_num = bb_num.group_by { |e| e }
     bb_num.each { |k,v| bb_num[k] = v.length }
     bb_num = (0 .. dp_num - 1).to_a.map { |e| bb_num[e].to_i }
@@ -286,28 +287,39 @@ class Center
     stock_changes = self.stock_changes.where(:created_at.gt => start_time)
                                       .where(:created_at.lt => end_time)
                                       .asc(:created_at)
-    stock_changes = stock_changes.map { |e| [(e.created_at.to_i - start_time.to_i) / interval, e.num] }
+    stock_changes = stock_changes.map { |e| [Book.cal_idx(start_time, end_time, interval, e.created_at), e.num] }
     stock_changes = stock_changes.group_by { |e| e[0] }
     stock_changes.each { |k,v| stock_changes[k] = v.map { |e| e[1] } .sum }
-    stock_num = (0 .. dp_num - 1).to_a.map { |e| cur_stock_num - stock_changes[e].to_i }
+    stock_num = (0 .. dp_num - 1).to_a.map do |e|
+      if e == 0
+        cur_stock_num
+      else
+        cur_stock_num = cur_stock_num - stock_changes[dp_num - e].to_i
+      end
+    end
+    stock_num.reverse!
 
     cur_off_shelf_num = self.book_borrows.where(retuan_at: nil).length
-    borrows = self.book_borrows.where(:borrowed_at.gt => start_time.to_i)
-                               .where(:borrowed_at.lt => end_time.to_i)
-    borrows = borrows.map { |e| (e.created_at.to_i - start_time.to_i) / interval }
+    borrows = self.book_borrows.where(:borrow_at.gt => start_time.to_i)
+                               .where(:borrow_at.lt => end_time.to_i)
+    borrows = borrows.map { |e| Book.cal_idx(start_time, end_time, interval, e.created_at) }
     borrows = borrows.group_by { |e| e }
     borrows.each { |k,v| borrows[k] = v.length }
     borrows = (0 .. dp_num - 1).to_a.map { |e| borrows[e].to_i }
 
-    returns = self.book_borrows.where(:borrowed_at.gt => start_time.to_i)
-                               .where(:borrowed_at.lt => end_time.to_i)
-    returns = returns.map { |e| (e.created_at.to_i - start_time.to_i) / interval }
+    returns = self.book_borrows.where(:return_at.gt => start_time.to_i)
+                               .where(:return_at.lt => end_time.to_i)
+    returns = returns.map { |e| Book.cal_idx(start_time, end_time, interval, e.created_at) }
     returns = returns.group_by { |e| e }
     returns.each { |k,v| returns[k] = v.length }
     returns = (0 .. dp_num - 1).to_a.map { |e| returns[e].to_i }
 
     off_shelf_num = (0 .. dp_num - 1).to_a.map do |e|
-      cur_off_shelf_num = [cur_off_shelf_num + borrows[dp_num - 1 - e] - returns[dp_num - 1 - e], 0].max
+      if e == 0
+        cur_off_shelf_num
+      else
+        cur_off_shelf_num = [cur_off_shelf_num + borrows[dp_num - e] - returns[dp_num - e], 0].max
+      end
     end
     off_shelf_num.reverse!
 
