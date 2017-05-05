@@ -18,7 +18,7 @@
 			var success = function(retval) {
 				// Console method should be commented in production
 				// console.log('====');console.log(retval);
-				if(retval && !retval.success && retval.value && retval.value.error_code == -6) {
+				if(retval && !retval.success && retval.code == -6) {
 					location.href = '/staff/sessions?code=-6';
 				} else {
 					callback(retval);
