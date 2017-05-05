@@ -183,8 +183,8 @@ $ ->
         else
           if data.code == BOOK_NOT_EXIST
             $.page_notification("该书不存在", 1000)
-          if data.code == BOOK_EXIST
-            $.page_notification("该书isbn号与其它书籍重复", 1000)
+          if data.code == REPEAT_ISBN
+            $.page_notification("该书ISBN号与其它书籍重复", 1000)
           else
             $.page_notification("服务器出错")
       )

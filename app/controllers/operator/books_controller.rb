@@ -36,9 +36,15 @@ class Operator::BooksController < Operator::ApplicationController
     @book = get_book_templates.where(id: params[:id]).first
     if @book.nil?
       retval = ErrCode::BOOK_NOT_EXIST
+      render json: retval_wrapper(retval) and return
+    end
+    book_template = BookTemplate.where(isbn: params[:book]["isbn"], :id.ne => params[:id])
+    if book_template.length > 0
+      retval = ErrCode::REPEAT_ISBN
+      render json: retval_wrapper(retval) and return
     end
     @book.update_info(params[:book])
-    render json: retval_wrapper(retval)
+    render json: retval_wrapper(retval) and return
   end
 
   def destroy
