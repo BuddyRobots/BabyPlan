@@ -288,13 +288,17 @@ class CourseInst
     self.course_participates.select { |e| e.is_effective } .length
   end
 
+  def self.cal_idx(start_time, end_time, interval, create_time)
+    dp_num = ((end_time.to_i - start_time.to_i) * 1.0 / interval.to_i).ceil
+    dp_num - 1 - (end_time.to_i - create_time.to_i) / interval.to_i
+  end
 
   def self.course_stats(duration, start_date, end_date)
     if duration == -1
       start_time_ary = start_date.split('-').map { |e| e.to_i }
       start_time = Time.mktime(start_time_ary[0], start_time_ary[1], start_time_ary[2]).to_i
       end_time_ary = end_date.split('-').map { |e| e.to_i }
-      end_time = Time.mktime(end_time_ary[0], end_time_ary[1], end_time_ary[2]).to_i
+      end_time = Time.mktime(end_time_ary[0], end_time_ary[1], end_time_ary[2], 23, 59, 59).to_i
       duration = [0, end_time - start_time].max
     else
       start_time = Time.now.to_i - duration
@@ -314,17 +318,17 @@ class CourseInst
     interval = day.days.to_i
 
     cps = CourseParticipate.where(:created_at.gt => start_time)
-                                  .where(:created_at.lt => end_time)
-                                  .where(trade_state: "SUCCESS")
-                                  .asc(:created_at)
-    dp_num = (end_time - start_time) / interval
-    signup_num = cps.map { |e| (e.created_at.to_i - (start_time.to_i)) / interval }
+                           .where(:created_at.lt => end_time)
+                           .where(trade_state: "SUCCESS")
+                           .asc(:created_at)
+    dp_num = ((end_time - start_time) * 1.0 / interval).ceil
+    signup_num = cps.map { |e| self.cal_idx(start_time, end_time, interval, e.created_at) }
     signup_num = signup_num.group_by { |e| e }
     signup_num.each { |k,v| signup_num[k] = v.length }
     signup_num = (0 .. dp_num - 1).to_a.map { |e| signup_num[e].to_i }
     # signup_num.reverse!
 
-    income = cps.map { |e| [(e.created_at.to_i - start_time.to_i) / interval, e.price_pay] }
+    income = cps.map { |e| [self.cal_idx(start_time, end_time, interval, e.created_at), e.price_pay] }
     income = income.group_by { |e| e[0] }
     income.each { |k,v| income[k] = v.map { |e| e[1] } .sum }
     income = (0 .. dp_num - 1).to_a.map { |e| income[e].to_i }
@@ -335,7 +339,7 @@ class CourseInst
 
     income_center_hash = { }
     Center.all.each do |c|
-      c_income = cps.where(center_id: c.id).map { |e| [(e.created_at.to_i - start_time.to_i) / interval, e.price_pay] }
+      c_income = cps.where(center_id: c.id).map { |e| [self.cal_idx(start_time, end_time, interval, e.created_at), e.price_pay] }
       c_income = c_income.group_by { |e| e[0] }
       c_income.each { |k,v| c_income[k] = v.map { |e| e[1] } .sum }
       c_income = (0 .. dp_num - 1).to_a.map { |e| c_income[e].to_i }
@@ -351,7 +355,7 @@ class CourseInst
 
     income_school_hash = { }
     School.all.each do |s|
-      s_income = cps.where(school_id: s.id).map { |e| [(e.created_at.to_i - start_time.to_i) / interval, e.price_pay] }
+      s_income = cps.where(school_id: s.id).map { |e| [self.cal_idx(start_time, end_time, interval, e.created_at), e.price_pay] }
       s_income = s_income.group_by { |e| e[0] }
       s_income.each { |k,v| s_income[k] = v.map { |e| e[1] } .sum }
       s_income = (0 .. dp_num - 1).to_a.map { |e| s_income[e].to_i }

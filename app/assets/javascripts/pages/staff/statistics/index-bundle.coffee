@@ -178,7 +178,7 @@ $ ->
             return
           series: [ {
             name: '授课单位收入'
-            # data: data.stat.income_school
+            data: data.stat.income_school
           } ]
       else
         $.page_notification "服务器出错，请稍后再试"
@@ -204,7 +204,7 @@ $ ->
             title:
               text: null
             xAxis: 
-              tickInterval: 5
+              tickInterval: 1
               title:
                 # text: '周数'
                 text: data.stat.borrow_time_unit
@@ -241,10 +241,10 @@ $ ->
             title:
               text: null
             xAxis: 
-              tickInterval: 5
+              tickInterval: 1
               title:
                 # text: '周数'
-                text: data.stock_time_unit
+                text: data.stat.stock_time_unit
             yAxis:
               title: text: '书籍数量(本)'
             tooltip: valueSuffix: '本'
