@@ -210,13 +210,25 @@ class Weixin
         }
       }
     }
-    
+
     url = "/cgi-bin/message/template/send?access_token=#{Weixin.get_access_token}"
     response = Weixin.post(url, :body => body.to_json)
     retval = JSON.parse(response.body)
     if retval["errcode"] == 0
+      WechatMessage.create({
+        openid: openid,
+        message_type: "course_start",
+        content: course_name,
+        success: true
+      })
       return true
     else
+      WechatMessage.create({
+        openid: openid,
+        message_type: "course_start",
+        content: course_name,
+        success: false
+      })
       return false
     end   
   end
@@ -249,8 +261,20 @@ class Weixin
     response = Weixin.post(url, :body => body.to_json)
     retval = JSON.parse(response.body)
     if retval["errcode"] == 0
+      WechatMessage.create({
+        openid: openid,
+        message_type: "book_return",
+        content: book_name + ", " + return_time.to_s,
+        success: true
+      })
       return true
     else
+      WechatMessage.create({
+        openid: openid,
+        message_type: "book_return",
+        content: book_name + ", " + return_time.to_s,
+        success: false
+      })
       return false
     end   
   end

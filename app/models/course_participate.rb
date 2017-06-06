@@ -651,5 +651,4 @@ class CourseParticipate
       end
     end
   end
-
 end

@@ -24,7 +24,7 @@ class BookBorrow
   	self.update_attributes({return_at: Time.now.to_i})
     # calculate whether need to pay latefee, and the amount of latefee
     latefee_per_day = BorrowSetting.first.try(:latefee_per_day) || 0.1
-    self.latefee = self.expire_days * latefee_per_day
+    self.latefee = (self.expire_days * latefee_per_day).round(2)
     self.latefee_paid = self.latefee == 0.0
     self.save
     nil
@@ -34,7 +34,7 @@ class BookBorrow
     self.update_attributes({return_at: Time.now.to_i, status: LOST})
     # calculate whether need to pay latefee, and the amount of latefee
     latefee_per_day = BorrowSetting.first.try(:latefee_per_day) || 0.1
-    self.latefee = self.expire_days * latefee_per_day
+    self.latefee = (self.expire_days * latefee_per_day).round(2)
     self.latefee_paid = self.latefee == 0.0
     self.save
     # decrease stock by 1
@@ -135,7 +135,8 @@ class BookBorrow
   end
 
   def self.send_book_remind
-    @books = BookBorrow.where(:borrow_at.gt => Time.now.end_of_day - (BorrowSetting.first.borrow_duration).day)
+    @books = BookBorrow.where(return_at: nil)
+                       .where(:borrow_at.lt => Time.now.end_of_day - (BorrowSetting.first.borrow_duration - 2).day)
     b_id = @books.map {|b| b.id}
     b_id.each do |b|
       book = BookBorrow.where(id: b).first
