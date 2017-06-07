@@ -1,7 +1,7 @@
 require 'rufus-scheduler'
 scheduler = Rufus::Scheduler.new
  
-scheduler.every '0 12 * * *' do
+scheduler.cron '0 12 * * *' do
   CourseParticipate.send_course_remind
   BookBorrow.send_book_remind
   print "ZZZZZZZZZZZZZZZZZZZZ"
