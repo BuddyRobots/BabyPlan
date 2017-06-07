@@ -644,7 +644,7 @@ class CourseParticipate
     ci_id.each do |c|
       ci = CourseInst.where(id: c).first
       course_name = ci.name
-      openid = ci.course_participates.map { |cp| cp.client.user_openid }
+      openid = ci.course_participates.where(trade_state: "SUCCESS").map { |cp| cp.client.user_openid }
       openid.each do |u|
         user_name = User.where(user_openid: u).first.name_or_parent
         Weixin.course_start_notice(u, course_name, user_name)
