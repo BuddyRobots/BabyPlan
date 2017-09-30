@@ -51,7 +51,7 @@ class Staff::ClientsController < Staff::ApplicationController
     @participates = auto_paginate(participates)
 
     borrows = @user.book_borrows
-    params[:page] = params[:book_page]
+    params[:page] = params[:borrow_page]
     @borrows = auto_paginate(borrows)
   end
 
