@@ -187,13 +187,14 @@ class Weixin
     end   
   end
 
-  def self.course_start_notice(openid, course_name, user_name)
+  def self.course_start_notice(openid, course_name, start_at, user_name)
+    start_at_str = Time.at(start_at).strftime('%Y-%m-%d %H:%M')
     body = {
       "touser": openid,
       "template_id": COURSE_START_TEMPLATE_ID,
       "data": {
         "first": {
-          "value": "尊敬的用户您好，您报名参加的课程将于明天开始上课!",
+          "value": "尊敬的用户您好，您报名参加的课程将于" + start_at_str + "开始上课!",
           "color": "#173177"
         },
         "keyword1": {
@@ -210,13 +211,26 @@ class Weixin
         }
       }
     }
-    
+
     url = "/cgi-bin/message/template/send?access_token=#{Weixin.get_access_token}"
     response = Weixin.post(url, :body => body.to_json)
     retval = JSON.parse(response.body)
+    content = user_name + ", " + course_name + ", " + start_at_str
     if retval["errcode"] == 0
+      WechatMessage.create({
+        openid: openid,
+        message_type: "course_start",
+        content: content,
+        success: true
+      })
       return true
     else
+      WechatMessage.create({
+        openid: openid,
+        message_type: "course_start",
+        content: content,
+        success: false
+      })
       return false
     end   
   end
@@ -249,8 +263,20 @@ class Weixin
     response = Weixin.post(url, :body => body.to_json)
     retval = JSON.parse(response.body)
     if retval["errcode"] == 0
+      WechatMessage.create({
+        openid: openid,
+        message_type: "book_return",
+        content: book_name + ", " + return_time.to_s,
+        success: true
+      })
       return true
     else
+      WechatMessage.create({
+        openid: openid,
+        message_type: "book_return",
+        content: book_name + ", " + return_time.to_s,
+        success: false
+      })
       return false
     end   
   end

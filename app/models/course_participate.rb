@@ -639,7 +639,7 @@ class CourseParticipate
   end
 
   def self.send_course_remind
-    @cis = CourseInst.where(:start_course.gt => Time.now.end_of_day).where(:start_course.lt => Time.now.end_of_day + 1.day)
+    @cis = CourseInst.where(:start_course.gt => Time.now.end_of_day.to_i).where(:start_course.lt => Time.now.end_of_day.to_i + 1.day.to_i)
     ci_id = @cis.map {|c| c.id}
     ci_id.each do |c|
       ci = CourseInst.where(id: c).first
@@ -647,9 +647,8 @@ class CourseParticipate
       openid = ci.course_participates.where(trade_state: "SUCCESS").map { |cp| cp.client.user_openid }
       openid.each do |u|
         user_name = User.where(user_openid: u).first.name_or_parent
-        Weixin.course_start_notice(u, course_name, user_name)
+        Weixin.course_start_notice(u, course_name, ci.start_course, user_name)
       end
     end
   end
-
 end

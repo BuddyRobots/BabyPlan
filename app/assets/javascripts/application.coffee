@@ -12,6 +12,7 @@
 #
 #= require jquery
 #= require jquery-ui
+#= require utility/err_code
 #= require datepicker-zh-TW
 #= require jquery.timepicker
 #= require jquery_ujs
@@ -19,7 +20,6 @@
 #= require utility/ajax
 #= require utility/console
 #= require utility/regex
-#= require utility/err_code
 #= require handlebars.runtime
 #= require ui/widgets/notification
 #= require ui/widgets/mobile_notification

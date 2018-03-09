@@ -18,8 +18,8 @@
 			var success = function(retval) {
 				// Console method should be commented in production
 				// console.log('====');console.log(retval);
-				if(retval && !retval.success && retval.value && retval.value.error_code == 'error_7') {
-					location.href = '/account/sign_out?ref=' + encodeURIComponent('/account/sign_in?ref=' + location.href);
+				if(retval && !retval.success && retval.code == -6) {
+					location.href = '/staff/sessions?code=-6';
 				} else {
 					callback(retval);
 				}
