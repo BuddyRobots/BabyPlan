@@ -51,6 +51,8 @@ $ ->
     password = $("#password").val()
     verify_code = $("#code").val()
     password_confirm = $("#password-confirm").val()
+    cur_url = window.location.herf
+    openid = $("#openid").text()
     if password == "" || verify_code == "" || password_confirm == ""
       $.mobile_page_notification("请补全信息", 1000)
       return
@@ -66,7 +68,10 @@ $ ->
       },
       (data) ->
         if data.success
-          location.href = "/user_mobile/sessions/new?code=" + SIGNIN_DONE
+          if cur_url.indexOf('redirect') != -1
+            location.href = "http://babyplan.bjfpa.org.cn/czqx/login/" + openid
+          else
+            location.href = "/user_mobile/sessions/new?code=" + SIGNIN_DONE
         else
           if data.code == WRONG_VERIFY_CODE
             $.mobile_page_notification("验证码错误", 1000)
