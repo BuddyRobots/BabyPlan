@@ -28,6 +28,7 @@ class UserMobile::SessionsController < UserMobile::ApplicationController
 
   # register page
   def sign_up
+    @user_openid = current_user.user_openid
   end
 
   # register action
@@ -44,6 +45,7 @@ class UserMobile::SessionsController < UserMobile::ApplicationController
 
   # signin
   def new
+    @user_openid = current_user.user_openid
   end
 
   # forget_password
