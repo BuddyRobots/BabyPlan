@@ -20,7 +20,7 @@
         %input#password.input-name{:type => "password"}
       %a.forgetpass{:href => forget_password_user_mobile_sessions_path } 忘记密码
     %a.signin.clicked{:href => "javascript:void(0);"} 登录
-    %a.signup{:href => sign_up_user_mobile_sessions_path } 注册
+    / %a.signup{:href => sign_up_user_mobile_sessions_path } 注册
+    %a.signup{:href => "#"} 注册
     %a.tourist{:href => feeds_user_mobile_sessions_path } 游客通道
     %span.hide#openid= @user_openid
-    

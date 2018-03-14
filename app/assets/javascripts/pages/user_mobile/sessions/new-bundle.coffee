@@ -15,7 +15,7 @@ $ ->
     password = $("#password").val()
     mobile_retval = $.regex.isMobile(mobile)
     cur_url = window.location.herf
-    openid = $("openid").text()
+    openid = $("#openid").text()
     if mobile_retval == false
       $.mobile_page_notification("请正确输入账号", 1000)
       return

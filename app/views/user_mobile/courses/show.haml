@@ -85,6 +85,7 @@
       .item-box= @course.desc.to_s.html_safe
     .content
       #map-container
+    %p.pay-notice 开课前二十四小时内不能退款
     - if @course_participate.nil? || @course_participate.prepay_id.blank?
       - if @course.status == CourseInst::OVER
         %button.btn.unclick-btn{:type => "button"} 已结束

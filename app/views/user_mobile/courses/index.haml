@@ -15,8 +15,11 @@
         .choice-item.border-right
           = select_tag "choice-price", options_for_select(CourseInst.price_for_select, @price.to_s), class: "no-padding"
           .triangle
-        .choice-item
+        .choice-item.border-right
           = select_tag "choice-age", options_for_select(User.age_for_select, @age.to_s), class: "no-padding"
+          .triangle
+        .choice-item
+          = select_tag "choice-surplus", options_for_select(CourseInst.surplus_for_select, @surplus.to_s), class: "no-padding"
           .triangle
       - if @courses.present?
         - @courses.each do |e|

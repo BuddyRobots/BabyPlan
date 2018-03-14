@@ -485,7 +485,11 @@ class CourseInst
   end
 
   def self.price_for_select
-    hash = { "选择价格区间" => 0, "免费" => 1, "0~20元" => 2, "20~40元" => 3, "40元以上" => 4 }
+    hash = { "选择价格" => 0, "免费" => 1, "0~20元" => 2, "20~40元" => 3, "40元以上" => 4 }
+  end
+
+  def self.surplus_for_select
+    hash = { "选择余量" => 0, "可报" => 1, "结束" => 2 }
   end
 
   def self.migrate
