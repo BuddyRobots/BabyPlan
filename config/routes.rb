@@ -281,6 +281,7 @@ Rails.application.routes.draw do
         post :verify
       end
       collection do
+        get :birthday_by_openid
         get :agreement
         get :feeds
         get :announcements

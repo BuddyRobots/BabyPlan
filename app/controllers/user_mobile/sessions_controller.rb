@@ -2,11 +2,21 @@ class UserMobile::SessionsController < UserMobile::ApplicationController
   skip_before_filter :require_sign_in
 
   # frontpage
-	def index
+  def index
     if @current_user.present?
       @announcements = Announcement.is_available.any_in(center_id: @current_user.client_centers.map { |e| e.id.to_s} + [nil]).limit(3)
     else
       @announcements = Announcement.is_available.where(:center_id => nil).limit(3)
+    end
+  end
+
+  def birthday_by_openid
+    user = User.where(user_openid: params[:openid]).first
+    if user.nil?
+      birthday = ""
+    else
+      birthday = user.birthday.to_s
+    render json: {openid: params[:openid], birthday: birthday} and return
     end
   end
 
