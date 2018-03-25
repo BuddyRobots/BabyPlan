@@ -13,9 +13,8 @@ $ ->
   signin = ->
     mobile = $("#mobile").val()
     password = $("#password").val()
+    redirect = $("#redirect").val()
     mobile_retval = $.regex.isMobile(mobile)
-    cur_url = window.location.herf
-    openid = $("#openid").text()
     if mobile_retval == false
       $.mobile_page_notification("请正确输入账号", 1000)
       return
@@ -24,16 +23,14 @@ $ ->
       {
         mobile: mobile
         password: password
+        redirect: redirect
       },
       (data) ->
         if data.success
           if data.user_return_to != null
             location.href = data.user_return_to
           else
-            if cur_url.indexOf('redirect') != -1 && openid != ""
-              location.href = 'http://babyplan.bjfpa.org.cn/czqx/login/' + openid
-            else
-              location.href = "/user_mobile/feeds"
+            location.href = "/user_mobile/feeds"
         else
           if data.code == USER_NOT_EXIST
             $.mobile_page_notification("帐号不存在", 1000)
@@ -53,8 +50,4 @@ $ ->
       signin()
 
   $(".signup").click ->
-    cur_url = window.location.herf
-    if cur_url.indexOf('redirect') != -1
-      location.href = "/user_mobile/sessions/sign_up?redirect=czqx"
-    else
-      location.href = "/user_mobile/sessions/sign_up" 
+    location.href = "/user_mobile/sessions/sign_up" 
