@@ -29,7 +29,6 @@
         %input#password-confirm.input-div{:type => "password"}
 
     %a.signup{:href => "javascript:void(0);"} 注册
-    %span.hide#openid= @user_openid
     - if Agreement.first.present? && Agreement.first.title.present?
       .agreement-div
         %span 我已阅读并同意
