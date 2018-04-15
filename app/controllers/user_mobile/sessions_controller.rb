@@ -32,7 +32,7 @@ class UserMobile::SessionsController < UserMobile::ApplicationController
 
   # register page
   def sign_up
-    @user_openid = current_user.user_openid
+    
   end
 
   # register action
