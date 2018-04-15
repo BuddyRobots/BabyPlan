@@ -14,9 +14,11 @@ class UserMobile::SessionsController < UserMobile::ApplicationController
     user = User.where(user_openid: params[:openid]).first
     if user.nil?
       birthday = ""
+      nickname = ""
     else
       birthday = user.birthday.to_s
-    render json: {openid: params[:openid], birthday: birthday} and return
+      nickname = user.name
+    render json: {openid: params[:openid], birthday: birthday, nickname: nickname} and return
     end
   end
 
