@@ -11,7 +11,7 @@ class Course
   field :time, type: String
   field :desc, type: String
   field :target, type: String
-  field :price, type: Integer
+  field :price, type: Float
   field :price_pay, type: Integer
   field :speaker, type: String
   field :available, type: Boolean

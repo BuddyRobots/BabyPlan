@@ -10,7 +10,7 @@ class CourseInst
   field :address, type: String
   field :capacity, type: Integer
   field :price, type: Integer
-  field :price_pay, type: Integer
+  field :price_pay, type: Float
   field :speaker, type: String
   field :date, type: String
   field :date_in_calendar, type: Array, default: [ ]
