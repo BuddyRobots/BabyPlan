@@ -36,7 +36,7 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
-  config.domain = "maker.buddyrobots.com"
+  config.domain = "test.buddyrobots.com"
 
   config.wechat_app_id = "wx0bad9193f1246547"
   config.wechat_app_key = "68b29adfa28e31c6107d7a627373e74f"
