@@ -161,8 +161,8 @@ a{
 		padding-top: 1.5%;
 	}
 	#refund {
-		font-size: 2em;
-		color: #666;
+		font-size: 2.4em;
+		color: #d70c19;
 		float: right;
 		padding-top: 1.5%;
 		margin-right: 3.28%;
@@ -171,7 +171,12 @@ a{
 		cursor: pointer;
 	}
 }
-
+.pay-notice {
+	font-size: 2.4em;
+	color: #d70c19;
+	text-align: center;
+	margin-bottom: 6.28%;
+}
 #course-address {
 	width: 78%;
 	display: inline-block;

@@ -35,11 +35,16 @@ class UserMobile::SessionsController < UserMobile::ApplicationController
       retval[:user_return_to] = session[:user_return_to]
       session.delete(:user_return_to)
     end
+    if params[:redirect].to_s == "http://babyplan.bjfpa.org.cn/czqx/login/"
+      user = User.find_by_auth_key(retval[:auth_key])
+      retval[:user_return_to] = params[:redirect] + user.user_openid
+    end
     render json: retval_wrapper(retval)
   end
 
   # register page
   def sign_up
+    
   end
 
   # register action
@@ -56,6 +61,7 @@ class UserMobile::SessionsController < UserMobile::ApplicationController
 
   # signin
   def new
+    @redirect = params[:redirect]
   end
 
   # forget_password

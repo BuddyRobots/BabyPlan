@@ -13,6 +13,7 @@ $ ->
   signin = ->
     mobile = $("#mobile").val()
     password = $("#password").val()
+    redirect = $("#redirect").val()
     mobile_retval = $.regex.isMobile(mobile)
     if mobile_retval == false
       $.mobile_page_notification("请正确输入账号", 1000)
@@ -22,6 +23,7 @@ $ ->
       {
         mobile: mobile
         password: password
+        redirect: redirect
       },
       (data) ->
         if data.success
@@ -46,3 +48,6 @@ $ ->
     code = event.which
     if code == 13
       signin()
+
+  $(".signup").click ->
+    location.href = "/user_mobile/sessions/sign_up" 

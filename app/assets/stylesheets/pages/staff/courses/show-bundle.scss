@@ -839,22 +839,6 @@ h2 {
 .notice-bottom {
 	margin-bottom: 15px;
 }
-#name-span {
-  vertical-align: middle;
-}
-.course-num-box {
-	@extend .unedit-box;
-}
-#course-school {
-	padding-top: 0;
-	padding-bottom: 0;
-}
-
-
-#client-address {
-	width: 45%;
-}
-
 .message-div {
 	font-size: 0;
 }
@@ -872,4 +856,23 @@ h2 {
 	display: none;
 	border: 1px solid #ddd;
 }
+
+
+#name-span {
+  vertical-align: middle;
+}
+.course-num-box {
+	@extend .unedit-box;
+}
+#course-school {
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
+
+#client-address {
+	width: 45%;
+}
+
+
 
