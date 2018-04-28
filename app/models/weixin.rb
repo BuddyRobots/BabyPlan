@@ -107,13 +107,43 @@ class Weixin
               "type": "view", 
               "name": "绘本", 
               "url": "http://babyplan.bjfpa.org.cn/user_mobile/books"
+            },
+            {
+              "type": "view", 
+              "name": "育儿", 
+              "url": "http://baby.fumubidu.com.cn/baby/"
+            },
+            {
+              "type": "view", 
+              "name": "成长记录", 
+              "url": "http://babyplan.bjfpa.org.cn/czqx"
+            },
+            {
+              "type": "view", 
+              "name": "活动", 
+              "url": "http://mp.weixin.qq.com/mp/homepage?__biz=MzIyOTQ3NDczOA==&hid=1&sn=a62e7b3f5b1c08425b31d654e943b678#wechat_redirect"
             }
           ]
         },
         {
-          "type": "view", 
-          "name": "公告", 
-          "url": "http://babyplan.bjfpa.org.cn/user_mobile/announcements"
+          "name": "学院",
+          "sub_button": [
+            {
+              "type": "view", 
+              "name": "视频公开课", 
+              "url": "http://mp.weixin.qq.com/mp/homepage?__biz=MzIyOTQ3NDczOA==&hid=3&sn=0428b458aef1deae2ccd8dd60706e0d0#wechat_redirect"
+            },
+            {
+              "type": "view", 
+              "name": "养育支持", 
+              "url": "http://mp.weixin.qq.com/mp/homepage?__biz=MzIyOTQ3NDczOA==&hid=4&sn=89cc6a556bc765cd542474ec0a7ab683#wechat_redirect"
+            },
+            {
+              "type": "view", 
+              "name": "了解中心", 
+              "url": "http://mp.weixin.qq.com/mp/homepage?__biz=MzIyOTQ3NDczOA==&hid=2&sn=9b15aba0c2a87d7006907933a6ac42d1#wechat_redirect"
+            }
+          ]
         },
         {
          "name": "我",
@@ -149,7 +179,7 @@ class Weixin
     }
 
     response = Weixin.post("/cgi-bin/menu/create?access_token=#{self.get_access_token}",
-      :body => data.to_json)
+      :body => data.to_json.gsub(/\\u([0-9a-z]{4})/){|s| [$1.to_i(16)].pack("U")})
     return response.body
   end
 
