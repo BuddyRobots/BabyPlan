@@ -29,8 +29,11 @@ class UserMobile::ApplicationController < ApplicationController
 
   def bind_openid
     if current_user.present?
+      openid = cookies[:openid]
+      user_openid = UserOpenid.where(openid: openid).first
+      has_user_openid = user_openid.present? && user_openid.user_id == current_user.id.to_s
       url = request.fullpath.split('?')[0]
-      if url != "/user_mobile/settings/get_openid" && url != "/user_mobile/settings/update_profile" && url != "/user_mobile/settings/profile" && current_user.user_openid.blank?
+      if url != "/user_mobile/settings/get_openid" && url != "/user_mobile/settings/update_profile" && url != "/user_mobile/settings/profile" && (current_user.user_openid.blank? || !has_user_openid)
         @state = request.fullpath
         # render template: "/user_mobile/settings/openid"
         redirect_to "https://open.weixin.qq.com/connect/oauth2/authorize?appid=#{Rails.configuration.wechat_app_id}&redirect_uri=#{CGI::escape('http://' + Rails.configuration.domain + '/user_mobile/settings/get_openid/')}&response_type=code&scope=snsapi_base&state=#{@state}#wechat_redirect"

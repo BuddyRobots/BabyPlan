@@ -111,12 +111,12 @@ class Weixin
             {
               "type": "view", 
               "name": "育儿", 
-              "url": "http://baby.fumubidu.com.cn/baby/"
+              "url": "http://babyplan.bjfpa.org.cn/baby-today/"
             },
             {
               "type": "view", 
-              "name": "成长记录", 
-              "url": "http://babyplan.bjfpa.org.cn/czqx"
+              "name": "成长曲线", 
+              "url": "http://babyplan.bjfpa.org.cn/czqx/"
             },
             {
               "type": "view", 

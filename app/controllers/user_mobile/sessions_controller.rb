@@ -11,15 +11,21 @@ class UserMobile::SessionsController < UserMobile::ApplicationController
   end
 
   def birthday_by_openid
-    user = User.where(user_openid: params[:openid]).first
-    if user.nil?
+    user_openid = UserOpenid.where(openid: params[:openid]).first
+    if user_openid.nil? or user_openid.user_id == ""
       birthday = ""
       nickname = ""
     else
-      birthday = user.birthday.to_s
-      nickname = user.name
-    render json: {openid: params[:openid], birthday: birthday, nickname: nickname} and return
+      user = User.where(id: user_openid.user_id).first
+      if user.nil?
+        birthday = ""
+        nickname = ""
+      else
+        birthday = user.birthday.to_s
+        nickname = user.name
+      end
     end
+    render json: {openid: params[:openid], birthday: birthday, nickname: nickname} and return
   end
 
   def create
@@ -93,6 +99,11 @@ class UserMobile::SessionsController < UserMobile::ApplicationController
 
   def signout
     cookies.delete(:auth_key, :domain => :all)
+    cookies.delete(:openid, :domain => :all)
+    if current_user.present?
+      user_openids = UserOpenid.where(user_id: current_user.id.to_s)
+      user_openids.destroy_all
+    end
     redirect_to new_user_mobile_session_path
   end
 

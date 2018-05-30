@@ -157,8 +157,27 @@ class UserMobile::SettingsController < UserMobile::ApplicationController
 
   def get_openid
     @open_id = Weixin.get_oauth_open_id(params[:code], false)
-    current_user.update_attribute(:user_openid, @open_id)
-    current_user.save
+    cookies[:openid] = {
+      :value => @open_id,
+      :expires => 24.months.from_now,
+      :domain => :all
+    }
+
+    if current_user.present?
+      current_user.update_attribute(:user_openid, @open_id)
+      current_user.save
+      user_id = current_user.id.to_s
+    else
+      user_id = ""
+    end
+
+    user_openid = UserOpenid.where(openid: @open_id).first
+    if user_openid.nil?
+        user_openid = UserOpenid.create(openid: @open_id, user_id: user_id)
+    else
+        user_openid.update_attribute(:user_id, user_id)
+    end
+
     redirect_to params[:state].blank? ? "/user_mobile/feeds" : params[:state]
   end
 
